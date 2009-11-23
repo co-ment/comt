@@ -1,0 +1,265 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>YUI Library Examples: JSON: JSON with Y.io</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    	<link rel="stylesheet" type="text/css" href="../../assets/yui.css" >
+
+<style>
+    /*Supplemental CSS for the YUI distribution*/
+    #custom-doc { width: 95%; min-width: 950px; }
+    #pagetitle {background-image: url(../../assets/bg_hd.gif);}
+/*    #pagetitle h1 {background-image: url(../../assets/title_h_bg.gif);}*/
+</style>
+
+<link rel="stylesheet" type="text/css" href="../../assets/dpSyntaxHighlighter.css">
+
+<!--there is no custom header content for this example-->
+
+<link type="text/css" rel="stylesheet" href="../../build/cssfonts/fonts-min.css" />
+<script type="text/javascript" src="../../build/yui/yui-min.js"></script>
+
+</head>
+<body id="yahoo-com" class=" yui-skin-sam">
+<div id="custom-doc" class="yui-t2">
+<div id="hd">
+	<div id="ygunav">
+		<p>
+            <em>
+                <a href="http://developer.yahoo.com/yui/3/">YUI 3.x Home</a> <i> - </i>	
+            </em>
+		</p>
+		<form action="http://search.yahoo.com/search" id="sitesearchform">
+            <input name="vs" type="hidden" value="developer.yahoo.com">
+            <input name="vs" type="hidden" value="yuiblog.com">
+		    <div id="sitesearch">
+		    	<label for="searchinput">Site Search (YDN &amp; YUIBlog): </label>
+			    <input type="text" id="searchinput" name="p">
+			    <input type="submit" value="Search" id="searchsubmit" class="ygbt">
+		    </div>
+		</form>
+    </div>
+	<div id="ygma"><a href="../../"><img src="../../assets/logo.gif"  border="0" width="200" height="93"></a></div>
+	<div id="pagetitle"><h1>YUI Library Examples: JSON: JSON with Y.io</h1></div>
+</div>
+<div id="bd">
+
+	<div id="bar-note"><p><strong>Note:</strong> This is YUI 3.x. Looking for <a href="http://developer.yahoo.com/yui/">YUI 2.x</a>?</p></div>
+
+	<div id="yui-main">
+		<div class="yui-b">
+		  <div class="yui-ge">
+			  <div class="yui-u first example" id="main">
+
+	<h2>JSON: JSON with Y.io</h2>
+
+	<div id="example" class="promo">
+	<p>
+	<p>A natural fit for JSON is working with the <a href="http://developer.yahoo.com/yui/io/">io module</a>.  In this example, we'll request JSON data from the server using the <code>Y.io</code> method and parse the resulting JSON string data for processing.</p>
+<p>Click the Get Messages button to send the request to the server.</p>
+	</p>	
+
+	<div class="module example-container ">
+			<div class="hd exampleHd">
+			<p class="newWindowButton yui-skin-sam">
+                <a href="json_connect_clean.html" target="_blank">View example in new window.</a>
+            </p>
+		</div>		<div id="example-canvas" class="bd">
+
+		
+	<!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
+	
+	<div id="demo">
+    <input type="button" id="demo_btn" value="Get Messages">
+
+    <div id="demo_msg"></div>
+</div>
+<script type="text/javascript">
+YUI({base:"../../build/", timeout: 10000}).use("node", "io", "dump", "json-parse",function (Y) {
+
+    var target = Y.Node.get('#demo_msg');
+
+    var callback = {
+
+        timeout : 3000,
+
+        on : {
+            success : function (x,o) {
+                Y.log("RAW JSON DATA: " + o.responseText);
+
+                // Process the JSON data returned from the server
+                var messages = [],
+                    html = '', i, l;
+
+                try {
+                    messages = Y.JSON.parse(o.responseText);
+                }
+                catch (e) {
+                    alert("JSON Parse failed!");
+                    return;
+                }
+
+                Y.log("PARSED DATA: " + Y.Lang.dump(messages));
+
+                // The returned data was parsed into an array of objects.
+                // Add a P element for each received message
+                for (i=0, l=messages.length; i < l; ++i) {
+                    html += '<p>' + messages[i].animal + ' says &quot;' +
+                                    messages[i].message + '&quot;</p>';
+                }
+
+                // Use the Node API to apply the new innerHTML to the target
+                target.set('innerHTML',html);
+            },
+
+            failure : function (x,o) {
+                alert("Async call failed!");
+            }
+
+        }
+    }
+
+    // Attach a click event listener to the button #demo_btn to send the request
+    Y.on('click',function (e) {
+        // Make the call to the server for JSON data
+        transaction = Y.io("assets/jsonConnect.php", callback);
+    },'#demo_btn');
+
+});
+</script>
+	
+	<!--END SOURCE CODE FOR EXAMPLE =============================== -->
+	
+		
+		</div>
+	</div>			
+	</div>
+		
+	<h3 class="first">Use <code>Y.JSON.parse</code> in the success handler</h3>
+<p>Pass the XHR <code>responseText</code> to <code>Y.JSON.parse</code> and capture the return value.  Note that the parse method can throw a <code>SyntaxError</code> exception, so be sure to wrap the call in a <code>try/catch</code> block.</p>
+
+<textarea name="code" class="JScript" rows="1" cols="60">
+// Create business logic in a YUI sandbox using the 'io' and 'json' modules
+YUI({base:"../../build/", timeout: 10000}).use("node", "io", "dump", "json-parse",function (Y) {
+
+    // capture the node that we'll display the messages in
+    var target = Y.Node.get('#demo_msg');
+
+    // Create the io callback/configuration
+    var callback = {
+
+        timeout : 3000,
+
+        on : {
+            success : function (x,o) {
+                Y.log("RAW JSON DATA: " + o.responseText);
+
+                var messages = [],
+                    html = '', i, l;
+
+                // Process the JSON data returned from the server
+                try {
+                    messages = Y.JSON.parse(o.responseText);
+                }
+                catch (e) {
+                    alert("JSON Parse failed!");
+                    return;
+                }
+
+                Y.log("PARSED DATA: " + Y.Lang.dump(messages));
+
+                // The returned data was parsed into an array of objects.
+                // Add a P element for each received message
+                for (i=0, l=messages.length; i < l; ++i) {
+                    html += '<p>' + messages[i].animal + ' says &quot;' +
+                                    messages[i].message + '&quot;</p>';
+                }
+
+                // Use the Node API to apply the new innerHTML to the target
+                target.set('innerHTML',html);
+            },
+
+            failure : function (x,o) {
+                alert("Async call failed!");
+            }
+
+        }
+    }
+
+    // Attach a click event listener to the button #demo_btn to send the request
+    Y.on('click',function (e) {
+        // Make the call to the server for JSON data
+        transaction = Y.io("assets/jsonConnect.php", callback);
+    },'#demo_btn');
+
+});
+</textarea>
+
+<p>The <code>parse</code> method returns the native JavaScript object representation of the string data returned from the <code>Y.io</code> call.  In this case, the data is an array of object literals in this form:</p>
+<textarea name="code" class="JScript" rows="1" cols="60">
+[
+    { "animal" : "Cat",  "message" : "Meow"  },
+    { "animal" : "Dog",  "message" : "Woof"  },
+    { "animal" : "Cow",  "message" : "Moo"   },
+    { "animal" : "Duck", "message" : "Quack" },
+    { "animal" : "Lion", "message" : "Roar"  }
+]
+</textarea>
+				</div>
+				<div class="yui-u sidebar">
+					
+				
+					<div id="examples" class="mod box4">
+                        <div class="hd">
+						<h4>
+    JSON Examples:</h4>
+                        </div>
+						<div class="bd">
+							<ul>
+								<li class='selected'><a href='../json/json_connect.html'>JSON with Y.io</a></li><li><a href='../json/json_freeze_thaw.html'>Rebuilding class instances from JSON data</a></li><li><a href='../json/json_convert_values.html'>Adding new object members during parsing</a></li>							</ul>
+						</div>
+					</div>
+					
+					<div class="mod box4">
+                        <div class="hd">
+						<h4>More JSON Resources:</h4>
+                        </div>
+                        <div class="bd">
+						<ul>
+							<!-- <li><a href="http://developer.yahoo.com/yui/json/">User's Guide</a> (external)</li> -->
+						<li><a href="../../api/module_json.html">API Documentation</a></li>
+</ul>
+                        </div>
+					</div>
+			  </div>
+		</div>
+		
+		</div>
+	</div>
+
+
+<div class="yui-b toc3" id="tocWrapper">
+<!-- TABLE OF CONTENTS -->
+<div id="toc">
+	
+<ul>
+<li class="sect first">YUI 3.x Project</li><li class="item"><a title="The Yahoo! User Interface (YUI) Library, 3.x Branch, " href="http://developer.yahoo.com/yui/3/">YUI 3 Web Site (external)</a></li><li class="item"><a title="Examples of every YUI utility and control in action" href="../../examples/">YUI 3 Examples</a></li><li class="item"><a title="Instantly searchable API documentation for the entire YUI library." href="../../api/">YUI 3 API Docs</a></li><li class="item"><a title="The YUI Library can be downloaded from SourceForge" href="http://sourceforge.net/projects/yui/">YUI 3 on Sourceforge (external)</a></li><li class="item"><a title="YUI is free and open, offered under a BSD license." href="http://developer.yahoo.com/yui/3/license.html">YUI License (external)</a></li><li class="sect">YUI 3 Core - Examples</li><li class="item"><a title="YUI (Global Prerequisite) - Functional Examples" href="../../examples/yui/index.html">YUI (Global Prerequisite)</a></li><li class="item"><a title="Event - Functional Examples" href="../../examples/event/index.html">Event</a></li><li class="item"><a title="Node - Functional Examples" href="../../examples/node/index.html">Node</a></li><li class="sect">YUI 3 Component Infrastructure - Examples</li><li class="item"><a title="Attribute - Functional Examples" href="../../examples/attribute/index.html">Attribute</a></li><li class="item"><a title="Plugin - Functional Examples" href="../../examples/plugin/index.html">Plugin</a></li><li class="item"><a title="Widget - Functional Examples" href="../../examples/widget/index.html">Widget</a></li><li class="sect">YUI 3 Utilities - Examples</li><li class="item"><a title="Animation - Functional Examples" href="../../examples/anim/index.html">Animation</a></li><li class="item"><a title="Cache - Functional Examples" href="../../examples/cache/index.html">Cache</a></li><li class="item"><a title="Cookie - Functional Examples" href="../../examples/cookie/index.html">Cookie</a></li><li class="item"><a title="DataSchema - Functional Examples" href="../../examples/dataschema/index.html">DataSchema</a></li><li class="item"><a title="DataSource - Functional Examples" href="../../examples/datasource/index.html">DataSource</a></li><li class="item"><a title="DataType - Functional Examples" href="../../examples/datatype/index.html">DataType</a></li><li class="item"><a title="Drag &amp; Drop - Functional Examples" href="../../examples/dd/index.html">Drag &amp; Drop</a></li><li class="item"><a title="Get - Functional Examples" href="../../examples/get/index.html">Get</a></li><li class="item"><a title="History - Functional Examples" href="../../examples/history/index.html">History</a></li><li class="item"><a title="ImageLoader - Functional Examples" href="../../examples/imageloader/index.html">ImageLoader</a></li><li class="item"><a title="IO - Functional Examples" href="../../examples/io/index.html">IO</a></li><li class="selected "><a title="JSON (JavaScript Object Notation) - Functional Examples" href="../../examples/json/index.html">JSON</a></li><li class="item"><a title="Queue - Functional Examples" href="../../examples/queue/index.html">Queue</a></li><li class="item"><a title="Stylesheet - Functional Examples" href="../../examples/stylesheet/index.html">Stylesheet</a></li><li class="sect">YUI 3 Widgets - Examples</li><li class="item"><a title="Overlay - Functional Examples" href="../../examples/overlay/index.html">Overlay</a></li><li class="item"><a title="Slider - Functional Examples" href="../../examples/slider/index.html">Slider</a></li><li class="sect">YUI 3 Node Plugins - Examples</li><li class="item"><a title="FocusManager Node Plugin - Functional Examples" href="../../examples/node-focusmanager/index.html">FocusManager Node Plugin</a></li><li class="item"><a title="MenuNav Node Plugin - Functional Examples" href="../../examples/node-menunav/index.html">MenuNav Node Plugin</a></li><li class="sect">YUI 3 CSS - Examples</li><li class="item"><a title="YUI CSS Reset - Functional Examples" href="../../examples/cssreset/index.html">CSS Reset</a></li><li class="item"><a title="YUI Fonts - Functional Examples" href="../../examples/cssfonts/index.html">CSS Fonts</a></li><li class="item"><a title="YUI Base - Functional Examples" href="../../examples/cssbase/index.html">CSS Base</a></li><li class="sect">YUI 3 Developer Tools - Examples</li><li class="item"><a title="Console - Functional Examples" href="../../examples/console/index.html">Console</a></li><li class="item"><a title="Profiler - Functional Examples" href="../../examples/profiler/index.html">Profiler</a></li><li class="item"><a title="Test - Functional Examples" href="../../examples/test/index.html">Test</a></li><li class="sect">The YUI Community</li><li class="item"><a title="The Yahoo! User Interface Blog" href="http://yuiblog.com">YUI Blog (external)</a></li><li class="item"><a title="The Yahoo! Group YDN-JavaScript hosts the YUI community forum" href="http://tech.groups.yahoo.com/group/ydn-javascript/">YUI Forum (external)</a></li><li class="item"><a title="The Yahoo! Group yui3 is dedicated to the 3.x branch of the Yahoo! User Interface (YUI) Library." href="http://tech.groups.yahoo.com/group/yui3/">YUI 3 Forum (external)</a></li><li class="item"><a title="YUI is used by Yahoo! and by hundreds of other sites, including many you know and love." href="/yui/poweredby/">YUI Sightings (external)</a></li><li class="item"><a title="Videos and podcasts from the YUI Team and from the Yahoo! frontend engineering community." href="http://developer.yahoo.com/yui/theater/">YUI Theater (external)</a></li><li class="sect">YUI Articles on the YUI Website</li><li class="item"><a title="Answers to Frequently Asked Questions about the YUI Library" href="http://developer.yahoo.com/yui/articles/faq/">YUI FAQ (external)</a></li><li class="item"><a title="Yahoo!'s philosophy of Graded Browser Support" href="http://developer.yahoo.com/yui/articles/gbs/">Graded Browser Support (external)</a></li><li class="item"><a title="Reporting Bugs and Making Feature Requests for YUI Components" href="http://developer.yahoo.com/yui/articles/reportingbugs/">Bug Reports/Feature Requests (external)</a></li><li class="item"><a title="Serve YUI source files from Yahoo! -- free, fast, and simple" href="http://developer.yahoo.com/yui/3/articles/hosting/">Serving YUI Files from Yahoo! (external)</a></li></ul>
+</div>
+</div>
+	</div><!--closes bd-->
+
+	<div id="ft">
+        <p class="first">Copyright &copy; 2009 Yahoo! Inc. All rights reserved.</p>
+        <p><a href="http://privacy.yahoo.com/privacy/us/devel/index.html">Privacy Policy</a> - 
+            <a href="http://docs.yahoo.com/info/terms/">Terms of Service</a> - 
+            <a href="http://docs.yahoo.com/info/copyright/copyright.html">Copyright Policy</a> - 
+            <a href="http://careers.yahoo.com/">Job Openings</a></p>
+	</div>
+</div>
+<script src="../../assets/dpSyntaxHighlighter.js"></script>
+<script language="javascript"> 
+dp.SyntaxHighlighter.HighlightAll('code'); 
+</script>
+</body>
+</html>

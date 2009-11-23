@@ -1,0 +1,29 @@
+{% extends "site/layout/base_workspace.html" %}
+{% load i18n %}
+{% load com %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+
+<h1>{% blocktrans %}Activate your account{% endblocktrans %}</h1>
+
+<form id="activate" enctype="multipart/form-data" class="wizard-form" action="." method="post">
+<table class="wide_form">
+    <tbody>
+        {% for form in forms %}
+            {% include "site/macros/form_fields.html" %}
+        {% endfor %}
+    <tr>
+        <td style="vertical-align: top; width: 20%; text-align:right;">
+        </td>
+        <td>
+            <label></label>
+            <input name="activate" type="submit" value="{% blocktrans %}Activate{% endblocktrans %}"/>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</form>
+{% endblock %}

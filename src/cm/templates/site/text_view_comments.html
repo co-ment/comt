@@ -1,0 +1,109 @@
+{% load local_perms %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {% include "site/layout/req_yui.html" %}
+    
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/site/text_view_comments/text_view_comments.css">
+</head>
+
+<body>
+<div id="maincontainer" >
+
+	<div id="contentwrapper">
+	    <div id="contentcolumn">
+		    <div class="innertube">
+		    <div id="textcontainer" class="initially_hidden"> 
+                {% autoescape off %}
+{{ content }}
+                {% endautoescape %} 
+            </div>
+            </div>
+	    </div>
+	</div>
+	<div id="leftcolumn">
+	</div>
+</div>
+</body>
+
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/site/text_view_comments/c-text.css">
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/site/text_view_comments/c-text-styles.css">
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/site/text_view_comments/c-style-comment.css">
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/site/text_view_comments/c-style-gray.css">
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/site/text_view_comments/c-style-notelike.css"> 
+<!-- date library, to be used by filter, maybe get rid of that when decent date parsing is offered elsewhere -->
+<!-- we're round tripping from object python date to str back to date to filter, TODO consider setting the date from python... -->
+<script type="text/javascript" src="{{ MEDIA_URL }}js/lib/flexible-js-formatting/dates/date-functions.js"></script>
+
+<script type="text/javascript">
+<!--
+// GLOBALS from server
+
+sv_user_permissions = [];
+
+{% get_local_text_perm request text can_create_comment as can_create_comment %}
+{% if can_create_comment %} sv_user_permissions.push("can_create_comment") {% endif %};
+
+//sv_adminKey = {% if admin %}"{{ adminkey }}"{% else %}""{% endif %} ;
+// TODO TEST with anonymous access
+
+{% if user.is_anonymous %} 
+    sv_loggedIn = false;
+    sv_username = ""; 
+{% else %} 
+    sv_loggedIn = true;
+    sv_username = "{{ user.username|escapejs }}"; 
+{% endif %}
+
+//initial comment db as json
+sv_comments = "{{ json_comments|escapejs }}";
+sv_filter_data = "{{ json_filter_datas|escapejs }}";
+sv_site_url = "{{ SITE_URL|escapejs }}";
+
+sv_client_url = "{% url text-client-exchange %}?{{ request.GET.urlencode }}" ;
+sv_text_view_show_comment_url = "{% url text-view-show-comment text.key '' %}";
+sv_text_feed_url = "{% url text-feed text.key %}";
+
+sv_client_date_fmt = "{{ client_date_fmt.js_parse }}"; //"%Y-%m-%dT%H:%M:%S" ;
+sv_key = "{{ text.key|escapejs }}";
+sv_format = "{{ text_version.format }}";
+
+sv_withComments = true ; // TODO will bug when false (!)
+c_yui_base = "{{ YUI_VERSION  }}" ;
+sv_get_params = "{{ get_params|escapejs }}" ;
+
+sv_media_url = "{{ MEDIA_URL|escapejs }}";
+
+--></script>
+
+<script type="text/javascript" src="{% url django.views.i18n.javascript_catalog %}"></script>
+{% if CLIENT_DEBUG  %}
+<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_permissions.js"></script> 
+<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_preferences.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_layout.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_icomment.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_db.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_sync.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_icomments.js"></script> 
+
+<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_util.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_server_exchange.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_selection.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_scopes.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_interface_forms.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_addcomment_form.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_reply_form.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_edit_form.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_dlg_intercept.js"></script>
+
+<script type="text/javascript" src="{{ MEDIA_URL }}js/site/c_text_view_comments_to_frame.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/site/c_text_view_comments.js"></script> 
+{% else %}
+<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_client-min.js?1258465065"></script> 
+{% endif %}
+
+
+
+</html>

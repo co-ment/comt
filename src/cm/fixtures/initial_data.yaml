@@ -1,0 +1,113 @@
+############### permissions ###############
+# this is defined here (instead of models) to control permission's id
+
+############### texts permissions ###############
+            
+- model : auth.permission
+  pk: 11
+  fields:
+    name: "Can view text"
+    codename: "can_view_text" 
+    content_type: 1
+      
+- model : auth.permission
+  pk: 12
+  fields:
+    name: "Can edit text"
+    codename: "can_edit_text" 
+    content_type: 1
+
+- model : auth.permission
+  pk: 13
+  fields:
+    name: "Can create text"
+    codename: "can_create_text"
+    content_type: 1
+
+- model : auth.permission
+  pk: 14
+  fields:
+    name: "Can delete text"
+    codename: "can_delete_text"
+    content_type: 1
+
+- model : auth.permission
+  pk: 15
+  fields:
+    name: "Can manage text"
+    codename: "can_manage_text" 
+    content_type: 1
+            
+############### comments permissions ###############
+
+- model : auth.permission
+  pk: 31
+  fields:
+    name: "Can create comment"
+    content_type: 1
+    codename: "can_create_comment" 
+
+- model : auth.permission
+  pk: 32
+  fields:
+    name: "Can delete comment"
+    codename: "can_delete_comment" 
+    content_type: 1
+
+- model : auth.permission
+  pk: 33
+  fields:
+    name: "Can delete own comment"
+    codename: "can_delete_comment_own" 
+    content_type: 1
+
+- model : auth.permission
+  pk: 34
+  fields:
+    name: "Can view approved comment"
+    codename: "can_view_approved_comment" 
+    content_type: 1
+
+- model : auth.permission
+  pk: 35
+  fields:
+    name: "Can view own comment"
+    codename: "can_view_comment_own" 
+    content_type: 1
+
+- model : auth.permission
+  pk: 36
+  fields:
+    name: "Can view unapproved comment"
+    codename: "can_view_unapproved_comment" 
+    content_type: 1
+
+- model : auth.permission
+  pk: 37
+  fields:
+    name: "Can edit comment"
+    codename: "can_edit_comment" 
+    content_type: 1
+
+- model : auth.permission
+  pk: 38
+  fields:
+    name: "Can edit own comment"
+    codename: "can_edit_comment_own" 
+    content_type: 1
+
+############### workspace permissions ###############
+
+- model : auth.permission
+  pk: 51
+  fields:
+    name: "Can manage workspace"
+    codename: "can_manage_workspace" 
+    content_type: 1
+
+- model : auth.permission
+  pk: 52
+  fields:
+    name: "Can view workspace"
+    codename: "can_view_workspace" 
+    content_type: 1

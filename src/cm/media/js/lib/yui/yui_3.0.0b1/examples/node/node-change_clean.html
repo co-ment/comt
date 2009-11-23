@@ -1,0 +1,66 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Using Node Change Events</title>
+
+<style type="text/css">
+/*margin and padding on body element
+  can introduce errors in determining
+  element position and are not recommended;
+  we turn them off as a foundation for YUI
+  CSS treatments. */
+body {
+	margin:0;
+	padding:0;
+}
+</style>
+
+<link type="text/css" rel="stylesheet" href="../../build/cssfonts/fonts-min.css" />
+<script type="text/javascript" src="../../build/yui/yui-min.js"></script>
+
+
+<!--begin custom header content for this example-->
+<link href="assets//node.css" rel="stylesheet" type="text/css">
+
+<!--end custom header content for this example-->
+
+</head>
+
+<body class=" yui-skin-sam">
+
+<h1>Using Node Change Events</h1>
+
+<div class="exampleIntro">
+	<p>This example demonstrates how to listen for and handle Node change events.</p>
+<p>Hover over or inspect the items to see the result of the title change.</p>
+			
+</div>
+
+<!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
+
+<ul id="demo">
+    <li title="i am lorem">lorem</li>
+    <li>ispum</li>
+    <li>dolor</li>
+    <li>sit</li>
+</ul>
+
+<script type="text/javascript">
+YUI({base:"../../build/", timeout: 10000}).use("node", function(Y) {
+    var onChange = function(e) {
+        if (e.newVal === 'new title') {
+            e.newVal = 'alternate title';
+        }
+    };
+
+    Y.get('#demo li').on('titleChange', onChange); // first LI
+    Y.all('#demo li').set('title', 'new title'); // all LIs
+});
+</script>
+
+<!--END SOURCE CODE FOR EXAMPLE =============================== -->
+
+</body>
+</html>

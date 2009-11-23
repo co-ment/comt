@@ -1,0 +1,12 @@
+{% if flash.message %}
+
+<script type="text/javascript">
+<!--
+$(function() {
+	enqueueMsg('{{ flash.message }}'); 
+}) ;
+-->
+</script>
+
+<div id="t-msg-wrapper" class="message" style="top:30px;left:30px; position:absolute;"></div>
+{% endif %}

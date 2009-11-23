@@ -1,0 +1,23 @@
+#textcontainer.classic{
+  font-family: "New Century Schoolbook" serif; 
+}
+  
+#textcontainer.code {
+  font-family: courier; 
+}
+  
+#textcontainer.modern {
+  font-family: arial,helvetica,clean,sans-serif; 
+}
+  
+#textcontainer.classic h1 {
+    font-size:197%; 
+}
+
+#textcontainer.code h1 {
+    font-size:197%;
+}
+
+#textcontainer.modern h1 {
+    font-size:197%;
+}

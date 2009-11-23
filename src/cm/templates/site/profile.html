@@ -1,0 +1,32 @@
+{% extends "site/layout/base_workspace.html" %}
+{% load com %}
+{% load i18n %}
+
+{% block title %}
+{% blocktrans with user.username as username %}Your profile ({{ username }}){% endblocktrans %}
+{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+
+<h1>{% blocktrans with user.username as username %}Your profile ({{ username }}){% endblocktrans %}</h1>
+<form id="profile" enctype="multipart/form-data" class="wizard-form" action="." method="post">
+<table class="wide_form">
+    <tbody>
+        {% for form in forms %}
+            {% include "site/macros/form_fields.html" %}
+        {% endfor %}
+    <tr>
+        <td style="vertical-align: top; width: 20%; text-align:right;">
+        </td>
+        <td>
+            <label></label>
+            <input name="save" type="submit" value="{% blocktrans %}Save{% endblocktrans %}"/>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</form>
+{% endblock %}

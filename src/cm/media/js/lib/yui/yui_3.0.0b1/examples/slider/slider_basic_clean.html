@@ -1,0 +1,112 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Basic Sliders</title>
+
+<style type="text/css">
+/*margin and padding on body element
+  can introduce errors in determining
+  element position and are not recommended;
+  we turn them off as a foundation for YUI
+  CSS treatments. */
+body {
+	margin:0;
+	padding:0;
+}
+</style>
+
+<link type="text/css" rel="stylesheet" href="../../build/cssfonts/fonts-min.css" />
+<script type="text/javascript" src="../../build/yui/yui-min.js"></script>
+
+
+<!--begin custom header content for this example-->
+<style type="text/css">
+    .vert_slider {
+        margin-bottom: 1em;
+    }
+</style>
+
+<!--end custom header content for this example-->
+
+</head>
+
+<body class=" yui-skin-sam">
+
+<h1>Basic Sliders</h1>
+
+<div class="exampleIntro">
+	<p>This example walks you through the basics of creating a Slider from script.
+Both Sliders in this example use the default value range of 0 - 100 and use
+default skin resources provided with the Sam skin.</p>
+
+<p>The first Slider is set up in a more traditional JavaScript coding style and
+the second using the shorter method chaining style.  The first Slider is
+configured to move along the vertical axis, and is initialized to a value of
+30.  The second Slider is horizontal and instantiated with minimal
+configuration.</p>
+			
+</div>
+
+<!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
+
+<div id="demo">
+
+    <h4>Vertical Slider</h4>
+    <p id="vert_value">Value: 30</p>
+    <div class="vert_slider"></div>
+
+    <h4>Horizontal Slider</h4>
+    <p id="horiz_value">Value: 0</p>
+    <div class="horiz_slider"></div>
+
+</div>
+<script type="text/javascript">
+// Create a YUI instance and request the slider module and its dependencies
+YUI({base:"../../build/", timeout: 10000}).use("slider", function (Y) {
+
+// store the node to display the vertical Slider's current value
+var v_report = Y.get('#vert_value'),
+    vert_slider;
+    
+// instantiate the vertical Slider.  Use the classic thumb provided with the
+// Sam skin
+vert_slider = new Y.Slider({
+    axis: 'y', // vertical Slider
+    value: 30, // initial value
+    railSize: '10em', // range the thumb can move through
+    thumbImage: 'assets/images/thumbY.png'
+});
+
+// callback function to display Slider's current value
+function reportValue(e) {
+    v_report.set('innerHTML', 'Value: ' + e.newVal);
+}
+
+vert_slider.after('valueChange', reportValue);
+
+// render the slider into the first element with class vert_slider
+vert_slider.render('.vert_slider');
+
+
+
+// instantiate the horizontal Slider, render it, and subscribe to its
+// valueChange event via method chaining.  No need to store the created Slider
+// in this case.
+new Y.Slider({
+        railSize: '200px',
+        thumbImage: 'assets/images/thumbX.png'
+    }).
+    render('.horiz_slider').
+    after('valueChange',function (e) {
+        Y.get('#horiz_value').set('innerHTML', 'Value: ' + e.newVal);
+    });
+
+});
+</script>
+
+<!--END SOURCE CODE FOR EXAMPLE =============================== -->
+
+</body>
+</html>

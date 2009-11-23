@@ -1,0 +1,137 @@
+/* General styling */
+
+body, html {
+    background:white;
+}
+
+* {
+    font-family:Helvetica, Verdana, Sans-Serif;
+}
+
+th, td, p, dd, dl, li, body, form, input, textarea, option,
+legend, select, fieldset {
+    font-family:Verdana, Helvetica, Sans-Serif;
+    font-size:small;
+}
+
+img {
+    border:0;
+    padding:0;
+    margin:0;
+}
+
+pre, code, tt {
+    font-family: Courier, Courier New, Monospace;
+}
+
+kbd, code {
+    color:#309;
+    }
+
+pre {
+    font-size: 80%;
+    background: #B7CFCF;
+    border: 1px solid gray;
+}
+
+caption, legend {
+    font-weight:bold;
+}
+
+dt {
+    font-weight:bold;
+}
+
+dt, dd {
+    margin-top: .5em;
+}
+
+form {
+    border:0;
+    padding:0;
+    margin:0;
+}
+
+h1, h2, h3 {
+    font-weight:bold;
+}
+h1 {
+    font-size:1.35em;
+    margin-top: 0;
+}
+h2 {
+    font-size:1.2em;
+}
+h3 {
+    font-size:1.15em;
+}
+
+/* Table Styling */
+
+table {
+    empty-cells:show;
+}
+.borders td, .borders th {
+    border:1px solid gray;
+    padding:3px;
+}
+.borders {
+    border-spacing:0px;
+    border:1px solid gray;
+}
+.collapsed {
+    border-collapse:collapse;
+}
+.elbowroom td, .elbowroom th {
+    padding-right:.5em;
+    padding-left:.5em;
+}
+.top td, .top th {
+    vertical-align: top;
+}
+.odd td {
+    background: #fcfaf2;
+}
+.ruled td {
+    border-bottom: 1px solid #B98601;
+}
+.ruled tr:last-child td {
+    border-bottom: none;
+}
+.ruled a:link, .ruled a:visited {
+    text-decoration: none;
+}
+.ruled a:hover {
+    text-decoration: underline;
+}
+.cleanHeaders th {
+    border-style: none none solid none;
+    border-color: black;
+    border-width: 1px;
+    text-align: left;
+    background: transparent;
+}
+.compact td, .compact th {
+    font-size:smaller;
+}
+.verticalHeaders th {
+    text-align:right;
+    border-right:1px solid #252;
+    white-space:nowrap;
+}
+.verticalHeaders th, .verticalHeaders td {
+    vertical-align:top;
+}
+table.classic {
+    border-top: 1px solid #252;
+    border-bottom: 1px solid #252;
+}
+table.verticalMargins {
+    margin: 1em 0;
+}
+.hoverul:link {
+    text-decoration: none;
+}
+.hoverul:hover {
+    text-decoration: underline;
+}

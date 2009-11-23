@@ -1,0 +1,4 @@
+{% load i18n %}
+{% load com %}
+{% nb_comments text as nb_comments %}
+<span class="metadata">{% blocktrans count nb_comments as nb_comments %}{{ nb_comments }} comment{% plural %}{{ nb_comments }} comments{% endblocktrans %}</span>

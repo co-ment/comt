@@ -1,0 +1,96 @@
+/*
+.c-scope.c-count-1 {
+    background-color : #e3edff;
+}
+.c-scope.c-count-2 {
+    background-color : #c9ddff;
+}
+.c-scope.c-count-3 {
+    background-color : #b0ccff;
+}
+.c-scope.c-count-4 {
+    background-color : #96bcff;
+}
+.c-scope.c-count-5{
+    background-color : #7dabff;
+}
+.c-scope.c-count-6{
+    background-color : #639bff;
+}
+.c-scope.c-count-7, .c-scope.c-count-8, .c-scope.c-count-9, .c-scope.c-count-10, .c-scope.c-count-11, .c-scope.c-count-12, .c-scope.c-count-13, .c-scope.c-count-14, .c-scope.c-count-15, .c-scope.c-count-16, .c-scope.c-count-17, .c-scope.c-count-18, .c-scope.c-count-19, .c-scope.c-count-20, .c-scope.c-count-21, .c-scope.c-count-22, .c-scope.c-count-23, .c-scope.c-count-24, .c-scope.c-count-25 {
+    background-color : #4a8bff;
+}
+*/
+.c-scope.c-count-1 {
+    background-color : #e3edff;
+}
+.c-scope.c-count-1 {
+    background-color : #c9ddff;
+}
+.c-scope.c-count-2 {
+    background-color : #b0ccff;
+}
+.c-scope.c-count-3 {
+    background-color : #96bcff;
+}
+.c-scope.c-count-4{
+    background-color : #7dabff;
+}
+.c-scope.c-count-5{
+    background-color : #639bff;
+}
+.c-scope.c-count-6, .c-scope.c-count-7, .c-scope.c-count-8, .c-scope.c-count-9, .c-scope.c-count-10, .c-scope.c-count-11, .c-scope.c-count-12, .c-scope.c-count-13, .c-scope.c-count-14, .c-scope.c-count-15, .c-scope.c-count-16, .c-scope.c-count-17, .c-scope.c-count-18, .c-scope.c-count-19, .c-scope.c-count-20, .c-scope.c-count-21, .c-scope.c-count-22, .c-scope.c-count-23, .c-scope.c-count-24, .c-scope.c-count-25 {
+    background-color : #4a8bff;
+}
+
+/*
+.c-scope.c-count-1  : won't work with IE6 (IE6 doesn't understand the chain of classes within a CSS selector)
+so
+_background-color : the underscore is for targeting IE6 only (won't target above versions) 
+!important :        is for giving a preference to the .c-count-x rules   
+*/
+.c-scope {
+    _background-color : #e3edff !important;
+}
+
+.cursor_pointer {
+    cursor: pointer;    
+}
+
+.c-count-1 {
+    background-color : #FFF39A;
+    cursor: pointer;    
+}
+
+.c-count-2{
+/*    background: transparent url(../../../img/close_comment.png) no-repeat scroll 0 0;*/
+/*  background: transparent url(../../../img/twopixtest.png) repeat scroll 0 0;*/
+    background-color : #FFDB9A;
+    cursor: pointer;    
+}
+
+.c-count-3{
+    background-color : #FFC39A;
+    cursor: pointer;    
+}
+
+.c-count-4 {
+    background-color : #FFAB9A;
+    cursor: pointer;    
+}
+
+.c-count-5 {
+    background-color : #FF879A;
+    cursor: pointer;    
+}
+
+.c-count-6 {
+    background-color : #FF7B9A;
+    cursor: pointer;    
+}
+
+/* cf. gNbColorGradSetting */
+.c-count-7, .c-count-8, .c-count-9, .c-count-10, .c-count-11, .c-count-12, .c-count-13, .c-count-14, .c-count-15, .c-count-16, .c-count-17, .c-count-18, .c-count-19, .c-count-20, .c-count-21, .c-count-22, .c-count-23, .c-count-24, .c-count-25 { 
+    background-color : #FF6272;
+    cursor: pointer;    
+}

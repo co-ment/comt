@@ -1,0 +1,101 @@
+{% extends "site/layout/base_text.html" %}
+{% load com %}
+{% load i18n %}
+{% load local_perms %}
+{% block main %}
+
+{% get_local_text_perm request text can_edit_text as can_edit_text %}
+
+<script type="text/javascript">
+<!--
+tb_conf['current_tab'] = 'history';
+-->
+</script>
+
+<script type="text/javascript">
+<!--
+$(function() {
+    $(".arrow").bind("mouseenter", function(e){
+        $(this).attr('src','{{ MEDIA_URL }}img/arrow_w_red.png');
+    });
+    
+    $(".arrow").bind("mouseout", function(e){
+        $(this).attr('src','{{ MEDIA_URL }}img/arrow_w_blue.png');
+    });
+    
+    $(".ver_span").bind("mouseenter", function(e){
+        $(this).removeClass('version_item').addClass('version_item-selected');
+    });
+        
+    $(".ver_span").bind("mouseout", function(e){
+        $(this).removeClass('version_item-selected').addClass('version_item');
+    });    
+});
+-->
+</script>
+
+<div id="text_history" class="tab-meta">    
+<h2>{% blocktrans %}Versions:{% endblocktrans %}</h2>
+
+<span id="text_history_timeline">
+{% for v1, v2, color in paired_versions %}
+    <a href="{% url text-history-version text.key v1.version_number %}" title="{% blocktrans with v1.version_number as v1number %}version #{{ v1number }}{% endblocktrans %}{% if v1.name %} {% blocktrans  with v1.name as v1name %}by {{ v1name }}{% endblocktrans %}{% endif %}{% if v1.note %} / {{ v1.note }}{% endif %} ({% blocktrans with v1.created as v1created %}created {{ v1created }}{% endblocktrans %})">
+    <span id={{ v1_id }}
+          style="background: {{ color }};" 
+          class="ver_span {% choice_string v1_id v1.id version_item-selected or v1.id v2_id version_item-selected version_item %}">{{ forloop.counter }}</span></a>
+
+    {% if v2 %}
+    <span class="{% choice_string v2_nid v2.version_number diff_item-selected diff_item %}">
+        <!-- <a href="{% url text-history-compare text.key v1.version_number v2.version_number %}" title="diff between {{ forloop.counter }} and following ">&rarr;</a>-->
+        <a href="{% url text-history-compare text.key v1.version_number v2.version_number %}" title="{% blocktrans with v1.version_number as v1number and v2.version_number as v2number %}differences between version #{{ v1number }} and #{{ v2number }}{% endblocktrans %}"><span style="vertical-align:middle;" >
+            <img class="arrow"
+                id="arrow_{{ v1.version_number }}"
+                src="{{ MEDIA_URL }}img/arrow_w_blue.png"/></span></a>
+    </span>    
+    {% endif %}
+{% endfor %}
+</span>
+
+<h2>{% blocktrans %}Authors:{% endblocktrans %}</h2>
+{% for author,color in author_colors %}
+    <span style="background: {{ color }};">{{ author }}</span>
+{% empty %}
+<a href="{% url text-authors text.key %}">{% blocktrans %}authors{% endblocktrans %}</a>
+{% endfor %}
+
+{% if can_edit_text %}
+<h2>{% blocktrans %}Actions:{% endblocktrans %}</h2>
+<form action="{% url text-revert text.key v1_nid %}" method="POST" >{% blocktrans %}Revert to version #{{ v1_nid }}:{% endblocktrans %}<input name="revert" type="submit" value="Revert"/></form>
+{% endif %}
+
+{% if v2_nid %}
+    <h2>{% blocktrans with v1_nid as v1_nid and v1_nid as v1_nid %}Differences between version #{{ v1_nid }} and version #{{ v2_nid }}:{% endblocktrans %}</h2>
+{% else %}
+    <h2>{% blocktrans with version1.created|local_date:tz as date and v1_nid as version_number and version1.title as title %}Version #{{ version_number  }} entitled "{{ title }}" and created on {{ date }}:{% endblocktrans %}</h2>   
+{% endif %}
+{% autoescape off %}
+
+{% if v2_nid %}
+<br />
+<table class="diff" width="100%">
+    <tr>
+        <td class="diff-head" width="45%">
+            {% blocktrans with v1_nid as version_number and version1.title as title %}{{ title }} / version #{{ version_number }}{% endblocktrans %}
+            <br/>
+            {% blocktrans with version1.created|local_date:tz as date %}created {{ date }}{% endblocktrans %}
+        </td>
+        <td width="10%"></td>
+        <td class="diff-head" width="45%">
+            {% blocktrans with v2_nid as version_number and version2.title as title %}{{ title }} / version #{{ version_number }}{% endblocktrans %}
+            <br/>
+            {% blocktrans with version2.created|local_date:tz as date %}created {{ date }}{% endblocktrans %}
+            
+        </td>
+    </tr>
+</table>
+{% endif %}
+
+{{ content }}
+{% endautoescape %}
+</div>
+{% endblock %}

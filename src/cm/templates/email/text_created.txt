@@ -1,0 +1,8 @@
+{% extends "email/base_email.txt" %}{% load i18n %}
+
+{% block content %}
+{% blocktrans %}Your text "{{ title }}" has been created.{% endblocktrans %}
+
+{% blocktrans %}To publish it click on the following link:{% endblocktrans %}
+{{ site_url }}{{ publish_url }} 
+{% endblock %}

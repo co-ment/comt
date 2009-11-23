@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Javascript date formatting demo</title>
+<script type="text/javascript" src="date-functions.js"></script>
+<link rel="stylesheet" type="text/css" href="../files/demo-style.css" />
+</head>
+
+<body>
+
+<p>The following demo loops through several sample formatting strings and all pre-defined patterms, and creates a table of the results:</p>
+
+<script type="text/javascript">var formats = [
+    "Y-m-d",
+    "n/j/y",
+    "l, M jS, Y",
+    "Y-m-d H:i:s",
+    "D \\t\\h\e jS"];
+var d = new Date();
+document.write("<table class='borders collapsed'><tr><th colspan='2'>Format Strings<" + "/th><" + "/tr>");
+for (var f in formats) {
+    document.write("<tr><td>" + formats[f] + "<" + "/td><td>" + d.dateFormat(formats[f]) + "<" + "/td><" + "/tr>");
+}
+document.write("<tr><th colspan='2'>Pre-Defined Patterns<" + "/th><" + "/tr>");
+for (var f in Date.patterns) {
+    document.write("<tr><td>Date.patterns." + f + "<" + "/td><td>" + d.dateFormat(Date.patterns[f]) + "<" + "/td><" + "/tr>");
+}
+document.write("<" + "/table>");
+</script>
+
+<p>The following table lists the code for each of the functions generated as a result of parsing the format strings:</p>
+
+<script type="text/javascript">
+document.write("<table class='borders collapsed'><tr><th>Function<" + "/th><th>Code<" + "/th><" + "/tr>");
+for (var f in Date.formatFunctions) {
+    if (f !== "count") {
+        document.write("<tr><td>" + Date.formatFunctions[f] + "<" + "/td><td>" + Date.prototype[Date.formatFunctions[f]] + "<" + "/td><" + "/tr>");
+    }
+}
+document.write("<" + "/table>");
+</script>
+
+
+</body>
+</html>

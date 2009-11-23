@@ -1,0 +1,26 @@
+{% extends "site/layout/base.html" %}
+{% load com %}
+{% load i18n %}
+{% load local_perms %}
+
+{% block head_base %}
+{% endblock %}
+
+{% block content %}
+
+{% get_local_perm request can_manage_workspace as can_manage_workspace %}
+{% nb_texts as nb_texts %}
+{% nb_users as nb_users %}
+<h1 class="main_title"><a title="{% blocktrans %}back to workspace{% endblocktrans %}" class="title" href="{% url index %}">{{ CONF.workspace_name }}</a></h1>
+
+<span class="metadata">
+{% blocktrans count nb_texts as nb_texts %}{{ nb_texts }} text{% plural %}{{ nb_texts }} texts{% endblocktrans %}{% if can_manage_workspace %}, {% blocktrans count nb_users as nb_users %}{{ nb_users }} user{% plural %}{{ nb_users }} users{% endblocktrans %}
+{% endif %}
+</span>
+
+{% include "site/macros/main_tabs.html" %}    
+
+{% block main %}
+{% endblock %}
+
+{% endblock %}

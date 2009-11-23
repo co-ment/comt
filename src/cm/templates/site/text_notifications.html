@@ -1,0 +1,93 @@
+{% extends "site/layout/base_text.html" %}
+{% load com %}
+{% load i18n %}
+{% load local_perms %}
+
+{% block title %}
+{% blocktrans %}Text notifications{% endblocktrans %}
+{% endblock %}
+
+{% block main %}
+{% get_local_perm request can_manage_workspace as can_manage_workspace %}
+{% get_local_perm request can_view_unapproved_comment as can_view_unapproved_comment %}
+
+<script type="text/javascript">
+<!--
+tb_conf['current_tab'] = 'notifications';
+-->
+</script>
+
+<div id="notifications_settings" class="tab-meta">   
+
+<form id="notifications" enctype="multipart/form-data" action="." method="post">
+
+<h2>{% blocktrans %}Feeds{% endblocktrans %}</h2>
+
+<h3>{% blocktrans %}Public feed{% endblocktrans %}</h3>
+
+<div>
+<a href="{{SITE_URL}}{% url text-feed text.key  %}" title="{% blocktrans with text.title as title %}Public feed for text {{ title }}{% endblocktrans %}">
+	<img style="vertical-align:middle;" src="{{ MEDIA_URL }}img/xml.gif" /> {{SITE_URL}}{% url text-feed text.key  %} 
+</a>
+</div>
+{% blocktrans %}This is the public feed for the text.{% endblocktrans %}
+
+{% if can_view_unapproved_comment %}
+<h3>{% blocktrans %}Private feed{% endblocktrans %}</h3>
+
+{% if text.private_feed_key %}
+<div>
+<a href="{{SITE_URL}}{% url text-private-feed text.key text.private_feed_key %}" title="{% blocktrans %}Private feed for text {% endblocktrans %}">
+	<img style="vertical-align:middle;" src="{{ MEDIA_URL }}img/xml.gif" /> {{SITE_URL}}{% url text-private-feed text.key text.private_feed_key %} 
+</a>
+</div>
+{% blocktrans %}This is the private feed for the text. Don't share this address with others unless you want them to see all activities on this text.{% endblocktrans %}
+<br />
+<input name="reset" type="submit" id="reset" value="{% blocktrans %}Reset private feed url{% endblocktrans %}"/>
+
+{% else %}
+<div>
+<input name="activate" type="submit" id="activate" value="{% blocktrans %}Activate private feed{% endblocktrans %}"/>
+</div>
+{% blocktrans %}The private feed for this text is not yet activated.{% endblocktrans %}
+{% endif %}
+
+{% endif %}
+
+<h2>{% blocktrans %}Email notifications{% endblocktrans %}</h2>
+
+	<input type="checkbox" id="all_check" class="check" name="all-check" {% if all_check %}checked="checked"{% endif %}/>&nbsp;
+	{% blocktrans %}Subscribe to all text notifications{% endblocktrans %}
+	
+	<script type="text/javascript">                
+	<!--
+	$(function() {
+	    $(".check").click(function(){
+	    	var all_check = $("#all_check").attr('checked');
+            $.post('.',{'all_check':all_check},function(data){/* window.location = window.location;*/});
+    });
+}) ;
+--> 
+</script>
+
+<h2>{% blocktrans %}Embed the text{% endblocktrans %}</h2>
+(<a title="{% blocktrans %}Help{% endblocktrans %}" target="_blank" href="{% url help %}#embed">?</a>)
+<br />
+{% blocktrans %}Copy this code into your site to display text with comments. Users will also be able to add comments from your site depending an anonymous users' roles.{% endblocktrans %}
+<br/>
+<br/>
+<textarea rows="4" cols="80" readonly="true">
+<iframe frameborder="0" src="{{ SITE_URL }}{% url text-view-comments-frame text.key %}" style="height: 166px; width: 99.9%; position: relative; top: 0px;"> 
+</iframe>
+</textarea>
+{% if not anonymous_can_view_text %}
+<br/>
+{% url text-share text.key as text_users_link %} 
+<span style="color:#F00;">{% blocktrans %}Warning:{% endblocktrans %}</span>{% blocktrans %}You won't be able to successfully embed the text before you <a href='{{ text_users_link }}'>give anonymous users</a> a role allowing them to view the text{% endblocktrans %}</span>
+{% endif %}
+</form>
+</div>
+
+
+{% endblock %}
+

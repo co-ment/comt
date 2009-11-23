@@ -1,0 +1,65 @@
+# generic roles
+# don't forget to clear existing roles if loading this fixture on a existing database
+            
+- model : cm.role
+  pk: 1
+  fields:
+    name: "Manager"
+    description: "" 
+    anon: false
+    permissions: [52, 11, 34, 31, 38, 36, 37, 32, 13, 14, 12, 15, 51]
+# can_manage_text
+# can_manage_workspace
+
+- model : cm.role
+  pk: 2
+  fields:
+    name: "Editor"
+    description: "" 
+    anon: false
+    permissions: [52, 11, 34, 31, 38, 36, 37, 32, 13, 14, 12]
+# can_create_text
+# can_delete_text
+# can_edit_text                          
+    
+- model : cm.role
+  pk: 3
+  fields:
+    name: "Moderator"
+    description: "" 
+    anon: false
+    permissions: [52, 11, 34, 31, 38, 36, 37, 32]
+# can_view_unapproved_comment
+# can_edit_comment
+# can_delete_comment
+    
+- model : cm.role
+  pk: 4
+  fields:
+    name: "Commentator"
+    description: "" 
+    anon: true
+    permissions: [52, 11, 34, 31, 38]
+# can_create_comment
+# can_edit_comment_own
+    
+- model : cm.role
+  pk: 5
+  fields:
+    name: "Observer"
+    description: "" 
+    anon: true
+    permissions: [52, 11, 34]
+# can_view_approved_comment
+    
+##- model : cm.role
+##  pk: 6
+##  fields:
+##    name: "Participant"
+##    description: "" 
+##    anon: true
+##    permissions: [52, 11]
+##
+### can_view_workspace    
+### can_view_text
+    

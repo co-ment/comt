@@ -1,0 +1,135 @@
+/* style of overlays for comments,no border text only style */
+	/* YUI OVERLAY */ /* Overlay Look/Feel */
+.c-comment, .c-newcomment {
+    padding: 0px;
+/*    font-size: 85%; */
+}
+
+.c-comment .yui-widget-hd, .c-comment .yui-widget-bd, .c-comment .yui-widget-ft,.c-newcomment .yui-widget-hd, .c-newcomment .yui-widget-bd, .c-newcomment .yui-widget-ft {
+    text-align: left;
+    padding: 2px;
+}
+
+.c-comment h1, .c-comment h2, .c-comment h3, .c-newcomment h1, .c-newcomment h2, .c-newcomment h3 {
+    margin:0;
+}
+
+.c-header-title {
+	font-size:100%;
+    font-weight: bold;
+}
+
+.c-newcommentform-title {
+	font-family:arial,helvetica,clean,sans-serif;
+	font-size-adjust:none;
+	font-style:normal;
+	font-variant:normal;
+	line-height:1.231;	
+    font-weight: bold;
+}
+
+.c-infos, .c-tags-infos, .c-state-actions,.c-iactions {
+    font-size: 77%;
+    color: #565656;
+}
+
+.c-error {
+    color: #FF0000;
+}
+
+.c-input {
+    padding:1px;
+    width:180px;
+}
+
+/* taking away anything changes the style under IE */
+.current_sel {
+	-x-system-font:none;
+	background-color:#111111;
+	color:#FFFFFF;
+	font-family:arial,helvetica,sans-serif;
+/*	font-size:11px;*/
+	font-size-adjust:none;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:bold;
+	line-height:normal;
+	width:100%;
+}
+
+.current_sel_ins {
+    margin:4px;
+}
+
+a.c-action {
+    overflow: hidden;
+    cursor: pointer;
+    color:#2D5593;
+    text-decoration: none;
+}
+
+.yui-widget-bd .c-ireplyactions {
+    overflow: hidden;
+    margin-right:3px;
+    float:right;
+}
+
+.yui-widget-hd a.c-close {
+/*  background: transparent url(../../../img/close_comment.png) no-repeat scroll 0 0;*/
+    background: transparent url(../../../img/c_spr.png) no-repeat scroll 0 -30px;
+    position: absolute;
+    right: 5px;
+	top: 5px;
+    height: 14px;
+    text-indent: -999px;
+    width: 14px;
+    cursor: pointer;
+    color:#2D5593;
+    overflow: hidden;
+    text-decoration: none;
+    font-size:77%;
+}
+
+.c-comment a.c-iclose {
+    background-position: 0 -30px;
+}
+
+.c-comment a.c-iclose-focus {
+    background-position: 0 -74px;
+}
+input[type="text"], input[type="password"], textarea {
+    border: 1px solid #C1C1C1;
+}
+
+
+.c-comment .yui-widget-bd {
+    padding-bottom: 20px;
+}
+
+.c-focus-comment .c-comment {
+    background-color:#DBE8FF;
+    border:1px solid  #BFD6FF;
+}
+
+.c-focus-comment .c-comment .yui-widget-hd {
+    background-color:#BFD6FF;
+}
+
+.c-focus-comment .c-comment{
+ /*   border: solid 1px #000000 ;*/
+}
+
+a.c-state-unapproved {
+    color:#F00 ;
+}
+a.c-state-pending {
+    color:#FF8000 ;
+}
+a.c-state-approved {
+    color:#1AB81D ;
+}
+
+span.c-content p { 
+    margin-bottom:0em;
+}

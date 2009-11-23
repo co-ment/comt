@@ -1,0 +1,42 @@
+{% extends "site/layout/base_workspace.html" %}
+{% load com %}
+{% load i18n %}
+
+{% block title %}
+{% blocktrans %}Contact{% endblocktrans %}
+{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+
+<h1>Contact</h1>
+<form id="profile" enctype="multipart/form-data" class="wizard-form" action="." method="post">
+<table class="wide_form">
+    <tbody>
+        {% include "site/macros/form_fields.html" %}
+    <tr>
+        <td style="vertical-align: top; width: 20%; text-align:right;">
+        </td>
+        <td>
+            <label></label>
+            <input name="send" type="submit" value="{% blocktrans %}Send{% endblocktrans %}"/>
+            
+		 	<input name="cancel" type="button" id="cancel_button" value="{% blocktrans %}Cancel{% endblocktrans %}"/>
+		    <script type="text/javascript">
+		    <!--
+		    $(document).ready(function(){
+		        $("#cancel_button").click(function (e) { 
+		            window.location = "{% url index %}";
+		            e.stopPropagation(); 
+		          });                
+		    }) ;
+		    -->
+		    </script>            
+        </td>
+    </tr>
+    </tbody>
+</table>
+</form>
+{% endblock %}

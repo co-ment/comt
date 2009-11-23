@@ -1,0 +1,32 @@
+{% extends "site/layout/base_text.html" %}
+{% load com %}
+
+{% block head %}
+<script type="text/javascript" src="{{ MEDIA_URL }}js/site/text_view_to_frame.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/site/text_view.js"></script>
+{% endblock %}
+
+{% block main %}
+
+<script type="text/javascript">
+<!--
+sv_media_url = "{{ MEDIA_URL|escapejs}}" ; 
+
+tb_conf['current_tab'] = 'view';
+-->
+</script>
+
+
+<!-- <div style="clear:right;">-->
+<!-- border-width: 0pt;     frameborder="0" -->
+<div id="text_view_frame_container">
+<center>
+<iframe id="text_view_frame" name="text_view_frame" style="height:400px;width:99.9%;"  frameborder="0" src ="{% url text-view-comments-frame text.key %}?{{ request.GET.urlencode }}"/> 
+</center>
+</div>
+
+{% autoescape off %}
+{{ text_version.get_content }}
+{% endautoescape %}
+
+{% endblock %}

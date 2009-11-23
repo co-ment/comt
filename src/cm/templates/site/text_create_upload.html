@@ -1,0 +1,58 @@
+{% extends "site/layout/base_workspace.html" %}
+{% load i18n %}
+
+{% block title %}{% blocktrans %}Upload a text{% endblocktrans %}{% endblock %}
+
+{% block main %}
+<script type="text/javascript">
+<!--
+tb_conf['current_tab'] = 'text';
+-->
+</script>
+
+<script type="text/javascript">
+<!--
+$(function() {
+    $(".hidden-text-actions").css('visibility','hidden');   
+}) ;
+-->
+</script>
+
+<div id="text" class="tab-meta">   
+
+<ul class="sub_list">
+    <li><a href="{% url text %}">{% blocktrans %}Text list{% endblocktrans %}</a></li>
+    <li> / </li>
+    <li><a href="{% url text-create-content %}">{% blocktrans %}Write a text{% endblocktrans %}</a></li>
+    <li> / </li>
+    <li class="active_sub">{% blocktrans %}Upload a text{% endblocktrans %}</li>
+</ul>
+
+<form id="text_create_upload" enctype="multipart/form-data" class="wizard-form" action="." method="post">
+<table class="wide_form">
+    <tbody>
+    {% include "site/macros/form_fields.html" %}    
+    <tr>
+        <td style="vertical-align: top; width: 20%; text-align:right;">
+        </td>
+        <td>
+            <label></label>
+            <input name="save" type="submit" value="{% blocktrans %}Save{% endblocktrans %}"/>
+            &nbsp;
+            <input id="cancel_button" type="button" value="{% blocktrans %}Cancel{% endblocktrans %}"/>
+            
+            <script type="text/javascript">
+            <!--
+            $(document).ready(function(){
+                $("#cancel_button").click(function () { 
+                    window.location = "{% url index %}"; 
+                  });                
+            }) ;
+            -->
+            </script>                 
+        </td>
+    </tr>
+    </tbody>
+</table>
+</form>
+{% endblock %}

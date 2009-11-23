@@ -1,0 +1,25 @@
+{% load com %}
+{% load i18n %}
+| <a id="user-approve-{{ user.get_profile.key }}" href="#">{% blocktrans %}Approve{% endblocktrans %}</a>/<a id="user-refuse-{{ user.get_profile.key }}" href="#">Refuse</a> membership
+<script type="text/javascript">
+<!--
+$("#user-approve-{{ user.get_profile.key }}").click(function(){
+    url = '{% url user-enable user.get_profile.key %}';
+	question = "{% blocktrans %}Are you sure you want to approve this user's membership to the workspace?{% endblocktrans %}";
+    if (confirm(question)) {
+        $.post(url, function(data){
+              window.location = '{% url user %}';
+            });                        
+    }
+});
+$("#user-refuse-{{ user.get_profile.key }}").click(function(){
+    url = '{% url user-suspend user.get_profile.key %}';
+	question = "{% blocktrans %}Are you sure you want to refuse this user's membership to the workspace?{% endblocktrans %}";
+    if (confirm(question)) {
+        $.post(url, function(data){
+              window.location = '{% url user %}';
+            });                        
+    }
+});
+--> 
+</script>

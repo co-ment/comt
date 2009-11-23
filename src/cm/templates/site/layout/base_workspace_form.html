@@ -1,0 +1,45 @@
+{% extends "site/layout/base_workspace.html" %}
+{% load com %}
+{% load i18n %}
+
+{% block head %}
+{% endblock %}
+
+{% block main %}
+
+{% block pre_form %}
+{% endblock %}
+
+<form enctype="multipart/form-data" class="wizard-form" action="." method="post">
+
+<table summary="form" class="wide_form">
+    <tbody>
+    {% if form %}
+        {% include "site/macros/form_fields.html" %}
+    {% endif %}
+
+    {% if forms %}
+        {% for form in forms %}
+            {% include "site/macros/form_fields.html" %}
+        {% endfor %}
+    {% endif %}
+    
+    <tr>
+        <td style="vertical-align: top; width: 20%; text-align:right;">
+        </td>
+        <td>
+            <label>&nbsp;</label>
+            <input name="{% if save_name %}{{ save_name }}{% else %}{% blocktrans %}Save{% endblocktrans %}{% endif %}" type="submit" value="{% if save_name %}{{ save_name }}{% else %}{% blocktrans %}Save{% endblocktrans %}{% endif %}"/>
+            {% block buttons %}
+            {% endblock %}            
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</form>
+
+{% block post_form %}
+{% endblock %}
+
+{% endblock %}

@@ -1,0 +1,187 @@
+{% extends "site/layout/base_workspace.html" %}
+{% load com %}
+{% load i18n %}
+{% load activity %}
+
+{% block title %}
+{% blocktrans %}People' list{% endblocktrans %}
+{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block main %}
+
+<script type="text/javascript">
+<!--
+tb_conf['current_tab'] = 'user';
+-->
+</script>
+
+<script type="text/javascript">
+<!--
+$(function() {
+    $(".hidden-user-actions").css('visibility','hidden');   
+}) ;
+-->
+</script>
+
+<div id="user" class="tab-meta">
+
+<form id="user_form" action="." method="post">
+
+<ul class="sub_list">
+    <li class="active_sub">{% blocktrans %}People' list{% endblocktrans %}</li>
+    <li> / </li>
+    <li><a href="{% url user-add %}">{% blocktrans %}Add a new user{% endblocktrans %}</a></li>
+    <li> / </li>
+    <li><a href="{% url user-mass-add %}">{% blocktrans %}Add users in bulk{% endblocktrans %}</a></li>    
+</ul>
+
+<select id="bulk_actions" name="action">
+<option selected="selected" value="-1">{% blocktrans %}Bulk Actions{% endblocktrans %}</option>
+<option value="disable">{% blocktrans %}Suspend access{% endblocktrans %}</option>
+<option value="enable">{% blocktrans %}Enable access{% endblocktrans %}</option>
+{% for bulk_role in all_roles %}
+<option value="role_{{ bulk_role.id }}">{% blocktrans with bulk_role as role_name %}Change role to {{ role_name }}{% endblocktrans %}</option>
+{% endfor %}
+</select>
+
+<input name="apply" type="hidden" value="apply"/>
+<input name="apply_action" id="apply" type="button" value="{% blocktrans %}Apply{% endblocktrans %}" disabled="disabled"/>
+
+&nbsp;{% if display_suspended_users %}<a href="?{% newparams 'display' '0' %}" title="{% blocktrans %}Hide suspended users{% endblocktrans %}">{% blocktrans %}Hide suspended users{% endblocktrans %}</a>{% else %}<a href="?{% newparams 'display' '1' %}" title="{% blocktrans %}Display suspended users{% endblocktrans %}">{% blocktrans %}Display suspended users{% endblocktrans %}</a>{% endif %}
+
+<script type="text/javascript">
+<!--
+function check_activate_apply() {
+    if (($("input[name^=check-]:checked").length > 0) && ($("#bulk_actions").val() != -1)) {
+        $('#apply').removeAttr('disabled');
+    }
+    else {
+        $('#apply').attr('disabled','disabled');
+    }   
+};
+
+$(function() {
+    $("input[name^=check-]").click(function () {
+    	check_activate_apply()
+      });                    
+    $("#bulk_actions").change(function () {
+        check_activate_apply();
+      });
+    $("#apply").click(function () {
+        question = "{% blocktrans %}Are you sure?{% endblocktrans %}";
+        if (confirm(question)) {
+            $("#user_form").submit();
+        }
+      });   
+              
+}) ;
+-->
+</script>
+
+{% include "site/macros/paginator.html" %}
+
+<div style="clear:both;"></div>
+
+<table summary="user list" class="large_table">
+    <thead>
+        <tr>
+            <th class="check-column"><input type="checkbox" id="all_check" name="checkall"/>
+            <script type="text/javascript">
+            <!--
+            $(function() {
+                $("#all_check").click(function () {
+                	checked = $("#all_check").attr('checked'); 
+                	$(".user_check").attr('checked', checked);
+                	check_activate_apply();
+                  });                            
+            }) ;
+            -->
+            </script>
+            </th>
+            <th>{% up_down user__username %}{% blocktrans %}User{% endblocktrans %}{% endup_down %}</th>
+            <th>{% up_down user__email %}{% blocktrans %}Email{% endblocktrans %}{% endup_down %}</th>
+            <th>{% up_down user__date_joined %}{% blocktrans %}Date joined{% endblocktrans %}{% endup_down %}</th>
+            <th>{% up_down role__name %}{% blocktrans %}Role{% endblocktrans %}{% endup_down %}</th>
+            <th>{% blocktrans %}Last week activity{% endblocktrans %}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for userrole in object_list %}
+    {% with userrole.user as user %}
+    
+    <tr class="user-{{ user.get_profile.key }} {% cycle 'odd' 'even' %}">
+        <td><input type="checkbox" {% ifequal user request.user %}disabled="disabled"{% endifequal %} class="user_check" name="check-{{ user.get_profile.key }}"/></td>
+        <td>
+			{% include "site/macros/user_actions.html" %}
+        </td>
+        <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+        <td>{{ user.date_joined|local_date }}</td>
+        <td>
+                <select name="user-role-{{ user.get_profile.key }}" {% ifequal user request.user %}disabled="disabled"{% endifequal %}>
+                    <option {% if userrole.role %}{% else %}selected="selected"{% endif %} value="">---------</option>
+                    {% for role in all_roles %}
+                    <option {% ifequal userrole.role role %}selected="selected"{% endifequal %} value="{{ role.id }}">{{ role.name_i18n }}</option>
+                    {% endfor %}
+                </select>
+        </td>
+        <td><span id="ticker-{{ user.get_profile.key }}">{% blocktrans %}Loading...{% endblocktrans %}</span>
+            <script type="text/javascript">
+            $(function() {                   
+                $('#ticker-{{ user.get_profile.key }}').sparkline({% activity all user '1/4day' 28 'all' '' %}, {'width': '100px','height': '22px'});
+            });                
+            </script>
+        </td>        
+        
+        
+    </tr>
+    
+    {% endwith %}
+    {% endfor %}
+    <tr class="no-border">
+        <td></td><td></td><td></td><td></td>
+    </tr>
+
+    <tr class="full-border even">
+        <td></td>
+        <td><a class="main_object_title" title="{% blocktrans %}Edit anonymous users{% endblocktrans %}" href="{% url user-anon-edit %}">{% blocktrans %}Anonymous users{% endblocktrans %}</a></td>
+        <td>-</td>
+        <td>-</td>
+        <td>
+            <select name="user-role-_">
+                <option selected="selected" value="">---------</option>
+                {% for role in anon_roles %}
+                <option {% ifequal anon_role role %}selected="selected"{% endifequal %} value="{{ role.id }}">{{ role.name_i18n }}</option>
+                {% endfor %}
+            </select>
+        </td>
+        <td><span id="ticker-_">{% blocktrans %}Loading...{% endblocktrans %}</span>
+            <script type="text/javascript">
+            $(function() {                   
+                $('#ticker-_').sparkline({% activity all None '1/4day' 28 'all' '' %}, {'width': '100px','height': '22px'});
+            });                
+            </script>
+        </td>        
+    </tr>
+    
+    </tbody>
+
+</table>
+
+ <script type="text/javascript">                
+<!--
+$(function() {
+    $('select[name^=user-role-]').change(function(){
+    	$('#save').removeAttr('disabled');
+    });
+}) ;
+--> 
+</script>                
+<input style="margin-left:20px;" name="save" id="save" type="submit" value="{% blocktrans %}Save{% endblocktrans %}" disabled="disabled"/>        
+
+</form>
+
+</div>
+{% endblock %}

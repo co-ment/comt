@@ -1,0 +1,33 @@
+{% extends "site/layout/base_workspace.html" %}
+{% load com %}
+{% load i18n %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+
+<h1>{% blocktrans %}Activate your account{% endblocktrans %}</h1>
+<form id="user_add" enctype="multipart/form-data" class="wizard-form" action="." method="post">
+<table class="wide_form">
+    <tbody>
+    {% with userform as form %}
+        {% include "site/macros/form_fields.html" %}
+    {% endwith %}    
+    
+    {% with pwform as form %}
+        {% include "site/macros/form_fields.html" %}
+    {% endwith %}    
+
+    <tr>
+        <td style="vertical-align: top; width: 20%; text-align:right;">
+        </td>
+        <td>
+            <label></label>
+            <input name="save" type="submit" value="{% blocktrans %}Save{% endblocktrans %}"/>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</form>
+{% endblock %}

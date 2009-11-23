@@ -1,0 +1,17 @@
+<form  id="test" class="wizard-form" action="." method="post">
+{{ form }}
+
+<input id="sub" name="continue" type="button" value="finish  →"/>
+
+<script type="text/javascript">
+    $(function() {
+        $("#sub").click(function () {
+        	var str = $("#test").serialize();
+        	$.post("{% url test_inner %}", str,
+        			  function(data, textStatus){
+        		$(".ui-tabs-panel").not('.ui-tabs-hide').html(data);
+        			  }, "html");
+        });
+    });
+    </script>
+</form>

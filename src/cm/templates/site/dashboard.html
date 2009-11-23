@@ -1,0 +1,319 @@
+{% extends "site/layout/base_workspace.html" %}
+{% load com %}
+{% load i18n %}
+{% load local_perms %}
+{% load activity %}
+
+{% block head_base %}
+<link href="{% url public-feed %}" title="Workspace feed" type="application/rss+xml" rel="alternate" />
+{% endblock %}
+
+{% block title %}
+{% blocktrans %}Dashboard{% endblocktrans %}
+{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block main %}
+
+{% get_local_perm request can_create_text as can_create_text %}
+{% get_local_perm request can_manage_workspace as can_manage_workspace %}
+
+<script type="text/javascript">
+<!--
+tb_conf['current_tab'] = 'dashboard';
+-->
+</script>
+
+<script type="text/javascript">
+<!--
+$(function() {
+    $(".hidden-text-actions").css('visibility','hidden');   
+}) ;
+-->
+</script>
+
+<div id="dashboard" class="tab-meta">   
+
+<div style="float:left;width:32%;">
+	<table class="dash_table">
+	    <thead>
+	        <tr>
+	        <th><span class="em">{% blocktrans %}Actions{% endblocktrans %}</span></th>
+			</tr>
+		</thead>
+		<tbody>
+	        <tr><td>	
+            {% if can_create_text %}<div class="dash_action"><a class="" href="{% url text-create-content %}"><img align="middle" src="{{ MEDIA_URL }}img/sop_write.png"/>&nbsp;{% blocktrans %}Write a text{% endblocktrans %}</a></div>{% endif %}
+            {% if can_create_text %}<div class="dash_action"><a class="" href="{% url text-create-upload %}"><img align="middle" src="{{ MEDIA_URL }}img/sop_upload.png"/>&nbsp;{% blocktrans %}Upload a text{% endblocktrans %}</a></div>{% endif %}
+            {% if can_manage_workspace %}<div class="dash_action"><a class="" href="{% url user-add %}"><img align="middle" src="{{ MEDIA_URL }}img/group_add.png"/>&nbsp;{% blocktrans %}Invite user{% endblocktrans %}</a></div>{% endif %}
+            <div class="dash_action"><a class="" href="{% url profile %}"><img align="middle" src="{{ MEDIA_URL }}img/user_edit.png"/>&nbsp;{% blocktrans %}Edit your profile{% endblocktrans %}</a></div>
+            <div class="dash_action"><a class="" href="{% url text %}"><img align="middle" src="{{ MEDIA_URL }}img/page_white_stack.png"/>&nbsp;{% blocktrans %}View text list{% endblocktrans %}</a></div>
+            {% if can_manage_workspace %}<div class="dash_action"><a class="" href="{% url settings %}"><img align="middle" src="{{ MEDIA_URL }}img/cog_edit.png"/>&nbsp;{% blocktrans %}Configure workspace{% endblocktrans %}</a></div>{% endif %}
+            </td>
+            </tr>
+		
+		</tbody>
+	</table>
+
+	{% if to_mod_profiles or to_mod_comments %}
+	<table class="dash_table">
+	    <thead>
+	        <tr>
+	        <th><span class="em">{% blocktrans %}Moderation queue{% endblocktrans %}</span></th>
+			</tr>
+		</thead>
+		<tbody>
+	        <tr><td>
+            <ul class="dashlog_list">
+            {% for profile in to_mod_profiles %}
+            	{% with profile.user as user %}
+            	<li class="dashlog_item">
+				    <div class="dashlog">            	
+						<img class="dashlog_img" src="{{ MEDIA_URL }}img/user_error_small.png"/>
+						<span class="dashlog_data">
+            			{% blocktrans %}user {{ user }} awaits approval{% endblocktrans %}
+            			</span>
+            			<div class="mod_actions">
+<img src="{{ MEDIA_URL }}img/bullet_go_small.png"/>
+<a id="user-approve-{{ user.get_profile.key }}" href="#">{% blocktrans %}approve{% endblocktrans %}</a>/<a id="user-refuse-{{ user.get_profile.key }}" href="#">{% blocktrans %}refuse{% endblocktrans %}</a> {% blocktrans %}membership{% endblocktrans %}
+<script type="text/javascript">
+<!--
+$("#user-approve-{{ user.get_profile.key }}").click(function(){
+    url = '{% url user-enable user.get_profile.key %}';
+	question = "{% blocktrans %}Are you sure you want to approve this user's membership to the workspace?{% endblocktrans %}";
+    if (confirm(question)) {
+        $.post(url, function(data){
+              window.location = '{% url index %}';
+            });                        
+    }
+});
+$("#user-refuse-{{ user.get_profile.key }}").click(function(){
+    url = '{% url user-suspend user.get_profile.key %}';
+	question = "{% blocktrans %}Are you sure you want to refuse this user's membership to the workspace?{% endblocktrans %}";
+    if (confirm(question)) {
+        $.post(url, function(data){
+              window.location = '{% url index %}';
+            });                        
+    }
+});
+-->             			
+</script>
+</div>
+						
+					<div style="padding-left:22px;" class="dashlog_metadata">
+					{% blocktrans with profile.modified|timesince as duration %}registered {{ duration }} ago{% endblocktrans %}
+                    </div>
+						  
+
+					</div>
+            	</li>
+            	{% endwith %}
+            {% endfor %}
+            {% for comment in to_mod_comments %}
+            	<li class="dashlog_item">
+				    <div class="dashlog">            	
+						<img class="dashlog_img" src="{{ MEDIA_URL }}img/note_error_small.png"/>
+						<span class="dashlog_data">
+            	
+		            	{% blocktrans %}comment{% endblocktrans %} <a href="{% url text-view-show-comment comment.text_version.text.key comment.key %}">{{ comment.title }}</a>
+		            	{% blocktrans with comment.user as cuser %}by {{ cuser }} on text{% endblocktrans %} <a href="{% url text-view comment.text_version.text.key %}">{{ comment.text_version.text.title }}</a> {% blocktrans %}awaits approval{% endblocktrans %}<br />
+		            	</span>
+		            	<div style="padding-left:22px;" class="mod_actions">
+<img src="{{ MEDIA_URL }}img/bullet_go_small.png"/>
+
+<a id="comment-approve-{{ comment.key }}" href="#">{% blocktrans %}approve{% endblocktrans %}</a>/<a id="comment-refuse-{{ comment.key }}" href="#">{% blocktrans %}refuse{% endblocktrans %}</a> {% blocktrans %}comment{% endblocktrans %},
+<a href="{% url text-view-show-comment comment.text_version.text.key comment.key %}">{% blocktrans %}view in context{% endblocktrans %}</a>
+<script type="text/javascript">
+<!--
+$("#comment-approve-{{ comment.key }}").click(function(){
+    url = '{% url text-client-exchange %}';
+	question = "{% blocktrans %}Are you sure you want to approve this comment?{% endblocktrans %}";
+    if (confirm(question)) {
+        $.post(url,
+                {
+            'comment_key':'{{ comment.key }}',
+            'fun':'editComment',
+            'key':'{{ comment.text_version.text.key }}',
+            'state':'approved'
+                 },
+               function(data){
+              window.location = '{% url index %}';
+            });                        
+    }
+});
+$("#comment-refuse-{{ comment.key }}").click(function(){
+    url = '{% url text-client-exchange %}';
+	question = "{% blocktrans %}Are you sure you want to refuse this comment?{% endblocktrans %}";
+    if (confirm(question)) {
+        $.post(url,
+                {
+            'comment_key':'{{ comment.key }}',
+            'fun':'editComment',
+            'key':'{{ comment.text_version.text.key }}',
+            'state':'unapproved'
+                 },
+               function(data){
+              window.location = '{% url index %}';
+            });                        
+    }
+});
+-->             			
+</script>		            	
+		            	</div>
+						<div style="padding-left:22px;" class="dashlog_metadata">
+						{% blocktrans with comment.modified|timesince as duration %}modified {{ duration }} ago{% endblocktrans %}
+	                    </div>
+		            </div>      
+            	</li>           
+            {% endfor %}
+            </ul>
+            </td></tr>		
+		</tbody>
+	</table>
+	{% endif %}	
+
+</div>	
+
+<div style="float:left;width:32%;padding-left:15px;">
+
+	<table class="dash_table">
+	    <thead>
+	        <tr>
+	        <th><span class="em">{% blocktrans %}Recent texts{% endblocktrans %}</span> (<a href="{% url text %}">{% blocktrans %}all{% endblocktrans %}</a>)</th>
+			</tr>
+		</thead>
+		<tbody>
+	        <tr><td>
+            <ul class="dashlog_list">
+            {% for text in last_texts %}
+            <li class="dashlog_item">
+				    <div class="dashlog">            	
+						<img class="dashlog_img" src="{{ MEDIA_URL }}img/page_white.png"/>
+						<span class="dashlog_data">
+							<a href="{% url text-view text.key %}">{{ text.title }}</a>						
+                    </span>
+                    <div style="padding-left:22px;" class="dashlog_metadata">
+                    {% nb_comments text as nb_comments %}
+					{% blocktrans count nb_comments as nb_comments %}{{ nb_comments }} comment{% plural %}{{ nb_comments }} comments{% endblocktrans %}, {% blocktrans with text.modified|timesince as duration %}modified {{ duration }} ago{% endblocktrans %}
+                    </div>
+                    </div>
+                    </li>
+            {% empty %}
+            {% blocktrans %}No texts yet{% endblocktrans %}                    
+            {% endfor %}
+            
+            </ul>
+            </td></tr>		
+		</tbody>
+	</table>
+	
+	{% if can_manage_workspace %}
+	{% include "site/dashboard_bloc_recent_comments.html" %}
+	{% endif %}
+</div>
+
+
+<div style="float:left;width:32%;padding-left:15px;">
+	{% if can_manage_workspace %}
+	<table class="dash_table">
+	    <thead>
+	        <tr>
+	        <th><span class="em">{% blocktrans %}Workspace activity{% endblocktrans %}</span>
+		        ({% ifnotequal span 'month' %}<a href="?{% newparams 'span' 'month' %}">{% blocktrans %}month{% endblocktrans %}</a>{% else %}{% blocktrans %}month{% endblocktrans %}{% endifnotequal %}/{% ifnotequal span 'week' %}<a href="?{% newparams 'span' 'week' %}">{% blocktrans %}week{% endblocktrans %}</a>{% else %}{% blocktrans %}week{% endblocktrans %}{% endifnotequal %}/{% ifnotequal span 'day' %}<a href="?{% newparams 'span' 'day' %}">{% blocktrans %}24 hours{% endblocktrans %}</a>{% else %}{% blocktrans %}24 hours{% endblocktrans %}{% endifnotequal %})</th>
+			</tr>
+		</thead>
+		<tbody>
+        <tr>
+            <td>
+                <div>{% blocktrans %}Access{% endblocktrans %}</div>  
+                <div class="spark" id="access">{% blocktrans %}Loading...{% endblocktrans %}</div>
+                <script type="text/javascript">
+                $(function() {
+                    $('#access').sparkline({% activity all all span auto 'text_view' 'raw' %}, {'width': '250px','height': '40px'});
+                });                
+                </script>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>{% blocktrans %}Commenting{% endblocktrans %}</div>  
+                <div class="spark" id="commenting">{% blocktrans %}Loading...{% endblocktrans %}</div>
+                <script type="text/javascript">
+                $(function() {
+                    $('#commenting').sparkline({% activity all all span auto 'comment_created' 'raw' %}, {'width': '250px','height': '40px'});
+                });                
+                </script>
+            </td>
+        </tr>
+		</tbody>
+	</table>
+	
+	<table class="dash_table">
+	    <thead>
+	        <tr>
+	        <th>       
+	        {% include "site/macros/paginator.html" %}    
+		        <span class="em">{% blocktrans %}Activities{% endblocktrans %}</span>
+		        <br />
+	        <span class="view_options">
+	            <input type="checkbox" name="view_texts" {% ifequal view_texts 1 %}checked="checked"{% endifequal %} id="view_texts"/>{% blocktrans %}texts{% endblocktrans %}
+	            <input type="checkbox" name="view_comments" {% ifequal view_comments 1 %}checked="checked"{% endifequal %} id="view_comments"/>{% blocktrans %}comments{% endblocktrans %}
+		        {% if can_manage_workspace %}
+		            <input type="checkbox" name="view_users" {% ifequal view_users 1 %}checked="checked"{% endifequal %} id="view_users"/>{% blocktrans %}users{% endblocktrans %}
+		        {% endif %}
+	        </span>
+	        
+        <script type="text/javascript">                
+        <!--
+        $(function() {
+            $("#view_texts").click(function(){                
+                window.location = ($(this).attr('checked'))? '?{% newparams 'view_texts' '1' %}' : '?{% newparams 'view_texts' '0' %}' ;
+            });
+            $("#view_comments").click(function(){                
+                window.location = ($(this).attr('checked'))? '?{% newparams 'view_comments' '1' %}' : '?{% newparams 'view_comments' '0' %}' ;
+            });
+            $("#view_users").click(function(){                
+                window.location = ($(this).attr('checked'))? '?{% newparams 'view_users' '1' %}' : '?{% newparams 'view_users' '0' %}' ;
+            });
+        }) ;
+        --> 
+        </script>	        
+			</th>
+			</tr>
+		</thead>
+		<tbody>
+	        <tr><td>
+	        
+                <ul class="dashlog_list">
+                <!--     {{ activity.type }} {{ activity.text }} {{ activity.comment }} {{ activity.user }} -->
+                {% for activity in object_list %}
+                    <li class="dashlog_item">
+				    <div class="dashlog">                    
+                    <img class="dashlog_img" src={{ MEDIA_URL }}img/{{ activity.img_name }} />
+                    <span class="dashlog_data">                    
+                    {{ activity.printable_data }}
+                    </span>
+                    <div style="padding-left:22px;" class="dashlog_metadata">
+                    {{ activity.printable_metadata }}
+                    </div>
+                    </div>
+                    </li>
+                {% empty %}
+            	{% blocktrans %}No activities{% endblocktrans %}
+                {% endfor %}
+                </ul>    
+            </td></tr>		
+		</tbody>
+	</table>
+	{% else %}
+		{% include "site/dashboard_bloc_recent_comments.html" %}	
+	{% endif %}
+	
+</div>
+
+<div style="clear:both;"></div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,394 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>YUI Library Examples: Drag &amp; Drop: Photo Browser</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    	<link rel="stylesheet" type="text/css" href="../../assets/yui.css" >
+
+<style>
+    /*Supplemental CSS for the YUI distribution*/
+    #custom-doc { width: 95%; min-width: 950px; }
+    #pagetitle {background-image: url(../../assets/bg_hd.gif);}
+/*    #pagetitle h1 {background-image: url(../../assets/title_h_bg.gif);}*/
+</style>
+
+<link rel="stylesheet" type="text/css" href="../../assets/dpSyntaxHighlighter.css">
+
+<!--there is no custom header content for this example-->
+
+<link type="text/css" rel="stylesheet" href="../../build/cssfonts/fonts-min.css" />
+<script type="text/javascript" src="../../build/yui/yui-min.js"></script>
+
+</head>
+<body id="yahoo-com" class=" yui-skin-sam">
+<div id="custom-doc" class="yui-t2">
+<div id="hd">
+	<div id="ygunav">
+		<p>
+            <em>
+                <a href="http://developer.yahoo.com/yui/3/">YUI 3.x Home</a> <i> - </i>	
+            </em>
+		</p>
+		<form action="http://search.yahoo.com/search" id="sitesearchform">
+            <input name="vs" type="hidden" value="developer.yahoo.com">
+            <input name="vs" type="hidden" value="yuiblog.com">
+		    <div id="sitesearch">
+		    	<label for="searchinput">Site Search (YDN &amp; YUIBlog): </label>
+			    <input type="text" id="searchinput" name="p">
+			    <input type="submit" value="Search" id="searchsubmit" class="ygbt">
+		    </div>
+		</form>
+    </div>
+	<div id="ygma"><a href="../../"><img src="../../assets/logo.gif"  border="0" width="200" height="93"></a></div>
+	<div id="pagetitle"><h1>YUI Library Examples: Drag &amp; Drop: Photo Browser</h1></div>
+</div>
+<div id="bd">
+
+	<div id="bar-note"><p><strong>Note:</strong> This is YUI 3.x. Looking for <a href="http://developer.yahoo.com/yui/">YUI 2.x</a>?</p></div>
+
+	<div id="yui-main">
+		<div class="yui-b">
+		  <div class="yui-ge">
+			  <div class="yui-u first example" id="main">
+
+	<h2>Drag &amp; Drop: Photo Browser</h2>
+
+	<div id="example" class="promo">
+	<p>
+	<p>Photo Browser built with YUI3 and <a href="http://developer.yahoo.com/yql/">YQL</a>. This example was part of the YUI3 presentation by <a href="http://blog.davglass.com/">Dav Glass</a> at <a href="http://openhacklondon.pbworks.com/">Open Hack : London</a></p>
+	</p>	
+
+	<div class="module example-container  newWindow">
+			<div id="example-canvas" class="bd">
+
+		<p class="newWindowButton yui-skin-sam">
+        <span id="newWindowLink">
+            <span class="first-child">
+                <a href="photo-browser_source.html" target="_blank">View example in new window.</a>
+            </span>
+        </span>	
+    </p>
+	
+		
+		</div>
+	</div>			
+	</div>
+		
+	<h3>YQL</h3>
+<p>This example uses the YQL YUI3 plugin: <a href="http://github.com/davglass/yui-yql">http://github.com/davglass/yui-yql</a></p>
+<p>Here is the Flickr YQL query used in this example.</p>
+<textarea name="code" class="JScript">
+SELECT * FROM flickr.photos.search(100) WHERE 
+   (text="openhacklondon") 
+   AND (safe_search = 1) 
+   AND (media = "photos") 
+   AND (extras = "o_dims") 
+   AND (
+       (o_width = "1600" AND o_height = "1200")
+     OR (o_width = "1200" AND o_height = "1600")
+     OR (o_width = "800" AND o_height = "600")
+   )
+</textarea>
+
+<h3>Slider and StyleSheet</h3>
+<p>In this example, we will use the Slider control to dynamically manipulate a CSS Style Rule.</p>
+<p>First, we need to create the slider and render it.</p>
+<textarea name="code" class="JScript">
+//Create and render the slider
+var sl = new Y.Slider({
+    railSize: '200px', value: 40, max: 70, min: 5,
+    thumbImage: assetsDir + 'css/thumb-classic-x.png'
+}).render('.horiz_slider');
+</textarea>
+<p>Now, we listen for the Slider's <code>valueChange</code> event. This event is fired when the value of the Slider has changed.</p>
+<p>Next we use the StyleSheet utility to dynamically change a style rule to resize the images.
+The style rule that we want to change is <code>#yui-main .yui-g ul li</code>. When the Slider's value changes, we will take the value and divide it by 2, then use that as the percentage width of the li. 
+This will give us the effect we want (resizing images) without touching all the images via the DOM.
+</p>
+<textarea name="code" class="JScript">
+//Listen for the change
+sl.after('valueChange',function (e) {
+    //Insert a dynamic stylesheet rule:
+    var sheet = new Y.StyleSheet('image_slider');
+    sheet.set('#yui-main .yui-g ul li', {
+        width: (e.newVal / 2) + '%'
+    });
+});
+</textarea>
+
+<h3>Event Delegation</h3>
+<p>This listener listens for all <code>mouseup</code> events on the <code>document</code> and it will only fire when the target element matches the <code>*</code> selector (which should be all elements).</p>
+<p>This way we can remove all the <code>selected</code> CSS classes from all the images in the browser when a <code>mouseup</code> occurs, only if the shift key was not pressed. We can then check to determine if the mouseup came from one of the images. If it has, add the selected class back to it.</p>
+
+<textarea name="code" class="JScript">
+//Listen for all mouseups on the document (selecting/deselecting images)
+Y.on('delegate', function(e) {
+    if (!e.shiftKey) {
+        //No shift key - remove all selected images
+        wrapper.queryAll('img.selected').removeClass('selected');
+    }
+    //Check if the target is an image and select it.
+    if (e.target.test('#yui-main .yui-g ul li img')) {
+        e.target.addClass('selected');
+    }
+}, document, 'mouseup', '*');    
+</textarea>
+<p>This listener, listens for all <code>click</code> events on the album list <code>#photoList li</code>. 
+First, it stops the click, so the href is not followed. Next, it removes all the <code>selected</code> classes from the list. Then, it adds the <code>selected</code> class to the item that was clicked on.</p>
+<p>After that UI setup, it uses Selectors to change the view of the images in the browser. 
+First, it checks if we are viewing "all" or a "sub album". If all is selected, it removes the <code>hidden</code> class from all the images.
+If it was an album, it adds the <code>hidden</code> class to all the images, then selects all the images with the class of its <code>id</code>, then it removes the hidden class from them.
+</p>
+<p>Basically, it hides all the images, then determines the ones it needs to show and removes the <code>hidden</code> class from them.</p>
+<textarea name="code" class="JScript">
+//Listen for all clicks on the '#photoList li' selector
+Y.on('delegate', function(e) {
+    //Prevent the click
+    e.halt();
+    //Remove all the selected items
+    e.currentTarget.get('parentNode').queryAll('li.selected').removeClass('selected');
+    //Add the selected class to the one that one clicked
+    e.currentTarget.addClass('selected');
+    //The "All Photos" link was clicked
+    if (e.currentTarget.hasClass('all')) {
+        //Remove all the hidden classes
+        wrapper.queryAll('li').removeClass('hidden');
+    } else {
+        //Another "album" was clicked, get its id
+        var c = e.target.get('id');
+        //Hide all items by adding the hidden class
+        wrapper.queryAll('li').addClass('hidden');
+        //Now, find all the items with the class name the same as the album id
+        //and remove the hidden class
+        wrapper.queryAll('li.' + c).removeClass('hidden');
+    }
+}, document, 'click', '#photoList li');
+</textarea>
+
+<h3>Full Source</h3>
+<p>Here is the full commented JavaScript source for this example.</p>
+<textarea name="code" class="JScript">
+YUI(yuiConfig).use('node', 'anim', 'dd', 'yql', 'slider', 'stylesheet', function(Y) {
+    //Get a reference to the wrapper to use later and add a loading class to it.
+    var wrapper = Y.get('#yui-main .yui-g ul').addClass('loading');
+    //Set its height to the height of the viewport so we can scroll it.
+    wrapper.setStyle('height', (wrapper.get('winHeight') - 50 )+ 'px');
+    Y.on('windowresize', function() { wrapper.setStyle('height', (wrapper.get('winHeight') - 50 )+ 'px'); });
+    //Make the YQL query.
+    new Y.yql('select * from flickr.photos.search(100) where text="openhacklondon" and safe_search = 1 and media = "photos" and extras = "o_dims" and ((o_width = "1600" and o_height = "1200") or (o_width = "1200" and o_height = "1600") or (o_width = "800" and o_height = "600") or (o_width = "600" and o_height = "800"))', function(e) {
+        if (e.query) {
+            var photos = e.query.results.photo;
+            //Walk the returned photos array
+            Y.each(photos, function(v, k) {
+                //Create our URL
+                var url = 'http:/'+'/static.flickr.com/' + v.server + '/' + v.id + '_' + v.secret + '_m.jpg',
+                    //Create the image and the LI
+                    li = Y.Node.create('<li class="loading"><img src="' + url + '" title="' + v.title + '"></li>'),
+                    //Get the image from the LI
+                    img = li.get('firstChild');
+                //Append the li to the wrapper
+                wrapper.appendChild(li);
+                //This little hack moves the tall images to the bottom of the list
+                //So they float better ;)
+                img.on('load', function() {
+                    //Is the height longer than the width?
+                    var c = ((this.get('height') > this.get('width')) ? 'tall' : 'wide');
+                    this.addClass(c);
+                    if (c === 'tall') {
+                        //Move it to the end of the list.
+                        this.get('parentNode.parentNode').removeChild(this.get('parentNode'));
+                        wrapper.appendChild(this.get('parentNode'));
+                    }
+                    this.get('parentNode').removeClass('loading');
+                });
+            });
+            //Get all the newly added li's
+            wrapper.queryAll('li').each(function(node) {
+                //Plugin the Drag plugin
+                this.plug(Y.Plugin.Drag, {
+                    offsetNode: false
+                });
+                //Plug the Proxy into the DD object
+                this.dd.plug(Y.Plugin.DDProxy, {
+                    resizeFrame: false,
+                    moveOnEnd: false,
+                    borderStyle: 'none'
+                });
+            });
+            //Create and render the slider
+            var sl = new Y.Slider({
+                railSize: '200px', value: 40, max: 70, min: 5,
+                thumbImage: assetsDir + 'css/thumb-classic-x.png'
+            }).render('.horiz_slider');
+            //Listen for the change
+            sl.after('valueChange',function (e) {
+                //Insert a dynamic stylesheet rule
+                var sheet = new Y.StyleSheet('image_slider');
+                sheet.set('#yui-main .yui-g ul li', {
+                    width: (e.newVal / 2) + '%'
+                });
+            });
+            //Remove the DDM as a bubble target..
+            sl._dd.removeTarget(Y.DD.DDM);
+            //Remove the wrappers loading class
+            wrapper.removeClass('loading');
+            Y.get('#ft').removeClass('loading');
+        }
+    });
+    //Listen for all mouseups on the document (selecting/deselecting images)
+    Y.on('delegate', function(e) {
+        if (!e.shiftKey) {
+            //No shift key - remove all selected images
+            wrapper.queryAll('img.selected').removeClass('selected');
+        }
+        //Check if the target is an image and select it.
+        if (e.target.test('#yui-main .yui-g ul li img')) {
+            e.target.addClass('selected');
+        }
+    }, document, 'mouseup', '*');    
+    //Listen for all clicks on the '#photoList li' selector
+    Y.on('delegate', function(e) {
+        //Prevent the click
+        e.halt();
+        //Remove all the selected items
+        e.currentTarget.get('parentNode').queryAll('li.selected').removeClass('selected');
+        //Add the selected class to the one that one clicked
+        e.currentTarget.addClass('selected');
+        //The "All Photos" link was clicked
+        if (e.currentTarget.hasClass('all')) {
+            //Remove all the hidden classes
+            wrapper.queryAll('li').removeClass('hidden');
+        } else {
+            //Another "album" was clicked, get its id
+            var c = e.currentTarget.get('id');
+            //Hide all items by adding the hidden class
+            wrapper.queryAll('li').addClass('hidden');
+            //Now, find all the items with the class name the same as the album id
+            //and remove the hidden class
+            wrapper.queryAll('li.' + c).removeClass('hidden');
+        }
+    }, document, 'click', '#photoList li');
+    //Stop the drag with the escape key
+    Y.get(document).on('keypress', function(e) {
+        //The escape key was pressed
+        if ((e.keyCode === 27) || (e.charCode === 27)) {
+            //We have an active Drag
+            if (Y.DD.DDM.activeDrag) {
+                //Stop the drag
+                Y.DD.DDM.activeDrag.stopDrag();
+            }
+        }
+    });
+    //On the drag:mouseDown add the selected class
+    Y.DD.DDM.on('drag:mouseDown', function(e) {
+        e.target.get('node').queryAll('img').addClass('selected');
+    });
+    //On drag start, get all the selected elements
+    //Add the count to the proxy element and offset it to the cursor.
+    Y.DD.DDM.on('drag:start', function(e) {
+        //How many items are selected
+        var count = wrapper.queryAll('img.selected').size();
+        //Set the style on the proxy node
+        e.target.get('dragNode').setStyles({
+            height: '25px', width: '25px'
+        }).set('innerHTML', '<span>' + count + '</span>');
+        //Offset the dragNode
+        e.target.deltaXY = [25, 5];
+    });
+    //We dropped on a drop target
+    Y.DD.DDM.on('drag:drophit', function(e) {
+        //get the images that are selected.
+        var imgs = wrapper.queryAll('img.selected'),
+            //The xy position of the item we dropped on
+            toXY = e.drop.get('node').getXY();
+        
+        imgs.each(function(node) {
+            //Clone the image, position it on top of the original and animate it to the drop target
+            node.get('parentNode').addClass(e.drop.get('node').get('id'));
+            var n = node.cloneNode().set('id', '').setStyle('position', 'absolute');
+            Y.get('body').appendChild(n);
+            n.setXY(node.getXY());
+            new Y.Anim({
+                node: n,
+                to: {
+                    height: 20, width: 20, opacity: 0,
+                    top: toXY[1], left: toXY[0]
+                },
+                from: {
+                    width: node.get('offsetWidth'),
+                    height: node.get('offsetHeight')
+                },
+                duration: .5
+            }).run();
+        });
+        //Update the count
+        var count = wrapper.queryAll('li.' + e.drop.get('node').get('id')).size();
+        e.drop.get('node').query('span').set('innerHTML', '(' + count + ')');
+    });
+    //Add drop support to the albums
+    Y.all('#photoList li').each(function(node) {
+        if (!node.hasClass('all')) {
+            //make all albums Drop Targets except the all photos.
+            node.plug(Y.Plugin.Drop);
+        }
+    });
+});
+</textarea>
+				</div>
+				<div class="yui-u sidebar">
+					
+				
+					<div id="examples" class="mod box4">
+                        <div class="hd">
+						<h4>
+    Drag &amp; Drop Examples:</h4>
+                        </div>
+						<div class="bd">
+							<ul>
+								<li><a href='../dd/simple-drag.html'>Simple Drag</a></li><li><a href='../dd/drag-plugin.html'>Drag Node Plugin</a></li><li><a href='../dd/proxy-drag.html'>Proxy Drag</a></li><li><a href='../dd/constrained-drag.html'>Drag Constrained to a Region</a></li><li><a href='../dd/groups-drag.html'>Interaction Groups</a></li><li><a href='../dd/shim-drag.html'>Using the Drag Shim</a></li><li><a href='../dd/anim-drop.html'>Animated Drop Targets</a></li><li><a href='../dd/drop-code.html'>Drop Based Coding</a></li><li><a href='../dd/winscroll.html'>Window Scrolling</a></li><li><a href='../dd/list-drag.html'>List reorder w/Bubbling</a></li><li><a href='../dd/scroll-list.html'>List reorder w/Scrolling</a></li><li><a href='../dd/portal-drag.html'>Portal Style Example</a></li><li class='selected'><a href='../dd/photo-browser.html'>Photo Browser</a></li>							</ul>
+						</div>
+					</div>
+					
+					<div class="mod box4">
+                        <div class="hd">
+						<h4>More Drag &amp; Drop Resources:</h4>
+                        </div>
+                        <div class="bd">
+						<ul>
+							<!-- <li><a href="http://developer.yahoo.com/yui/dd/">User's Guide</a> (external)</li> -->
+						<li><a href="../../api/module_dd.html">API Documentation</a></li>
+</ul>
+                        </div>
+					</div>
+			  </div>
+		</div>
+		
+		</div>
+	</div>
+
+
+<div class="yui-b toc3" id="tocWrapper">
+<!-- TABLE OF CONTENTS -->
+<div id="toc">
+	
+<ul>
+<li class="sect first">YUI 3.x Project</li><li class="item"><a title="The Yahoo! User Interface (YUI) Library, 3.x Branch, " href="http://developer.yahoo.com/yui/3/">YUI 3 Web Site (external)</a></li><li class="item"><a title="Examples of every YUI utility and control in action" href="../../examples/">YUI 3 Examples</a></li><li class="item"><a title="Instantly searchable API documentation for the entire YUI library." href="../../api/">YUI 3 API Docs</a></li><li class="item"><a title="The YUI Library can be downloaded from SourceForge" href="http://sourceforge.net/projects/yui/">YUI 3 on Sourceforge (external)</a></li><li class="item"><a title="YUI is free and open, offered under a BSD license." href="http://developer.yahoo.com/yui/3/license.html">YUI License (external)</a></li><li class="sect">YUI 3 Core - Examples</li><li class="item"><a title="YUI (Global Prerequisite) - Functional Examples" href="../../examples/yui/index.html">YUI (Global Prerequisite)</a></li><li class="item"><a title="Event - Functional Examples" href="../../examples/event/index.html">Event</a></li><li class="item"><a title="Node - Functional Examples" href="../../examples/node/index.html">Node</a></li><li class="sect">YUI 3 Component Infrastructure - Examples</li><li class="item"><a title="Attribute - Functional Examples" href="../../examples/attribute/index.html">Attribute</a></li><li class="item"><a title="Plugin - Functional Examples" href="../../examples/plugin/index.html">Plugin</a></li><li class="item"><a title="Widget - Functional Examples" href="../../examples/widget/index.html">Widget</a></li><li class="sect">YUI 3 Utilities - Examples</li><li class="item"><a title="Animation - Functional Examples" href="../../examples/anim/index.html">Animation</a></li><li class="item"><a title="Cache - Functional Examples" href="../../examples/cache/index.html">Cache</a></li><li class="item"><a title="Cookie - Functional Examples" href="../../examples/cookie/index.html">Cookie</a></li><li class="item"><a title="DataSchema - Functional Examples" href="../../examples/dataschema/index.html">DataSchema</a></li><li class="item"><a title="DataSource - Functional Examples" href="../../examples/datasource/index.html">DataSource</a></li><li class="item"><a title="DataType - Functional Examples" href="../../examples/datatype/index.html">DataType</a></li><li class="selected "><a title="Drag &amp; Drop - Functional Examples" href="../../examples/dd/index.html">Drag &amp; Drop</a></li><li class="item"><a title="Get - Functional Examples" href="../../examples/get/index.html">Get</a></li><li class="item"><a title="History - Functional Examples" href="../../examples/history/index.html">History</a></li><li class="item"><a title="ImageLoader - Functional Examples" href="../../examples/imageloader/index.html">ImageLoader</a></li><li class="item"><a title="IO - Functional Examples" href="../../examples/io/index.html">IO</a></li><li class="item"><a title="JSON (JavaScript Object Notation) - Functional Examples" href="../../examples/json/index.html">JSON</a></li><li class="item"><a title="Queue - Functional Examples" href="../../examples/queue/index.html">Queue</a></li><li class="item"><a title="Stylesheet - Functional Examples" href="../../examples/stylesheet/index.html">Stylesheet</a></li><li class="sect">YUI 3 Widgets - Examples</li><li class="item"><a title="Overlay - Functional Examples" href="../../examples/overlay/index.html">Overlay</a></li><li class="item"><a title="Slider - Functional Examples" href="../../examples/slider/index.html">Slider</a></li><li class="sect">YUI 3 Node Plugins - Examples</li><li class="item"><a title="FocusManager Node Plugin - Functional Examples" href="../../examples/node-focusmanager/index.html">FocusManager Node Plugin</a></li><li class="item"><a title="MenuNav Node Plugin - Functional Examples" href="../../examples/node-menunav/index.html">MenuNav Node Plugin</a></li><li class="sect">YUI 3 CSS - Examples</li><li class="item"><a title="YUI CSS Reset - Functional Examples" href="../../examples/cssreset/index.html">CSS Reset</a></li><li class="item"><a title="YUI Fonts - Functional Examples" href="../../examples/cssfonts/index.html">CSS Fonts</a></li><li class="item"><a title="YUI Base - Functional Examples" href="../../examples/cssbase/index.html">CSS Base</a></li><li class="sect">YUI 3 Developer Tools - Examples</li><li class="item"><a title="Console - Functional Examples" href="../../examples/console/index.html">Console</a></li><li class="item"><a title="Profiler - Functional Examples" href="../../examples/profiler/index.html">Profiler</a></li><li class="item"><a title="Test - Functional Examples" href="../../examples/test/index.html">Test</a></li><li class="sect">The YUI Community</li><li class="item"><a title="The Yahoo! User Interface Blog" href="http://yuiblog.com">YUI Blog (external)</a></li><li class="item"><a title="The Yahoo! Group YDN-JavaScript hosts the YUI community forum" href="http://tech.groups.yahoo.com/group/ydn-javascript/">YUI Forum (external)</a></li><li class="item"><a title="The Yahoo! Group yui3 is dedicated to the 3.x branch of the Yahoo! User Interface (YUI) Library." href="http://tech.groups.yahoo.com/group/yui3/">YUI 3 Forum (external)</a></li><li class="item"><a title="YUI is used by Yahoo! and by hundreds of other sites, including many you know and love." href="/yui/poweredby/">YUI Sightings (external)</a></li><li class="item"><a title="Videos and podcasts from the YUI Team and from the Yahoo! frontend engineering community." href="http://developer.yahoo.com/yui/theater/">YUI Theater (external)</a></li><li class="sect">YUI Articles on the YUI Website</li><li class="item"><a title="Answers to Frequently Asked Questions about the YUI Library" href="http://developer.yahoo.com/yui/articles/faq/">YUI FAQ (external)</a></li><li class="item"><a title="Yahoo!'s philosophy of Graded Browser Support" href="http://developer.yahoo.com/yui/articles/gbs/">Graded Browser Support (external)</a></li><li class="item"><a title="Reporting Bugs and Making Feature Requests for YUI Components" href="http://developer.yahoo.com/yui/articles/reportingbugs/">Bug Reports/Feature Requests (external)</a></li><li class="item"><a title="Serve YUI source files from Yahoo! -- free, fast, and simple" href="http://developer.yahoo.com/yui/3/articles/hosting/">Serving YUI Files from Yahoo! (external)</a></li></ul>
+</div>
+</div>
+	</div><!--closes bd-->
+
+	<div id="ft">
+        <p class="first">Copyright &copy; 2009 Yahoo! Inc. All rights reserved.</p>
+        <p><a href="http://privacy.yahoo.com/privacy/us/devel/index.html">Privacy Policy</a> - 
+            <a href="http://docs.yahoo.com/info/terms/">Terms of Service</a> - 
+            <a href="http://docs.yahoo.com/info/copyright/copyright.html">Copyright Policy</a> - 
+            <a href="http://careers.yahoo.com/">Job Openings</a></p>
+	</div>
+</div>
+<script src="../../assets/dpSyntaxHighlighter.js"></script>
+<script language="javascript"> 
+dp.SyntaxHighlighter.HighlightAll('code'); 
+</script>
+</body>
+</html>

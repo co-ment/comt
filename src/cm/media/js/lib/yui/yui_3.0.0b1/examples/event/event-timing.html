@@ -1,0 +1,395 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>YUI Library Examples: Event: Using 'available', 'contentready', and 'domready'</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    	<link rel="stylesheet" type="text/css" href="../../assets/yui.css" >
+
+<style>
+    /*Supplemental CSS for the YUI distribution*/
+    #custom-doc { width: 95%; min-width: 950px; }
+    #pagetitle {background-image: url(../../assets/bg_hd.gif);}
+/*    #pagetitle h1 {background-image: url(../../assets/title_h_bg.gif);}*/
+</style>
+
+<link rel="stylesheet" type="text/css" href="../../assets/dpSyntaxHighlighter.css">
+<link type="text/css" rel="stylesheet" href="../../build/cssfonts/fonts-min.css" />
+<script type="text/javascript" src="../../build/yui/yui-debug.js"></script>
+<style>
+	#contentContainer {padding:1em; background:#999966;}
+	#contentContainer ul {height:0px; overflow:hidden;}
+</style>
+
+
+</head>
+<body id="yahoo-com" class=" yui-skin-sam">
+<div id="custom-doc" class="yui-t2">
+<div id="hd">
+	<div id="ygunav">
+		<p>
+            <em>
+                <a href="http://developer.yahoo.com/yui/3/">YUI 3.x Home</a> <i> - </i>	
+            </em>
+		</p>
+		<form action="http://search.yahoo.com/search" id="sitesearchform">
+            <input name="vs" type="hidden" value="developer.yahoo.com">
+            <input name="vs" type="hidden" value="yuiblog.com">
+		    <div id="sitesearch">
+		    	<label for="searchinput">Site Search (YDN &amp; YUIBlog): </label>
+			    <input type="text" id="searchinput" name="p">
+			    <input type="submit" value="Search" id="searchsubmit" class="ygbt">
+		    </div>
+		</form>
+    </div>
+	<div id="ygma"><a href="../../"><img src="../../assets/logo.gif"  border="0" width="200" height="93"></a></div>
+	<div id="pagetitle"><h1>YUI Library Examples: Event: Using 'available', 'contentready', and 'domready'</h1></div>
+</div>
+<div id="bd">
+
+	<div id="bar-note"><p><strong>Note:</strong> This is YUI 3.x. Looking for <a href="http://developer.yahoo.com/yui/">YUI 2.x</a>?</p></div>
+
+	<div id="yui-main">
+		<div class="yui-b">
+		  <div class="yui-ge">
+			  <div class="yui-u first example" id="main">
+
+	<h2>Event: Using 'available', 'contentready', and 'domready'</h2>
+
+	<div id="example" class="promo">
+	<p>
+	<p>As web pages get richer, they tend to get slower.  One way to make your
+pages as responsive as possible is to carefully storyboard the page-load and
+page-paint processes so that the interactions most central to the page's
+purpose are enabled as early as possible.  The window object's
+<code>load</code> event won't happen until the full DOM and all image data have
+loaded.  Putting off script execution until after the page loads can be optimal
+for some scripts, but sometimes you won't want to wait that long to begin
+    interacting with the page via script.</p>
+
+<p>The Event Utility gives you three additional interesting moments that occur
+during a page's load process: </p>
+
+<ol>
+
+  <li><code><strong>available:</strong></code> <code>available</code>
+  targets a single element and fires when that element is available (when it
+  responds to <code>document.getElementById()</code>) &mdash; but you can't
+  count on the element's children having been loaded at this point.</li>
+
+  <li><code><strong>contentready:</strong></code> When you care about not
+  just your target element but its children as well, use
+  <code>contentready</code>. This event will tell you that your target
+  element and all of its children are present in the DOM.</li>
+  
+  <li><code><strong>domready:</strong></code> Some DOM scripting operations
+  cannot be performed safely until the page's entire DOM has loaded. The
+  <code>domready</code> event will let you know that the DOM is fully loaded
+  and ready for you to modify  via script. This custom event takes the place of
+  the <code>onDOMReady</code> event from previous versions of YUI.</li>
+
+</ol>
+
+<p>In the example box below, <code>available</code>,
+<code>contentready</code> and <code>domready</code> are all in use.  A
+<code>&lt;div&gt;</code> (with a green background) loads; it has 100 chidren;
+one of those children is an arbitrarily large image that will take awhile to
+load. Keep an eye on the console, if you have one available in your browser.
+You'll see that the <code>&lt;div&gt;</code> (1) becomes available, (2) its
+content becomes ready (after all of its 100 children have loaded), (3) the DOM
+becomes ready, and finally (4) the page loads.</p>
+
+<p><strong>Internet Explorer note:</strong> It isn't always safe to modify
+content during the available/contentready until after the <code>domready</code>
+moment.  In this browser, <code>domready</code> will execute before the
+available/contentready listeners.
+
+<p><strong>3.x note:</strong> This example has all of the YUI requirements included
+on the page.  This differs from the default YUI configuration, which will dynamically load required
+YUI modules.  Dynamic loading works asynchronously, so the domready moment
+likely will have passed when it comes time to bind the listeners, and possibly
+the window load event as well.  All of the event listeners will actually fire in this
+case, but the order of the events will not be the same.  <code>domready</code> will
+execute before the available/contentready listeners, and the window
+load event may as well.</p>
+	</p>	
+
+	<div class="module example-container ">
+			<div id="example-canvas" class="bd">
+
+		
+	<!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
+	
+	
+<!-- include event dependencies -->
+<script type="text/javascript" src="../../build/oop/oop-debug.js"></script>
+<script type="text/javascript" src="../../build/event/event-debug.js"></script>
+<script type="text/javascript" src="../../build/dom/dom-debug.js"></script>
+<script type="text/javascript" src="../../build/node/node-debug.js"></script>
+<div id="contentContainer">
+<div id="demo"></div>
+
+    <!--a ul with an arbitrarily large number of children:-->
+    <ul>
+        <li id='li-0'>child node #0</li>
+<li id='li-1'>child node #1</li>
+<li id='li-2'>child node #2</li>
+<li id='li-3'>child node #3</li>
+<li id='li-4'>child node #4</li>
+<li id='li-5'>child node #5</li>
+<li id='li-6'>child node #6</li>
+<li id='li-7'>child node #7</li>
+<li id='li-8'>child node #8</li>
+<li id='li-9'>child node #9</li>
+<li id='li-10'>child node #10</li>
+<li id='li-11'>child node #11</li>
+<li id='li-12'>child node #12</li>
+<li id='li-13'>child node #13</li>
+<li id='li-14'>child node #14</li>
+<li id='li-15'>child node #15</li>
+<li id='li-16'>child node #16</li>
+<li id='li-17'>child node #17</li>
+<li id='li-18'>child node #18</li>
+<li id='li-19'>child node #19</li>
+<li id='li-20'>child node #20</li>
+<li id='li-21'>child node #21</li>
+<li id='li-22'>child node #22</li>
+<li id='li-23'>child node #23</li>
+<li id='li-24'>child node #24</li>
+<li id='li-25'>child node #25</li>
+<li id='li-26'>child node #26</li>
+<li id='li-27'>child node #27</li>
+<li id='li-28'>child node #28</li>
+<li id='li-29'>child node #29</li>
+<li id='li-30'>child node #30</li>
+<li id='li-31'>child node #31</li>
+<li id='li-32'>child node #32</li>
+<li id='li-33'>child node #33</li>
+<li id='li-34'>child node #34</li>
+<li id='li-35'>child node #35</li>
+<li id='li-36'>child node #36</li>
+<li id='li-37'>child node #37</li>
+<li id='li-38'>child node #38</li>
+<li id='li-39'>child node #39</li>
+<li id='li-40'>child node #40</li>
+<li id='li-41'>child node #41</li>
+<li id='li-42'>child node #42</li>
+<li id='li-43'>child node #43</li>
+<li id='li-44'>child node #44</li>
+<li id='li-45'>child node #45</li>
+<li id='li-46'>child node #46</li>
+<li id='li-47'>child node #47</li>
+<li id='li-48'>child node #48</li>
+<li id='li-49'>child node #49</li>
+<li id='li-50'>child node #50</li>
+<li id='li-51'>child node #51</li>
+<li id='li-52'>child node #52</li>
+<li id='li-53'>child node #53</li>
+<li id='li-54'>child node #54</li>
+<li id='li-55'>child node #55</li>
+<li id='li-56'>child node #56</li>
+<li id='li-57'>child node #57</li>
+<li id='li-58'>child node #58</li>
+<li id='li-59'>child node #59</li>
+<li id='li-60'>child node #60</li>
+<li id='li-61'>child node #61</li>
+<li id='li-62'>child node #62</li>
+<li id='li-63'>child node #63</li>
+<li id='li-64'>child node #64</li>
+<li id='li-65'>child node #65</li>
+<li id='li-66'>child node #66</li>
+<li id='li-67'>child node #67</li>
+<li id='li-68'>child node #68</li>
+<li id='li-69'>child node #69</li>
+<li id='li-70'>child node #70</li>
+<li id='li-71'>child node #71</li>
+<li id='li-72'>child node #72</li>
+<li id='li-73'>child node #73</li>
+<li id='li-74'>child node #74</li>
+<li id='li-75'>child node #75</li>
+<li id='li-76'>child node #76</li>
+<li id='li-77'>child node #77</li>
+<li id='li-78'>child node #78</li>
+<li id='li-79'>child node #79</li>
+<li id='li-80'>child node #80</li>
+<li id='li-81'>child node #81</li>
+<li id='li-82'>child node #82</li>
+<li id='li-83'>child node #83</li>
+<li id='li-84'>child node #84</li>
+<li id='li-85'>child node #85</li>
+<li id='li-86'>child node #86</li>
+<li id='li-87'>child node #87</li>
+<li id='li-88'>child node #88</li>
+<li id='li-89'>child node #89</li>
+<li id='li-90'>child node #90</li>
+<li id='li-91'>child node #91</li>
+<li id='li-92'>child node #92</li>
+<li id='li-93'>child node #93</li>
+<li id='li-94'>child node #94</li>
+<li id='li-95'>child node #95</li>
+<li id='li-96'>child node #96</li>
+<li id='li-97'>child node #97</li>
+<li id='li-98'>child node #98</li>
+<li id='li-99'>child node #99</li>
+    </ul>
+
+    <img src="http://developer.yahoo.com/yui/docs/assets/examples/exampleimages/large/uluru.jpg" width="500" alt="Uluru" id="image" />
+
+</div>
+
+
+<script language="javascript">
+
+
+YUI({base:"../../build/", timeout: 10000, filter:"debug", logInclude: {event:true, example:true}}).use("*",
+function(Y) {
+
+    var results = Y.get('#demo');
+
+    //we'll use this handler for all of our callbacks; the
+    //message being logged will always be the last argument.
+    function fnHandler(e) {
+        var message = arguments[arguments.length - 1];
+        // Y.log(message, "info", "example");
+        results.set('innerHTML', results.get('innerHTML') + '<p>' + message + '</p>');
+    }
+
+    //assign page load handler:
+    Y.on("load", fnHandler, window, Y, "The window load event fired.  The page and all of its image data, including the large image of Uluru, has completed loading.");
+
+    //assign domready handler:
+    Y.on("domready", fnHandler, Y, "The DOMContentLoaded event fired.  The DOM is now safe to modify via script.");
+    
+    //assign 'contentready' handler:
+    Y.on("contentready", fnHandler, "#contentContainer", Y, "The 'contentready' event fired for the element 'contentContainer'.  That element and all of its children are present in the DOM.");
+
+    //assign 'available' handler:
+    Y.on("available", fnHandler, "#contentContainer", Y, "The 'available' event fired on the element 'contentContainer'.  That element is present in the DOM.");
+    
+    fnHandler("", "As the page loads, you'll see the 'available', 'contentready', 'domready', and window load events logged here as they fire in sequence.");
+    
+});
+
+</script>
+	
+	<!--END SOURCE CODE FOR EXAMPLE =============================== -->
+	
+		
+		</div>
+	</div>			
+	</div>
+		
+	<h2 class="first">Source Code for This Example:</h2>
+
+<h3>Markup:</h3>
+
+<p>The markup used to create the DOM is very simple, consisting of a <code>&lt;div&gt;</code> that holds a <code>&lt;ul&gt;</code> with 100 child <code>&lt;li&gt;</code>s and a single ~3MB image. The <code>&lt;ul&gt;</code> will take a little time to load, and the image (loading over the internet) will take a few seconds to load even on a fast connection. That should allow us to see in the Logger console some time deltas between when the <code>&lt;div&gt;</code> whose ID is <code>contentContainer</code> becomes available, when its children (those 100 <code>&lt;li&gt;</code>s) are ready, when the DOM is ready (including all the navigation elements on the page), and lastly when the page loads (ie, when that ~3MB image is fully loaded). </p>
+<textarea name="code" class="HTML" cols="60" rows="1"><div id="contentContainer">
+
+    <!--a ul with an arbitrarily large number of children:-->
+    <ul>
+        <li>...</li>
+        <!--...100 more of these-->
+    </ul>
+
+    <img src="http://developer.yahoo.com/yui/docs/assets/examples/exampleimages/large/uluru.jpg" width="500" alt="Uluru" id="image" />
+
+</div></textarea>
+
+<h3>CSS:</h3>
+
+<p>The CSS colors the contentContainer element and hides the big list to keep the example more compact.</p>
+
+<textarea name="code" class="JScript" cols="60" rows="1"><style type="text/css">
+    #contentContainer {padding:1em; background:#999966;}
+    #contentContainer ul {height:0px; overflow:hidden;}
+</style></textarea>
+
+<h3>JavaScript:</h3>
+<p>In the script, we create an anonymous function that contains our YUI instance (<code>Y</code>).  We then subscribe to the four events in which we're interested and, in each case, log a message to the console or Logger to express the timing of the events as they fire.</p>
+
+<textarea name="code" class="JScript" cols="60" rows="1">(function() {
+YUI().use('*', function(Y) {
+    var results = Y.get('#demo');
+
+    //we'll use this handler for all of our callbacks; the
+    //message being logged will always be the last argument.
+    function fnHandler(e) {
+        var message = arguments[arguments.length - 1];
+        // Y.log(message, "info", "example");
+        results.set('innerHTML', results.get('innerHTML') + '<p>' + message + '</p>');
+    }
+
+    //assign page load handler:
+    Y.on("load", fnHandler, window, Y, "The window load event fired.  The page and all of its image data, including the large image of Uluru, has completed loading.");
+
+    //assign domready handler:
+    Y.on("domready", fnHandler, Y, "The DOMContentLoaded event fired.  The DOM is now safe to modify via script.");
+    
+    //assign 'contentready' handler:
+    Y.on("contentready", fnHandler, "#contentContainer", Y, "The 'contentready' event fired for the element 'contentContainer'.  That element and all of its children are present in the DOM.");
+
+    //assign 'available' handler:
+    Y.on("available", fnHandler, "#contentContainer", Y, "The 'available' event fired on the element 'contentContainer'.  That element is present in the DOM.");
+    
+    fnHandler("", "As the page loads, you'll see the 'available', 'contentready', 'domready', and window load events logged here as they fire in sequence.");
+    
+});
+})();</textarea>
+				</div>
+				<div class="yui-u sidebar">
+					
+				
+					<div id="examples" class="mod box4">
+                        <div class="hd">
+						<h4>
+    Event Examples:</h4>
+                        </div>
+						<div class="bd">
+							<ul>
+								<li><a href='../event/event-simple.html'>Simple DOM Events</a></li><li class='selected'><a href='../event/event-timing.html'>Using 'available', 'contentready', and 'domready'</a></li><li><a href='../event/event-ce.html'>Using Custom Events</a></li><li><a href='../event/event-focus-blur.html'>Using the 'focus' and 'blur' custom events</a></li><li><a href='../yui/yui-augment.html'>Compose Classes of Objects with <code>augment</code> (included with examples for The YUI Global Object)</a></li><li><a href='../node-focusmanager/node-focusmanager-3.html'>Accessible Menu Button (included with examples for Focus Manager Node Plugin)</a></li><li><a href='../node-focusmanager/node-focusmanager-2.html'>Accessible TabView (included with examples for Focus Manager Node Plugin)</a></li><li><a href='../attribute/attribute-event.html'>Change Events (included with examples for Attribute)</a></li><li><a href='../widget/widget-extend.html'>Extending the base widget class (included with examples for Widget)</a></li><li><a href='../attribute/attribute-getset.html'>Getters, Setters and Validators (included with examples for Attribute)</a></li><li><a href='../dd/photo-browser.html'>Photo Browser (included with examples for Drag &amp; Drop)</a></li>							</ul>
+						</div>
+					</div>
+					
+					<div class="mod box4">
+                        <div class="hd">
+						<h4>More Event Resources:</h4>
+                        </div>
+                        <div class="bd">
+						<ul>
+							<!-- <li><a href="http://developer.yahoo.com/yui/event/">User's Guide</a> (external)</li> -->
+						<li><a href="../../api/module_event.html">API Documentation</a></li>
+</ul>
+                        </div>
+					</div>
+			  </div>
+		</div>
+		
+		</div>
+	</div>
+
+
+<div class="yui-b toc3" id="tocWrapper">
+<!-- TABLE OF CONTENTS -->
+<div id="toc">
+	
+<ul>
+<li class="sect first">YUI 3.x Project</li><li class="item"><a title="The Yahoo! User Interface (YUI) Library, 3.x Branch, " href="http://developer.yahoo.com/yui/3/">YUI 3 Web Site (external)</a></li><li class="item"><a title="Examples of every YUI utility and control in action" href="../../examples/">YUI 3 Examples</a></li><li class="item"><a title="Instantly searchable API documentation for the entire YUI library." href="../../api/">YUI 3 API Docs</a></li><li class="item"><a title="The YUI Library can be downloaded from SourceForge" href="http://sourceforge.net/projects/yui/">YUI 3 on Sourceforge (external)</a></li><li class="item"><a title="YUI is free and open, offered under a BSD license." href="http://developer.yahoo.com/yui/3/license.html">YUI License (external)</a></li><li class="sect">YUI 3 Core - Examples</li><li class="item"><a title="YUI (Global Prerequisite) - Functional Examples" href="../../examples/yui/index.html">YUI (Global Prerequisite)</a></li><li class="selected "><a title="Event - Functional Examples" href="../../examples/event/index.html">Event</a></li><li class="item"><a title="Node - Functional Examples" href="../../examples/node/index.html">Node</a></li><li class="sect">YUI 3 Component Infrastructure - Examples</li><li class="item"><a title="Attribute - Functional Examples" href="../../examples/attribute/index.html">Attribute</a></li><li class="item"><a title="Plugin - Functional Examples" href="../../examples/plugin/index.html">Plugin</a></li><li class="item"><a title="Widget - Functional Examples" href="../../examples/widget/index.html">Widget</a></li><li class="sect">YUI 3 Utilities - Examples</li><li class="item"><a title="Animation - Functional Examples" href="../../examples/anim/index.html">Animation</a></li><li class="item"><a title="Cache - Functional Examples" href="../../examples/cache/index.html">Cache</a></li><li class="item"><a title="Cookie - Functional Examples" href="../../examples/cookie/index.html">Cookie</a></li><li class="item"><a title="DataSchema - Functional Examples" href="../../examples/dataschema/index.html">DataSchema</a></li><li class="item"><a title="DataSource - Functional Examples" href="../../examples/datasource/index.html">DataSource</a></li><li class="item"><a title="DataType - Functional Examples" href="../../examples/datatype/index.html">DataType</a></li><li class="item"><a title="Drag &amp; Drop - Functional Examples" href="../../examples/dd/index.html">Drag &amp; Drop</a></li><li class="item"><a title="Get - Functional Examples" href="../../examples/get/index.html">Get</a></li><li class="item"><a title="History - Functional Examples" href="../../examples/history/index.html">History</a></li><li class="item"><a title="ImageLoader - Functional Examples" href="../../examples/imageloader/index.html">ImageLoader</a></li><li class="item"><a title="IO - Functional Examples" href="../../examples/io/index.html">IO</a></li><li class="item"><a title="JSON (JavaScript Object Notation) - Functional Examples" href="../../examples/json/index.html">JSON</a></li><li class="item"><a title="Queue - Functional Examples" href="../../examples/queue/index.html">Queue</a></li><li class="item"><a title="Stylesheet - Functional Examples" href="../../examples/stylesheet/index.html">Stylesheet</a></li><li class="sect">YUI 3 Widgets - Examples</li><li class="item"><a title="Overlay - Functional Examples" href="../../examples/overlay/index.html">Overlay</a></li><li class="item"><a title="Slider - Functional Examples" href="../../examples/slider/index.html">Slider</a></li><li class="sect">YUI 3 Node Plugins - Examples</li><li class="item"><a title="FocusManager Node Plugin - Functional Examples" href="../../examples/node-focusmanager/index.html">FocusManager Node Plugin</a></li><li class="item"><a title="MenuNav Node Plugin - Functional Examples" href="../../examples/node-menunav/index.html">MenuNav Node Plugin</a></li><li class="sect">YUI 3 CSS - Examples</li><li class="item"><a title="YUI CSS Reset - Functional Examples" href="../../examples/cssreset/index.html">CSS Reset</a></li><li class="item"><a title="YUI Fonts - Functional Examples" href="../../examples/cssfonts/index.html">CSS Fonts</a></li><li class="item"><a title="YUI Base - Functional Examples" href="../../examples/cssbase/index.html">CSS Base</a></li><li class="sect">YUI 3 Developer Tools - Examples</li><li class="item"><a title="Console - Functional Examples" href="../../examples/console/index.html">Console</a></li><li class="item"><a title="Profiler - Functional Examples" href="../../examples/profiler/index.html">Profiler</a></li><li class="item"><a title="Test - Functional Examples" href="../../examples/test/index.html">Test</a></li><li class="sect">The YUI Community</li><li class="item"><a title="The Yahoo! User Interface Blog" href="http://yuiblog.com">YUI Blog (external)</a></li><li class="item"><a title="The Yahoo! Group YDN-JavaScript hosts the YUI community forum" href="http://tech.groups.yahoo.com/group/ydn-javascript/">YUI Forum (external)</a></li><li class="item"><a title="The Yahoo! Group yui3 is dedicated to the 3.x branch of the Yahoo! User Interface (YUI) Library." href="http://tech.groups.yahoo.com/group/yui3/">YUI 3 Forum (external)</a></li><li class="item"><a title="YUI is used by Yahoo! and by hundreds of other sites, including many you know and love." href="/yui/poweredby/">YUI Sightings (external)</a></li><li class="item"><a title="Videos and podcasts from the YUI Team and from the Yahoo! frontend engineering community." href="http://developer.yahoo.com/yui/theater/">YUI Theater (external)</a></li><li class="sect">YUI Articles on the YUI Website</li><li class="item"><a title="Answers to Frequently Asked Questions about the YUI Library" href="http://developer.yahoo.com/yui/articles/faq/">YUI FAQ (external)</a></li><li class="item"><a title="Yahoo!'s philosophy of Graded Browser Support" href="http://developer.yahoo.com/yui/articles/gbs/">Graded Browser Support (external)</a></li><li class="item"><a title="Reporting Bugs and Making Feature Requests for YUI Components" href="http://developer.yahoo.com/yui/articles/reportingbugs/">Bug Reports/Feature Requests (external)</a></li><li class="item"><a title="Serve YUI source files from Yahoo! -- free, fast, and simple" href="http://developer.yahoo.com/yui/3/articles/hosting/">Serving YUI Files from Yahoo! (external)</a></li></ul>
+</div>
+</div>
+	</div><!--closes bd-->
+
+	<div id="ft">
+        <p class="first">Copyright &copy; 2009 Yahoo! Inc. All rights reserved.</p>
+        <p><a href="http://privacy.yahoo.com/privacy/us/devel/index.html">Privacy Policy</a> - 
+            <a href="http://docs.yahoo.com/info/terms/">Terms of Service</a> - 
+            <a href="http://docs.yahoo.com/info/copyright/copyright.html">Copyright Policy</a> - 
+            <a href="http://careers.yahoo.com/">Job Openings</a></p>
+	</div>
+</div>
+<script src="../../assets/dpSyntaxHighlighter.js"></script>
+<script language="javascript"> 
+dp.SyntaxHighlighter.HighlightAll('code'); 
+</script>
+</body>
+</html>

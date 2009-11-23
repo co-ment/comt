@@ -1,0 +1,89 @@
+{% extends "site/layout/base_workspace.html" %}
+{% load com %}
+{% load i18n %}
+{% load local_perms %}
+
+{% block title %}
+{% blocktrans %}Notifications{% endblocktrans %}
+{% endblock %}
+
+{% block main %}
+{% get_local_perm request can_manage_workspace as can_manage_workspace %}
+<script type="text/javascript">
+<!--
+tb_conf['current_tab'] = 'notifications';
+-->
+</script>
+
+<div id="notifications" class="tab-meta">   
+
+<form id="notifications" enctype="multipart/form-data" action="." method="post">
+
+<h2>{% blocktrans %}Feeds{% endblocktrans %}</h2>
+
+<h3>{% blocktrans %}Public feed{% endblocktrans %} (<a title="{% blocktrans %}Help{% endblocktrans %}" target="_blank" href="{% url help %}#public_private_feed">?</a>)</h3>
+
+<div>
+<a href="{% url public-feed %}" title="{% blocktrans %}Public feed for workspace{% endblocktrans %}">
+	<img style="vertical-align:middle;" src="{{ MEDIA_URL }}/img/xml.gif" /> {{SITE_URL}}{% url public-feed %} 
+</a>
+</div>
+{% blocktrans %}This is the public feed for the workspace.{% endblocktrans %}
+
+{% if can_manage_workspace %}
+<h3>{% blocktrans %}Private feed{% endblocktrans %} (<a title="{% blocktrans %}Help{% endblocktrans %}" target="_blank" href="{% url help %}#public_private_feed">?</a>)</h3>
+
+{% if CONF.private_feed_key %}
+<div>
+<a href="{% url private-feed CONF.private_feed_key %}" title="{% blocktrans %}Private feed for workspace{% endblocktrans %}">
+	<img style="vertical-align:middle;" src="{{ MEDIA_URL }}/img/xml.gif" /> {{SITE_URL}}{% url private-feed CONF.private_feed_key %} 
+</a>
+</div>
+{% blocktrans %}This is the private feed for the workspace. Don't share this address with others unless you want them to see all activities on the workspace.{% endblocktrans %}
+<br />
+<input name="reset" type="submit" id="reset" value="{% blocktrans %}Reset private feed url{% endblocktrans %}"/>
+
+{% else %}
+<div>
+<input name="activate" type="submit" id="activate" value="{% blocktrans %}Activate private feed{% endblocktrans %}"/>
+</div>
+{% blocktrans %}The private feed for this workspace is not yet activated.{% endblocktrans %}
+{% endif %}
+{% endif %}
+
+<h2>{% blocktrans %}Email notifications{% endblocktrans %}</h2>
+
+	<input type="checkbox" id="notify_check" class="check" name="notify-check" {% if notify_check %}checked="checked"{% endif %}/>&nbsp;
+	{% blocktrans %}Subscribe to workspace notifications{% endblocktrans %}
+	<br />
+	<input type="checkbox" id="own_check" class="check" name="commentsown-check" {% if own_check %}checked="checked"{% endif %}/>&nbsp;
+	{% blocktrans %}Subscribe to all comments/replies notifications in discussions where you have participated{% endblocktrans %}	                 
+	
+	<script type="text/javascript">
+	<!--
+	$(function() {
+	    $(".check").click(function(){
+	    	notify_check = $("#notify_check").attr('checked');
+	    	own_check = $("#own_check").attr('checked');
+	
+	         $.post('.', 
+	                 {
+	         	'notify_check':notify_check,
+	         	'own_check':own_check
+	             	},
+	                 function(data){
+	               // window.location = window.location;
+	             });
+	                   	
+	    });
+	    
+	}) ;
+	--> 
+	</script>
+
+</form>
+</div>
+
+
+{% endblock %}
+

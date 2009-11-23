@@ -1,0 +1,7 @@
+{% autoescape off %}
+{% block content %}
+{% endblock %}
+--
+{{ CONF.workspace_name }}
+{{ CONF.site_url }}
+{% endautoescape %}

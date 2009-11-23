@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Number-Formatting Unit Tests</title>
+<script type="text/javascript" src="number-functions.js"></script>
+<script type="text/javascript" src="../jsunit/app/jsUnitCore.js"></script>
+</head>
+<body>
+
+<p>This test page relies on the jsUnit unit testing framework.</p>
+
+<script type="text/javascript">
+var successes = [
+    4, "", "4",
+    4, "00", "04",
+    4, "0", "4",
+    4, "#", "4",
+    4, "#0", "4",
+    4, "##", "4",
+    4, "0.0", "4.0",
+    4, "0,0", "04",
+    4, "0.#", "4.0",
+    4, "0.000", "4.000",
+    4.5, "0", "5",
+    4.5, "0.0", "4.5",
+    4.5, "0.00", "4.50",
+    4.5, ".0", "4.5",
+    4.55, "0.00", "4.55",
+    4.55, "0.0", "4.6",
+    4.55, "0.0#0", "4.550",
+    1000, "0", "1000",
+    1000, "0,0", "1,000",
+    1000, "0,#", "1,000",
+    1000, "0,0.0", "1,000.0",
+    1000, "00000.00", "01000.00",
+    1000, "0,###0.00", "01,000.00",
+    1000, "a", "a",
+    1000, "asdf", "asdf",
+    -1, "", "-1",
+    -1, "000", "-001",
+    -1.44, "0", "-2",
+    5.55, "0.0E+00", "5.6E+00",
+    1000000, "0.0E+00", "1.0E+06",
+    .1, "0.00e00", "1.00e-01",
+    .1, "0.00E00", "1.00E-01",
+    1, "0.00E00", "1.00E00",
+    1, "0.00e00", "1.00e00",
+    1, "0.00e+00", "1.00e+00",
+    1, "0.00E+00", "1.00E+00",
+    -1, "0.00E+00", "-1.00E+00",
+    1, "abc1.0cde", "abc11.0cde",
+    -1, "abc1.0cde", "abc1-1.0cde",
+    1, "abc10.0cde", "abc11.0cde",
+    -1, "abc10.0cde", "abc1-1.0cde",
+    NaN, "", "NaN",
+    +Infinity, "", "Infinity",
+    -Infinity, "", "-Infinity",
+    .00000000000008, "0.00000000000000", "0.00000000000008",
+    5, "0;0.0;0.000", "5",
+    -5, "0;0.0;0.000", "5.0",
+    -5, "0;(0.0);0.000", "(5.0)",
+    0, "0;0.0;0.000", "0.000",
+    5, "one;two", "one",
+    0, "one;two", "one",
+    -5, "one;two", "two",
+    5, "one;two;three", "one",
+    -5, "one;two;three", "two",
+    0, "one;two;three", "three",
+    -100000, "#,#.00", "-100,000.00",
+    100000, "#,#.00", "100,000.00",
+    -1, "#,#.00", "-1.00",
+    1, "#,#.00", "1.00",
+    5, "???.0", "  5.0",
+    12831242485472, "0,0,, million", "12,831,243 million"
+    ];
+function testOne() {
+    for (var i = 0; i < successes.length; i += 3) {
+        assertEquals("Index " + i + ": '" + successes[i]
+                + "' => '" + successes[i+1] + "'",
+            successes[i+2],
+            successes[i].numberFormat(successes[i+1]));
+    }
+}
+</script>
+
+</body>
+</html>

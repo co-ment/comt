@@ -1,0 +1,36 @@
+# generic roles
+# don't forget to clear existing roles if loading this fixture on a existing database
+            
+- model : cm.role
+  pk: 1
+  fields:
+    name: "Teacher"
+    description: "" 
+    permissions: [52, 11, 34, 31, 38, 36, 37, 32, 13, 14, 12, 15, 51]
+# all
+
+- model : cm.role
+  pk: 2
+  fields:
+    name: "Student"
+    description: "" 
+    permissions: [52, 11, 31, 35, 33, 34]
+# can_view_approved_comment 34    
+# can_delete_comment_own	33
+# can_view_comment_own		35
+# can_create_comment		31
+# can_view_text				11
+# can_view_workspace		52                    
+
+- model : cm.role
+  pk: 3
+  fields:
+    name: "Individual student"
+    description: "" 
+    permissions: [52, 11, 31, 35, 33]
+# can_delete_comment_own	33
+# can_view_comment_own		35
+# can_create_comment		31
+# can_view_text				11
+# can_view_workspace		52                    
+    

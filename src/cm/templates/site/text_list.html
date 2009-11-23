@@ -1,0 +1,192 @@
+{% extends "site/layout/base_workspace.html" %}
+{% load com %}
+{% load i18n %}
+{% load local_perms %}
+{% load activity %}
+
+{% block head %}
+{% endblock %}
+
+{% block title %}
+{% blocktrans %}Texts{% endblocktrans %}
+{% endblock %}
+
+{% block main %}
+
+{% get_local_perm request can_create_text as can_create_text %}
+{% get_local_perm request can_manage_workspace as can_manage_workspace %}
+
+<script type="text/javascript">
+<!--
+tb_conf['current_tab'] = 'text';
+-->
+</script>
+
+<script type="text/javascript">
+<!--
+$(function() {
+    $(".hidden-text-actions").css('visibility','hidden');   
+}) ;
+-->
+</script>
+
+<div id="text" class="tab-meta">   
+
+<ul class="sub_list">
+    <li class="active_sub">{% blocktrans %}Text list{% endblocktrans %}</li>
+    {% if can_create_text %}
+    <li> / </li>
+    <li><a href="{% url text-create-content %}">{% blocktrans %}Write a text{% endblocktrans %}</a></li>
+    <li> / </li>
+    <li><a href="{% url text-create-upload %}">{% blocktrans %}Upload a text{% endblocktrans %}</a></li>
+    {% endif %}
+</ul>
+
+{% if object_list %}
+<form id="texts_form" action="." method="post">
+
+{% if can_manage_workspace %}
+<select id="bulk_actions" name="action">
+<option selected="selected" value="-1">{% blocktrans %}Bulk Actions{% endblocktrans %}</option>
+<option value="delete">{% blocktrans %}Delete{% endblocktrans %}</option>
+</select>
+
+<input name="apply" id="apply" type="button" value="{% blocktrans %}Apply{% endblocktrans %}" disabled="disabled"/>            
+
+<script type="text/javascript">
+<!--
+function check_activate_apply() {
+    if (($("input[name^=check-]:checked").length > 0) && ($("#bulk_actions").val() != -1)) {
+        $('#apply').removeAttr('disabled');
+    }
+    else {
+        $('#apply').attr('disabled','disabled');
+    }   
+};
+
+$(function() {
+    $("input[name^=check-]").click(function () {
+        check_activate_apply();
+      });                            
+    $("#bulk_actions").change(function () {
+        check_activate_apply();
+      });
+    $("#apply").click(function () {
+        question = "{% blocktrans %}Are you sure?{% endblocktrans %}";
+        if (confirm(question)) {
+            $("#texts_form").submit();
+        }
+      });   
+}) ;
+-->
+</script>
+{% endif %}
+
+{% include "site/macros/paginator.html" %}
+
+<div style="clear:both;"></div>
+
+<table summary="text list" class="large_table">
+    <thead>
+        <tr>
+            {% if can_manage_workspace %}
+                <th class="check-column"><input type="checkbox" id="all_check" name="checkall"/>
+                <script type="text/javascript">
+                <!--
+                $(function() {
+                    $("#all_check").click(function () {
+                        checked = $("#all_check").attr('checked'); 
+                        $(".text_check").attr('checked', checked);
+                        check_activate_apply();                    
+                      });                     
+                }) ;
+                -->
+                </script>
+                </th>
+            {% endif %}        
+            <th>{% up_down title %}{% blocktrans %}Text{% endblocktrans %}{% endup_down %}</th>
+            <th>{% blocktrans %}Author{% endblocktrans %}</th>
+            <th>{% up_down modified %}{% blocktrans %}Modified{% endblocktrans %}{% endup_down %}</th>
+            <th># {% blocktrans %}comments{% endblocktrans %}</th>
+            {% if can_manage_workspace %}<th>{% blocktrans %}Last week activity{% endblocktrans %}</th>{% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for text in object_list %}
+        
+        {% get_local_text_perm request text can_edit_text as can_edit_text %}
+        {% get_local_text_perm request text can_delete_text as can_delete_text %}
+        {% get_local_text_perm request text can_manage_text as can_manage_text %}
+        
+        <tr class="text-{{ text.key }} {% cycle 'odd' 'even' %}">
+            {% if can_manage_workspace %}<td><input type="checkbox" class="text_check" name="check-{{ text.key }}"/></td>{% endif %}
+            <td>
+                <a class="main_object_title" href="{% url text-view text.key %}">{{ text.title }}</a>
+                <div class="hidden-text-actions text-actions-{{ text.key }}">
+                    <a href="{% url text-view text.key %}">{% blocktrans %}View{% endblocktrans %}</a> | 
+                    {% if can_edit_text %}<a href="{% url text-edit text.key %}">{% blocktrans %}Edit{% endblocktrans %}</a> | {% endif %}
+                    {% if can_delete_text %}<a id="text-delete-{{ text.key }}" href="#">{% blocktrans %}Delete{% endblocktrans %}</a> |
+                    <script type="text/javascript">                
+                    <!--
+                    $(function() {
+                        $("#text-delete-{{ text.key }}").click(function(){
+                            url = '{% url text-delete text.key %}';
+                            question = "{% blocktrans %}Are you sure you want to delete this text?{% endblocktrans %}";
+                            if (confirm(question)) {
+                                $.post(url, function(data){
+                                      window.location = '{% url index %}';
+                                    });                        
+                            }
+                        });
+                        
+                    }) ;
+                    --> 
+                    </script>
+                     
+                    {% endif %}
+                    {% if can_manage_text %}<a href="{% url text-share text.key %}">{% blocktrans %}Users{% endblocktrans %}</a> | {% endif %}
+                    {% if can_manage_text %}<a href="{% url text-settings text.key %}">{% blocktrans %}Settings{% endblocktrans %}</a>{% endif %}
+                </div>
+                <script type="text/javascript">                
+                <!--
+                $(function() {
+                    $(".text-{{ text.key }}").mouseover(function(){
+                        $(".text-actions-{{ text.key }}").css('visibility','visible');
+                        $(".text-{{ text.key }}").addClass('hover');   
+                    });
+                    $(".text-{{ text.key }}").mouseout(function(){
+                        $(".text-actions-{{ text.key }}").css('visibility','hidden');   
+                        $(".text-{{ text.key }}").removeClass('hover');   
+                    });
+                }) ;
+                --> 
+                </script>
+            </td>
+            <td>{% if text.user and can_manage_workspace %}<a title="{% blocktrans %}Edit user{% endblocktrans %}" href="{% url user-edit text.user.get_profile.key %}">{{ text.get_name }}</a>
+                {% else %}
+                {{ text.get_name }}
+                {% endif %}
+            </td>
+            <td>{{ text.modified|local_date }}</td>
+            <td>{{ text|nb_comments:request }}</td>
+            {% if can_manage_workspace %}
+            <td><span id="ticker-{{ text.key }}">{% blocktrans %}Loading...{% endblocktrans %}</span>
+                <script type="text/javascript">
+                $(function() {                   
+                    $('#ticker-{{ text.key }}').sparkline({% activity text all '1/4day' 28 'all' '' %}, {'width': '100px','height': '22px'});
+                });                
+                </script>
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</form>
+{% else %}
+{% blocktrans %}No texts yet{% endblocktrans %}
+{% endif %}
+</div>
+
+{% endblock %}

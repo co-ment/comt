@@ -1,0 +1,6 @@
+{% load i18n %}{% autoescape off %}{% block content %}{% endblock %}
+{% blocktrans with SITE_URL as SITE_URL and notification.desactivate_notification_url as desactivate_notification_url %}If you'd like to unsubscribe from this notification, click the following link: {{ SITE_URL }}{{ desactivate_notification_url }}.{% endblocktrans %}
+--
+{{ CONF.workspace_name }}
+{{ CONF.site_url }}
+{% endautoescape %}

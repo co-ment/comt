@@ -1,0 +1,104 @@
+{% load i18n %}
+{% load com %}
+{% load local_perms %}
+
+{% get_local_text_perm request text can_edit_text as can_edit_text %}
+{% get_local_text_perm request text can_manage_text as can_manage_text %}
+
+<div id="text-tabs">
+    <ul>
+        <li><a id="view_tab_link" class="cust_behav" href="#text_view_frame_container">{% blocktrans %}Text{% endblocktrans %}</a></li>
+        {% if can_edit_text %}
+        <li><a id="edit_tab_link" class="cust_behav" href="#text_edit">{% blocktrans %}Edit{% endblocktrans %}</a></li>
+        {% endif %}
+        {% if can_manage_text %}
+        <li><a id="share_tab_link" class="cust_behav" href="#text_share">{% blocktrans %}People{% endblocktrans %}</a></li>
+        {% endif %}
+        <li><a id="history_tab_link" class="cust_behav" href="#text_history">{% blocktrans %}Versions{% endblocktrans %} ({{ text.get_versions_number }})</a></li>
+        {% if can_manage_text %}
+        <li><a id="settings_tab_link" class="cust_behav" href="#text_settings">{% blocktrans %}Settings{% endblocktrans %}</a></li>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <li><a id="notifications_tab_link" class="cust_behav" href="#notifications_settings">{% blocktrans %}Notifications{% endblocktrans %}</a></li>
+        {% endif %}
+    </ul> 
+</div>
+
+<script type="text/javascript">
+<!--
+tb_conf['text-view-url'] = "{% url text-view text.key %}";
+tb_conf['edit-view-url'] = "{% url text-edit text.key %}";
+
+{% if can_manage_text %}
+tb_conf['share-view-url'] = "{% url text-share text.key %}";
+{% endif %}
+tb_conf['history-view-url'] = "{% url text-history text.key %}";
+
+{% if can_manage_text %}
+tb_conf['settings-view-url'] = "{% url text-settings text.key %}";
+{% endif %}
+
+{% if user.is_authenticated %}
+tb_conf['notifications-view-url'] = "{% url text-notifications text.key %}";
+{% endif %}
+
+renderTabs = function (current_tab) {
+
+    var tab_index = 0;
+    
+    if (current_tab == 'view') {
+        tab_index = 0;
+    }    
+
+    var delta = 0;    
+    {% if can_edit_text %}
+    delta = 1;        
+    if (current_tab == 'edit') {
+        tab_index = 1;
+    }
+    {% endif %}    
+
+    {% if can_manage_text %}
+    delta = 2;       
+    if (current_tab == 'share') {
+        tab_index = 2;
+    }
+    {% endif %}
+    if (current_tab == 'history') {
+        tab_index = 1 + delta;        
+    }    
+    
+    {% if can_manage_text %}
+    delta = 3;        
+    if (current_tab == 'settings') {
+        tab_index = 4;
+    }
+    {% endif %}
+    {% if user.is_authenticated %}    
+    if (current_tab == 'notifications') {
+        tab_index = 2 + delta;        
+    }
+    {% endif %}
+        
+    $("#text-tabs").tabs({ ajaxOptions: { async: false }, selected: tab_index}) ;
+    
+    $('.cust_behav').click(function() {
+        window.location = this.href;
+    });
+    
+    $("#view_tab_link").attr("href", tb_conf['text-view-url']) ;
+    $("#edit_tab_link").attr("href", tb_conf['edit-view-url']) ;
+    $("#share_tab_link").attr("href", tb_conf['share-view-url']) ;
+    $("#history_tab_link").attr("href", tb_conf['history-view-url']) ;
+    $("#settings_tab_link").attr("href", tb_conf['settings-view-url']) ;
+    $("#notifications_tab_link").attr("href", tb_conf['notifications-view-url']) ;
+
+    $("#text-tabs").trigger("tabs_ready");
+
+} ; 
+
+$(document).ready(function(){
+    renderTabs(tb_conf['current_tab']);
+}) ;
+-->
+</script>

@@ -1,0 +1,49 @@
+{% extends "site/layout/base_workspace_form.html" %}
+{% load com %}
+{% load i18n %}
+
+{% block title %}
+{% blocktrans %}Add a new user{% endblocktrans %}
+{% endblock %}
+
+{% block pre_form %}
+
+<script type="text/javascript">
+<!--
+tb_conf['current_tab'] = 'user';
+-->
+</script>
+
+<div id="user" class="tab-meta">
+
+<ul class="sub_list">
+    <li><a href="{% url user %}">{% blocktrans %}Users' list{% endblocktrans %}</a></li>
+    <li> / </li>
+    <li class="active_sub">{% blocktrans %}Add a new user{% endblocktrans %}</li>
+    <li> / </li>
+    <li><a href="{% url user-mass-add %}">{% blocktrans %}Add users in bulk{% endblocktrans %}</a></li>    
+</ul>
+{% blocktrans %}The user will receive an email invitation to join the workspace.
+You can customize the email sent by using the 'Note' field bellow.{% endblocktrans %}
+<br />
+<br />
+
+{% endblock %}
+
+{% block buttons %}
+            <input name="cancel" type="button" id="cancel_button" value="{% blocktrans %}Cancel{% endblocktrans %}"/>
+            <script type="text/javascript">
+            <!--
+            $(document).ready(function(){
+                $("#cancel_button").click(function () { 
+                    window.location = "{% url user %}"; 
+                  });                
+            }) ;
+            -->
+            </script>                        
+
+{% endblock %}
+
+{% block post_form %}
+</div>
+{% endblock %}

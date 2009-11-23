@@ -1,0 +1,18 @@
+<script type="text/javascript">
+<!--
+{% if tz_installed %}
+    {% if tz %}
+        var tz = '{{ tz }}';
+    {% else %}
+        $(function() {
+            var d = new Date();
+            var tz = -d.getTimezoneOffset()/60;
+            /*tz = 'America/Chicago';*/
+            $.post("{% url timezone_set %}", { tz: tz }, function(data){
+                window.location = window.location;
+            });
+        })
+    {% endif %}
+{% endif %}
+-->
+</script>

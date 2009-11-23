@@ -1,0 +1,43 @@
+{% extends "site/layout/base_workspace.html" %}
+{% load i18n %}
+{% load com %}
+
+{% block head %}
+{% endblock %}
+
+{% block title %}{% blocktrans %}Register{% endblocktrans %}{% endblock %}
+
+{% block content %}
+
+<h1 class="main_title"><a class="title" href="{% url index %}">{{ CONF.workspace_name }}</a></h1>
+
+<div id="login_container">
+
+<form id="register" enctype="multipart/form-data" class="wizard-form" action="." method="post">
+
+<div class="underline_border">
+{% blocktrans with CONF.workspace_name as wname %}{{ wname }} Registration{% endblocktrans %}
+</div>
+
+
+<table class="small_form">
+    <tbody>
+    {% for form in forms %}
+    	{% include "site/macros/form_fields.html" %}
+    {% endfor %}
+    <tr>
+        <td style="vertical-align: top; width: 20%; text-align:right;">
+        </td>
+        <td>
+            <label></label>
+            <input name="register" type="submit" value="Register"/>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</form>
+
+</div>
+
+{% endblock %}

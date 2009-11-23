@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+<!--  faudra penser au style choisi pour le texte au moment du print ... et ajouter la class au body -->
+<STYLE TYPE='text/css'>
+div.pagebreakhere {
+    page-break-before: always ;
+}
+</STYLE>
+
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/site/text_view_comments/c-text.css">
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/site/text_view_comments/c-text-styles.css">
+    
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/site/text_view_comments/text_view_comments.css">
+
+
+</head>
+
+<body>
+{% autoescape off %}
+    {{ content }}
+{% endautoescape %}
+{%  include "site/macros/text_comments.html" %}
+</body>
+</html>

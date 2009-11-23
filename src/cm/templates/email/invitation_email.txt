@@ -1,0 +1,5 @@
+{% extends "email/base_email.txt" %}{% load i18n %}{% block content %}{% if note %}{{ note }}
+{% endif %}
+{% blocktrans %}Click the following link to complete your registration and access the workspace:{% endblocktrans %}
+{{ CONF.site_url }}{{ activate_url }}
+{% endblock %}

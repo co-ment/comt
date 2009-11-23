@@ -1,0 +1,43 @@
+{% extends "site/layout/base_workspace_form.html" %}
+{% load com %}
+{% load i18n %}
+
+{% block title %}
+{% if user_edit %}{% blocktrans with user_edit.get_profile.admin_print as username %}Edit user {{ username }}{% endblocktrans %}{% else %}{% blocktrans %}Edit anonymous users{% endblocktrans %}{% endif %}
+{% endblock %}
+
+{% block pre_form %}
+
+<script type="text/javascript">
+<!--
+tb_conf['current_tab'] = 'user';
+-->
+</script>
+
+<div id="user" class="tab-meta">
+
+<ul class="sub_list">
+    <li><a href="{% url user %}">{% blocktrans %}Users' list{% endblocktrans %}</a></li>
+    <li> / </li>
+    <li><a href="{% url user-add %}">{% blocktrans %}Add a new user{% endblocktrans %}</a></li>
+    <li> / </li>
+    <li class="active_sub">{% if user_edit %}{% blocktrans with user_edit.get_profile.admin_print as username %}Edit user {{ username }}{% endblocktrans %}{% else %}{% blocktrans %}Edit anonymous users{% endblocktrans %}{% endif %}</li>
+</ul>
+{% endblock %}
+
+{% block buttons %}
+            <input name="cancel" type="button" id="cancel_button" value="{% blocktrans %}Cancel{% endblocktrans %}"/>
+            <script type="text/javascript">
+            <!--
+            $(document).ready(function(){
+                $("#cancel_button").click(function () { 
+                    window.location = "{% url user %}"; 
+                  });                
+            }) ;
+            -->
+            </script>                        
+{% endblock %}
+
+{% block post_form %}
+</div>
+{% endblock %}

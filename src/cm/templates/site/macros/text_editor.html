@@ -1,0 +1,45 @@
+{% load i18n %}
+<script type="text/javascript" src="{{ MEDIA_URL }}js/lib/markitup/1.1.5/markitup/jquery.markitup.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/markitup/sets.js"></script>
+
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}js/lib/markitup/1.1.5/markitup/skins/markitup/style.css" />
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/markitup/style.css" />
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/markitup/editor.css" />
+
+<script type="text/javascript" >
+
+/* yes 2 different variables */
+    myHTMLSettings.previewTemplatePath = "{% url text-wysiwyg-preview "html" %}";
+    myMarkdownSettings.previewParserPath = "{% url text-wysiwyg-preview "markdown" %}";
+    
+    $(document).ready(function() {
+    adaptMarkitup = function() {
+        $('#id_content').markItUpRemove();  
+        var newSet = $('#id_format').val();
+        switch(newSet) {
+            case 'markdown':
+                $('#id_content').markItUp(myMarkdownSettings);
+                break;
+            case 'html':
+                $('#id_content').markItUp(myHTMLSettings);
+                break;
+        }
+        return false;
+    }
+    
+    adaptMarkitup();
+    
+    $('#id_format').change(function() {adaptMarkitup();}) ;
+   });
+   
+    needToConfirm = false ;
+    function confirmExit() {
+        if (needToConfirm)
+            return "{% blocktrans %}You have attempted to leave this page. Unsaved changes will be lost. Are you sure you want to exit this page?{% endblocktrans %}";
+    } ;
+
+    $(document).ready(function() {
+        $("input[type='text']").add("textarea").change(function() {needToConfirm = true ;}) ;
+        window.onbeforeunload = confirmExit;
+	}) ;
+</script>

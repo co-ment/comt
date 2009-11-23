@@ -1,0 +1,103 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Stack Support</title>
+
+<style type="text/css">
+/*margin and padding on body element
+  can introduce errors in determining
+  element position and are not recommended;
+  we turn them off as a foundation for YUI
+  CSS treatments. */
+body {
+	margin:0;
+	padding:0;
+}
+</style>
+
+<link type="text/css" rel="stylesheet" href="../../build/cssfonts/fonts-min.css" />
+<script type="text/javascript" src="../../build/yui/yui-min.js"></script>
+
+
+<!--begin custom header content for this example-->
+<style type="text/css">
+/* Overlay Look/Feel */
+.yui-overlay-content {
+    padding:2px;
+    border:1px solid #000;
+    background-color:#aaa;
+    font-size:93%;
+}
+
+.yui-overlay-content .yui-widget-hd {
+    font-weight:bold;
+    text-align:center;
+    padding:2px;
+    border:2px solid #aa0000;
+    background-color:#fff;
+}
+
+.yui-overlay-content .yui-widget-bd {
+    text-align:left;
+    padding:2px;
+    border:2px solid #0000aa;
+    background-color:#fff;
+}
+
+.yui-overlay-content .yui-widget-hd .yui-ovr-number {
+    color:#aa0000;
+}
+
+/* Example Layout CSS */
+.overlay-example {
+    position:relative;
+    border:1px solid #000;
+    background-color:#eee;
+    padding:5px;
+    height:25em;
+}
+
+.overlay-example select.needs-shim {
+    width:100%;
+}
+
+.overlay-example .filler {
+    color:#999;
+}
+</style>
+<!--end custom header content for this example-->
+
+</head>
+
+<body class=" yui-skin-sam">
+<!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
+
+<div class="overlay-example" id="overlay-stack">
+</div>
+
+<script type="text/javascript">
+YUI({base:"../../build/", timeout: 10000}).use("overlay", function(Y) {
+
+    function myHandler(e) {
+        overlay.setStdModContent(Y.WidgetStdMod.HEADER, Y.Node.create("<span> ... clicked once, but can't do it twice ?</span>"), Y.WidgetStdMod.AFTER) ;
+    }
+
+    var overlay = new Y.Overlay({
+            xy:[0,0],
+            width:"20em",
+            height:"20em",
+            headerContent: 'Overlay <span id="myid">clickMe</span>',
+            bodyContent: "content"
+        });
+
+    overlay.render("#overlay-stack");
+    Y.one("#myid").on('click',myHandler) ;
+});
+</script>
+
+<!--END SOURCE CODE FOR EXAMPLE =============================== -->
+
+</body>
+</html>

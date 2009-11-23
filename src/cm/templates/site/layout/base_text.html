@@ -1,0 +1,26 @@
+{% extends "site/layout/base.html" %}
+{% load com %}
+{% load i18n %}
+
+{% block title %}
+{{ text.get_title }}
+{% endblock %}
+
+{% block head_base %}
+<script type="text/javascript" src="{% url django.views.i18n.javascript_catalog %}"></script>
+<link href="{% url text-feed text.key %}" title="{{ text.get_title }}" type="application/rss+xml" rel="alternate" />
+{% endblock %}
+
+{% block content %}
+
+{%  include "site/macros/text_actions.html" %}
+<a class="breadcrumbs" href="{% url index %}" title="Home">&laquo; {% blocktrans %}back to workspace{% endblocktrans %}</a>
+<h1 class="main_title_text"><a class="title" href="{% url text-view text.key %}">{{ text.get_title }}</a></h1>
+
+{% include "site/macros/text_meta.html" %}   
+{% include "site/macros/text_tabs.html" %}   
+
+{% block main %}
+{% endblock %}
+
+{% endblock %}

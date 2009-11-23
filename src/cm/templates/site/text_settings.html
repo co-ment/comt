@@ -1,0 +1,32 @@
+{% extends "site/layout/base_text.html" %}
+{% load i18n %}
+{% load com %}
+
+{% block main %}
+
+<script type="text/javascript">
+<!--
+tb_conf['current_tab'] = 'settings';
+-->
+</script>
+
+<div id="text_settings" class="tab-meta">
+<form id="settings_form" class="text-form wizard-form" action="." method="post">
+    <table class="wide_form">
+        <tbody>
+            {% include "site/macros/form_fields.html" %}
+    <tr>
+        <td style="vertical-align: top; width: 20%; text-align:right;">
+        </td>
+        <td>
+            <label></label>
+            <input name="save" id="save" type="submit" value="{% blocktrans %}Save{% endblocktrans %}"/>            
+        </td>
+    </tr>
+        </tbody>
+    </table>
+</form>
+
+</div>
+
+{% endblock %}

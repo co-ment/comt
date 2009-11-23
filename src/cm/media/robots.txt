@@ -1,0 +1,6 @@
+User-Agent: *
+Disallow: /jsi18n/
+Disallow: /text/
+Disallow: /admin/
+Disallow: /media/
+Disallow: /site_media/

@@ -1,0 +1,18 @@
+/*cm customization of markitup editor's look*/
+.markItUpEditor, .markItUpPreviewFrame, .markItUpContainer { 
+    border:1px solid #96D8A8;
+}
+
+.html .markItUpEditor, .markdown .markItUpEditor {
+    background-image:none;
+}
+
+.markItUpEditor {
+    padding:5px;
+    width:676px;
+}
+
+
+.markItUpContainer {
+    background-image:none;
+}

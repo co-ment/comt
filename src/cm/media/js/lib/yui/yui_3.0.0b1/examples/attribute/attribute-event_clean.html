@@ -1,0 +1,229 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Change Events</title>
+
+<style type="text/css">
+/*margin and padding on body element
+  can introduce errors in determining
+  element position and are not recommended;
+  we turn them off as a foundation for YUI
+  CSS treatments. */
+body {
+	margin:0;
+	padding:0;
+}
+</style>
+
+<link type="text/css" rel="stylesheet" href="../../build/cssfonts/fonts-min.css" />
+<script type="text/javascript" src="../../build/yui/yui-min.js"></script>
+
+
+<!--begin custom header content for this example-->
+<style type="text/css">
+    #example-out .entry {
+        font-family:courier;
+        margin-top:2px;
+    }
+
+    #example-out .header {
+        font-weight:bold;
+        font-family:arial;
+        color:#8dd5e7;
+        margin-top:10px;
+        margin-bottom:3px;
+    }
+
+    #example-out {
+        margin:5px;
+        border:1px solid #000;
+        color:#ffffff;
+        background-color:#004c6d;
+        overflow:auto;
+        height:20em;
+        width:30em;
+        padding-left:2px;
+    }
+
+    .attrs {
+        width:30em;
+        border:1px solid #000;
+        background-color:#cdcdcd;
+        margin:5px;
+    }
+
+    .attrs .header {
+        font-weight:bold;
+        background-color:#aaa;
+        padding:5px;
+    }
+
+    .attrs .body {
+        padding:10px;
+    }
+
+    .attrs .footer {
+        padding:5px;
+    }
+
+    .attrs label {
+        display:block;
+        float:left;
+        clear:left;
+        font-weight:bold;
+        width:8em;
+    }
+</style>
+<script type="text/javascript">
+    YUI.namespace("example");
+    YUI.example.print = function(msg, cl) {
+        var o = document.getElementById("example-out");
+        if (o) {
+            cl = cl || "";
+            o.innerHTML += '<div class="entry ' + cl + '">' + msg + '</div>';
+        }
+    }
+</script>
+
+<!--end custom header content for this example-->
+
+</head>
+
+<body class=" yui-skin-sam">
+
+<h1>Change Events</h1>
+
+<div class="exampleIntro">
+	Attribute change events are one of the key benefits of using attributes to maintain state for your objects, instead of regular object properties. This example shows how you can listen for attribute change events and work with the event payload they receive. 
+			
+</div>
+
+<!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
+
+<div class="attrs">
+    <div class="header">Enter a new value and click the "Change Value" button:</div>
+    <div class="body">
+        <p>
+            <label for="attrSel">Attribute</label>: 
+            <select id="attrSel">
+                <option value="foo">foo</option>
+                <option value="bar">bar</option>
+                <option value="foobar">foobar (change will be prevented)</option>
+            </select>
+        </p>
+        <p><label for="currentVal">Current Value</label>: <span id="currentVal"></span></p>
+        <p><label for="newVal">New Value</label>: <input type="text" id="newVal" /></p>
+    </div>
+    <div class="footer">
+        <button type="button" id="changeValue">Change Value</button>
+    </div>
+</div>
+
+<div id="example-out"></div>
+
+<script type="text/javascript">
+// Get a new YUI instance 
+YUI({base:"../../build/", timeout: 10000}).use("node", "attribute", function(Y) {
+
+    // Shortcut to print (unrelated to example)
+    var print = YUI.example.print;
+
+    // Setup a custom class with attribute support
+    function MyClass(cfg) {
+        this.addAttrs(Y.merge(MyClass.ATTRIBUTES), cfg);
+    }
+
+    // Setup attribute configuration
+    MyClass.ATTRIBUTES = {
+        "foo" : {
+            value:5
+        },
+ 
+        "bar" : {
+            value:"Hello World!"
+        },
+
+        "foobar" : {
+            value:true
+        }
+    };
+
+    Y.augment(MyClass, Y.Attribute);
+
+    var o1 = new MyClass();
+
+    function printEvt(event) {
+        print("event.prevVal : " + event.prevVal);
+        print("event.newVal : " + event.newVal);
+        print("event.attrName : " + event.attrName);
+    }
+
+    // Start Form Handling
+    var attrSel = Y.Node.get("#attrSel");
+    var attrOpts = attrSel.get("options");
+    var newValTxt = Y.Node.get("#newVal");
+    var currentValSpan = Y.Node.get("#currentVal");
+
+    function updateVal() {
+        var selIndex = attrSel.get("selectedIndex");
+        var attr = attrOpts.item(selIndex).get("value");
+        o1.set(attr, newValTxt.get("value"));
+    }
+
+    Y.on("click", updateVal, "#changeValue");
+
+    function populateCurrentValue() {
+        var selIndex = attrSel.get("selectedIndex");
+        var attr = attrOpts.item(selIndex).get("value");
+
+        currentValSpan.set("innerHTML", o1.get(attr));
+        newValTxt.set("value", "");
+    }
+
+    populateCurrentValue();
+
+    Y.on("change", populateCurrentValue, attrSel);
+    // End Form Handling
+
+    // Event Listners
+    o1.after("fooChange", function(event) {
+        print("after fooChange", "header");
+        printEvt(event);
+
+        currentValSpan.set("innerHTML", event.newVal);
+    });
+
+    o1.after("barChange", function(event) {
+        print("after barChange", "header");
+        printEvt(event);
+
+        currentValSpan.set("innerHTML", event.newVal);
+    });
+
+    o1.on("foobarChange", function(event) {
+
+        // Calling preventDefault, in an "on" listener
+        // will prevent the attribute change from occuring
+        // and the after listener being called
+        print("on foobarChange (prevented)", "header");
+        event.preventDefault();
+    });
+
+    o1.after("foobarChange", function(event) {
+        // This will never get called, because we're
+        // calling preventDefault in the "on" listener
+        print("after foobarChange", "header");
+        printEvt(event);
+
+        currentValSpan.set("innerHTML", event.newVal);
+    });
+
+});
+</script>
+
+<!--END SOURCE CODE FOR EXAMPLE =============================== -->
+
+</body>
+</html>

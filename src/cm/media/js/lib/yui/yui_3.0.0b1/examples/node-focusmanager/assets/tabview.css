@@ -1,0 +1,122 @@
+.yui-tabview {
+	margin: 10px;
+}
+
+.yui-tabview div {
+	border: solid 1px #000;
+}
+
+.yui-tabview div div {
+	border: solid 1px #999;
+}
+
+.yui-tabview ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	zoom: 1;	/* Clear the floated <LI> elements in IE */
+}
+
+.yui-tabview ul:after {  /* Clear the floated <LI> elements in Webkit, Opera and Gecko */
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    height: 0;
+    line-height: 0;
+}
+
+.yui-tab {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	float: left;
+	border: solid 1px #000;
+	margin: 0 -1px -1px 0;
+	background-color: #ccc;
+	*position: relative;	/* Necessary to get negative margins in IE */
+	*bottom: -1px;
+}
+
+.yui-tab a {
+	display: block;
+	text-decoration: none;
+	color: #000;
+	border: solid 1px #ccc;
+}
+
+.yui-tab a em {
+	font-style: normal;
+	display: block;
+	padding: 2px 10px;			
+}
+
+.yui-tab-focus a {
+	border-color: #B3D4FF;			
+}
+
+.yui-tab-focus a:focus {  
+	outline: 0;	/* Suppress default browser focus */
+}
+
+.yui-tab-selected a {	
+	background-color: #999;
+	border-color: #999;
+	border-bottom-width: 2px;
+	margin-bottom: -1px;
+	*position: relative;	/* Necessary to get negative margins in IE */
+}
+
+.yui-tab-selected a em {			
+	background-color: #fff;
+	border-bottom: 3px solid #fff;
+	margin-bottom: -3px;
+	*position: relative;	/* Necessary to get negative margins in IE */
+}
+
+.yui-tab-focus a em {
+	background-color: #B3D4FF;
+	border-color: #B3D4FF;			
+}
+
+.yui-tabpanel {
+	background-color: #fff;
+	display: none;
+}
+
+.yui-tabpanel-selected {
+	display: block;
+	padding: 10px;
+}
+
+.yui-tabview div div div.paging {
+	text-align: right;
+	height: 12px;
+	border: 0;
+}
+
+
+/*	Replace the text of each <BUTTON> with an icon by hiding the 
+	
+	Hide the text of each <BUTTON> offscreen so that it is still 
+	accessible to users of screen readers */
+
+.paging button {
+	display: inline-block;
+	height: 12px;
+	width: 12px;
+	overflow: hidden;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	text-indent: -999em;
+	background: url(arrows.png) 0 0 no-repeat;
+}
+
+.paging button.yui-tabview-prevbtn {
+	background-position: 0 0;	
+}
+
+.paging button.yui-tabview-nextbtn {
+	background-position: 0 -12px;			
+}

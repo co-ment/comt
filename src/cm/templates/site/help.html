@@ -1,0 +1,60 @@
+{% extends "site/layout/base_workspace.html" %}
+{% load com %}
+{% load i18n %}
+
+{% block title %}
+{% blocktrans %}Help{% endblocktrans %}
+{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+
+<h1>Help</h1>
+
+<h2>General Presentation</h2>
+
+XXX
+
+<h2>Glossary</h2>
+
+<h3>Text edition</h3>
+
+<dl>
+  <dt><a name="markdown"></a>Markdown</dt>
+    <dd>XXX</dd>
+    
+</dl>
+
+<h3>Roles</h3>
+<dl>
+  <dt><a name="roles"></a>Roles</dt>
+    <dd>Roles are predefined sets of permission useful</dd>
+    
+  <dt><a name="local_role"></a>Local role</dt>
+    <dd>A local role is a role that is set for a specific user on a specific text.  It can be used to override a possibly existing workspace-level role or to give a user a role on a text (and not on every text in the workspace).</dd>
+
+  <dt><a name="role_model"></a>Role model</dt>
+    <dd>A role model is a role set useful in a specific use case</dd>
+
+</dl>
+
+<h3>Notification and feeds</h3>
+
+<dl>    
+  <dt><a name="email_notifications"></a>Email notification</dt>
+    <dd>Email notifications are a way for users to be informed when a new comment is added on a text they follow by receiving emails.</dd>
+    
+  <dt><a name="feed"></a>Feeds</dt>
+    <dd>A <a title="Web feed definition on Wikipedia" href="http://en.wikipedia.org/wiki/Web_feed">(web) feed</a> is a news feed on a specific text or on the whole workspace.</dd>
+    
+  <dt><a name="public_private_feed"></a>Public and private feeds</dt>
+    <dd>The public feed includes all the events publically accessible on the workspace or a specific text.  The private feed includes all events.  Be sure to share this feed with caution.</dd>
+
+  <dt><a name="embed"></a>Text embedding</dt>
+    <dd>You can embed your text into a page of your own website. Texts can be embed with or without comments. Visitors will also be able to add comments from your website depending on anonymous users' roles on the text.</dd>
+    
+</dl>
+
+{% endblock %}

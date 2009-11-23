@@ -1,0 +1,535 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-11-20 12:24+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: media/js/client/c_addcomment_form.js:52
+msgid "New comment"
+msgstr ""
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_reply_form.js:37
+msgid "New reply"
+msgstr ""
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:4
+msgid "Username:"
+msgstr ""
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:5
+msgid "E-mail address:"
+msgstr ""
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:6
+msgid "Title:"
+msgstr ""
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:7
+msgid "Content:"
+msgstr ""
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:8
+msgid "Tag:"
+msgstr ""
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:11
+msgid "Modify comment's scope:"
+msgstr ""
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:13
+msgid "Comment will apply to this selection:"
+msgstr ""
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:14
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:395
+msgid "Save"
+msgstr ""
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:14
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:100
+msgid "Cancel"
+msgstr ""
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_icomment.js:25
+#: media/js/client/c_interface_forms.js:15
+msgid "close"
+msgstr ""
+
+#: media/js/client/c_dlg_intercept.js:48
+msgid "New comment will be canceled, continue?"
+msgstr ""
+
+#: media/js/client/c_dlg_intercept.js:48 media/js/client/c_dlg_intercept.js:50
+#: media/js/client/c_dlg_intercept.js:52 media/js/client/c_sync.js:201
+msgid "Warning"
+msgstr ""
+
+#: media/js/client/c_dlg_intercept.js:50
+msgid "Started reply will be canceled, continue?"
+msgstr ""
+
+#: media/js/client/c_dlg_intercept.js:52
+msgid "Started comment edition will be canceled, continue?"
+msgstr ""
+
+#: media/js/client/c_edit_form.js:47
+msgid "Edit comment"
+msgstr ""
+
+#: media/js/client/c_icomment.js:10
+msgid "change comment state to pending"
+msgstr ""
+
+#: media/js/client/c_icomment.js:11
+msgid "change comment state to approved"
+msgstr ""
+
+#: media/js/client/c_icomment.js:12
+msgid "change comment state to unapproved"
+msgstr ""
+
+#: media/js/client/c_icomment.js:13
+msgid "cancel changing the state of this comment"
+msgstr ""
+
+#: media/js/client/c_icomment.js:14
+msgid "pending"
+msgstr ""
+
+#: media/js/client/c_icomment.js:15
+msgid "approved"
+msgstr ""
+
+#: media/js/client/c_icomment.js:16
+msgid "unapproved"
+msgstr ""
+
+#: media/js/client/c_icomment.js:17
+msgid "cancel"
+msgstr ""
+
+#: media/js/client/c_icomment.js:18
+msgid "show replies"
+msgstr ""
+
+#: media/js/client/c_icomment.js:19
+msgid "change to:"
+msgstr ""
+
+#: media/js/client/c_icomment.js:20
+msgid "reply"
+msgstr ""
+
+#: media/js/client/c_icomment.js:21
+msgid "edit comment"
+msgstr ""
+
+#: media/js/client/c_icomment.js:22
+msgid "delete comment"
+msgstr ""
+
+#: media/js/client/c_icomment.js:23
+msgid "edit"
+msgstr ""
+
+#: media/js/client/c_icomment.js:24
+msgid "delete"
+msgstr ""
+
+#: media/js/client/c_icomment.js:276
+msgid "last modified on %(date)s"
+msgstr ""
+
+#: media/js/client/c_icomment.js:279
+msgid "Permalink to this comment"
+msgstr ""
+
+#: media/js/client/c_icomment.js:282
+msgid "by %(name)s, created on %(date)s"
+msgstr ""
+
+#: media/js/client/c_interface_forms.js:1
+msgid "No selection yet"
+msgstr ""
+
+#: media/js/client/c_server_exchange.js:47
+msgid "error:"
+msgstr ""
+
+#: media/js/client/c_sync.js:57
+msgid "no filtered comments left"
+msgstr ""
+
+#: media/js/client/c_sync.js:179 media/js/client/c_sync.js.py:186
+msgid "could not save comment"
+msgstr ""
+
+#: media/js/client/c_sync.js:201
+msgid "Are you sure you want to delete this comment?"
+msgstr ""
+
+#: media/js/client/c_sync.js:205
+msgid "could not remove comment"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/client/f_message.js:17
+msgid "loading..."
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:4
+msgid "print from the browser"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:5
+msgid "download html file (.html)"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:6
+msgid "download markdown file (.mkd)"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:7
+msgid "download portable object format file (.pdf)"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:8
+msgid "download latex file (.tex)"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:9
+msgid "download open document file (.odt)"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:12
+msgid "Print text"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:13
+msgid "Export text"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:40
+msgid "using markers only, no background colors"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:41
+msgid "using markers and background colors"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:53
+msgid "all (%(nb_comments)s)"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:54
+msgid "current filtered ones (%(nb_comments)s)"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:56
+msgid "none (0)"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:89
+msgid "Go !"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:43
+msgid "click to show options"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:44
+msgid "click to hide options"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:76
+msgid "Text"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:80
+msgid "Search"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:85
+#: media/js/site/f_text_view_frame.js:395
+msgid "Reset"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:86
+msgid "Hide all Comments"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:94
+msgid "Authors"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:102
+msgid "States"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:111
+msgid "Dates"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:119
+msgid "Tags"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:177
+msgid "view previous comment"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:178
+msgid "view next comment"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:179
+msgid "view first comment"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:180
+msgid "view last next comment"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:181
+msgid "view all comments"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:182
+msgid "toggle advance interface"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:183
+msgid "print document with/without comments"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:184
+msgid "export document with/without comments"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:187
+msgid "add a comment"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1
+msgid "discussions"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:203
+msgid "filter:"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1
+msgid "comments"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1
+msgid "replies"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:208
+msgid "browse by:"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:210
+msgid "location"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:211
+msgid "modification"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:354
+msgid "Text style"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:399
+msgid "Animation duration"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1
+msgid "Use padding to show discussion threads"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:408
+msgid "(0.001 to 1 second)"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:434
+msgid "preferences reset (will apply on next load)"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:440
+msgid "preferences saved (will apply on next load)"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:544
+msgid "filter reset"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:554
+msgid "filter applied"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:589
+msgid "all"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:607
+msgid "last 24 hours (%(nb_comments)s)"
+msgid_plural "last %(nb_days)s days (%(nb_comments)s)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:721
+msgid "No"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:722
+msgid "Yes"
+msgstr ""
+
+#: media/js/markitup/sets.js:18 media/js/markitup/sets.js.py:63
+msgid "First Level Heading"
+msgstr ""
+
+#: media/js/markitup/sets.js:18 media/js/markitup/sets.js.py:19
+#: media/js/markitup/sets.js:20 media/js/markitup/sets.js.py:21
+#: media/js/markitup/sets.js:22 media/js/markitup/sets.js.py:23
+#: media/js/markitup/sets.js:63 media/js/markitup/sets.js.py:64
+#: media/js/markitup/sets.js:65 media/js/markitup/sets.js.py:66
+#: media/js/markitup/sets.js:67 media/js/markitup/sets.js.py:68
+msgid "Your title here..."
+msgstr ""
+
+#: media/js/markitup/sets.js:19 media/js/markitup/sets.js.py:64
+msgid "Second Level Heading"
+msgstr ""
+
+#: media/js/markitup/sets.js:20 media/js/markitup/sets.js.py:65
+msgid "Heading 3"
+msgstr ""
+
+#: media/js/markitup/sets.js:21 media/js/markitup/sets.js.py:66
+msgid "Heading 4"
+msgstr ""
+
+#: media/js/markitup/sets.js:22 media/js/markitup/sets.js.py:67
+msgid "Heading 5"
+msgstr ""
+
+#: media/js/markitup/sets.js:23 media/js/markitup/sets.js.py:68
+msgid "Heading 6"
+msgstr ""
+
+#: media/js/markitup/sets.js:25 media/js/markitup/sets.js.py:71
+msgid "Bold"
+msgstr ""
+
+#: media/js/markitup/sets.js:26 media/js/markitup/sets.js.py:72
+msgid "Italic"
+msgstr ""
+
+#: media/js/markitup/sets.js:28 media/js/markitup/sets.js.py:75
+msgid "Bulleted List"
+msgstr ""
+
+#: media/js/markitup/sets.js:29 media/js/markitup/sets.js.py:76
+msgid "Numeric List"
+msgstr ""
+
+#: media/js/markitup/sets.js:33 media/js/markitup/sets.js.py:79
+msgid "Picture"
+msgstr ""
+
+#: media/js/markitup/sets.js:34 media/js/markitup/sets.js.py:80
+msgid "Link"
+msgstr ""
+
+#: media/js/markitup/sets.js:36
+msgid "Quotes"
+msgstr ""
+
+#: media/js/markitup/sets.js:37
+msgid "Code Block / Code"
+msgstr ""
+
+#: media/js/markitup/sets.js:39 media/js/markitup/sets.js.py:83
+msgid "Preview"
+msgstr ""
+
+#: media/js/markitup/sets.js:69
+msgid "Paragraph"
+msgstr ""
+
+#: media/js/markitup/sets.js:73
+msgid "Stroke through"
+msgstr ""
+
+#: media/js/markitup/sets.js:77
+msgid "List element"
+msgstr ""
+
+#: media/js/markitup/sets.js:80
+msgid "Your text to link..."
+msgstr ""
+
+#: media/js/markitup/sets.js:82
+msgid "Clean"
+msgstr ""
+
+#: media/js/site/c_text_view_comments.js:18
+msgid "modern"
+msgstr ""
+
+#: media/js/site/c_text_view_comments.js:18
+msgid "classic"
+msgstr ""
+
+#: media/js/site/c_text_view_comments.js:18
+msgid "code"
+msgstr ""
+
+#: media/js/site/f_text_view_frame.js:185
+msgid "toggle full screen view"
+msgstr ""
+
+#: media/js/site/f_text_view_frame.js:186
+msgid "text feed"
+msgstr ""
+
+#: media/js/site/f_text_view_frame.js:317
+msgid "unthread discussions"
+msgstr ""
+
+#: media/js/site/f_text_view_frame.js:320
+msgid "thread discussions"
+msgstr ""
+
+#: media/js/site/f_text_view_frame.js:560
+msgid "discussion"
+msgid_plural "discussions"
+msgstr[0] ""
+msgstr[1] ""
+
+#: media/js/site/f_text_view_frame.js:564
+msgid "comment"
+msgid_plural "comments"
+msgstr[0] ""
+msgstr[1] ""
+
+#: media/js/site/f_text_view_frame.js:567
+msgid "&nbsp;reply"
+msgid_plural "&nbsp;replies"
+msgstr[0] ""
+msgstr[1] ""

@@ -1,0 +1,529 @@
+# generic_roles should be loaded first
+
+############### users ###############
+# user1
+
+- model : auth.user
+  pk: 1
+  fields:
+    username: user1
+    email: user1@here.dja
+    password: sha1$6efc5$cf1468825cd79fd2d6ddaf97738c8666053af349
+      
+- model : cm.userprofile
+  pk: 1
+  fields:
+    user: 1
+    key: "up_key_1" 
+    adminkey: "up_adminkey_1" 
+
+# user2
+
+- model : auth.user
+  pk: 2
+  fields:
+    username: user2
+    email: user2@here.dja
+    password: sha1$6efc5$cf1468825cd79fd2d6ddaf97738c8666053af349
+
+- model : cm.userprofile
+  pk: 2
+  fields:
+    user: 2
+    key: "up_key_2" 
+    adminkey: "up_adminkey_2" 
+
+# user3
+
+- model : auth.user
+  pk: 3
+  fields:
+    username: user3
+    email: user3@here.dja
+    password: sha1$6efc5$cf1468825cd79fd2d6ddaf97738c8666053af349
+
+- model : cm.userprofile
+  pk: 3
+  fields:
+    user: 3
+    key: "up_key_3" 
+    adminkey: "up_adminkey_3" 
+
+# user4
+
+- model : auth.user
+  pk: 4
+  fields:
+    username: user4
+    email: user4@here.dja
+    password: sha1$6efc5$cf1468825cd79fd2d6ddaf97738c8666053af349
+
+- model : cm.userprofile
+  pk: 4
+  fields:
+    user: 4
+    key: "up_key_4" 
+    adminkey: "up_adminkey_4" 
+
+# user5
+
+- model : auth.user
+  pk: 5
+  fields:
+    is_active: False
+    username: user5
+    email: user5@here.dja
+    password: sha1$6efc5$cf1468825cd79fd2d6ddaf97738c8666053af349
+
+- model : cm.userprofile
+  pk: 5
+  fields:
+    user: 5
+    key: "up_key_5" 
+    adminkey: "up_adminkey_5" 
+
+# user6: pending user
+
+- model : auth.user
+  pk: 6
+  fields:
+    is_active: False
+    username: user6
+    email: user6@here.dja
+    password: sha1$6efc5$cf1468825cd79fd2d6ddaf97738c8666053af349
+
+- model : cm.userprofile
+  pk: 6
+  fields:
+    user: 6
+    key: "up_key_6" 
+    adminkey: "up_adminkey_6"
+    is_suspended: True 
+
+############### texts ############### 
+
+# text 1
+- model : cm.textversion
+  pk: 1
+  fields:
+    created: "2009-02-13 04:01:12"
+    modified: "2009-02-13 04:01:12"
+    title: 'title 1, aposteriori moderation'
+    format: 'markdown'
+    content: 'aaa bbb ccc ddd eee fff ggg'
+    text: 1
+    mod_posteriori: True
+
+- model : cm.text
+  pk: 1
+  fields:
+    created: "2009-02-13 04:01:12"
+    modified: "2009-02-13 04:01:12"
+    last_text_version: 1
+    title: 'title 1'
+    state: "approved"
+    key: "text_key_1" 
+    adminkey: "text_adminkey_1" 
+    user: 1
+
+# text 2
+- model : cm.textversion
+  pk: 2
+  fields:
+    created: "2009-02-13 04:01:12"
+    modified: "2009-02-13 04:01:12"
+    title: 'title 2,  apriori moderation'
+    format: 'markdown'
+    content: 'aaa bbb ccc ddd eee fff ggg'
+    text: 2
+    mod_posteriori: False
+
+- model : cm.text
+  pk: 2
+  fields:
+    created: "2009-02-13 04:01:12"
+    modified: "2009-02-13 04:01:12"
+    last_text_version: 2
+    title: 'title 2'
+    state: "approved"
+    key: "text_key_2" 
+    adminkey: "text_adminkey_2"
+    user: 1     
+  
+# text 3
+- model : cm.textversion
+  pk: 3
+  fields:
+    created: "2009-02-13 04:01:12"
+    modified: "2009-02-13 04:01:12"
+    title: 'title 3'
+    format: 'markdown'
+    content: 'aaa bbb ccc ddd eee fff ggg  
+    
+    
+    long text 
+    
+     
+    long text 
+    
+     
+    long text 
+    
+         
+    long text 
+    
+     
+    long text 
+    
+     
+    long text 
+    
+         
+    long text 
+    
+     
+    long text 
+    
+     
+    long text 
+    
+         
+    long text 
+    
+     
+    long text 
+    
+     
+    long text 
+    
+         
+    long text 
+    
+     
+    long text 
+    
+     
+    long text 
+    
+         
+    long text 
+    
+     
+    long text 
+    
+     
+    long text 
+    
+         
+    long text 
+    
+     
+    long text 
+    
+     
+    long text 
+    
+         
+    long text 
+    
+     
+    long text 
+    
+     
+    long text 
+    
+         
+    long text 
+    
+     
+    long text 
+    
+     
+    long text 
+    
+         
+    long text 
+    
+     
+    long text 
+    
+     
+    long text 
+    
+         
+    long text 
+    
+     
+    long text 
+    
+     
+    long text 
+    
+         
+    long text 
+    
+     
+    long text 
+    
+     
+    long text 
+    
+         
+    long text 
+    
+     
+    long text 
+    
+     
+    long text 
+    
+         
+    long text 
+    
+     
+    long text 
+    
+     
+    long text 
+    
+         
+    long text 
+    
+     
+    long text 
+    
+     
+    long text 
+    
+         
+    long text 
+    
+     
+    long text 
+    
+     
+    long text 
+    
+         
+    long text 
+    
+     
+    long text 
+    
+     
+    long text 
+    
+         
+    long text 
+    
+     
+    long text 
+    
+     
+    long text 
+    
+         
+    long text 
+    
+     
+    long text 
+    
+     
+    long text 
+    
+         
+    long text'
+    text: 3
+
+- model : cm.text
+  pk: 3
+  fields:
+    created: "2009-02-13 04:01:12"
+    modified: "2009-02-13 04:01:12"
+    last_text_version: 3
+    title: 'title 3'
+    state: "approved"
+    key: "text_key_3" 
+    adminkey: "text_adminkey_3"
+    user: 2    
+
+############### userrole ############### 
+
+# user 1 is global Manager
+# userrole 1
+- model : cm.userrole
+  pk: 1
+  fields:
+    role: 1
+    user: 1
+    text: null
+  
+# user 2 is Editor on text 2
+# userrole 2
+- model : cm.userrole
+  pk: 2
+  fields:
+    role: 1
+    user: 2
+    text: 2
+
+# user 2 is Commentator on text 3
+# userrole 3
+- model : cm.userrole
+  pk: 3
+  fields:
+    role: 4
+    user: 2
+    text: 3
+
+# user 3 is Commentator on text 2
+# userrole 4
+- model : cm.userrole
+  pk: 4
+  fields:
+    role: 4
+    user: 3
+    text: 2
+
+# user 3 is Observer on text 3
+# userrole 5 :
+- model : cm.userrole
+  pk: 5
+  fields:
+    role: 5
+    user: 3
+    text: 3
+
+# user 4 is global Manager
+# userrole 6
+- model : cm.userrole
+  pk: 6
+  fields:
+    role: 1
+    user: 4
+    text: null
+  
+
+# user 4 is Commentator on text 2 (downgrade from global Manager)
+# userrole 7
+- model : cm.userrole
+  pk: 7
+  fields:
+    role: 4
+    user: 4
+    text: 2
+
+############### comment ###############
+
+# comment 1 (visible on text 2)
+- model : cm.comment
+  pk: 1
+  fields:
+    created: "2009-02-13 04:01:12" 
+    modified: "2009-02-13 04:01:12"
+    start_wrapper: 0 
+    end_wrapper: 0
+    start_offset: 1 
+    end_offset: 11
+    title: "comment 1" 
+    content: "comment 1 content" 
+    content_html: "<p>comment 1 content, this <a href='http://localhost:8000/text/text_key_2/view/?comment_key=comment_key_4'>link</a> is a link to another comment, and <a href='http://www.lemonde.fr'>this one</a> is a link to lemonde</sp></p>" 
+    key: "comment_key_1" 
+    adminkey: "comment_adminkey_1"
+    reply_to: null
+    user: 1
+    state: "approved"
+    text_version: 2
+
+# comment 2 (visible on text 2)
+- model : cm.comment
+  pk: 2
+  fields:
+    created: "2009-02-13 04:01:13" 
+    modified: "2009-02-13 04:01:13"
+    start_wrapper: 0 
+    end_wrapper: 0
+    start_offset: 1 
+    end_offset: 11
+    title: "comment 2" 
+    content: "comment 2 content" 
+    content_html: "<p>comment 2 content</p>" 
+    key: "comment_key_2" 
+    adminkey: "comment_adminkey_2"
+    reply_to: null
+    user: 1
+    state: "approved"
+    text_version: 2
+
+# comment 3 (NOT visible on text 2)
+- model : cm.comment
+  pk: 3
+  fields:
+    created: "2009-02-13 04:01:13" 
+    modified: "2009-02-13 04:01:13"
+    start_wrapper: 0 
+    end_wrapper: 0
+    start_offset: 1 
+    end_offset: 11
+    title: "comment 3" 
+    content: "comment 3 content" 
+    content_html: "<p>comment 3 content</p>" 
+    key: "comment_key_3" 
+    adminkey: "comment_adminkey_3"
+    reply_to: null
+    user: 1
+    state: "pending"
+    text_version: 2
+
+# comment 4 (visible BUT child of comment 3 (NOT visible))
+- model : cm.comment
+  pk: 4
+  fields:
+    created: "2009-02-13 04:01:13" 
+    modified: "2009-02-13 04:01:13"
+    title: "comment 4" 
+    content: "comment 4 content" 
+    content_html: "<p>comment 4 content</p>" 
+    key: "comment_key_4" 
+    adminkey: "comment_adminkey_4"
+    reply_to: 3
+    user: 1
+    state: "approved"
+    text_version: 2
+
+############### activity ###############
+- model : cm.activity
+  pk: 1
+  fields:
+    created: "2009-01-13 04:01:13" 
+    text: 1 
+    originator_user: 1
+    type: 'text_view'
+
+- model : cm.activity
+  pk: 2
+  fields:
+    created: "2009-01-13 04:31:13" 
+    text: 1 
+    originator_user: 1
+    type: 'text_view'
+    
+- model : cm.activity
+  pk: 3
+  fields:
+    created: "2009-01-02 04:31:13" 
+    text: 1 
+    originator_user: 1
+    type: 'text_view'    
+
+    
+- model : cm.activity
+  pk: 4
+  fields:
+    created: "2009-01-31 04:31:13" 
+    text: 1 
+    originator_user: 1
+    type: 'text_view'
+
+
+            

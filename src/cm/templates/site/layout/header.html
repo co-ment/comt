@@ -1,0 +1,20 @@
+{% load i18n %}
+{% load local_perms %}
+{% get_local_perm request can_create_text as can_create_text %}
+
+<div id="header_controls">
+
+{% if user.is_authenticated %}<b>{{ user.username }}</b> ·{% endif %} 
+   <a title="{% blocktrans %}Home{% endblocktrans %}" href="{% url index %}">{% blocktrans %}Home{% endblocktrans %}</a>
+   {% if can_create_text %}    
+ · <a title="{% blocktrans %}Write a text{% endblocktrans %}" href="{% url text-create-content %}">{% blocktrans %}Write a text{% endblocktrans %}</a>
+ · <a title="{% blocktrans %}Upload a text{% endblocktrans %}" href="{% url text-create-upload %}">{% blocktrans %}Upload a text{% endblocktrans %}</a>
+   {% endif %}
+{% if user.is_authenticated %}
+ · <a title="{% blocktrans %}Profile{% endblocktrans %}" href="{% url profile %}">{% blocktrans %}Profile{% endblocktrans %}</a>
+ · <a title="{% blocktrans %}Logout{% endblocktrans %}" href="{% url logout %}">{% blocktrans %}Logout{% endblocktrans %}</a>
+{% else%} 
+ · <a title="{% blocktrans %}Login{% endblocktrans %}" href="{% url login %}">{% blocktrans %}Login{% endblocktrans %}</a>
+{% if CONF.workspace_registration %} · <a title="{% blocktrans %}Register{% endblocktrans %}" href="{% url register %}">{% blocktrans %}Register{% endblocktrans %}</a>{% endif %}
+{% endif %}
+</div>

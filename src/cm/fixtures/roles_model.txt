@@ -1,0 +1,9 @@
+How to create a new set of roles {myroles}
+=================================
+
+- create a file named roles_{myroles}.yaml in the fixture directory
+
+- make sure the role with id=1 is a manager
+
+- make sure the role with max id is a single participant with minimum rights
+ 

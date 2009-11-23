@@ -1,0 +1,50 @@
+{% extends "site/layout/base_workspace_form.html" %}
+{% load i18n %}
+{% load com %}
+
+{% block title %}{% blocktrans %}Settings{% endblocktrans %}{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block pre_form %}
+
+<script type="text/javascript">
+<!--
+tb_conf['current_tab'] = 'settings';
+-->
+</script>
+
+<div id="settings" class="tab-meta">   
+
+{% endblock %}
+
+{% block buttons %}
+    <input name="cancel" type="button" id="cancel_button" value="{% blocktrans %}Cancel{% endblocktrans %}"/>
+    <script type="text/javascript">
+    <!--
+
+    
+    $(document).ready(function(){
+        old_state = $("#id_workspace_role_model").attr('value');
+        
+        $("#id_workspace_role_model").change(function (e) { 
+            question = "{% blocktrans %}Are you sure you want to change the role model? All roles (except managers) will be resetted!{% endblocktrans %}";
+            if (!confirm(question)) {
+            	$("#id_workspace_role_model").attr('value',old_state);
+            }
+          });
+        
+        $("#cancel_button").click(function (e) { 
+            window.location = "{% url index %}";
+            e.stopPropagation(); 
+          });                
+    }) ;
+    -->
+    </script>
+{% endblock %}
+
+{% block post_form %}
+</div>
+{% endblock %}
+

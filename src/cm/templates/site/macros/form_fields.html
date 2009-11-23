@@ -1,0 +1,26 @@
+{% load i18n %}
+{% if form.non_field_errors %}<tr><td class="label"></td><td><span class="error-text">{{ form.non_field_errors }}</span></td></tr>{% endif %}
+
+{% for field in form %}
+<tr>
+     <td class="label">{{ field.label_tag }}{% if field.field.required %}&nbsp;<span class="required_star">*</span>{% endif %}&nbsp;&nbsp;<div><br/></div></td>
+     <td>
+        <div {% if field.errors %}class="error"{% endif %}>{{ field }}
+        {% ifequal field.name "format" %}
+        <a target="_blank" href="{% url help-format %}">?</a>
+        {% endifequal %}
+        </div>                
+
+        <div class="help_text">                  
+        {% if field.help_text %}{{ field.help_text }}{% endif %}{% if help_links %}{% for key,value in help_links.items %}{% ifequal key field.name %}&nbsp;(<a target="_blank" title="{% blocktrans %}Help{% endblocktrans %}" href="{% url help %}#{{ value }}">?</a>){% endifequal %}{% endfor %}{% endif %}{% if field.errors %}
+            <span class="error-text">              
+                {% for error in field.errors %}{{ error|escape }}{% endfor %}
+            </span>
+            </div>
+        {% else %}    
+            <br/>              
+        {% endif %}           
+        </div>        
+     </td>
+</tr>
+{% endfor %}

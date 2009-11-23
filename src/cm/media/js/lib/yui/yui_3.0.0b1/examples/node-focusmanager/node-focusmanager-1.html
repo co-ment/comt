@@ -1,0 +1,424 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>YUI Library Examples: Focus Manager Node Plugin: Accessible Toolbar</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    	<link rel="stylesheet" type="text/css" href="../../assets/yui.css" >
+
+<style>
+    /*Supplemental CSS for the YUI distribution*/
+    #custom-doc { width: 95%; min-width: 950px; }
+    #pagetitle {background-image: url(../../assets/bg_hd.gif);}
+/*    #pagetitle h1 {background-image: url(../../assets/title_h_bg.gif);}*/
+</style>
+
+<link rel="stylesheet" type="text/css" href="../../assets/dpSyntaxHighlighter.css">
+<link type="text/css" rel="stylesheet" href="../../build/cssfonts/fonts-min.css" />
+<script type="text/javascript" src="../../build/yui/yui-min.js"></script>
+<style type="text/css">
+
+	.yui-toolbar {
+		border: solid 1px #999;
+		background-color: #ccc;
+		margin: .25em;
+		overflow: auto;
+	}
+
+	.yui-toolbar-button {
+		display: inline-block;
+	    border-width: 1px 0;
+	    border-style: solid;
+	    border-color: #808080;
+	    margin: .25em;
+	    font-size: 85%;  /* 11px */
+	}
+
+	.yui-toolbar-button span {
+		display: inline-block;
+	    border-width: 0 1px;
+	    border-style: solid;
+	    border-color: #808080;
+	    margin: 0 -1px;
+	    *position: relative;    /* Necessary to get negative margins working in IE */
+	    *left: -1px;
+	}
+
+	.yui-toolbar-button input {
+	    border: none;
+	    margin: 0;
+		padding: 4px 4px 4px 24px;	
+	    *overflow: visible; /* Remove superfluous padding for IE */
+		background: transparent url(assets/icons.png) 4px -6px no-repeat;
+	}
+	
+	#add-btn input {
+		background-position: 4px -102px;
+	}
+	
+	#edit-btn input {
+		background-position: 4px -78px;
+	}			
+
+	#print-btn input {
+		background-position: 4px -54px;
+	}
+
+	#open-btn input {
+		background-position: 4px -30px;
+	}
+
+	#delete-btn input {
+		background-position: 4px -126px;
+	}
+
+	#save-btn input {
+		background-position: 4px -6px;
+	}
+
+
+	/*	Augment the browser's default styling of the focus state by changing the 
+	 	background color of the button when it is focused.	*/
+
+	.yui-toolbar-button input.focus {
+		background-color: #B3D4FF;
+	}
+
+</style>
+</head>
+<body id="yahoo-com" class=" yui-skin-sam">
+<div id="custom-doc" class="yui-t2">
+<div id="hd">
+	<div id="ygunav">
+		<p>
+            <em>
+                <a href="http://developer.yahoo.com/yui/3/">YUI 3.x Home</a> <i> - </i>	
+            </em>
+		</p>
+		<form action="http://search.yahoo.com/search" id="sitesearchform">
+            <input name="vs" type="hidden" value="developer.yahoo.com">
+            <input name="vs" type="hidden" value="yuiblog.com">
+		    <div id="sitesearch">
+		    	<label for="searchinput">Site Search (YDN &amp; YUIBlog): </label>
+			    <input type="text" id="searchinput" name="p">
+			    <input type="submit" value="Search" id="searchsubmit" class="ygbt">
+		    </div>
+		</form>
+    </div>
+	<div id="ygma"><a href="../../"><img src="../../assets/logo.gif"  border="0" width="200" height="93"></a></div>
+	<div id="pagetitle"><h1>YUI Library Examples: Focus Manager Node Plugin: Accessible Toolbar</h1></div>
+</div>
+<div id="bd">
+
+	<div id="bar-note"><p><strong>Note:</strong> This is YUI 3.x. Looking for <a href="http://developer.yahoo.com/yui/">YUI 2.x</a>?</p></div>
+
+	<div id="yui-main">
+		<div class="yui-b">
+		  <div class="yui-ge">
+			  <div class="yui-u first example" id="main">
+
+	<h2>Focus Manager Node Plugin: Accessible Toolbar</h2>
+
+	<div id="example" class="promo">
+	<p>
+	<p>
+This example illustrates how to create an accessible toolbar using the 
+Focus Manager Node Plugin and Node's support for the 
+<a href="http://www.w3.org/TR/wai-aria/">WAI-ARIA Roles and States</a>.
+</p>	</p>	
+
+	<div class="module example-container ">
+			<div class="hd exampleHd">
+			<p class="newWindowButton yui-skin-sam">
+                <a href="node-focusmanager-1_clean.html" target="_blank">View example in new window.</a>
+            </p>
+		</div>		<div id="example-canvas" class="bd">
+
+		
+	<!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
+	
+	<div id="toolbar-1" class="yui-toolbar">
+	<span id="add-btn" class="yui-toolbar-button"><span><input type="button" name="btn-add" value="Add"></span></span>
+	<span id="edit-btn" class="yui-toolbar-button"><span><input type="button" name="btn-edit" value="Edit"></span></span>
+	<span id="print-btn" class="yui-toolbar-button"><span><input type="button" name="btn-print" value="Print"></span></span>
+	<span id="delete-btn" class="yui-toolbar-button"><span><input type="button" name="btn-delete" value="Delete"></span></span>
+	<span id="open-btn" class="yui-toolbar-button"><span><input type="button" name="btn-open" value="Open"></span></span>
+	<span id="save-btn" class="yui-toolbar-button"><span><input type="button" name="btn-save" value="Save"></span></span>
+</div>
+
+<!-- YUI Seed -->
+<script type="text/javascript" src="../../build/yui/yui.js"></script>
+<script type="text/javascript">
+
+	YUI({base:"../../build/", timeout: 10000}).use("node-focusmanager", function(Y) {
+
+		//	Retrieve the Node instance representing the toolbar
+		//	(<div id="toolbar">) and call the "plug" method 
+		//	passing in a reference to the Focus Manager Node Plugin.
+
+		var toolbar = Y.Node.get("#toolbar-1");
+
+		toolbar.plug(Y.Plugin.NodeFocusManager, { 
+
+				descendants: "input",
+				keys: { next: "down:39", //	Right arrow
+						previous: "down:37" },	//	Left arrow
+				focusClass: "focus",
+				circular: true
+
+			 });
+
+
+		//	Set the ARIA "role" attribute of the Node instance representing the 
+		//	toolbar to "toolbar" to improve the semantics of the markup for 
+		//	users of screen readers.
+
+		toolbar.set("role", "toolbar");
+
+
+		//	Listen for the click event on each button via the use of the 
+		//	"delegate" Custom Event.
+
+		Y.on("delegate", function (event) {
+
+			alert("You clicked " + event.currentTarget.query("input").get("value"));
+
+		}, toolbar, "click", ".yui-toolbar-button");
+
+	});
+
+</script>
+	
+	<!--END SOURCE CODE FOR EXAMPLE =============================== -->
+	
+		
+		</div>
+	</div>			
+	</div>
+		
+	<h3>Setting Up the HTML</h3>
+<p>
+Start with a set of <code>&#60;input&#62;</code> elements.  For the 
+purpose of this example, the <code>type</code> attribute of each 
+button will be set to a value of "button" since they won't be responsible for 
+submitting a form.  Each <code>&#60;input&#62;</code> is wrapped by two 
+<code>&#60;span&#62;</code>s that serve as decorator elements used to style 
+each button with rounded corners.
+</p>
+
+<textarea name="code" class="HTML" cols="60" rows="1">
+<div id="toolbar-1" class="yui-toolbar">
+	<span id="add-btn" class="yui-toolbar-button"><span><input type="button" name="btn-add" value="Add"></span></span>
+	<span id="edit-btn" class="yui-toolbar-button"><span><input type="button" name="btn-edit" value="Edit"></span></span>
+	<span id="print-btn" class="yui-toolbar-button"><span><input type="button" name="btn-print" value="Print"></span></span>
+	<span id="delete-btn" class="yui-toolbar-button"><span><input type="button" name="btn-delete" value="Delete"></span></span>
+	<span id="open-btn" class="yui-toolbar-button"><span><input type="button" name="btn-open" value="Open"></span></span>
+	<span id="save-btn" class="yui-toolbar-button"><span><input type="button" name="btn-save" value="Save"></span></span>
+</div>
+</textarea>
+
+<h3>Setting Up the CSS</h3>
+<p>
+Next, each button in the toolbar is styled with rounded corners using a 
+combination of the CSS <code>border</code> property along with the use of 
+negative margins.  An icon is added to each button using a background image.  
+Following the advice of the 
+<a href="http://developer.yahoo.com/performance/rules.html">Exceptional Performance team</a>, 
+this example uses the technique of 
+<a href="http://www.alistapart.com/articles/sprites">CSS Sprites</a>, 
+combining all of the icons for each button into a single image to reduce 
+HTTP requests.
+</p>
+<textarea name="code" class="CSS" cols="60" rows="1">
+.yui-toolbar {
+	border: solid 1px #999;
+	background-color: #ccc;
+	margin: .25em;
+	overflow: auto;
+}
+
+.yui-toolbar-button {
+	display: inline-block;
+    border-width: 1px 0;
+    border-style: solid;
+    border-color: #808080;
+    margin: .25em;
+    font-size: 85%;  /* 11px */
+}
+
+.yui-toolbar-button span {
+	display: inline-block;
+    border-width: 0 1px;
+    border-style: solid;
+    border-color: #808080;
+    margin: 0 -1px;
+    *position: relative;    /* Necessary to get negative margins working in IE */
+    *left: -1px;
+}
+
+.yui-toolbar-button input {
+    border: none;
+    margin: 0;
+	padding: 4px 4px 4px 24px;	
+    *overflow: visible; /* Remove superfluous padding for IE */
+	background: transparent url(assets/icons.png) 4px -6px no-repeat;
+}
+
+#add-btn input {
+	background-position: 4px -102px;
+}
+
+#edit-btn input {
+	background-position: 4px -78px;
+}			
+
+#print-btn input {
+	background-position: 4px -54px;
+}
+
+#open-btn input {
+	background-position: 4px -30px;
+}
+
+#delete-btn input {
+	background-position: 4px -126px;
+}
+
+#save-btn input {
+	background-position: 4px -6px;
+}
+</textarea>
+
+<h3>Initializing the Focus Manager</h3>
+<p>
+With the toolbar markup and CSS in place, retrieve the Node instance 
+representing the toolbar (<code>&#60;div id="toolbar-1"&#62;</code>) 
+and call the <a href="../../api/Node.html#method_plug"><code>plug</code></a> 
+passing in a reference to the Focus Manager Node Plugin as the first argument, 
+and a collection of configuration attributes as the second argument.
+</p>
+<p>
+The Focus Manager's 
+<a href="../../api/plugin.NodeFocusManager.html#config_descendants"><code>descendants</code></a> 
+attribute is set to a value of "input", so that only one button in the toolbar 
+is in the browser's default tab flow.  This allows users navigating via the 
+keyboard to use the tab key to quickly move into and out of the toolbar.  Once 
+the toolbar has focus, the user can move focus among each button using the left 
+and right arrows keys, as defined by the value of the 
+<a href="../../api/plugin.NodeFocusManager.html#config_keys"><code>keys</code></a> 
+attribute.  Lastly, the 
+<a href="../../api/plugin.NodeFocusManager.html#config_focusClass"><code>focusClass</code></a> 
+attribute is used to apply a class of <code>focus</code> to each 
+<code>&#60;input&#62;</code> when it is focused, making it easy to style the 
+focused state in each of the 
+<a href="http://developer.yahoo.com/yui/articles/gbs/#gbschart">A-Grade browsers</a>.
+</p>
+<textarea name="code" class="JScript" cols="60" rows="1">
+YUI({base:"../../build/", timeout: 10000}).use("node-focusmanager", function(Y) {
+
+	//	Retrieve the Node instance representing the toolbar
+	//	(<div id="toolbar">) and call the "plug" method 
+	//	passing in a reference to the Focus Manager Node Plugin.
+
+	var toolbar = Y.Node.get("#toolbar-1");
+
+	toolbar.plug(Y.Plugin.NodeFocusManager, { 
+
+			descendants: "input",	//	The descendant Nodes to manage
+			keys: { next: "down:39", //	Right arrow
+					previous: "down:37" },	//	Left arrow
+			focusClass: "focus",	//	Class to be applied to the currently focused <input>
+			circular: true	//	Go back to the first/last Node when the beginning or end is reached
+
+		 });
+
+
+	//	Set the ARIA "role" attribute of the Node instance representing the 
+	//	toolbar to "toolbar" to improve the semantics of the markup for 
+	//	users of screen readers.
+
+	toolbar.set("role", "toolbar");
+
+
+	//	Listen for the click event on each button via the use of the 
+	//	"delegate" Custom Event.
+
+	Y.on("delegate", function (event) {
+
+		alert("You clicked " + event.currentTarget.query("input").get("value"));
+
+	}, toolbar, "click", ".yui-toolbar-button");
+
+});
+</textarea>
+
+<h3>Styling Focus</h3>
+<p>
+To augment the browser's default styling of the focused state define a CSS 
+selector that adds a background color to the 
+</p>
+<textarea name="code" class="CSS" cols="60" rows="1">
+/*	Augment the browser's default styling of the focus state by changing the 
+ 	background color of the button when it is focused.	*/
+
+.yui-toolbar-button input.focus {
+	background-color: #B3D4FF;
+}
+</textarea>
+				</div>
+				<div class="yui-u sidebar">
+					
+				
+					<div id="examples" class="mod box4">
+                        <div class="hd">
+						<h4>
+    Focus Manager Node Plugin Examples:</h4>
+                        </div>
+						<div class="bd">
+							<ul>
+								<li class='selected'><a href='../node-focusmanager/node-focusmanager-1.html'>Accessible Toolbar</a></li><li><a href='../node-focusmanager/node-focusmanager-2.html'>Accessible TabView</a></li><li><a href='../node-focusmanager/node-focusmanager-3.html'>Accessible Menu Button</a></li>							</ul>
+						</div>
+					</div>
+					
+					<div class="mod box4">
+                        <div class="hd">
+						<h4>More Focus Manager Node Plugin Resources:</h4>
+                        </div>
+                        <div class="bd">
+						<ul>
+							<!-- <li><a href="http://developer.yahoo.com/yui/node-focusmanager/">User's Guide</a> (external)</li> -->
+						<li><a href="../../api/module_node-focusmanager.html">API Documentation</a></li>
+</ul>
+                        </div>
+					</div>
+			  </div>
+		</div>
+		
+		</div>
+	</div>
+
+
+<div class="yui-b toc3" id="tocWrapper">
+<!-- TABLE OF CONTENTS -->
+<div id="toc">
+	
+<ul>
+<li class="sect first">YUI 3.x Project</li><li class="item"><a title="The Yahoo! User Interface (YUI) Library, 3.x Branch, " href="http://developer.yahoo.com/yui/3/">YUI 3 Web Site (external)</a></li><li class="item"><a title="Examples of every YUI utility and control in action" href="../../examples/">YUI 3 Examples</a></li><li class="item"><a title="Instantly searchable API documentation for the entire YUI library." href="../../api/">YUI 3 API Docs</a></li><li class="item"><a title="The YUI Library can be downloaded from SourceForge" href="http://sourceforge.net/projects/yui/">YUI 3 on Sourceforge (external)</a></li><li class="item"><a title="YUI is free and open, offered under a BSD license." href="http://developer.yahoo.com/yui/3/license.html">YUI License (external)</a></li><li class="sect">YUI 3 Core - Examples</li><li class="item"><a title="YUI (Global Prerequisite) - Functional Examples" href="../../examples/yui/index.html">YUI (Global Prerequisite)</a></li><li class="item"><a title="Event - Functional Examples" href="../../examples/event/index.html">Event</a></li><li class="item"><a title="Node - Functional Examples" href="../../examples/node/index.html">Node</a></li><li class="sect">YUI 3 Component Infrastructure - Examples</li><li class="item"><a title="Attribute - Functional Examples" href="../../examples/attribute/index.html">Attribute</a></li><li class="item"><a title="Plugin - Functional Examples" href="../../examples/plugin/index.html">Plugin</a></li><li class="item"><a title="Widget - Functional Examples" href="../../examples/widget/index.html">Widget</a></li><li class="sect">YUI 3 Utilities - Examples</li><li class="item"><a title="Animation - Functional Examples" href="../../examples/anim/index.html">Animation</a></li><li class="item"><a title="Cache - Functional Examples" href="../../examples/cache/index.html">Cache</a></li><li class="item"><a title="Cookie - Functional Examples" href="../../examples/cookie/index.html">Cookie</a></li><li class="item"><a title="DataSchema - Functional Examples" href="../../examples/dataschema/index.html">DataSchema</a></li><li class="item"><a title="DataSource - Functional Examples" href="../../examples/datasource/index.html">DataSource</a></li><li class="item"><a title="DataType - Functional Examples" href="../../examples/datatype/index.html">DataType</a></li><li class="item"><a title="Drag &amp; Drop - Functional Examples" href="../../examples/dd/index.html">Drag &amp; Drop</a></li><li class="item"><a title="Get - Functional Examples" href="../../examples/get/index.html">Get</a></li><li class="item"><a title="History - Functional Examples" href="../../examples/history/index.html">History</a></li><li class="item"><a title="ImageLoader - Functional Examples" href="../../examples/imageloader/index.html">ImageLoader</a></li><li class="item"><a title="IO - Functional Examples" href="../../examples/io/index.html">IO</a></li><li class="item"><a title="JSON (JavaScript Object Notation) - Functional Examples" href="../../examples/json/index.html">JSON</a></li><li class="item"><a title="Queue - Functional Examples" href="../../examples/queue/index.html">Queue</a></li><li class="item"><a title="Stylesheet - Functional Examples" href="../../examples/stylesheet/index.html">Stylesheet</a></li><li class="sect">YUI 3 Widgets - Examples</li><li class="item"><a title="Overlay - Functional Examples" href="../../examples/overlay/index.html">Overlay</a></li><li class="item"><a title="Slider - Functional Examples" href="../../examples/slider/index.html">Slider</a></li><li class="sect">YUI 3 Node Plugins - Examples</li><li class="item"><a title="FocusManager Node Plugin - Functional Examples" href="../../examples/node-focusmanager/index.html">FocusManager Node Plugin</a></li><li class="item"><a title="MenuNav Node Plugin - Functional Examples" href="../../examples/node-menunav/index.html">MenuNav Node Plugin</a></li><li class="sect">YUI 3 CSS - Examples</li><li class="item"><a title="YUI CSS Reset - Functional Examples" href="../../examples/cssreset/index.html">CSS Reset</a></li><li class="item"><a title="YUI Fonts - Functional Examples" href="../../examples/cssfonts/index.html">CSS Fonts</a></li><li class="item"><a title="YUI Base - Functional Examples" href="../../examples/cssbase/index.html">CSS Base</a></li><li class="sect">YUI 3 Developer Tools - Examples</li><li class="item"><a title="Console - Functional Examples" href="../../examples/console/index.html">Console</a></li><li class="item"><a title="Profiler - Functional Examples" href="../../examples/profiler/index.html">Profiler</a></li><li class="item"><a title="Test - Functional Examples" href="../../examples/test/index.html">Test</a></li><li class="sect">The YUI Community</li><li class="item"><a title="The Yahoo! User Interface Blog" href="http://yuiblog.com">YUI Blog (external)</a></li><li class="item"><a title="The Yahoo! Group YDN-JavaScript hosts the YUI community forum" href="http://tech.groups.yahoo.com/group/ydn-javascript/">YUI Forum (external)</a></li><li class="item"><a title="The Yahoo! Group yui3 is dedicated to the 3.x branch of the Yahoo! User Interface (YUI) Library." href="http://tech.groups.yahoo.com/group/yui3/">YUI 3 Forum (external)</a></li><li class="item"><a title="YUI is used by Yahoo! and by hundreds of other sites, including many you know and love." href="/yui/poweredby/">YUI Sightings (external)</a></li><li class="item"><a title="Videos and podcasts from the YUI Team and from the Yahoo! frontend engineering community." href="http://developer.yahoo.com/yui/theater/">YUI Theater (external)</a></li><li class="sect">YUI Articles on the YUI Website</li><li class="item"><a title="Answers to Frequently Asked Questions about the YUI Library" href="http://developer.yahoo.com/yui/articles/faq/">YUI FAQ (external)</a></li><li class="item"><a title="Yahoo!'s philosophy of Graded Browser Support" href="http://developer.yahoo.com/yui/articles/gbs/">Graded Browser Support (external)</a></li><li class="item"><a title="Reporting Bugs and Making Feature Requests for YUI Components" href="http://developer.yahoo.com/yui/articles/reportingbugs/">Bug Reports/Feature Requests (external)</a></li><li class="item"><a title="Serve YUI source files from Yahoo! -- free, fast, and simple" href="http://developer.yahoo.com/yui/3/articles/hosting/">Serving YUI Files from Yahoo! (external)</a></li></ul>
+</div>
+</div>
+	</div><!--closes bd-->
+
+	<div id="ft">
+        <p class="first">Copyright &copy; 2009 Yahoo! Inc. All rights reserved.</p>
+        <p><a href="http://privacy.yahoo.com/privacy/us/devel/index.html">Privacy Policy</a> - 
+            <a href="http://docs.yahoo.com/info/terms/">Terms of Service</a> - 
+            <a href="http://docs.yahoo.com/info/copyright/copyright.html">Copyright Policy</a> - 
+            <a href="http://careers.yahoo.com/">Job Openings</a></p>
+	</div>
+</div>
+<script src="../../assets/dpSyntaxHighlighter.js"></script>
+<script language="javascript"> 
+dp.SyntaxHighlighter.HighlightAll('code'); 
+</script>
+</body>
+</html>

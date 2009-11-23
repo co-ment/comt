@@ -1,0 +1,39 @@
+[
+	{
+		"pk": 1,
+		"model": "auth.user", 
+		"fields": {
+			"username": "root", 
+			"first_name": "", 
+			"last_name": "", 
+			"is_active": true, 
+			"is_superuser": true, 
+			"is_staff": true, 
+			"last_login": "2007-10-23 07:19:08", 
+			"groups": [], 
+			"user_permissions": [], 
+			"password": "sha1$70a5b$469ecd4dc7c9b8d79b212f57cbc62397f9ad9bc8",	
+			"email": "dev3@sopinspace.com", 
+			"date_joined": "2007-10-23 07:19:08"
+		}
+	},
+	{
+		"pk": 2	,
+		"model": "auth.user", 
+		"fields": {
+			"username": "fred", 
+			"first_name": "", 
+			"last_name": "", 
+			"is_active": true, 
+			"is_superuser": false, 
+			"is_staff": false, 
+			"last_login": "2007-10-23 07:19:08", 
+			"groups": [], 
+			"user_permissions": [], 
+			"password": "sha1$d029b$0ce4f35125421375b77acf3af3ad89a749869cde", 
+			"email": "dev@sopinspace.com", 
+			"date_joined": "2007-10-23 07:19:08"
+		}
+	}
+	
+]

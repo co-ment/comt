@@ -1,0 +1,649 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>YUI Library Examples: Overlay: Animation Plugin</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    	<link rel="stylesheet" type="text/css" href="../../assets/yui.css" >
+
+<style>
+    /*Supplemental CSS for the YUI distribution*/
+    #custom-doc { width: 95%; min-width: 950px; }
+    #pagetitle {background-image: url(../../assets/bg_hd.gif);}
+/*    #pagetitle h1 {background-image: url(../../assets/title_h_bg.gif);}*/
+</style>
+
+<link rel="stylesheet" type="text/css" href="../../assets/dpSyntaxHighlighter.css">
+<link type="text/css" rel="stylesheet" href="../../build/cssfonts/fonts-min.css" />
+<script type="text/javascript" src="../../build/yui/yui-min.js"></script>
+<style type="text/css">
+    .yui-overlay-content {
+        background-color:#ccc;
+        border:1px solid #000;
+        padding:5px;
+    }
+
+    .yui-overlay .yui-widget-hd, 
+    .yui-overlay .yui-widget-bd, 
+    .yui-overlay .yui-widget-ft {
+        background-color:#eee;
+        padding:2px;
+        border:1px solid #999;
+    }
+
+    .yui-overlay .yui-widget-bd {
+        background-color:#fff;
+    } 
+</style>
+
+</head>
+<body id="yahoo-com" class=" yui-skin-sam">
+<div id="custom-doc" class="yui-t2">
+<div id="hd">
+	<div id="ygunav">
+		<p>
+            <em>
+                <a href="http://developer.yahoo.com/yui/3/">YUI 3.x Home</a> <i> - </i>	
+            </em>
+		</p>
+		<form action="http://search.yahoo.com/search" id="sitesearchform">
+            <input name="vs" type="hidden" value="developer.yahoo.com">
+            <input name="vs" type="hidden" value="yuiblog.com">
+		    <div id="sitesearch">
+		    	<label for="searchinput">Site Search (YDN &amp; YUIBlog): </label>
+			    <input type="text" id="searchinput" name="p">
+			    <input type="submit" value="Search" id="searchsubmit" class="ygbt">
+		    </div>
+		</form>
+    </div>
+	<div id="ygma"><a href="../../"><img src="../../assets/logo.gif"  border="0" width="200" height="93"></a></div>
+	<div id="pagetitle"><h1>YUI Library Examples: Overlay: Animation Plugin</h1></div>
+</div>
+<div id="bd">
+
+	<div id="bar-note"><p><strong>Note:</strong> This is YUI 3.x. Looking for <a href="http://developer.yahoo.com/yui/">YUI 2.x</a>?</p></div>
+
+	<div id="yui-main">
+		<div class="yui-b">
+		  <div class="yui-ge">
+			  <div class="yui-u first example" id="main">
+
+	<h2>Overlay: Animation Plugin</h2>
+
+	<div id="example" class="promo">
+	<p>
+	<p>This example shows how you can use Widget's plugin infrastructure to customize the existing behavior of a widget.</p>
+
+<p>We create an Animation plugin class for Overlay called <code>AnimPlugin</code> which changes the way Overlay instances are shown/hidden, by fading them in and out. The Overlay is initially constructed with the <code>AnimPlugin</code> plugged in <em>(with the duration set to 2 seconds)</em>.
+Clicking the "Unplug AnimPlugin" button, will restore the original non-Animated Overlay show/hide behavior. Clicking on the "Plug AnimPlugin" button will plug in the <code>AnimPlugin</code> again, but with a shorter duration.</p>
+	</p>	
+
+	<div class="module example-container ">
+			<div class="hd exampleHd">
+			<p class="newWindowButton yui-skin-sam">
+                <a href="overlay-anim-plugin_clean.html" target="_blank">View example in new window.</a>
+            </p>
+		</div>		<div id="example-canvas" class="bd">
+
+		
+	<!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
+	
+	<div id="overlay">
+    <div class="yui-widget-hd">Overlay Header</div>
+    <div class="yui-widget-bd">Overlay Body</div>
+    <div class="yui-widget-ft">Overlay Footer</div>
+</div>
+
+<button type="button" id="show">Show</button>
+<button type="button" id="hide">Hide</button>
+<button type="button" id="unplug">Unplug AnimPlugin</button>
+<button type="button" id="plug">Plug AnimPlugin (duration:0.5)</button>
+
+<script type="text/javascript">
+YUI({base:"../../build/", timeout: 10000}).use("overlay", "anim", "plugin", function(Y) {
+
+    /* Animation Plugin Constructor */
+    function AnimPlugin(config) {
+        AnimPlugin.superclass.constructor.apply(this, arguments);
+    }
+
+    /* 
+     * The namespace for the plugin. This will be the property on the widget, which will 
+     * reference the plugin instance, when it's plugged in
+     */
+    AnimPlugin.NS = "fx";
+
+    /*
+     * The NAME of the AnimPlugin class. Used to prefix events generated
+     * by the plugin class.
+     */
+    AnimPlugin.NAME = "animPlugin";
+
+    /*
+     * The default set of attributes for the AnimPlugin class.
+     */
+    AnimPlugin.ATTRS = {
+
+        /*
+         * Default duration. Used by the default animation implementations
+         */
+        duration : {
+            value: 0.2
+        },
+
+        /*
+         * Default animation instance used for showing the widget (opacity fade-in)
+         */
+        animVisible : {
+            valueFn : function() {
+
+		var host = this.get("host");
+                var boundingBox = host.get("boundingBox");
+
+                var anim = new Y.Anim({
+                    node: boundingBox,
+                    to: { opacity: 1 },
+                    duration: this.get("duration")
+                });
+
+                // Set initial opacity, to avoid initial flicker
+                if (!host.get("visible")) {
+                    boundingBox.setStyle("opacity", 0);
+                }
+
+                // Clean up, on destroy. Where supported, remove
+                // opacity set using style. Else make 100% opaque
+                anim.on("destroy", function() {
+                    if (Y.UA.ie) {
+                        this.get("node").setStyle("opacity", 1);
+                    } else {
+                        this.get("node").setStyle("opacity", "");
+                    }
+                });
+
+                return anim;
+            }
+        },
+
+        /*
+         * Default animation instance used for hiding the widget (opacity fade-out)
+         */
+        animHidden : {
+            valueFn : function() {
+                return new Y.Anim({
+                    node: this.get("host").get("boundingBox"),
+                    to: { opacity: 0 },
+                    duration: this.get("duration")
+                });
+            }
+        }
+    }
+
+    /*
+     * Extend the base plugin class
+     */
+    Y.extend(AnimPlugin, Y.Plugin.Base, {
+
+        /*
+         * Initialization code. Called when the 
+         * plugin is instantiated (whenever it's 
+         * plugged into the host)
+         */
+        initializer : function(config) {
+            this._bindAnimVisible();
+            this._bindAnimHidden();
+
+            this.after("animVisibleChange", this._bindAnimVisible);
+            this.after("animHiddenChange", this._bindAnimHidden);
+
+            // Override default _uiSetVisible method, with custom animated method
+            this.doBefore("_uiSetVisible", this._uiAnimSetVisible);
+        },
+
+        /*
+         * Destruction code. Invokes destroy in the individual animation instances,
+         * and lets them take care of cleaning up any state.
+         */
+        destructor : function() {
+            this.get("animVisible").destroy();
+            this.get("animHidden").destroy();
+        },
+
+        /*
+         * The custom animation method, added by the plugin.
+         *
+         * This method replaces the default _uiSetVisible handler
+         * Widget provides, by injecting itself before _uiSetVisible,
+         * (using Plugins before method) and preventing the default
+         * behavior.
+         */
+        _uiAnimSetVisible : function(val) {
+            if (this.get("host").get("rendered")) {
+                if (val) {
+                    this.get("animHidden").stop();
+                    this.get("animVisible").run();
+                } else {
+                    this.get("animVisible").stop();
+                    this.get("animHidden").run();
+                }
+                return new Y.Do.Prevent("AnimPlugin prevented default show/hide");
+            }
+        },
+
+        /*
+         * The original Widget _uiSetVisible implementation
+         */
+        _uiSetVisible : function(val) {
+            var host = this.get("host");
+            var hiddenClass = host.getClassName("hidden");
+            if (!val) {
+                host.get("boundingBox").addClass(hiddenClass);
+            } else {
+                host.get("boundingBox").removeClass(hiddenClass);
+            }
+        },
+
+        /* Sets up call to invoke original visibility handling when the animVisible animation is started */
+        _bindAnimVisible : function() {
+            var animVisible = this.get("animVisible");
+
+            // Setup original visibility handling (for show) before starting to animate
+            animVisible.on("start", Y.bind(function() {
+                this._uiSetVisible(true);
+            }, this));
+        },
+
+        /* Sets up call to invoke original visibility handling when the animHidden animation is complete */
+        _bindAnimHidden : function() {
+            var animHidden = this.get("animHidden");
+
+            // Setup original visibility handling (for hide) after completing animation
+            animHidden.after("end", Y.bind(function() {
+                this._uiSetVisible(false);
+            }, this));
+        }
+    });
+
+    // Create a new Overlay instance, and add AnimPlugin with a default duration of 2 seconds
+    var overlay = new Y.Overlay({
+        contentBox: "#overlay",
+        width:"10em",
+        height:"10em",
+        visible:false,
+        shim:false,
+        align: {
+            node: "#show", 
+            points: ["tl", "bl"]
+        },
+        plugins : [{fn:AnimPlugin, cfg:{duration:2}}]
+    });
+    overlay.render();
+
+    Y.on("click", function() {
+        overlay.show();
+    }, "#show");
+
+    Y.on("click", function() {
+        overlay.hide();
+    }, "#hide");
+
+    Y.on("click", function() {
+        overlay.unplug("fx");
+    }, "#unplug");
+
+    Y.on("click", function() {
+        overlay.unplug("fx");
+        overlay.plug({fn:AnimPlugin, cfg:{duration:0.5}});
+    }, "#plug");
+
+});
+</script>
+	
+	<!--END SOURCE CODE FOR EXAMPLE =============================== -->
+	
+		
+		</div>
+	</div>			
+	</div>
+		
+	<h3>Creating an Animation Plugin For Overlay</h3>
+
+<h4>Setting Up The YUI Instance</h4>
+
+<p>For this example, we'll pull in the <code>overlay</code> module, along with the <code>anim</code> and <code>plugin</code> modules. The <code>anim</code> module provides the animation utility, and <code>plugin</code> will provide
+the <code>Plugin</code> base class which we'll extend to create our <code>AnimPlugin</code>. The code to set up our sandbox instance is shown below:</p>
+ 
+<textarea name="code" class="JScript" rows="1" cols="60">
+YUI({...}).use("overlay", "anim", "plugin", function(Y) {
+    // We'll write our code here, after pulling in the default Overlay widget, the Animation utility and the Plugin base class
+});
+</textarea>
+
+<p>Using the <code>overlay</code> module will also pull down the default CSS required for overlay, on top of which we only need to add our required look/feel CSS for the example.</p>
+
+<h4>AnimPlugin Class Structure</h4>
+
+<p>The <code>AnimPlugin</code> class will extend the <code>Plugin</code> base class. Since <code>Plugin</code> derives from <code>Base</code>, we follow the same pattern we use for widgets and other utilities which extend Base to setup our new class.</p>
+
+<p>Namely:</p>
+
+<ul>
+    <li>Setting up the constructor to invoke the superclass constructor</li>
+    <li>Setting up a <code>NAME</code> property, to identify the class</li>
+    <li>Setting up the default attributes, using the <code>ATTRS</code> property</li>
+    <li>Providing prototype implementations for anything we want executed during initialization and destruction using the <code>initializer</code> and <code>destructor</code> lifecycle methods</li>
+</ul>
+    
+<p>Additionally, since this is a plugin, we provide a <code>NS</code> property for the class, which defines the property which will refer to the <code>AnimPlugin</code> instance on the host class (e.g. <code>overlay.fx</code> will be an instance of <code>AnimPlugin</code>)</p>.
+
+<p>This basic structure is shown below:</p>
+
+<textarea name="code" class="JScript" rows="1" cols="60">
+    /* Animation Plugin Constructor */
+    function AnimPlugin(config) {
+        AnimPlugin.superclass.constructor.apply(this, arguments);
+    }
+
+    /* 
+     * The namespace for the plugin. This will be the property on the widget, which will 
+     * reference the plugin instance, when it's plugged in
+     */
+    AnimPlugin.NS = "fx";
+
+    /*
+     * The NAME of the AnimPlugin class. Used to prefix events generated
+     * by the plugin class.
+     */
+    AnimPlugin.NAME = "animPlugin";
+
+    /*
+     * The default set of attributes for the AnimPlugin class.
+     */
+    AnimPlugin.ATTRS = {
+
+        /*
+         * Default duration. Used by the default animation implementations
+         */
+        duration : {
+            value: 0.2
+        },
+
+        /*
+         * Default animation instance used for showing the widget (opacity fade-in)
+         */
+        animVisible : {
+            valueFn : function() {
+                ...
+            }
+        },
+
+        /*
+         * Default animation instance used for hiding the widget (opacity fade-out)
+         */
+        animHidden : {
+            valueFn : function() {
+                ...
+            }
+        }
+    }
+
+    /*
+     * Extend the base plugin class
+     */
+    Y.extend(AnimPlugin, Y.Plugin, {
+
+        // Lifecycle methods
+        initializer : function(config) { ... },
+        destructor : function() { ... },
+
+        // Other plugin specific methods
+        _uiAnimSetVisible : function(val) { ... },
+        _uiSetVisible : function(val) { ... },
+        ...
+    });
+</textarea>
+
+<h4>Attributes: animVisible, animHidden</h4>
+
+<p>The <code>animVisible</code> and <code>animHidden</code> attributes use Attribute's <code>valueFn</code> support to set up instance based default values for the attributes.</p>
+
+<p>The <code>animHidden</code> attribute is pretty straight forward and simply returns the Animation instance bound to the bounding box of the Overlay to provide a fade-out animation:</p>
+
+<textarea name="code" class="JScript" rows="1" cols="60">
+    animHidden : {
+        valueFn : function() {
+            return new Y.Anim({
+                node: this.get("host").get("boundingBox"),
+                to: { opacity: 0 },
+                duration: this.get("duration")
+            });
+        }
+    }
+</textarea>
+
+<p>The <code>animVisible</code> attribute is a little more interesting:</p>
+
+<textarea name="code" class="JScript" rows="1" cols="60">
+    animVisible : {
+        valueFn : function() {
+
+            var host = this.get("host"),
+                boundingBox = host.get("boundingBox");
+
+            var anim = new Y.Anim({
+                node: boundingBox,
+                to: { opacity: 1 },
+                duration: this.get("duration")
+            });
+
+            // Set initial opacity, to avoid initial flicker
+            if (!host.get("visible")) {
+                boundingBox.setStyle("opacity", 0);
+            }
+
+            // Clean up, on destroy. Where supported, remove
+            // opacity set using style. Else make 100% opaque
+            anim.on("destroy", function() {
+                if (Y.UA.ie) {
+                    this.get("node").setStyle("opacity", 1);
+                } else {
+                    this.get("node").setStyle("opacity", "");
+                }
+            });
+
+            return anim;
+        }
+</textarea>
+
+<p>It essentially does the same thing as <code>animHidden</code>; setting up an Animation instance to provide an opacity based fade-in. However it also sets up a listener which will attempt to cleanup the opacity state of the Overlay when the plugin is unplugged from the Overlay. When a plugin is unplugged, it is destroyed.</p>
+
+<h4>Lifecycle Methods: initializer, destructor</h4>
+
+<p>In the <code>initializer</code>, we set up listeners on the animation instances (using <code>_bindAnimVisible, _bindAnimHidden</code>), which invoke the original visibility handling to make the Overlay visible before starting the <code>animVisible</code> animation and hide it after the <code>animHidden</code> animation is complete.</p>
+
+<textarea name="code" class="JScript" rows="1" cols="60">
+    initializer : function(config) {
+        this._bindAnimVisible();
+        this._bindAnimHidden();
+
+        this.after("animVisibleChange", this._bindAnimVisible);
+        this.after("animHiddenChange", this._bindAnimHidden);
+
+        // Override default _uiSetVisible method, with custom animated method
+        this.doBefore("_uiSetVisible", this._uiAnimSetVisible);
+    }
+
+    ...
+
+    _bindAnimVisible : function() {
+        var animVisible = this.get("animVisible");
+
+        animVisible.on("start", Y.bind(function() {
+            // Setup original visibility handling (for show) before starting to animate
+            this._uiSetVisible(true);
+        }, this));
+    },
+
+    _bindAnimHidden : function() {
+        var animHidden = this.get("animHidden");
+
+        animHidden.after("end", Y.bind(function() {
+            // Setup original visibility handling (for hide) after completing animation
+            this._uiSetVisible(false);
+        }, this));
+    }
+</textarea>
+
+<p>
+However the key part of the <code>initializer</code> method is the call to <code>this.doBefore("_uiSetVisible", this._uiAnimSetVisible)</code> <em>(line 9)</em>. <code>Plugin</code>'s <code>doBefore</code> and <code>doAfter</code> methods, will let you set up both before/after event listeners, as well as inject code to be executed before or after a given method on the host object (in this case the Overlay) is invoked.
+</p>
+<p>
+For the animation plugin, we want to change how the Overlay updates its UI in response to changes to the <code>visible</code> attribute. Instead of simply flipping visibility (through the application of the <code>yui-overlay-hidden</code> class), we want to fade the Overlay in and out. Therefore, we inject our custom animation method, <code>_uiSetAnimVisible</code>, before the Overlay's <code>_uiSetVisible</code>.
+</p>
+
+<p>Using <code>Plugin</code>'s <code>doBefore/doAfter</code> methods to setup any event listeners and method injection code on the host object (Overlay), ensures that the custom behavior is removed when the plugin is unplugged from the host, restoring it's original behavior.</p>
+
+<p>The <code>destructor</code> simply calls <code>destroy</code> on the animation instances used, and lets them perform their own cleanup (as defined in the discussion on attributes):</p>
+
+<textarea name="code" class="JScript" rows="1" cols="60">
+    destructor : function() {
+        this.get("animVisible").destroy();
+        this.get("animHidden").destroy();
+    },
+</textarea>
+
+<h4>The Animated Visibility Method</h4>
+
+<p>The <code>_uiAnimSetVisible</code> method is the method we use to over-ride the default visibility handling for the Overlay. Instead of simply adding or removing the <code>yui-overlay-hidden</code> class, it starts the appropriate animation depending on whether or not visible is being set to true or false:</p>
+
+<textarea name="code" class="JScript" rows="1" cols="60">
+    _uiAnimSetVisible : function(val) {
+        if (this.get("host").get("rendered")) {
+            if (val) {
+                this.get("animHidden").stop();
+                this.get("animVisible").run();
+            } else {
+                this.get("animVisible").stop();
+                this.get("animHidden").run();
+            }
+            return new Y.Do.Halt();
+        }
+    }
+</textarea>
+
+<p>Since this method is injected before the default method which handles visibility changes for Overlay (<code>_uiSetVisibility</code>), we invoke <code>Y.Do.Halt()</code> to prevent the original method from being invoked, since we'd like to invoke it in response to the animation starting or completing. 
+<code>Y.Do</code> is YUI's aop infrastructure and is used under the hood by Plugin's <code>doBefore</code> and <code>doAfter</code> methods when injecting code</p>.
+
+<h4>The Original Visibility Method</h4>
+
+<p>The original visiblity handling for Overlay is replicated in the <code>AnimPlugin</code>'s <code>_uiSetVisible</code> method and is invoked before starting the <code>animVisible</code> animation and after completing the <code>animHidden</code> animation as described above.</p>
+
+<textarea name="code" class="JScript" rows="1" cols="60">
+    _uiSetVisible : function(val) {
+        var host = this.get("host");
+        if (!val) {
+            host.get("boundingBox").addClass(host.getClassName("hidden"));
+        } else {
+            host.get("boundingBox").removeClass(host.getClassName("hidden"));
+        }
+    }
+</textarea>
+
+<p><strong>NOTE:</strong> We're evaluating whether or not <code>Y.Do</code> may provide access to the original method for a future release, which would make this replicated code unnecessary.</p>
+
+<h4>Using The Plugin</h4>
+
+<p>All objects which derive from <a href="../../api/Base.html">Base</a> are <a href="../../api/Plugin.Host.html">Plugin Hosts</a>. They provide <code>plug</code> and <code>unplug</code> methods to allow users to add/remove plugins to/from existing instances. They also allow the user to specify the set of plugins to be applied to a new instance, along with their configurations, as part of the constructor arguments:</p>
+
+<textarea name="code" class="JScript" rows="1" cols="60">
+    var overlay = new Y.Overlay({
+        contentBox: "#overlay",
+        width:"10em",
+        height:"10em",
+        visible:false,
+        shim:false,
+        align: {
+            node: "#show", 
+            points: ["tl", "bl"]
+        },
+        plugins : [{fn:AnimPlugin, cfg:{duration:2}}]
+    });
+    overlay.render();
+</textarea>
+
+<p>We use the constructor support to setup the <code>AnimPlugin</code> for the instance with a custom value for its <code>duration</code> attribute as shown on line 11 above.</p>
+
+<p><strong>NOTE:</strong> In the interests of keeping the example focused on the plugin infrastructure, we turn off shimming for the overlay. If we needed to enable shimming, In IE6, we'd need to remove the alpha opacity filter set on the shim while animating, to have IE animate the contents of the Overlay correctly.</p>
+
+<p>The example also uses the <code>plug</code> and <code>unplug</code> methods, to add and remove the custom animation behavior after the instance is created:</p>
+
+<textarea name="code" class="JScript" rows="1" cols="60">
+    // Listener for the "Unplug AnimPlugin" button, removes the AnimPlugin from the overlay instance
+    Y.on("click", function() {
+        overlay.unplug("fx");
+    }, "#unplug");
+
+    // Listener for the "Plug AnimPlugin" button, removes the AnimPlugin from the overlay instance, 
+    // and re-adds it with a new, shorter duration value.
+    Y.on("click", function() {
+        overlay.unplug("fx");
+        overlay.plug({fn:AnimPlugin, cfg:{duration:0.5}});
+    }, "#plug");
+</textarea>
+				</div>
+				<div class="yui-u sidebar">
+					
+				
+					<div id="examples" class="mod box4">
+                        <div class="hd">
+						<h4>
+    Overlay Examples:</h4>
+                        </div>
+						<div class="bd">
+							<ul>
+								<li><a href='../overlay/overlay-xy.html'>Basic XY Positioning</a></li><li><a href='../overlay/overlay-align.html'>Extended XY Positioning</a></li><li><a href='../overlay/overlay-stack.html'>Stack Support</a></li><li><a href='../overlay/overlay-stdmod.html'>Standard Module Support</a></li><li><a href='../overlay/overlay-io-plugin.html'>IO Plugin</a></li><li class='selected'><a href='../overlay/overlay-anim-plugin.html'>Animation Plugin</a></li><li><a href='../node-focusmanager/node-focusmanager-3.html'>Accessible Menu Button (included with examples for Focus Manager Node Plugin)</a></li>							</ul>
+						</div>
+					</div>
+					
+					<div class="mod box4">
+                        <div class="hd">
+						<h4>More Overlay Resources:</h4>
+                        </div>
+                        <div class="bd">
+						<ul>
+							<!-- <li><a href="http://developer.yahoo.com/yui/overlay/">User's Guide</a> (external)</li> -->
+						<li><a href="../../api/module_overlay.html">API Documentation</a></li>
+</ul>
+                        </div>
+					</div>
+			  </div>
+		</div>
+		
+		</div>
+	</div>
+
+
+<div class="yui-b toc3" id="tocWrapper">
+<!-- TABLE OF CONTENTS -->
+<div id="toc">
+	
+<ul>
+<li class="sect first">YUI 3.x Project</li><li class="item"><a title="The Yahoo! User Interface (YUI) Library, 3.x Branch, " href="http://developer.yahoo.com/yui/3/">YUI 3 Web Site (external)</a></li><li class="item"><a title="Examples of every YUI utility and control in action" href="../../examples/">YUI 3 Examples</a></li><li class="item"><a title="Instantly searchable API documentation for the entire YUI library." href="../../api/">YUI 3 API Docs</a></li><li class="item"><a title="The YUI Library can be downloaded from SourceForge" href="http://sourceforge.net/projects/yui/">YUI 3 on Sourceforge (external)</a></li><li class="item"><a title="YUI is free and open, offered under a BSD license." href="http://developer.yahoo.com/yui/3/license.html">YUI License (external)</a></li><li class="sect">YUI 3 Core - Examples</li><li class="item"><a title="YUI (Global Prerequisite) - Functional Examples" href="../../examples/yui/index.html">YUI (Global Prerequisite)</a></li><li class="item"><a title="Event - Functional Examples" href="../../examples/event/index.html">Event</a></li><li class="item"><a title="Node - Functional Examples" href="../../examples/node/index.html">Node</a></li><li class="sect">YUI 3 Component Infrastructure - Examples</li><li class="item"><a title="Attribute - Functional Examples" href="../../examples/attribute/index.html">Attribute</a></li><li class="item"><a title="Plugin - Functional Examples" href="../../examples/plugin/index.html">Plugin</a></li><li class="item"><a title="Widget - Functional Examples" href="../../examples/widget/index.html">Widget</a></li><li class="sect">YUI 3 Utilities - Examples</li><li class="item"><a title="Animation - Functional Examples" href="../../examples/anim/index.html">Animation</a></li><li class="item"><a title="Cache - Functional Examples" href="../../examples/cache/index.html">Cache</a></li><li class="item"><a title="Cookie - Functional Examples" href="../../examples/cookie/index.html">Cookie</a></li><li class="item"><a title="DataSchema - Functional Examples" href="../../examples/dataschema/index.html">DataSchema</a></li><li class="item"><a title="DataSource - Functional Examples" href="../../examples/datasource/index.html">DataSource</a></li><li class="item"><a title="DataType - Functional Examples" href="../../examples/datatype/index.html">DataType</a></li><li class="item"><a title="Drag &amp; Drop - Functional Examples" href="../../examples/dd/index.html">Drag &amp; Drop</a></li><li class="item"><a title="Get - Functional Examples" href="../../examples/get/index.html">Get</a></li><li class="item"><a title="History - Functional Examples" href="../../examples/history/index.html">History</a></li><li class="item"><a title="ImageLoader - Functional Examples" href="../../examples/imageloader/index.html">ImageLoader</a></li><li class="item"><a title="IO - Functional Examples" href="../../examples/io/index.html">IO</a></li><li class="item"><a title="JSON (JavaScript Object Notation) - Functional Examples" href="../../examples/json/index.html">JSON</a></li><li class="item"><a title="Queue - Functional Examples" href="../../examples/queue/index.html">Queue</a></li><li class="item"><a title="Stylesheet - Functional Examples" href="../../examples/stylesheet/index.html">Stylesheet</a></li><li class="sect">YUI 3 Widgets - Examples</li><li class="selected "><a title="Overlay - Functional Examples" href="../../examples/overlay/index.html">Overlay</a></li><li class="item"><a title="Slider - Functional Examples" href="../../examples/slider/index.html">Slider</a></li><li class="sect">YUI 3 Node Plugins - Examples</li><li class="item"><a title="FocusManager Node Plugin - Functional Examples" href="../../examples/node-focusmanager/index.html">FocusManager Node Plugin</a></li><li class="item"><a title="MenuNav Node Plugin - Functional Examples" href="../../examples/node-menunav/index.html">MenuNav Node Plugin</a></li><li class="sect">YUI 3 CSS - Examples</li><li class="item"><a title="YUI CSS Reset - Functional Examples" href="../../examples/cssreset/index.html">CSS Reset</a></li><li class="item"><a title="YUI Fonts - Functional Examples" href="../../examples/cssfonts/index.html">CSS Fonts</a></li><li class="item"><a title="YUI Base - Functional Examples" href="../../examples/cssbase/index.html">CSS Base</a></li><li class="sect">YUI 3 Developer Tools - Examples</li><li class="item"><a title="Console - Functional Examples" href="../../examples/console/index.html">Console</a></li><li class="item"><a title="Profiler - Functional Examples" href="../../examples/profiler/index.html">Profiler</a></li><li class="item"><a title="Test - Functional Examples" href="../../examples/test/index.html">Test</a></li><li class="sect">The YUI Community</li><li class="item"><a title="The Yahoo! User Interface Blog" href="http://yuiblog.com">YUI Blog (external)</a></li><li class="item"><a title="The Yahoo! Group YDN-JavaScript hosts the YUI community forum" href="http://tech.groups.yahoo.com/group/ydn-javascript/">YUI Forum (external)</a></li><li class="item"><a title="The Yahoo! Group yui3 is dedicated to the 3.x branch of the Yahoo! User Interface (YUI) Library." href="http://tech.groups.yahoo.com/group/yui3/">YUI 3 Forum (external)</a></li><li class="item"><a title="YUI is used by Yahoo! and by hundreds of other sites, including many you know and love." href="/yui/poweredby/">YUI Sightings (external)</a></li><li class="item"><a title="Videos and podcasts from the YUI Team and from the Yahoo! frontend engineering community." href="http://developer.yahoo.com/yui/theater/">YUI Theater (external)</a></li><li class="sect">YUI Articles on the YUI Website</li><li class="item"><a title="Answers to Frequently Asked Questions about the YUI Library" href="http://developer.yahoo.com/yui/articles/faq/">YUI FAQ (external)</a></li><li class="item"><a title="Yahoo!'s philosophy of Graded Browser Support" href="http://developer.yahoo.com/yui/articles/gbs/">Graded Browser Support (external)</a></li><li class="item"><a title="Reporting Bugs and Making Feature Requests for YUI Components" href="http://developer.yahoo.com/yui/articles/reportingbugs/">Bug Reports/Feature Requests (external)</a></li><li class="item"><a title="Serve YUI source files from Yahoo! -- free, fast, and simple" href="http://developer.yahoo.com/yui/3/articles/hosting/">Serving YUI Files from Yahoo! (external)</a></li></ul>
+</div>
+</div>
+	</div><!--closes bd-->
+
+	<div id="ft">
+        <p class="first">Copyright &copy; 2009 Yahoo! Inc. All rights reserved.</p>
+        <p><a href="http://privacy.yahoo.com/privacy/us/devel/index.html">Privacy Policy</a> - 
+            <a href="http://docs.yahoo.com/info/terms/">Terms of Service</a> - 
+            <a href="http://docs.yahoo.com/info/copyright/copyright.html">Copyright Policy</a> - 
+            <a href="http://careers.yahoo.com/">Job Openings</a></p>
+	</div>
+</div>
+<script src="../../assets/dpSyntaxHighlighter.js"></script>
+<script language="javascript"> 
+dp.SyntaxHighlighter.HighlightAll('code'); 
+</script>
+</body>
+</html>

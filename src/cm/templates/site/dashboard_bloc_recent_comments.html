@@ -1,0 +1,33 @@
+{% load com %}
+{% load i18n %}
+{% load local_perms %}
+{% load activity %}
+
+<table class="dash_table">
+    <thead>
+        <tr>
+        <th><span class="em">{% blocktrans %}Recent comments{% endblocktrans %}<span class="em"></th>
+		</tr>
+	</thead>
+	<tbody>
+        <tr><td>
+           <ul class="dashlog_list">
+           {% for comment in last_comments %}
+           <li class="dashlog_item">
+			    <div class="dashlog">            	
+					<img class="dashlog_img" src="{{ MEDIA_URL }}img/note_small.png"/>
+					<span class="dashlog_data">
+						<a href="{% url text-view-show-comment comment.text_version.text.key comment.key %}">{{ comment.title }}</a> {% blocktrans %}on text{% endblocktrans %} <a href="{% url text-view comment.text_version.text.key %}">{{ comment.text_version.title }}</a>						
+                   </span>
+                   <div style="padding-left:22px;" class="dashlog_metadata">
+				{% blocktrans with comment.created|timesince as duration %}created {{ duration }} ago{% endblocktrans %}
+                   </div>
+                   </div>
+                   </li>
+           {% empty %}
+           {% blocktrans %}No comments yet{% endblocktrans %}
+           {% endfor %}
+           </ul>
+           </td></tr>		
+	</tbody>
+</table>

@@ -1,0 +1,80 @@
+{% load com %}
+{% load i18n %}
+{% load local_perms %}
+
+{% get_local_perm request can_manage_workspace as can_manage_workspace %}
+{% nb_texts as nb_texts %}
+{% nb_users as nb_users %}
+<div id="main-tabs">
+    <ul>
+        <li><a id="dashboard_link" class="cust_behav" href="#dashboard">{% blocktrans %}Dashboard{% endblocktrans %}</a></li>
+        <li><a id="text_link" class="cust_behav" href="#text">{% blocktrans with nb_texts as nb_texts %}Texts ({{ nb_texts }}){% endblocktrans %} </a></li>
+        {% if can_manage_workspace %}
+        <li><a id="user_link" class="cust_behav" href="#user">{% blocktrans with nb_users as nb_users %}People  ({{ nb_users }}){% endblocktrans %}</a></li>
+        <li><a id="settings_link" class="cust_behav" href="#settings">{% blocktrans %}Settings{% endblocktrans %}</a></li>
+        {% endif %}
+        <li><a id="notifications_link" class="cust_behav" href="#notifications">Notifications</a></li>
+    </ul> 
+</div>
+
+<script type="text/javascript">
+<!--
+tb_conf['dashboard-url'] = "{% url index %}";
+tb_conf['text-url'] = "{% url text %}";
+{% if can_manage_workspace %}
+tb_conf['user-url'] = "{% url user %}";
+tb_conf['settings-url'] = "{% url settings %}";
+{% endif %}
+tb_conf['notifications-url'] = "{% url notifications %}";
+
+renderTabs = function (current_tab) {
+
+    var tab_index = 0;
+    
+    if (current_tab == 'dashboard') {
+        tab_index = 0;
+    }    
+
+    if (current_tab == 'text') {
+        tab_index = 1;
+    }    
+    
+    {% if can_manage_workspace %}    
+    if (current_tab == 'user') {
+        tab_index = 2;        
+    }    
+
+    if (current_tab == 'settings') {
+        tab_index = 3;        
+    }    
+
+    if (current_tab == 'notifications') {
+        tab_index = 4;
+    }        
+    {% else %}
+    if (current_tab == 'notifications') {
+        tab_index = 2;
+    }            
+    {% endif %}
+    	
+    $("#main-tabs").tabs({ ajaxOptions: { async: false }, selected: tab_index}) ;
+
+    $('.cust_behav').click(function() {
+        window.location = this.href;
+    });
+
+    $("#dashboard_link").attr("href", tb_conf['dashboard-url']) ;
+    $("#text_link").attr("href", tb_conf['text-url']) ;
+    {% if can_manage_workspace %}    
+    $("#user_link").attr("href", tb_conf['user-url']) ;
+    $("#settings_link").attr("href", tb_conf['settings-url']) ;
+    {% endif %}
+    $("#notifications_link").attr("href", tb_conf['notifications-url']) ;
+
+} ; 
+
+$(document).ready(function(){
+    renderTabs(tb_conf['current_tab']);
+}) ;
+-->
+</script>

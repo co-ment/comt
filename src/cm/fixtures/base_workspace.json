@@ -1,0 +1,19 @@
+[
+	{
+		"pk": 1,
+		"model": "cm.configuration", 
+		"fields": {
+			"key": "site_name", 
+			"raw_value": "S'New co-ment workspace'\np0\n." 
+		}
+	},
+	{
+		"pk": 2	,
+		"model": "cm.configuration", 
+		"fields": {
+			"key": "test", 
+			"raw_value": "S'simple test'\np0\n."
+		}
+	}
+	
+]

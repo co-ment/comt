@@ -1,0 +1,172 @@
+    /**
+     *  Basic Layout Theme
+     */
+.ui-layout-pane { /* all 'panes' */
+    background: #FFF; 
+/*    border:     1px solid #BBB;*/
+    padding:    0; 
+    margin:    0; 
+    overflow:   auto;
+}
+.ui-layout-pane-north .ui-tabs-nav {
+        /* don't need border or rounded corners - tabs 'fill' the pane */
+        border-top:     0;
+        border-left:    0;
+        border-right:   0;
+        padding-bottom: 0 !important;
+        -moz-border-radius:     0;
+        -webkit-border-radius:  0;
+    }
+
+.ui-layout-resizer { /* all 'resizer-bars' */ 
+    border-bottom:     1px solid #BBB;
+	    background: #DDD; 
+    } 
+    .ui-layout-resizer-open:hover { /* mouse-over */
+        background: #9D9; 
+    }
+
+.ui-layout-toggler { /* all 'toggler-buttons' */ 
+    background: #E7E7E7; 
+    } 
+    .ui-layout-toggler-closed { /* closed toggler-button */ 
+        background: #E7E7E7; 
+        border-bottom: 1px solid #BBB; 
+        border-top: 1px solid #BBB; 
+    } 
+    .ui-layout-toggler .content { /* toggler-text */ 
+        font: 13px bold Verdana, Verdana, Arial, Helvetica, sans-serif;
+    }
+    .ui-layout-toggler:hover { /* mouse-over */ 
+        background: #AAA; 
+        } 
+/* class to make the 'draggable iframe mask' visible 
+div.ui-draggable-iframeFix {
+    opacity: 0.2 !important;
+    filter:  alpha(opacity=20) !important;
+    background-color: #666 !important;
+}*/
+/* override YUI's base for jquery tabs*/
+.ui-tabs ul li {
+    list-style: none;
+}
+
+
+.outer-north, .inner-north{
+    font-size:90%;
+}
+
+#c_filter_btn {
+/*       font-size:1.4em;*/
+}
+
+#c-right-btn, #c-msg-wrapper {
+float:right;
+}
+.f-msg-cls {
+    padding-right:2px;
+    font-weight:normal;
+    margin-left:5px ;
+    margin-right:5px ;
+/*    border:1px solid #000;*/
+    color:#0000C0 ;
+/*    background-color:#0000C0 ;*/
+}
+
+.f-msg-e {
+/*    background-color:#C00000 ;*/
+    color:#C00000 ;
+}
+
+.f-msg {
+/*    background-color:#00C000 ;*/
+    color:#00C000 ;
+}
+
+/* jquery custom overrides */
+.inner-north {
+    border-top : none ;
+    border-right : none ;
+    border-left : none ;
+    padding : 0 ;
+}
+
+#header-nobck {
+    background : none ;
+/*    border : none ;*/
+}
+
+.inner-north ul li {/* override YUI's base for jquery tabs*/
+    list-style: none;
+}
+.inner-north .ui-tabs-nav li a {
+    padding:0.4em 2em;
+}
+.ui-layout-pane-north {
+    overflow: hidden !important;
+}
+
+#outer-north {
+    padding:4px;
+}
+
+/*#c_filter_results {
+	font-weight:bold;
+}*/
+
+.initially_hidden {
+    display:none;
+}
+
+.frame_helptext {
+	font-size:77%;
+}
+
+th, td {
+border:0;
+padding:0;
+}
+
+#c_filter input[type="text"], #c_filter select{
+    width:160px;
+}
+
+.ui-slider-horizontal {
+    /*height:0.5em;*/
+    font-size:0.7em;
+}
+
+.ui-slider-handle {
+    /*height:0.8em;*/
+    width:0.8em;
+}
+
+.ui-slider-handle {
+margin-left:-0.2em;
+top:-0.2em;
+}
+
+#print_export_form input, #print_export_form label {
+display: block ;
+}
+
+#c_f_res_details {
+	font-size:77%;
+}
+#c_slider {
+    border:1px solid #DDDDDD;
+}
+#c-right-btn img {
+margin-right:5px;
+}
+ #dialog_print_export select {
+    margin-bottom:10px;
+    margin-top:4px;
+ }
+ 
+#add_comment_btn {
+	position:absolute;
+	left:3px; 
+    z-index:999;
+    cursor:pointer;
+}

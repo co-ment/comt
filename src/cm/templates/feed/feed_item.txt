@@ -1,0 +1,9 @@
+{% autoescape off %}
+{{ title }}
+<br />
+{{ body }}
+<br />
+--
+<br />
+{{ CONF.workspace_name }} - <a href="{{ CONF.site_url }}">{{ CONF.site_url }}</a>
+{% endautoescape %}

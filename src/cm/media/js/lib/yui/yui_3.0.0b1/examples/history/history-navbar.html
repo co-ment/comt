@@ -1,0 +1,310 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>YUI Library Examples: Browser History Utility: Simple Navigation Bar</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    	<link rel="stylesheet" type="text/css" href="../../assets/yui.css" >
+
+<style>
+    /*Supplemental CSS for the YUI distribution*/
+    #custom-doc { width: 95%; min-width: 950px; }
+    #pagetitle {background-image: url(../../assets/bg_hd.gif);}
+/*    #pagetitle h1 {background-image: url(../../assets/title_h_bg.gif);}*/
+</style>
+
+<link rel="stylesheet" type="text/css" href="../../assets/dpSyntaxHighlighter.css">
+
+<!--there is no custom header content for this example-->
+
+<link type="text/css" rel="stylesheet" href="../../build/cssfonts/fonts-min.css" />
+<script type="text/javascript" src="../../build/yui/yui-min.js"></script>
+
+</head>
+<body id="yahoo-com" class=" yui-skin-sam">
+<div id="custom-doc" class="yui-t2">
+<div id="hd">
+	<div id="ygunav">
+		<p>
+            <em>
+                <a href="http://developer.yahoo.com/yui/3/">YUI 3.x Home</a> <i> - </i>	
+            </em>
+		</p>
+		<form action="http://search.yahoo.com/search" id="sitesearchform">
+            <input name="vs" type="hidden" value="developer.yahoo.com">
+            <input name="vs" type="hidden" value="yuiblog.com">
+		    <div id="sitesearch">
+		    	<label for="searchinput">Site Search (YDN &amp; YUIBlog): </label>
+			    <input type="text" id="searchinput" name="p">
+			    <input type="submit" value="Search" id="searchsubmit" class="ygbt">
+		    </div>
+		</form>
+    </div>
+	<div id="ygma"><a href="../../"><img src="../../assets/logo.gif"  border="0" width="200" height="93"></a></div>
+	<div id="pagetitle"><h1>YUI Library Examples: Browser History Utility: Simple Navigation Bar</h1></div>
+</div>
+<div id="bd">
+
+	<div id="bar-note"><p><strong>Note:</strong> This is YUI 3.x. Looking for <a href="http://developer.yahoo.com/yui/">YUI 2.x</a>?</p></div>
+
+	<div id="yui-main">
+		<div class="yui-b">
+		  <div class="yui-ge">
+			  <div class="yui-u first example" id="main">
+
+	<h2>Browser History Utility: Simple Navigation Bar</h2>
+
+	<div id="example" class="promo">
+	<p>
+	<p>This example demonstrates how to use the Browser History Utility to "ajaxify" a simple navigation bar.</p>	</p>	
+
+	<div class="module example-container  newWindow">
+			<div id="example-canvas" class="bd">
+
+		<p class="newWindowButton yui-skin-sam">
+        <span id="newWindowLink">
+            <span class="first-child">
+                <a href="history-navbar_source.html" target="_blank">View example in new window.</a>
+            </span>
+        </span>	
+    </p>
+	
+		
+		</div>
+	</div>			
+	</div>
+		
+	<h3 class="first">Basic markup</h3>
+
+<textarea name="code" class="HTML" cols="60" rows="1">
+&lt;!doctype html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;YUI Browser History Utility - Simple Navigation Bar Example&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="doc"&gt;
+      &lt;div id="hd"&gt;
+        &lt;h3&gt;Navigation Links&lt;/h3&gt;
+        &lt;div id="nav"&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href="?section=home"&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="?section=overview"&gt;Overview&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="?section=products"&gt;Products&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="?section=contactus"&gt;Contact Us&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div id="bd"&gt;
+&lt;?php
+
+$section = "home";
+$sections = array("home", "overview", "products", "contactus");
+if (isset($_GET["section"]) && in_array($_GET["section"], $sections)) {
+    $section = $_GET["section"];
+}
+
+include($section . ".php");
+
+?&gt;
+      </div>
+      <div id="ft">YUI Browser History Utility - Simple Navigation Bar Example</div>
+    </div>
+  </body>
+</html>
+</textarea>
+
+<p>
+  The small portion of PHP code is responsible for including the content specified by the "section" parameter in the URL.
+  This technique avoids having to rewrite common parts of a web site such as the header and footer.
+</p>
+
+<p>
+  This page is already fully functional. However, clicking on the links in the navigation bar will refresh the entire
+  page, including portions that are common to all the sections. This is highly inefficient (especially for a large web
+  site), and using AJAX will allow us to optimize this. The idea is to use client-side scripting to intercept the click
+  event, cancel it, and use the YUI <code>io</code> module to asynchronously load the content of the section, which we can
+  then write to the document using innerHTML. The only downside of this approach is that it breaks the back/forward
+  buttons, and individual sections cannot be bookmarked anymore. The Browser History Utility will help us work around
+  this issue.
+</p>
+
+<h3>Add the necessary markup</h3>
+
+<textarea name="code" class="HTML" cols="60" rows="1">
+&lt;iframe id="yui-history-iframe" src="assets/blank.html"&gt;&lt;/iframe&gt;
+&lt;input id="yui-history-field" type="hidden"&gt;
+</textarea>
+
+<p>
+  This markup should be inserted right after the opening <code>&lt;body&gt;</code> tag.
+</p>
+
+<h3>Set up the YUI Instance</h3>
+
+<p>Now, we need to create our YUI instance and tell it to load the <code>io</code> and <code>history</code> modules:</p>
+<textarea name="code" class="JScript">
+YUI().use('io', 'history');
+</textarea>
+
+<h3>Write the code necessary to load a section of the web site</h3>
+
+<p>
+  Use the YUI <code>io</code> module to achieve this:
+</p>
+
+<textarea name="code" class="JScript" cols="60" rows="1">
+function loadSection(section) {
+
+    var url = section + '.php',
+        cfg = {
+            on: {
+                success: function (id, o, args) {
+                    Y.get('#bd').set('innerHTML', o.responseText);
+                },
+
+                failure: function (id, o, args) {
+                    // Fallback...
+                }
+            }
+        };
+
+    Y.io(url, cfg);
+}
+</textarea>
+
+<h3>Design your application</h3>
+
+<p>
+  In our simple example, we have only one module, represented by the navigation bar. We will refer to this module using
+  the identifier "navbar". The state of the navigation module will be represented using the name of the corresponding
+  section ("home", "overview", "products", etc.)
+</p>
+
+<h3>Retrieve the initial state of the navigation module</h3>
+
+<p>
+  Use the <code>getBookmarkedState</code> method to find out the initial state of a module according
+  to the URL fragment identifier (which is present if the user had previously bookmarked the application).
+  In our example, we also use the <code>getQueryStringParameter</code> method to find out the initial state
+  of a module according to the query string (which is present if the user reached the page using a search engine,
+  or if the user did not have scripting enabled when previously bookmarking the page). Finally, default to "home":
+</p>
+
+<textarea name="code" class="JScript" cols="60" rows="1">
+bookmarkedSection = Y.History.getBookmarkedState('navbar');
+querySection = Y.History.getQueryStringParameter('section');
+initSection = bookmarkedSection || querySection || 'home';
+</textarea>
+
+<h3>Register the navigation module</h3>
+
+<p>
+  Use the <code>register</code> method, passing in the navigation module identifier, the initial state
+  of the navigation module, and the callback function that will be called when the state of the navigation
+  module has changed:
+</p>
+
+<textarea name="code" class="JScript" cols="60" rows="1">
+Y.History.register('navbar', initSection).subscribe('history:moduleStateChange', loadSection);
+</textarea>
+
+<h3>Write the code that initializes your application</h3>
+
+<p>
+  First of all, we want to change the behavior of the links in the navigation bar. In order to do this, we simply
+  enumerate them, and attach to each individual anchor an <code>onclick</code> handler. In the <code>onclick</code>
+  handler, we cancel the event's default behavior and do some custom action.
+</p>
+
+<p>
+  We also need to display the default section if a section was requested via the URL fragment identifier,
+  and that section is different from the one loaded using PHP:
+</p>
+
+<textarea name="code" class="JScript" cols="60" rows="1">
+function initializeNavigationBar() {
+    Y.on('click', function (evt) {
+        var el = evt.target;
+        while (el.get('id') !== 'nav') {
+            if (el.get('nodeName').toUpperCase() === 'A') {
+                evt.preventDefault();
+                section = Y.History.getQueryStringParameter('section', el.get('href')) || 'home';
+                if (!Y.History.navigate('navbar', section)) {
+                    // Fallback...
+                    loadSection(section);
+                }
+                break;
+            } else {
+                el = el.get('parentNode');
+            }
+        }
+    }, '#nav');
+
+    currentSection = Y.History.getCurrentState('navbar');
+    loadSection(currentSection);
+}
+</textarea>
+
+<h3>Initialize the Browser History Utility</h3>
+
+<textarea name="code" class="JScript" cols="60" rows="1">
+Y.History.subscribe('history:ready', initializeNavigationBar);
+Y.History.initialize('#yui-history-field', '#yui-history-iframe');
+</textarea>				</div>
+				<div class="yui-u sidebar">
+					
+				
+					<div id="examples" class="mod box4">
+                        <div class="hd">
+						<h4>
+    Browser History Utility Examples:</h4>
+                        </div>
+						<div class="bd">
+							<ul>
+								<li class='selected'><a href='../history/history-navbar.html'>Simple Navigation Bar</a></li>							</ul>
+						</div>
+					</div>
+					
+					<div class="mod box4">
+                        <div class="hd">
+						<h4>More Browser History Utility Resources:</h4>
+                        </div>
+                        <div class="bd">
+						<ul>
+							<!-- <li><a href="http://developer.yahoo.com/yui/history/">User's Guide</a> (external)</li> -->
+						<li><a href="../../api/module_history.html">API Documentation</a></li>
+</ul>
+                        </div>
+					</div>
+			  </div>
+		</div>
+		
+		</div>
+	</div>
+
+
+<div class="yui-b toc3" id="tocWrapper">
+<!-- TABLE OF CONTENTS -->
+<div id="toc">
+	
+<ul>
+<li class="sect first">YUI 3.x Project</li><li class="item"><a title="The Yahoo! User Interface (YUI) Library, 3.x Branch, " href="http://developer.yahoo.com/yui/3/">YUI 3 Web Site (external)</a></li><li class="item"><a title="Examples of every YUI utility and control in action" href="../../examples/">YUI 3 Examples</a></li><li class="item"><a title="Instantly searchable API documentation for the entire YUI library." href="../../api/">YUI 3 API Docs</a></li><li class="item"><a title="The YUI Library can be downloaded from SourceForge" href="http://sourceforge.net/projects/yui/">YUI 3 on Sourceforge (external)</a></li><li class="item"><a title="YUI is free and open, offered under a BSD license." href="http://developer.yahoo.com/yui/3/license.html">YUI License (external)</a></li><li class="sect">YUI 3 Core - Examples</li><li class="item"><a title="YUI (Global Prerequisite) - Functional Examples" href="../../examples/yui/index.html">YUI (Global Prerequisite)</a></li><li class="item"><a title="Event - Functional Examples" href="../../examples/event/index.html">Event</a></li><li class="item"><a title="Node - Functional Examples" href="../../examples/node/index.html">Node</a></li><li class="sect">YUI 3 Component Infrastructure - Examples</li><li class="item"><a title="Attribute - Functional Examples" href="../../examples/attribute/index.html">Attribute</a></li><li class="item"><a title="Plugin - Functional Examples" href="../../examples/plugin/index.html">Plugin</a></li><li class="item"><a title="Widget - Functional Examples" href="../../examples/widget/index.html">Widget</a></li><li class="sect">YUI 3 Utilities - Examples</li><li class="item"><a title="Animation - Functional Examples" href="../../examples/anim/index.html">Animation</a></li><li class="item"><a title="Cache - Functional Examples" href="../../examples/cache/index.html">Cache</a></li><li class="item"><a title="Cookie - Functional Examples" href="../../examples/cookie/index.html">Cookie</a></li><li class="item"><a title="DataSchema - Functional Examples" href="../../examples/dataschema/index.html">DataSchema</a></li><li class="item"><a title="DataSource - Functional Examples" href="../../examples/datasource/index.html">DataSource</a></li><li class="item"><a title="DataType - Functional Examples" href="../../examples/datatype/index.html">DataType</a></li><li class="item"><a title="Drag &amp; Drop - Functional Examples" href="../../examples/dd/index.html">Drag &amp; Drop</a></li><li class="item"><a title="Get - Functional Examples" href="../../examples/get/index.html">Get</a></li><li class="selected "><a title="History - Functional Examples" href="../../examples/history/index.html">History</a></li><li class="item"><a title="ImageLoader - Functional Examples" href="../../examples/imageloader/index.html">ImageLoader</a></li><li class="item"><a title="IO - Functional Examples" href="../../examples/io/index.html">IO</a></li><li class="item"><a title="JSON (JavaScript Object Notation) - Functional Examples" href="../../examples/json/index.html">JSON</a></li><li class="item"><a title="Queue - Functional Examples" href="../../examples/queue/index.html">Queue</a></li><li class="item"><a title="Stylesheet - Functional Examples" href="../../examples/stylesheet/index.html">Stylesheet</a></li><li class="sect">YUI 3 Widgets - Examples</li><li class="item"><a title="Overlay - Functional Examples" href="../../examples/overlay/index.html">Overlay</a></li><li class="item"><a title="Slider - Functional Examples" href="../../examples/slider/index.html">Slider</a></li><li class="sect">YUI 3 Node Plugins - Examples</li><li class="item"><a title="FocusManager Node Plugin - Functional Examples" href="../../examples/node-focusmanager/index.html">FocusManager Node Plugin</a></li><li class="item"><a title="MenuNav Node Plugin - Functional Examples" href="../../examples/node-menunav/index.html">MenuNav Node Plugin</a></li><li class="sect">YUI 3 CSS - Examples</li><li class="item"><a title="YUI CSS Reset - Functional Examples" href="../../examples/cssreset/index.html">CSS Reset</a></li><li class="item"><a title="YUI Fonts - Functional Examples" href="../../examples/cssfonts/index.html">CSS Fonts</a></li><li class="item"><a title="YUI Base - Functional Examples" href="../../examples/cssbase/index.html">CSS Base</a></li><li class="sect">YUI 3 Developer Tools - Examples</li><li class="item"><a title="Console - Functional Examples" href="../../examples/console/index.html">Console</a></li><li class="item"><a title="Profiler - Functional Examples" href="../../examples/profiler/index.html">Profiler</a></li><li class="item"><a title="Test - Functional Examples" href="../../examples/test/index.html">Test</a></li><li class="sect">The YUI Community</li><li class="item"><a title="The Yahoo! User Interface Blog" href="http://yuiblog.com">YUI Blog (external)</a></li><li class="item"><a title="The Yahoo! Group YDN-JavaScript hosts the YUI community forum" href="http://tech.groups.yahoo.com/group/ydn-javascript/">YUI Forum (external)</a></li><li class="item"><a title="The Yahoo! Group yui3 is dedicated to the 3.x branch of the Yahoo! User Interface (YUI) Library." href="http://tech.groups.yahoo.com/group/yui3/">YUI 3 Forum (external)</a></li><li class="item"><a title="YUI is used by Yahoo! and by hundreds of other sites, including many you know and love." href="/yui/poweredby/">YUI Sightings (external)</a></li><li class="item"><a title="Videos and podcasts from the YUI Team and from the Yahoo! frontend engineering community." href="http://developer.yahoo.com/yui/theater/">YUI Theater (external)</a></li><li class="sect">YUI Articles on the YUI Website</li><li class="item"><a title="Answers to Frequently Asked Questions about the YUI Library" href="http://developer.yahoo.com/yui/articles/faq/">YUI FAQ (external)</a></li><li class="item"><a title="Yahoo!'s philosophy of Graded Browser Support" href="http://developer.yahoo.com/yui/articles/gbs/">Graded Browser Support (external)</a></li><li class="item"><a title="Reporting Bugs and Making Feature Requests for YUI Components" href="http://developer.yahoo.com/yui/articles/reportingbugs/">Bug Reports/Feature Requests (external)</a></li><li class="item"><a title="Serve YUI source files from Yahoo! -- free, fast, and simple" href="http://developer.yahoo.com/yui/3/articles/hosting/">Serving YUI Files from Yahoo! (external)</a></li></ul>
+</div>
+</div>
+	</div><!--closes bd-->
+
+	<div id="ft">
+        <p class="first">Copyright &copy; 2009 Yahoo! Inc. All rights reserved.</p>
+        <p><a href="http://privacy.yahoo.com/privacy/us/devel/index.html">Privacy Policy</a> - 
+            <a href="http://docs.yahoo.com/info/terms/">Terms of Service</a> - 
+            <a href="http://docs.yahoo.com/info/copyright/copyright.html">Copyright Policy</a> - 
+            <a href="http://careers.yahoo.com/">Job Openings</a></p>
+	</div>
+</div>
+<script src="../../assets/dpSyntaxHighlighter.js"></script>
+<script language="javascript"> 
+dp.SyntaxHighlighter.HighlightAll('code'); 
+</script>
+</body>
+</html>

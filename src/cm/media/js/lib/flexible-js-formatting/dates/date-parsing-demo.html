@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Javascript Date Parsing Demo</title>
+    <script type="text/javascript" src="date-functions.js"></script>
+    <link rel="stylesheet" type="text/css" href="../files/demo-style.css" />
+</head>
+<body>
+
+<h1>Javascript Date Parsing Demo</h1>
+
+<p>This page demonstrates the Javascript date-parsing functionality I've
+created.  First, some samples.  The following code:</p>
+
+<pre>
+var d = Date.parseDate("2005-10-05 12:13 am", "Y-m-d g:i a");
+document.write(d + "\n");
+var d = Date.parseDate("9/5/05", "n/j/y");
+document.write(d + "\n");
+</pre>
+
+<p>generates this output:</p>
+
+<pre>
+<script type="text/javascript">
+var d = Date.parseDate("2005-10-05 12:13 am", "Y-m-d g:i a");
+document.write(d + "\n");
+d = Date.parseDate("9/5/05", "n/j/y");
+document.write(d + "\n");
+d = new Date();
+</script>
+</pre>
+
+<p>This and all output on this page is generated on-the-fly by Javascript, so you can view the page source and see the
+code that creates the output you're seeing.</p>
+
+<p>It is possible to use the date-parsing functionality, together with the
+date-formatting functionality, for round-trip formatting and parsing back again
+without losing information.  All you need to do is use the same format
+specifier for both operations.  In general, I would suggest using one of the
+ISO 8601 patterns, such as <code>Date.patterns.ISO8601LongPattern</code> to
+ensure no precision is lost along the way.  Obviously you need to use a format
+specifier that doesn't discard information during the formatting step; anything
+discarded is unrecoverable during the parsing step.</p>
+
+<p>To demonstrate this functionality, here is a table showing the round-trip
+for all the predefined format patterns.</p>
+
+<script type="text/javascript">
+d = new Date(2005, 10, 18, 20, 11, 32);
+document.write("<table class='borders collapsed'>");
+document.write("<tr><th>Input<" + "/th><th>Pattern<" + "/th><th>Formatted Result<" + "/th><th>Parsed Result, Re-Formatted<" + "/th><" + "/tr>");
+for (var f in Date.patterns) {
+    document.write("<tr><td>" + d.dateFormat(Date.patterns.ISO8601LongPattern)
+        + "<" + "/td><td>" + Date.patterns[f] + "<" + "/td><td>"
+        + d.dateFormat(Date.patterns[f]) + "<" + "/td><td>"
+        + Date.parseDate(d.dateFormat(Date.patterns[f]), Date.patterns[f]).dateFormat(Date.patterns.ISO8601LongPattern)
+        + "<" + "/th><" + "/tr>");
+}
+document.write("<" + "/table>");
+</script>
+
+<p>As you can see, some of the formats discard some information, so it's not
+always possible to reconstitute the original input.  Notice particularly how the date is assumed to be "today" in cases where only the time is preserved
+in the formatting string.</p>
+
+<p>Finally, a word about the internals.  As you may have seen me do before,
+I've written code that writes code.  Here is the regular expression generated
+for one of the parsing formats, followed by the automatically generated code
+that uses the regular expression to implement the parser:</p>
+
+<p><code><script type="text/javascript">document.write(Date.parseRegexes[6]);</script></code></p>
+
+<pre>
+<script type="text/javascript">
+document.write(Date.parse6);
+</script>
+</pre>
+
+</body>
+</html>

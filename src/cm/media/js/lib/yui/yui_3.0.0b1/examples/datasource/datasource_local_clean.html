@@ -1,0 +1,192 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>DataSource.Local</title>
+
+<style type="text/css">
+/*margin and padding on body element
+  can introduce errors in determining
+  element position and are not recommended;
+  we turn them off as a foundation for YUI
+  CSS treatments. */
+body {
+	margin:0;
+	padding:0;
+}
+</style>
+
+<link type="text/css" rel="stylesheet" href="../../build/cssfonts/fonts-min.css" />
+<script type="text/javascript" src="../../build/yui/yui-min.js"></script>
+
+
+<!--begin custom header content for this example-->
+<style type="text/css">
+/* custom styles for this example */
+#demo .output {margin-bottom:1em; padding:10px; border:1px solid #D9D9D9;}
+</style>
+
+<!--end custom header content for this example-->
+
+</head>
+
+<body class=" yui-skin-sam">
+
+<h1>DataSource.Local</h1>
+
+<div class="exampleIntro">
+	Use DataSource.Local to manage retrieval from local JavaScript arrays and objects. A <a href="http://developer.yahoo.com/yui/3/dataschema/">DataSchema</a> plugin is used to normalize incoming data into a known format for consistency of usage by other components.
+			
+</div>
+
+<!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
+
+<form id="demo">
+    <h4>Array</h4>
+    <h6>Data</h6>
+    <pre>
+[
+    {name:"abc",id:123,extra:"foo"},
+    {name:"def",id:456,extra:"bar"},
+    {name:"ghi",id:789,extra:"baz"}
+]
+    </pre>
+
+    <h6>Schema</h6>
+    <pre>
+{
+    resultFields: ["name","id"]
+}
+    </pre>
+
+    <h6>Normalized data</h6>
+    <input type="button" id="demo_array" value="Retrieve data =>">
+    <div id="demo_output_array" class="output"></div>
+
+    <h4>JSON</h4>
+    <h6>Data</h6>
+    <pre>
+{
+    "profile":{
+        "current":160,
+        "target":150
+    },
+    "reference": [
+        {
+            "category":"exercise",
+            "type":"expenditure",
+            "activities":[
+                {"name":"biking", "calories":550},
+                {"name":"golf", "calories":1000},
+                {"name":"running", "calories":650},
+                {"name":"swimming", "calories":650},
+                {"name":"walking", "calories":225}
+            ]
+        },
+        {
+            "category":"nutrition",
+            "type":"intake",
+            "fruit":[
+                {"name":"apple", "calories":70},
+                {"name":"banana", "calories":70},
+                {"name":"orange", "calories":90},
+            ],
+            "vegetables":[
+                {"name":"baked potato", "calories":150},
+                {"name":"broccoli", "calories":50},
+                {"name":"green beans", "calories":30}
+            ]
+        }
+    ],
+    "program": [
+        {
+            "category":"exercise",
+            "schedule":[
+                {"day":"sunday", "activity":"swimming"},
+                {"day":"monday", "activity":"running"},
+                {"day":"tuesday", "activity":"biking"},
+                {"day":"wednesday", "activity":"running"},
+                {"day":"thursday", "activity":"swimming"},
+                {"day":"friday", "activity":"running"},
+                {"day":"saturday", "activity":"golf"}
+            ]
+        },
+        {
+            "category":"diet",
+            "schedule":[
+            ]
+        }
+    ]
+}
+    </pre>
+
+    <h6>Schema</h6>
+    <pre>
+{
+    resultListLocator: "reference[1].fruit",
+    resultFields: ["name","calories"]
+}
+    </pre>
+
+    <h6>Normalized data</h6>
+    <input type="button" id="demo_json" value="Retrieve data =>">
+    <div id="demo_output_json" class="output"></div>
+</form>
+
+<script type="text/javascript">
+YUI({base:"../../build/", timeout: 10000}).use("dump", "node", "datasource-local", "datasource-arrayschema", "datasource-jsonschema", function (Y) {
+    var myDataArray = [
+            {name:"abc",id:123,extra:"foo"},
+            {name:"def",id:456,extra:"bar"},
+            {name:"ghi",id:789,extra:"baz"}
+        ],
+        myDataSourceArray = new Y.DataSource.Local({source:myDataArray}),
+        myCallbackArray = {
+            success: function(e){
+                Y.get("#demo_output_array").setContent(Y.dump(e.response));
+            },
+            failure: function(e){
+                Y.get("#demo_output_array").setContent("Could not retrieve data: " + e.error.message);
+            }
+        };
+
+    myDataSourceArray.plug({fn: Y.Plugin.DataSourceArraySchema, cfg: {
+        schema: {
+            resultFields: ["name","id"]
+        }
+    }});
+
+    Y.on("click", function(e){
+        myDataSourceArray.sendRequest(null, myCallbackArray);
+    }, "#demo_array");
+
+    var myDataJSON = {"profile":{"current":160,"target":150},"reference": [{"category":"exercise","type":"expenditure","activities":[{"name":"biking", "calories":550},{"name":"golf", "calories":1000},{"name":"running", "calories":650},{"name":"swimming", "calories":650},{"name":"walking", "calories":225}]},{"category":"nutrition","type":"intake","fruit":[{"name":"apple", "calories":70},{"name":"banana", "calories":70},{"name":"orange", "calories":90},],"vegetables":[{"name":"baked potato", "calories":150},{"name":"broccoli", "calories":50},{"name":"green beans", "calories":30}]}],"program": [{"category":"exercise","schedule":[{"day":"sunday", "activity":"swimming"},{"day":"monday", "activity":"running"},{"day":"tuesday", "activity":"biking"},{"day":"wednesday", "activity":"running"},{"day":"thursday", "activity":"swimming"},{"day":"friday", "activity":"running"},{"day":"saturday", "activity":"golf"}]},{"category":"diet","schedule":[]}]},
+        myDataSourceJSON = new Y.DataSource.Local({source:myDataJSON}),
+        myCallbackJSON = {
+            success: function(e){
+                Y.get("#demo_output_json").setContent(Y.dump(e.response));
+            },
+            failure: function(e){
+                Y.get("#demo_output_json").setContent("Could not retrieve data: " + e.error.message);
+            }
+        };
+
+    myDataSourceJSON.plug({fn: Y.Plugin.DataSourceJSONSchema, cfg: {
+        schema: {
+            resultListLocator: "reference[1].fruit",
+            resultFields: ["name","calories"]
+        }
+    }});
+
+    Y.on("click", function(e){
+        myDataSourceJSON.sendRequest(null, myCallbackJSON);
+    }, "#demo_json");
+});
+
+</script>
+
+<!--END SOURCE CODE FOR EXAMPLE =============================== -->
+
+</body>
+</html>

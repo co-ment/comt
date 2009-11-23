@@ -1,0 +1,6 @@
+{% extends "email/base_email.txt" %}{% load i18n %}
+
+{% block content %}
+{% blocktrans %}Contact from user: {{ name }} / {{ email }}{% endblocktrans %}
+{{ body }}
+{% endblock %}

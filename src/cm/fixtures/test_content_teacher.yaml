@@ -1,0 +1,171 @@
+# roles_teacher should be loaded first
+
+############### users ###############
+# user1
+
+- model : auth.user
+  pk: 1
+  fields:
+    username: user1
+    email: user1@here.dja
+    password: sha1$6efc5$cf1468825cd79fd2d6ddaf97738c8666053af349
+      
+- model : cm.userprofile
+  pk: 1
+  fields:
+    user: 1
+    key: "up_key_1" 
+    adminkey: "up_adminkey_1" 
+
+# user2
+
+- model : auth.user
+  pk: 2
+  fields:
+    username: user2
+    email: user2@here.dja
+    password: sha1$6efc5$cf1468825cd79fd2d6ddaf97738c8666053af349
+
+- model : cm.userprofile
+  pk: 2
+  fields:
+    user: 2
+    key: "up_key_2" 
+    adminkey: "up_adminkey_2" 
+
+# user3
+
+- model : auth.user
+  pk: 3
+  fields:
+    username: user3
+    email: user3@here.dja
+    password: sha1$6efc5$cf1468825cd79fd2d6ddaf97738c8666053af349
+
+- model : cm.userprofile
+  pk: 3
+  fields:
+    user: 3
+    key: "up_key_3" 
+    adminkey: "up_adminkey_3"
+
+############### texts ############### 
+
+# text 1
+- model : cm.textversion
+  pk: 1
+  fields:
+    created: "2009-02-13 04:01:12"
+    modified: "2009-02-13 04:01:12"
+    title: 'title 1'
+    format: 'markdown'
+    content: 'aaa bbb ccc ddd eee fff ggg'
+    text: 1
+
+- model : cm.text
+  pk: 1
+  fields:
+    created: "2009-02-13 04:01:12"
+    modified: "2009-02-13 04:01:12"
+    last_text_version: 1
+    title: 'title 1'
+    state: "approved"
+    key: "text_key_1" 
+    adminkey: "text_adminkey_1" 
+    user: 1
+
+# text 2
+- model : cm.textversion
+  pk: 2
+  fields:
+    created: "2009-02-13 04:01:12"
+    modified: "2009-02-13 04:01:12"
+    title: 'title 2'
+    format: 'markdown'
+    content: 'aaa bbb ccc ddd eee fff ggg'
+    text: 2
+
+- model : cm.text
+  pk: 2
+  fields:
+    created: "2009-02-13 04:01:12"
+    modified: "2009-02-13 04:01:12"
+    last_text_version: 2
+    title: 'title 2'
+    state: "approved"
+    key: "text_key_2" 
+    adminkey: "text_adminkey_2"
+    user: 1     
+  
+############### userrole ############### 
+
+# user 1 is Teacher
+# userrole 1
+- model : cm.userrole
+  pk: 1
+  fields:
+    role: 1
+    user: 1
+    text: null
+  
+# user 2 is Student
+# userrole 2
+- model : cm.userrole
+  pk: 2
+  fields:
+    role: 2
+    user: 2
+    text: null
+
+# user 3 is Student
+# userrole 3
+- model : cm.userrole
+  pk: 3
+  fields:
+    role: 2
+    user: 3
+    text: null
+
+############### comment ###############
+
+# comment 1 (by user1 on text 1)
+- model : cm.comment
+  pk: 1
+  fields:
+    created: "2009-02-13 04:01:12" 
+    modified: "2009-02-13 04:01:12"
+    start_wrapper: 0 
+    end_wrapper: 0
+    start_offset: 1 
+    end_offset: 11
+    title: "comment 1" 
+    content: "comment 1 content" 
+    content_html: "<p>comment 1 content</p>" 
+    key: "comment_key_1" 
+    adminkey: "comment_adminkey_1"
+    reply_to: null
+    user: 1
+    visible : true
+    text_version: 1
+
+# comment 2 (by user2 on text 2)
+- model : cm.comment
+  pk: 2
+  fields:
+    created: "2009-02-13 04:01:13" 
+    modified: "2009-02-13 04:01:13"
+    start_wrapper: 0 
+    end_wrapper: 0
+    start_offset: 1 
+    end_offset: 11
+    title: "comment 2" 
+    content: "comment 2 content" 
+    content_html: "<p>comment 2 content</p>" 
+    key: "comment_key_2" 
+    adminkey: "comment_adminkey_2"
+    reply_to: null
+    user: 2
+    visible : true
+    text_version: 2
+
+    

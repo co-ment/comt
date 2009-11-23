@@ -1,0 +1,23 @@
+--/*INNER FRAME LAYOUT*/
+	/* this style is from http://www.dynamicdrive.com/style/layouts/item/css-liquid-layout-21-fixed-fluid/ for 2 columns layout */
+#contentwrapper {
+	float: left;
+	width: 100%;
+}
+/*Set left margin to $LeftColumnWidth$
+#contentcolumn {
+	margin-left: 200px; 
+}
+*/
+#leftcolumn {
+	float: left;
+	/*width: 200px; $LeftColumnWidth$*/
+	margin-left: -100%;
+}
+
+.innertube {
+	margin: 5px;
+}
+.initially_hidden, .displaynone {
+    display:none;
+}

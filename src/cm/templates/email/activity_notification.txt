@@ -1,0 +1,4 @@
+{% extends "email/base_email_notification.txt" %}{% load i18n %}{% block content %}{% blocktrans %}Notification:{% endblocktrans %}
+{{ activity.printable_data_nohtml_link }}
+({{ activity.printable_metadata_absolute }})
+{% endblock %}

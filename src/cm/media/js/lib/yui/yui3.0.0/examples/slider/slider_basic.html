@@ -1,0 +1,382 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>YUI Library Examples: Slider: Basic Sliders</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    	<link rel="stylesheet" type="text/css" href="../../assets/yui.css" >
+
+<style>
+    /*Supplemental CSS for the YUI distribution*/
+    #custom-doc { width: 95%; min-width: 950px; }
+    #pagetitle {background-image: url(../../assets/bg_hd.gif);}
+/*    #pagetitle h1 {background-image: url(../../assets/title_h_bg.gif);}*/
+</style>
+
+<link rel="stylesheet" type="text/css" href="../../assets/dpSyntaxHighlighter.css">
+<link type="text/css" rel="stylesheet" href="../../build/cssfonts/fonts-min.css" />
+<script type="text/javascript" src="../../build/yui/yui-min.js"></script>
+<style type="text/css">
+    .vert_slider {
+        margin-bottom: 1em;
+    }
+</style>
+
+</head>
+<body id="yahoo-com" class=" yui-skin-sam">
+<div id="custom-doc" class="yui-t2">
+<div id="hd">
+	<div id="ygunav">
+		<p>
+            <em>
+                <a href="http://developer.yahoo.com/yui/3/">YUI 3.x Home</a> <i> - </i>	
+            </em>
+		</p>
+		<form action="http://search.yahoo.com/search" id="sitesearchform">
+            <input name="vs" type="hidden" value="developer.yahoo.com">
+            <input name="vs" type="hidden" value="yuiblog.com">
+		    <div id="sitesearch">
+		    	<label for="searchinput">Site Search (YDN &amp; YUIBlog): </label>
+			    <input type="text" id="searchinput" name="p">
+			    <input type="submit" value="Search" id="searchsubmit" class="ygbt">
+		    </div>
+		</form>
+    </div>
+	<div id="ygma"><a href="../../"><img src="../../assets/logo.gif"  border="0" width="200" height="93"></a></div>
+	<div id="pagetitle"><h1>YUI Library Examples: Slider: Basic Sliders</h1></div>
+</div>
+<div id="bd">
+
+
+	<div id="yui-main">
+		<div class="yui-b">
+		  <div class="yui-ge">
+			  <div class="yui-u first example" id="main">
+
+	<h2>Slider: Basic Sliders</h2>
+
+	<div id="example" class="promo">
+	<div class="example-intro">
+	<p>This example walks you through the basics of creating a Slider from script.
+Both Sliders in this example use the default value range of 0 - 100 and use
+default skin resources provided with the Sam skin.</p>
+
+<p>The first Slider is set up in a more traditional JavaScript coding style and
+the second using the shorter method chaining style.  The first Slider is
+configured to move along the vertical axis, and is initialized to a value of
+30.  The second Slider is horizontal and instantiated with minimal
+configuration.</p>
+	</div>	
+
+	<div class="module example-container ">
+			<div class="hd exampleHd">
+			<p class="newWindowButton yui-skin-sam">
+                <a href="slider_basic_clean.html" target="_blank">View example in new window.</a>
+            </p>
+		</div>		<div id="example-canvas" class="bd">
+
+		
+	<!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
+	
+	<div id="demo">
+
+    <h4>Vertical Slider</h4>
+    <p id="vert_value">Value: 30</p>
+    <div class="vert_slider"></div>
+
+    <h4>Horizontal Slider</h4>
+    <p id="horiz_value">Value: 0</p>
+    <div class="horiz_slider"></div>
+
+</div>
+<script type="text/javascript">
+// Create a YUI instance and request the slider module and its dependencies
+YUI({base:"../../build/", timeout: 10000}).use("slider", function (Y) {
+
+// store the node to display the vertical Slider's current value
+var v_report = Y.one('#vert_value'),
+    vert_slider;
+    
+// instantiate the vertical Slider.  Use the classic thumb provided with the
+// Sam skin
+vert_slider = new Y.Slider({
+    axis: 'y', // vertical Slider
+    value: 30, // initial value
+    railSize: '10em', // range the thumb can move through
+    thumbImage: '../../build/slider/assets/skins/sam/thumb-classic-y.png'
+});
+
+// callback function to display Slider's current value
+function reportValue(e) {
+    v_report.set('innerHTML', 'Value: ' + e.newVal);
+}
+
+vert_slider.after('valueChange', reportValue);
+
+// render the slider into the first element with class vert_slider
+vert_slider.render('.vert_slider');
+
+
+
+// instantiate the horizontal Slider, render it, and subscribe to its
+// valueChange event via method chaining.  No need to store the created Slider
+// in this case.
+new Y.Slider({
+        railSize: '200px',
+        thumbImage: '../../build/slider/assets/skins/sam/thumb-classic-x.png'
+    }).
+    render('.horiz_slider').
+    after('valueChange',function (e) {
+        Y.one('#horiz_value').set('innerHTML', 'Value: ' + e.newVal);
+    });
+
+});
+</script>
+	
+	<!--END SOURCE CODE FOR EXAMPLE =============================== -->
+	
+		
+		</div>
+	</div>			
+	</div>
+		
+	<h3>Creating a Slider from script</h3>
+<p>In this example, we'll be generating an X axis and Y axis Slider using entirely JavaScript.  To start, we'll need elements on the page into which the Sliders will be rendered.</p>
+
+<div id="syntax1" class="yui-syntax-highlight"><div class="numbers"><pre class="html4strict" style="font-family:monospace;"><ol><li class="li1"><div class="de1">    <span class="sc2">&lt;<span class="kw2">h4</span>&gt;</span>Vertical Slider<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h4</span>&gt;</span></div></li><li class="li1"><div class="de1">    <span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;vert_value&quot;</span>&gt;</span>Value: 0<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span></div></li><li class="li1"><div class="de1">    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;vert_slider&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2">    <span class="sc2">&lt;<span class="kw2">h4</span>&gt;</span>Horizontal Slider<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h4</span>&gt;</span></div></li><li class="li1"><div class="de1">    <span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;horiz_value&quot;</span>&gt;</span>Value: 0<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span></div></li><li class="li1"><div class="de1">    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;horiz_slider&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span></div></li></ol></pre></div><div class="nonumbers"><pre class="html4strict" style="font-family:monospace;">    <span class="sc2">&lt;<span class="kw2">h4</span>&gt;</span>Vertical Slider<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h4</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;vert_value&quot;</span>&gt;</span>Value: 0<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;vert_slider&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span>
+&nbsp;
+    <span class="sc2">&lt;<span class="kw2">h4</span>&gt;</span>Horizontal Slider<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">h4</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">p</span> <span class="kw3">id</span><span class="sy0">=</span><span class="st0">&quot;horiz_value&quot;</span>&gt;</span>Value: 0<span class="sc2">&lt;<span class="sy0">/</span><span class="kw2">p</span>&gt;</span>
+    <span class="sc2">&lt;<span class="kw2">div</span> <span class="kw3">class</span><span class="sy0">=</span><span class="st0">&quot;horiz_slider&quot;</span>&gt;&lt;<span class="sy0">/</span><span class="kw2">div</span>&gt;</span></pre></div><textarea id="syntax1-plain">    <h4>Vertical Slider</h4>
+    <p id="vert_value">Value: 0</p>
+    <div class="vert_slider"></div>
+
+    <h4>Horizontal Slider</h4>
+    <p id="horiz_value">Value: 0</p>
+    <div class="horiz_slider"></div></textarea></div>
+<h3>Set up your YUI instance</h3>
+<p>Create a YUI instance and <code>use</code> the <code>slider</code> module.</p>
+
+<div id="syntax2" class="yui-syntax-highlight"><div class="numbers"><pre class="javascript" style="font-family:monospace;"><ol><li class="li1"><div class="de1">YUI<span class="br0">&#40;</span><span class="br0">&#123;</span>base<span class="sy0">:</span><span class="st0">&quot;../../build/&quot;</span><span class="sy0">,</span> timeout<span class="sy0">:</span> <span class="nu0">10000</span><span class="br0">&#125;</span><span class="br0">&#41;</span>.<span class="kw2">use</span><span class="br0">&#40;</span><span class="st0">&quot;slider&quot;</span><span class="sy0">,</span> <span class="kw2">function</span> <span class="br0">&#40;</span>Y<span class="br0">&#41;</span> <span class="br0">&#123;</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li1"><div class="de1"><span class="co2">/* our code goes here */</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li2"><div class="de2"><span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></div></li></ol></pre></div><div class="nonumbers"><pre class="javascript" style="font-family:monospace;">YUI<span class="br0">&#40;</span><span class="br0">&#123;</span>base<span class="sy0">:</span><span class="st0">&quot;../../build/&quot;</span><span class="sy0">,</span> timeout<span class="sy0">:</span> <span class="nu0">10000</span><span class="br0">&#125;</span><span class="br0">&#41;</span>.<span class="kw2">use</span><span class="br0">&#40;</span><span class="st0">&quot;slider&quot;</span><span class="sy0">,</span> <span class="kw2">function</span> <span class="br0">&#40;</span>Y<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+<span class="co2">/* our code goes here */</span>
+&nbsp;
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre></div><textarea id="syntax2-plain">YUI({base:"../../build/", timeout: 10000}).use("slider", function (Y) {
+
+/* our code goes here */
+
+});</textarea></div>
+<h3>Creating a vertical Slider</h3>
+<p>To create a vertical Slider you just need to set the <code>axis</code> attribute to &quot;y&quot;.  The Sam skin comes with a thumb image for both horizontal and vertical Sliders.</p>
+
+<div id="syntax3" class="yui-syntax-highlight"><div class="numbers"><pre class="javascript" style="font-family:monospace;"><ol><li class="li1"><div class="de1"><span class="kw2">var</span> vert_slider<span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li1"><div class="de1"><span class="co1">// instantiate the vertical Slider.  Use the classic Y thumb provided with the</span></div></li><li class="li1"><div class="de1"><span class="co1">// Sam skin</span></div></li><li class="li2"><div class="de2">vert_slider <span class="sy0">=</span> <span class="kw2">new</span> Y.<span class="me1">Slider</span><span class="br0">&#40;</span><span class="br0">&#123;</span></div></li><li class="li1"><div class="de1">    axis<span class="sy0">:</span> <span class="st0">'y'</span><span class="sy0">,</span>        <span class="co1">// vertical Slider</span></div></li><li class="li1"><div class="de1">    value<span class="sy0">:</span> <span class="nu0">30</span><span class="sy0">,</span>        <span class="co1">// initial value</span></div></li><li class="li1"><div class="de1">    railSize<span class="sy0">:</span> <span class="st0">'10em'</span><span class="sy0">,</span> <span class="co1">// range the thumb can move through</span></div></li><li class="li1"><div class="de1">    thumbImage<span class="sy0">:</span> <span class="st0">'../../build/slider/assets/skins/sam/thumb-classic-y.png'</span></div></li><li class="li2"><div class="de2"><span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></div></li></ol></pre></div><div class="nonumbers"><pre class="javascript" style="font-family:monospace;"><span class="kw2">var</span> vert_slider<span class="sy0">;</span>
+&nbsp;
+<span class="co1">// instantiate the vertical Slider.  Use the classic Y thumb provided with the</span>
+<span class="co1">// Sam skin</span>
+vert_slider <span class="sy0">=</span> <span class="kw2">new</span> Y.<span class="me1">Slider</span><span class="br0">&#40;</span><span class="br0">&#123;</span>
+    axis<span class="sy0">:</span> <span class="st0">'y'</span><span class="sy0">,</span>        <span class="co1">// vertical Slider</span>
+    value<span class="sy0">:</span> <span class="nu0">30</span><span class="sy0">,</span>        <span class="co1">// initial value</span>
+    railSize<span class="sy0">:</span> <span class="st0">'10em'</span><span class="sy0">,</span> <span class="co1">// range the thumb can move through</span>
+    thumbImage<span class="sy0">:</span> <span class="st0">'../../build/slider/assets/skins/sam/thumb-classic-y.png'</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre></div><textarea id="syntax3-plain">var vert_slider;
+    
+// instantiate the vertical Slider.  Use the classic Y thumb provided with the
+// Sam skin
+vert_slider = new Y.Slider({
+    axis: 'y',        // vertical Slider
+    value: 30,        // initial value
+    railSize: '10em', // range the thumb can move through
+    thumbImage: '../../build/slider/assets/skins/sam/thumb-classic-y.png'
+});</textarea></div>
+<p>We'll subscribe to our Slider's <code>valueChange</code> event and display the current value in the <code>#vert_value</code> Node above the Slider.</p>
+
+<div id="syntax4" class="yui-syntax-highlight"><div class="numbers"><pre class="javascript" style="font-family:monospace;"><ol><li class="li1"><div class="de1"><span class="kw2">var</span> v_report <span class="sy0">=</span> Y.<span class="me1">one</span><span class="br0">&#40;</span><span class="st0">'#vert_value'</span><span class="br0">&#41;</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li1"><div class="de1"><span class="co1">// callback function to display Slider's current value</span></div></li><li class="li1"><div class="de1"><span class="kw2">function</span> reportValue<span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span></div></li><li class="li2"><div class="de2">    v_report.<span class="me1">set</span><span class="br0">&#40;</span><span class="st0">'innerHTML'</span><span class="sy0">,</span> <span class="st0">'Value: '</span> <span class="sy0">+</span> e.<span class="me1">newVal</span><span class="br0">&#41;</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1"><span class="br0">&#125;</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li1"><div class="de1">vert_slider.<span class="me1">after</span><span class="br0">&#40;</span><span class="st0">'valueChange'</span><span class="sy0">,</span> reportValue<span class="br0">&#41;</span><span class="sy0">;</span></div></li></ol></pre></div><div class="nonumbers"><pre class="javascript" style="font-family:monospace;"><span class="kw2">var</span> v_report <span class="sy0">=</span> Y.<span class="me1">one</span><span class="br0">&#40;</span><span class="st0">'#vert_value'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// callback function to display Slider's current value</span>
+<span class="kw2">function</span> reportValue<span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    v_report.<span class="me1">set</span><span class="br0">&#40;</span><span class="st0">'innerHTML'</span><span class="sy0">,</span> <span class="st0">'Value: '</span> <span class="sy0">+</span> e.<span class="me1">newVal</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+vert_slider.<span class="me1">after</span><span class="br0">&#40;</span><span class="st0">'valueChange'</span><span class="sy0">,</span> reportValue<span class="br0">&#41;</span><span class="sy0">;</span></pre></div><textarea id="syntax4-plain">var v_report = Y.one('#vert_value');
+
+// callback function to display Slider's current value
+function reportValue(e) {
+    v_report.set('innerHTML', 'Value: ' + e.newVal);
+}
+
+vert_slider.after('valueChange', reportValue);</textarea></div>
+<p>Then finally, we'll render the Slider into the first element with the class &quot;vert_slider&quot;.</p>
+
+<div id="syntax5" class="yui-syntax-highlight"><div class="numbers"><pre class="javascript" style="font-family:monospace;"><ol><li class="li1"><div class="de1">vert_slider.<span class="me1">render</span><span class="br0">&#40;</span><span class="st0">'.vert_slider'</span><span class="br0">&#41;</span><span class="sy0">;</span></div></li></ol></pre></div><div class="nonumbers"><pre class="javascript" style="font-family:monospace;">vert_slider.<span class="me1">render</span><span class="br0">&#40;</span><span class="st0">'.vert_slider'</span><span class="br0">&#41;</span><span class="sy0">;</span></pre></div><textarea id="syntax5-plain">vert_slider.render('.vert_slider');</textarea></div>
+<h3>Creating a horizontal Slider</h3>
+<p>Sliders are horizontal by default, so there's no need to specify the <code>axis</code> attribute.  In lieu of an initial <code>value</code> setting, the <code>min</code> is used.  Slider's default <code>min</code> and <code>max</code> are 0 and 100 respectively.  All we need to do is describe how long the Slider's rail is and what (if any) thumb image to use.</p>
+
+<div id="syntax6" class="yui-syntax-highlight"><div class="numbers"><pre class="javascript" style="font-family:monospace;"><ol><li class="li1"><div class="de1"><span class="kw2">var</span> horiz_slider <span class="sy0">=</span> <span class="kw2">new</span> Y.<span class="me1">Slider</span><span class="br0">&#40;</span><span class="br0">&#123;</span></div></li><li class="li1"><div class="de1">    railSize<span class="sy0">:</span> <span class="st0">'200px'</span><span class="sy0">,</span></div></li><li class="li1"><div class="de1">    thumbImage<span class="sy0">:</span> <span class="st0">'../../build/slider/assets/skins/sam/thumb-classic-x.png'</span></div></li><li class="li1"><div class="de1"><span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></div></li></ol></pre></div><div class="nonumbers"><pre class="javascript" style="font-family:monospace;"><span class="kw2">var</span> horiz_slider <span class="sy0">=</span> <span class="kw2">new</span> Y.<span class="me1">Slider</span><span class="br0">&#40;</span><span class="br0">&#123;</span>
+    railSize<span class="sy0">:</span> <span class="st0">'200px'</span><span class="sy0">,</span>
+    thumbImage<span class="sy0">:</span> <span class="st0">'../../build/slider/assets/skins/sam/thumb-classic-x.png'</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre></div><textarea id="syntax6-plain">var horiz_slider = new Y.Slider({
+    railSize: '200px',
+    thumbImage: '../../build/slider/assets/skins/sam/thumb-classic-x.png'
+});</textarea></div>
+<p>Rather than store the Slider in a variable this time around, however, let's use method chaining to render and set up the display handler inline.</p>
+
+<div id="syntax7" class="yui-syntax-highlight"><div class="numbers"><pre class="javascript" style="font-family:monospace;"><ol><li class="li1"><div class="de1"><span class="kw2">new</span> Y.<span class="me1">Slider</span><span class="br0">&#40;</span><span class="br0">&#123;</span></div></li><li class="li1"><div class="de1">        railSize<span class="sy0">:</span> <span class="st0">'200px'</span><span class="sy0">,</span></div></li><li class="li1"><div class="de1">        thumbImage<span class="sy0">:</span> <span class="st0">'../../build/slider/assets/skins/sam/thumb-classic-x.png'</span></div></li><li class="li1"><div class="de1">    <span class="br0">&#125;</span><span class="br0">&#41;</span>.</div></li><li class="li2"><div class="de2">    <span class="me1">render</span><span class="br0">&#40;</span><span class="st0">'.horiz_slider'</span><span class="br0">&#41;</span>.</div></li><li class="li1"><div class="de1">    <span class="me1">after</span><span class="br0">&#40;</span><span class="st0">'valueChange'</span><span class="sy0">,</span><span class="kw2">function</span> <span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span></div></li><li class="li1"><div class="de1">        Y.<span class="me1">one</span><span class="br0">&#40;</span><span class="st0">'#horiz_value'</span><span class="br0">&#41;</span>.<span class="me1">set</span><span class="br0">&#40;</span><span class="st0">'innerHTML'</span><span class="sy0">,</span> <span class="st0">'Value: '</span> <span class="sy0">+</span> e.<span class="me1">newVal</span><span class="br0">&#41;</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">    <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></div></li></ol></pre></div><div class="nonumbers"><pre class="javascript" style="font-family:monospace;"><span class="kw2">new</span> Y.<span class="me1">Slider</span><span class="br0">&#40;</span><span class="br0">&#123;</span>
+        railSize<span class="sy0">:</span> <span class="st0">'200px'</span><span class="sy0">,</span>
+        thumbImage<span class="sy0">:</span> <span class="st0">'../../build/slider/assets/skins/sam/thumb-classic-x.png'</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span>.
+    <span class="me1">render</span><span class="br0">&#40;</span><span class="st0">'.horiz_slider'</span><span class="br0">&#41;</span>.
+    <span class="me1">after</span><span class="br0">&#40;</span><span class="st0">'valueChange'</span><span class="sy0">,</span><span class="kw2">function</span> <span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        Y.<span class="me1">one</span><span class="br0">&#40;</span><span class="st0">'#horiz_value'</span><span class="br0">&#41;</span>.<span class="me1">set</span><span class="br0">&#40;</span><span class="st0">'innerHTML'</span><span class="sy0">,</span> <span class="st0">'Value: '</span> <span class="sy0">+</span> e.<span class="me1">newVal</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre></div><textarea id="syntax7-plain">new Y.Slider({
+        railSize: '200px',
+        thumbImage: '../../build/slider/assets/skins/sam/thumb-classic-x.png'
+    }).
+    render('.horiz_slider').
+    after('valueChange',function (e) {
+        Y.one('#horiz_value').set('innerHTML', 'Value: ' + e.newVal);
+    });</textarea></div>
+<p>And that's all there is to it!</p>
+
+<h3>Full Code Listing</h3>
+<div id="syntax8" class="yui-syntax-highlight yui-syntax-highlight-linenumbers"><div class="numbers"><pre class="javascript" style="font-family:monospace;"><ol><li class="li1"><div class="de1"><span class="co1">// Create a YUI instance and request the slider module and its dependencies</span></div></li><li class="li1"><div class="de1">YUI<span class="br0">&#40;</span><span class="br0">&#123;</span>base<span class="sy0">:</span><span class="st0">&quot;../../build/&quot;</span><span class="sy0">,</span> timeout<span class="sy0">:</span> <span class="nu0">10000</span><span class="br0">&#125;</span><span class="br0">&#41;</span>.<span class="kw2">use</span><span class="br0">&#40;</span><span class="st0">&quot;slider&quot;</span><span class="sy0">,</span> <span class="kw2">function</span> <span class="br0">&#40;</span>Y<span class="br0">&#41;</span> <span class="br0">&#123;</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li1"><div class="de1"><span class="co1">// store the node to display the vertical Slider's current value</span></div></li><li class="li2"><div class="de2"><span class="kw2">var</span> v_report <span class="sy0">=</span> Y.<span class="me1">one</span><span class="br0">&#40;</span><span class="st0">'#vert_value'</span><span class="br0">&#41;</span><span class="sy0">,</span></div></li><li class="li1"><div class="de1">    vert_slider<span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li1"><div class="de1"><span class="co1">// instantiate the vertical Slider.  Use the classic thumb provided with the</span></div></li><li class="li1"><div class="de1"><span class="co1">// Sam skin</span></div></li><li class="li2"><div class="de2">vert_slider <span class="sy0">=</span> <span class="kw2">new</span> Y.<span class="me1">Slider</span><span class="br0">&#40;</span><span class="br0">&#123;</span></div></li><li class="li1"><div class="de1">    axis<span class="sy0">:</span> <span class="st0">'y'</span><span class="sy0">,</span> <span class="co1">// vertical Slider</span></div></li><li class="li1"><div class="de1">    value<span class="sy0">:</span> <span class="nu0">30</span><span class="sy0">,</span> <span class="co1">// initial value</span></div></li><li class="li1"><div class="de1">    railSize<span class="sy0">:</span> <span class="st0">'10em'</span><span class="sy0">,</span> <span class="co1">// range the thumb can move through</span></div></li><li class="li1"><div class="de1">    thumbImage<span class="sy0">:</span> <span class="st0">'../../build/slider/assets/skins/sam/thumb-classic-y.png'</span></div></li><li class="li2"><div class="de2"><span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li1"><div class="de1"><span class="co1">// callback function to display Slider's current value</span></div></li><li class="li1"><div class="de1"><span class="kw2">function</span> reportValue<span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span></div></li><li class="li1"><div class="de1">    v_report.<span class="me1">set</span><span class="br0">&#40;</span><span class="st0">'innerHTML'</span><span class="sy0">,</span> <span class="st0">'Value: '</span> <span class="sy0">+</span> e.<span class="me1">newVal</span><span class="br0">&#41;</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2"><span class="br0">&#125;</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li1"><div class="de1">vert_slider.<span class="me1">after</span><span class="br0">&#40;</span><span class="st0">'valueChange'</span><span class="sy0">,</span> reportValue<span class="br0">&#41;</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li1"><div class="de1"><span class="co1">// render the slider into the first element with class vert_slider</span></div></li><li class="li2"><div class="de2">vert_slider.<span class="me1">render</span><span class="br0">&#40;</span><span class="st0">'.vert_slider'</span><span class="br0">&#41;</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li1"><div class="de1">&nbsp;</div></li><li class="li1"><div class="de1"><span class="co1">// instantiate the horizontal Slider, render it, and subscribe to its</span></div></li><li class="li2"><div class="de2"><span class="co1">// valueChange event via method chaining.  No need to store the created Slider</span></div></li><li class="li1"><div class="de1"><span class="co1">// in this case.</span></div></li><li class="li1"><div class="de1"><span class="kw2">new</span> Y.<span class="me1">Slider</span><span class="br0">&#40;</span><span class="br0">&#123;</span></div></li><li class="li1"><div class="de1">        railSize<span class="sy0">:</span> <span class="st0">'200px'</span><span class="sy0">,</span></div></li><li class="li1"><div class="de1">        thumbImage<span class="sy0">:</span> <span class="st0">'../../build/slider/assets/skins/sam/thumb-classic-x.png'</span></div></li><li class="li2"><div class="de2">    <span class="br0">&#125;</span><span class="br0">&#41;</span>.</div></li><li class="li1"><div class="de1">    <span class="me1">render</span><span class="br0">&#40;</span><span class="st0">'.horiz_slider'</span><span class="br0">&#41;</span>.</div></li><li class="li1"><div class="de1">    <span class="me1">after</span><span class="br0">&#40;</span><span class="st0">'valueChange'</span><span class="sy0">,</span><span class="kw2">function</span> <span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span></div></li><li class="li1"><div class="de1">        Y.<span class="me1">one</span><span class="br0">&#40;</span><span class="st0">'#horiz_value'</span><span class="br0">&#41;</span>.<span class="me1">set</span><span class="br0">&#40;</span><span class="st0">'innerHTML'</span><span class="sy0">,</span> <span class="st0">'Value: '</span> <span class="sy0">+</span> e.<span class="me1">newVal</span><span class="br0">&#41;</span><span class="sy0">;</span></div></li><li class="li1"><div class="de1">    <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></div></li><li class="li2"><div class="de2">&nbsp;</div></li><li class="li1"><div class="de1"><span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></div></li></ol></pre></div><div class="nonumbers"><pre class="javascript" style="font-family:monospace;"><span class="co1">// Create a YUI instance and request the slider module and its dependencies</span>
+YUI<span class="br0">&#40;</span><span class="br0">&#123;</span>base<span class="sy0">:</span><span class="st0">&quot;../../build/&quot;</span><span class="sy0">,</span> timeout<span class="sy0">:</span> <span class="nu0">10000</span><span class="br0">&#125;</span><span class="br0">&#41;</span>.<span class="kw2">use</span><span class="br0">&#40;</span><span class="st0">&quot;slider&quot;</span><span class="sy0">,</span> <span class="kw2">function</span> <span class="br0">&#40;</span>Y<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+<span class="co1">// store the node to display the vertical Slider's current value</span>
+<span class="kw2">var</span> v_report <span class="sy0">=</span> Y.<span class="me1">one</span><span class="br0">&#40;</span><span class="st0">'#vert_value'</span><span class="br0">&#41;</span><span class="sy0">,</span>
+    vert_slider<span class="sy0">;</span>
+&nbsp;
+<span class="co1">// instantiate the vertical Slider.  Use the classic thumb provided with the</span>
+<span class="co1">// Sam skin</span>
+vert_slider <span class="sy0">=</span> <span class="kw2">new</span> Y.<span class="me1">Slider</span><span class="br0">&#40;</span><span class="br0">&#123;</span>
+    axis<span class="sy0">:</span> <span class="st0">'y'</span><span class="sy0">,</span> <span class="co1">// vertical Slider</span>
+    value<span class="sy0">:</span> <span class="nu0">30</span><span class="sy0">,</span> <span class="co1">// initial value</span>
+    railSize<span class="sy0">:</span> <span class="st0">'10em'</span><span class="sy0">,</span> <span class="co1">// range the thumb can move through</span>
+    thumbImage<span class="sy0">:</span> <span class="st0">'../../build/slider/assets/skins/sam/thumb-classic-y.png'</span>
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// callback function to display Slider's current value</span>
+<span class="kw2">function</span> reportValue<span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    v_report.<span class="me1">set</span><span class="br0">&#40;</span><span class="st0">'innerHTML'</span><span class="sy0">,</span> <span class="st0">'Value: '</span> <span class="sy0">+</span> e.<span class="me1">newVal</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+vert_slider.<span class="me1">after</span><span class="br0">&#40;</span><span class="st0">'valueChange'</span><span class="sy0">,</span> reportValue<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">// render the slider into the first element with class vert_slider</span>
+vert_slider.<span class="me1">render</span><span class="br0">&#40;</span><span class="st0">'.vert_slider'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+<span class="co1">// instantiate the horizontal Slider, render it, and subscribe to its</span>
+<span class="co1">// valueChange event via method chaining.  No need to store the created Slider</span>
+<span class="co1">// in this case.</span>
+<span class="kw2">new</span> Y.<span class="me1">Slider</span><span class="br0">&#40;</span><span class="br0">&#123;</span>
+        railSize<span class="sy0">:</span> <span class="st0">'200px'</span><span class="sy0">,</span>
+        thumbImage<span class="sy0">:</span> <span class="st0">'../../build/slider/assets/skins/sam/thumb-classic-x.png'</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span>.
+    <span class="me1">render</span><span class="br0">&#40;</span><span class="st0">'.horiz_slider'</span><span class="br0">&#41;</span>.
+    <span class="me1">after</span><span class="br0">&#40;</span><span class="st0">'valueChange'</span><span class="sy0">,</span><span class="kw2">function</span> <span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        Y.<span class="me1">one</span><span class="br0">&#40;</span><span class="st0">'#horiz_value'</span><span class="br0">&#41;</span>.<span class="me1">set</span><span class="br0">&#40;</span><span class="st0">'innerHTML'</span><span class="sy0">,</span> <span class="st0">'Value: '</span> <span class="sy0">+</span> e.<span class="me1">newVal</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre></div><textarea id="syntax8-plain">// Create a YUI instance and request the slider module and its dependencies
+YUI({base:"../../build/", timeout: 10000}).use("slider", function (Y) {
+
+// store the node to display the vertical Slider's current value
+var v_report = Y.one('#vert_value'),
+    vert_slider;
+    
+// instantiate the vertical Slider.  Use the classic thumb provided with the
+// Sam skin
+vert_slider = new Y.Slider({
+    axis: 'y', // vertical Slider
+    value: 30, // initial value
+    railSize: '10em', // range the thumb can move through
+    thumbImage: '../../build/slider/assets/skins/sam/thumb-classic-y.png'
+});
+
+// callback function to display Slider's current value
+function reportValue(e) {
+    v_report.set('innerHTML', 'Value: ' + e.newVal);
+}
+
+vert_slider.after('valueChange', reportValue);
+
+// render the slider into the first element with class vert_slider
+vert_slider.render('.vert_slider');
+
+
+
+// instantiate the horizontal Slider, render it, and subscribe to its
+// valueChange event via method chaining.  No need to store the created Slider
+// in this case.
+new Y.Slider({
+        railSize: '200px',
+        thumbImage: '../../build/slider/assets/skins/sam/thumb-classic-x.png'
+    }).
+    render('.horiz_slider').
+    after('valueChange',function (e) {
+        Y.one('#horiz_value').set('innerHTML', 'Value: ' + e.newVal);
+    });
+
+});</textarea></div>				</div>
+				<div class="yui-u sidebar">
+					
+				
+					<div id="examples" class="mod box4">
+                        <div class="hd">
+						<h4>
+    Slider Examples:</h4>
+                        </div>
+						<div class="bd">
+							<ul>
+								<li class='selected'><a href='../slider/slider_basic.html'>Basic Sliders</a></li><li><a href='../slider/slider_from_markup.html'>Creating a Slider from existing markup</a></li><li><a href='../stylesheet/stylesheet_theme.html'>Adjusting a page theme on the fly (included with examples for StyleSheet)</a></li><li><a href='../console/console_global.html'>Creating a universal Console (included with examples for Console)</a></li><li><a href='../dd/photo-browser.html'>Photo Browser (included with examples for Drag &amp; Drop)</a></li>							</ul>
+						</div>
+					</div>
+					
+					<div class="mod box4">
+                        <div class="hd">
+						<h4>More Slider Resources:</h4>
+                        </div>
+                        <div class="bd">
+						<ul>
+							<!-- <li><a href="http://developer.yahoo.com/yui/slider/">User's Guide</a> (external)</li> -->
+<li><a href="../../api/module_slider.html">API Documentation</a></li></ul>
+                        </div>
+					</div>
+			  </div>
+		</div>
+		
+		</div>
+	</div>
+
+
+<div class="yui-b toc3" id="tocWrapper">
+<!-- TABLE OF CONTENTS -->
+<div id="toc">
+	
+<ul>
+<li class="sect first">YUI 3 Resources</li><li class="item"><a title="YUI 3 -- Yahoo! User Interface (YUI) Library" href="http://developer.yahoo.com/yui/3/">YUI 3 Web Site</a></li><li class="item"><a title="Examples of every YUI utility and control in action" href="../../examples/">YUI 3 Examples</a></li><li class="item"><a title="Instantly searchable API documentation for the entire YUI library." href="../../api/">YUI 3 API Docs</a></li><li class="item"><a title="YUI 3 Dependency Configurator -- configure your custom YUI implementation" href="http://developer.yahoo.com/yui/3/configurator">YUI 3 Dependency Configurator</a></li><li class="item"><a title="The YUI 3 Forum on YUILibrary.com" href="http://yuilibrary.com/forum/viewforum.php?f=15">YUI 3 Forums (external)</a></li><li class="item"><a title="Found a bug or a missing feature? Let us know on YUILibrary.com." href="http://developer.yahoo.com/yui/articles/reportingbugs/">Bug Reports/Feature Requests</a></li><li class="item"><a title="YUI is free and open, offered under a BSD license." href="http://developer.yahoo.com/yui/license.html">YUI License</a></li><li class="item"><a title="Download and fork the YUI project on GitHub" href="http://github.com/yui">YUI on Github</a></li><li class="item"><a title="The Yahoo! User Interface Blog" href="http://yuiblog.com">YUI Blog (external)</a></li><li class="sect">YUI 3 Core - Examples</li><li class="item"><a title="YUI Global Object - Functional Examples" href="../../examples/yui/index.html">YUI Global Object</a></li><li class="item"><a title="Event - Functional Examples" href="../../examples/event/index.html">Event</a></li><li class="item"><a title="Node - Functional Examples" href="../../examples/node/index.html">Node</a></li><li class="sect">YUI 3 Component Infrastructure - Examples</li><li class="item"><a title="Attribute - Functional Examples" href="../../examples/attribute/index.html">Attribute</a></li><li class="item"><a title="Plugin - Functional Examples" href="../../examples/plugin/index.html">Plugin <img src='http://l.yimg.com/a/i/not/beta_1.gif'></a></li><li class="item"><a title="Widget - Functional Examples" href="../../examples/widget/index.html">Widget <img src='http://l.yimg.com/a/i/not/beta_1.gif'></a></li><li class="sect">YUI 3 Utilities - Examples</li><li class="item"><a title="Animation - Functional Examples" href="../../examples/anim/index.html">Animation</a></li><li class="item"><a title="AsyncQueue - Functional Examples" href="../../examples/async-queue/index.html">AsyncQueue</a></li><li class="item"><a title="Browser History - Functional Examples" href="../../examples/history/index.html">Browser History</a></li><li class="item"><a title="Cache - Functional Examples" href="../../examples/cache/index.html">Cache</a></li><li class="item"><a title="Cookie - Functional Examples" href="../../examples/cookie/index.html">Cookie</a></li><li class="item"><a title="DataSchema - Functional Examples" href="../../examples/dataschema/index.html">DataSchema <img src='http://l.yimg.com/a/i/not/beta_1.gif'></a></li><li class="item"><a title="DataSource - Functional Examples" href="../../examples/datasource/index.html">DataSource <img src='http://l.yimg.com/a/i/not/beta_1.gif'></a></li><li class="item"><a title="DataType - Functional Examples" href="../../examples/datatype/index.html">DataType <img src='http://l.yimg.com/a/i/not/beta_1.gif'></a></li><li class="item"><a title="Drag &amp; Drop - Functional Examples" href="../../examples/dd/index.html">Drag &amp; Drop</a></li><li class="item"><a title="Get - Functional Examples" href="../../examples/get/index.html">Get</a></li><li class="item"><a title="ImageLoader - Functional Examples" href="../../examples/imageloader/index.html">ImageLoader</a></li><li class="item"><a title="IO - Functional Examples" href="../../examples/io/index.html">IO</a></li><li class="item"><a title="JSON (JavaScript Object Notation) - Functional Examples" href="../../examples/json/index.html">JSON</a></li><li class="item"><a title="Stylesheet - Functional Examples" href="../../examples/stylesheet/index.html">Stylesheet</a></li><li class="sect">YUI 3 Widgets - Examples</li><li class="item"><a title="Overlay - Functional Examples" href="../../examples/overlay/index.html">Overlay <img src='http://l.yimg.com/a/i/not/beta_1.gif'></a></li><li class="selected "><a title="Slider - Functional Examples" href="../../examples/slider/index.html">Slider <img src='http://l.yimg.com/a/i/not/beta_1.gif'></a></li><li class="sect">YUI 3 Node Plugins - Examples</li><li class="item"><a title="FocusManager Node Plugin - Functional Examples" href="../../examples/node-focusmanager/index.html">FocusManager Node Plugin <img src='http://l.yimg.com/a/i/not/beta_1.gif'></a></li><li class="item"><a title="MenuNav Node Plugin - Functional Examples" href="../../examples/node-menunav/index.html">MenuNav Node Plugin <img src='http://l.yimg.com/a/i/not/beta_1.gif'></a></li><li class="sect">YUI 3 CSS - Examples</li><li class="item"><a title="YUI CSS Reset - Functional Examples" href="../../examples/cssreset/index.html">CSS Reset</a></li><li class="item"><a title="YUI Fonts - Functional Examples" href="../../examples/cssfonts/index.html">CSS Fonts</a></li><li class="item"><a title="YUI Base - Functional Examples" href="../../examples/cssbase/index.html">CSS Base</a></li><li class="sect">YUI 3 Developer Tools - Examples</li><li class="item"><a title="Console - Functional Examples" href="../../examples/console/index.html">Console <img src='http://l.yimg.com/a/i/not/beta_1.gif'></a></li><li class="item"><a title="Console Filters Plugin- Functional Examples" href="../../examples/console-filters/index.html">Plugin.ConsoleFilters <img src='http://l.yimg.com/a/i/not/beta_1.gif'></a></li><li class="item"><a title="Profiler - Functional Examples" href="../../examples/profiler/index.html">Profiler</a></li><li class="item"><a title="Test - Functional Examples" href="../../examples/test/index.html">Test</a></li><li class="sect">Other Useful YUI 3 Resources</li><li class="item"><a title="Answers to Frequently Asked Questions about the YUI Library" href="http://developer.yahoo.com/yui/articles/faq/">YUI FAQ (external)</a></li><li class="item"><a title="Yahoo!'s philosophy of Graded Browser Support" href="http://developer.yahoo.com/yui/articles/gbs/">Graded Browser Support (external)</a></li><li class="item"><a title="Videos and podcasts from the YUI Team and from the Yahoo! frontend engineering community." href="http://developer.yahoo.com/yui/theater/">YUI Theater (external)</a></li></ul>
+</div>
+</div>
+	</div><!--closes bd-->
+
+	<div id="ft">
+        <p class="first">Copyright &copy; 2009 Yahoo! Inc. All rights reserved.</p>
+        <p><a href="http://privacy.yahoo.com/privacy/us/devel/index.html">Privacy Policy</a> - 
+            <a href="http://docs.yahoo.com/info/terms/">Terms of Service</a> - 
+            <a href="http://docs.yahoo.com/info/copyright/copyright.html">Copyright Policy</a> - 
+            <a href="http://careers.yahoo.com/">Job Openings</a></p>
+	</div>
+</div>
+<script language="javascript"> 
+var yuiConfig = {base:"../../build/", timeout: 10000};
+</script>
+<script src="../../assets/syntax.js"></script>
+<script src="../../assets/dpSyntaxHighlighter.js"></script>
+<script language="javascript"> 
+dp.SyntaxHighlighter.HighlightAll('code'); 
+</script>
+</body>
+</html>

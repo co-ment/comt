@@ -1,0 +1,119 @@
+{% load com %}
+{% load i18n %}
+
+<!-- TODO factorize with base.html for style and jquery etc... -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+<!-- TODO factorize with base.html etc...--> 
+    <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}js/lib/yui/{{ YUI_VERSION  }}/build/cssreset/reset-min.css"> 
+    <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}js/lib/yui/{{ YUI_VERSION  }}/build/cssfonts/fonts-min.css"> 
+    <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}js/lib/yui/{{ YUI_VERSION  }}/build/cssbase/base-min.css">
+
+<!-- TODO factorize with base.html for jquery etc... -->
+	<script type="text/javascript">
+	<!--
+	sv_media_url = "{{ MEDIA_URL|escapejs}}" ; 
+	-->
+	</script>
+    <link type="text/css" href="{{ MEDIA_URL }}js/lib/jquery/css/smoothness/jquery-ui-1.7.2.custom.css" rel="stylesheet" />    
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/lib/jquery/js/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/lib/jquery/js/jquery-ui-1.7.2.custom.min.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/lib/jquery/js/layout/jquery.layout.min.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/lib/jquery/js/cookie/jquery.cookie.js"></script><!-- not minified -->
+
+    <!-- <script type="text/javascript" src="{{ MEDIA_URL }}js/lib/bgiframe_2.1.1/jquery.bgiframe.min.js"></script> -->
+
+    <link type="text/css" href="{{ MEDIA_URL }}css/site/text_view_frame.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="{% url django.views.i18n.javascript_catalog %}"></script>
+{% if CLIENT_DEBUG %}
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/client/f_message.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/client/f_printDialog.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/site/f_text_view_frame.js"></script>
+{% else %}
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/client/f_client-min.js?1258465065"></script> 
+{% endif %}
+    <style type="text/css">
+        /*
+         *  TAB-THEME ADJUSTMENTS
+         */
+        .ui-tabs-nav li {
+            white-space:    nowrap;
+        }
+        .ui-tabs-nav li a {
+            font-size:      1em !important;
+            padding:        4px 1.5ex 3px !important;
+        }
+        .ui-tabs-panel {
+            font-size:      1em !important;
+            padding:        8px 1em !important;
+        }
+    </style>
+
+
+
+</head>
+<BODY>
+    <DIV id="add_comment_btn" class="initially_hidden"> 
+		<img align="middle" src="/site_media/img/note_add_sop_mid.gif" alt="{% blocktrans %}add a comment{% endblocktrans %}" title="{% blocktrans %}add a comment{% endblocktrans %}"/>
+    </DIV>
+	<!-- cf.http://layout.jquery-dev.net/download/example.html -->
+	<!-- TODO check height 600 ... -->
+	<DIV id="outer-north" class="ui-layout-north"> 
+        <div style="margin-top:4px;" id="c_slider"></div>        
+ 	</DIV>
+	<DIV class="outer-center" > 
+	    <DIV class="inner-north initially_hidden" > 
+		    <ul id="header-nobck">
+		        <li><a href="#c_filter">{% blocktrans %}Filter comments{% endblocktrans %}</a></li>
+                <li><a href="#c_preferences">{% blocktrans %}Preferences{% endblocktrans %}</a></li>
+                <li><a href="#c_text_preferences">{% blocktrans %}Text preferences{% endblocktrans %}</a></li>
+		    </ul>
+            <div id="c_filter" class="c_tab">
+            </div>
+            <div id="c_preferences" class="c_tab">
+            </div>
+            <div id="c_text_preferences" class="c_tab">
+            </div>
+	    </DIV>
+         <iframe id="text_view_comments" name="text_view_comments" class="ui-layout-center"
+            width="100%" height="100%" frameborder="0" scrolling="auto"
+            src="{% url text-view-comments text.key %}?{{ request.GET.urlencode }}"></iframe>
+             
+<!--  exemple de passage d'arguments        <iframe id="text_view_comments" name="text_view_comments" class="ui-layout-center"
+            width="100%" height="100%" frameborder="0" scrolling="auto"
+            src="{% url text-view-comments text.key %}?filter_name=aa&filter_tag=toto"></iframe>
+ -->            
+	</DIV>
+<div style="display: none;">
+    <div id="dialog_h"></div>
+    <div id="dialog_print_export" title="">
+<!--         <p id="validateTips">All form fields are required.</p> -->
+    
+        <form name="print_export_form" id="print_export_form" method="post" action="" target_action="{% url text-export text.key "FoRmAt" "DoWnLoAd" "WhIcHCoMmEnT" "WiThCoLoR" %}?{{ request.GET.urlencode }}">
+	        <fieldset>
+                <label for="name">{% blocktrans %}Which comments?{% endblocktrans %}</label>
+                <select  name="p_comments" id="p_comments" />
+                </select>
+
+                <label for="name">{% blocktrans %}How do you want to print?{% endblocktrans %}</label>
+                <select name="p_method" id="p_method"/>
+                </select>
+
+	            <label id="p_color_label" for="email">{% blocktrans %}How should comments' scope be shown in text?{% endblocktrans %}</label>
+                <select name="p_color" id="p_color"/>
+                </select>
+	        </fieldset>
+	        
+            <input type="hidden" name="filteredIds" id="filteredIds" value="" />
+            <input type="hidden" name="print_export_action" id="print_export_action" value="" />
+	    </form>        
+    </div>
+</div>
+</BODY>
+</html>

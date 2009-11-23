@@ -1,0 +1,40 @@
+{% extends "site/layout/base_workspace.html" %}
+{% load com %}
+{% load i18n %}
+{% load local_perms %}
+{% load activity %}
+
+{% block head %}
+{% endblock %}
+
+{% block title %}{% blocktrans %}Home{% endblocktrans %}{% endblock %}
+
+{% block content %}
+
+<h1 class="main_title"><a class="title" href="{% url index %}">{{ CONF.workspace_name }}</a></h1>
+
+{% if public_texts %}
+<table>
+<tr>
+<td width="70%" style="vertical-align:text-top;">
+<h2>{% blocktrans count public_texts|length as counter %}One public text{% plural %}{{ counter }} public texts{% endblocktrans %}</h2>
+<ul>
+{% for text in public_texts %}
+<li><a title="{{ text.title }}" href="{% url text-view text.key %}">{{ text.title }}</a>
+<br/>
+{% include "site/macros/text_meta.html" %}   
+</li>
+{% endfor %}
+</ul>
+</td>
+<td width="29%">
+{% include "site/login_form.html" %}
+</td>
+</tr>
+</table>
+{% else %}
+{% include "site/login_form.html" %}
+{% endif %}
+
+
+{% endblock %}

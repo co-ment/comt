@@ -1,0 +1,39 @@
+{% extends "site/layout/base_workspace_form.html" %}
+{% load com %}
+{% load i18n %}
+
+{% block title %}
+{% blocktrans %}Contact user{% endblocktrans %}
+{% endblock %}
+
+{% block pre_form %}
+
+<script type="text/javascript">
+<!--
+tb_conf['current_tab'] = 'user';
+-->
+</script>
+
+<div id="user" class="tab-meta">
+
+<a href="{% url user %}">{% blocktrans %}Users' list{% endblocktrans %}</a> / <a href="{% url user-add %}">{% blocktrans %}Add a new user{% endblocktrans %}</a> / {% blocktrans with user.get_profile.admin_print as username %}Contact user {{ username }}{% endblocktrans %} 
+
+<br /><br />
+{% endblock %}
+
+{% block buttons %}
+            <input name="cancel" type="button" id="cancel_button" value="{% blocktrans %}Cancel{% endblocktrans %}"/>
+            <script type="text/javascript">
+            <!--
+            $(document).ready(function(){
+                $("#cancel_button").click(function () { 
+                    window.location = "{% url user %}"; 
+                  });                
+            }) ;
+            -->
+            </script>                        
+{% endblock %}
+
+{% block post_form %}
+</div>
+{% endblock %}

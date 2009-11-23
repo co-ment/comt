@@ -1,0 +1,328 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>YUI Library Examples: Slider: Basic Sliders</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    	<link rel="stylesheet" type="text/css" href="../../assets/yui.css" >
+
+<style>
+    /*Supplemental CSS for the YUI distribution*/
+    #custom-doc { width: 95%; min-width: 950px; }
+    #pagetitle {background-image: url(../../assets/bg_hd.gif);}
+/*    #pagetitle h1 {background-image: url(../../assets/title_h_bg.gif);}*/
+</style>
+
+<link rel="stylesheet" type="text/css" href="../../assets/dpSyntaxHighlighter.css">
+<link type="text/css" rel="stylesheet" href="../../build/cssfonts/fonts-min.css" />
+<script type="text/javascript" src="../../build/yui/yui-min.js"></script>
+<style type="text/css">
+    .vert_slider {
+        margin-bottom: 1em;
+    }
+</style>
+
+</head>
+<body id="yahoo-com" class=" yui-skin-sam">
+<div id="custom-doc" class="yui-t2">
+<div id="hd">
+	<div id="ygunav">
+		<p>
+            <em>
+                <a href="http://developer.yahoo.com/yui/3/">YUI 3.x Home</a> <i> - </i>	
+            </em>
+		</p>
+		<form action="http://search.yahoo.com/search" id="sitesearchform">
+            <input name="vs" type="hidden" value="developer.yahoo.com">
+            <input name="vs" type="hidden" value="yuiblog.com">
+		    <div id="sitesearch">
+		    	<label for="searchinput">Site Search (YDN &amp; YUIBlog): </label>
+			    <input type="text" id="searchinput" name="p">
+			    <input type="submit" value="Search" id="searchsubmit" class="ygbt">
+		    </div>
+		</form>
+    </div>
+	<div id="ygma"><a href="../../"><img src="../../assets/logo.gif"  border="0" width="200" height="93"></a></div>
+	<div id="pagetitle"><h1>YUI Library Examples: Slider: Basic Sliders</h1></div>
+</div>
+<div id="bd">
+
+	<div id="bar-note"><p><strong>Note:</strong> This is YUI 3.x. Looking for <a href="http://developer.yahoo.com/yui/">YUI 2.x</a>?</p></div>
+
+	<div id="yui-main">
+		<div class="yui-b">
+		  <div class="yui-ge">
+			  <div class="yui-u first example" id="main">
+
+	<h2>Slider: Basic Sliders</h2>
+
+	<div id="example" class="promo">
+	<p>
+	<p>This example walks you through the basics of creating a Slider from script.
+Both Sliders in this example use the default value range of 0 - 100 and use
+default skin resources provided with the Sam skin.</p>
+
+<p>The first Slider is set up in a more traditional JavaScript coding style and
+the second using the shorter method chaining style.  The first Slider is
+configured to move along the vertical axis, and is initialized to a value of
+30.  The second Slider is horizontal and instantiated with minimal
+configuration.</p>
+	</p>	
+
+	<div class="module example-container ">
+			<div class="hd exampleHd">
+			<p class="newWindowButton yui-skin-sam">
+                <a href="slider_basic_clean.html" target="_blank">View example in new window.</a>
+            </p>
+		</div>		<div id="example-canvas" class="bd">
+
+		
+	<!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
+	
+	<div id="demo">
+
+    <h4>Vertical Slider</h4>
+    <p id="vert_value">Value: 30</p>
+    <div class="vert_slider"></div>
+
+    <h4>Horizontal Slider</h4>
+    <p id="horiz_value">Value: 0</p>
+    <div class="horiz_slider"></div>
+
+</div>
+<script type="text/javascript">
+// Create a YUI instance and request the slider module and its dependencies
+YUI({base:"../../build/", timeout: 10000}).use("slider", function (Y) {
+
+// store the node to display the vertical Slider's current value
+var v_report = Y.get('#vert_value'),
+    vert_slider;
+    
+// instantiate the vertical Slider.  Use the classic thumb provided with the
+// Sam skin
+vert_slider = new Y.Slider({
+    axis: 'y', // vertical Slider
+    value: 30, // initial value
+    railSize: '10em', // range the thumb can move through
+    thumbImage: 'assets/images/thumbY.png'
+});
+
+// callback function to display Slider's current value
+function reportValue(e) {
+    v_report.set('innerHTML', 'Value: ' + e.newVal);
+}
+
+vert_slider.after('valueChange', reportValue);
+
+// render the slider into the first element with class vert_slider
+vert_slider.render('.vert_slider');
+
+
+
+// instantiate the horizontal Slider, render it, and subscribe to its
+// valueChange event via method chaining.  No need to store the created Slider
+// in this case.
+new Y.Slider({
+        railSize: '200px',
+        thumbImage: 'assets/images/thumbX.png'
+    }).
+    render('.horiz_slider').
+    after('valueChange',function (e) {
+        Y.get('#horiz_value').set('innerHTML', 'Value: ' + e.newVal);
+    });
+
+});
+</script>
+	
+	<!--END SOURCE CODE FOR EXAMPLE =============================== -->
+	
+		
+		</div>
+	</div>			
+	</div>
+		
+	<h3>Creating a Slider from script</h3>
+<p>In this example, we'll be generating an X axis and Y axis Slider using entirely JavaScript.  To start, we'll need elements on the page into which the Sliders will be rendered.</p>
+
+<textarea class="HTML" name="code" cols="60" rows="1">
+    <h4>Vertical Slider</h4>
+    <p id="vert_value">Value: 0</p>
+    <div class="vert_slider"></div>
+
+    <h4>Horizontal Slider</h4>
+    <p id="horiz_value">Value: 0</p>
+    <div class="horiz_slider"></div>
+</textarea>
+
+<h3>Set up your YUI instance</h3>
+<p>Create a YUI instance and <code>use</code> the <code>slider</code> module.</p>
+
+<textarea class="JScript" name="code" cols="60" rows="1">
+YUI({base:"../../build/", timeout: 10000}).use("slider", function (Y) {
+
+/* our code goes here */
+
+});
+</textarea>
+
+<h3>Creating a vertical Slider</h3>
+<p>To create a vertical Slider you just need to set the <code>axis</code> attribute to &quot;y&quot;.  The Sam skin comes with a thumb image for both horizontal and vertical Sliders.</p>
+
+<textarea class="JScript" name="code" cols="60" rows="1">
+var vert_slider;
+    
+// instantiate the vertical Slider.  Use the classic Y thumb provided with the
+// Sam skin
+vert_slider = new Y.Slider({
+    axis: 'y',        // vertical Slider
+    value: 30,        // initial value
+    railSize: '10em', // range the thumb can move through
+    thumbImage: 'assets/images/thumbY.png'
+});
+</textarea>
+
+<p>We'll subscribe to our Slider's <code>valueChange</code> event and display the current value in the <code>#vert_value</code> Node above the Slider.</p>
+
+<textarea class="JScript" name="code" cols="60" rows="1">
+var v_report = Y.get('#vert_value');
+
+// callback function to display Slider's current value
+function reportValue(e) {
+    v_report.set('innerHTML', 'Value: ' + e.newVal);
+}
+
+vert_slider.after('valueChange', reportValue);
+</textarea>
+
+<p>Then finally, we'll render the Slider into the first element with the class &quot;vert_slider&quot;.</p>
+
+<textarea class="JScript" name="code" cols="60" rows="1">
+vert_slider.render('.vert_slider');
+</textarea>
+
+<h3>Creating a horizontal Slider</h3>
+<p>Sliders are horizontal by default, so there's no need to specify the <code>axis</code> attribute.  In lieu of an initial <code>value</code> setting, the <code>min</code> is used.  Slider's default <code>min</code> and <code>max</code> are 0 and 100 respectively.  All we need to do is describe how long the Slider's rail is and what (if any) thumb image to use.</p>
+
+<textarea class="JScript" name="code" cols="60" rows="1">
+var horiz_slider = new Y.Slider({
+    railSize: '200px',
+    thumbImage: 'assets/images/thumbX.png'
+});
+</textarea>
+
+<p>Rather than store the Slider in a variable this time around, however, let's use method chaining to render and set up the display handler inline.</p>
+
+<textarea class="JScript" name="code" cols="60" rows="1">
+new Y.Slider({
+        railSize: '200px',
+        thumbImage: 'assets/images/thumbX.png'
+    }).
+    render('.horiz_slider').
+    after('valueChange',function (e) {
+        Y.get('#horiz_value').set('innerHTML', 'Value: ' + e.newVal);
+    });
+</textarea>
+
+<p>And that's all there is to it!</p>
+
+<h3>Full Code Listing</h3>
+<textarea class="JScript" name="code" cols="60" rows="1">
+// Create a YUI instance and request the slider module and its dependencies
+YUI({base:"../../build/", timeout: 10000}).use("slider", function (Y) {
+
+// store the node to display the vertical Slider's current value
+var v_report = Y.get('#vert_value'),
+    vert_slider;
+    
+// instantiate the vertical Slider.  Use the classic thumb provided with the
+// Sam skin
+vert_slider = new Y.Slider({
+    axis: 'y', // vertical Slider
+    value: 30, // initial value
+    railSize: '10em', // range the thumb can move through
+    thumbImage: 'assets/images/thumbY.png'
+});
+
+// callback function to display Slider's current value
+function reportValue(e) {
+    v_report.set('innerHTML', 'Value: ' + e.newVal);
+}
+
+vert_slider.after('valueChange', reportValue);
+
+// render the slider into the first element with class vert_slider
+vert_slider.render('.vert_slider');
+
+
+
+// instantiate the horizontal Slider, render it, and subscribe to its
+// valueChange event via method chaining.  No need to store the created Slider
+// in this case.
+new Y.Slider({
+        railSize: '200px',
+        thumbImage: 'assets/images/thumbX.png'
+    }).
+    render('.horiz_slider').
+    after('valueChange',function (e) {
+        Y.get('#horiz_value').set('innerHTML', 'Value: ' + e.newVal);
+    });
+
+});
+</textarea>
+				</div>
+				<div class="yui-u sidebar">
+					
+				
+					<div id="examples" class="mod box4">
+                        <div class="hd">
+						<h4>
+    Slider Examples:</h4>
+                        </div>
+						<div class="bd">
+							<ul>
+								<li class='selected'><a href='../slider/slider_basic.html'>Basic Sliders</a></li><li><a href='../slider/slider_from_markup.html'>Creating a Slider from existing markup</a></li><li><a href='../dd/photo-browser.html'>Photo Browser (included with examples for Drag &amp; Drop)</a></li>							</ul>
+						</div>
+					</div>
+					
+					<div class="mod box4">
+                        <div class="hd">
+						<h4>More Slider Resources:</h4>
+                        </div>
+                        <div class="bd">
+						<ul>
+							<!-- <li><a href="http://developer.yahoo.com/yui/slider/">User's Guide</a> (external)</li> -->
+						<li><a href="../../api/module_slider.html">API Documentation</a></li>
+</ul>
+                        </div>
+					</div>
+			  </div>
+		</div>
+		
+		</div>
+	</div>
+
+
+<div class="yui-b toc3" id="tocWrapper">
+<!-- TABLE OF CONTENTS -->
+<div id="toc">
+	
+<ul>
+<li class="sect first">YUI 3.x Project</li><li class="item"><a title="The Yahoo! User Interface (YUI) Library, 3.x Branch, " href="http://developer.yahoo.com/yui/3/">YUI 3 Web Site (external)</a></li><li class="item"><a title="Examples of every YUI utility and control in action" href="../../examples/">YUI 3 Examples</a></li><li class="item"><a title="Instantly searchable API documentation for the entire YUI library." href="../../api/">YUI 3 API Docs</a></li><li class="item"><a title="The YUI Library can be downloaded from SourceForge" href="http://sourceforge.net/projects/yui/">YUI 3 on Sourceforge (external)</a></li><li class="item"><a title="YUI is free and open, offered under a BSD license." href="http://developer.yahoo.com/yui/3/license.html">YUI License (external)</a></li><li class="sect">YUI 3 Core - Examples</li><li class="item"><a title="YUI (Global Prerequisite) - Functional Examples" href="../../examples/yui/index.html">YUI (Global Prerequisite)</a></li><li class="item"><a title="Event - Functional Examples" href="../../examples/event/index.html">Event</a></li><li class="item"><a title="Node - Functional Examples" href="../../examples/node/index.html">Node</a></li><li class="sect">YUI 3 Component Infrastructure - Examples</li><li class="item"><a title="Attribute - Functional Examples" href="../../examples/attribute/index.html">Attribute</a></li><li class="item"><a title="Plugin - Functional Examples" href="../../examples/plugin/index.html">Plugin</a></li><li class="item"><a title="Widget - Functional Examples" href="../../examples/widget/index.html">Widget</a></li><li class="sect">YUI 3 Utilities - Examples</li><li class="item"><a title="Animation - Functional Examples" href="../../examples/anim/index.html">Animation</a></li><li class="item"><a title="Cache - Functional Examples" href="../../examples/cache/index.html">Cache</a></li><li class="item"><a title="Cookie - Functional Examples" href="../../examples/cookie/index.html">Cookie</a></li><li class="item"><a title="DataSchema - Functional Examples" href="../../examples/dataschema/index.html">DataSchema</a></li><li class="item"><a title="DataSource - Functional Examples" href="../../examples/datasource/index.html">DataSource</a></li><li class="item"><a title="DataType - Functional Examples" href="../../examples/datatype/index.html">DataType</a></li><li class="item"><a title="Drag &amp; Drop - Functional Examples" href="../../examples/dd/index.html">Drag &amp; Drop</a></li><li class="item"><a title="Get - Functional Examples" href="../../examples/get/index.html">Get</a></li><li class="item"><a title="History - Functional Examples" href="../../examples/history/index.html">History</a></li><li class="item"><a title="ImageLoader - Functional Examples" href="../../examples/imageloader/index.html">ImageLoader</a></li><li class="item"><a title="IO - Functional Examples" href="../../examples/io/index.html">IO</a></li><li class="item"><a title="JSON (JavaScript Object Notation) - Functional Examples" href="../../examples/json/index.html">JSON</a></li><li class="item"><a title="Queue - Functional Examples" href="../../examples/queue/index.html">Queue</a></li><li class="item"><a title="Stylesheet - Functional Examples" href="../../examples/stylesheet/index.html">Stylesheet</a></li><li class="sect">YUI 3 Widgets - Examples</li><li class="item"><a title="Overlay - Functional Examples" href="../../examples/overlay/index.html">Overlay</a></li><li class="selected "><a title="Slider - Functional Examples" href="../../examples/slider/index.html">Slider</a></li><li class="sect">YUI 3 Node Plugins - Examples</li><li class="item"><a title="FocusManager Node Plugin - Functional Examples" href="../../examples/node-focusmanager/index.html">FocusManager Node Plugin</a></li><li class="item"><a title="MenuNav Node Plugin - Functional Examples" href="../../examples/node-menunav/index.html">MenuNav Node Plugin</a></li><li class="sect">YUI 3 CSS - Examples</li><li class="item"><a title="YUI CSS Reset - Functional Examples" href="../../examples/cssreset/index.html">CSS Reset</a></li><li class="item"><a title="YUI Fonts - Functional Examples" href="../../examples/cssfonts/index.html">CSS Fonts</a></li><li class="item"><a title="YUI Base - Functional Examples" href="../../examples/cssbase/index.html">CSS Base</a></li><li class="sect">YUI 3 Developer Tools - Examples</li><li class="item"><a title="Console - Functional Examples" href="../../examples/console/index.html">Console</a></li><li class="item"><a title="Profiler - Functional Examples" href="../../examples/profiler/index.html">Profiler</a></li><li class="item"><a title="Test - Functional Examples" href="../../examples/test/index.html">Test</a></li><li class="sect">The YUI Community</li><li class="item"><a title="The Yahoo! User Interface Blog" href="http://yuiblog.com">YUI Blog (external)</a></li><li class="item"><a title="The Yahoo! Group YDN-JavaScript hosts the YUI community forum" href="http://tech.groups.yahoo.com/group/ydn-javascript/">YUI Forum (external)</a></li><li class="item"><a title="The Yahoo! Group yui3 is dedicated to the 3.x branch of the Yahoo! User Interface (YUI) Library." href="http://tech.groups.yahoo.com/group/yui3/">YUI 3 Forum (external)</a></li><li class="item"><a title="YUI is used by Yahoo! and by hundreds of other sites, including many you know and love." href="/yui/poweredby/">YUI Sightings (external)</a></li><li class="item"><a title="Videos and podcasts from the YUI Team and from the Yahoo! frontend engineering community." href="http://developer.yahoo.com/yui/theater/">YUI Theater (external)</a></li><li class="sect">YUI Articles on the YUI Website</li><li class="item"><a title="Answers to Frequently Asked Questions about the YUI Library" href="http://developer.yahoo.com/yui/articles/faq/">YUI FAQ (external)</a></li><li class="item"><a title="Yahoo!'s philosophy of Graded Browser Support" href="http://developer.yahoo.com/yui/articles/gbs/">Graded Browser Support (external)</a></li><li class="item"><a title="Reporting Bugs and Making Feature Requests for YUI Components" href="http://developer.yahoo.com/yui/articles/reportingbugs/">Bug Reports/Feature Requests (external)</a></li><li class="item"><a title="Serve YUI source files from Yahoo! -- free, fast, and simple" href="http://developer.yahoo.com/yui/3/articles/hosting/">Serving YUI Files from Yahoo! (external)</a></li></ul>
+</div>
+</div>
+	</div><!--closes bd-->
+
+	<div id="ft">
+        <p class="first">Copyright &copy; 2009 Yahoo! Inc. All rights reserved.</p>
+        <p><a href="http://privacy.yahoo.com/privacy/us/devel/index.html">Privacy Policy</a> - 
+            <a href="http://docs.yahoo.com/info/terms/">Terms of Service</a> - 
+            <a href="http://docs.yahoo.com/info/copyright/copyright.html">Copyright Policy</a> - 
+            <a href="http://careers.yahoo.com/">Job Openings</a></p>
+	</div>
+</div>
+<script src="../../assets/dpSyntaxHighlighter.js"></script>
+<script language="javascript"> 
+dp.SyntaxHighlighter.HighlightAll('code'); 
+</script>
+</body>
+</html>

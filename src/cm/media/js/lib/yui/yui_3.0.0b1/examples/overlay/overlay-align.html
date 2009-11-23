@@ -1,0 +1,407 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>YUI Library Examples: Overlay: Extended XY Positioning</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    	<link rel="stylesheet" type="text/css" href="../../assets/yui.css" >
+
+<style>
+    /*Supplemental CSS for the YUI distribution*/
+    #custom-doc { width: 95%; min-width: 950px; }
+    #pagetitle {background-image: url(../../assets/bg_hd.gif);}
+/*    #pagetitle h1 {background-image: url(../../assets/title_h_bg.gif);}*/
+</style>
+
+<link rel="stylesheet" type="text/css" href="../../assets/dpSyntaxHighlighter.css">
+<link type="text/css" rel="stylesheet" href="../../build/cssfonts/fonts-min.css" />
+<script type="text/javascript" src="../../build/yui/yui-min.js"></script>
+<style type="text/css">
+/* Overlay Look/Feel */
+.yui-overlay-content {
+    padding:2px;
+    border:1px solid #000;
+    background-color:#aaa;
+    font-size:93%;
+}
+
+.yui-overlay-content .yui-widget-hd {
+    font-weight:bold;
+    text-align:center;
+    padding:2px;
+    border:2px solid #aa0000;
+    background-color:#fff;
+}
+
+.yui-overlay-content .yui-widget-bd {
+    text-align:left;
+    padding:2px;
+    border:2px solid #0000aa;
+    background-color:#fff;
+}
+
+/* Example Layout CSS */
+.overlay-example {
+    position:relative;
+    border:1px solid #000;
+    background-color:#eee;
+    padding:5px;
+    height:25em;
+}
+
+.overlay-example button {
+    margin-left:1px;
+}
+
+.overlay-example .filler {
+    color:#999;
+}
+
+.align-box {
+    height:12em;
+    width:12em;
+    border:1px solid #000;
+    margin:0px;
+    text-align:center;
+}
+
+.align-box .title {
+    font-weight:bold;
+    color:#fff;
+    padding:2px;
+}
+
+#align1 {
+    position:static;
+    background-color:#0000cc;
+}
+
+#align2 {
+    position:relative;
+    top:-130px;
+    left:250px;
+    background-color:#00cc00;
+}
+
+#align3 {
+    position:absolute;
+    bottom:130px;
+    right:20px;
+    background-color:#cc0000;
+}
+
+#alignment {
+    padding:5px;
+    display:inline;
+    background-color:#fff;
+    border:1px solid black;
+}
+
+#step {
+    font-size:85%;
+    margin-left:5px;
+}
+</style>
+</head>
+<body id="yahoo-com" class=" yui-skin-sam">
+<div id="custom-doc" class="yui-t2">
+<div id="hd">
+	<div id="ygunav">
+		<p>
+            <em>
+                <a href="http://developer.yahoo.com/yui/3/">YUI 3.x Home</a> <i> - </i>	
+            </em>
+		</p>
+		<form action="http://search.yahoo.com/search" id="sitesearchform">
+            <input name="vs" type="hidden" value="developer.yahoo.com">
+            <input name="vs" type="hidden" value="yuiblog.com">
+		    <div id="sitesearch">
+		    	<label for="searchinput">Site Search (YDN &amp; YUIBlog): </label>
+			    <input type="text" id="searchinput" name="p">
+			    <input type="submit" value="Search" id="searchsubmit" class="ygbt">
+		    </div>
+		</form>
+    </div>
+	<div id="ygma"><a href="../../"><img src="../../assets/logo.gif"  border="0" width="200" height="93"></a></div>
+	<div id="pagetitle"><h1>YUI Library Examples: Overlay: Extended XY Positioning</h1></div>
+</div>
+<div id="bd">
+
+	<div id="bar-note"><p><strong>Note:</strong> This is YUI 3.x. Looking for <a href="http://developer.yahoo.com/yui/">YUI 2.x</a>?</p></div>
+
+	<div id="yui-main">
+		<div class="yui-b">
+		  <div class="yui-ge">
+			  <div class="yui-u first example" id="main">
+
+	<h2>Overlay: Extended XY Positioning</h2>
+
+	<div id="example" class="promo">
+	<p>
+	This example show how you can use Overlay's extended positioning support to align or center the overlay either in the viewport, or relative to another node on the page. You can specify any one of 9 points (top-left, top-right, bottom-left, bottom-right, top-center, bottom-center, left-center, right-center, center) to align on both the Overlay and the node/viewport it is being aligned to.	</p>	
+
+	<div class="module example-container ">
+			<div class="hd exampleHd">
+			<p class="newWindowButton yui-skin-sam">
+                <a href="overlay-align_clean.html" target="_blank">View example in new window.</a>
+            </p>
+		</div>		<div id="example-canvas" class="bd">
+
+		
+	<!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
+	
+	<div class="overlay-example" id="overlay-align">
+    <p><pre id="alignment"></pre><span id="step"></span></p>
+    <p><button type="button" id="align">Next Alignment</button></p>
+    <p class="filler">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nunc pretium quam eu mi varius pulvinar. Duis orci arcu, ullamcorper sit amet, luctus ut, interdum ac, quam. Pellentesque euismod. Nam tincidunt, purus in ultrices congue, urna neque posuere arcu, aliquam tristique purus sapien id nulla. Etiam rhoncus nulla at leo. Cras scelerisque nisl in nibh. Sed eget odio. Morbi elit elit, porta a, convallis sit amet, rhoncus non, felis. Mauris nulla pede, pretium eleifend, porttitor at, rutrum id, orci. Quisque non urna. Nulla aliquam rhoncus est.</p>
+    <div id="align1" class="align-box"><span class="title">id = #align1</span></div>
+    <div id="align2" class="align-box"><span class="title">id = #align2</span></div>
+    <div id="align3" class="align-box"><span class="title">id = #align3</span></div>
+</div>
+
+<script type="text/javascript">
+YUI({base:"../../build/", timeout: 10000}).use("overlay", function(Y) {
+
+    /* Create Overlay from script, this time. No footer */
+    var overlay = new Y.Overlay({
+        width:"10em",
+        height:"10em",
+        headerContent: "Aligned Overlay",
+        bodyContent: "Click the 'Align Next' button to try a new alignment",
+        zIndex:2
+    });
+
+    /* Render it to #overlay-align element */
+    overlay.render("#overlay-align");
+
+    var alignment = Y.Node.get("#alignment");
+    var stepNumber = Y.Node.get("#step");
+
+    var WidgetPositionExt = Y.WidgetPositionExt;
+
+    var steps = [
+        function() {
+            /* Center in #overlay-align */
+            overlay.set("align", {node:"#overlay-align", points:[WidgetPositionExt.CC, WidgetPositionExt.CC]});
+            alignment.set("innerHTML", 'align: {node:"#overlay-align", points:["cc", "cc"]}');
+        },
+        function() {
+            /* Align top-left corner of overlay, with top-right corner of #align1 */
+            overlay.set("align", {node:"#align1", points:[WidgetPositionExt.TL, WidgetPositionExt.TR]});
+            alignment.set("innerHTML", 'align: {node:"#align1", points:["tl", "tr"]}');
+        },
+        function() {
+            /* Center overlay in #align2 */
+            overlay.set("centered", "#align2");
+            alignment.set("innerHTML", 'centered: "#align2"');
+        },
+        function() {
+            /* Align right-center edge of overlay with right-center edge of viewport */
+            overlay.set("align", {points:[WidgetPositionExt.RC, WidgetPositionExt.RC]});
+            alignment.set("innerHTML", 'align: {points:["rc", "rc"]} (viewport)');
+        },
+        function() {
+            /* Center overlay in viewport */
+           overlay.set("centered", true);
+            alignment.set("innerHTML", "centered: true (viewport)");
+        },
+        function() {
+            /* Align top-center edge of overlay with bottom-center edge of #align3 */
+            overlay.set("align", {node:"#align3", points:[WidgetPositionExt.TC, WidgetPositionExt.BC]});
+            alignment.set("innerHTML", 'align: {node:"#align3", points:["tc", "bc"]}');
+        }
+    ];
+
+    var step = 0;
+    var totalSteps = steps.length;
+
+    function alignNext() {
+        stepNumber.set("innerHTML", "Alignment " + (step+1) + " of " + totalSteps);
+        steps[step]();
+        step = (++step)%(totalSteps);
+    }
+
+    alignNext();
+
+    Y.on("click", alignNext, "#align");
+});
+</script>
+	
+	<!--END SOURCE CODE FOR EXAMPLE =============================== -->
+	
+		
+		</div>
+	</div>			
+	</div>
+		
+	<h3>Extended XY Overlay Positioning - Align, Center Support</h3>
+
+<h4>Setting Up The YUI Instance</h4>
+
+<p>As with the <a href="overlay-xy.html">"Basic XY Positioning"</a> example, to create an instance of an Overlay on your page, the only module you need to request is the <code>overlay</code> module. The <code>overlay</code> module will pull in the <code>widget</code>, <code>widget-stack</code>, <code>widget-position</code>, <code>widget-position-ext</code> and <code>widget-stdmod</code> dependencies it has.</p>
+
+<textarea name="code" class="JScript" rows="1" cols="60">
+YUI({...}).use("overlay", function(Y) {
+    // We'll write example code here, where we have a Y.Overlay class available.
+});
+</textarea>
+
+<p>Using the <code>overlay</code> module, will also pull down the default CSS required for overlay, on top of which we only need to add our required look/feel CSS for the example.</p>
+
+<h4>Instantiating The Overlay</h4>
+
+<p>For this example, we'll instantiate an Overlay, as we did for the <a href="overlay-xy.html">"Basic XY Positioning"</a> example, however we'll set the content for the Overlay sections using the <code>headerContent</code> and <code>bodyContent</code> attributes. We won't create a footer section for this overlay:</p>
+
+<textarea name="code" class="JScript" rows="1" cols="60">
+    /* Create Overlay from script, this time. With no footer */
+    var overlay = new Y.Overlay({
+        width:"10em",
+        height:"10em",
+        headerContent: "Aligned Overlay",
+        bodyContent: "Click the 'Align Next' button to try a new alignment",
+        zIndex:2
+    });
+
+    /* Render it as a child of the #overlay-align element */
+    overlay.render("#overlay-align");
+</textarea>
+
+<p>Since the Overlay is created from script, and doesn't currently exist in the document, we pass the <code>overlay.render()</code> method a selector query (<code>"#overlay-align"</code>) for the node under which we want the Overlay to be rendered in the DOM. If we leave out this argument to render (or if the selector query doesn't bring back a node), the Overlay will be rendered to the current document's body element.</p>
+
+<h4>Aligning the overlay</h4>
+
+<p>The <a href="../../api/WidgetPositionExt.html"><code>WidgetPositionExt</code></a> extension used to create the overlay class adds the <code>align</code> and <code>centered</code> attributes to the Overlay, which can be used to align or center the Overlay relative to another element on the page (or the viewport).</p>
+
+<p>The <code>align</code> attribute accepts as a value an object literal with the following properties:</p>
+
+<dl>
+    <dt>node</dt>
+    <dd>
+      The node to which the Widget is to be aligned. If set to null, or not provided, the Overlay is aligned to the viewport
+    </dd>
+    <dt>points</dt>
+    <dd>
+      <p>
+      A two element array, defining the two points on the Overlay and node which are to be aligned. The first element is the point on the Overlay, and the second element is the point on the node (or viewport).
+      Supported alignment points are defined as static properties on <code>WidgetPositionExt</code>.
+      </p>
+      <p>
+      e.g. <code>[WidgetPositionExt.TR, WidgetPositionExt.TL]</code> aligns the Top-Right corner of the Overlay with the
+      Top-Left corner of the node/viewport, and <code>[WidgetPositionExt.CC, WidgetPositionExt.TC]</code> aligns the Center of the 
+      Overlay with the Top-Center edge of the node/viewport.
+      </p>
+    </dd>
+</dl>
+
+<p>The <code>centered</code> property can either by set to <code>true</code> to center the Overlay in the viewport, or set to a selector string or node reference to center the Overlay in a particular node.</p>
+
+<p>The example loops around a list of 6 alignment configurations, as the "Align Next" button is clicked:</p>
+
+<textarea name="code" class="JScript" rows="1" cols="60">
+    /* Center in #overlay-align (example box) */
+    overlay.set("align", {node:"#overlay-align", points:[WidgetPositionExt.CC, WidgetPositionExt.CC]});
+
+    /* Align top-left corner of overlay, with top-right corner of #align1 */
+    overlay.set("align", {node:"#align1", points:[WidgetPositionExt.TL, WidgetPositionExt.TR]});
+
+    /* Center overlay in #align2 */
+    overlay.set("centered", "#align2");
+
+    /* Align right-center edge of overlay with right-center edge of viewport */
+    overlay.set("align", {points:[WidgetPositionExt.RC, WidgetPositionExt.RC]});
+
+    /* Center overlay in viewport */
+    overlay.set("centered", true);
+
+    /* Align top-center edge of overlay with bottom-center edge of #align3 */
+    overlay.set("align", {node:"#align3", points:[WidgetPositionExt.TC, WidgetPositionExt.BC]});
+</textarea>
+
+<p><strong>NOTE:</strong> Future verions will add support to <code>WidgetPositionExt</code>, to re-align the Overlay in response to trigger events (e.g. window resize, scroll etc.) and support for constrained positioning.</p>
+
+<h4>CSS: Overlay Look/Feel</h4>
+
+<p>As mentioned in the <a href="overlay-xy.html">"Basic XY Positioning"</a> example, the overlay.css Sam Skin file (build/overlay/assets/skins/sam/overlay.css) provides the default functional CSS for the overlay. Namely the CSS rules to hide the overlay, and position it absolutely. However there's no default out-of-the-box look/feel applied to the Overlay widget.</p>
+
+<p>The example provides it's own look and feel for the Overlay, by defining rules for the content box, header and body sections:</p>
+
+<textarea name="code" class="CSS" rows="1" cols="60">
+.yui-overlay-content {
+    padding:2px;
+    border:1px solid #000;
+    background-color:#aaa;
+    font-size:93%;
+}
+
+.yui-overlay-content .yui-widget-hd {
+    font-weight:bold;
+    text-align:center;
+    padding:2px;
+    border:2px solid #aa0000;
+    background-color:#fff;
+}
+
+.yui-overlay-content .yui-widget-bd {
+    text-align:left;
+    padding:2px;
+    border:2px solid #0000aa;
+    background-color:#fff;
+}
+</textarea>
+				</div>
+				<div class="yui-u sidebar">
+					
+				
+					<div id="examples" class="mod box4">
+                        <div class="hd">
+						<h4>
+    Overlay Examples:</h4>
+                        </div>
+						<div class="bd">
+							<ul>
+								<li><a href='../overlay/overlay-xy.html'>Basic XY Positioning</a></li><li class='selected'><a href='../overlay/overlay-align.html'>Extended XY Positioning</a></li><li><a href='../overlay/overlay-stack.html'>Stack Support</a></li><li><a href='../overlay/overlay-stdmod.html'>Standard Module Support</a></li><li><a href='../overlay/overlay-io-plugin.html'>IO Plugin</a></li><li><a href='../overlay/overlay-anim-plugin.html'>Animation Plugin</a></li><li><a href='../node-focusmanager/node-focusmanager-3.html'>Accessible Menu Button (included with examples for Focus Manager Node Plugin)</a></li>							</ul>
+						</div>
+					</div>
+					
+					<div class="mod box4">
+                        <div class="hd">
+						<h4>More Overlay Resources:</h4>
+                        </div>
+                        <div class="bd">
+						<ul>
+							<!-- <li><a href="http://developer.yahoo.com/yui/overlay/">User's Guide</a> (external)</li> -->
+						<li><a href="../../api/module_overlay.html">API Documentation</a></li>
+</ul>
+                        </div>
+					</div>
+			  </div>
+		</div>
+		
+		</div>
+	</div>
+
+
+<div class="yui-b toc3" id="tocWrapper">
+<!-- TABLE OF CONTENTS -->
+<div id="toc">
+	
+<ul>
+<li class="sect first">YUI 3.x Project</li><li class="item"><a title="The Yahoo! User Interface (YUI) Library, 3.x Branch, " href="http://developer.yahoo.com/yui/3/">YUI 3 Web Site (external)</a></li><li class="item"><a title="Examples of every YUI utility and control in action" href="../../examples/">YUI 3 Examples</a></li><li class="item"><a title="Instantly searchable API documentation for the entire YUI library." href="../../api/">YUI 3 API Docs</a></li><li class="item"><a title="The YUI Library can be downloaded from SourceForge" href="http://sourceforge.net/projects/yui/">YUI 3 on Sourceforge (external)</a></li><li class="item"><a title="YUI is free and open, offered under a BSD license." href="http://developer.yahoo.com/yui/3/license.html">YUI License (external)</a></li><li class="sect">YUI 3 Core - Examples</li><li class="item"><a title="YUI (Global Prerequisite) - Functional Examples" href="../../examples/yui/index.html">YUI (Global Prerequisite)</a></li><li class="item"><a title="Event - Functional Examples" href="../../examples/event/index.html">Event</a></li><li class="item"><a title="Node - Functional Examples" href="../../examples/node/index.html">Node</a></li><li class="sect">YUI 3 Component Infrastructure - Examples</li><li class="item"><a title="Attribute - Functional Examples" href="../../examples/attribute/index.html">Attribute</a></li><li class="item"><a title="Plugin - Functional Examples" href="../../examples/plugin/index.html">Plugin</a></li><li class="item"><a title="Widget - Functional Examples" href="../../examples/widget/index.html">Widget</a></li><li class="sect">YUI 3 Utilities - Examples</li><li class="item"><a title="Animation - Functional Examples" href="../../examples/anim/index.html">Animation</a></li><li class="item"><a title="Cache - Functional Examples" href="../../examples/cache/index.html">Cache</a></li><li class="item"><a title="Cookie - Functional Examples" href="../../examples/cookie/index.html">Cookie</a></li><li class="item"><a title="DataSchema - Functional Examples" href="../../examples/dataschema/index.html">DataSchema</a></li><li class="item"><a title="DataSource - Functional Examples" href="../../examples/datasource/index.html">DataSource</a></li><li class="item"><a title="DataType - Functional Examples" href="../../examples/datatype/index.html">DataType</a></li><li class="item"><a title="Drag &amp; Drop - Functional Examples" href="../../examples/dd/index.html">Drag &amp; Drop</a></li><li class="item"><a title="Get - Functional Examples" href="../../examples/get/index.html">Get</a></li><li class="item"><a title="History - Functional Examples" href="../../examples/history/index.html">History</a></li><li class="item"><a title="ImageLoader - Functional Examples" href="../../examples/imageloader/index.html">ImageLoader</a></li><li class="item"><a title="IO - Functional Examples" href="../../examples/io/index.html">IO</a></li><li class="item"><a title="JSON (JavaScript Object Notation) - Functional Examples" href="../../examples/json/index.html">JSON</a></li><li class="item"><a title="Queue - Functional Examples" href="../../examples/queue/index.html">Queue</a></li><li class="item"><a title="Stylesheet - Functional Examples" href="../../examples/stylesheet/index.html">Stylesheet</a></li><li class="sect">YUI 3 Widgets - Examples</li><li class="selected "><a title="Overlay - Functional Examples" href="../../examples/overlay/index.html">Overlay</a></li><li class="item"><a title="Slider - Functional Examples" href="../../examples/slider/index.html">Slider</a></li><li class="sect">YUI 3 Node Plugins - Examples</li><li class="item"><a title="FocusManager Node Plugin - Functional Examples" href="../../examples/node-focusmanager/index.html">FocusManager Node Plugin</a></li><li class="item"><a title="MenuNav Node Plugin - Functional Examples" href="../../examples/node-menunav/index.html">MenuNav Node Plugin</a></li><li class="sect">YUI 3 CSS - Examples</li><li class="item"><a title="YUI CSS Reset - Functional Examples" href="../../examples/cssreset/index.html">CSS Reset</a></li><li class="item"><a title="YUI Fonts - Functional Examples" href="../../examples/cssfonts/index.html">CSS Fonts</a></li><li class="item"><a title="YUI Base - Functional Examples" href="../../examples/cssbase/index.html">CSS Base</a></li><li class="sect">YUI 3 Developer Tools - Examples</li><li class="item"><a title="Console - Functional Examples" href="../../examples/console/index.html">Console</a></li><li class="item"><a title="Profiler - Functional Examples" href="../../examples/profiler/index.html">Profiler</a></li><li class="item"><a title="Test - Functional Examples" href="../../examples/test/index.html">Test</a></li><li class="sect">The YUI Community</li><li class="item"><a title="The Yahoo! User Interface Blog" href="http://yuiblog.com">YUI Blog (external)</a></li><li class="item"><a title="The Yahoo! Group YDN-JavaScript hosts the YUI community forum" href="http://tech.groups.yahoo.com/group/ydn-javascript/">YUI Forum (external)</a></li><li class="item"><a title="The Yahoo! Group yui3 is dedicated to the 3.x branch of the Yahoo! User Interface (YUI) Library." href="http://tech.groups.yahoo.com/group/yui3/">YUI 3 Forum (external)</a></li><li class="item"><a title="YUI is used by Yahoo! and by hundreds of other sites, including many you know and love." href="/yui/poweredby/">YUI Sightings (external)</a></li><li class="item"><a title="Videos and podcasts from the YUI Team and from the Yahoo! frontend engineering community." href="http://developer.yahoo.com/yui/theater/">YUI Theater (external)</a></li><li class="sect">YUI Articles on the YUI Website</li><li class="item"><a title="Answers to Frequently Asked Questions about the YUI Library" href="http://developer.yahoo.com/yui/articles/faq/">YUI FAQ (external)</a></li><li class="item"><a title="Yahoo!'s philosophy of Graded Browser Support" href="http://developer.yahoo.com/yui/articles/gbs/">Graded Browser Support (external)</a></li><li class="item"><a title="Reporting Bugs and Making Feature Requests for YUI Components" href="http://developer.yahoo.com/yui/articles/reportingbugs/">Bug Reports/Feature Requests (external)</a></li><li class="item"><a title="Serve YUI source files from Yahoo! -- free, fast, and simple" href="http://developer.yahoo.com/yui/3/articles/hosting/">Serving YUI Files from Yahoo! (external)</a></li></ul>
+</div>
+</div>
+	</div><!--closes bd-->
+
+	<div id="ft">
+        <p class="first">Copyright &copy; 2009 Yahoo! Inc. All rights reserved.</p>
+        <p><a href="http://privacy.yahoo.com/privacy/us/devel/index.html">Privacy Policy</a> - 
+            <a href="http://docs.yahoo.com/info/terms/">Terms of Service</a> - 
+            <a href="http://docs.yahoo.com/info/copyright/copyright.html">Copyright Policy</a> - 
+            <a href="http://careers.yahoo.com/">Job Openings</a></p>
+	</div>
+</div>
+<script src="../../assets/dpSyntaxHighlighter.js"></script>
+<script language="javascript"> 
+dp.SyntaxHighlighter.HighlightAll('code'); 
+</script>
+</body>
+</html>

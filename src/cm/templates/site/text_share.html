@@ -1,0 +1,128 @@
+{% extends "site/layout/base_text.html" %}
+{% load com %}
+{% load i18n %}
+
+{% block head %}
+{% endblock %}
+
+{% block main %}
+
+<script type="text/javascript">
+<!--
+tb_conf['current_tab'] = 'share';
+-->
+</script>
+
+<script type="text/javascript">
+<!--
+$(function() {
+    $(".hidden-user-actions").css('visibility','hidden');   
+}) ;
+-->
+</script>
+
+<div id="text_share" class="tab-meta">
+
+<form id="text_share_form" action="." method="post">
+
+<ul class="sub_list">
+    <li class="active_sub">{% blocktrans %}Users' list{% endblocktrans %}</li>
+    <li> / </li>
+    <li><a href="{% url user-add-text text.key %}">{% blocktrans %}Add a new user{% endblocktrans %}</a></li>
+    <li> / </li>
+    <li><a href="{% url user-mass-add-text text.key %}">{% blocktrans %}Add users in bulk{% endblocktrans %}</a></li>
+</ul>
+
+{% include "site/macros/paginator.html" %}
+
+<div style="clear:both;"></div>
+
+<table summary="user list" class="large_table">
+    <thead>
+        <tr>
+            <th class="check-column"><input type="checkbox" id="all_check" name="checkall"/>
+            <script type="text/javascript">
+            <!--
+            $(function() {
+                $("#all_check").click(function () {
+                	checked = $("#all_check").attr('checked'); 
+                	$(".user_check").attr('checked', checked);
+                	check_activate_apply();
+                  });                            
+            }) ;
+            -->
+            </script>
+            </th>
+            <th>{% up_down user__username %}User{% endup_down %}</th>
+            <th><a class="tip" href="#" title="{% blocktrans %}The 'Workspace role' is the global role that applies to every text, you can give a user a particular role on this text using the 'local role' column on the right{% endblocktrans %}">{% blocktrans %}Workspace role{% endblocktrans %}</a></th>
+            <th>{% up_down role__name %}{% blocktrans %}Local role{% endblocktrans %}{% endup_down %}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for userrole in object_list %}
+    {% with userrole.user as user %}
+    
+    <tr class="user-{{ user.get_profile.key }} {% cycle 'odd' 'even' %}">
+        <td><input type="checkbox" class="user_check" name="check-{{ user.get_profile.key }}"/></td>
+        <td>
+			{% include "site/macros/user_actions.html" %}
+        </td>
+        <td>
+        {% if userrole.role and user.get_profile.global_role %}<a class="tip" href="#" title="{% blocktrans with userrole.role.name_i18n as rolename %}This role has been overriden on this text by a local role: {{ rolename }}{% endblocktrans %}">{% endif %}
+        
+        <span {% if userrole.role %}class="non_active"{% endif %}>
+        {% if user.get_profile.global_role %}{{ user.get_profile.global_role.name_i18n}}{% else %}-{% endif %}
+        </span>
+        
+        {% if userrole.role and user.get_profile.global_role %}</a>{% endif %}
+        </td>
+        <td>
+                <select name="user-role-{{ user.get_profile.key }}" {% ifequal user request.user %}disabled="disabled"{% endifequal %}>
+                    <option {% if userrole.role %}{% else %}selected="selected"{% endif %} value="">---------</option>
+                    {% for role in all_roles %}
+                    <option {% ifequal userrole.role role %}selected="selected"{% endifequal %} value="{{ role.id }}">{{ role.name_i18n }}</option>
+                    {% endfor %}
+                </select>
+        </td>
+        
+    </tr>
+    
+    {% endwith %}
+    {% endfor %}
+    <tr class="no-border">
+        <td></td><td></td><td></td><td></td>
+    </tr>
+
+    <tr class="full-border even">
+        <td></td>
+        <td><a class="main_object_title" title="{% blocktrans %}Edit anonymous users{% endblocktrans %}" href="{% url user-anon-edit %}">{% blocktrans %}Anonymous users{% endblocktrans %}</a></td>
+        <td>{% if global_anon_role %}{{ global_anon_role.name_i18n }}{% else %}-{% endif %}</td>
+        <td>
+            <select name="user-role-_">
+                <option selected="selected" value="">---------</option>
+                {% for role in anon_roles %}
+                <option {% ifequal anon_role role %}selected="selected"{% endifequal %} value="{{ role.id }}">{{ role.name_i18n }}</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    
+    </tbody>
+
+</table>
+
+ <script type="text/javascript">                
+<!--
+$(function() {
+    $('select[name^=user-role-]').change(function(){
+    	$('#save').removeAttr('disabled');
+    });
+}) ;
+--> 
+</script>                
+<input style="margin-left:20px;" name="save" id="save" type="submit" value="{% blocktrans %}Save{% endblocktrans %}" disabled="disabled"/>        
+
+</form>
+
+</div>
+{% endblock %}

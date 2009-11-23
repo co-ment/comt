@@ -1,0 +1,308 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Creating a Slider from existing markup</title>
+
+<style type="text/css">
+/*margin and padding on body element
+  can introduce errors in determining
+  element position and are not recommended;
+  we turn them off as a foundation for YUI
+  CSS treatments. */
+body {
+	margin:0;
+	padding:0;
+}
+</style>
+
+<link type="text/css" rel="stylesheet" href="../../build/cssfonts/fonts-min.css" />
+<script type="text/javascript" src="../../build/yui/yui-min.js"></script>
+
+
+<!--begin custom header content for this example-->
+<style type="text/css">
+    #demo {
+        background: #fff;
+        border: 1px solid #999;
+        color: #000;
+    }
+
+    #volume_control {
+        height: 22px;
+        line-height: 22px;
+        background: url("assets/images/bg.png") repeat-x 0 -22px;
+        position: relative;
+    }
+
+    #volume_control label {
+        font-weight: bold;
+        height: 22px;
+        margin: 0 1ex 0 1em;
+        vertical-align: top;
+        zoom: 1;
+    }
+
+    #volume {
+        border: 1px inset #999;
+        height: 16px;
+        margin: 2px 1ex 0 0;
+        padding: 0 3px;
+        text-align: right;
+        vertical-align: top;
+        width: 2em;
+    }
+
+    /* Override some default Sam skin styles */
+    #volume_control .yui-slider {
+        display: block;
+        position: absolute;
+        top: 22px;
+        vertical-align: top;
+    }
+
+    #volume_control .yui-slider-rail {
+        background: url("assets/images/rail.png") no-repeat 0 0;
+        height: 117px;
+        width: 17px;
+        padding: 0 7px;
+    }
+
+    /* Support open/close action for the slider */
+    #demo .volume-hide #volume_slider {
+        display: none;
+    }
+
+    /* Use a sprite for the speaker icon */
+    #volume_icon {
+        background: url("assets/images/volume_icon.png") no-repeat -30px 0;
+        border: none;
+        height: 22px;
+        overflow: hidden;
+        width: 31px;
+    }
+
+    /* move the button text offscreen left */
+    #volume_icon p {
+        text-indent: -9999px;
+    }
+
+    #mute {
+        background: url("assets/images/bg.png") repeat-x 0 -22px;
+        border: none;
+        height: 22px;
+        vertical-align: top;
+    }
+
+    #mute p {
+        margin: 0;
+    }
+
+    #mute:hover {
+        background-position: 0 0;
+        color: #fff;
+    }
+    
+    /*
+     * adjust the speaker icon sprite in accordance with volume level and
+     * active state
+    */
+    #demo .volume-hide .level_0 { background-position: -31px 0; }
+    #demo .volume-hide .level_1 { background-position: -31px -22px; }
+    #demo .volume-hide .level_2 { background-position: -31px -44px; }
+    #demo .volume-hide .level_3 { background-position: -31px -66px; }
+
+    #demo .level_0,
+    #demo .level_0:hover {
+        background-position: 0 0;
+    }
+    #demo .level_1,
+    #demo .level_1:hover {
+        background-position: 0 -22px;
+    }
+    #demo .level_2,
+    #demo .level_2:hover {
+        background-position: 0 -44px;
+    }
+    #demo .level_3,
+    #demo .level_3:hover {
+        background-position: 0 -66px;
+    }
+
+    #demo .demo-content {
+        padding: 1ex 1em;
+    }
+</style>
+
+<!--end custom header content for this example-->
+
+</head>
+
+<body class=" yui-skin-sam">
+
+<h1>Creating a Slider from existing markup</h1>
+
+<div class="exampleIntro">
+	<p>This example illustrates how to create a Slider using existing markup.  The <code>boundingBox</code> and <code>contentBox</code> are included in the markup and passed to the constructor.  Standard class names are assigned to the DOM elements inside the <code>contentBox</code> that will result in them being discovered and automatically used.</p>
+
+<p>The visualization of the Slider is based on the volume control in Mac OS X 10.5, with additional controls included for illustration.  <strong>Click on the speaker icon to show the Slider</strong>.</p>
+
+<p>Things to note about this example:</p>
+<ul>
+    <li>The Slider is rendered into a hidden container, and the <code>syncUI</code> method called when it is made visible</li>
+    <li>Some default Sam skin style is overridden to support the implementation</li>
+    <li><code>minGutter</code> and <code>maxGutter</code> configuration is used to limit the thumb movement inside the larger rail element and image.</li>
+    <li>There is no whitespace in the markup around the thumb's <code>&lt;img&gt;</code> element to avoid an IE layout bug.</li>
+</ul>
+			
+</div>
+
+<!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
+
+<div id="demo">
+
+    <div id="volume_control" class="volume-hide">
+        <label for="volume">volume</label><input type="text" size="3" maxlength="3" name="volume" id="volume" value="50">
+        <div id="volume_slider">
+            <div id="volume_slider_content">
+                <div class="yui-slider-rail">
+                    <!-- IE expands whitespace around img tags into padding -->
+                    <div class="yui-slider-thumb"><img class="yui-slider-thumb-image" src="assets/images/thumb.png" height="17" width="17"></div>
+                </div>
+            </div>
+        </div>
+        <button type="button" id="volume_icon" class="level_2" title="Open volume slider"><p>Open</p></button>
+        <button type="button" title="Mute" id="mute"><p>mute</p></button>
+    </div>
+
+    <div class="demo-content">
+        <p>Nulla facilisi. In vel sem. Morbi id urna in diam dignissim feugiat. Proin molestie tortor eu velit. Aliquam erat volutpat. Nullam ultrices, diam tempus vulputate egestas, eros pede varius leo, sed imperdiet lectus est ornare odio.</p>
+        <p>Phasellus wisi purus, interdum vitae, rutrum accumsan, viverra in, velit. Sed enim risus, congue non, tristique in, commodo eu, metus. Aenean tortor mi, imperdiet id, gravida eu, posuere eu, felis.</p>
+    </div>
+</div>
+<script type="text/javascript">
+// Create a YUI instance and request the slider module and its dependencies
+YUI({base:"../../build/", timeout: 10000}).use("slider", function (Y) {
+
+var control    = Y.get('#volume_control'),
+    sliderBox  = Y.get('#volume_slider'),
+    volInput   = Y.get('#volume'),
+    icon       = Y.get('#volume_icon'),
+    mute       = Y.get('#mute'),
+    open       = false,
+    level      = 2,
+    beforeMute = 0,
+    volume;
+
+sliderBox.setStyle('left',icon.get('offsetLeft')+'px');
+    
+volume = new Y.Slider({
+        boundingBox: sliderBox,
+        contentBox : '#volume_slider_content',
+        axis       : 'y',
+        min        : 100,
+        max        : 0,
+        value      : 50,
+        railSize   : '117px',
+        minGutter  : 9,
+        maxGutter  : 11
+    }).render();
+
+// Initialize event listeners
+volume.after('valueChange', updateInput);
+volume.after('valueChange', updateIcon);
+
+mute.on('click', muteVolume);
+
+volInput.on({
+    keydown: handleInput,
+    keyup:   updateVolume
+});
+
+icon.on('click', showHideSlider);
+
+Y.on('click', handleDocumentClick, document);
+
+// Support functions
+function updateInput(e) {
+    if (e.src !== 'KEY') {
+        volInput.set('value',e.newVal);
+    }
+}
+
+function updateIcon(e) {
+    var newLevel = e.newVal && Math.ceil(e.newVal / 34);
+
+    if (level !== newLevel) {
+        icon.replaceClass('level_'+level, 'level_'+newLevel);
+        level = newLevel;
+    }
+}
+
+function muteVolume(e) {
+    var disabled = !volume.get('disabled');
+    volume.set('disabled', disabled);
+
+    if (disabled) {
+        beforeMute = volume.getValue();
+        volume.setValue(0);
+        this.set('innerHTML','unmute');
+        volInput.set('disabled','disabled');
+    } else {
+        volume.set('value', beforeMute);
+        this.set('innerHTML','mute');
+        volInput.set('disabled','');
+    }
+}
+
+function handleInput(e) {
+    // Allow only numbers and various other control keys
+    if (e.keyCode > 57) {
+        e.halt();
+    }
+
+    // Stop numbers that would result in a value > 100
+    if (e.keyCode >= 48) {
+        var val = volInput.get('value'),
+            key = e.keyCode - 48;
+
+        if (parseInt(val + key,10) > 100) {
+            e.halt();
+        }
+    }
+}
+
+function updateVolume(e) {
+    var value = parseInt(volInput.get('value'),10) || 0;
+
+    volume.setValue(value, { src: 'KEY' });
+}
+
+function showHideSlider(e) {
+    control.toggleClass('volume-hide');
+    open = !open;
+
+    if (open) {
+        volume.syncUI();
+    }
+
+    if (e) {
+        e.preventDefault();
+    }
+}
+
+function handleDocumentClick(e) {
+    if (open && !icon.contains(e.target) &&
+            !volume.get('boundingBox').contains(e.target)) {
+        showHideSlider();
+    }
+}
+
+});
+</script>
+
+<!--END SOURCE CODE FOR EXAMPLE =============================== -->
+
+</body>
+</html>

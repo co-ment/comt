@@ -1,0 +1,53 @@
+{% extends "site/layout/base_text_form.html" %}
+{% load com %}
+{% load i18n %}
+
+{% block title %}
+{% blocktrans %}Add a new user{% endblocktrans %}
+{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block pre_form %}
+
+<script type="text/javascript">
+<!--
+tb_conf['current_tab'] = 'share';
+-->
+</script>
+
+<div id="text_share" class="tab-meta">
+
+<ul class="sub_list">
+    <li><a href="{% url text-share text.key %}">{% blocktrans %}Users' list{% endblocktrans %}</a></li>
+    <li> / </li>
+    <li><a href="{% url user-add-text text.key %}">{% blocktrans %}Add a new user{% endblocktrans %}</a></li>
+    <li> / </li>
+    <li class="active_sub">{% blocktrans %}Add users in bulk{% endblocktrans %}</a></li>    
+</ul>
+{% blocktrans %}The users will receive an email invitation to join the workspace.{% endblocktrans %}
+{% blocktrans %}You can customize the email sent by using the 'Note' field bellow.{% endblocktrans %}
+<br />
+<br />
+
+</div>
+{% endblock %}
+
+{% block buttons %}
+            <input name="cancel" type="button" id="cancel_button" value="{% blocktrans %}Cancel{% endblocktrans %}"/>
+            <script type="text/javascript">
+            <!--
+            $(document).ready(function(){
+                $("#cancel_button").click(function () { 
+                    window.location = "{% url user %}"; 
+                  });                
+            }) ;
+            -->
+            </script>                        
+
+{% endblock %}
+
+{% block post_form %}
+</div>
+{% endblock %}

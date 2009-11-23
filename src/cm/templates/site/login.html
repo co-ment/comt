@@ -1,0 +1,16 @@
+{% extends "site/layout/base_workspace.html" %}
+{% load i18n %}
+{% load com %}
+
+{% block head %}
+{% endblock %}
+
+{% block title %}{% blocktrans %}Login{% endblocktrans %}{% endblock %}
+
+{% block content %}
+
+<h1 class="main_title"><a class="title" href="{% url index %}">{{ CONF.workspace_name }}</a></h1>
+
+{% include "site/login_form.html" %}
+
+{% endblock %}

@@ -1,0 +1,144 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Creating a universal Console</title>
+
+<style type="text/css">
+/*margin and padding on body element
+  can introduce errors in determining
+  element position and are not recommended;
+  we turn them off as a foundation for YUI
+  CSS treatments. */
+body {
+	margin:0;
+	padding:0;
+}
+</style>
+
+<link type="text/css" rel="stylesheet" href="../../build/cssfonts/fonts-min.css" />
+<script type="text/javascript" src="../../build/yui/yui-min.js"></script>
+
+
+<!--begin custom header content for this example-->
+<style type="text/css">
+#demo {
+    overflow: hidden;
+}
+#yconsole {
+    position: static;
+    float: right;
+    margin: 0 0 1em 1em;
+}
+
+#demo .yui-console .yui-console-title {
+    border: 0 none;
+    color: #000;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 0;
+    text-transform: none;
+}
+#demo .yui-console .yui-console-entry-meta {
+    margin: 0;
+}
+
+#yui1_slider {
+    margin-bottom: 2em;
+}
+
+#yui2_anim {
+    background: #406ed9;
+    color: #fff;
+    height: 100px;
+    line-height: 100px;
+    margin-bottom: 1em;
+    text-align: center;
+    width: 100px;
+}
+</style>
+
+<!--end custom header content for this example-->
+
+</head>
+
+<body class=" yui-skin-sam">
+
+<h1>Creating a universal Console</h1>
+
+<div class="exampleIntro">
+	<p>In this example, the Console's <code>logSource</code> configuration is set to <code>Y.Global</code>, an <code>EventTarget</code> shared by all YUI instances.</p>
+
+<p>Two YUI instances are created with different configurations and module inclusions.  Each YUI instance is configured to request the <code><em>module</em>-debug.js</code> version of its modules and dependencies and filter out all but specific log sources using the <code>logInclude</code> config property.</p>
+
+<p>The universal Console is instantiated and rendered inside the first YUI instance.</p>
+			
+</div>
+
+<!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
+
+<div id="demo">
+    <div id="yconsole"></div>
+
+    <h4>YUI #1: Slider</h4>
+    <div id="yui1_slider"></div>
+
+    <h4>YUI #2: Animation</h4>
+    <div id="yui2_anim">HIDE ME</div>
+    <button type="button" id="yui2_anim_go">Hide</button>
+</div>
+<script type="text/javascript">
+// Create the first YUI instance
+
+YUI({
+        base: '../../build/',
+        filter: 'debug',
+    logInclude: { slider: true },
+    timeout: 10000
+}).use('slider', 'console', function (Y) {
+    
+    // Configure the Console's logSource to Y.Global to make it universal
+    new Y.Console({
+        boundingBox: '#yconsole',
+        logSource: Y.Global,
+        newestOnTop: false
+    }).render();
+
+    // Create a Slider from this instance
+    new Y.Slider({
+        railSize: '150px',
+        thumbImage: '../../build/slider/assets/skins/sam/thumb-classic-x.png'
+    }).render('#yui1_slider');
+
+});
+
+// Create the second YUI instance
+YUI({
+        base: '../../build/',
+        filter: 'debug',
+    logInclude: { event: true, attribute: true },
+    timeout: 10000
+}).use('node','anim', function (Y) {
+
+    var anim = new Y.Anim({
+        node: '#yui2_anim',
+        from: { opacity: 1 },
+        to:   { opacity: 0 }
+    });
+    anim.on('end', function () {
+        this.set('reverse', !this.get('reverse'));
+    });
+
+    Y.get('#yui2_anim_go').on('click',function () {
+        this.set('innerHTML', anim.get('reverse') ? 'Hide' : 'Show');
+        anim.run();
+    });
+
+});
+</script>
+
+<!--END SOURCE CODE FOR EXAMPLE =============================== -->
+
+</body>
+</html>

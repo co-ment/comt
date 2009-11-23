@@ -1,0 +1,17 @@
+/* OVERRIDE */
+.c-comment {
+    border:1px solid  #FCFC6B;
+    background-color:#FFFFBD;
+}
+
+.c-comment .yui-widget-hd {
+    background-color:#FCFC6B;
+}
+
+.c-comment a.c-iclose {
+    background-position: 0 -162px ;
+	/*background: transparent url(../../../img/close_comment_notelike.png) no-repeat scroll 0 0;*/
+    
+}
+
+

@@ -1,0 +1,69 @@
+{% load com %}
+{% load i18n %}
+<b>
+	{% ifequal user request.user %}
+    <a title="{% blocktrans %}Your profile{% endblocktrans %}" class="main_object_title" href="{% url profile %}">{{ user.get_profile.admin_print }}</a>
+    {% else %}
+    <a title="{% blocktrans with user.get_profile.admin_print as userprint %}Edit user {{ userprint }}{% endblocktrans %}" class="main_object_title" href="{% url user-edit user.get_profile.key %}">{{ user.get_profile.admin_print }}</a>
+    {% endifequal %}
+</b>
+<div class="hidden-user-actions user-actions-{{ user.get_profile.key }}" style="visibility:hidden;">
+{% ifequal user request.user %}
+  <a title="Your profile" href="{% url profile %}">{% blocktrans %}Your profile{% endblocktrans %}</a> 
+{% else %}
+  <a title="Edit user" href="{% url user-edit user.get_profile.key %}">{% blocktrans %}Edit{% endblocktrans %}</a> 
+| <a href="{% url user-contact user.get_profile.key %}">{% blocktrans %}Contact{% endblocktrans %}</a>               
+{% if user.get_profile.is_suspended %}
+	{% if user.is_active %}
+		| <a id="user-enable-{{ user.get_profile.key }}" href="#">{% blocktrans %}Enable access{% endblocktrans %}</a>
+	{% else %}
+		{% include "site/macros/user_moderation.html" %}
+	{% endif %}
+{% else %}
+        | <a id="user-suspend-{{ user.get_profile.key }}" href="#">{% blocktrans %}Suspend access{% endblocktrans %}</a>
+        | <a id="user-resend-{{ user.get_profile.key }}" href="#">{% blocktrans %}(Re-)send invitation{% endblocktrans %}</a>
+{% endif %}
+{% endifequal %}  
+</div>
+<script type="text/javascript">
+<!--
+$(function() {
+    $("#user-suspend-{{ user.get_profile.key }}").click(function(){
+        url = '{% url user-suspend user.get_profile.key %}';
+    	question = "{% blocktrans %}Are you sure you want to suspend this user's access to the workspace?{% endblocktrans %}";
+        if (confirm(question)) {
+            $.post(url, function(data){
+                  window.location = '{% url user %}';
+                });                        
+        }
+    });
+    $("#user-enable-{{ user.get_profile.key }}").click(function(){
+        url = '{% url user-enable user.get_profile.key %}';
+    	question = "{% blocktrans %}Are you sure you want to enable this user's access to the workspace?{% endblocktrans %}";
+        if (confirm(question)) {
+            $.post(url, function(data){
+                  window.location = '{% url user %}';
+                });                        
+        }
+    });
+    $("#user-resend-{{ user.get_profile.key }}").click(function(){
+    	url = '{% url user-send-invitation user.get_profile.key %}';
+    	question = "{% blocktrans %}Are you sure you want to send this user an invitation to the workspace?{% endblocktrans %}";
+        if (confirm(question)) {
+            $.post(url, function(data){
+                  window.location = '{% url user %}';
+                });                        
+        }
+    });
+    
+    $(".user-{{ user.get_profile.key }}").mouseover(function(){
+        $(".user-actions-{{ user.get_profile.key }}").css('visibility','visible');
+        $(".user-{{ user.get_profile.key }}").addClass('hover');                       
+    });
+    $(".user-{{ user.get_profile.key }}").mouseout(function(){
+        $(".user-actions-{{ user.get_profile.key }}").css('visibility','hidden');   
+        $(".user-{{ user.get_profile.key }}").removeClass('hover');                       
+    });
+}) ;
+--> 
+</script>
