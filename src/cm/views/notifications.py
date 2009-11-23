@@ -13,7 +13,6 @@ from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.utils import feedgenerator
 from django.utils.translation import ugettext as _
-from cm.security import user_has_perm # import here!
 
 import re
 import time
@@ -72,12 +71,14 @@ def text_notifications(request, key):
     text = get_text_by_keys_or_404(key)
     user = request.user if request.user.is_authenticated() else None
 
-    anonymous_can_view_text = False
-    anonymous_user_role = UserRole.objects.get(user=None, text=text)
-    if anonymous_user_role :
-	    anonymous_can_view_text = user_has_perm(anonymous_user_role.user, 'can_view_text', text=text)
+    from cm.security import user_has_perm # import here!
+    anonymous_can_view_text = user_has_perm(None, 'can_view_text', text=text)
     own_check = Notification.objects.filter(text=text,type='own',user=user).count()
     all_check = Notification.objects.filter(text=text,type=None,user=user).count()
+    
+    
+    embed_code = '<iframe frameborder="0" src="%s%s" style="height: 166px; width: 99.9%%; position: relative; top: 0px;">'%(settings.SITE_URL, reverse('text-view-comments-frame', args=[text.key]))   
+    
     if request.method == 'POST':
         if 'activate' in request.POST:
             text.private_feed_key = generate_key()
@@ -98,6 +99,7 @@ def text_notifications(request, key):
     template_dict = {
                      'text' : text,
                      'all_check' : all_check,
-                     'anonymous_can_view_text' : anonymous_can_view_text
+                     'anonymous_can_view_text' : anonymous_can_view_text,
+                     'embed_code': embed_code
                      }
     return render_to_response('site/text_notifications.html', template_dict , context_instance=RequestContext(request))

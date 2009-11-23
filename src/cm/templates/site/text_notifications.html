@@ -70,20 +70,17 @@ tb_conf['current_tab'] = 'notifications';
 --> 
 </script>
 
-<h2>{% blocktrans %}Embed the text{% endblocktrans %}</h2>
-(<a title="{% blocktrans %}Help{% endblocktrans %}" target="_blank" href="{% url help %}#embed">?</a>)
-<br />
+<h2>{% blocktrans %}Embed text{% endblocktrans %}</h2>
 {% blocktrans %}Copy this code into your site to display text with comments. Users will also be able to add comments from your site depending an anonymous users' roles.{% endblocktrans %}
+(<a title="{% blocktrans %}Help{% endblocktrans %}" target="_blank" href="{% url help %}#embed">?</a>)
 <br/>
 <br/>
-<textarea rows="4" cols="80" readonly="true">
-<iframe frameborder="0" src="{{ SITE_URL }}{% url text-view-comments-frame text.key %}" style="height: 166px; width: 99.9%; position: relative; top: 0px;"> 
-</iframe>
+<input style="width:100%;background-color:#DDDDDD;" value="{{ embed_code }}" type="text" readonly="true"></input>
 </textarea>
 {% if not anonymous_can_view_text %}
 <br/>
 {% url text-share text.key as text_users_link %} 
-<span style="color:#F00;">{% blocktrans %}Warning:{% endblocktrans %}</span>{% blocktrans %}You won't be able to successfully embed the text before you <a href='{{ text_users_link }}'>give anonymous users</a> a role allowing them to view the text{% endblocktrans %}</span>
+<span style="color:#F00;">{% blocktrans %}Warning:{% endblocktrans %}</span>{% blocktrans %}You won't successfully embed the text before you <a href='{{ text_users_link }}'>give anonymous users</a> a role allowing them to view the text{% endblocktrans %}</span>
 {% endif %}
 </form>
 </div>
