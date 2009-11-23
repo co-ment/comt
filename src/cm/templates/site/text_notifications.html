@@ -79,8 +79,7 @@ tb_conf['current_tab'] = 'notifications';
 </textarea>
 {% if not anonymous_can_view_text %}
 <br/>
-{% url text-share text.key as text_users_link %} 
-<span style="color:#F00;">{% blocktrans %}Warning:{% endblocktrans %}</span>{% blocktrans %}You won't successfully embed the text before you <a href='{{ text_users_link }}'>give anonymous users</a> a role allowing them to view the text{% endblocktrans %}</span>
+<span style="color:#F00;">{% blocktrans %}Warning:{% endblocktrans %}</span>{% blocktrans %}You won't successfully embed the text before you give anonymous users a role allowing them to view the text.{% endblocktrans %}</span>
 {% endif %}
 </form>
 </div>
