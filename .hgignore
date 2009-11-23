@@ -1,0 +1,13 @@
+
+syntax: regexp
+^settings_local\.py$
+syntax: regexp
+^urls_local\.py$
+syntax: regexp
+^bin$
+syntax: regexp
+^develop-eggs$
+syntax: regexp
+^eggs$
+syntax: regexp
+^src/comt\.egg-info$
