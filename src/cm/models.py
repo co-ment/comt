@@ -692,18 +692,18 @@ class Activity(models.Model):
     
     #type/msg
     MSGS = {
-         'text_edited' : _(u'Text %(link_to_text)s edited'),
-         'text_edited_new_version' : _(u'Text %(link_to_text)s edited (new version created)'),
-         'text_created' :  _(u'Text %(link_to_text)s added'),
-         'text_removed' : _(u'Text %(link_to_text)s removed'),
-         'comment_created' : _(u'Comment %(link_to_comment)s added on text %(link_to_text)s'),
-         'comment_removed' : _(u'Comment %(link_to_comment)s removed from text %(link_to_text)s'),
-         'user_created' : _(u'User %(username)s added'),
-         'user_enabled' : _(u'User %(username)s access to workspace enabled'),
-         'user_refused' : _(u'User %(username)s access to workspace refused'),
-         'user_suspended' : _(u'User %(username)s access to workspace suspended'),
-         'user_activated' : _(u'User %(username)s access to workspace activated'),
-         'user_approved' : _(u'User %(username)s has activated his account'),
+         'text_edited' : ugettext_lazy(u'Text %(link_to_text)s edited'),
+         'text_edited_new_version' : ugettext_lazy(u'Text %(link_to_text)s edited (new version created)'),
+         'text_created' :  ugettext_lazy(u'Text %(link_to_text)s added'),
+         'text_removed' : ugettext_lazy(u'Text %(link_to_text)s removed'),
+         'comment_created' : ugettext_lazy(u'Comment %(link_to_comment)s added on text %(link_to_text)s'),
+         'comment_removed' : ugettext_lazy(u'Comment %(link_to_comment)s removed from text %(link_to_text)s'),
+         'user_created' : ugettext_lazy(u'User %(username)s added'),
+         'user_enabled' : ugettext_lazy(u'User %(username)s access to workspace enabled'),
+         'user_refused' : ugettext_lazy(u'User %(username)s access to workspace refused'),
+         'user_suspended' : ugettext_lazy(u'User %(username)s access to workspace suspended'),
+         'user_activated' : ugettext_lazy(u'User %(username)s access to workspace activated'),
+         'user_approved' : ugettext_lazy(u'User %(username)s has activated his account'),
          }
     
     def is_same_user(self, other_activity):
