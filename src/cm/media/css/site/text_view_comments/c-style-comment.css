@@ -75,12 +75,9 @@ a.c-action {
     float:right;
 }
 
-.yui-widget-hd a.c-close {
-/*  background: transparent url(../../../img/close_comment.png) no-repeat scroll 0 0;*/
-    background: transparent url(../../../img/c_spr.png) no-repeat scroll 0 -30px;
+.yui-widget-hd a.c-close, .yui-widget-hd a.c-show-scope  {
     position: absolute;
-    right: 5px;
-	top: 5px;
+    top: 5px;
     height: 14px;
     text-indent: -999px;
     width: 14px;
@@ -90,12 +87,20 @@ a.c-action {
     text-decoration: none;
     font-size:77%;
 }
+.yui-widget-hd a.c-close  {
+    background: transparent url(../../../img/c_spr.png) no-repeat scroll 0 -30px;
+    right: 5px;
+}
+.yui-widget-hd a.c-show-scope {
+    background: transparent url(../../../img/c_spr2.png) no-repeat scroll 0 -30px;
+    right: 21px;
+}
 
-.c-comment a.c-iclose {
+.c-comment a.c-iclose, .c-comment a.c-show-iscope  {
     background-position: 0 -30px;
 }
 
-.c-comment a.c-iclose-focus {
+.c-comment a.c-iclose-focus, .c-comment a.c-show-iscope-focus {
     background-position: 0 -74px;
 }
 input[type="text"], input[type="password"], textarea {

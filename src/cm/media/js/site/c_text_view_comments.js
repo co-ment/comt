@@ -286,10 +286,10 @@ onDomReady = function(arg1) {
 					gSync.showSingleComment(topParentComment) ;
 				}
 			}
-			// else show all
-			else {
-				gSync.showAllComments() ;
-			}
+			
+//			else {
+//			gSync.showAllComments() ;// show all
+//			}
 		}
 	});
 	q1.run();

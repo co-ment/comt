@@ -8,7 +8,7 @@
     background-color:#FCFC6B;
 }
 
-.c-comment a.c-iclose {
+.c-comment a.c-iclose, .c-comment a.c-show-iscope  {
     background-position: 0 -162px ;
 	/*background: transparent url(../../../img/close_comment_notelike.png) no-repeat scroll 0 0;*/
     
