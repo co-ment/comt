@@ -17,3 +17,12 @@ syntax: regexp
 ^parts$
 syntax: regexp
 ^\.installed\.cfg$
+
+syntax: regexp
+^develop-eggs$
+syntax: regexp
+^downloads$
+syntax: regexp
+^parts$
+syntax: regexp
+^bin$
