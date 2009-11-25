@@ -68,4 +68,4 @@ def send_notification(activity, notification):
     
     send_mail(subject, message, ApplicationConfiguration['email_from'], [email], fail_silently=True)
     
-    logging.debug("Notification sent [%s] => %s" %(activity,notification.user) if notification.user else "sending (email) %s => %s" %(activity,notification.email))
+    #logging.debug(u"Notification sent [%s] => %s" %(activity,notification.user) if notification.user else u"sending (email) %s => %s" %(activity,notification.email))
