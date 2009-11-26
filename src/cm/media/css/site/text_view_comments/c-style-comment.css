@@ -75,7 +75,7 @@ a.c-action {
     float:right;
 }
 
-.yui-widget-hd a.c-close, .yui-widget-hd a.c-show-scope  {
+.c-comment a.c-close, .c-comment a.c-show-scope  {
     position: absolute;
     top: 5px;
     height: 14px;
@@ -87,26 +87,30 @@ a.c-action {
     text-decoration: none;
     font-size:77%;
 }
-.yui-widget-hd a.c-close  {
+.c-comment a.c-close  {
     background: transparent url(../../../img/c_spr.png) no-repeat scroll 0 -30px;
     right: 5px;
 }
-.yui-widget-hd a.c-show-scope {
+.c-comment a.c-show-scope {
     background: transparent url(../../../img/c_spr2.png) no-repeat scroll 0 -30px;
     right: 21px;
 }
 
-.c-comment a.c-iclose, .c-comment a.c-show-iscope  {
+.c-comment a.c-close  {
     background-position: 0 -30px;
 }
 
-.c-comment a.c-iclose-focus, .c-comment a.c-show-iscope-focus {
+.c-focus-comment .c-comment a.c-close {
     background-position: 0 -74px;
 }
+
+.c-focus-comment .c-comment a.c-show-scope {
+    background-image: none;
+}
+
 input[type="text"], input[type="password"], textarea {
     border: 1px solid #C1C1C1;
 }
-
 
 .c-comment .yui-widget-bd {
     padding-bottom: 20px;

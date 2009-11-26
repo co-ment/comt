@@ -47,8 +47,8 @@ IComment = function() {
 								'<a class="c-state-unapproved c-action" title="' + changeToUnapprove + '" alt="' + changeToUnapprove + '">'+ unapproved +'</a>' + " " +  
 								'<a class="c-state-cancel c-action" title="' + cancelChange + '" alt="' + cancelChange + '">' + cancel +'</a>' + " " +  
 							'</div>' + 
-							'<a class="c-show-scope c-show-iscope c-action" title="'+ showScope + '" alt="' + showScope + '"><em>-</em></a>' +
-							'<a class="c-close c-iclose c-action" title="'+ close + '" alt="' + close + '"><em>X</em></a>' +
+							'<a class="c-show-scope c-action" title="'+ showScope + '" alt="' + showScope + '"><em>-</em></a>' +
+							'<a class="c-close c-action" title="'+ close + '" alt="' + close + '"><em>X</em></a>' +
 						'</div>',
 		bodyContent :	'<div class="icomment-body">' +
 						'<span class="c-content"></span>' +
@@ -212,10 +212,6 @@ IComment.prototype = {
 		// debug !!
 //		CY.log('activate' + this.commentId) ;
 		this.overlay.get('boundingBox').addClass('c-focus-comment') ;
-		this.overlay.get('contentBox').query(".c-close").addClass('c-iclose-focus') ;
-		this.overlay.get('contentBox').query(".c-close").removeClass('c-iclose') ;
-		this.overlay.get('contentBox').query(".c-show-scope").addClass('c-show-iscope-focus') ;
-		this.overlay.get('contentBox').query(".c-show-scope").removeClass('c-show-iscope') ;
 		
 	},
 	
@@ -223,10 +219,6 @@ IComment.prototype = {
 		// debug !!
 //		CY.log('deactivate' + this.commentId) ;
 		this.overlay.get('boundingBox').removeClass('c-focus-comment') ;
-		this.overlay.get('contentBox').query(".c-close").addClass('c-iclose') ;
-		this.overlay.get('contentBox').query(".c-close").removeClass('c-iclose-focus') ;
-		this.overlay.get('contentBox').query(".c-show-scope").addClass('c-show-iscope') ;
-		this.overlay.get('contentBox').query(".c-show-scope").removeClass('c-show-iscope-focus') ;
 		
 	},
 	hide:function() {

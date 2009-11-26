@@ -8,10 +8,6 @@
     background-color:#FCFC6B;
 }
 
-.c-comment a.c-iclose, .c-comment a.c-show-iscope  {
+.c-comment a.c-close, .c-comment a.c-show-scope  {
     background-position: 0 -162px ;
-	/*background: transparent url(../../../img/close_comment_notelike.png) no-repeat scroll 0 0;*/
-    
 }
-
-

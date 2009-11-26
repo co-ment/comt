@@ -9,7 +9,7 @@
     background-color:#ECECEC ;
 }
 
-.c-comment a.c-iclose, .c-newcomment a.c-iclose {
+.c-comment a.c-close, .c-comment a.c-show-scope, .c-newcomment a.c-close {
     background-position: 0 -118px;
 }
 

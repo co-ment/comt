@@ -12,7 +12,7 @@ gFormHtml = {
 		'headerTitle'	:'<center><div id="###" class="c-header-title"></div></center>',
 		'currentSel'	:'<div id="###">' + gettext('Comment will apply to this selection:') + '<br/><div class="current_sel"><div id="???" class="current_sel_ins">' + gNoSelectionYet + '</div></div>#hiddeninput#</div>',
 		'btns'			:'<center><input id="###" type="button" value="' + gettext('Save') + '" /><input id="???" type="button" value="' + gettext('Cancel') + '" /></center>',
-		'closeIcon' 	:'<a id="###" class="c-close c-iclose" title="' + gettext('close') + '"><em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</em></a>'
+		'closeIcon' 	:'<a id="###" class="c-close" title="' + gettext('close') + '"><em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</em></a>'
 		} ;
 
 // returns {'headerContent':headerHtml, 'bodyContent':bodyHtml}
