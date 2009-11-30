@@ -1,6 +1,6 @@
 from cm.activity import register_activity
 from cm.client import jsonize, get_filter_datas, edit_comment, remove_comment, \
-    add_comment, RequestComplexEncoder, comments_thread
+    add_comment, RequestComplexEncoder, comments_thread, own_notify
 from cm.cm_settings import NEW_TEXT_VERSION_ON_EDIT
 from cm.diff import text_diff as _text_diff, text_history as inner_text_history, \
     get_colors
@@ -228,6 +228,8 @@ def client_exchange(request):
         text_version = text.get_latest_version()
         
         if (text != None) :
+            if function_name == 'ownNotify' : 
+                ret = own_notify(request=request, key=key)
             if function_name in ('editComment', 'addComment', 'removeComment',) :
                 if function_name == 'editComment' :
                     ret = edit_comment(request=request, key=key, comment_key=request.POST['comment_key'])
@@ -239,12 +241,11 @@ def client_exchange(request):
                 ret['filterData'] = get_filter_datas(request, text_version, text)
                 #ret['tagCloud'] = get_tagcloud(key)
     if ret :
-        if type(ret) != HttpResponseRedirect :
+        if type(ret) != HttpResponseRedirect and type(ret) != HttpResponse:
             ret = HttpResponse(simplejson.dumps(ret, cls=RequestComplexEncoder, request=request))        
     else :
-        ret = HttpResponse(simplejson.dumps({}))
-        ret.status_code = 403
-
+        ret = HttpResponse()
+        ret.status_code = 403 
     return ret 
 
 

@@ -19,8 +19,9 @@ import time
 
 @login_required
 def notifications(request):
-    notify_check = Notification.objects.filter(text=None,type=None,user=request.user, active=True).count()
-    own_check = Notification.objects.filter(text=None,type='own',user=request.user, active=True).count()
+    workspace_notify_check = Notification.objects.filter(text=None,type='workspace',user=request.user, active=True).count()
+    own_notify_check = Notification.objects.filter(text=None,type='own',user=request.user, active=True).count()
+    
     if request.method == 'POST':
         if 'activate' in request.POST:
             Configuration.objects.set_key('private_feed_key', generate_key())
@@ -28,22 +29,15 @@ def notifications(request):
         if 'reset' in request.POST:
             Configuration.objects.set_key('private_feed_key', generate_key())
             display_message(request, _(u"Private feed reseted."))            
-        if request.POST.get('notify_check',None) == u'true':
-            if not notify_check:            
-                notification = Notification.objects.create_notification(text=None, type=None, email_or_user=request.user)
-                # ajax display_message(request, _(u"Notifications activated."))
-        elif request.POST.get('notify_check',None) == u'false':
-            Notification.objects.filter(text=None,type=None,user=request.user).delete()
-            notify_check = False
-                
-        if request.POST.get('own_check',None) == u'true':
-            Notification.objects.set_notification_to_own_discussions(text=None,email_or_user=request.user, active=True)
-        elif request.POST.get('own_check',None) == u'false':
-            Notification.objects.set_notification_to_own_discussions(text=None,email_or_user=request.user, active=False)
-            own_check = False
+        if request.POST.get('notif_id',None):
+            notif_id = request.POST.get('notif_id')
+            notif_type = 'own' if notif_id == 'own_notify_check' else 'workspace' 
+            notif_val = request.POST.get(notif_id,None)
+            if notif_val != None :
+                Notification.objects.set_notification(text=None, type=notif_type, active=(notif_val == 'true'), email_or_user=request.user)
     
-    return render_to_response('site/notifications.html', {'notify_check':notify_check,
-                                                          'own_check' :own_check, 
+    return render_to_response('site/notifications.html', {'workspace_notify_check':workspace_notify_check,
+                                                          'own_notify_check' :own_notify_check, 
                                                           }, context_instance=RequestContext(request))
     
 
@@ -73,9 +67,8 @@ def text_notifications(request, key):
 
     from cm.security import user_has_perm # import here!
     anonymous_can_view_text = user_has_perm(None, 'can_view_text', text=text)
-    own_check = Notification.objects.filter(text=text,type='own',user=user).count()
-    all_check = Notification.objects.filter(text=text,type=None,user=user).count()
-    
+    text_notify_check = Notification.objects.filter(text=text,type='text',user=user, active=True).count()
+    workspace_notify_check = Notification.objects.filter(text=None,type='workspace',user=user, active=True).count()
     
     embed_code = '<iframe frameborder="0" src="%s%s" style="height: 166px; width: 99.9%%; position: relative; top: 0px;">'%(settings.SITE_URL, reverse('text-view-comments-frame', args=[text.key]))   
     
@@ -89,16 +82,16 @@ def text_notifications(request, key):
             text.save()
             display_message(request, _(u"Private notifications feed reseted."))
             
-        if request.POST.get('all_check',None) == u'true':            
-            if not all_check:          
-                notification = Notification.objects.create_notification(text=text, type=None, email_or_user=user)
-
-        if request.POST.get('all_check',None) == u'false':            
-            notification = Notification.objects.filter(text=text, type=None, user=user).delete()
+        if request.POST.get('notif_id',None):
+            notif_id = request.POST.get('notif_id')
+            notif_val = request.POST.get(notif_id,None)
+            if notif_val != None :
+                Notification.objects.set_notification(text=text, type='text', active=(notif_val == 'true'), email_or_user=request.user)
 
     template_dict = {
                      'text' : text,
-                     'all_check' : all_check,
+                     'workspace_notify_check' : workspace_notify_check,
+                     'text_notify_check' : text_notify_check,
                      'anonymous_can_view_text' : anonymous_can_view_text,
                      'embed_code': embed_code
                      }

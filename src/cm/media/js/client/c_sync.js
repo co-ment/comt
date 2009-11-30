@@ -124,6 +124,21 @@ Sync.prototype = {
 				else if (isReply())
 					this._hideNewReplyForm() ;
 				
+				if ("ask_for_notification" in ret) {  
+					if (ret['ask_for_notification']) {
+						// TODO ask for notification ...or use AUTO_CONTRIB ?
+						parent.f_yesNoDialog(gettext("Do you wan to subscribe to all replies notifications in discussions where you have participated?"), gettext("Warning"), null, null, null, 
+							function() { // special case : no waiting for the return, no error check, nothing !
+									var cfg = {
+									method: "POST", 
+									data: urlEncode({'fun':'ownNotify', 'key':sv_key, 'email':ret['email']}) 
+								} ; 
+								CY.io(sv_client_url, cfg);
+							}, this, null) ;
+					}
+				}
+					
+				
 				if ("comment" in ret) { // won't be when add with a priori moderation
 					var comment = ret['comment'] ;
 	

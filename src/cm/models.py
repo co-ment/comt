@@ -382,38 +382,29 @@ class Attachment(KeyModel):
     objects = AttachmentManager()
     
 class NotificationManager(KeyManager):
-    def create_notification(self, text, type, email_or_user):
-        prev_notification = self.get_notification_to_own_discussions(text, type, email_or_user)
-        if not prev_notification:
-            notification = self.create(text=text, type=type)
-            notification.set_email_or_user(email_or_user)
-            return notification
-        else:
-            return prev_notification 
+    def create_notification(self, text, type, active, email_or_user):
+        notification = self.create(text=text, type=type, active=active)
+        notification.set_email_or_user(email_or_user)
+        return notification
 
-    def get_notification_to_own_discussions(self, text, type, email_or_user):
+    def get_notifications(self, text, type, email_or_user):
         if isinstance(email_or_user,unicode):
             prev_notifications = Notification.objects.filter(text=text, type=type, email=email_or_user)
         else:
             prev_notifications = Notification.objects.filter(text=text, type=type, user=email_or_user)
+            
         if prev_notifications:
             return prev_notifications[0]
         else:
             return None
      
-    def set_notification_to_own_discussions(self, text, email_or_user, active=True):
-        if active:
-            notification = self.create_notification(text, 'own', email_or_user)
-            if not notification.active:
-                notification.active = True
-                notification.save()                
-        else:
-            notification = self.create_notification(text, 'own', email_or_user)
-            notification.active = False
+    def set_notification(self, text, type, active, email_or_user):
+        notification = self.get_notifications(text, type, email_or_user)
+        if notification == None :
+            self.create_notification(text, type, active, email_or_user)
+        else : 
+            notification.active = active
             notification.save()                
-    
-    def subscribe_to_own_text(self, text, user):
-        return self.create_notification(text, None, user)
     
 class Notification(KeyModel, AuthorModel):
     text = models.ForeignKey(Text, null=True, blank=True)

@@ -52,32 +52,35 @@ tb_conf['current_tab'] = 'notifications';
 {% endif %}
 
 <h2>{% blocktrans %}Email notifications{% endblocktrans %}</h2>
-
-	<input type="checkbox" id="notify_check" class="check" name="notify-check" {% if notify_check %}checked="checked"{% endif %}/>&nbsp;
+    <div>
+	<input type="checkbox" id="workspace_notify_check" class="check" {% if workspace_notify_check %}checked="checked"{% endif %}/>&nbsp;
 	{% blocktrans %}Subscribe to workspace notifications{% endblocktrans %}
-	<br />
-	<input type="checkbox" id="own_check" class="check" name="commentsown-check" {% if own_check %}checked="checked"{% endif %}/>&nbsp;
-	{% blocktrans %}Subscribe to all comments/replies notifications in discussions where you have participated{% endblocktrans %}	                 
-	
+	</div>
+    <div id="own_notify_check_container">
+	<input type="checkbox" id="own_notify_check" class="check" {% if own_notify_check %}checked="checked"{% endif %}/>&nbsp;
+	{% blocktrans %}Subscribe to all replies notifications in discussions where you have participated{% endblocktrans %}	                 
+    </div>	
 	<script type="text/javascript">
 	<!--
-	$(function() {
-	    $(".check").click(function(){
-	    	notify_check = $("#notify_check").attr('checked');
-	    	own_check = $("#own_check").attr('checked');
-	
-	         $.post('.', 
-	                 {
-	         	'notify_check':notify_check,
-	         	'own_check':own_check
-	             	},
-	                 function(data){
-	               // window.location = window.location;
-	             });
-	                   	
-	    });
-	    
-	}) ;
+
+    $(function() {
+        adapt_own_check_visibility = function() {
+            if ($("#workspace_notify_check").attr('checked'))
+                $("#own_notify_check_container").hide() ;
+            else
+                $("#own_notify_check_container").show() ;
+        } ;
+        $(".check").click(function(){
+            checked = $(this).attr('checked');
+            id = $(this).attr('id') ;
+            post_data = {'notif_id': id} ;
+            post_data[id] = checked ; 
+            $.post('.', post_data, function(data){});
+            
+            adapt_own_check_visibility();
+        });
+        adapt_own_check_visibility() ;
+    }) ;
 	--> 
 	</script>
 

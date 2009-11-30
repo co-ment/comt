@@ -208,6 +208,21 @@ def edit_comment(request, key, comment_key):
         ret['msg'] = _(u'comment saved')
     return ret
     
+# DIRTY : this function has no error check but anyway errors are not listened to client side 
+@has_perm_on_text("can_create_comment")
+def own_notify(request, key):
+    email_or_user = None if request.user.is_anonymous() else request.user
+    if not email_or_user :
+        email_or_user = request.POST.get('email', None)
+        if email_or_user :
+            email_or_user = email_or_user.lower().strip()
+
+    text = Text.objects.get(key=key)
+    Notification.objects.set_notification(text=None, type='own', active=True, email_or_user=email_or_user)
+    ret = HttpResponse()
+    ret.status_code = 200 
+    return ret 
+
 @has_perm_on_text("can_create_comment")
 def add_comment(request, key):
 #    if edit_comment_id : #
@@ -240,6 +255,18 @@ def add_comment(request, key):
         comment_state = 'approved' if text_version.mod_posteriori else 'pending'
         comment = Comment.objects.create(state=comment_state, text_version=text_version, user=user, name=name, email=email, title=title, content=content, content_html=content_html, tags = tags, start_wrapper = start_wrapper, end_wrapper = end_wrapper, start_offset = start_offset, end_offset = end_offset, reply_to=reply_to)
         
+        ask_for_notification = True
+        if user : 
+            workspace_notify_count = Notification.objects.filter(text=None,type='workspace',user=user, active=True).count()
+            text_notify_count = Notification.objects.filter(text=text,type='text',user=user, active=True).count()
+            if workspace_notify_count > 0 or text_notify_count > 0 : 
+                ask_for_notification = False
+
+        if ask_for_notification :
+            ask_for_notification = ( None == Notification.objects.get_notifications(text=None, type='own', email_or_user=(user if user else email)))
+        ret['ask_for_notification'] = ask_for_notification
+        ret['email'] = '' if user else email
+    
         if text_version.mod_posteriori or has_perm(request, 'can_view_unapproved_comment', text=text) : 
             ret['comment'] = comment
             ret['msg'] = _(u"comment saved")
@@ -247,7 +274,7 @@ def add_comment(request, key):
             ret['msg'] = _(u"comment saved, it is being held for moderation")
         
         if AUTO_CONTRIB_REGISTER:
-            Notification.objects.set_notification_to_own_discussions(text=text, email_or_user=user or email)            
+            Notification.objects.set_notification(text=text, type='own', active=True, email_or_user=user or email)            
         register_activity(request, "comment_created", text, comment)
     return ret
 

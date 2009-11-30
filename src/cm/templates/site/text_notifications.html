@@ -55,18 +55,26 @@ tb_conf['current_tab'] = 'notifications';
 {% endif %}
 
 <h2>{% blocktrans %}Email notifications{% endblocktrans %}</h2>
-
-	<input type="checkbox" id="all_check" class="check" name="all-check" {% if all_check %}checked="checked"{% endif %}/>&nbsp;
-	{% blocktrans %}Subscribe to all text notifications{% endblocktrans %}
-	
+    <div>
+    {% if workspace_notify_check %}
+        {% blocktrans %}You will receive text notifications because you subscribed to notifications at the workspace level{% endblocktrans %}
+    {% else %}
+		<input type="checkbox" id="text_notify_check" class="check" {% if text_notify_check %}checked="checked"{% endif %}/>&nbsp;
+	    {% blocktrans %}Subscribe to all text notifications{% endblocktrans %}
+    {% endif %}
+	</div>
 	<script type="text/javascript">                
 	<!--
-	$(function() {
-	    $(".check").click(function(){
-	    	var all_check = $("#all_check").attr('checked');
-            $.post('.',{'all_check':all_check},function(data){/* window.location = window.location;*/});
-    });
-}) ;
+    $(function() {
+        $(".check").click(function(){
+            checked = $(this).attr('checked');
+            id = $(this).attr('id') ;
+            post_data = {'notif_id': id} ;
+            post_data[id] = checked ; 
+            $.post('.', post_data, function(data){});
+        });
+        
+    }) ;
 --> 
 </script>
 
