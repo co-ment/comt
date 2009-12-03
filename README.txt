@@ -34,42 +34,43 @@ Requirements
 Installation (development install)
 ============
 1. Install python2.5+ and all required python libraries
-	(ubuntu users : 'apt-get install python python-magic python-setuptools python-uno')
+	(ubuntu users : 'sudo apt-get install python python-magic python-setuptools python-uno')
 2. Install pandoc
-	(ubuntu users : 'apt-get install pandoc')
+	(ubuntu users : 'sudo apt-get install pandoc')
 3. Install openoffice (headless mode) [used for document conversion]
-	(ubuntu users : 'apt-get install sun-java6-jre openoffice.org openoffice.org-headless xvfb)
+	(ubuntu users : 'sudo apt-get install sun-java6-jre openoffice.org openoffice.org-headless xvfb)
 4. Install/configure database [skip this step if you plan to use a sqlite database]
 	4 a) Postgresql
 		- Install and configure database server [skip this step if use an external database server] 
-		(ubuntu users : 'apt-get install postgresql')		
+		(ubuntu users : 'sudo apt-get install postgresql')		
 		- Install database client
-		(ubuntu users : 'apt-get install postgresql-client')		
+		(ubuntu users : 'sudo apt-get install postgresql-client')		
 		- Install python database connector: psycopg2
-		(ubuntu users : 'apt-get install python-psycopg2')		
+		(ubuntu users : 'sudo apt-get install python-psycopg2')		
 	4 b) Mysql
 		-  Install and configure mysql server [skip this step if use an external database server]
-		(ubuntu users : 'apt-get install mysql-server')		
+		(ubuntu users : 'sudo apt-get install mysql-server')		
 		- Install database client
-		(ubuntu users : 'apt-get install mysql-client')
+		(ubuntu users : 'sudo apt-get install mysql-client')
 		- Install python database connector: mysqldb
-		(ubuntu users : 'apt-get install python-mysqldb')						
+		(ubuntu users : 'sudo apt-get install python-mysqldb')						
 5. Create a database (we recommend UTF8 encoding) and a read/write access to it. [skip this step if you plan to use a sqlite database]
    The database account accessing the database MUST have administrative privileges when running the 'syncdb command' (step 8)
    (The reason for that is that Postgresql requires such privileges to create the C-based stored procedure that we use for full text indexing)
-7. Setup the project and get dependencies
+   (ex. postgresql: 'sudo -u postgres createdb -E utf8 -e <db_name>)
+6. Setup the project and get dependencies
    - `python bootstrap.py`
    - `./bin/buildout` 
-6. Configure Comt to your settings
+7. Configure Comt to your settings
    - copy settings_local_sample.py to settings_local.py (this file will contain your personal settings)  
    - edit settings_local.py to suit your settings (search for 'YOUR_SETTINGS' occurrences, those are mandatory settings)
-7. Create the database structure (and test your database connection)
+8. Create the database structure (and test your database connection)
    - `./bin/django syncdb --settings=settings`
-8. Create basic right management system
+9. Create basic right management system
    - `./bin/django loaddata roles_generic --settings=settings`
-9. Launch development server
-   - `./bin/django manage.py runserver --settings=settings`
-10. Access your Comt instance by pointing your browser to http://127.0.0.1:8000/
+10. Launch development server
+   - `./bin/django runserver --settings=settings`
+11. Access your Comt instance by pointing your browser to http://127.0.0.1:8000/
 
 Installation (production environment)
 =============

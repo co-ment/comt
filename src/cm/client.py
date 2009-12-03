@@ -217,8 +217,9 @@ def own_notify(request, key):
         if email_or_user :
             email_or_user = email_or_user.lower().strip()
 
+    active = (request.POST.get('active', False) == 'true')
     text = Text.objects.get(key=key)
-    Notification.objects.set_notification(text=None, type='own', active=True, email_or_user=email_or_user)
+    Notification.objects.set_notification(text=None, type='own', active=active, email_or_user=email_or_user)
     ret = HttpResponse()
     ret.status_code = 200 
     return ret 
@@ -266,8 +267,8 @@ def add_comment(request, key):
             ask_for_notification = ( None == Notification.objects.get_notifications(text=None, type='own', email_or_user=(user if user else email)))
         ret['ask_for_notification'] = ask_for_notification
         ret['email'] = '' if user else email
-    
-        if text_version.mod_posteriori or has_perm(request, 'can_view_unapproved_comment', text=text) : 
+
+        if text_version.mod_posteriori or has_perm(request, 'can_view_unapproved_comment', text=text) or has_perm(request, 'can_view_comment_own', text=text) : 
             ret['comment'] = comment
             ret['msg'] = _(u"comment saved")
         else :

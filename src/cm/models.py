@@ -199,7 +199,7 @@ class TextVersion(AuthorModel):
 #            comments = self.comment_set.all()
 #        elif has_perm(user, 'can_view_approved_comment', self.text):
 #            comments = self.comment_set.filter(visible=True)
-#        elif has_perm(user, 'can_view_own_comment', self.text):
+#        elif has_perm(user, 'can_view_comment_own', self.text):
 #            comments = self.comment_set.filter(user=user)
 #        else:
 #            return Comment.objects.none() # empty queryset
