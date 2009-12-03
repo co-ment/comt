@@ -127,11 +127,18 @@ Sync.prototype = {
 				if ("ask_for_notification" in ret) {  
 					if (ret['ask_for_notification']) {
 						// TODO ask for notification ...or use AUTO_CONTRIB ?
-						parent.f_yesNoDialog(gettext("Do you want to subscribe to all replies notifications in discussions you participated in?"), gettext("Follow up"), null, null, null, 
+						parent.f_yesNoDialog(gettext("Do you want to subscribe to all replies notifications in discussions you participated in?"), gettext("Follow up"), 
 							function() { // special case : no waiting for the return, no error check, nothing !
 									var cfg = {
 									method: "POST", 
-									data: urlEncode({'fun':'ownNotify', 'key':sv_key, 'email':ret['email']}) 
+									data: urlEncode({'fun':'ownNotify', 'key':sv_key, 'email':ret['email'], 'active':false}) 
+								} ; 
+								CY.io(sv_client_url, cfg);
+							}, this, null,
+							function() { // special case : no waiting for the return, no error check, nothing !
+									var cfg = {
+									method: "POST", 
+									data: urlEncode({'fun':'ownNotify', 'key':sv_key, 'email':ret['email'], 'active':true}) 
 								} ; 
 								CY.io(sv_client_url, cfg);
 							}, this, null) ;

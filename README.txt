@@ -68,7 +68,7 @@ Installation (development install)
 8. Create basic right management system
    - `./bin/django loaddata roles_generic --settings=settings`
 9. Launch development server
-   - `./bin/django manage.py runserver --settings=settings`
+   - `./bin/django runserver --settings=settings`
 10. Access your Comt instance by pointing your browser to http://127.0.0.1:8000/
 
 Installation (production environment)
