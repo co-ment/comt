@@ -51,15 +51,5 @@
     anon: true
     permissions: [52, 11, 34]
 # can_view_approved_comment
-    
-##- model : cm.role
-##  pk: 6
-##  fields:
-##    name: "Participant"
-##    description: "" 
-##    anon: true
-##    permissions: [52, 11]
-##
-### can_view_workspace    
-### can_view_text
-    
+# can_view_workspace    
+# can_view_text
