@@ -39,7 +39,7 @@ $(function() {
 
 <span id="text_history_timeline">
 {% for v1, v2, color in paired_versions %}
-    <a href="{% url text-history-version text.key v1.version_number %}" title="{% blocktrans with v1.version_number as v1number %}version #{{ v1number }}{% endblocktrans %}{% if v1.name %} {% blocktrans  with v1.name as v1name %}by {{ v1name }}{% endblocktrans %}{% endif %}{% if v1.note %} / {{ v1.note }}{% endif %} ({% blocktrans with v1.created as v1created %}created {{ v1created }}{% endblocktrans %})">
+    <a href="{% url text-history-version text.key v1.version_number %}" title="{% blocktrans with v1.version_number as v1number %}version #{{ v1number }}{% endblocktrans %}{% if v1.name %} {% blocktrans  with v1.name as v1name %}by {{ v1name }}{% endblocktrans %}{% endif %}{% if v1.note %} / {{ v1.note }}{% endif %} ({% blocktrans with v1.created|local_date as v1created %}created {{ v1created }}{% endblocktrans %})">
     <span id={{ v1_id }}
           style="background: {{ color }};" 
           class="ver_span {% choice_string v1_id v1.id version_item-selected or v1.id v2_id version_item-selected version_item %}">{{ forloop.counter }}</span></a>
