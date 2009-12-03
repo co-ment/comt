@@ -153,7 +153,7 @@ def get_viewable_comments(request, comments, text, order_by=('created',)):
         elif user and has_perm(request, 'can_view_comment_own', text=text):
             visible_comments = comments.filter(user=user).order_by(*order_by)
             # filter comments with a non visible (i.e. moderated) comment in the above thread 
-            comments_thread_viewable = [c for c in visible_comments if c.is_thread_full_visible()]
+            comments_thread_viewable = [c for c in visible_comments if c.is_thread_full_visible(own_user=user)]
             return comments_thread_viewable                
         else:
             return []

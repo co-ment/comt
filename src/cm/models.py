@@ -285,18 +285,17 @@ class Comment(PermanentModel, AuthorModel):
     def is_reply(self):
         return self.reply_to != None
     
-    def is_thread_full_visible(self):
-        cur_comment = self
-        if not cur_comment.state == 'approved':
-            return False
-        
-        while cur_comment.reply_to != None:
-            cur_comment = cur_comment.reply_to
-            if not cur_comment.state == 'approved':
-                return False
-            
-        return True
-    
+    def is_thread_full_visible(self, own_user=None):
+        """
+        own_user: comment belonging to this user are also visible 
+        """
+        if self.state == 'approved' or (own_user and self.user == own_user):
+            if self.reply_to==None:
+                return True
+            else:                
+                return self.reply_to.is_thread_full_visible(own_user)
+        return False
+               
     def top_comment(self):
         if self.reply_to == None :
             return self
