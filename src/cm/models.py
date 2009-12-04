@@ -582,12 +582,6 @@ class UserProfile(KeyModel):
         except UserRole.DoesNotExist:
             return None
 
-    def global_userrole(self):
-        try:
-            return UserRole.objects.get(user=self.user, text=None)
-        except UserRole.DoesNotExist:
-            return None
-
     def admin_print(self):
         if self.is_suspended:
             if self.user.is_active:
