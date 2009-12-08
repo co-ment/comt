@@ -225,7 +225,7 @@ def own_notify(request, key):
     return ret 
 
 @has_perm_on_text("can_create_comment")
-def add_comment(request, key):
+def add_comment(request, key, version_key):
 #    if edit_comment_id : #
 #    if self.request.user.is_anonymous() : # accessing via an admin url ?
 #    and comment.user == self.request.user
@@ -251,7 +251,7 @@ def add_comment(request, key):
             reply_to = Comment.objects.get(id=reply_to_id)
             
         text = Text.objects.get(key=key)
-        text_version = text.get_latest_version()
+        text_version = TextVersion.objects.get(key=version_key)
         
         comment_state = 'approved' if text_version.mod_posteriori else 'pending'
         comment = Comment.objects.create(state=comment_state, text_version=text_version, user=user, name=name, email=email, title=title, content=content, content_html=content_html, tags = tags, start_wrapper = start_wrapper, end_wrapper = end_wrapper, start_offset = start_offset, end_offset = end_offset, reply_to=reply_to)

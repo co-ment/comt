@@ -83,7 +83,7 @@
 	    </DIV>
          <iframe id="text_view_comments" name="text_view_comments" class="ui-layout-center"
             width="100%" height="100%" frameborder="0" scrolling="auto"
-            src="{% url text-view-comments text.key %}?{{ request.GET.urlencode }}"></iframe>
+            src="{% url text-view-comments-version text.key text_version.key %}?{{ request.GET.urlencode }}"></iframe>
              
 <!--  exemple de passage d'arguments        <iframe id="text_view_comments" name="text_view_comments" class="ui-layout-center"
             width="100%" height="100%" frameborder="0" scrolling="auto"

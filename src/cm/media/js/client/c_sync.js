@@ -131,14 +131,14 @@ Sync.prototype = {
 							function() { // special case : no waiting for the return, no error check, nothing !
 									var cfg = {
 									method: "POST", 
-									data: urlEncode({'fun':'ownNotify', 'key':sv_key, 'email':ret['email'], 'active':false}) 
+									data: urlEncode({'fun':'ownNotify', 'key':sv_key, 'version_key':sv_version_key, 'email':ret['email'], 'active':false}) 
 								} ; 
 								CY.io(sv_client_url, cfg);
 							}, this, null,
 							function() { // special case : no waiting for the return, no error check, nothing !
 									var cfg = {
 									method: "POST", 
-									data: urlEncode({'fun':'ownNotify', 'key':sv_key, 'email':ret['email'], 'active':true}) 
+									data: urlEncode({'fun':'ownNotify', 'key':sv_key, 'version_key':sv_version_key, 'email':ret['email'], 'active':true}) 
 								} ; 
 								CY.io(sv_client_url, cfg);
 							}, this, null) ;

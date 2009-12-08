@@ -113,7 +113,9 @@
     content: 'aaa bbb ccc ddd eee fff ggg'
     text: 1
     mod_posteriori: True
-
+    key: "textversion_key_1" 
+    adminkey: "tv_adminkey_1" 
+    
 - model : cm.text
   pk: 1
   fields:
@@ -137,6 +139,8 @@
     content: 'aaa bbb ccc ddd eee fff ggg'
     text: 2
     mod_posteriori: False
+    key: "textversion_key_2" 
+    adminkey: "tv_adminkey_2" 
 
 - model : cm.text
   pk: 2
@@ -334,6 +338,9 @@
          
     long text'
     text: 3
+    key: "textversion_key_3" 
+    adminkey: "tv_adminkey_3" 
+    
 
 - model : cm.text
   pk: 3

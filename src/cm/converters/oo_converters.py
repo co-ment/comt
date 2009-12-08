@@ -5,7 +5,7 @@
 #   mkdir /var/www/.qt ; chown www-data:www-data /var/www/.qt
 #   mkdir /var/www/.kde ; chown www-data:www-data /var/www/.kde
 
-UNO_IMPORT = True
+UNO_IMPORT = False
 
 if UNO_IMPORT:
     import uno
