@@ -138,13 +138,17 @@ class Text(PermanentModel, AuthorModel):
 DEFAULT_INPUT_FORMAT = getattr(settings, 'DEFAULT_INPUT_FORMAT', DEFAULT_INPUT_FORMAT_PANDOC)
 CHOICES_INPUT_FORMATS = getattr(settings, 'CHOICES_INPUT_FORMATS', CHOICES_INPUT_FORMATS_PANDOC)
 
-class TextVersionManager(models.Manager):
+class TextVersionManager(KeyManager):
 
     def duplicate(self, text_version, duplicate_comments=True):
         #import pdb;pdb.set_trace()
         old_comment_set = set(text_version.comment_set.all())
         text_version.id = None
-        #import pdb;pdb.set_trace()
+        
+        # generate new key
+        text_version.key = self._gen_key()
+        text_version.adminkey = self._gen_adminkey()
+        
         text_version.save()
         
         duplicate_text_version = text_version
@@ -165,7 +169,7 @@ class TextVersionManager(models.Manager):
                  
         return duplicate_text_version
         
-class TextVersion(AuthorModel):
+class TextVersion(AuthorModel, KeyModel):
     modified = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 

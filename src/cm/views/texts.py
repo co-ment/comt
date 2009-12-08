@@ -1,3 +1,4 @@
+from cm.utils.embed import embed_html
 from cm.activity import register_activity
 from cm.client import jsonize, get_filter_datas, edit_comment, remove_comment, \
     add_comment, RequestComplexEncoder, comments_thread, own_notify
@@ -15,7 +16,7 @@ from cm.utils.comment_positioning import compute_new_comment_positions, \
     insert_comment_markers
 from cm.utils.html import cleanup_textarea
 from cm.utils.spannifier import spannify
-from cm.views import get_keys_from_dict, get_text_by_keys_or_404, redirect
+from cm.views import get_keys_from_dict, get_textversion_by_keys_or_404, get_text_by_keys_or_404, redirect
 from cm.views.export import content_export2
 from cm.views.user import AnonUserRoleForm, cm_login
 from difflib import unified_diff
@@ -169,12 +170,12 @@ def text_list(request):
     
 @has_perm_on_text('can_view_text')
 def text_view(request, key, adminkey=None):
-    
     text = get_text_by_keys_or_404(key)
     register_activity(request, "text_view", text=text)    
-    
     text_version = text.get_latest_version()
-    template_dict = { 'text' : text, 'text_version' : text_version, 'title' : text_version.title, 'content' : text_version.get_content()}
+    embed_code = embed_html(key, 'id="text_view_frame" name="text_view_frame"')
+    
+    template_dict = { 'embed_code':embed_code, 'text' : text, 'text_version' : text_version, 'title' : text_version.title, 'content' : text_version.get_content()}
     return render_to_response('site/text_view.html', template_dict, context_instance=RequestContext(request))
 
 @has_perm_on_text('can_delete_text')
@@ -188,10 +189,13 @@ def text_delete(request, key):
     return HttpResponse('') # no redirect because this is called by js
 
 @has_perm_on_text('can_view_text') # only protected by text_view / comment filtering done in view
-def text_view_comments(request, key, adminkey=None):
+def text_view_comments(request, key, version_key=None, adminkey=None):
     text = get_text_by_keys_or_404(key)
-    #TODO: stupid why restrict to latest ? 
-    text_version = text.get_latest_version()
+    if version_key :
+        text_version = get_textversion_by_keys_or_404(version_key, adminkey, key)
+    else :
+        text_version = text.get_latest_version()
+
     comments = get_viewable_comments(request, text_version.comment_set.filter(reply_to__isnull=True),text)
     filter_datas = get_filter_datas(request, text_version, text)
     
@@ -222,6 +226,7 @@ def client_exchange(request):
         #print request.POST
     elif request.POST:
         key = request.POST['key']
+        version_key = request.POST['version_key']
 
         text = Text.objects.get(key=key) ;
         #TODO: stupid why restrict to latest ? 
@@ -234,7 +239,7 @@ def client_exchange(request):
                 if function_name == 'editComment' :
                     ret = edit_comment(request=request, key=key, comment_key=request.POST['comment_key'])
                 elif function_name == 'addComment' :
-                    ret = add_comment(request=request, key=key)
+                    ret = add_comment(request=request, key=key, version_key=version_key)
                 elif function_name == 'removeComment' :
                     ret = remove_comment(request=request, key=key, comment_key=request.POST['comment_key'])
                     
@@ -398,11 +403,14 @@ def text_print(request, key, adminkey=None):
                                   context_instance=RequestContext(request))
 
 @has_perm_on_text('can_view_text')
-def text_view_frame(request, key, adminkey=None):
+def text_view_frame(request, key, version_key=None, adminkey=None):
     text = get_text_by_keys_or_404(key)
     
-    text_version = text.get_latest_version()
-    template_dict = {'text' : text}
+    if version_key :
+        text_version = get_textversion_by_keys_or_404(version_key, adminkey, key)
+    else :
+        text_version = text.get_latest_version()
+    template_dict = {'text' : text, 'text_version' : text_version}
     return render_to_response('site/text_view_frame.html',
                               template_dict,
                               context_instance=RequestContext(request))
@@ -441,8 +449,10 @@ def text_history(request, key, v1_nid=None, v2_nid=None, adminkey=False):
             vv2 = None
         paired_versions.append((vv1, vv2, colors_dict.get(vv1.get_name(), '#D9D9D9')))
 
+    embed_code = ""
+    content = ""
     if v1_nid and not v2_nid:
-        content = v1.get_content()
+        embed_code = embed_html(key, 'id="text_view_frame" name="text_view_frame"', v1.key)
     else:
         content = get_uniffied_inner_diff_table(cleanup_textarea(v1.content), cleanup_textarea(v2.content))
 
@@ -455,6 +465,7 @@ def text_history(request, key, v1_nid=None, v2_nid=None, adminkey=False):
                      'version1': v1,
                      'version2': v2,
                      'content' : content,
+                     'embed_code':embed_code,
                      'author_colors' : author_colors,
                      }
     return render_to_response('site/text_history.html', template_dict, context_instance=RequestContext(request))
@@ -563,14 +574,14 @@ def text_diff(request, key, id_v1, id_v2):
     title = _text_diff(text_version_1.title, text_version_2.title)
     return render_to_response('site/text_view.html', {'text' : text, 'text_version_1' : text_version_1, 'text_version_2' : text_version_2, 'title' : title, 'content' : content}, context_instance=RequestContext(request))
 
-
-@has_perm_on_text('can_view_text')
-def text_version(request, key, id_version):
-    text = get_text_by_keys_or_404(key)
-    text_version = TextVersion.objects.get(pk=id_version)
-    # TODO : assert text_v in text ...
-    # TODO : do not use db id    
-    return render_to_response('site/text_view.html', {'text' : text, 'text_version' : text_version, 'title' : text_version.title, 'content' : text_version.get_content()}, context_instance=RequestContext(request))
+# commented out, unused suspected 
+#@has_perm_on_text('can_view_text')
+#def text_version(request, key, id_version):
+#    text = get_text_by_keys_or_404(key)
+#    text_version = TextVersion.objects.get(pk=id_version)
+#    # TODO : assert text_v in text ...
+#    # TODO : do not use db id    
+#    return render_to_response('site/text_view.html', {'text' : text, 'text_version' : text_version, 'title' : text_version.title, 'content' : text_version.get_content()}, context_instance=RequestContext(request))
 
 class EditTextForm(ModelForm):
     title = forms.CharField(label=_("Title"), widget=forms.TextInput)

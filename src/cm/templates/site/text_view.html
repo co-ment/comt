@@ -21,7 +21,10 @@ tb_conf['current_tab'] = 'view';
 <!-- border-width: 0pt;     frameborder="0" -->
 <div id="text_view_frame_container">
 <center>
-<iframe id="text_view_frame" name="text_view_frame" style="height:400px;width:99.9%;"  frameborder="0" src ="{% url text-view-comments-frame text.key %}?{{ request.GET.urlencode }}"/> 
+{% autoescape off %}
+{{ embed_code }}
+{% endautoescape %}
+<!-- <iframe id="text_view_frame" name="text_view_frame" style="height:400px;width:99.9%;"  frameborder="0" src ="{% url text-view-comments-frame-version text.key text_version.key %}?{{ request.GET.urlencode }}"/>  --> 
 </center>
 </div>
 

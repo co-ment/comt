@@ -3,6 +3,7 @@ from cm.message import display_message
 from cm.models import ApplicationConfiguration, Notification, Configuration, UserRole
 from cm.models_base import generate_key
 from cm.views import get_text_by_keys_or_404
+from cm.utils.embed import embed_html
 from django import forms
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -70,7 +71,8 @@ def text_notifications(request, key):
     text_notify_check = Notification.objects.filter(text=text,type='text',user=user, active=True).count()
     workspace_notify_check = Notification.objects.filter(text=None,type='workspace',user=user, active=True).count()
     
-    embed_code = '<iframe frameborder="0" src="%s%s" style="height: 166px; width: 99.9%%; position: relative; top: 0px;">'%(settings.SITE_URL, reverse('text-view-comments-frame', args=[text.key]))   
+    #embed_code = '<iframe frameborder="0" src="%s%s" style="height: 166px; width: 99.9%%; position: relative; top: 0px;">'%(settings.SITE_URL, reverse('text-view-comments-frame', args=[text.key]))
+    embed_code = embed_html(text.key) ;   
     
     if request.method == 'POST':
         if 'activate' in request.POST:

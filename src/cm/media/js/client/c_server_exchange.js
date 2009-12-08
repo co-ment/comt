@@ -22,6 +22,7 @@ var gtest = {
 doExchange = function(serverFun, obj, formId, retFunc, clientContext, clientArgs, inCaseErrorMsg) {
 	obj['fun'] = serverFun ;
 	obj['key'] = sv_key ;
+	obj['version_key'] = sv_version_key ;
 //	obj['adminKey'] = sv_adminKey ;
 	
 	var cfg = {
@@ -70,6 +71,7 @@ doExchange = function(serverFun, obj, formId, retFunc, clientContext, clientArgs
 warn_server = function(obj) {
 	obj['fun'] = "warn" ;
 	obj['key'] = sv_key ;
+	obj['version_key'] = sv_version_key ;
 
 	var obj2 = CY.UA ;
 
