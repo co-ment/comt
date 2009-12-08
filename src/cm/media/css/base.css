@@ -42,7 +42,7 @@ h2 {
 	/*background: #FFFFFF url(../img/header_bg2.png) repeat-x scroll
 		top bottom;*/
 	
-	height: 45px;
+	height: 25px;
 	margin: 0 auto 5px;
 	position: relative;
 	/*border-color: -moz-use-text-color -moz-use-text-color #BBB;
@@ -55,7 +55,7 @@ h2 {
 }
 
 #header_controls {
-	margin-top: 10px;
+	margin-top: 2px;
 	float: right;
 }
 
@@ -374,7 +374,7 @@ table th,table td {
 /* jquery custom overrides */
 
 #main-tabs, #text-tabs {
-	margin-top: 20px;
+	margin-top: 10px;
     border : none ;
     padding : 0 ;
 }
@@ -389,7 +389,7 @@ table th,table td {
 
 
 #main-tabs .ui-tabs-nav li a, #text-tabs .ui-tabs-nav li a {
-    padding:0.4em 2em;
+    padding:0.3em 1.7em;
 }
 
 .text-meta {
