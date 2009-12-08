@@ -95,7 +95,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'cm',
     'tagging',
-    'django_extensions', # http://code.google.com/p/django-command-extensions/    
+    'django_extensions', # http://code.google.com/p/django-command-extensions/
+    'south',    
 )
 
 _ = lambda s: s
