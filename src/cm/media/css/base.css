@@ -793,3 +793,7 @@ dl dt {
 dl dd {
 	padding-bottom: 1em;
 }
+
+#paginator {
+	font-weight: bold;
+}
