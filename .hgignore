@@ -26,3 +26,5 @@ syntax: regexp
 ^parts$
 syntax: regexp
 ^bin$
+syntax: regexp
+^recreate$
