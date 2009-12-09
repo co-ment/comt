@@ -86,13 +86,16 @@ Upgrade
 Normal upgrade
 --------------
 Upgrading you database should only need one command:
+   - `./bin/buildout`
    - `./bin/django migrate --settings=settings`
    
 Upgrade from alpha releases
 ----------------------------
 If your database was created using comt alpha prior to the revision 29, here are the commands you should run:
-   - `./bin/django migrate cm 0001_initial --skip`
-   - `./bin/django migrate migrate`
+   - `./bin/buildout`
+   - `./bin/django syncdb`
+   - `./bin/django migrate cm 0001_initial --fake`
+   - `./bin/django migrate`
 
 Openoffice
 ==========
