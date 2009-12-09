@@ -25,16 +25,19 @@ Requirements
 ------------
 - python (GPL compatible license)
 - python magic	(permissive BSD style license)
+- python development headers	(GPL compatible license)
 - python setuptools (PSF or ZPL - GPL compatible)
 - python uno (GPL)
 - pandoc
 - headless openoffice
+- git (GPL)
+- libyaml (permissive license)
 (all other python dependencies will be downloaded by buildout)
 
 Installation (development install)
 ============
-1. Install python2.5+ and all required python libraries
-	(ubuntu users : 'sudo apt-get install python python-magic python-setuptools python-uno')
+1. Install python2.5+ and all required libraries
+	(ubuntu users : 'sudo apt-get install python python-magic python-setuptools python-uno libyaml-0-1 python-dev git-core')
 2. Install pandoc
 	(ubuntu users : 'sudo apt-get install pandoc')
 3. Install openoffice (headless mode) [used for document conversion]
@@ -66,6 +69,7 @@ Installation (development install)
    - edit settings_local.py to suit your settings (search for 'YOUR_SETTINGS' occurrences, those are mandatory settings)
 8. Create the database structure (and test your database connection)
    - `./bin/django syncdb --settings=settings`
+   - `./bin/django migrate --settings=settings`
 9. Create basic right management system
    - `./bin/django loaddata roles_generic --settings=settings`
 10. Launch development server
@@ -75,6 +79,20 @@ Installation (development install)
 Installation (production environment)
 =============
 If you'd like to install Comt on a production environment, check out django installation guide at http://www.djangoproject.com/documentation/modpython/
+
+Upgrade
+=======
+
+Normal upgrade
+--------------
+Upgrading you database should only need one command:
+   - `./bin/django migrate --settings=settings`
+   
+Upgrade from alpha releases
+----------------------------
+If your database was created using comt alpha prior to the revision 29, here are the commands you should run:
+   - `./bin/django migrate cm 0001_initial --skip`
+   - `./bin/django migrate migrate`
 
 Openoffice
 ==========
