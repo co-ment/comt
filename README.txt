@@ -16,9 +16,9 @@ Dependencies
 
 Environment
 -------------
-- Postgresql 8.3 / Mysql 5+ / sqlite
+- Postgresql 8.3 or Mysql 5+ or sqlite
 - Python 2.5+
-- Openoffice 3.0+ & Pandoc
+- Openoffice 3.0+ (headless) & Pandoc
 
 
 Requirements
