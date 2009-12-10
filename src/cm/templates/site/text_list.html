@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load local_perms %}
 {% load activity %}
+{% load tagging_tags %}
 
 {% block head %}
 {% endblock %}
@@ -41,6 +42,34 @@ $(function() {
     <li><a href="{% url text-create-upload %}">{% blocktrans %}Upload a text{% endblocktrans %}</a></li>
     {% endif %}
 </ul>
+
+<form id="filter_form" action="." method="get">
+<table summary="{% blocktrans %}People' list{% endblocktrans %}" class="large_table">
+	<tr>
+		<td>
+		{% blocktrans %}Filter by tag:{% endblocktrans %} 
+		<select id="tag_selected" name="tag_selected">
+		<option {% if not tag_selected %}selected="selected"{% endif %} value="0">- {% blocktrans %}All{% endblocktrans %} -</option>
+		
+		{% for tag in tag_list %}
+		<option  {% ifequal tag_selected tag.name %}selected="selected"{% endifequal %} value="{{ tag.name }}">{{ tag.name }}</option>
+		{% endfor %}
+		</select>
+		</td>
+		
+	</tr>
+</table>
+</form>
+
+<script type="text/javascript">
+<!--
+$(function() {
+    $("#tag_selected").change(function () {
+    	$("#filter_form").submit();
+      });
+}) ;
+-->
+</script>
 
 {% if object_list %}
 <form id="texts_form" action="." method="post">
@@ -122,6 +151,10 @@ $(function() {
             {% if can_manage_workspace %}<td><input type="checkbox" class="text_check" name="check-{{ text.key }}"/></td>{% endif %}
             <td>
                 <a class="main_object_title" href="{% url text-view text.key %}">{{ text.title }}</a>
+                
+				{% tags_for_object text.last_text_version as tag_list %}
+				{% if tag_list %}<div class="tag_list>">{% blocktrans %}tags:{% endblocktrans %}&nbsp;{% for tag in tag_list %}<a class="tag" title="{% blocktrans with tag.name as tag_name %}Filter by tag: {{ tag_name }}{% endblocktrans %}" href="?{% newparams 'tag_selected' tag.name %}"">{{ tag.name }}</a>&nbsp;{% endfor %}</div>{% endif %}
+                
                 <div class="hidden-text-actions text-actions-{{ text.key }}">
                     <a href="{% url text-view text.key %}">{% blocktrans %}View{% endblocktrans %}</a> | 
                     {% if can_edit_text %}<a href="{% url text-edit text.key %}">{% blocktrans %}Edit{% endblocktrans %}</a> | {% endif %}

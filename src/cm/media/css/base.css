@@ -797,3 +797,8 @@ dl dd {
 #paginator {
 	font-weight: bold;
 }
+
+a.tag {
+	color: #474747;
+}
+

@@ -569,6 +569,8 @@ class UserProfile(KeyModel):
     is_email_error = models.BooleanField(default=False)
     is_suspended = models.BooleanField(ugettext_lazy(u'Suspended access'), default=False) # used to disable access or to wait for approval when registering
 
+    tags = TagField(ugettext_lazy("Tags"), max_length=1000)
+
     objects = RegistrationManager()
 
     class Meta:

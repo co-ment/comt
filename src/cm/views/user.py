@@ -22,6 +22,7 @@ from django.contrib.auth.decorators import login_required
 from cm.views import get_keys_from_dict
 from cm.security import has_global_perm
 from cm.exception import UnauthorizedException
+from tagging.models import Tag
 import sys
 import re
 
@@ -30,6 +31,7 @@ USER_PAGINATION = 10
 @has_global_perm('can_manage_workspace')
 def user_list(request):    
     display_suspended_users = get_int(request.GET, 'display', 0)
+    tag_selected = request.GET.get('tag_selected', 0)
     paginate_by = get_int(request.GET, 'paginate', USER_PAGINATION)
     order_by = get_among(request.GET, 'order', ('user__username',
                                               'user__email',
@@ -105,12 +107,26 @@ def user_list(request):
                'all_roles' : Role.objects.all(),
                'anon_roles' : Role.objects.filter(anon=True),
                'display_suspended_users' : display_suspended_users,
+               'tag_list' : Tag.objects.usage_for_model(UserProfile),
+               'tag_selected': tag_selected,
                }
     
-    query = UserRole.objects.filter(text=None).filter(~Q(user=None)).order_by(order_by)
+    query = UserRole.objects.select_related().filter(text=None).filter(~Q(user=None)).order_by(order_by)
     if not display_suspended_users:
         query = query.exclude(Q(user__userprofile__is_suspended=True) & Q(user__is_active=True))
-        
+
+    if tag_selected:     
+        tag_ids = Tag.objects.filter(name=tag_selected)
+        if tag_ids:   
+            content_type_id = ContentType.objects.get_for_model(UserProfile).pk
+            # table cm_userprofile is not present if display_suspended_users: fix this 
+            tables = ['tagging_taggeditem', 'cm_userprofile'] if display_suspended_users else ['tagging_taggeditem']  
+            query = query.extra(where=['tagging_taggeditem.object_id = cm_userprofile.id', 
+                                       'tagging_taggeditem.content_type_id = %i' %content_type_id,
+                                       'tagging_taggeditem.tag_id = %i' %tag_ids[0].id],
+                                tables=tables,
+                                )
+
     return object_list(request, query,
                        template_name='site/user_list.html',
                        paginate_by=paginate_by,
@@ -183,7 +199,7 @@ class UserRoleTextForm(ModelForm):
 class UserProfileForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('allow_contact', 'preferred_language', 'is_suspended')
+        fields = ('allow_contact', 'preferred_language', 'is_suspended', 'tags')
 
 class MyUserProfileForm(ModelForm):
     class Meta:
@@ -193,7 +209,7 @@ class MyUserProfileForm(ModelForm):
 class UserProfileAddForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('preferred_language',)
+        fields = ('preferred_language', 'tags')
 
 class UserAddForm(forms.Form):
     note = forms.CharField(label=ugettext_lazy(u'Note'),

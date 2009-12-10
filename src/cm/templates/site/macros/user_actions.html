@@ -1,5 +1,6 @@
 {% load com %}
 {% load i18n %}
+{% load tagging_tags %}
 <b>
 	{% ifequal user request.user %}
     <a title="{% blocktrans %}Your profile{% endblocktrans %}" class="main_object_title" href="{% url profile %}">{{ user.get_profile.admin_print }}</a>
@@ -7,6 +8,10 @@
     <a title="{% blocktrans with user.get_profile.admin_print as userprint %}Edit user {{ userprint }}{% endblocktrans %}" class="main_object_title" href="{% url user-edit user.get_profile.key %}">{{ user.get_profile.admin_print }}</a>
     {% endifequal %}
 </b>
+
+{% tags_for_object user.get_profile as tag_list %}
+{% if tag_list %}<div class="tag_list>">{% blocktrans %}tags:{% endblocktrans %}&nbsp;{% for tag in tag_list %}<a class="tag" title="{% blocktrans with tag.name as tag_name %}Filter by tag: {{ tag_name }}{% endblocktrans %}" href="?{% newparams 'tag_selected' tag.name %}"">{{ tag.name }}</a>&nbsp;{% endfor %}</div>{% endif %}
+
 <div class="hidden-user-actions user-actions-{{ user.get_profile.key }}" style="visibility:hidden;">
 {% ifequal user request.user %}
   <a title="Your profile" href="{% url profile %}">{% blocktrans %}Your profile{% endblocktrans %}</a> 

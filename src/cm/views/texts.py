@@ -35,6 +35,7 @@ from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext as _, ugettext_lazy
 from django.views.generic.list_detail import object_list
+from tagging.models import Tag
 import difflib
 import logging
 import mimetypes
@@ -146,7 +147,8 @@ TEXT_PAGINATION = 10
 # TODO: set global access perm
 def text_list(request):
     paginate_by = get_int(request.GET,'paginate',TEXT_PAGINATION)
-    
+    tag_selected = request.GET.get('tag_selected', 0)
+        
     order_by = get_among(request.GET,'order',('title','author','modified','-title','-author','-modified'),'-modified')
 
     if request.method == 'POST':
@@ -163,9 +165,27 @@ def text_list(request):
             return HttpResponseRedirect(reverse('text'))
 
     texts = get_texts_with_perm(request, 'can_view_text').order_by(order_by)
+
+    context = {    
+               'tag_list' : Tag.objects.usage_for_queryset(TextVersion.objects.filter(id__in = [t.last_text_version_id for t in get_texts_with_perm(request, 'can_view_text')])),
+               'tag_selected': tag_selected,
+               }
+
+    if tag_selected:     
+        tag_ids = Tag.objects.filter(name=tag_selected)
+        if tag_ids:   
+            content_type_id = ContentType.objects.get_for_model(TextVersion).pk
+            # table cm_userprofile is not present if display_suspended_users: fix this 
+            texts = texts.extra(where=['tagging_taggeditem.object_id = cm_text.last_text_version_id', 
+                                       'tagging_taggeditem.content_type_id = %i' %content_type_id,
+                                       'tagging_taggeditem.tag_id = %i' %tag_ids[0].id],
+                                tables=['tagging_taggeditem'],
+                                )
+    
     return object_list(request, texts,
                        template_name = 'site/text_list.html',
                        paginate_by = paginate_by,
+                       extra_context=context,
                        )
     
 @has_perm_on_text('can_view_text')
