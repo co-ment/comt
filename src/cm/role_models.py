@@ -2,17 +2,18 @@ from django.core import management
 from django.db.models import Q
 from django.db.models import Max
 from django.utils.translation import ugettext as _, ugettext_lazy
+import random
 
 role_models_choices = [('generic', ugettext_lazy(u'Generic')), ('teacher', ugettext_lazy(u'Class (education)'))]
 
 
-TEMP_MANAGER_ID = 5464567
-TEMP_MANAGER_NAME = 'qsdqsdyjj54654QEsfdhfgbuk'
-
-TEMP_USER_ID = 808987897
-TEMP_USER_NAME = 'sy6573kpoksdjklsdsd734'
-
 def change_role_model(role_model):
+    TEMP_MANAGER_ID = random.randint(1000,10000000) 
+    TEMP_MANAGER_NAME = str(random.randint(1000,10000000))
+    
+    TEMP_USER_ID = random.randint(1000,10000000)
+    TEMP_USER_NAME = str(random.randint(1000,10000000))
+
     from cm.models import Role, UserRole
 
     # create fake manager/usr role to remember managers/users _roles
