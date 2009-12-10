@@ -49,7 +49,7 @@ def user_list(request):
     
     if request.method == 'POST':
         # bulk apply
-        if 'apply' in request.POST:
+        if 'apply' in request.POST and not 'save' in request.POST:
             action = request.POST.get('action', None)
             user_profile_keys = get_keys_from_dict(request.POST, 'check-').keys()
             if action == 'disable':
