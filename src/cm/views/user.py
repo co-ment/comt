@@ -114,17 +114,18 @@ def user_list(request):
     query = UserRole.objects.select_related().filter(text=None).filter(~Q(user=None)).order_by(order_by)
     if not display_suspended_users:
         query = query.exclude(Q(user__userprofile__is_suspended=True) & Q(user__is_active=True))
+    else:
+        # trick to include userprofile table anyway (to filter by tags)
+        query = query.filter(Q(user__userprofile__is_suspended=True) | Q(user__userprofile__is_suspended=False))
 
     if tag_selected:     
         tag_ids = Tag.objects.filter(name=tag_selected)
         if tag_ids:   
             content_type_id = ContentType.objects.get_for_model(UserProfile).pk
-            # table cm_userprofile is not present if display_suspended_users: fix this 
-            tables = ['tagging_taggeditem', 'cm_userprofile'] if display_suspended_users else ['tagging_taggeditem']  
             query = query.extra(where=['tagging_taggeditem.object_id = cm_userprofile.id', 
                                        'tagging_taggeditem.content_type_id = %i' %content_type_id,
                                        'tagging_taggeditem.tag_id = %i' %tag_ids[0].id],
-                                tables=tables,
+                                tables=['tagging_taggeditem'],
                                 )
 
     return object_list(request, query,

@@ -803,6 +803,9 @@ def text_wysiwyg_preview(request, format):
 
 @has_perm_on_text('can_manage_text')
 def text_share(request, key):
+    display_suspended_users = get_int(request.GET, 'display', 0)
+    tag_selected = request.GET.get('tag_selected', 0)
+    
     text = get_text_by_keys_or_404(key)
     order_by = get_among(request.GET,'order',('user__username',
                                               'user__email',
@@ -845,9 +848,29 @@ def text_share(request, key):
                'all_roles' : Role.objects.all(),
                'anon_roles' : Role.objects.filter(anon = True),
                'text' : text,
+               'display_suspended_users' : display_suspended_users,
+               'tag_list' : Tag.objects.usage_for_model(UserProfile),
+               'tag_selected': tag_selected,               
                }
 
-    return object_list(request, UserRole.objects.filter(text=text).filter(~Q(user=None)).order_by(order_by),
+    query = UserRole.objects.filter(text=text).filter(~Q(user=None)).order_by(order_by)
+    if not display_suspended_users:
+        query = query.exclude(Q(user__userprofile__is_suspended=True) & Q(user__is_active=True))
+    else:
+        # trick to include userprofile table anyway (to filter by tags)
+        query = query.filter(Q(user__userprofile__is_suspended=True) | Q(user__userprofile__is_suspended=False))
+
+    if tag_selected:     
+        tag_ids = Tag.objects.filter(name=tag_selected)
+        if tag_ids:   
+            content_type_id = ContentType.objects.get_for_model(UserProfile).pk
+            query = query.extra(where=['tagging_taggeditem.object_id = cm_userprofile.id', 
+                                       'tagging_taggeditem.content_type_id = %i' %content_type_id,
+                                       'tagging_taggeditem.tag_id = %i' %tag_ids[0].id],
+                                tables=['tagging_taggeditem'],
+                                )
+
+    return object_list(request, query,
                        template_name = 'site/text_share.html',
                        paginate_by = paginate_by,
                        extra_context = context,

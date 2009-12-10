@@ -23,8 +23,6 @@ $(function() {
 
 <div id="text_share" class="tab-meta">
 
-<form id="text_share_form" action="." method="post">
-
 <ul class="sub_list">
     <li class="active_sub">{% blocktrans %}Users' list{% endblocktrans %}</li>
     <li> / </li>
@@ -32,6 +30,38 @@ $(function() {
     <li> / </li>
     <li><a href="{% url user-mass-add-text text.key %}">{% blocktrans %}Add users in bulk{% endblocktrans %}</a></li>
 </ul>
+
+<form id="filter_form" action="." method="get">
+<table summary="{% blocktrans %}People' list{% endblocktrans %}" class="large_table">
+	<tr>
+		<td>
+		{% if display_suspended_users %}<a href="?{% newparams 'display' '0' %}" title="{% blocktrans %}Hide suspended users{% endblocktrans %}">{% blocktrans %}Hide suspended users{% endblocktrans %}</a>{% else %}<a href="?{% newparams 'display' '1' %}" title="{% blocktrans %}Display suspended users{% endblocktrans %}">{% blocktrans %}Display suspended users{% endblocktrans %}</a>{% endif %}
+		&#183;
+		{% blocktrans %}Filter by tag:{% endblocktrans %} 
+		<select id="tag_selected" name="tag_selected">
+		<option {% if not tag_selected %}selected="selected"{% endif %} value="0">- {% blocktrans %}All{% endblocktrans %} -</option>
+		
+		{% for tag in tag_list %}
+		<option  {% ifequal tag_selected tag.name %}selected="selected"{% endifequal %} value="{{ tag.name }}">{{ tag.name }}</option>
+		{% endfor %}
+		</select>
+		</td>
+		
+	</tr>
+</table>
+</form>
+
+<form id="text_share_form" action="." method="post">
+
+<script type="text/javascript">
+<!--
+$(function() {
+    $("#tag_selected").change(function () {
+    	$("#filter_form").submit();
+      });
+}) ;
+-->
+</script>
 
 {% include "site/macros/paginator.html" %}
 
