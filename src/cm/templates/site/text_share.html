@@ -83,7 +83,7 @@ $(function() {
             -->
             </script>
             </th>
-            <th>{% up_down user__username %}User{% endup_down %}</th>
+            <th>{% up_down user__username %}{% blocktrans %}User{% endblocktrans %}{% endup_down %}</th>
             <th><a class="tip" href="#" title="{% blocktrans %}The 'Workspace role' is the global role that applies to every text, you can give a user a particular role on this text using the 'local role' column on the right{% endblocktrans %}">{% blocktrans %}Workspace role{% endblocktrans %}</a></th>
             <th>{% up_down role__name %}{% blocktrans %}Local role{% endblocktrans %}{% endup_down %}</th>
         </tr>
