@@ -22,6 +22,7 @@ from django.contrib.auth.decorators import login_required
 from cm.views import get_keys_from_dict
 from cm.security import has_global_perm
 from cm.exception import UnauthorizedException
+from cm.cm_settings import SHOW_EMAILS_IN_ADMIN
 from tagging.models import Tag
 import sys
 import re
@@ -109,6 +110,7 @@ def user_list(request):
                'display_suspended_users' : display_suspended_users,
                'tag_list' : Tag.objects.usage_for_model(UserProfile),
                'tag_selected': tag_selected,
+               'SHOW_EMAILS_IN_ADMIN': SHOW_EMAILS_IN_ADMIN,
                }
     
     query = UserRole.objects.select_related().filter(text=None).filter(~Q(user=None)).order_by(order_by)

@@ -130,7 +130,7 @@ $(function() {
             </script>
             </th>
             <th>{% up_down user__username %}{% blocktrans %}User{% endblocktrans %}{% endup_down %}</th>
-            <th>{% up_down user__email %}{% blocktrans %}Email{% endblocktrans %}{% endup_down %}</th>
+            {% if SHOW_EMAILS_IN_ADMIN %}<th>{% up_down user__email %}{% blocktrans %}Email{% endblocktrans %}{% endup_down %}</th>{% endif %}
             <th>{% up_down user__date_joined %}{% blocktrans %}Date joined{% endblocktrans %}{% endup_down %}</th>
             <th>{% up_down role__name %}{% blocktrans %}Role{% endblocktrans %}{% endup_down %}</th>
             <th>{% blocktrans %}Last week activity{% endblocktrans %}</th>
@@ -145,7 +145,7 @@ $(function() {
         <td>
 			{% include "site/macros/user_actions.html" %}
         </td>
-        <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+        {% if SHOW_EMAILS_IN_ADMIN %}<td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>{% endif %}
         <td>{{ user.date_joined|local_date }}</td>
         <td>
                 <select name="user-role-{{ user.get_profile.key }}" {% ifequal user request.user %}disabled="disabled"{% endifequal %}>
@@ -175,7 +175,7 @@ $(function() {
     <tr class="full-border even">
         <td></td>
         <td><a class="main_object_title" title="{% blocktrans %}Edit anonymous users{% endblocktrans %}" href="{% url user-anon-edit %}">{% blocktrans %}Anonymous users{% endblocktrans %}</a></td>
-        <td>-</td>
+        {% if SHOW_EMAILS_IN_ADMIN %}<td>-</td>{% endif %}
         <td>-</td>
         <td>
             <select name="user-role-_">
