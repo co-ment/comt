@@ -31,7 +31,7 @@ def change_role_model(role_model):
 
     Role.objects.filter(~Q(id=TEMP_MANAGER_ID) & ~Q(id=TEMP_USER_ID)).delete()
     
-    management.call_command('loaddata', 'roles_' + role_model, verbosity=10)
+    management.call_command('loaddata', 'roles_' + role_model, verbosity=0)
 
     new_manager = Role.objects.get(id=1)
     id_max = Role.objects.filter(~Q(id=TEMP_MANAGER_ID) & ~Q(id=TEMP_USER_ID)).aggregate(Max('id'))['id__max']
