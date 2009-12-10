@@ -4,7 +4,7 @@ Comt
 
 Presentation
 ============
-Comt is the open source version of co-ment, a Web-based text annotation platform.
+Comt is an open source Web-based text annotation platform.
 
 License
 =======
@@ -23,15 +23,15 @@ Environment
 
 Requirements
 ------------
-- python (GPL compatible license)
-- python magic	(permissive BSD style license)
-- python development headers	(GPL compatible license)
-- python setuptools (PSF or ZPL - GPL compatible)
-- python uno (GPL)
+- python
+- python magic
+- python development headers
+- python setuptools
+- python uno
 - pandoc
 - headless openoffice
-- git (GPL)
-- libyaml (permissive license)
+- git
+- libyaml
 (all other python dependencies will be downloaded by buildout)
 
 Installation (development install)
