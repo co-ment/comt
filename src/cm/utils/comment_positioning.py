@@ -148,10 +148,10 @@ def insert_comment_markers(htmlcontent, comments, with_markers, with_colors) :
     html = get_the_soup(htmlcontent) ;
     
 #    import pdb;pdb.set_trace()
-    
-    max_wrapper = max([comment.end_wrapper for comment in comments])
-    min_wrapper = min([comment.start_wrapper for comment in comments])
-    
+    if comments :
+        max_wrapper = max([comment.end_wrapper for comment in comments])
+        min_wrapper = min([comment.start_wrapper for comment in comments])
+        
     datas = {} # { wrapper_id : {'start_color':nb_of_comments_unterminated_at_wrapper_start, 'offsets':{offset: [[ids of wrappers starting at offset], [ids of wrappers ending at offset]]}}
     # datas['offsets'][someoffset][0] and idem[1] will be ordered the way comments are (should be ('start_wrapper', 'start_offset', 'end_wrapper', 'end_offset') important)
     cpt = 1 # starting numbered comment
