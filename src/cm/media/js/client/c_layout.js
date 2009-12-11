@@ -12,16 +12,19 @@ Layout.prototype = {
 	},
 	
 	isInComentSite : function () {
-		// TODO test with IE, test also when embeded
-		
-		var ret = false; 
-		try {
-			ret = (!CY.Lang.isUndefined(parent) && !CY.Lang.isUndefined(parent.parent) && parent.parent.location != location && CY.Lang.isFunction(parent.parent.v_toggleFrameSize));
+		var ret = false;
+		try { 
+			if (!CY.Lang.isUndefined(sv_site_url) && !CY.Lang.isUndefined(parent) && !CY.Lang.isUndefined(parent.parent)) {
+				var parentParentLocation = new String(parent.parent.location) ;
+				CY.log(parentParentLocation) ;
+				ret = (parentParentLocation.indexOf(sv_site_url) == 0);
+			}
 		}
 		catch (e) {
 			ret=false;
+			CY.log("error thrown while trying to access parent.parent.location") ;
 		}
-			
+		CY.log("inComentSite returned : " + ret) ;
 		return ret ;
 	},
 	
@@ -48,7 +51,6 @@ Layout.prototype = {
 		CY.get('#contentcolumn').setStyle('marginLeft', colWidth + 'px');
 		CY.get('#leftcolumn').setStyle('width', colWidth + 'px');
 	},
-	
 	parentInterfaceUnfreeze : function() {
 		if (this.isInFrame())
 			parent.f_interfaceUnfreeze() ;

@@ -2,8 +2,6 @@
 {% load com %}
 
 {% block head %}
-<script type="text/javascript" src="{{ MEDIA_URL }}js/site/text_view_to_frame.js"></script>
-<script type="text/javascript" src="{{ MEDIA_URL }}js/site/text_view.js"></script>
 {% endblock %}
 
 {% block main %}
@@ -19,7 +17,7 @@ tb_conf['current_tab'] = 'view';
 
 <!-- <div style="clear:right;">-->
 <!-- border-width: 0pt;     frameborder="0" -->
-<div id="text_view_frame_container">
+<div id="autoexpand_text_view_frame_container">
 <center>
 {% autoescape off %}
 {{ embed_code }}

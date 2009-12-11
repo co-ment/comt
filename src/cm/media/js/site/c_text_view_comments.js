@@ -210,7 +210,7 @@ onDomReady = function(arg1) {
 		fn : function() {
 
 			if (gLayout.isInComentSite()) {
-				top.v_toInitialSize();
+				parent.toInitialSize();
 			}
 			if (sv_withComments) {
 				instanciateICommentForm();

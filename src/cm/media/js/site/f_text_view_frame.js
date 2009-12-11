@@ -304,7 +304,7 @@ fillTopToolbar = function() {
 	
 	if (frames['text_view_comments'].gLayout.isInComentSite()) {
 		$("#c_fullscreen_btn").click( function() {
-				top.v_toggleFrameSize();
+				toggleFrameSize();
 		});
 	} ;	
 	
@@ -737,3 +737,90 @@ f_yesNoDialog = function(htmlContent, title, noFunction, noFunctionContext, noFu
 f_setCookie = function(name, value) {
 	_setCookie(name, value) ;
 }
+
+
+
+/*****************************************************************************/
+
+
+gInFullScreen = false;
+
+_setFrameSize = function() {
+	if (gInFullScreen) {
+		var headerHeight = parent.$("#header").height();
+		var windowHeight = parent.$(parent).height();
+		var frameHeight = (windowHeight - headerHeight - 2) + 'px'; // - 2 to prevent scrollbars ? --> TODO test it without -2
+
+		var windowWidth = parent.$(parent).width();
+		var frameWidth = (windowWidth - 2) + 'px'; // - 2 to prevent scrollbars ?// --> TODO test it without -2
+
+		// TODO we should be embeded ! shouldn't work otherwise anyway (frame security concerns)
+		parent.$("#text_view_frame").css( {
+			'position' :'absolute',
+			'left' :'0px',
+			'top' :headerHeight,
+			'width' :frameWidth,
+			'height' :frameHeight
+		});
+	}
+	else {
+		var frameTop = Math.ceil(parent.$("#autoexpand_text_view_frame_container").position()["top"]);
+
+		var windowHeight = parent.$(parent).height();
+		var frameHeight = (windowHeight - frameTop - 2) + 'px'; // - 2 to prevent scrollbars // ? --> TODO test it without -2
+		
+		var windowWidth = parent.$(parent).width();
+		var frameWidth = (windowWidth - 2) + 'px'; // - 2 to prevent scrollbars ? // --> TODO test it without -2
+
+		// TODO test if we're embeded ! wont work otherwise anyway (frame security)
+		parent.$("#text_view_frame").css( {
+			'position' :'relative',
+			'width' :'99.9%',
+			'height' :frameHeight,
+			'top' :'0px'
+		});
+	}
+}
+_toFullScreenSize = function() {
+	gInFullScreen = true;
+	_setFrameSize() ;
+
+	$("#c_fullscreen_btn").attr('src', sv_media_url + '/img/arrow_in.png');
+
+	f_setCookie('fullscreen', '1') ;
+};
+
+_toNormalSize = function() {
+	gInFullScreen = false;
+	_setFrameSize() ;
+
+	$("#c_fullscreen_btn").attr('src', sv_media_url + 'img/arrow_out.png');
+	
+	f_setCookie('fullscreen', '0') ;
+};
+
+_toInitialSize = function() {
+	//console.info('_toInitialSize') ; 
+	var fullscreen = ($.cookie('fullscreen') == '1');
+	if (fullscreen)
+		_toFullScreenSize() ;
+	else 
+		_toNormalSize() ;
+};
+
+toInitialSize = function() {
+	_toInitialSize() ;
+	parent.$(parent).resize(function(){
+//		console.log('before setFramesize in top resize winwidth' + 	frames['text_view_comments'].CY.DOM.winWidth()) ;
+		_setFrameSize();
+//		console.log('after setFramesize in top resize winwidth' + 	frames['text_view_frame'].frames['text_view_comments'].CY.DOM.winWidth()) ;
+	});
+}
+
+toggleFrameSize = function() {
+	if (gInFullScreen)
+		_toNormalSize() ;
+	else 
+		_toFullScreenSize() ;
+}
+

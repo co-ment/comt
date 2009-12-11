@@ -675,7 +675,7 @@ ul.sub_list li.active_sub {
 	background:0;
 }
 
-#text_view_frame_container { /* cf .ui-widget-content */
+#autoexpand_text_view_frame_container { /* cf .ui-widget-content */
 	border:1px solid #AAAAAA;
 }
 
