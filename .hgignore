@@ -28,3 +28,5 @@ syntax: regexp
 ^bin$
 syntax: regexp
 ^recreate$
+syntax: regexp
+^\.pydevproject$

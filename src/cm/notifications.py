@@ -21,7 +21,7 @@ def notify(sender, **kwargs):
     
     activity = kwargs['instance']
     if activity.type in Activity.VIEWABLE_ACTIVITIES.get('view_users'): # user activity: only viewed by managers
-        notifications = Notification.objects.filter(text=None)
+        notifications = Notification.objects.filter(text=None, active=True)
         for notification in notifications:
             if notification.user:
                 from cm.security import user_has_perm # import here!
@@ -29,7 +29,7 @@ def notify(sender, **kwargs):
                     send_notification(activity, notification)
                     allready_notified.add(notification.user)
     elif activity.type in Activity.VIEWABLE_ACTIVITIES.get('view_comments'):
-        notifications = Notification.objects.filter(Q(text=activity.text) | Q(text=None))
+        notifications = Notification.objects.filter(Q(text=activity.text) | Q(text=None), active=True)
         for notification in notifications:            
             viewable = get_viewable_comments(FakeRequest(notification.user),
                                              Comment.objects.filter(id__in = [activity.comment.id]),
@@ -41,7 +41,7 @@ def notify(sender, **kwargs):
                     send_notification(activity, notification)
                     allready_notified.add(notification.user)            
     elif activity.type in Activity.VIEWABLE_ACTIVITIES.get('view_texts'):
-        notifications = Notification.objects.filter(Q(text=activity.text) | Q(text=None))
+        notifications = Notification.objects.filter(Q(text=activity.text) | Q(text=None), active=True)
         for notification in notifications:
             if notification.user:
                 from cm.security import user_has_perm # import here!

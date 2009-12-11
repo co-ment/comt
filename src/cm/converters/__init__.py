@@ -40,7 +40,7 @@ def _convert_from_mimetype(input, mime_type, format):
                        'text/english',
                        'text/enriched'
                       ]:
-        converted_input = input
+        converted_input = to_unicode(input)
         
     ##############################
     # anything looks like code: put them into markdown citation
