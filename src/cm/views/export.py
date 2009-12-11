@@ -102,7 +102,9 @@ def _response_download(content, title, mimetype, extension):
     file_title = title + '.' + extension
     from email.header import Header
     encoded_name = str(Header(file_title.encode('utf8'), charset='utf8', maxlinelen=500))
-    response['Content-Disposition'] = u'attachment; filename=%s' % encoded_name
+    # TODO: find a way to include long (more than 76 chars) into header
+    encoded_name = encoded_name.replace('\n','')
+    response['Content-Disposition'] = 'attachment; filename=%s' % encoded_name
     response.write(content)
     return response        
 
