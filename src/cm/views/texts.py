@@ -290,30 +290,41 @@ def text_export(request, key, format, download, whichcomments, withcolor, admink
     if whichcomments == "filtered" or whichcomments == "all":
         #comments = text_version.comment_set.filter(reply_to__isnull=True)# whichcomments=="all"
         #comments = get_viewable_comments(request, text_version.comment_set.filter(reply_to__isnull=True), text, order_by=('start_wrapper','start_offset','end_wrapper','end_offset'))# whichcomments=="all"
-        comments = get_viewable_comments(request, text_version.comment_set.all(), text, order_by=('start_wrapper','start_offset','end_wrapper','end_offset'))# whichcomments=="all"
- 
+        
+        _comments = text_version.comment_set.all()
         if whichcomments == "filtered" :
+            filteredIds = []
             if request.method == 'POST' :
                 ll = request.POST.get('filteredIds',[]).split(",")
                 filteredIds = [ int(l) for l in ll if l]
-                comments = comments.filter(id__in=filteredIds) # security ! TODO CROSS PERMISSIONS WITH POST CONTENT
-            else :
-                comments = []
-
+            _comments = text_version.comment_set.filter(id__in=filteredIds) # security ! TODO CROSS PERMISSIONS WITH POST CONTENT
+            
+        comments = get_viewable_comments(request, _comments, text, order_by=('start_wrapper','start_offset','end_wrapper','end_offset'))# whichcomments=="all"
+        
+    # decide to use pandoc or not
+    if with_color :
+        use_pandoc = False  # pandoc wouldn't preserve comments scope background colors
+    else :
+        if format in ('markdown', 'tex') : 
+            use_pandoc = True
+        elif format in ('pdf', 'odt') : 
+            use_pandoc = (original_format == "markdown")
+        elif format in ('doc', 'html') : 
+            use_pandoc = False
     if len(comments) == 0 : #want to bypass html conversion in this case
-        return content_export2(request, original_content, text_version.title, original_format, format, False, download_response)
+        return content_export2(request, original_content, text_version.title, original_format, format, use_pandoc, download_response)
     else : # case comments to be added  
         #comments = comments.order_by('start_wrapper','start_offset','end_wrapper','end_offset')
         html = text_version.get_content()
         wrapped_text_version, _ , _ = spannify(html)
         with_markers = True
         marked_content = insert_comment_markers(wrapped_text_version, comments, with_markers, with_color)
-
+    
         viewable_comments = comments_thread(request, text_version, text) 
-#        viewable_commentsnoreply = get_viewable_comments(request, commentsnoreply, text, order_by = ('start_wrapper','start_offset','end_wrapper','end_offset'))
-#        viewable_comments = []
-#        for cc in viewable_commentsnoreply :
-#            viewable_comments += list_viewable_comments(request, [cc], text)
+    #        viewable_commentsnoreply = get_viewable_comments(request, commentsnoreply, text, order_by = ('start_wrapper','start_offset','end_wrapper','end_offset'))
+    #        viewable_comments = []
+    #        for cc in viewable_commentsnoreply :
+    #            viewable_comments += list_viewable_comments(request, [cc], text)
             
         # numerotation{  id --> numbered as a child}
         extended_comments = {}
@@ -332,7 +343,7 @@ def text_export(request, key, format, download, whichcomments, withcolor, admink
             if cc.is_reply() :
                 cc.num = "%s.%s"%(extended_comments[cc.reply_to_id].num, cc.num)
         
-#        viewable_comments += list_viewable_comments(request, viewable_commentsnoreply, text)
+    #        viewable_comments += list_viewable_comments(request, viewable_commentsnoreply, text)
         html_comments=render_to_string('site/macros/text_comments.html',{'comments':viewable_comments }, context_instance=RequestContext(request))
         
         content = "%s%s"%(marked_content, html_comments)
@@ -340,17 +351,6 @@ def text_export(request, key, format, download, whichcomments, withcolor, admink
         # impossible to satisfy because of color then no colors instead:
         if with_color and format in ('markdown', 'tex') : #TODO : add S5
             with_color = False  
-
-        # decide to use pandoc or not
-        if with_color :
-            use_pandoc = False  # pandoc wouldn't preserve comments scope background colors
-        else :
-            if format in ('markdown', 'tex') : 
-                use_pandoc = True
-            elif format in ('pdf', 'odt') : 
-                use_pandoc = (original_format == "markdown")
-            elif format in ('doc', 'html') : 
-                use_pandoc = False
         
         return content_export2(request, content, text_version.title, content_format, format, use_pandoc, download_response)
 
