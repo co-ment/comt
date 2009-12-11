@@ -59,6 +59,10 @@ h2 {
 	float: right;
 }
 
+#header_left {
+	margin-top: 2px;	
+}
+
 #content {
 	
 }
@@ -269,8 +273,9 @@ input[disabled=""], input[disabled="disabled"]  {
 	color: #B1A5AB;
 }
 
-label {
+label, .label {
 	color: #444;
+	font-weight: bold;
 }
 
 input[type="text"],input[type="password"],textarea {
@@ -642,7 +647,7 @@ a.sort_up:hover, a.sort_down:hover, a.sort_disable:hover {
 
 
 h1.main_title {
-	margin-top:0.5em;
+	margin-top:0em;
 	margin-bottom:0em;
 }
 
