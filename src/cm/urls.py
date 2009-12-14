@@ -11,7 +11,7 @@ from cm.views.user import *
 from cm.views.timezone import *
 from cm.views.site import *
 from cm.views.feeds import *
-from cm.views.notifications import *
+from cm.views.followup import *
 from cm.views import i18n
 
 urlpatterns = patterns('',
@@ -88,11 +88,13 @@ urlpatterns += patterns('',
      url(r'^help/', help, name="help"),
      
      # notifications
-     ## workspace notifications
-     url(r'^notifications/$', notifications, name="notifications"),
-     url(r'^notification/(?P<adminkey>\w*)/desactivate/$', desactivate_notification, name="desactivate-notification"),
+     ## workspace followup
+     url(r'^followup/$', followup, name="followup"),
+     url(r'^followup/(?P<adminkey>\w*)/desactivate/$', desactivate_notification, name="desactivate-notification"),
      ## text notifications
-     url(r'^text/(?P<key>\w*)/notifications/$', text_notifications, name="text-notifications"),
+     url(r'^text/(?P<key>\w*)/followup/$', text_followup, name="text-followup"),
+     ## embed
+     url(r'^text/(?P<key>\w*)/embed/$', text_embed, name="text-embed"),
 
      # feeds
      ## workspace feeds

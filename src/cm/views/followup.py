@@ -19,7 +19,7 @@ import re
 import time
 
 @login_required
-def notifications(request):
+def followup(request):
     workspace_notify_check = Notification.objects.filter(text=None,type='workspace',user=request.user, active=True).count()
     own_notify_check = Notification.objects.filter(text=None,type='own',user=request.user, active=True).count()
     
@@ -37,7 +37,7 @@ def notifications(request):
             if notif_val != None :
                 Notification.objects.set_notification(text=None, type=notif_type, active=(notif_val == 'true'), email_or_user=request.user)
     
-    return render_to_response('site/notifications.html', {'workspace_notify_check':workspace_notify_check,
+    return render_to_response('site/followup.html', {'workspace_notify_check':workspace_notify_check,
                                                           'own_notify_check' :own_notify_check, 
                                                           }, context_instance=RequestContext(request))
     
@@ -62,7 +62,7 @@ def desactivate_notification(request, adminkey):
                                context_instance=RequestContext(request))
 
 
-def text_notifications(request, key):
+def text_followup(request, key):
     text = get_text_by_keys_or_404(key)
     user = request.user if request.user.is_authenticated() else None
 
@@ -70,9 +70,6 @@ def text_notifications(request, key):
     anonymous_can_view_text = user_has_perm(None, 'can_view_text', text=text)
     text_notify_check = Notification.objects.filter(text=text,type='text',user=user, active=True).count()
     workspace_notify_check = Notification.objects.filter(text=None,type='workspace',user=user, active=True).count()
-    
-    #embed_code = '<iframe frameborder="0" src="%s%s" style="height: 166px; width: 99.9%%; position: relative; top: 0px;">'%(settings.SITE_URL, reverse('text-view-comments-frame', args=[text.key]))
-    embed_code = embed_html(text.key) ;   
     
     if request.method == 'POST':
         if 'activate' in request.POST:
@@ -95,6 +92,17 @@ def text_notifications(request, key):
                      'workspace_notify_check' : workspace_notify_check,
                      'text_notify_check' : text_notify_check,
                      'anonymous_can_view_text' : anonymous_can_view_text,
+                     }
+    return render_to_response('site/text_followup.html', template_dict , context_instance=RequestContext(request))
+
+def text_embed(request, key):
+    text = get_text_by_keys_or_404(key)
+    #embed_code = '<iframe frameborder="0" src="%s%s" style="height: 166px; width: 99.9%%; position: relative; top: 0px;">'%(settings.SITE_URL, reverse('text-view-comments-frame', args=[text.key]))
+    embed_code = embed_html(text.key) ;   
+    template_dict = {
+                     'text' : text,
                      'embed_code': embed_code
                      }
-    return render_to_response('site/text_notifications.html', template_dict , context_instance=RequestContext(request))
+    return render_to_response('site/text_embed.html', template_dict , context_instance=RequestContext(request))
+    
+    

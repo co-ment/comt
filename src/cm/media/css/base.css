@@ -251,7 +251,7 @@ ul.errorlist li {
 */
 
 .wizard-form {
-	background-color: #F7F7F7;
+	/*background-color: #F7F7F7;*/
 	border: 1px solid #D7D7D7;
 	padding: 10px;
 }
@@ -807,3 +807,6 @@ a.tag {
 	color: #474747;
 }
 
+.title_first {
+	margin-top: 0em;
+}

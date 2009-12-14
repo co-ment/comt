@@ -4,22 +4,22 @@
 {% load local_perms %}
 
 {% block title %}
-{% blocktrans %}Notifications{% endblocktrans %}
+{% blocktrans %}Followup{% endblocktrans %}
 {% endblock %}
 
 {% block main %}
 {% get_local_perm request can_manage_workspace as can_manage_workspace %}
 <script type="text/javascript">
 <!--
-tb_conf['current_tab'] = 'notifications';
+tb_conf['current_tab'] = 'followup';
 -->
 </script>
 
-<div id="notifications" class="tab-meta">   
+<div id="followup" class="tab-meta">   
 
-<form id="notifications" enctype="multipart/form-data" action="." method="post">
+<form id="followup_form" enctype="multipart/form-data" action="." method="post">
 
-<h2>{% blocktrans %}Feeds{% endblocktrans %}</h2>
+<h2 class="title_first">{% blocktrans %}Feeds{% endblocktrans %}</h2>
 
 <h3>{% blocktrans %}Public feed{% endblocktrans %} (<a title="{% blocktrans %}Help{% endblocktrans %}" target="_blank" href="{% url help %}#public_private_feed">?</a>)</h3>
 

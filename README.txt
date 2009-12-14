@@ -144,3 +144,23 @@ Credits
 ========
 We'd like to thank:
 - Kirill Miazine (http://km.krot.org/) for the norwegian translation
+
+Translation
+============
+
+Update all po files
+---------------------
+cd src/cm
+../../bin/django makemessages -a
+../../bin/django makemessages -d djangojs -a
+
+Compile po files
+----------------
+cd src/cm
+../../bin/django compilemessages
+
+Create new file for lang 'lg'
+-----------------------------
+cd src/cm
+../../bin/django makemessages -l=lg -e=html,txt
+../../bin/django makemessages -d djangojs -l=lg

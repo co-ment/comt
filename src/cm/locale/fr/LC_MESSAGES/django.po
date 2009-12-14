@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-10 14:25+0100\n"
-"PO-Revision-Date: 2009-12-10 14:34+0100\n"
+"POT-Creation-Date: 2009-12-14 13:50+0100\n"
+"PO-Revision-Date: 2009-12-14 13:51+0100\n"
 "Last-Translator: dev <dev@sopinspace.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -64,7 +64,7 @@ msgstr "inconnu"
 #: models.py:176
 #: views/create.py:30
 #: views/create.py:45
-#: views/texts.py:607
+#: views/texts.py:608
 msgid "Title"
 msgstr "Titre"
 
@@ -73,7 +73,7 @@ msgid "Format"
 msgstr "Format"
 
 #: models.py:178
-#: views/texts.py:684
+#: views/texts.py:685
 msgid "Content"
 msgstr "Texte"
 
@@ -83,7 +83,7 @@ msgid "Tags"
 msgstr "Tags"
 
 #: models.py:181
-#: views/user.py:215
+#: views/user.py:218
 msgid "Note"
 msgstr "Note"
 
@@ -224,11 +224,11 @@ msgstr "Email :"
 msgid "Notification:"
 msgstr "Notification:"
 
-#: role_models.py:6
+#: role_models.py:7
 msgid "Generic"
 msgstr "Générique"
 
-#: role_models.py:6
+#: role_models.py:7
 msgid "Class (education)"
 msgstr "Classe (éducation)"
 
@@ -384,7 +384,7 @@ msgstr "Pour le publier, cliquez sur le lien suivant :"
 
 #: templates/site/activate.html:10
 #: templates/site/user_activate.html:10
-#: views/user.py:322
+#: views/user.py:325
 msgid "Activate your account"
 msgstr "Activer votre compte"
 
@@ -621,14 +621,77 @@ msgstr "créé il y a %(duration)s"
 msgid "No comments yet"
 msgstr "Aucun commentaire"
 
+#: templates/site/followup.html:7
+#: templates/site/macros/text_tabs.html:22
+msgid "Followup"
+msgstr "Suivi"
+
+#: templates/site/followup.html:22
+#: templates/site/text_followup.html:24
+msgid "Feeds"
+msgstr "Flux"
+
+#: templates/site/followup.html:24
+#: templates/site/text_followup.html:26
+msgid "Public feed"
+msgstr "Flux public"
+
+#: templates/site/followup.html:24
+#: templates/site/followup.html.py:34
 #: templates/site/help.html:6
-#: templates/site/notifications.html:24
-#: templates/site/notifications.html:34
-#: templates/site/text_notifications.html:83
+#: templates/site/text_embed.html:26
 #: templates/site/layout/footer.html:26
 #: templates/site/macros/form_fields.html:15
 msgid "Help"
 msgstr "Aide"
+
+#: templates/site/followup.html:27
+msgid "Public feed for workspace"
+msgstr "Flux public de l'espace de travail"
+
+#: templates/site/followup.html:31
+msgid "This is the public feed for the workspace."
+msgstr "Ceci est le flux public de l'espace de travail."
+
+#: templates/site/followup.html:34
+#: templates/site/text_followup.html:36
+msgid "Private feed"
+msgstr "Flux privé"
+
+#: templates/site/followup.html:38
+msgid "Private feed for workspace"
+msgstr "Flux privé de l'espace de travail"
+
+#: templates/site/followup.html:42
+msgid "This is the private feed for the workspace. Don't share this address with others unless you want them to see all activities on the workspace."
+msgstr "Ceci est le flux privé de l'espace de travail. Ne partagez cette adresse que si vous voulez que d'autres que vous-même puissent suivre toutes les activités de l'espace de travail."
+
+#: templates/site/followup.html:44
+#: templates/site/text_followup.html:46
+msgid "Reset private feed url"
+msgstr "Réinitialiser l'adresse du flux privé"
+
+#: templates/site/followup.html:48
+#: templates/site/text_followup.html:50
+msgid "Activate private feed"
+msgstr "Activer le flux privé"
+
+#: templates/site/followup.html:50
+msgid "The private feed for this workspace is not yet activated."
+msgstr "Le flux privé de cet espace de travail n'est pas encore activé."
+
+#: templates/site/followup.html:54
+#: templates/site/text_followup.html:57
+msgid "Email notifications"
+msgstr "Notifications par email"
+
+#: templates/site/followup.html:57
+msgid "Subscribe to workspace notifications"
+msgstr "S'abonner aux notifications de l'espace de travail"
+
+#: templates/site/followup.html:61
+msgid "Subscribe to all replies notifications in discussions where you have participated"
+msgstr "S'abonner aux notifications concernant les commentaires ou réponses dans les discussions auxquelles vous avez participé"
 
 #: templates/site/login.html:8
 #: templates/site/login_form.html:19
@@ -659,69 +722,6 @@ msgid_plural "%(counter)s public texts"
 msgstr[0] "Un texte public"
 msgstr[1] "%(counter)s textes publics"
 
-#: templates/site/notifications.html:7
-#: templates/site/macros/text_tabs.html:22
-msgid "Notifications"
-msgstr "Notifications"
-
-#: templates/site/notifications.html:22
-#: templates/site/text_notifications.html:24
-msgid "Feeds"
-msgstr "Flux"
-
-#: templates/site/notifications.html:24
-#: templates/site/text_notifications.html:26
-msgid "Public feed"
-msgstr "Flux public"
-
-#: templates/site/notifications.html:27
-msgid "Public feed for workspace"
-msgstr "Flux public de l'espace de travail"
-
-#: templates/site/notifications.html:31
-msgid "This is the public feed for the workspace."
-msgstr "Ceci est le flux public de l'espace de travail."
-
-#: templates/site/notifications.html:34
-#: templates/site/text_notifications.html:36
-msgid "Private feed"
-msgstr "Flux privé"
-
-#: templates/site/notifications.html:38
-msgid "Private feed for workspace"
-msgstr "Flux privé de l'espace de travail"
-
-#: templates/site/notifications.html:42
-msgid "This is the private feed for the workspace. Don't share this address with others unless you want them to see all activities on the workspace."
-msgstr "Ceci est le flux privé de l'espace de travail. Ne partagez cette adresse que si vous voulez que d'autres que vous-même puissent suivre toutes les activités de l'espace de travail."
-
-#: templates/site/notifications.html:44
-#: templates/site/text_notifications.html:46
-msgid "Reset private feed url"
-msgstr "Réinitialiser l'adresse du flux privé"
-
-#: templates/site/notifications.html:48
-#: templates/site/text_notifications.html:50
-msgid "Activate private feed"
-msgstr "Activer le flux privé"
-
-#: templates/site/notifications.html:50
-msgid "The private feed for this workspace is not yet activated."
-msgstr "Le flux privé de cet espace de travail n'est pas encore activé."
-
-#: templates/site/notifications.html:54
-#: templates/site/text_notifications.html:57
-msgid "Email notifications"
-msgstr "Notifications par email"
-
-#: templates/site/notifications.html:57
-msgid "Subscribe to workspace notifications"
-msgstr "S'abonner aux notifications de l'espace de travail"
-
-#: templates/site/notifications.html:61
-msgid "Subscribe to all replies notifications in discussions where you have participated"
-msgstr "S'abonner aux notifications concernant les commentaires ou réponses dans les discussions auxquelles vous avez participé"
-
 #: templates/site/notifications_desactivate.html:8
 msgid "Desactivate notification"
 msgstr "Désactiver la notification"
@@ -746,7 +746,7 @@ msgstr "Votre profil (%(username)s)"
 #: templates/site/text_create_upload.html:40
 #: templates/site/text_edit.html:111
 #: templates/site/text_settings.html:23
-#: templates/site/text_share.html:123
+#: templates/site/text_share.html:153
 #: templates/site/user_activate.html:27
 #: templates/site/user_list.html:210
 #: templates/site/layout/base_workspace_form.html:32
@@ -791,74 +791,110 @@ msgstr "Nous vous suggérons de créer une nouvelle version"
 msgid "Since you chose not to create a new version all comments will be deleted, do you want to continue?"
 msgstr "Tous les commentaires vont être supprimés parce que vous avez choisi de ne pas créer une nouvelle version, continuer ?"
 
+#: templates/site/text_embed.html:7
+msgid "Text notifications"
+msgstr "Notifications du texte"
+
+#: templates/site/text_embed.html:24
+msgid "Embed text"
+msgstr "Encapsulation du texte"
+
+#: templates/site/text_embed.html:25
+msgid "Copy this code into your site to display text with comments. Users will also be able to add comments from your site depending an anonymous users' roles."
+msgstr "Copier ce code dans votre site pour afficher le texte et ses commentaires. Les utilisateurs pourront ajouter leurs commentaires (si vous avez activé cette possiblité)."
+
+#: templates/site/text_embed.html:33
+msgid "Warning:"
+msgstr "Attention: "
+
+#: templates/site/text_embed.html:33
+msgid "You won't successfully embed the text before you give anonymous users a role allowing them to view the text."
+msgstr "Vous ne pourrez pas encapsuler votre texte dans un site externe si vous ne donnez pas aux utilisateurs anonymes un rôle leur permettant de voir le texte."
+
+#: templates/site/text_followup.html:7
+msgid "Text followup"
+msgstr "Suivi du texte"
+
+#: templates/site/text_followup.html:29
+#, python-format
+msgid "Public feed for text %(title)s"
+msgstr "Flux public pour le texte %(title)s"
+
+#: templates/site/text_followup.html:33
+msgid "This is the public feed for the text."
+msgstr "Ceci est le flux public du texte."
+
+#: templates/site/text_followup.html:40
+msgid "Private feed for text "
+msgstr "Flux privé du texte"
+
+#: templates/site/text_followup.html:44
+msgid "This is the private feed for the text. Don't share this address with others unless you want them to see all activities on this text."
+msgstr "Ceci est le flux privé du texte. Ne partagez cette adresse que si vous voulez que d'autres que vous-même puissent suivre toutes les activités du texte."
+
+#: templates/site/text_followup.html:52
+msgid "The private feed for this text is not yet activated."
+msgstr "Le flux privé de ce texte n'est pas encore activé."
+
+#: templates/site/text_followup.html:60
+msgid "You will receive text notifications because you subscribed to notifications at the workspace level"
+msgstr "Vous recevrez les notifications de ce texte parce que vous vous êtes abonné aux notifications au niveau de l'espace de travail tout entier"
+
+#: templates/site/text_followup.html:63
+msgid "Subscribe to all text notifications"
+msgstr "S'abonner aux notifications du texte"
+
 #: templates/site/text_history.html:38
 msgid "Versions:"
 msgstr "Versions :"
 
-#: templates/site/text_history.html:42
+#: templates/site/text_history.html:46
 #, python-format
 msgid "version #%(v1number)s"
 msgstr "version n°%(v1number)s"
 
-#: templates/site/text_history.html:42
+#: templates/site/text_history.html:46
 #, python-format
 msgid "by %(v1name)s"
 msgstr "par %(v1name)s"
 
-#: templates/site/text_history.html:42
+#: templates/site/text_history.html:46
 #, python-format
 msgid "created %(v1created)s"
 msgstr "créé le %(v1created)s"
 
-#: templates/site/text_history.html:50
+#: templates/site/text_history.html:54
 #, python-format
 msgid "differences between version #%(v1number)s and #%(v2number)s"
 msgstr "différences entre les versions n°%(v1number)s et n°%(v2number)s :"
 
-#: templates/site/text_history.html:59
-msgid "Authors:"
-msgstr "Auteurs :"
-
-#: templates/site/text_history.html:63
-msgid "authors"
-msgstr "auteurs"
-
-#: templates/site/text_history.html:67
-msgid "Actions:"
-msgstr "Actions :"
-
-#: templates/site/text_history.html:68
+#: templates/site/text_history.html:66
 #, python-format
-msgid "Revert to version #%(v1_nid)s:"
-msgstr "Revenir à la version n°%(v1_nid)s :"
+msgid "Revert to version #%(v1_nid)s"
+msgstr "Revenir à la version n°%(v1_nid)s"
 
-#: templates/site/text_history.html:72
+#: templates/site/text_history.html:70
 #, python-format
 msgid "Differences between version #%(v1_nid)s and version #%(v2_nid)s:"
 msgstr "Différences entre les versions n°%(v1_nid)s et n°%(v2_nid)s :"
 
-#: templates/site/text_history.html:74
-#, python-format
-msgid "Version #%(version_number)s entitled \"%(title)s\" and created on %(date)s:"
-msgstr "Version n°%(version_number)s ayant pour titre \"%(title)s\" et créée le %(date)s :"
-
-#: templates/site/text_history.html:83
-#: templates/site/text_history.html:89
-#, python-format
-msgid "%(title)s / version #%(version_number)s"
-msgstr "%(title)s / version n°%(version_number)s"
-
+#: templates/site/text_history.html:73
 #: templates/site/text_history.html:85
 #: templates/site/text_history.html:91
 #, python-format
-msgid "created %(date)s"
-msgstr "créé le %(date)s"
+msgid "Version #%(version_number)s created on %(date)s"
+msgstr "Version n°%(version_number)s créée le %(date)s :"
+
+#: templates/site/text_history.html:101
+msgid "No differences"
+msgstr "Pas de différences"
 
 #: templates/site/text_list.html:12
 msgid "Texts"
 msgstr "Textes"
 
 #: templates/site/text_list.html:47
+#: templates/site/text_share.html:35
 #: templates/site/user_list.html:7
 #: templates/site/user_list.html.py:32
 #: templates/site/user_list.html:40
@@ -867,11 +903,13 @@ msgid "People' list"
 msgstr "Liste des utilisateurs"
 
 #: templates/site/text_list.html:50
+#: templates/site/text_share.html:40
 #: templates/site/user_list.html:45
 msgid "Filter by tag:"
 msgstr "Filtrer avec le mot-clé"
 
 #: templates/site/text_list.html:52
+#: templates/site/text_share.html:42
 #: templates/site/user_list.html:47
 msgid "All"
 msgstr "Tous"
@@ -947,56 +985,7 @@ msgstr "Utilisateurs"
 msgid "Edit user"
 msgstr "Editer l'utilisateur"
 
-#: templates/site/text_notifications.html:7
-msgid "Text notifications"
-msgstr "Notifications du texte"
-
-#: templates/site/text_notifications.html:29
-#, python-format
-msgid "Public feed for text %(title)s"
-msgstr "Flux public pour le texte %(title)s"
-
-#: templates/site/text_notifications.html:33
-msgid "This is the public feed for the text."
-msgstr "Ceci est le flux public du texte."
-
-#: templates/site/text_notifications.html:40
-msgid "Private feed for text "
-msgstr "Flux privé du texte"
-
-#: templates/site/text_notifications.html:44
-msgid "This is the private feed for the text. Don't share this address with others unless you want them to see all activities on this text."
-msgstr "Ceci est le flux privé du texte. Ne partagez cette adresse que si vous voulez que d'autres que vous-même puissent suivre toutes les activités du texte."
-
-#: templates/site/text_notifications.html:52
-msgid "The private feed for this text is not yet activated."
-msgstr "Le flux privé de ce texte n'est pas encore activé."
-
-#: templates/site/text_notifications.html:60
-msgid "You will receive text notifications because you subscribed to notifications at the workspace level"
-msgstr "Vous recevrez les notifications de ce texte parce que vous vous êtes abonné aux notifications au niveau de l'espace de travail tout entier"
-
-#: templates/site/text_notifications.html:63
-msgid "Subscribe to all text notifications"
-msgstr "S'abonner aux notifications du texte"
-
-#: templates/site/text_notifications.html:81
-msgid "Embed text"
-msgstr "Encapsulation du texte"
-
-#: templates/site/text_notifications.html:82
-msgid "Copy this code into your site to display text with comments. Users will also be able to add comments from your site depending an anonymous users' roles."
-msgstr "Copier ce code dans votre site pour afficher le texte et ses commentaires. Les utilisateurs pourront ajouter leurs commentaires (si vous avez activé cette possiblité)."
-
-#: templates/site/text_notifications.html:90
-msgid "Warning:"
-msgstr "Attention: "
-
-#: templates/site/text_notifications.html:90
-msgid "You won't successfully embed the text before you give anonymous users a role allowing them to view the text."
-msgstr "Vous ne pourrez pas encapsuler votre texte dans un site externe si vous ne donnez pas aux utilisateurs anonymes un rôle leur permettant de voir le texte."
-
-#: templates/site/text_share.html:29
+#: templates/site/text_share.html:27
 #: templates/site/user_add.html:20
 #: templates/site/user_add_text.html:23
 #: templates/site/user_contact.html:19
@@ -1006,7 +995,7 @@ msgstr "Vous ne pourrez pas encapsuler votre texte dans un site externe si vous 
 msgid "Users' list"
 msgstr "Liste des utilisateurs"
 
-#: templates/site/text_share.html:31
+#: templates/site/text_share.html:29
 #: templates/site/user_add.html:6
 #: templates/site/user_add.html.py:22
 #: templates/site/user_add_text.html:6
@@ -1020,7 +1009,7 @@ msgstr "Liste des utilisateurs"
 msgid "Add a new user"
 msgstr "Ajouter un utilisateur"
 
-#: templates/site/text_share.html:33
+#: templates/site/text_share.html:31
 #: templates/site/user_add.html:24
 #: templates/site/user_add_text.html:27
 #: templates/site/user_list.html:36
@@ -1030,31 +1019,46 @@ msgstr "Ajouter un utilisateur"
 msgid "Add users in bulk"
 msgstr "Ajouter des utilisateurs en masse"
 
-#: templates/site/text_share.html:57
+#: templates/site/text_share.html:38
+#: templates/site/user_list.html:43
+msgid "Hide suspended users"
+msgstr "Masquer les utilisateurs désactivés"
+
+#: templates/site/text_share.html:38
+#: templates/site/user_list.html:43
+msgid "Display suspended users"
+msgstr "Afficher les utilisateurs désactivés"
+
+#: templates/site/text_share.html:86
+#: templates/site/user_list.html:132
+msgid "User"
+msgstr "Utilisateur"
+
+#: templates/site/text_share.html:87
 msgid "The 'Workspace role' is the global role that applies to every text, you can give a user a particular role on this text using the 'local role' column on the right"
 msgstr "Le 'rôle dans l'espace de travail' est le rôle global qui s'applique à tous les textes, vous pouvez donner à un utilisateur particulier un rôle différent sur ce texte via la colonne 'rôle local' à droite"
 
-#: templates/site/text_share.html:57
+#: templates/site/text_share.html:87
 msgid "Workspace role"
 msgstr "Rôle dans l'espace de travail"
 
-#: templates/site/text_share.html:58
+#: templates/site/text_share.html:88
 msgid "Local role"
 msgstr "Rôle local"
 
-#: templates/site/text_share.html:71
+#: templates/site/text_share.html:101
 #, python-format
 msgid "This role has been overriden on this text by a local role: %( rolename)s"
 msgstr "Ce rôle a été surchargé par un rôle local : %( rolename)s"
 
-#: templates/site/text_share.html:98
+#: templates/site/text_share.html:128
 #: templates/site/user_edit.html:6
 #: templates/site/user_edit.html.py:24
 #: templates/site/user_list.html:177
 msgid "Edit anonymous users"
 msgstr "Editer 'l'utilisateur anonyme'"
 
-#: templates/site/text_share.html:98
+#: templates/site/text_share.html:128
 #: templates/site/user_list.html:177
 msgid "Anonymous users"
 msgstr "Utilisateurs anonymes"
@@ -1124,14 +1128,6 @@ msgstr "Contacter l'utilisateur %(username)s"
 msgid "Edit user %(username)s"
 msgstr "Editer l'utilisateur %(username)s"
 
-#: templates/site/user_list.html:43
-msgid "Hide suspended users"
-msgstr "Masquer les utilisateurs désactivés"
-
-#: templates/site/user_list.html:43
-msgid "Display suspended users"
-msgstr "Afficher les utilisateurs désactivés"
-
 #: templates/site/user_list.html:73
 #: templates/site/macros/user_actions.html:28
 msgid "Suspend access"
@@ -1147,12 +1143,8 @@ msgstr "Activer l'accès"
 msgid "Change role to %(role_name)s"
 msgstr "Modifier le rôle en %(role_name)s"
 
-#: templates/site/user_list.html:132
-msgid "User"
-msgstr "Utilisateur"
-
 #: templates/site/user_list.html:133
-#: views/user.py:275
+#: views/user.py:278
 msgid "Email"
 msgstr "Email"
 
@@ -1169,7 +1161,7 @@ msgstr "Rôle"
 msgid "The users will receive an email invitation to join the workspace."
 msgstr "Les utilisateurs recevront un email d'invitation à rejoindre l'espace de travail."
 
-#: templates/site/layout/base_text.html:17
+#: templates/site/layout/base_text.html:16
 #: templates/site/layout/base_workspace.html:14
 msgid "back to workspace"
 msgstr "retour à l'espace de travail"
@@ -1239,6 +1231,10 @@ msgstr "Utilisateurs"
 #: templates/site/macros/text_tabs.html:17
 msgid "Versions"
 msgstr "Versions"
+
+#: templates/site/macros/text_tabs.html:25
+msgid "Embed"
+msgstr "Encapsulation"
 
 #: templates/site/macros/user_actions.html:6
 #: templates/site/macros/user_actions.html:17
@@ -1340,34 +1336,34 @@ msgstr "Flux privé du texte %(text_title)s"
 msgid "Private activity feed for text %(text_title)s"
 msgstr "Flux public pour le texte %(text_title)s"
 
-#: views/notifications.py:29
-#: views/notifications.py:81
+#: views/followup.py:29
+#: views/followup.py:78
 msgid "Private feed activated."
 msgstr "Flux privé activé."
 
-#: views/notifications.py:32
+#: views/followup.py:32
 msgid "Private feed reseted."
 msgstr "Flux privé réinitialisé."
 
-#: views/notifications.py:50
+#: views/followup.py:50
 msgid "This notification has already been desactivated."
 msgstr "Cette notification a été désactivée."
 
-#: views/notifications.py:56
+#: views/followup.py:56
 msgid "Notification desactivated."
 msgstr "Notification désactivée."
 
-#: views/notifications.py:60
+#: views/followup.py:60
 msgid "Desactivate notification?"
 msgstr "Désactiver la notification ?"
 
-#: views/notifications.py:85
+#: views/followup.py:82
 msgid "Private notifications feed reseted."
-msgstr "Flux privé"
+msgstr "Flux privé réinitialisé."
 
 #: views/site.py:81
 #: views/texts.py:131
-#: views/user.py:521
+#: views/user.py:524
 msgid "You're logged in!"
 msgstr "Vous êtes connecté !"
 
@@ -1445,199 +1441,211 @@ msgstr "%(nb_texts)i texte(s) supprimés"
 msgid "Text %(text_title)s deleted"
 msgstr "texte %(text_title)s supprimé"
 
-#: views/texts.py:611
+#: views/texts.py:612
 msgid "Note (optional)"
 msgstr "Note (facultative)"
 
-#: views/texts.py:614
+#: views/texts.py:615
 msgid "Add a note to explain the modifications made to the text"
 msgstr "Ajouter une note pour expliquer les modifications apportées au texte"
 
-#: views/texts.py:624
+#: views/texts.py:625
 msgid "New version (optional)"
 msgstr "Nouvelle version (facultative)"
 
-#: views/texts.py:627
+#: views/texts.py:628
 msgid "Create a new version of this text (recommended)"
 msgstr "créér une nouvelle version de ce texte (recommandé)"
 
-#: views/texts.py:630
+#: views/texts.py:631
 msgid "Keep comments (optional)"
 msgstr "Conserver les commentaires (facultatif)"
 
-#: views/texts.py:633
+#: views/texts.py:634
 msgid "Keep comments (if not affected by the edit)"
 msgstr "Conserver les commentaires dont la portée n'a pas été affectée par l'édition"
 
-#: views/texts.py:682
+#: views/texts.py:683
 msgid "Name (optional)"
 msgstr "Nom (facultatif)"
 
-#: views/texts.py:683
+#: views/texts.py:684
 msgid "Email (optional)"
 msgstr "Email (facultatif)"
 
-#: views/texts.py:733
+#: views/texts.py:734
 #, python-format
 msgid "A new version (copied from version %(version_id)s) has been created"
 msgstr "Une nouvelle version (copiée depuis la version %(version_id)s) a été créée"
 
-#: views/texts.py:836
-#: views/user.py:78
-#: views/user.py:98
+#: views/texts.py:840
+#: views/user.py:79
+#: views/user.py:99
 #, python-format
 msgid "%(count)i user(s) role modified"
 msgstr "%(count)i rôle(s) d'utilisateur modifié(s)"
 
-#: views/texts.py:874
+#: views/texts.py:898
 msgid "Text settings updated"
 msgstr "Paramètres mis à jour"
 
-#: views/user.py:60
+#: views/user.py:61
 #, python-format
 msgid "%(count)i User's access suspended"
 msgstr "%(count)i accès utilisateur désactivé(s)"
 
-#: views/user.py:67
+#: views/user.py:68
 #, python-format
 msgid "%(count)i User's access enabled"
 msgstr "%(count)i accès utilisateur sactivé(s)"
 
-#: views/user.py:137
+#: views/user.py:140
 msgid "E-mail address"
 msgstr "Email"
 
-#: views/user.py:157
+#: views/user.py:160
 msgid "This user is already a member."
 msgstr "Cet utilisateur est déjà membre."
 
-#: views/user.py:160
+#: views/user.py:163
 msgid "Emails"
 msgstr "Emails"
 
-#: views/user.py:161
+#: views/user.py:164
 msgid "Add multiples emails one per line (or separated by \",\" or \";\")"
 msgstr "Ajouter des emails multiples (un par ligne ou séparés par \",\" or \";\")"
 
-#: views/user.py:178
+#: views/user.py:181
 msgid "Workspace level role"
 msgstr "Rôle dans l'espace de travail"
 
-#: views/user.py:179
+#: views/user.py:182
 msgid "This role will apply to every text in the workspace. To share only a (few) texts with this user, you can leave this blank and delegate roles on texts once the user is created."
 msgstr "Ce rôle s'appliquera à tous les textes dans l'espace de travail. Pour partager seulement quelques textes avec cet utilisateur, vous pouvez laisser ce champ vide et déléguer les rôles sur les textes une fois l'utilisateur créé."
 
-#: views/user.py:195
+#: views/user.py:198
 msgid "Text level role"
 msgstr "Rôle sur le texte"
 
-#: views/user.py:196
+#: views/user.py:199
 msgid "This role will apply only to this text."
 msgstr "Ce rôle ne s'appliquera qu'à ce texte"
 
-#: views/user.py:216
+#: views/user.py:219
 msgid "Optional text to add to invitation email"
 msgstr "Texte additionnel à ajouter à l'email d'invitation."
 
-#: views/user.py:251
+#: views/user.py:254
 #, python-format
 msgid "%(nb_users)d user added"
 msgid_plural "%(nb_users)d users added"
 msgstr[0] "%(nb_users)d utilisateur ajouté"
 msgstr[1] "%(nb_users)d utilisateurs ajoutés"
 
-#: views/user.py:269
+#: views/user.py:272
 msgid "Save user"
 msgid_plural "Save users"
 msgstr[0] "Enregistrer l'utilisateur"
 msgstr[1] "Enregistrer les utilisateurs"
 
-#: views/user.py:291
+#: views/user.py:294
 msgid "This username is already in use. Please supply a different username."
 msgstr "Ce nom d'utilisateur est déjà utilisé. Merci d'en fournir un autre."
 
-#: views/user.py:312
-#: views/user.py:328
+#: views/user.py:315
+#: views/user.py:331
 msgid "Your account has been activated. You're now logged-in."
 msgstr "Votre compte a été activé. Vous êtes maintenant connecté."
 
-#: views/user.py:323
+#: views/user.py:326
 msgid "activate account"
 msgstr "activation du compte"
 
-#: views/user.py:354
+#: views/user.py:357
 #, python-format
 msgid "User's access %(prof)s has been suspended."
 msgstr "L'accès de l'utilisateur %(prof)s a été desactivé."
 
-#: views/user.py:360
+#: views/user.py:363
 #, python-format
 msgid "User's access %(prof)s has been refused."
 msgstr "L'accès de l'utilisateur %(prof)s a été refusé."
 
-#: views/user.py:373
+#: views/user.py:376
 #, python-format
 msgid "User's access %(prof)s has been restored."
 msgstr "L'accès de l'utilisateur %(prof)s a été restauré."
 
-#: views/user.py:377
+#: views/user.py:380
 #, python-format
 msgid "User's access %(prof)s has been approved."
 msgstr "L'accès de l'utilisateur %(prof)s a été activé."
 
-#: views/user.py:387
+#: views/user.py:390
 #, python-format
 msgid "A new invitation has been sent to user %(prof)s."
 msgstr "Une nouvelle invitation a été envoyée à l'utilisateur %(prof)s."
 
-#: views/user.py:401
+#: views/user.py:404
 msgid "Profile updated"
 msgstr "Profil mis à jour"
 
-#: views/user.py:433
+#: views/user.py:436
 msgid "Anonymous user role modified."
 msgstr "Role de l'utilisateur anonyme modifié."
 
-#: views/user.py:455
+#: views/user.py:458
 msgid "User modified"
 msgstr "Utilisateur modifié"
 
-#: views/user.py:470
+#: views/user.py:473
 msgid "Subject"
 msgstr "Sujet"
 
-#: views/user.py:471
+#: views/user.py:474
 msgid "Subject of the email"
 msgstr "Sujet du message"
 
-#: views/user.py:474
+#: views/user.py:477
 msgid "Body"
 msgstr "Corps"
 
-#: views/user.py:475
+#: views/user.py:478
 msgid "Body of the email"
 msgstr "Corps du message"
 
-#: views/user.py:495
+#: views/user.py:498
 msgid "Email sent."
 msgstr "Email envoyé."
 
-#: views/user.py:515
+#: views/user.py:518
 msgid "This account is suspended, contact the workspace administrator."
 msgstr "Ce compte est désactivé, veuillez contacter le gestionnaire de l'espace de travail."
 
-#: views/user.py:546
+#: views/user.py:549
 msgid "You've been logged out."
 msgstr "Vous êtes déconnecté."
 
-#: views/user.py:562
+#: views/user.py:565
 msgid "You've been registered, you will receive a confirmation mail once a moderator has approved your membership."
 msgstr "Enregistrement réussi, vous recevrez un message de confirmation quand un gestionnaire de l'espace de travail aura activé votre compte."
 
-#: views/user.py:565
+#: views/user.py:568
 msgid "You've been registered, please check your email for the confirm message."
 msgstr "Enregistrement réussi, un message de confirmation vous a été envoyé"
 
+#~ msgid "Notifications"
+#~ msgstr "Notifications"
+#~ msgid "Authors:"
+#~ msgstr "Auteurs :"
+#~ msgid "authors"
+#~ msgstr "auteurs"
+#~ msgid "Actions:"
+#~ msgstr "Actions :"
+#~ msgid "%(title)s / version #%(version_number)s"
+#~ msgstr "%(title)s / version n°%(version_number)s"
+#~ msgid "created %(date)s"
+#~ msgstr "créé le %(date)s"
 #~ msgid "Preview text"
 #~ msgstr "Prévisualiser le texte"
 #~ msgid "Add user"
