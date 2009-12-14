@@ -35,7 +35,11 @@ $(function() {
 </script>
 
 <div id="text_history" class="tab-meta">    
-<h2>{% blocktrans %}Versions:{% endblocktrans %}</h2>
+<div class="label">{% blocktrans %}Versions:{% endblocktrans %}
+{% for author,color in author_colors %}
+    <span style="background: {{ color }};">{{ author }}</span>
+{% endfor %} 
+</div>
 
 <span id="text_history_timeline">
 {% for v1, v2, color in paired_versions %}
@@ -56,22 +60,18 @@ $(function() {
 {% endfor %}
 </span>
 
-<h2>{% blocktrans %}Authors:{% endblocktrans %}</h2>
-{% for author,color in author_colors %}
-    <span style="background: {{ color }};">{{ author }}</span>
-{% empty %}
-<a href="{% url text-authors text.key %}">{% blocktrans %}authors{% endblocktrans %}</a>
-{% endfor %}
-
 {% if can_edit_text %}
-<h2>{% blocktrans %}Actions:{% endblocktrans %}</h2>
-<form action="{% url text-revert text.key v1_nid %}" method="POST" >{% blocktrans %}Revert to version #{{ v1_nid }}:{% endblocktrans %}<input name="revert" type="submit" value="Revert"/></form>
+<br />
+<br />
+<form action="{% url text-revert text.key v1_nid %}" method="POST" ><input name="revert" type="submit" value="{% blocktrans %}Revert to version #{{ v1_nid }}{% endblocktrans %}"/></form>
 {% endif %}
 
 {% if v2_nid %}
     <h2>{% blocktrans with v1_nid as v1_nid and v1_nid as v1_nid %}Differences between version #{{ v1_nid }} and version #{{ v2_nid }}:{% endblocktrans %}</h2>
 {% else %}
-    <h2>{% blocktrans with version1.created|local_date:tz as date and v1_nid as version_number and version1.title as title %}Version #{{ version_number  }} entitled "{{ title }}" and created on {{ date }}:{% endblocktrans %}</h2>   
+	<h2>{{ version1.title }}</h2>
+    <span class="metadata">{% blocktrans with version1.created|local_date:tz as date and v1_nid as version_number %}Version #{{ version_number }} created on {{ date }}{% endblocktrans %}</span>
+    <br /><br />   
 {% endif %}
 {% autoescape off %}
 
@@ -80,24 +80,31 @@ $(function() {
 <table class="diff" width="100%">
     <tr>
         <td class="diff-head" width="45%">
-            {% blocktrans with v1_nid as version_number and version1.title as title %}{{ title }} / version #{{ version_number }}{% endblocktrans %}
+        	{{ version1.title }}
             <br/>
-            {% blocktrans with version1.created|local_date:tz as date %}created {{ date }}{% endblocktrans %}
+            <span class="metadata">{% blocktrans with version1.created|local_date:tz as date and v1_nid as version_number %}Version #{{ version_number }} created on {{ date }}{% endblocktrans %}</span>
         </td>
         <td width="10%"></td>
         <td class="diff-head" width="45%">
-            {% blocktrans with v2_nid as version_number and version2.title as title %}{{ title }} / version #{{ version_number }}{% endblocktrans %}
+        	{{ version2.title }}
             <br/>
-            {% blocktrans with version2.created|local_date:tz as date %}created {{ date }}{% endblocktrans %}
-            
+            <span class="metadata">{% blocktrans with version2.created|local_date:tz as date and v2_nid as version_number %}Version #{{ version_number }} created on {{ date }}{% endblocktrans %}</span>            
         </td>
     </tr>
 </table>
 {% endif %}
 
+
+{% if is_diff %}
 {{ content }}
+{% else %}
+<center>{% blocktrans %}No differences{% endblocktrans %}</center>
+{% endif %}
+
+{% if embed_code %}
 <div id="autoexpand_text_view_frame_container">
 {{ embed_code }}
+{% endif %}
 </div>
 
 {% endautoescape %}

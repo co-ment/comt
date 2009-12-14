@@ -484,8 +484,9 @@ def text_history(request, key, v1_nid=None, v2_nid=None, adminkey=False):
                      'v2_id' : v2_id,
                      'version1': v1,
                      'version2': v2,
-                     'content' : content,
+                     'content' : content.strip(),
                      'embed_code':embed_code,
+                     'is_diff' : content !='<table class="diff"><tbody></tbody></table>',
                      'author_colors' : author_colors,
                      }
     return render_to_response('site/text_history.html', template_dict, context_instance=RequestContext(request))
