@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-14 13:42+0100\n"
+"POT-Creation-Date: 2009-12-14 17:55+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,6 +73,7 @@ msgstr ""
 
 #: media/js/client/c_dlg_intercept.js:48 media/js/client/c_dlg_intercept.js:50
 #: media/js/client/c_dlg_intercept.js:52 media/js/client/c_sync.js:223
+#: media/js/site/text_edit.js:84
 msgid "Warning"
 msgstr ""
 
@@ -408,10 +409,12 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:721
+#: media/js/site/text_edit.js:78
 msgid "No"
 msgstr ""
 
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:722
+#: media/js/site/text_edit.js:79
 msgid "Yes"
 msgstr ""
 
@@ -530,4 +533,38 @@ msgstr ""
 
 #: media/js/site/f_text_view_frame.js:320
 msgid "thread discussions"
+msgstr ""
+
+#: media/js/site/text_edit.js:26
+msgid ""
+"%(nb_comments)s comment will be removed because the text it applies to has "
+"been changed."
+msgid_plural ""
+"%(nb_comments)s comments will be removed because the text they apply to has "
+"been changed."
+msgstr[0] ""
+msgstr[1] ""
+
+#: media/js/site/text_edit.js:30 media/js/site/text_edit.js.py:49
+#: media/js/site/text_edit.js:66
+msgid "Do you want to continue?"
+msgstr ""
+
+#: media/js/site/text_edit.js:43
+msgid ""
+"%(nb_comments)s comment will be lost because the text it applies to has been "
+"changed."
+msgid_plural ""
+"%(nb_comments)s comments will be lost because the text they apply to has "
+"been changed."
+msgstr[0] ""
+msgstr[1] ""
+
+#: media/js/site/text_edit.js:47
+msgid "(We suggest you create a new version)"
+msgstr ""
+
+#: media/js/site/text_edit.js:64
+msgid ""
+"Since you chose not to create a new version all comments will be deleted"
 msgstr ""
