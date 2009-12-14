@@ -7,6 +7,6 @@ def embed_html(text_key, attrs='', version_key=None) :
     else :
         url =  reverse('text-view-comments-frame', args=[text_key])
 
-    embed_code = '<iframe %s frameborder="0" src="%s%s" style="height: 200px; width: 99.9%%; position: relative; top: 0px;">'%(attrs, settings.SITE_URL, url)
+    embed_code = '<iframe %s frameborder="0" src="%s%s" style="height: 200px; width: 99.9%%; position: relative; top: 0px;" />'%(attrs, settings.SITE_URL, url)
     
     return embed_code
