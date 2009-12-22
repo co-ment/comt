@@ -18,16 +18,16 @@ class NotificationTest(TestCase):
         self.assertEquals(len(Notification.objects.all()), 0)
 
         # subscribe to workspace notifications
-        response = c.post('/notifications/', {'notif_id': u'workspace_notify_check', 
-                                              'workspace_notify_check': u'workspace_notify_check',
-                                              })
+        response = c.post('/followup/', {'notif_id': u'workspace_notify_check', 
+                                         'workspace_notify_check': u'workspace_notify_check',
+                                         })
 
         self.assertEquals(len(Notification.objects.all()), 1)
         
         # subscribe to own notifications
-        response = c.post('/notifications/', {'notif_id': u'own_notify_check', 
-                                              'own_notify_check': u'true',
-                                              })
+        response = c.post('/followup/', {'notif_id': u'own_notify_check', 
+                                         'own_notify_check': u'true',
+                                        })
         
         self.assertEquals(len(Notification.objects.all()), 2)
 
@@ -39,6 +39,7 @@ class NotificationTest(TestCase):
                             'format' : 'markdown',
                             'fun' : 'addComment',
                             'key' : 'text_key_1',
+                            'version_key' : 'textversion_key_1',
                             'start_offset' : 16,
                             'start_wrapper' : 0,
                             'title' : 'sdf', 
