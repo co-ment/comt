@@ -642,7 +642,7 @@ class EditTextForm(ModelForm):
     def save_into_text(self, text, request):
         new_content = request.POST.get('content')
         new_title = request.POST.get('title')
-        new_format = request.POST.get('format')
+        new_format = request.POST.get('format', text.last_text_version.format)
         new_note = request.POST.get('note',None)
         new_tags = request.POST.get('tags',None)
         version = text.get_latest_version()
@@ -660,7 +660,7 @@ class EditTextForm(ModelForm):
         
         new_content = request.POST.get('content')
         new_title = request.POST.get('title')
-        new_format = request.POST.get('format')        
+        new_format = request.POST.get('format', text.last_text_version.format)        
         new_note = request.POST.get('note',None)
         new_tags = request.POST.get('tags',None)
         new_text_version.edit(new_title, new_format, new_content, new_tags, new_note, True)
@@ -674,7 +674,8 @@ class EditTextForm(ModelForm):
 
         # override manually to disabled
         format_field = self.fields['format']
-        format_field.widget.attrs = attrs={'disabled':'disabled'} 
+        format_field.widget.attrs = attrs={'disabled':'disabled'}
+        format_field.required = False
 
         self.fields['format'] = format_field
 
