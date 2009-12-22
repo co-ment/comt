@@ -8,6 +8,7 @@ from cm.diff import text_diff as _text_diff, text_history as inner_text_history,
 from cm.exception import UnauthorizedException
 from cm.message import *
 from cm.models import *
+from django.forms.util import ErrorList
 from cm.models_base import generate_key
 from cm.security import get_texts_with_perm, has_perm, get_viewable_comments, \
     has_perm_on_text
@@ -665,6 +666,17 @@ class EditTextForm(ModelForm):
         new_text_version.edit(new_title, new_format, new_content, new_tags, new_note, True)
         
         return new_text_version
+
+    def __init__(self, data=None, files=None, auto_id='id_%s', prefix=None,
+                 initial=None, error_class=ErrorList, label_suffix=':',
+                 empty_permitted=False, instance=None):
+        ModelForm.__init__(self, data, files, auto_id, prefix, initial, error_class, label_suffix, empty_permitted, instance)
+
+        # override manually to disabled
+        format_field = self.fields['format']
+        format_field.widget.attrs = attrs={'disabled':'disabled'} 
+
+        self.fields['format'] = format_field
 
 @has_perm_on_text('can_edit_text')
 def text_pre_edit(request, key, adminkey=None):
