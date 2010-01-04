@@ -30,3 +30,5 @@ syntax: regexp
 ^recreate$
 syntax: regexp
 ^\.pydevproject$
+syntax: regexp
+^\.settings$
