@@ -22,8 +22,7 @@ from django.utils.translation import ugettext as _, ugettext_lazy, ugettext_noop
 from tagging.fields import TagField
 import pickle
 from django.db import connection
-
-
+from datetime import datetime
 
 class TextManager(Manager):
     def create_text(self, title, format, content, note, name, email, tags, user=None, state='approved', **kwargs):
@@ -163,7 +162,7 @@ class TextVersionManager(KeyManager):
                         reply_to = None
                         if c.reply_to:                            
                             reply_to = old_comment_map[c.reply_to.id]  
-                        c2 = Comment.objects.duplicate(c, duplicate_text_version, reply_to)
+                        c2 = Comment.objects.duplicate(c, duplicate_text_version, reply_to, keep_dates=True)
                         old_comment_map[old_id] = c2
                         break
                  
@@ -237,7 +236,7 @@ class TextVersion(AuthorModel, KeyModel):
             tomodify_comments, toremove_comments = compute_new_comment_positions(self.content, self.format, new_content, new_format, comments)
             #print "tomodify_comments",len(tomodify_comments)
             #print "toremove_comments",len(toremove_comments)
-            [comment.save() for comment in tomodify_comments]
+            [comment.save(keep_dates=True) for comment in tomodify_comments]
             [comment.delete() for comment in toremove_comments]
         self.title = new_title
         if new_tags:
@@ -250,18 +249,18 @@ class TextVersion(AuthorModel, KeyModel):
         
 class CommentManager(Manager):
     
-    def duplicate(self, comment, text_version, reply_to=None):
+    def duplicate(self, comment, text_version, reply_to=None, keep_dates=False):
         comment.id = None
         comment.text_version = text_version
         if reply_to:
             comment.reply_to = reply_to
         self.update_keys(comment)
-        comment.save()
+        comment.save(keep_dates=keep_dates)
         return comment
     
 class Comment(PermanentModel, AuthorModel):
-    modified = models.DateTimeField(auto_now=True)
-    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField()
+    created = models.DateTimeField()
 
     text_version = models.ForeignKey("TextVersion")
 
@@ -283,6 +282,14 @@ class Comment(PermanentModel, AuthorModel):
 
     objects = CommentManager()
     
+    def save(self, force_insert=False, force_update=False, keep_dates=False):
+        if not keep_dates:
+            now = datetime.now()
+            if not self.id: 
+                self.created = now  
+            self.modified = now 
+        super(PermanentModel, self).save() 
+            
     def __unicode__(self):
         return '<%d> %s' % (self.id, self.title)    
         
