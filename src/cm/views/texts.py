@@ -42,7 +42,7 @@ import logging
 import mimetypes
 import simplejson
 import sys
-
+from django.db.models.sql.datastructures import EmptyResultSet
 
 def get_text_and_admin(key, adminkey, assert_admin = False):
     """
@@ -167,8 +167,12 @@ def text_list(request):
 
     texts = get_texts_with_perm(request, 'can_view_text').order_by(order_by)
 
+    try:
+        tag_list = Tag.objects.usage_for_queryset(TextVersion.objects.filter(id__in = [t.last_text_version_id for t in get_texts_with_perm(request, 'can_view_text')]))
+    except EmptyResultSet:
+        tag_list = []
     context = {    
-               'tag_list' : Tag.objects.usage_for_queryset(TextVersion.objects.filter(id__in = [t.last_text_version_id for t in get_texts_with_perm(request, 'can_view_text')])),
+               'tag_list' : tag_list,
                'tag_selected': tag_selected,
                }
 
