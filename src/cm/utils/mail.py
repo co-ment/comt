@@ -46,7 +46,6 @@ def send_mail_in_language(subject, subject_vars, message_template, message_vars,
     """
     If obj in recipient_list is user: used preferred_language in profile to send the email
     """
-    import pdb;pdb.set_trace()
     for user_recipient in recipient_list:
         if type(user_recipient) == User:
             lang_code = User.get_profile().preferred_language
@@ -56,7 +55,7 @@ def send_mail_in_language(subject, subject_vars, message_template, message_vars,
             recipient = user_recipient
             
         processed_subject = translate_to(subject, lang_code) %subject_vars
-        processed_message = translate_to(message, lang_code) %message_vars
+        processed_message = translate_to(message_template, lang_code) %message_vars
         
         send_mail(processed_subject, processed_message, from_email, recipient)
         
