@@ -31,4 +31,4 @@ syntax: regexp
 syntax: regexp
 ^\.pydevproject$
 syntax: regexp
-^\.settings$
+^\.settings/.*$
