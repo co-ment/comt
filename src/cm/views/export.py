@@ -5,8 +5,6 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext as _, ugettext_lazy
 from cm.converters.pandoc_converters import pandoc_convert
-from cm.converters.oo_converters import convert_html as oo_convert
-from cm.converters.oo_converters import combine_css_body
 from cm.models import Text, TextVersion, Attachment, Comment
 import mimetypes
 import simplejson
@@ -36,7 +34,9 @@ def content_export2(request, content, title, content_format, format, use_pandoc,
         else :
             fix_content = content
             if content_format == 'html':
+                from cm.converters.oo_converters import combine_css_body                
                 fix_content = combine_css_body(content, '')
+            from cm.converters.oo_converters import convert_html as oo_convert                
             export_content = oo_convert(fix_content, format)
     
     export_infos = EXPORT2_INFOS[format]
@@ -58,7 +58,9 @@ def content_export_new(request, content, title, src_format, format, use_pandoc, 
         else :
             fix_content = content
             if src_format == 'html':
+                from cm.converters.oo_converters import combine_css_body                
                 fix_content = combine_css_body(content, '')
+            from cm.converters.oo_converters import convert_html as oo_convert                
             export_content = oo_convert(fix_content, format)
     
     export_infos = EXPORT_INFOS[format]
@@ -151,7 +153,9 @@ def content_export(request, content, title, src_format, format, use_pandoc):
         else :
             fix_content = content
             if src_format == 'html':
+                from cm.converters.oo_converters import combine_css_body                
                 fix_content = combine_css_body(content, '')
+            from cm.converters.oo_converters import convert_html as oo_convert                
             export_content = oo_convert(fix_content, format)
     
     export_infos = EXPORT_INFOS[format]

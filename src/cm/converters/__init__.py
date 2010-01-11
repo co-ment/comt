@@ -1,6 +1,6 @@
-from oo_converters import convert
 from pandoc_converters import pandoc_convert
 import chardet 
+import re
 
 # TODO: move that in text_base: save images
 def convert_from_mimetype(file_name, mime_type, format):
@@ -87,7 +87,8 @@ def fix_img_path(html, xhtml, imgs):
     result.append(xhtml[last_index:len(xhtml)])
     return u''.join(result)
 
-def convert_oo_to_html(input):    
+def convert_oo_to_html(input):
+    from oo_converters import convert    
     html_input, images = convert(input, 'html')
     
     enc = chardet.detect(html_input)['encoding']
@@ -103,7 +104,8 @@ def convert_oo_to_html(input):
         raise Exception('UnicodeDecodeError: could not decode')
     return res_content_html, images
 
-def old_convert_oo_to_html(input):    
+def old_convert_oo_to_html(input): 
+    from oo_converters import convert   
     html_input, images = convert(input, 'html')
     xhtml_input, _not_used_ = convert(input, 'xhtml')
     
