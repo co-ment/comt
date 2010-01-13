@@ -35,14 +35,6 @@ def _convert_from_mimetype(input, mime_type, format):
         converted_input = pandoc_convert(xhtml_input, 'html', format)
         
     ##############################
-    # anything looks like text -> markdown
-    elif mime_type in ['text/plain',
-                       'text/english',
-                       'text/enriched'
-                      ]:
-        converted_input = to_unicode(input)
-        
-    ##############################
     # anything looks like code: put them into markdown citation
     elif mime_type.startswith('text/x-') or mime_type in ['application/x-latex',
                                                           'application/x-ruby',
@@ -56,6 +48,18 @@ def _convert_from_mimetype(input, mime_type, format):
             converted_input = input
         else:
             converted_input = pandoc_convert(input, 'html', format)
+    ##############################
+    # anything looks like text -> markdown
+    elif mime_type in ['text/plain',
+                       'text/english',
+                       'text/enriched'
+                      ]:
+        converted_input = to_unicode(input)
+    ##############################
+    # default case: assume it's text
+    else:
+        converted_input = to_unicode(input)
+
 
     return converted_input, attachs
     
