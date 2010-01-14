@@ -19,8 +19,6 @@ tb_conf['current_tab'] = 'followup';
 
 <div id="followup_settings" class="tab-meta">   
 
-<form id="notifications" enctype="multipart/form-data" action="." method="post">
-
 <h2 class="title_first">{% blocktrans %}Feeds{% endblocktrans %}</h2>
 
 <h3>{% blocktrans %}Public feed{% endblocktrans %}</h3>
@@ -31,6 +29,9 @@ tb_conf['current_tab'] = 'followup';
 </a>
 </div>
 {% blocktrans %}This is the public feed for the text.{% endblocktrans %}
+
+{% if user.is_authenticated %}
+<form id="notifications" enctype="multipart/form-data" action="." method="post">
 
 {% if can_view_unapproved_comment %}
 <h3>{% blocktrans %}Private feed{% endblocktrans %}</h3>
@@ -75,8 +76,11 @@ tb_conf['current_tab'] = 'followup';
         });
         
     }) ;
---> 
-</script>
+	--> 
+	</script>
+
+</form>
+{% endif %}
 
 </div>
 
