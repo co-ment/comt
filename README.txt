@@ -159,8 +159,8 @@ Compile po files
 cd src/cm
 ../../bin/django compilemessages
 
-Create new file for lang 'lg'
+Create new file for lang 'LG'
 -----------------------------
 cd src/cm
-../../bin/django makemessages -l=lg -e=html,txt
-../../bin/django makemessages -d djangojs -l=lg
+../../bin/django makemessages -l LG -e .html,.txt
+../../bin/django makemessages -d djangojs -l LG 
