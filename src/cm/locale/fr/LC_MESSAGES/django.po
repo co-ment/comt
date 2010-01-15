@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-15 09:43+0100\n"
-"PO-Revision-Date: 2010-01-15 09:56+0100\n"
+"POT-Creation-Date: 2010-01-15 13:16+0100\n"
+"PO-Revision-Date: 2010-01-15 13:17+0100\n"
 "Last-Translator: dev <dev@sopinspace.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1007,8 +1007,8 @@ msgstr "Rôle local"
 
 #: templates/site/text_share.html:101
 #, python-format
-msgid "This role has been overriden on this text by a local role: %( rolename)s"
-msgstr "Ce rôle a été surchargé par un rôle local : %( rolename)s"
+msgid "This role has been overriden on this text by a local role: %(rolename)s"
+msgstr "Ce rôle a été surchargé par un rôle local : %(rolename)s"
 
 #: templates/site/text_share.html:128
 #: templates/site/user_edit.html:6
@@ -1322,7 +1322,7 @@ msgstr "Flux privé réinitialisé."
 
 #: views/site.py:81
 #: views/texts.py:132
-#: views/user.py:524
+#: views/user.py:522
 msgid "You're logged in!"
 msgstr "Vous êtes connecté !"
 
@@ -1520,76 +1520,76 @@ msgstr "Votre compte a été activé. Vous êtes maintenant connecté."
 msgid "activate account"
 msgstr "activation du compte"
 
-#: views/user.py:357
+#: views/user.py:356
 #, python-format
 msgid "User's access %(prof)s has been suspended."
 msgstr "L'accès de l'utilisateur %(prof)s a été desactivé."
 
-#: views/user.py:363
+#: views/user.py:362
 #, python-format
 msgid "User's access %(prof)s has been refused."
 msgstr "L'accès de l'utilisateur %(prof)s a été refusé."
 
-#: views/user.py:376
+#: views/user.py:374
 #, python-format
 msgid "User's access %(prof)s has been restored."
 msgstr "L'accès de l'utilisateur %(prof)s a été restauré."
 
-#: views/user.py:380
+#: views/user.py:378
 #, python-format
 msgid "User's access %(prof)s has been approved."
 msgstr "L'accès de l'utilisateur %(prof)s a été activé."
 
-#: views/user.py:390
+#: views/user.py:388
 #, python-format
 msgid "A new invitation has been sent to user %(prof)s."
 msgstr "Une nouvelle invitation a été envoyée à l'utilisateur %(prof)s."
 
-#: views/user.py:404
+#: views/user.py:402
 msgid "Profile updated"
 msgstr "Profil mis à jour"
 
-#: views/user.py:436
+#: views/user.py:434
 msgid "Anonymous user role modified."
 msgstr "Role de l'utilisateur anonyme modifié."
 
-#: views/user.py:458
+#: views/user.py:456
 msgid "User modified"
 msgstr "Utilisateur modifié"
 
-#: views/user.py:473
+#: views/user.py:471
 msgid "Subject"
 msgstr "Sujet"
 
-#: views/user.py:474
+#: views/user.py:472
 msgid "Subject of the email"
 msgstr "Sujet du message"
 
-#: views/user.py:477
+#: views/user.py:475
 msgid "Body"
 msgstr "Corps"
 
-#: views/user.py:478
+#: views/user.py:476
 msgid "Body of the email"
 msgstr "Corps du message"
 
-#: views/user.py:498
+#: views/user.py:496
 msgid "Email sent."
 msgstr "Email envoyé."
 
-#: views/user.py:518
+#: views/user.py:516
 msgid "This account is suspended, contact the workspace administrator."
 msgstr "Ce compte est désactivé, veuillez contacter le gestionnaire de l'espace de travail."
 
-#: views/user.py:549
+#: views/user.py:547
 msgid "You've been logged out."
 msgstr "Vous êtes déconnecté."
 
-#: views/user.py:565
+#: views/user.py:563
 msgid "You've been registered, you will receive a confirmation mail once a moderator has approved your membership."
 msgstr "Enregistrement réussi, vous recevrez un message de confirmation quand un gestionnaire de l'espace de travail aura activé votre compte."
 
-#: views/user.py:568
+#: views/user.py:566
 msgid "You've been registered, please check your email for the confirm message."
 msgstr "Enregistrement réussi, un message de confirmation vous a été envoyé"
 

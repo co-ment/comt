@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-15 09:43+0100\n"
+"POT-Creation-Date: 2010-01-15 13:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -965,8 +965,7 @@ msgstr ""
 
 #: templates/site/text_share.html:101
 #, python-format
-msgid ""
-"This role has been overriden on this text by a local role: %( rolename)s"
+msgid "This role has been overriden on this text by a local role: %(rolename)s"
 msgstr ""
 
 #: templates/site/text_share.html:128 templates/site/user_edit.html:6
@@ -1273,7 +1272,7 @@ msgstr ""
 msgid "Private notifications feed reseted."
 msgstr ""
 
-#: views/site.py:81 views/texts.py:132 views/user.py:524
+#: views/site.py:81 views/texts.py:132 views/user.py:522
 msgid "You're logged in!"
 msgstr ""
 
@@ -1474,78 +1473,78 @@ msgstr ""
 msgid "activate account"
 msgstr ""
 
-#: views/user.py:357
+#: views/user.py:356
 #, python-format
 msgid "User's access %(prof)s has been suspended."
 msgstr ""
 
-#: views/user.py:363
+#: views/user.py:362
 #, python-format
 msgid "User's access %(prof)s has been refused."
 msgstr ""
 
-#: views/user.py:376
+#: views/user.py:374
 #, python-format
 msgid "User's access %(prof)s has been restored."
 msgstr ""
 
-#: views/user.py:380
+#: views/user.py:378
 #, python-format
 msgid "User's access %(prof)s has been approved."
 msgstr ""
 
-#: views/user.py:390
+#: views/user.py:388
 #, python-format
 msgid "A new invitation has been sent to user %(prof)s."
 msgstr ""
 
-#: views/user.py:404
+#: views/user.py:402
 msgid "Profile updated"
 msgstr ""
 
-#: views/user.py:436
+#: views/user.py:434
 msgid "Anonymous user role modified."
 msgstr ""
 
-#: views/user.py:458
+#: views/user.py:456
 msgid "User modified"
 msgstr ""
 
-#: views/user.py:473
+#: views/user.py:471
 msgid "Subject"
 msgstr ""
 
-#: views/user.py:474
+#: views/user.py:472
 msgid "Subject of the email"
 msgstr ""
 
-#: views/user.py:477
+#: views/user.py:475
 msgid "Body"
 msgstr ""
 
-#: views/user.py:478
+#: views/user.py:476
 msgid "Body of the email"
 msgstr ""
 
-#: views/user.py:498
+#: views/user.py:496
 msgid "Email sent."
 msgstr ""
 
-#: views/user.py:518
+#: views/user.py:516
 msgid "This account is suspended, contact the workspace administrator."
 msgstr ""
 
-#: views/user.py:549
+#: views/user.py:547
 msgid "You've been logged out."
 msgstr ""
 
-#: views/user.py:565
+#: views/user.py:563
 msgid ""
 "You've been registered, you will receive a confirmation mail once a "
 "moderator has approved your membership."
 msgstr ""
 
-#: views/user.py:568
+#: views/user.py:566
 msgid ""
 "You've been registered, please check your email for the confirm message."
 msgstr ""
