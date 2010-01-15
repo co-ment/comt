@@ -819,10 +819,13 @@ def text_wysiwyg_preview(request, format):
     return render_to_response('site/wysiwyg_preview.html', {'content':html_content} , context_instance=RequestContext(request))
         #return HttpResponse(pandoc_convert(content, format, "html", full=False))
 
+USER_PAGINATION = 10
+
 @has_perm_on_text('can_manage_text')
 def text_share(request, key):
     display_suspended_users = get_int(request.GET, 'display', 0)
     tag_selected = request.GET.get('tag_selected', 0)
+    paginate_by = get_int(request.GET, 'paginate', USER_PAGINATION)    
     
     text = get_text_by_keys_or_404(key)
     order_by = get_among(request.GET,'order',('user__username',
@@ -833,7 +836,6 @@ def text_share(request, key):
                                               '-role__name',
                                               ),
                           'user__username')
-    paginate_by = 10
     
     UserRole.objects.create_userroles_text(text)
     
