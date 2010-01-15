@@ -19,7 +19,7 @@ msgstr ""
 
 #: client.py:25
 msgid "A selection is required. Select in the text the part your comment applies to."
-msgstr "Et merket område må angis. Merk den delen av teksten som din merknad skal gjelde"
+msgstr "Et område i teksten må merkes. Merk den delen av teksten som din merknad skal gjelde"
 
 #: client.py:133
 msgid "name is required"
@@ -35,11 +35,11 @@ msgstr "ugyldig epost"
 
 #: client.py:140
 msgid "title is required"
-msgstr "overskrift må angis"
+msgstr "overskriften må angis"
 
 #: client.py:142
 msgid "content is required"
-msgstr "tekst må fylles ut"
+msgstr "teksten må fylles ut"
 
 #: client.py:157
 msgid "comment removed"
@@ -52,7 +52,7 @@ msgstr "merknad lagret"
 
 #: client.py:275
 msgid "comment saved, it is being held for moderation"
-msgstr "merknad lagret, men holdes tilbake for godkjenning"
+msgstr "merknad lagret og holdes tilbake for godkjenning"
 
 #: client.py:336
 msgid "Tags input must be no longer than 250 characters."
@@ -174,38 +174,38 @@ msgstr "Merknad %(link_to_comment)s slettet fra teksten %(link_to_text)s"
 #: models.py:698
 #, python-format
 msgid "User %(username)s added"
-msgstr "Bruker %(username)s lagt til"
+msgstr "Bruker %(username)s opprettet"
 
 #: models.py:699
 #, python-format
 msgid "User %(username)s access to workspace enabled"
-msgstr "Aktivert tilgang til arbeidsområde for brukeren %(username)s"
+msgstr "Aktivert tilgang for brukeren %(username)s"
 
 #: models.py:700
 #, python-format
 msgid "User %(username)s access to workspace refused"
-msgstr "Tilgang til arbeidsområde for brukeren %(username)s nektet"
+msgstr "Tilgang for brukeren %(username)s nektet"
 
 #: models.py:701
 #, python-format
 msgid "User %(username)s access to workspace suspended"
-msgstr "Tilgang til arbeidsområde for brukeren %(username)s stoppet"
+msgstr "Tilgang for brukeren %(username)s stoppet"
 
 #: models.py:702
 #, python-format
 msgid "User %(username)s access to workspace activated"
-msgstr "Tilgang til arbeidsområde for brukeren %(username)s aktivert"
+msgstr "Tilgang for brukeren %(username)s aktivert"
 
 #: models.py:703
 #, python-format
 msgid "User %(username)s has activated his account"
-msgstr "Bruker %(username)s aktiverte kontoen"
+msgstr "Bruker %(username)s har aktivert kontoen"
 
 #: models.py:758
 #: models.py:766
 #, python-format
 msgid "by \"%(username)s\""
-msgstr "av \"%(username)s\""
+msgstr "av %(username)s"
 
 #: models.py:760
 #, python-format
@@ -242,7 +242,7 @@ msgstr "engelsk"
 
 #: settings.py:107
 msgid "Norwegian"
-msgstr "Norsk"
+msgstr "norsk"
 
 #: static_i18n.py:6
 #: static_i18n.py:11
@@ -343,7 +343,7 @@ msgstr "Individuell student"
 
 #: templates/404.html:4
 msgid "Page not found"
-msgstr "Siden ble ikke funnet"
+msgstr "Ukjent side"
 
 #: templates/404.html:6
 msgid "The requested page could not be found."
@@ -407,7 +407,7 @@ msgstr "Handlinger"
 #: templates/site/text_list.html:40
 #: templates/site/layout/header.html:10
 msgid "Write a text"
-msgstr "Skriv en tekst"
+msgstr "Skriv tekst"
 
 #: templates/site/dashboard.html:49
 #: templates/site/text_create_content.html:30
@@ -416,7 +416,7 @@ msgstr "Skriv en tekst"
 #: templates/site/text_list.html:42
 #: templates/site/layout/header.html:11
 msgid "Upload a text"
-msgstr "Last opp en tekst"
+msgstr "Last opp tekst"
 
 #: templates/site/dashboard.html:50
 msgid "Invite user"
@@ -424,11 +424,11 @@ msgstr "Inviter bruker"
 
 #: templates/site/dashboard.html:51
 msgid "Edit your profile"
-msgstr "Endre din profil"
+msgstr "Rediger din profil"
 
 #: templates/site/dashboard.html:52
 msgid "View text list"
-msgstr "Vise tekster"
+msgstr "Se tekstoversikt"
 
 #: templates/site/dashboard.html:53
 msgid "Configure workspace"
@@ -480,7 +480,7 @@ msgstr "merknad"
 #: templates/site/dashboard.html:121
 #, python-format
 msgid "by %(cuser)s on text"
-msgstr "av %(cuser)s på tekst"
+msgstr "av %(cuser)s til tekst"
 
 #: templates/site/dashboard.html:121
 msgid "awaits approval"
@@ -556,11 +556,11 @@ msgstr "Laster..."
 
 #: templates/site/dashboard.html:241
 msgid "Commenting"
-msgstr "Merknader"
+msgstr "Kommentering"
 
 #: templates/site/dashboard.html:258
 msgid "Activities"
-msgstr "Aktiviteter"
+msgstr "Aktivitetslogg"
 
 #: templates/site/dashboard.html:261
 msgid "texts"
@@ -577,15 +577,15 @@ msgstr "brukere"
 
 #: templates/site/dashboard.html:304
 msgid "No activities"
-msgstr "Intet aktivitet"
+msgstr "Ingen aktiviteter"
 
 #: templates/site/dashboard_bloc_recent_comments.html:9
 msgid "Recent comments"
-msgstr "Nyeste merknader"
+msgstr "Nye merknader"
 
 #: templates/site/dashboard_bloc_recent_comments.html:20
 msgid "on text"
-msgstr "på tekst"
+msgstr "til teksten"
 
 #: templates/site/dashboard_bloc_recent_comments.html:23
 #, python-format
@@ -640,12 +640,12 @@ msgstr "Privat strøm for arbeidsområde"
 
 #: templates/site/followup.html:43
 msgid "This is the private feed for the workspace. Don't share this address with others unless you want them to see all activities on the workspace."
-msgstr "Dette er den private strømmen for arbeidsområdet. Ikke del denne adressen med andre, men minde du ønsker at de skal kunne se alt som skjer på arbeidsområdet."
+msgstr "Dette er den private strømmen for arbeidsområdet. Ikke del denne adressen med andre, men mindre du ønsker at de skal kunne se alt som skjer på arbeidsområdet."
 
 #: templates/site/followup.html:45
 #: templates/site/text_followup.html:47
 msgid "Reset private feed url"
-msgstr "Nullstill adressen for privat strøm"
+msgstr "Nullstill adresse for den private strømmen"
 
 #: templates/site/followup.html:49
 #: templates/site/text_followup.html:51
@@ -663,11 +663,11 @@ msgstr "Epostvarsler"
 
 #: templates/site/followup.html:58
 msgid "Subscribe to workspace notifications"
-msgstr "Påmelding til varsler for arbeidsområdet"
+msgstr "Abonner på varsler for arbeidsområdet"
 
 #: templates/site/followup.html:62
 msgid "Subscribe to all replies notifications in discussions where you have participated"
-msgstr "Abonner på å få varsler for svar i diskusjoner der du har deltatt"
+msgstr "Abonner på varsler for svar i diskusjoner hvor du har deltatt"
 
 #: templates/site/login.html:8
 #: templates/site/login_form.html:19
@@ -709,7 +709,7 @@ msgstr "%(title)s"
 
 #: templates/site/notifications_desactivate.html:31
 msgid "Desactivate"
-msgstr "Stopp varsler"
+msgstr "Stopp"
 
 #: templates/site/profile.html:6
 #: templates/site/profile.html.py:14
@@ -743,7 +743,7 @@ msgstr "Innstillinger"
 
 #: templates/site/settings.html:32
 msgid "Are you sure you want to change the role model? All roles (except managers) will be resetted!"
-msgstr "Ønsker du å endre rollemodellen? Alle roller (untatt administratorer) vil bli nullstilt!"
+msgstr "Ønsker du å endre rollemodellen? Alle roller (untatt administrator) vil bli nullstilt!"
 
 #: templates/site/text_create_content.html:26
 #: templates/site/text_create_upload.html:24
@@ -761,7 +761,7 @@ msgstr "Integrer tekst"
 
 #: templates/site/text_embed.html:25
 msgid "Copy this code into your site to display text with comments. Users will also be able to add comments from your site depending an anonymous users' roles."
-msgstr "Kopier denne koden til din side for å vise tekst med merknader. Brukere vil også kunne legge til merknader fra din side, avhengig av rettighetene til anonyme brukere."
+msgstr "Kopier denne koden til din side for å vise teksten med merknader. Avhengig av rettighetene til anonyme brukere, vil brukere muligens også kunne legge til egne merknader fra din side."
 
 #: templates/site/text_embed.html:33
 msgid "Warning:"
@@ -778,7 +778,7 @@ msgstr "Oppfølgning av tekst"
 #: templates/site/text_followup.html:27
 #, python-format
 msgid "Public feed for text %(title)s"
-msgstr "Offentlig strøm for tekst %(title)s"
+msgstr "Offentlig strøm for teksten %(title)s"
 
 #: templates/site/text_followup.html:31
 msgid "This is the public feed for the text."
@@ -786,11 +786,11 @@ msgstr "Dette er den offentlige strømmen for teksten."
 
 #: templates/site/text_followup.html:41
 msgid "Private feed for text "
-msgstr "Privat strøm for tekst "
+msgstr "Privat strøm for teksten "
 
 #: templates/site/text_followup.html:45
 msgid "This is the private feed for the text. Don't share this address with others unless you want them to see all activities on this text."
-msgstr "Dette er den private strømmen for arbeidsområdet. Ikke del denne adressen med andre, men minde du ønsker at de skal kunne se alt som skjer på arbeidsområdet."
+msgstr "Dette er den private strømmen for teksten. Ikke del denne adressen med andre, men mindre du ønsker at de skal kunne se alt som skjer med teksten."
 
 #: templates/site/text_followup.html:53
 msgid "The private feed for this text is not yet activated."
@@ -831,7 +831,7 @@ msgstr "forskjeller mellom versjonene #%(v1number)s og #%(v2number)s"
 #: templates/site/text_history.html:66
 #, python-format
 msgid "Revert to version #%(v1_nid)s"
-msgstr "Gå tilbake til versjonen #%(v1_nid)s"
+msgstr "Still tilbake til versjonen #%(v1_nid)s"
 
 #: templates/site/text_history.html:70
 #, python-format
@@ -877,7 +877,7 @@ msgstr "Alle"
 #: templates/site/text_list.html:79
 #: templates/site/user_list.html:72
 msgid "Bulk Actions"
-msgstr "Massehandlinger"
+msgstr "Globale handlinger"
 
 #: templates/site/text_list.html:80
 #: templates/site/text_list.html.py:161
@@ -887,7 +887,7 @@ msgstr "Slett"
 #: templates/site/text_list.html:83
 #: templates/site/user_list.html:81
 msgid "Apply"
-msgstr "Bruk"
+msgstr "Utfør"
 
 #: templates/site/text_list.html:104
 #: templates/site/user_list.html:102
@@ -925,7 +925,7 @@ msgstr "Filtrer etter etikett: %(tag_name)s"
 
 #: templates/site/text_list.html:159
 msgid "View"
-msgstr "Visning"
+msgstr "Se"
 
 #: templates/site/text_list.html:160
 #: templates/site/macros/text_tabs.html:12
@@ -977,7 +977,7 @@ msgstr "Opprett ny bruker"
 #: templates/site/user_mass_add.html:24
 #: templates/site/user_mass_add_text.html:27
 msgid "Add users in bulk"
-msgstr "Opprett flere nye brukere"
+msgstr "Opprett flere brukere"
 
 #: templates/site/text_share.html:38
 #: templates/site/user_list.html:43
@@ -996,7 +996,7 @@ msgstr "Bruker"
 
 #: templates/site/text_share.html:87
 msgid "The 'Workspace role' is the global role that applies to every text, you can give a user a particular role on this text using the 'local role' column on the right"
-msgstr "Rollen 'Rolle for arbeidsområde' er en global rolle, som vil anvendes på alle tekster, du kan gi en bruker en særskilt rolle for denne teksten ved å bruke kolonnen 'lokal rolle' til høyre."
+msgstr "Rollen 'Rolle for arbeidsområde' er en global rolle, som vil anvendes på alle tekster. Du kan gi en bruker en særskilt rolle for denne teksten ved å bruke kolonnen 'lokal rolle' til høyre."
 
 #: templates/site/text_share.html:87
 msgid "Workspace role"
@@ -1009,7 +1009,7 @@ msgstr "Lokal rolle"
 #: templates/site/text_share.html:101
 #, python-format
 msgid "This role has been overriden on this text by a local role: %(rolename)s"
-msgstr "Denne rollen viker for en lokal rolle for denne teksten: %(rolename)s"
+msgstr "Denne rollen viker for en lokal rolle for teksten: %(rolename)s"
 
 #: templates/site/text_share.html:128
 #: templates/site/user_edit.html:6
@@ -1060,12 +1060,12 @@ msgid ""
 "The user will receive an email invitation to join the workspace.\n"
 "You can customize the email sent by using the 'Note' field bellow."
 msgstr ""
-"Brukeren vil motta en epostinvitasjon til å slutte seg til arbeidsområdet.\n"
+"Brukeren vil motta en invitasjon til å slutte seg til arbeidsområdet.\n"
 "Du kan tilpasse eposten som skal sendes ved å bruke feltet 'Kommentar' nedenfor."
 
 #: templates/site/user_add_text.html:29
 msgid "The user will receive an email invitation to join the workspace."
-msgstr "Brukeren vil motta en epostinvitasjon til å slutte seg til arbeidsområdet."
+msgstr "Brukeren vil motta en invitasjon til å slutte seg til arbeidsområdet."
 
 #: templates/site/user_add_text.html:30
 #: templates/site/user_mass_add.html:27
@@ -1119,7 +1119,7 @@ msgstr "Rolle"
 #: templates/site/user_mass_add.html:26
 #: templates/site/user_mass_add_text.html:29
 msgid "The users will receive an email invitation to join the workspace."
-msgstr "Brukere vil motta epostinvitasjon til å slutte seg til arbeidsområdet."
+msgstr "Brukere vil motta invitasjon til å slutte seg til arbeidsområdet."
 
 #: templates/site/layout/base_text.html:16
 #: templates/site/layout/base_workspace.html:14
@@ -1182,7 +1182,7 @@ msgstr "av %(name)s %(date)s"
 
 #: templates/site/macros/text_editor.html:38
 msgid "You have attempted to leave this page. Unsaved changes will be lost. Are you sure you want to exit this page?"
-msgstr "Du har forsøkt å forlate denne siden. Endringer som ikke er lagret vil bli tap. Ønsker du å forlate denne siden?"
+msgstr "Du har forsøkt å forlate denne siden. Endringer som ikke er lagret vil bli tapt. Ønsker du å forlate denne siden?"
 
 #: templates/site/macros/text_tabs.html:15
 msgid "People"
@@ -1208,7 +1208,7 @@ msgstr "Endre bruker %(userprint)s"
 
 #: templates/site/macros/user_actions.html:29
 msgid "(Re-)send invitation"
-msgstr "Send invitasjon"
+msgstr "Send invitasjon (evt. på nytt)"
 
 #: templates/site/macros/user_actions.html:38
 msgid "Are you sure you want to suspend this user's access to the workspace?"
@@ -1236,11 +1236,11 @@ msgstr "%Y-%m-%d %H:%M"
 
 #: views/create.py:26
 msgid "Upload file (optional)"
-msgstr "Last opp fil (valgfrtit)"
+msgstr "Last opp fil"
 
 #: views/create.py:27
 msgid "Upload a file from your computer instead of using the direct input above"
-msgstr "Last opp en fil fra din datamaskin fremfor å skrive inn teksten ovenfor"
+msgstr "Last opp en fil fra din datamaskin"
 
 #: views/create.py:38
 msgid "You should specify a file to upload."
@@ -1254,7 +1254,7 @@ msgstr "Overskriften for din tekst"
 #: views/create.py:108
 #, python-format
 msgid "Text \"%(text_title)s\" has been created"
-msgstr "Teksten \"%(text_title)s\" er blitt opprettet"
+msgstr "Teksten %(text_title)s har blitt opprettet"
 
 #: views/feeds.py:26
 #, python-format
@@ -1264,7 +1264,7 @@ msgstr "Offentlig strøm for %(workspace_name)s"
 #: views/feeds.py:27
 #, python-format
 msgid "Workspace %(workspace_name)s public activity feed"
-msgstr "Offentlig strøm for aktivitet på arbeidsområde %(workspace_name)s"
+msgstr "Offentlig strøm for aktiviteter på arbeidsområdet %(workspace_name)s"
 
 #: views/feeds.py:37
 #, python-format
@@ -1274,27 +1274,27 @@ msgstr "Privat strøm for %(workspace_name)s"
 #: views/feeds.py:38
 #, python-format
 msgid "Workspace %(workspace_name)s private feed"
-msgstr "Privat strøm for aktivitet på arbeidsområde %(workspace_name)s"
+msgstr "Privat strøm for aktiviteter på arbeidsområdet %(workspace_name)s"
 
 #: views/feeds.py:73
 #, python-format
 msgid "Text %(text_title)s's public feed"
-msgstr "Offentlig strøm for tekst %(text_title)s"
+msgstr "Offentlig strøm for teksten %(text_title)s"
 
 #: views/feeds.py:74
 #, python-format
 msgid "Public activity feed for text %(text_title)s"
-msgstr "Offentlig strøm for aktivitet på teksten %(text_title)s"
+msgstr "Offentlig strøm for aktiviteter på teksten %(text_title)s"
 
 #: views/feeds.py:85
 #, python-format
 msgid "Text %(text_title)s's private feed"
-msgstr "Privat strøm for tekst %(text_title)s"
+msgstr "Privat strøm for teksten %(text_title)s"
 
 #: views/feeds.py:86
 #, python-format
 msgid "Private activity feed for text %(text_title)s"
-msgstr "Privat strøm for aktivitet på teksten %(text_title)s"
+msgstr "Privat strøm for aktiviteter på teksten %(text_title)s"
 
 #: views/followup.py:31
 #: views/followup.py:80
@@ -1345,7 +1345,7 @@ msgstr "Tekst"
 
 #: views/site.py:107
 msgid "Send me a copy of the email"
-msgstr "Send meg en kopi av denne eposten"
+msgstr "Send meg en kopi av eposten"
 
 #: views/site.py:133
 msgid "Copy of message:"
@@ -1385,7 +1385,7 @@ msgstr "Rollemodell"
 
 #: views/site.py:170
 msgid "Change the roles available in the workspace"
-msgstr "Endre roller i arbeidsområde"
+msgstr "Endre roller i arbeidsområdet"
 
 #: views/site.py:195
 msgid "Settings saved"
@@ -1399,7 +1399,7 @@ msgstr "%(nb_texts)i tekst(er) slettet"
 #: views/texts.py:211
 #, python-format
 msgid "Text %(text_title)s deleted"
-msgstr "Tekst %(text_title)s slettet"
+msgstr "Tekstet %(text_title)s slettet"
 
 #: views/texts.py:617
 msgid "Note (optional)"
@@ -1407,7 +1407,7 @@ msgstr "Kommentar (valgfritt)"
 
 #: views/texts.py:620
 msgid "Add a note to explain the modifications made to the text"
-msgstr "Legg til en kommentar for å beskrive foretatte endringer"
+msgstr "Legg til en kommentar for å beskrive foretatte endringer i teksten"
 
 #: views/texts.py:630
 msgid "New version (optional)"
@@ -1423,7 +1423,7 @@ msgstr "Behold merknader (valgfritt)"
 
 #: views/texts.py:639
 msgid "Keep comments (if not affected by the edit)"
-msgstr "Behold merknadene (dersom de ikke er påvirket av endringene)"
+msgstr "Behold merknadene (dersom de ikke er påvirket av endringene i teksten)"
 
 #: views/texts.py:700
 msgid "Name (optional)"
@@ -1436,7 +1436,7 @@ msgstr "Epost (valgfritt)"
 #: views/texts.py:751
 #, python-format
 msgid "A new version (copied from version %(version_id)s) has been created"
-msgstr "Ny versjon (kopiert fra versjon %(version_id)s) er blitt opprettet"
+msgstr "Ny versjon (kopiert fra versjon %(version_id)s) har blitt opprettet"
 
 #: views/texts.py:857
 #: views/user.py:79
@@ -1481,7 +1481,7 @@ msgstr "Rolle for arbeidsområde"
 
 #: views/user.py:182
 msgid "This role will apply to every text in the workspace. To share only a (few) texts with this user, you can leave this blank and delegate roles on texts once the user is created."
-msgstr "Denne rollen vil anvendes på alle tekster i arbeidsområdet. For å dele bare visse tekster med denne brukeren, kan du la dette feltet stå tomt og gi gi brukeren tekstroller, når brukeren er opprettet."
+msgstr "Denne rollen vil anvendes på alle tekster i arbeidsområdet. For å dele bare visse tekster med denne brukeren, kan du la dette feltet stå tomt og tilordne brukeren tekstroller, når brukeren er opprettet."
 
 #: views/user.py:198
 msgid "Text level role"
@@ -1493,7 +1493,7 @@ msgstr "Denne roller vil anvendes på denne teksten."
 
 #: views/user.py:219
 msgid "Optional text to add to invitation email"
-msgstr "Valgfri melding som skal sendes med invitasjonen"
+msgstr "Valgfri melding som skal sendes sammen med invitasjonen"
 
 #: views/user.py:254
 #, python-format
@@ -1553,7 +1553,7 @@ msgstr "Profil oppdatert"
 
 #: views/user.py:434
 msgid "Anonymous user role modified."
-msgstr "Rollen Anonym bruker endret."
+msgstr "Rollen for anonyme brukere har blitt endret."
 
 #: views/user.py:456
 msgid "User modified"
@@ -1586,13 +1586,13 @@ msgstr "Denne kontoen er sperret, ta kontakt med administrator for arbeidsområd
 
 #: views/user.py:547
 msgid "You've been logged out."
-msgstr "Du er blitt logget ut."
+msgstr "Du er logget ut."
 
 #: views/user.py:563
 msgid "You've been registered, you will receive a confirmation mail once a moderator has approved your membership."
-msgstr "Du er blitt registert. Du vil motta en epost med bekreftelse når en administrator godkjenner din medlemskap."
+msgstr "Du er blitt registert. Du vil motta en epost med bekreftelse når en administrator godkjenner ditt medlemskap."
 
 #: views/user.py:566
 msgid "You've been registered, please check your email for the confirm message."
-msgstr "Du er blitt registert. Se din epost for en melding med bekreftelse."
+msgstr "Du er blitt registert. Se din epost for en melding med bekreftelsen."
 

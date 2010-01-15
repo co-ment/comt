@@ -52,7 +52,7 @@ msgstr "Endre merknadens rekkevidde:"
 
 #: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:13
 msgid "Comment will apply to this selection:"
-msgstr "Merknaden vil gjelde dette tekstområdet:"
+msgstr "Merknaden vil gjelde følgende tekstområde:"
 
 #: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:14
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:395
@@ -105,7 +105,7 @@ msgstr "endre tilstand til ikke-godkjent"
 
 #: media/js/client/c_icomment.js:13
 msgid "cancel changing the state of this comment"
-msgstr "avbryt endring av tilstand for merknaden"
+msgstr "avbryt endring av tilstanden for merknaden"
 
 #: media/js/client/c_icomment.js:14
 msgid "pending"
@@ -183,7 +183,7 @@ msgstr "ingen filtrerte merknader igjen"
 msgid ""
 "Do you want to subscribe to all replies notifications in discussions you "
 "participated in?"
-msgstr "Ønsker du å abonnere på å få varsler for alle svar i diskusjoner der du har deltatt?"
+msgstr "Ønsker du å abonnere på varsler for alle svar i diskusjoner hvor du har deltatt?"
 
 #: media/js/client/c_sync.js:129
 msgid "Follow up"
@@ -207,7 +207,7 @@ msgstr "laster..."
 
 #: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:4
 msgid "print from the browser"
-msgstr "skriv ut fra nettleseren"
+msgstr "skriv ut fra nettleser"
 
 #: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:5
 msgid "download html file (.html)"
@@ -344,11 +344,11 @@ msgstr "filter:"
 
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:208
 msgid "browse by:"
-msgstr "bla gjennom:"
+msgstr "navigasjon etter:"
 
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:210
 msgid "location"
-msgstr "sted"
+msgstr "plassering"
 
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:211
 msgid "modification"
@@ -523,7 +523,7 @@ msgstr "kode"
 
 #: media/js/site/f_text_view_frame.js:185
 msgid "toggle full screen view"
-msgstr "slå på/av visning på fult skjerm"
+msgstr "slå på/av visning på full side"
 
 #: media/js/site/f_text_view_frame.js:186
 msgid "text feed"
