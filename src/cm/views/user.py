@@ -419,8 +419,6 @@ class AnonUserRoleForm(UserRoleForm):
         role_field = self.fields['role']
         role_field.required = False
         role_field.choices = [(u'', u'---------')] + [(r.id, str(r)) for r in Role.objects.filter(anon=True)] # limit anon choices
-        for c in role_field.choices:
-            print c
         
         self.fields['role'] = role_field
 
