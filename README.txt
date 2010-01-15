@@ -145,6 +145,20 @@ Credits
 We'd like to thank:
 - Kirill Miazine (http://km.krot.org/) for the norwegian translation
 
+How to contribute
+=================
+We use mercurial as our source code management system.
+
+1. Create a mercurial profile (nickname/email) in ~/.hgrc (cf. http://mercurial.selenic.com/quickstart for more info).
+   This is important because your name will appear in your changeset once it gets accepted into the mainline
+2. Clone the repository `hg clone http://hg.co-ment.org/ comt`
+   OR update your copy of the source code: `hg update`
+3. Hack, hack
+4. Commit locally: `hg commit -m "MY COMMIT MESSAGE"`
+5. Export your changeset to a file: `hg export tip > my_patch.txt`
+6. Create a ticket describing your change and attach your patch to it: http://www.co-ment.org/newticket
+7. We will review the patch and get in touch will you if needed
+
 Translation
 ============
 
