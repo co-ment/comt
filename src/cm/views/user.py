@@ -350,7 +350,6 @@ def user_activate(request, key):
 def user_suspend(request, key):
     if request.method == 'POST':
         profile = get_object_or_404(UserProfile, key=key)
-        profile = UserProfile.objects.get(key=key)
         profile.is_suspended = True
         profile.save()
         if profile.user.is_active:            
@@ -369,7 +368,6 @@ def user_suspend(request, key):
 def user_enable(request, key):
     if request.method == 'POST':
         profile = get_object_or_404(UserProfile, key=key)
-        profile = UserProfile.objects.get(key=key)
         profile.is_suspended = False
         profile.save()
         if profile.user.is_active:
@@ -444,7 +442,7 @@ def user_anon_edit(request):
 
 @has_global_perm('can_manage_workspace')    
 def user_edit(request, key):
-    profile = UserProfile.objects.get(key=key)
+    profile = get_object_or_404(UserProfile, key=key)
     user = profile.user
     userrole = profile.global_userrole()
     if request.method == 'POST':
@@ -481,7 +479,7 @@ class UserContactForm(forms.Form):
 
 @login_required
 def user_contact(request, key):
-    recipient_profile = UserProfile.objects.get(key=key)
+    recipient_profile = get_object_or_404(UserProfile, key=key)
 
     if request.method == 'POST':
         contact_form = UserContactForm(request.POST)
