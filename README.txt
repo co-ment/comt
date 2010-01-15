@@ -143,7 +143,7 @@ The Comt web site http://www.co-ment.org is the place to ask questions, report b
 Credits
 ========
 We'd like to thank:
-- Kirill Miazine (http://km.krot.org/) for the norwegian translation
+- Kirill Miazine (http://km.krot.org/) for the Norwegian translation
 
 How to contribute
 =================
@@ -164,11 +164,11 @@ We use mercurial as our source code management system.
 
 Contribute without using mercurial
 ----------------------------------
-If you know want to use mercurial, you can also create a ticket (http://www.co-ment.org/newticket) with a few modified files to the bugtracker.
+If you don't want to use mercurial, you can also create a ticket (http://www.co-ment.org/newticket) with a few modified files to the bugtracker.
 Make sure you leave us a nickname and an email for inclusion in the changelog.
  
 Translation
-============
+===========
 
 Update all po files
 ---------------------
