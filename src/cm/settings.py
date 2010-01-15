@@ -104,7 +104,7 @@ _ = lambda s: s
 LANGUAGES = (
     ('fr', _(u'French')),
     ('en', _(u'English')),
-#    ('no', _('Norwegian')),
+    ('no', _('Norwegian')),
 )
 
 AUTH_PROFILE_MODULE = 'cm.UserProfile'

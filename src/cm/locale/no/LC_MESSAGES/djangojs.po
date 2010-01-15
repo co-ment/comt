@@ -55,7 +55,7 @@ msgstr ""
 #: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:14
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:395
 msgid "Save"
-msgstr ""
+msgstr "Lagre"
 
 #: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:14
 #: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:100
@@ -75,7 +75,7 @@ msgstr ""
 #: media/js/client/c_dlg_intercept.js:52 media/js/client/c_sync.js:223
 #: media/js/site/text_edit.js:84
 msgid "Warning"
-msgstr ""
+msgstr "Advarsel"
 
 #: media/js/client/c_dlg_intercept.js:50
 msgid "Started reply will be canceled, continue?"
@@ -107,7 +107,7 @@ msgstr ""
 
 #: media/js/client/c_icomment.js:14
 msgid "pending"
-msgstr ""
+msgstr "pågående"
 
 #: media/js/client/c_icomment.js:15
 msgid "approved"
@@ -119,7 +119,7 @@ msgstr ""
 
 #: media/js/client/c_icomment.js:17
 msgid "cancel"
-msgstr ""
+msgstr "Avbryt"
 
 #: media/js/client/c_icomment.js:18
 msgid "show replies"
@@ -135,19 +135,19 @@ msgstr ""
 
 #: media/js/client/c_icomment.js:21
 msgid "edit comment"
-msgstr ""
+msgstr "endre merknad"
 
 #: media/js/client/c_icomment.js:22
 msgid "delete comment"
-msgstr ""
+msgstr "slett merknad"
 
 #: media/js/client/c_icomment.js:23
 msgid "edit"
-msgstr ""
+msgstr "rediger"
 
 #: media/js/client/c_icomment.js:24
 msgid "delete"
-msgstr ""
+msgstr "slett"
 
 #: media/js/client/c_icomment.js:26
 msgid "show scope"
@@ -269,11 +269,11 @@ msgstr ""
 
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:76
 msgid "Text"
-msgstr ""
+msgstr "Tekst"
 
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:80
 msgid "Search"
-msgstr ""
+msgstr "Søk"
 
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:85
 #: media/js/site/f_text_view_frame.js:395
@@ -290,7 +290,7 @@ msgstr ""
 
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:102
 msgid "States"
-msgstr ""
+msgstr "Tilstand"
 
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:111
 msgid "Dates"
@@ -298,7 +298,7 @@ msgstr ""
 
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:119
 msgid "Tags"
-msgstr ""
+msgstr "Etiketter"
 
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:177
 msgid "view previous comment"
@@ -389,8 +389,7 @@ msgstr[1] ""
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:564
 msgid "comment"
 msgid_plural "comments"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "merknad"
 
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:567
 msgid "&nbsp;reply"
@@ -411,12 +410,12 @@ msgstr[1] ""
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:721
 #: media/js/site/text_edit.js:78
 msgid "No"
-msgstr ""
+msgstr "Nei"
 
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:722
 #: media/js/site/text_edit.js:79
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: media/js/markitup/sets.js:18 media/js/markitup/sets.js.py:64
 msgid "First Level Heading"
@@ -568,3 +567,4 @@ msgstr ""
 msgid ""
 "Since you chose not to create a new version all comments will be deleted"
 msgstr ""
+

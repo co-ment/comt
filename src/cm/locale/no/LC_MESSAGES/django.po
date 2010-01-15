@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-15 09:43+0100\n"
+"POT-Creation-Date: 2010-01-15 09:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,7 +55,7 @@ msgstr ""
 
 #: client.py:336
 msgid "Tags input must be no longer than 250 characters."
-msgstr ""
+msgstr "Etiketter kan ikke være lengre enn 250 tegn."
 
 #: diff.py:53
 msgid "unknown"
@@ -63,7 +63,7 @@ msgstr ""
 
 #: models.py:175 views/create.py:30 views/create.py:45 views/texts.py:613
 msgid "Title"
-msgstr ""
+msgstr "Overskrift"
 
 #: models.py:176
 msgid "Format"
@@ -71,11 +71,11 @@ msgstr ""
 
 #: models.py:177 views/texts.py:702
 msgid "Content"
-msgstr ""
+msgstr "Innhold"
 
 #: models.py:178 models.py:579
 msgid "Tags"
-msgstr ""
+msgstr "Etiketter"
 
 #: models.py:180 views/user.py:218
 msgid "Note"
@@ -96,7 +96,7 @@ msgstr ""
 
 #: models.py:482
 msgid "name"
-msgstr ""
+msgstr "navn"
 
 #: models.py:483
 msgid "description"
@@ -112,7 +112,7 @@ msgstr ""
 
 #: models.py:574
 msgid "Preferred language"
-msgstr ""
+msgstr "Foretrukket språk"
 
 #: models.py:577
 msgid "Suspended access"
@@ -128,7 +128,7 @@ msgstr ""
 
 #: models.py:609
 msgid "pending"
-msgstr ""
+msgstr "pågående"
 
 #: models.py:624
 msgid "Invitation"
@@ -226,11 +226,11 @@ msgstr ""
 
 #: settings.py:105
 msgid "French"
-msgstr ""
+msgstr "fransk"
 
 #: settings.py:106
 msgid "English"
-msgstr ""
+msgstr "engelsk"
 
 #: settings.py:107
 msgid "Norwegian"
@@ -238,7 +238,7 @@ msgstr ""
 
 #: static_i18n.py:6 static_i18n.py:11
 msgid "Observer"
-msgstr ""
+msgstr "Observatør"
 
 #: static_i18n.py:7
 msgid "Manager"
@@ -246,11 +246,11 @@ msgstr ""
 
 #: static_i18n.py:8
 msgid "Editor"
-msgstr ""
+msgstr "Redaktør"
 
 #: static_i18n.py:9
 msgid "Moderator"
-msgstr ""
+msgstr "Moderator"
 
 #: static_i18n.py:10
 msgid "Commentator"
@@ -334,7 +334,7 @@ msgstr ""
 
 #: templates/404.html:4
 msgid "Page not found"
-msgstr ""
+msgstr "Siden ble ikke funnet"
 
 #: templates/404.html:6
 msgid "The requested page could not be found."
@@ -359,13 +359,12 @@ msgstr ""
 
 #: templates/site/contact.html:6 templates/site/layout/footer.html:9
 #: templates/site/macros/user_actions.html:20
-#, fuzzy
 msgid "Contact"
-msgstr "Ajouter un utilisateur"
+msgstr "Kontakt"
 
 #: templates/site/contact.html:24
 msgid "Send"
-msgstr ""
+msgstr "Send"
 
 #: templates/site/contact.html:26
 #: templates/site/notifications_desactivate.html:32
@@ -383,7 +382,7 @@ msgstr ""
 
 #: templates/site/dashboard.html:43
 msgid "Actions"
-msgstr ""
+msgstr "Handlinger"
 
 #: templates/site/dashboard.html:48 templates/site/text_create_content.html:4
 #: templates/site/text_create_content.html:28
@@ -397,12 +396,11 @@ msgstr ""
 #: templates/site/text_create_upload.html:28 templates/site/text_list.html:42
 #: templates/site/layout/header.html:11
 msgid "Upload a text"
-msgstr ""
+msgstr "Last opp en tekst"
 
 #: templates/site/dashboard.html:50
-#, fuzzy
 msgid "Invite user"
-msgstr "Ajouter un utilisateur"
+msgstr ""
 
 #: templates/site/dashboard.html:51
 msgid "Edit your profile"
@@ -456,7 +454,7 @@ msgstr ""
 
 #: templates/site/dashboard.html:120 templates/site/dashboard.html.py:126
 msgid "comment"
-msgstr ""
+msgstr "merknad"
 
 #: templates/site/dashboard.html:121
 #, python-format
@@ -527,7 +525,7 @@ msgstr ""
 #: templates/site/text_list.html:206 templates/site/user_list.html:158
 #: templates/site/user_list.html.py:188
 msgid "Loading..."
-msgstr ""
+msgstr "Laster..."
 
 #: templates/site/dashboard.html:241
 msgid "Commenting"
@@ -546,9 +544,8 @@ msgid "comments"
 msgstr ""
 
 #: templates/site/dashboard.html:264
-#, fuzzy
 msgid "users"
-msgstr "Ajouter un utilisateur"
+msgstr ""
 
 #: templates/site/dashboard.html:304
 msgid "No activities"
@@ -578,11 +575,11 @@ msgstr ""
 
 #: templates/site/followup.html:20 templates/site/text_followup.html:22
 msgid "Feeds"
-msgstr ""
+msgstr "Strømmer"
 
 #: templates/site/followup.html:22 templates/site/text_followup.html:24
 msgid "Public feed"
-msgstr ""
+msgstr "Offentlig strøm"
 
 #: templates/site/followup.html:22 templates/site/followup.html.py:35
 #: templates/site/help.html:6 templates/site/text_embed.html:26
@@ -601,7 +598,7 @@ msgstr ""
 
 #: templates/site/followup.html:35 templates/site/text_followup.html:37
 msgid "Private feed"
-msgstr ""
+msgstr "Privat strøm"
 
 #: templates/site/followup.html:39
 msgid "Private feed for workspace"
@@ -642,7 +639,7 @@ msgstr ""
 #: templates/site/login.html:8 templates/site/login_form.html:19
 #: templates/site/layout/header.html:17
 msgid "Login"
-msgstr ""
+msgstr "Logg inn"
 
 #: templates/site/login_form.html:7
 #, python-format
@@ -652,12 +649,12 @@ msgstr ""
 #: templates/site/login_form.html:20 templates/site/register.html:8
 #: templates/site/layout/header.html:18
 msgid "Register"
-msgstr ""
+msgstr "Registrer"
 
 #: templates/site/non_authenticated_index.html:10
 #: templates/site/layout/header.html:8
 msgid "Home"
-msgstr ""
+msgstr "Startside"
 
 #: templates/site/non_authenticated_index.html:20
 #, python-format
@@ -680,9 +677,9 @@ msgid "Desactivate"
 msgstr ""
 
 #: templates/site/profile.html:6 templates/site/profile.html.py:14
-#, fuzzy, python-format
+#, python-format
 msgid "Your profile (%(username)s)"
-msgstr "Ajouter un utilisateur"
+msgstr ""
 
 #: templates/site/profile.html:26 templates/site/text_create_content.html:45
 #: templates/site/text_create_upload.html:40 templates/site/text_edit.html:34
@@ -690,7 +687,7 @@ msgstr "Ajouter un utilisateur"
 #: templates/site/user_activate.html:27 templates/site/user_list.html:210
 #: templates/site/layout/base_workspace_form.html:32
 msgid "Save"
-msgstr ""
+msgstr "Lagre"
 
 #: templates/site/register.html:19
 #, python-format
@@ -711,9 +708,8 @@ msgstr ""
 
 #: templates/site/text_create_content.html:26
 #: templates/site/text_create_upload.html:24 templates/site/text_list.html:37
-#, fuzzy
 msgid "Text list"
-msgstr "Ajouter un utilisateur"
+msgstr ""
 
 #: templates/site/text_embed.html:7
 msgid "Text notifications"
@@ -827,9 +823,8 @@ msgstr ""
 #: templates/site/text_list.html:47 templates/site/text_share.html:35
 #: templates/site/user_list.html:7 templates/site/user_list.html.py:32
 #: templates/site/user_list.html:40 templates/site/user_list.html.py:116
-#, fuzzy
 msgid "People' list"
-msgstr "Ajouter un utilisateur"
+msgstr ""
 
 #: templates/site/text_list.html:50 templates/site/text_share.html:40
 #: templates/site/user_list.html:45
@@ -859,7 +854,7 @@ msgstr ""
 
 #: templates/site/text_list.html:136 templates/site/macros/text_tabs.html:10
 msgid "Text"
-msgstr ""
+msgstr "Tekst"
 
 #: templates/site/text_list.html:137
 msgid "Author"
@@ -876,7 +871,7 @@ msgstr ""
 #: templates/site/text_list.html:156
 #: templates/site/macros/user_actions.html:13
 msgid "tags:"
-msgstr ""
+msgstr "etiketter:"
 
 #: templates/site/text_list.html:156
 #: templates/site/macros/user_actions.html:13
@@ -886,35 +881,31 @@ msgstr ""
 
 #: templates/site/text_list.html:159
 msgid "View"
-msgstr ""
+msgstr "Visning"
 
 #: templates/site/text_list.html:160 templates/site/macros/text_tabs.html:12
 #: templates/site/macros/user_actions.html:19
-#, fuzzy
 msgid "Edit"
-msgstr "Ajouter un utilisateur"
+msgstr "Rediger"
 
 #: templates/site/text_list.html:167
 msgid "Are you sure you want to delete this text?"
 msgstr ""
 
 #: templates/site/text_list.html:180
-#, fuzzy
 msgid "Users"
-msgstr "Ajouter un utilisateur"
+msgstr ""
 
 #: templates/site/text_list.html:198
-#, fuzzy
 msgid "Edit user"
-msgstr "Ajouter un utilisateur"
+msgstr ""
 
 #: templates/site/text_share.html:27 templates/site/user_add.html:20
 #: templates/site/user_add_text.html:23 templates/site/user_contact.html:19
 #: templates/site/user_edit.html:20 templates/site/user_mass_add.html:20
 #: templates/site/user_mass_add_text.html:23
-#, fuzzy
 msgid "Users' list"
-msgstr "Ajouter un utilisateur"
+msgstr ""
 
 #: templates/site/text_share.html:29 templates/site/user_add.html:6
 #: templates/site/user_add.html.py:22 templates/site/user_add_text.html:6
@@ -923,17 +914,15 @@ msgstr "Ajouter un utilisateur"
 #: templates/site/user_mass_add.html:22
 #: templates/site/user_mass_add_text.html:6
 #: templates/site/user_mass_add_text.html:25
-#, fuzzy
 msgid "Add a new user"
-msgstr "Ajouter un utilisateur"
+msgstr ""
 
 #: templates/site/text_share.html:31 templates/site/user_add.html:24
 #: templates/site/user_add_text.html:27 templates/site/user_list.html:36
 #: templates/site/user_mass_add.html:6 templates/site/user_mass_add.html:24
 #: templates/site/user_mass_add_text.html:27
-#, fuzzy
 msgid "Add users in bulk"
-msgstr "Ajouter un utilisateur"
+msgstr ""
 
 #: templates/site/text_share.html:38 templates/site/user_list.html:43
 msgid "Hide suspended users"
@@ -944,9 +933,8 @@ msgid "Display suspended users"
 msgstr ""
 
 #: templates/site/text_share.html:86 templates/site/user_list.html:132
-#, fuzzy
 msgid "User"
-msgstr "Ajouter un utilisateur"
+msgstr ""
 
 #: templates/site/text_share.html:87
 msgid ""
@@ -971,14 +959,12 @@ msgstr ""
 
 #: templates/site/text_share.html:128 templates/site/user_edit.html:6
 #: templates/site/user_edit.html.py:24 templates/site/user_list.html:177
-#, fuzzy
 msgid "Edit anonymous users"
-msgstr "Ajouter un utilisateur"
+msgstr ""
 
 #: templates/site/text_share.html:128 templates/site/user_list.html:177
-#, fuzzy
 msgid "Anonymous users"
-msgstr "Ajouter un utilisateur"
+msgstr "Anonyme brukere"
 
 #: templates/site/text_view_frame.html:63
 msgid "add a comment"
@@ -1010,7 +996,7 @@ msgstr ""
 
 #: templates/site/unauthorized.html:5
 msgid "Unauthorized"
-msgstr ""
+msgstr "Ingen rettigheter"
 
 #: templates/site/user_add.html:26
 msgid ""
@@ -1028,19 +1014,18 @@ msgid "You can customize the email sent by using the 'Note' field bellow."
 msgstr ""
 
 #: templates/site/user_contact.html:6
-#, fuzzy
 msgid "Contact user"
-msgstr "Ajouter un utilisateur"
+msgstr ""
 
 #: templates/site/user_contact.html:19
-#, fuzzy, python-format
+#, python-format
 msgid "Contact user %(username)s"
-msgstr "Ajouter un utilisateur"
+msgstr ""
 
 #: templates/site/user_edit.html:6 templates/site/user_edit.html.py:24
-#, fuzzy, python-format
+#, python-format
 msgid "Edit user %(username)s"
-msgstr "Ajouter un utilisateur"
+msgstr ""
 
 #: templates/site/user_list.html:73 templates/site/macros/user_actions.html:28
 msgid "Suspend access"
@@ -1057,7 +1042,7 @@ msgstr ""
 
 #: templates/site/user_list.html:133 views/user.py:278
 msgid "Email"
-msgstr ""
+msgstr "Epostadresse"
 
 #: templates/site/user_list.html:134
 msgid "Date joined"
@@ -1101,7 +1086,7 @@ msgstr ""
 
 #: templates/site/layout/header.html:15
 msgid "Logout"
-msgstr ""
+msgstr "Logg ut"
 
 #: templates/site/macros/main_tabs.html:11
 #, python-format
@@ -1143,21 +1128,21 @@ msgstr ""
 
 #: templates/site/macros/text_tabs.html:17
 msgid "Versions"
-msgstr ""
+msgstr "Versjoner"
 
 #: templates/site/macros/text_tabs.html:25
 msgid "Embed"
-msgstr ""
+msgstr "Integrer"
 
 #: templates/site/macros/user_actions.html:6
 #: templates/site/macros/user_actions.html:17
 msgid "Your profile"
-msgstr ""
+msgstr "Din profil"
 
 #: templates/site/macros/user_actions.html:8
-#, fuzzy, python-format
+#, python-format
 msgid "Edit user %(userprint)s"
-msgstr "Ajouter un utilisateur"
+msgstr ""
 
 #: templates/site/macros/user_actions.html:29
 msgid "(Re-)send invitation"
@@ -1181,7 +1166,7 @@ msgstr ""
 
 #: templatetags/com.py:142
 msgid "F j, Y \\a\\t g:i a"
-msgstr ""
+msgstr "j.n.Y \\k\\l. G:i"
 
 #: utils/date.py:6
 msgid "%Y-%m-%d %H:%M"
@@ -1279,23 +1264,23 @@ msgstr ""
 
 #: views/site.py:99
 msgid "Your name"
-msgstr ""
+msgstr "Ditt navn"
 
 #: views/site.py:101
 msgid "Your email address"
-msgstr ""
+msgstr "Din epostadresse"
 
 #: views/site.py:104
 msgid "Subject of the message"
-msgstr ""
+msgstr "Emne"
 
 #: views/site.py:105
 msgid "Body of the message"
-msgstr ""
+msgstr "Tekst"
 
 #: views/site.py:107
 msgid "Send me a copy of the email"
-msgstr ""
+msgstr "Send meg en kopi av denne eposten"
 
 #: views/site.py:133
 msgid "Copy of message:"
@@ -1304,6 +1289,7 @@ msgstr ""
 #: views/site.py:135
 msgid "Email sent. We will get back to you as quickly as possible."
 msgstr ""
+"Eposten er blitt sendt. Vi vil komme tilbake til deg så raskt som mulig."
 
 #: views/site.py:149
 msgid "Workspace name"
@@ -1439,15 +1425,15 @@ msgstr ""
 
 #: views/user.py:198
 msgid "Text level role"
-msgstr "Rôle sur le texte"
+msgstr ""
 
 #: views/user.py:199
 msgid "This role will apply only to this text."
-msgstr "Ce rôle ne s'appliquera seulement à ce texte."
+msgstr ""
 
 #: views/user.py:219
 msgid "Optional text to add to invitation email"
-msgstr "Text optionnel de personnalisation du message d'invitation"
+msgstr ""
 
 #: views/user.py:254
 #, python-format
@@ -1465,6 +1451,7 @@ msgstr[1] ""
 #: views/user.py:294
 msgid "This username is already in use. Please supply a different username."
 msgstr ""
+"Dette brukernavnet er allerde registrert. Vennligst velg et annet brukernavn."
 
 #: views/user.py:315 views/user.py:331
 msgid "Your account has been activated. You're now logged-in."
@@ -1513,7 +1500,7 @@ msgstr ""
 
 #: views/user.py:473
 msgid "Subject"
-msgstr ""
+msgstr "Emne"
 
 #: views/user.py:474
 msgid "Subject of the email"
@@ -1537,7 +1524,7 @@ msgstr ""
 
 #: views/user.py:549
 msgid "You've been logged out."
-msgstr ""
+msgstr "Du er blitt logget ut."
 
 #: views/user.py:565
 msgid ""
@@ -1550,9 +1537,3 @@ msgid ""
 "You've been registered, please check your email for the confirm message."
 msgstr ""
 
-#, fuzzy
-#~ msgid "Contact from user: %(name)s / %(email)s"
-#~ msgstr "Ajouter un utilisateur"
-
-#~ msgid "Add user"
-#~ msgstr "Ajouter un utilisateur"
