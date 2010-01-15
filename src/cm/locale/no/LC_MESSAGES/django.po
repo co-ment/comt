@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: hand-crafted with vim rules.\n"
+"X-Generator: hand-crafted with vim.\n"
 
 #: client.py:25
 msgid "A selection is required. Select in the text the part your comment applies to."
@@ -1049,7 +1049,7 @@ msgstr "Hvordan ønsker du å skrive ut?"
 
 #: templates/site/text_view_frame.html:108
 msgid "How should comments' scope be shown in text?"
-msgstr "Hvordan skal rekeviden for merknadene i teksten vises?"
+msgstr "Hvordan skal rekkevidden for merknadene i teksten vises?"
 
 #: templates/site/unauthorized.html:5
 msgid "Unauthorized"
