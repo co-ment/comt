@@ -165,7 +165,7 @@ msgstr "Fast adresse til denne merknaden"
 
 #: media/js/client/c_icomment.js:280
 msgid "by %(name)s, created on %(date)s"
-msgstr "av %(name)s, opprettet %(date)s""
+msgstr "av %(name)s, opprettet %(date)s"
 
 #: media/js/client/c_interface_forms.js:1
 msgid "No selection yet"
