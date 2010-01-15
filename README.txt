@@ -147,6 +147,9 @@ We'd like to thank:
 
 How to contribute
 =================
+
+Contribute using mercurial
+--------------------------
 We use mercurial as our source code management system.
 
 1. Create a mercurial profile (nickname/email) in ~/.hgrc (cf. http://mercurial.selenic.com/quickstart for more info).
@@ -159,6 +162,11 @@ We use mercurial as our source code management system.
 6. Create a ticket describing your change and attach your patch to it: http://www.co-ment.org/newticket
 7. We will review the patch and get in touch will you if needed
 
+Contribute without using mercurial
+----------------------------------
+If you know want to use mercurial, you can also create a ticket (http://www.co-ment.org/newticket) with a few modified files to the bugtracker.
+Make sure you leave us a nickname and an email for inclusion in the changelog.
+ 
 Translation
 ============
 
