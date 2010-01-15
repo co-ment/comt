@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-01-15 13:15+0100\n"
-"PO-Revision-Date: 2010-01-15 13:19+0100\n"
+"PO-Revision-Date: 2010-01-15 13:22+0100\n"
 "Last-Translator: dev <dev@sopinspace.com>\n"
 "Language-Team:  <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -242,7 +242,7 @@ msgstr "engelsk"
 
 #: settings.py:107
 msgid "Norwegian"
-msgstr "norsk"
+msgstr "Norsk"
 
 #: static_i18n.py:6
 #: static_i18n.py:11
