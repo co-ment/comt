@@ -1,15 +1,14 @@
 # COMT Norwegian translation
 # Copyright (C) Sopinspace
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the COMT package.
 # Kirill Miazine (km@krot.org), 2010
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
-"Report-Msgid-Bugs-To: km@krot.org\n"
-"POT-Creation-Date: 2010-01-15 09:42+0100\n"
-"PO-Revision-Date: 2010-01-15 15:00+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-01-16 17:57+0100\n"
+"PO-Revision-Date: 2010-01-16 18:00+0100\n"
 "Last-Translator: Kirill Miazine <km@krot.org>\n"
 "Language-Team: <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -85,7 +84,7 @@ msgstr "Ønsker du å avbryte påbegynt svar?"
 
 #: media/js/client/c_dlg_intercept.js:52
 msgid "Started comment edition will be canceled, continue?"
-msgstr "Ønsker du å avbryte påbegynt endring i merknaden?"
+msgstr "Ønsker du å avbryte påbegynte endringer i merknaden?"
 
 #: media/js/client/c_edit_form.js:47
 msgid "Edit comment"
@@ -105,7 +104,7 @@ msgstr "endre tilstand til ikke-godkjent"
 
 #: media/js/client/c_icomment.js:13
 msgid "cancel changing the state of this comment"
-msgstr "avbryt endring av tilstanden for merknaden"
+msgstr "avbryt endring av tilstand for merknaden"
 
 #: media/js/client/c_icomment.js:14
 msgid "pending"
@@ -183,7 +182,9 @@ msgstr "ingen filtrerte merknader igjen"
 msgid ""
 "Do you want to subscribe to all replies notifications in discussions you "
 "participated in?"
-msgstr "Ønsker du å abonnere på varsler for alle svar i diskusjoner hvor du har deltatt?"
+msgstr ""
+"Ønsker du å abonnere på varsler for alle svar i diskusjoner hvor du har "
+"deltatt?"
 
 #: media/js/client/c_sync.js:129
 msgid "Follow up"
@@ -201,7 +202,7 @@ msgstr "Ønsker du å slette denne merknaden?"
 msgid "could not remove comment"
 msgstr "kunne ikke slette merknad"
 
-#: media/js/client/f_client-min.js:1 media/js/client/f_message.js:17
+#: media/js/client/f_client-min.js:1
 msgid "loading..."
 msgstr "laster..."
 
@@ -531,11 +532,11 @@ msgstr "textstrøm"
 
 #: media/js/site/f_text_view_frame.js:317
 msgid "unthread discussions"
-msgstr "skjule diskusjonstråder"
+msgstr "skjul diskusjonstråder"
 
 #: media/js/site/f_text_view_frame.js:320
 msgid "thread discussions"
-msgstr "vise diskusjonstråder"
+msgstr "vis diskusjonstråder"
 
 #: media/js/site/text_edit.js:26
 msgid ""
@@ -544,9 +545,11 @@ msgid ""
 msgid_plural ""
 "%(nb_comments)s comments will be removed because the text they apply to has "
 "been changed."
-msgstr[0] "%(nb_comments)s merknad vil bli slettet, fordi teksten, den er knyttet til "
+msgstr[0] ""
+"%(nb_comments)s merknad vil bli slettet, fordi teksten som den er knyttet til "
 "har blitt endret."
-msgstr[1] "%(nb_comments)s merknader vil bli slettet, fordi teksten, de er knyttet til "
+msgstr[1] ""
+"%(nb_comments)s merknader vil bli slettet, fordi teksten som de er knyttet til "
 "har blitt endret."
 
 #: media/js/site/text_edit.js:30 media/js/site/text_edit.js.py:49
@@ -561,10 +564,12 @@ msgid ""
 msgid_plural ""
 "%(nb_comments)s comments will be lost because the text they apply to has "
 "been changed."
-msgstr[0] "%(nb_comments)s merknad vil bli tapt, fordi teksten, den er knyttet til "
-"har blitt endret."
-msgstr[1] "%(nb_comments)s merknader vil bli tapt, fordi teksten, de er knyttet til "
-"har blitt endret."
+msgstr[0] ""
+"%(nb_comments)s merknad vil bli tapt, fordi teksten som den er knyttet til har "
+"blitt endret."
+msgstr[1] ""
+"%(nb_comments)s merknader vil bli tapt, fordi teksten som de er knyttet til har "
+"blitt endret."
 
 #: media/js/site/text_edit.js:47
 msgid "(We suggest you create a new version)"
@@ -573,5 +578,5 @@ msgstr "(Vi anbefaler at du oppretter en ny versjon)"
 #: media/js/site/text_edit.js:64
 msgid ""
 "Since you chose not to create a new version all comments will be deleted"
-msgstr "Siden du ikke ønsket å opprette en ny versjon, vil alle merknader bli slettet"
-
+msgstr ""
+"Siden du ikke ønsket å opprette en ny versjon, vil alle merknader bli slettet"
