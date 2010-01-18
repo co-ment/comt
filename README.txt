@@ -165,12 +165,12 @@ We use mercurial as our source code management system.
 4. Commit locally: `hg commit -m "MY COMMIT MESSAGE"`
 5. Export your changeset to a file: `hg export tip > my_patch.txt`
 6. Create a ticket describing your change and attach your patch to it: http://www.co-ment.org/newticket
-7. We will review the patch and get in touch will you if needed
+7. We will review the patch as soon as possible. If we judge it acceptable and useful, we will be back to you regarding copyright, licensing and other legalese.
 
 Contribute without using mercurial
 ----------------------------------
 If you don't want to use mercurial, you can also create a ticket (http://www.co-ment.org/newticket) with a few modified files to the bugtracker.
-Make sure you leave us a nickname and an email for inclusion in the changelog.
+Make sure you leave us a nickname and an email for inclusion in the changelog. Point 7 above also applies to contributions without using mercurial.
  
 Translation
 ===========
