@@ -10,6 +10,11 @@ License
 =======
 GNU AFFERO GENERAL PUBLIC LICENSE
 http://www.gnu.org/licenses/agpl.html
+for software files
+
+CC-BY
+http://creativecommons.org/licenses/by/3.0/
+for translation files
 
 Dependencies
 ============
