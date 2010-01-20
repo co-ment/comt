@@ -17,6 +17,7 @@ class StructureTest(TestCase):
                   new_format='html', 
                   new_content=text.get_latest_version().content, 
                   keep_comments = True, 
+                  cancel_modified_scopes=False,                  
                   new_version = True)
         self.assertEqual(TextVersion.objects.count(), 2)
         self.assertEqual(Comment.objects.count(), 16)
@@ -26,6 +27,7 @@ class StructureTest(TestCase):
                   new_format='html', 
                   new_content='simple text <p>simple text</p> <p>simple text</p> ', 
                   keep_comments = True, 
+                  cancel_modified_scopes=False,                  
                   new_version = True)
         self.assertEqual(TextVersion.objects.count(), 3)
         self.assertEqual(Comment.objects.count(), 17) # 22
@@ -35,6 +37,7 @@ class StructureTest(TestCase):
                   new_format='html', 
                   new_content='xxxxxx', 
                   keep_comments = True, 
+                  cancel_modified_scopes=False,                  
                   new_version = False)
         self.assertEqual(TextVersion.objects.count(), 3)
         self.assertEqual(Comment.objects.count(), 16) # 21
@@ -47,6 +50,7 @@ class StructureTest(TestCase):
                   new_format='html', 
                   new_content='xxxxxx', 
                   keep_comments = False, 
+                  cancel_modified_scopes=False,                  
                   new_version = False)
         self.assertEqual(TextVersion.objects.count(), 1)
         self.assertEqual(Comment.objects.count(), 0)
@@ -59,6 +63,7 @@ class StructureTest(TestCase):
                   new_format='html', 
                   new_content='xxxxxx', 
                   keep_comments = False, 
+                  cancel_modified_scopes=False,                  
                   new_version = True)
         self.assertEqual(TextVersion.objects.count(), 2)
         self.assertEqual(Comment.objects.count(), 8)

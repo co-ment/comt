@@ -375,7 +375,12 @@ Sync.prototype = {
 		if (comment != null) {
 			var path = gDb.getPath(comment) ;
 			var topAncestorComment = path[path.length - 1] ;
-			var topY = CY.get(".c-id-"+topAncestorComment.id).getY() ;
+			var topY = 0 ;
+			if (comment['start_wrapper'] != -1) 
+				topY = CY.get(".c-id-"+topAncestorComment.id).getY() ;
+			else 
+				topY = CY.get('document').get('scrollTop') ;
+			
 			this._showComments([topAncestorComment.id], topY, false) ;
 			// optim when browsing comments with no reply			
 			if (topAncestorComment.replies.length > 0)
@@ -396,24 +401,24 @@ Sync.prototype = {
 			this.showSingleComment(comment) ;
 	},
 	
-	_showComments : function(commentDbIds, topY, showingAll) {
+	_showComments : function(commentDbIds, topY, atDocumentTop) {
 		this._q.add(
 			{fn:function() {
-				gShowingAllComments = showingAll ;			
+				gShowingAllComments = atDocumentTop ;			
 				gIComments.hide() ; 
 				var cs = CY.Array.map(commentDbIds, function(id) { return gDb.getComment(id) ; }) ;
 				var comments = gDb.getThreads(cs) ;
 				gIComments.fetch(comments) ;
 	
 				if (commentDbIds.length > 0) {
-					if (!showingAll) {
-						gIComments.activate(commentDbIds[0]) ;
-						var scopeStart = CY.get(".c-id-"+commentDbIds[0]) ;
-						if (!scopeStart.inViewportRegion())
-							scopeStart.scrollIntoView(true) ;
+					if (atDocumentTop) {
+						CY.get('document').set('scrollTop', 0) ; 
 					}
 					else {
-						CY.get('document').set('scrollTop', 0) ; 
+						gIComments.activate(commentDbIds[0]) ;
+						var scopeStart = CY.get(".c-id-"+commentDbIds[0]) ;
+						if (scopeStart && !scopeStart.inViewportRegion()) // scopeStart could be null when comment has no scope
+							scopeStart.scrollIntoView(true) ;
 					}
 				}
 				
@@ -452,10 +457,20 @@ Sync.prototype = {
 		}, this, null) ;
 	},
 
-	showComments : function(commentDbIds, mouseXY, showingAll) {
+	showScopeRemovedComments : function() {
+		checkForOpenedDialog(null, function() {
+			gShowingAllComments = true ;
+			var scopeRemovedComments = CY.Array.filter(gDb.comments, function(comment) { return (comment.start_wrapper == -1) ; }) ;
+			var scopeRemovedCommentIds = CY.Array.map(scopeRemovedComments, function(c){return c.id;}) ;
+			this.showComments(scopeRemovedCommentIds, [0,0], true) ;
+			
+		}, this, null) ;
+	},
+
+	showComments : function(commentDbIds, mouseXY, atDocumentTop) {
 		checkForOpenedDialog(null, function() {
 			this._q.add({fn:CY.bind(this.setPreventClickOn, this)}) ;
-			this._showComments(commentDbIds, mouseXY[1], showingAll) ;
+			this._showComments(commentDbIds, mouseXY[1], atDocumentTop) ;
 			this._animateTo(mouseXY[1]) ;
 			this._q.add({fn:CY.bind(this.setPreventClickOff, this)}) ;
 			this._q.run();

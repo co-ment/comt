@@ -18,7 +18,8 @@ tb_conf['pre_edit_url'] = '{% url text-preedit text.key %}?{{ request.GET.urlenc
 </script>
 
 <div style="display: none;">
-    <div id="check_save_dialog"></div>
+    <div id="confirm_all_removed_dlg"></div>
+    <div id="remove_scope_choice_dlg"></div>
 </div>
 
 <div id="text_edit" class="tab-meta">
@@ -31,6 +32,7 @@ tb_conf['pre_edit_url'] = '{% url text-preedit text.key %}?{{ request.GET.urlenc
         </td>
         <td>
             <label></label>
+            <input name="cancel_modified_scopes" id="cancel_modified_scopes" type="hidden"/>            
             <input name="save" id="save" type="button" value="{% blocktrans %}Save{% endblocktrans %}"/>            
         </td>
     </tr>

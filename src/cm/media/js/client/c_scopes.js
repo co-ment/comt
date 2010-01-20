@@ -7,12 +7,13 @@
 // c-c is a comment marker
 
 paintCommentScope = function(comment) {
-	if (comment.reply_to_id == null) {
+	if (comment.reply_to_id == null && comment['start_wrapper'] != -1) {
 		var selection = { 	'start' : { 'elt' : document.getElementById("sv_"+comment['start_wrapper']), 'offset' : comment['start_offset'] },
 							'end' : { 'elt' : document.getElementById("sv_"+comment['end_wrapper']), 'offset' : comment['end_offset'] }
 						} ;
-		if (document.getElementById("sv_"+comment['start_wrapper'])== null)
+		if (document.getElementById("sv_"+comment['start_wrapper'])== null) {
 			warn_server({'from':'paintCommentScope', 'start_wrapper':comment['start_wrapper']}) ;
+		}
 		else {
 			if (document.getElementById("sv_"+comment['end_wrapper'])== null)
 				warn_server({'from':'paintCommentScope', 'end_wrapper':comment['end_wrapper']}) ;

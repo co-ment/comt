@@ -45,7 +45,7 @@ class CommentPositioningTest(TestCase):
             comment = create_comment(x, y, z, k)
             res[comment.id] = new  
         
-        version.edit("text", "html", new_content, keep_comments = True)
+        version.edit("text", "html", new_content, keep_comments = True, cancel_modified_scopes=False)
 
         for id, new in res.items():
             if not new:

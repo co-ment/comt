@@ -33,6 +33,15 @@
     color: #565656;
 }
 
+.c-no-scope-msg {
+    font-size: 77%;
+    color: #F00;
+}
+
+.c-has-scope .c-no-scope-msg {
+    display:none;
+}
+
 .c-error {
     color: #FF0000;
 }
@@ -104,8 +113,8 @@ a.c-action {
     background-position: 0 -74px;
 }
 
-.c-focus-comment .c-comment a.c-show-scope {
-    background-image: none;
+.c-is-reply .c-comment a.c-show-scope, .c-focus-comment .c-comment a.c-show-scope, .c-has-no-scope .c-comment a.c-show-scope {
+    display: none;
 }
 
 input[type="text"], input[type="password"], textarea {

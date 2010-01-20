@@ -30,8 +30,8 @@ def compute_new_comment_positions(old_content, old_format, new_content, new_form
     opcodes = sm.get_opcodes()
     to_remove_comments_ids = set()
     
-    # limit to real comments (not replies)
-    commentList = [c for c in commentList if not c.is_reply()]
+    # limit to real comments (not replies) and those that have scope 
+    commentList = [c for c in commentList if not c.is_reply() and not c.is_scope_removed()]
     
     for comment in commentList:
         try:
@@ -140,7 +140,7 @@ def add_marker(text, color, start_ids, end_ids, with_markers, with_colors):
         
     return ret
 
-# comments are comments and replies : TODO $$$$$$$$$$$$ handle replies case 
+# comments are comments and replies :
 def insert_comment_markers(htmlcontent, comments, with_markers, with_colors) :
 
 #    parser = html5lib.HTMLParser(tree=treebuilders.getTreeBuilder("beautifulsoup"))

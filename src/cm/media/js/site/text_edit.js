@@ -23,15 +23,15 @@ function check_save(){
                     }
                     else {
                 		var message = ngettext( 
-                				'%(nb_comments)s comment will be removed because the text it applies to has been changed.',
-                				'%(nb_comments)s comments will be removed because the text they apply to has been changed.', 
+                				'%(nb_comments)s comment applies to text that was modified.',
+                				'%(nb_comments)s comments apply to text that was modified.', 
 								nb_removed) ;
                 		message += '<br />' ;
-                		message += gettext( 'Do you want to continue?') ;
+                		message += gettext( 'Should comments be kept with no scope or entirely removed from new version?') ;
                 		message = interpolate(message,{'nb_comments':nb_removed}, true) ;		
                 		
-                        $('#check_save_dialog').html(message) ;
-                        $('#check_save_dialog').dialog('open') ;
+                        $('#remove_scope_choice_dlg').html(message) ;
+                        $('#remove_scope_choice_dlg').dialog('open') ;
                     }
                }
                else {                  
@@ -40,17 +40,17 @@ function check_save(){
                     }
                    else {
 	               		var message = ngettext(  
-	               				'%(nb_comments)s comment will be lost because the text it applies to has been changed.',
-	               				'%(nb_comments)s comments will be lost because the text they apply to has been changed.',	               								
+	               				'%(nb_comments)s comment applies to text that was modified.',
+                				'%(nb_comments)s comments apply to text that was modified.', 
 								nb_removed) ;
                 		message += '<br />' ;
                 		message += gettext( '(We suggest you create a new version)') ;
                 		message += '<br />' ;
-                		message += gettext( 'Do you want to continue?') ;
+                		message += gettext( 'Should comments be kept with no scope or entirely removed?') ;
                 		message = interpolate(message,{'nb_comments':nb_removed}, true) ;		
 
-                 		$('#check_save_dialog').html(message) ;
-                        $('#check_save_dialog').dialog('open') ;
+                 		$('#remove_scope_choice_dlg').html(message) ;
+                        $('#remove_scope_choice_dlg').dialog('open') ;
                    }
                }
            },
@@ -61,11 +61,11 @@ function check_save(){
     }
     else {
         if (!newVersion) {
-                var message = gettext("Since you chose not to create a new version all comments will be deleted") ;
+            var message = gettext("You chose not to create a new version all comments will be deleted") ;
         		message += '<br />' ;
         		message += gettext( 'Do you want to continue?') ;
-                $('#check_save_dialog').html(message) ;
-                $('#check_save_dialog').dialog('open') ;
+                $('#confirm_all_removed').html(message) ;
+                $('#confirm_all_removed').dialog('open') ;
         }
         else {
             $('#edit_form').submit();
@@ -78,7 +78,7 @@ $(function() {
 	buttons[gettext('No')] = function() {$(this).dialog('close');} ;
 	buttons[gettext('Yes')] = function() {$(this).dialog('close');$('#edit_form').submit();} ;
 
-    $('#check_save_dialog').dialog({
+    $('#confirm_all_removed').dialog({
         bgiframe: true, 
         autoOpen: false,        
         title :gettext('Warning'),
@@ -86,5 +86,18 @@ $(function() {
         buttons:buttons
     }) ;
     
+	var buttons0 = {};
+	buttons0[gettext('Detach')] = function() {$(this).dialog('close');$('#cancel_modified_scopes').val("1");$('#edit_form').submit();} ;
+	buttons0[gettext('Remove')] = function() {$(this).dialog('close');$('#cancel_modified_scopes').val("0");$('#edit_form').submit();} ;
+	buttons0[gettext('Cancel')] = function() {$(this).dialog('close');} ;
+
+    $('#remove_scope_choice_dlg').dialog({
+        bgiframe: true, 
+        autoOpen: false,        
+        title :gettext('Warning'),
+        modal: true,
+        buttons:buttons0
+    }) ;
+
     $("#save").click(function() { check_save() ;}) ;
 }) ;

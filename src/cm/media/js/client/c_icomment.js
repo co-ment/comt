@@ -26,6 +26,7 @@ IComment = function() {
 	var del = gettext("delete") ;
 	var close = gettext("close") ;
 	var showScope = gettext("show scope") ;
+	var scopeRemoved = gettext("Comment is detached : it was created on a previous version and text it applied to has been modified or removed.") ;
 	
 	// no header, no body yet 
 	this.overlay = new CY.Overlay( {
@@ -46,6 +47,9 @@ IComment = function() {
 								'<a class="c-state-approved c-action" title="' + changeToApprove + '" alt="' + changeToApprove + '">'+ approved +'</a>' + " " +  
 								'<a class="c-state-unapproved c-action" title="' + changeToUnapprove + '" alt="' + changeToUnapprove + '">'+ unapproved +'</a>' + " " +  
 								'<a class="c-state-cancel c-action" title="' + cancelChange + '" alt="' + cancelChange + '">' + cancel +'</a>' + " " +  
+							'</div>' + 
+							'<div class="c-no-scope-msg">' +
+								scopeRemoved +  
 							'</div>' + 
 							'<a class="c-show-scope c-action" title="'+ showScope + '" alt="' + showScope + '"><em>-</em></a>' +
 							'<a class="c-close c-action" title="'+ close + '" alt="' + close + '"><em>X</em></a>' +
@@ -177,7 +181,8 @@ IComment.prototype = {
 			}
 			else {
 				if (gShowingAllComments) {
-					// next special dirty case test explained : when editing/replying to a comment with gShowingAllComments a click in the edit/reply form also is a click on the iComment, in this case we don't want to showSingleComment .... 
+					// next special dirty case test explained : when editing/replying to a comment with gShowingAllComments a click in the edit/reply form also is a click on the iComment, in this case we don't want to showSingleComment ....
+					// should be handled via a preventDefault in some way
 					if (!this._isHostingAForm()) {
 						var comment = gDb.getComment(this.commentId) ;
 						checkForOpenedDialog(null, function() {
@@ -276,6 +281,22 @@ IComment.prototype = {
 		this.commentId = comment.id ;
 		var boundingBoxNode = this.overlay.get('boundingBox') ;
 		
+		if (comment['start_wrapper'] != -1){ 
+			boundingBoxNode.addClass('c-has-scope') ;
+			boundingBoxNode.removeClass('c-has-no-scope') ;
+		}
+		else { 
+			boundingBoxNode.addClass('c-has-no-scope') ;
+			boundingBoxNode.removeClass('c-has-scope') ;
+		}
+		
+		if (comment['reply_to_id'] != null){ 
+			boundingBoxNode.addClass('c-is-reply') ;
+		}
+		else { 
+			boundingBoxNode.removeClass('c-is-reply') ;
+		}
+		
 		// TITLE
 		var titleInfos = interpolate(gettext('last modified on %(date)s'),{'date':comment.modified_user_str}, true) ;
 		
@@ -318,11 +339,14 @@ IComment.prototype = {
 
 		// MODERATION
 		this.changeModeration(comment) ;
+/* useless : use implemendted permanentlink instead
+ * 
 		// also change link title to give users the possibility to know comment id (to be able to reference this exact comment in GET arguments) 
 		var moderationLnk = this.overlay.get('contentBox').query(".c-moderate") ;
 		//var cid = (comment.reply_to_id == null) ? this.commentId : "" ;
 		moderationLnk.set("title", "click to change comment ID visibility".replace(/ID/, this.commentId).replace(/  /, " ")) ;
 		
+ */		
 		// open links in new window :
 		var links = boundingBoxNode.queryAll(".c-content a") ;
 		if (links != null)

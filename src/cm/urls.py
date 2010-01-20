@@ -52,13 +52,15 @@ urlpatterns += patterns('',
      url(r'^create/upload/$', text_create_upload, name="text-create-upload"),
      url(r'^create/content/$', text_create_content, name="text-create-content"),
      
+
      # text
      url(r'^text/(?P<key>\w*)/view/$', text_view, name="text-view"),
+     url(r'^text/(?P<key>\w*)/view/\?comment_key=(?P<id>\w*)$', text_view, name="text-view-show-comment"), 
+     
 #     url(r'^text/(?P<key>\w*)/view/(?P<version_key>\w*)/$', text_view, name="text-view-version"),
      
      url(r'^text/(?P<key>\w*)/edit/$', text_edit, name="text-edit"),
      url(r'^text/(?P<key>\w*)/pre_edit/$', text_pre_edit, name="text-preedit"),
-     url(r'^text/(?P<key>\w*)/share/$', text_share, name="text-share"),
      url(r'^text/(?P<key>\w*)/settings/$', text_settings, name="text-settings"),
      url(r'^text/(?P<key>\w*)/history/$', text_history, name="text-history"),
      url(r'^text/(?P<key>\w*)/history-version/(?P<v1_nid>\d*)/$', text_history, name="text-history-version"),
@@ -72,16 +74,15 @@ urlpatterns += patterns('',
 #     url(r'^text/(?P<key>\w*)/version/(?P<id_version>\w*)/$', text_version, name="text-version"),
      
      url(r'^text/(?P<key>\w*)/comments_frame/$', text_view_frame, name="text-view-comments-frame"),
+     url(r'^text/(?P<key>\w*)/comments_frame/\?comment_key=(?P<id>\w*)$', text_view_frame, name="text-view-comments-frame-show-comment"), 
      url(r'^text/(?P<key>\w*)/comments_frame/(?P<version_key>\w*)/$', text_view_frame, name="text-view-comments-frame-version"),
+     url(r'^text/(?P<key>\w*)/comments_frame/\?comment_key=(?P<id>\w*)$', text_view_frame, name="text-view-comments-frame-version-show-comment"), 
      
      url(r'^text/(?P<key>\w*)/comments/$', text_view_comments, name="text-view-comments"),
      url(r'^text/(?P<key>\w*)/comments/(?P<version_key>\w*)/$', text_view_comments, name="text-view-comments-version"),
 
      url(r'^text/(?P<key>\w*)/user/add/$', user_add, name="user-add-text"),
      url(r'^text/(?P<key>\w*)/user/mass-add/$', user_mass_add, name="user-mass-add-text"),
-     
-     # comments
-     url(r'^text/(?P<key>\w*)/view/\?comment_key=(?P<id>\w*)$', text_view, name="text-view-show-comment"),
      
      # site
      url(r'^contact/', contact, name="contact"),

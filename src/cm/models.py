@@ -123,12 +123,12 @@ class Text(PermanentModel, AuthorModel):
         new_text_version = TextVersion.objects.duplicate(text_version, True)
         return new_text_version
         
-    def edit(self, new_title, new_format, new_content, new_tags=None, new_note=None, keep_comments=True, new_version=True):
+    def edit(self, new_title, new_format, new_content, new_tags=None, new_note=None, keep_comments=True, cancel_modified_scopes=True, new_version=True):
         text_version = self.get_latest_version()
             
         if new_version:        
             text_version = TextVersion.objects.duplicate(text_version, keep_comments)
-        text_version.edit(new_title, new_format, new_content, new_tags, new_note, keep_comments)        
+        text_version.edit(new_title, new_format, new_content, new_tags, new_note, keep_comments, cancel_modified_scopes)        
         return text_version 
         
     def __unicode__(self):
@@ -186,8 +186,7 @@ class TextVersion(AuthorModel, KeyModel):
     objects = TextVersionManager()
     
     def get_content(self, format='html'):
-        converted_content = pandoc_convert(self.content, self.format, format)
-        return converted_content 
+        return pandoc_convert(self.content, self.format, format)
 
 #    def _get_comments(self, user = None, filter_reply = 0):        
 #        """
@@ -228,16 +227,23 @@ class TextVersion(AuthorModel, KeyModel):
     def __unicode__(self):
         return '<%d> %s' % (self.id, self.title)    
 
-    def edit(self, new_title, new_format, new_content, new_tags=None, new_note=None, keep_comments=True): # TODO : tags
+    def edit(self, new_title, new_format, new_content, new_tags=None, new_note=None, keep_comments=True, cancel_modified_scopes=True): 
         if not keep_comments :
             self.comment_set.all().delete()
         elif self.content != new_content or new_format != self.format:
             comments = self.get_comments() ;
             tomodify_comments, toremove_comments = compute_new_comment_positions(self.content, self.format, new_content, new_format, comments)
-            #print "tomodify_comments",len(tomodify_comments)
+            #print "tomodify_comments"
+            #print tomodify_comments
             #print "toremove_comments",len(toremove_comments)
             [comment.save(keep_dates=True) for comment in tomodify_comments]
-            [comment.delete() for comment in toremove_comments]
+            if cancel_modified_scopes :
+                [comment.remove_scope() for comment in toremove_comments]
+            else :
+                [comment.delete() for comment in toremove_comments]
+                
+        #TODO: RBE: recompute same text comments links 
+
         self.title = new_title
         if new_tags:
             self.tags = new_tags
@@ -307,6 +313,11 @@ class Comment(PermanentModel, AuthorModel):
                 return self.reply_to.is_thread_full_visible(own_user)
         return False
                
+    def is_scope_removed(self):
+        #when scope is "removed" we will have 
+        #self.start_wrapper == self.end_wrapper == self.start_offset == self.end_offset == -1
+        return (self.start_wrapper == -1)  
+               
     def top_comment(self):
         if self.reply_to == None :
             return self
@@ -323,7 +334,11 @@ class Comment(PermanentModel, AuthorModel):
         PermanentModel.delete(self)
         # delete replies
         [c.delete() for c in self.comment_set.all()]
-    
+        
+    def remove_scope(self):
+        self.start_wrapper = self.end_wrapper = self.start_offset = self.end_offset = -1
+        self.save()
+        
 # http://docs.djangoproject.com/en/dev/topics/files/#topics-files
 
 # default conf values

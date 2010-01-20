@@ -18,7 +18,7 @@ from cm.utils.comment_positioning import compute_new_comment_positions, \
 from cm.utils.html import cleanup_textarea
 from cm.utils.spannifier import spannify
 from cm.views import get_keys_from_dict, get_textversion_by_keys_or_404, get_text_by_keys_or_404, redirect
-from cm.views.export import content_export2
+from cm.views.export import content_export2, content_export
 from cm.views.user import AnonUserRoleForm, cm_login
 from difflib import unified_diff
 from django import forms
@@ -198,8 +198,7 @@ def text_view(request, key, adminkey=None):
     text = get_text_by_keys_or_404(key)
     register_activity(request, "text_view", text=text)    
     text_version = text.get_latest_version()
-    embed_code = embed_html(key, 'id="text_view_frame" name="text_view_frame"')
-    
+    embed_code = embed_html(key, 'id="text_view_frame" name="text_view_frame"', None, request.META.get('QUERY_STRING'))
     template_dict = { 'embed_code':embed_code, 'text' : text, 'text_version' : text_version, 'title' : text_version.title, 'content' : text_version.get_content()}
     return render_to_response('site/text_view.html', template_dict, context_instance=RequestContext(request))
 
@@ -225,7 +224,6 @@ def text_view_comments(request, key, version_key=None, adminkey=None):
     filter_datas = get_filter_datas(request, text_version, text)
     
     get_params = simplejson.dumps(request.GET)
-    
     wrapped_text_version, _ , _ = spannify(text_version.get_content())
     template_dict = {'text' : text,
                                'text_version' : text_version,
@@ -649,9 +647,10 @@ class EditTextForm(ModelForm):
         new_format = request.POST.get('format', text.last_text_version.format)
         new_note = request.POST.get('note',None)
         new_tags = request.POST.get('tags',None)
+        cancel_modified_scopes = (request.POST.get('cancel_modified_scopes',u'1') == u'1')
         version = text.get_latest_version()
-        version.edit(new_title, new_format, new_content, new_tags, new_note, True)
-        
+        version.edit(new_title, new_format, new_content, new_tags, new_note, True, cancel_modified_scopes)
+
         return version
 
     def save_new_version(self, text, request):
@@ -667,7 +666,8 @@ class EditTextForm(ModelForm):
         new_format = request.POST.get('format', text.last_text_version.format)        
         new_note = request.POST.get('note',None)
         new_tags = request.POST.get('tags',None)
-        new_text_version.edit(new_title, new_format, new_content, new_tags, new_note, True)
+        cancel_modified_scopes = (request.POST.get('cancel_modified_scopes',u'1') == u'1')
+        new_text_version.edit(new_title, new_format, new_content, new_tags, new_note, True, cancel_modified_scopes)
         
         return new_text_version
 

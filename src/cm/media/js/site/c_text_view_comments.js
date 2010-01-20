@@ -275,7 +275,6 @@ onDomReady = function(arg1) {
 				parent.f_interfaceUnfreeze() ;
 				parent.f_removeLoadingMsg();
 			}
-			
 			// if there is a comment id in the url display it
 			if ("comment_key" in gGETValues) {
 				var key = gGETValues["comment_key"] ;

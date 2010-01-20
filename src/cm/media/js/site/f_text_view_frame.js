@@ -181,6 +181,7 @@ fillTopToolbar = function() {
 	var viewFirst = gettext('view first comment') ;
 	var viewLast = gettext('view last next comment') ;
 	var viewAll = gettext('view all comments') ;
+	var viewScopeRemoved = gettext('view all detached comments') ;
 	var advancedInterface = gettext('toggle advance interface') ;
 	var print = gettext('print document with/without comments') ;
 	var exportDoc = gettext('export document with/without comments') ;
@@ -230,6 +231,9 @@ fillTopToolbar = function() {
 			'</td>' +
 			'<td width="20" align="left">' +
 			'<a href="#" id="c_browse_all"><img title="'+ viewAll +'" alt="'+ viewAll +'" src="' + sv_media_url + '/img/view_all.png"/></a>' +
+			'</td>' +
+			'<td width="20" align="left">' +
+			'<a href="#" id="c_browse_scope_removed"><img title="'+ viewScopeRemoved +'" alt="'+ viewScopeRemoved +'" src="' + sv_media_url + '/img/view_scope_removed2.png"/></a>' +
 			'</td>' +
 			'<td width="20" align="left">' +
 				'<a href="#" id="c_advanced_btn"><img title="'+ advancedInterface +'" alt="'+ advancedInterface +'" src="' + sv_media_url + '/img/application_split.png"/></a>' +
@@ -282,6 +286,14 @@ fillTopToolbar = function() {
 		if (frames['text_view_comments'].readyForAction()) {
 			frames['text_view_comments'].checkForOpenedDialog(null, function() {
 				frames['text_view_comments'].gSync.showAllComments() ;
+			}) ;
+		}
+	});
+	
+	$("#c_browse_scope_removed").click( function() {
+		if (frames['text_view_comments'].readyForAction()) {
+			frames['text_view_comments'].checkForOpenedDialog(null, function() {
+				frames['text_view_comments'].gSync.showScopeRemovedComments() ;
 			}) ;
 		}
 	});
@@ -746,39 +758,41 @@ f_setCookie = function(name, value) {
 gInFullScreen = false;
 
 _setFrameSize = function() {
-	if (gInFullScreen) {
-		var headerHeight = parent.$("#header").height();
-		var windowHeight = parent.$(parent).height();
-		var frameHeight = (windowHeight - headerHeight - 2) + 'px'; // - 2 to prevent scrollbars ? --> TODO test it without -2
-
-		var windowWidth = parent.$(parent).width();
-		var frameWidth = (windowWidth - 2) + 'px'; // - 2 to prevent scrollbars ?// --> TODO test it without -2
-
-		// TODO we should be embeded ! shouldn't work otherwise anyway (frame security concerns)
-		parent.$("#text_view_frame").css( {
-			'position' :'absolute',
-			'left' :'0px',
-			'top' :headerHeight,
-			'width' :frameWidth,
-			'height' :frameHeight
-		});
-	}
-	else {
-		var frameTop = Math.ceil(parent.$("#autoexpand_text_view_frame_container").position()["top"]);
-
-		var windowHeight = parent.$(parent).height();
-		var frameHeight = (windowHeight - frameTop - 2) + 'px'; // - 2 to prevent scrollbars // ? --> TODO test it without -2
-		
-		var windowWidth = parent.$(parent).width();
-		var frameWidth = (windowWidth - 2) + 'px'; // - 2 to prevent scrollbars ? // --> TODO test it without -2
-
-		// TODO test if we're embeded ! wont work otherwise anyway (frame security)
-		parent.$("#text_view_frame").css( {
-			'position' :'relative',
-			'width' :'99.9%',
-			'height' :frameHeight,
-			'top' :'0px'
-		});
+	if (parent != window) { // (this condition is to enable accessing "comments_frame" view from top window) TODO test under IE   
+		if (gInFullScreen) {
+			var headerHeight = parent.$("#header").height();
+			var windowHeight = parent.$(parent).height();
+			var frameHeight = (windowHeight - headerHeight - 2) + 'px'; // - 2 to prevent scrollbars ? --> TODO test it without -2
+	
+			var windowWidth = parent.$(parent).width();
+			var frameWidth = (windowWidth - 2) + 'px'; // - 2 to prevent scrollbars ?// --> TODO test it without -2
+	
+			// TODO we should be embeded ! shouldn't work otherwise anyway (frame security concerns)
+			parent.$("#text_view_frame").css( {
+				'position' :'absolute',
+				'left' :'0px',
+				'top' :headerHeight,
+				'width' :frameWidth,
+				'height' :frameHeight
+			});
+		}
+		else {
+			var frameTop = Math.ceil(parent.$("#autoexpand_text_view_frame_container").position()["top"]);
+	
+			var windowHeight = parent.$(parent).height();
+			var frameHeight = (windowHeight - frameTop - 2) + 'px'; // - 2 to prevent scrollbars // ? --> TODO test it without -2
+			
+			var windowWidth = parent.$(parent).width();
+			var frameWidth = (windowWidth - 2) + 'px'; // - 2 to prevent scrollbars ? // --> TODO test it without -2
+	
+			// TODO test if we're embeded ! wont work otherwise anyway (frame security)
+			parent.$("#text_view_frame").css( {
+				'position' :'relative',
+				'width' :'99.9%',
+				'height' :frameHeight,
+				'top' :'0px'
+			});
+		}
 	}
 }
 _toFullScreenSize = function() {
