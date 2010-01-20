@@ -156,8 +156,8 @@ $(function() {
 				{% if tag_list %}<div class="tag_list>">{% blocktrans %}tags:{% endblocktrans %}&nbsp;{% for tag in tag_list %}<a class="tag" title="{% blocktrans with tag.name as tag_name %}Filter by tag: {{ tag_name }}{% endblocktrans %}" href="?{% newparams 'tag_selected' tag.name %}"">{{ tag.name }}</a>&nbsp;{% endfor %}</div>{% endif %}
                 
                 <div class="hidden-text-actions text-actions-{{ text.key }}">
-                    <a href="{% url text-view text.key %}">{% blocktrans %}View{% endblocktrans %}</a> | 
-                    {% if can_edit_text %}<a href="{% url text-edit text.key %}">{% blocktrans %}Edit{% endblocktrans %}</a> | {% endif %}
+                    <a href="{% url text-view text.key %}">{% blocktrans %}View{% endblocktrans %}</a> 
+                    {% if can_edit_text %} | <a href="{% url text-edit text.key %}">{% blocktrans %}Edit{% endblocktrans %}</a> | {% endif %}
                     {% if can_delete_text %}<a id="text-delete-{{ text.key }}" href="#">{% blocktrans %}Delete{% endblocktrans %}</a> |
                     <script type="text/javascript">                
                     <!--

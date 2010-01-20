@@ -10,6 +10,11 @@ License
 =======
 GNU AFFERO GENERAL PUBLIC LICENSE
 http://www.gnu.org/licenses/agpl.html
+for software files
+
+CC-BY
+http://creativecommons.org/licenses/by/3.0/
+for translation files
 
 Dependencies
 ============
@@ -143,10 +148,32 @@ The Comt web site http://www.co-ment.org is the place to ask questions, report b
 Credits
 ========
 We'd like to thank:
-- Kirill Miazine (http://km.krot.org/) for the norwegian translation
+- Kirill Miazine (http://km.krot.org/) for the Norwegian translation
 
+How to contribute
+=================
+
+Contribute using mercurial
+--------------------------
+We use mercurial as our source code management system.
+
+1. Create a mercurial profile (nickname/email) in ~/.hgrc (cf. http://mercurial.selenic.com/quickstart for more info).
+   This is important because your name will appear in your changeset once it gets accepted into the mainline
+2. Clone the repository `hg clone http://hg.co-ment.org/ comt`
+   OR update your copy of the source code: `hg update`
+3. Hack, hack
+4. Commit locally: `hg commit -m "MY COMMIT MESSAGE"`
+5. Export your changeset to a file: `hg export tip > my_patch.txt`
+6. Create a ticket describing your change and attach your patch to it: http://www.co-ment.org/newticket
+7. We will review the patch as soon as possible. If we judge it acceptable and useful, we will be back to you regarding copyright, licensing and other legalese.
+
+Contribute without using mercurial
+----------------------------------
+If you don't want to use mercurial, you can also create a ticket (http://www.co-ment.org/newticket) with a few modified files to the bugtracker.
+Make sure you leave us a nickname and an email for inclusion in the changelog. Point 7 above also applies to contributions without using mercurial.
+ 
 Translation
-============
+===========
 
 Update all po files
 ---------------------
@@ -159,8 +186,8 @@ Compile po files
 cd src/cm
 ../../bin/django compilemessages
 
-Create new file for lang 'lg'
+Create new file for lang 'LG'
 -----------------------------
 cd src/cm
-../../bin/django makemessages -l=lg -e=html,txt
-../../bin/django makemessages -d djangojs -l=lg
+../../bin/django makemessages -l LG -e .html,.txt
+../../bin/django makemessages -d djangojs -l LG 

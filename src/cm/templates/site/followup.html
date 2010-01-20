@@ -17,8 +17,6 @@ tb_conf['current_tab'] = 'followup';
 
 <div id="followup" class="tab-meta">   
 
-<form id="followup_form" enctype="multipart/form-data" action="." method="post">
-
 <h2 class="title_first">{% blocktrans %}Feeds{% endblocktrans %}</h2>
 
 <h3>{% blocktrans %}Public feed{% endblocktrans %} (<a title="{% blocktrans %}Help{% endblocktrans %}" target="_blank" href="{% url help %}#public_private_feed">?</a>)</h3>
@@ -29,6 +27,9 @@ tb_conf['current_tab'] = 'followup';
 </a>
 </div>
 {% blocktrans %}This is the public feed for the workspace.{% endblocktrans %}
+
+{% if user.is_authenticated %}
+<form id="followup_form" enctype="multipart/form-data" action="." method="post">
 
 {% if can_manage_workspace %}
 <h3>{% blocktrans %}Private feed{% endblocktrans %} (<a title="{% blocktrans %}Help{% endblocktrans %}" target="_blank" href="{% url help %}#public_private_feed">?</a>)</h3>
@@ -83,8 +84,9 @@ tb_conf['current_tab'] = 'followup';
     }) ;
 	--> 
 	</script>
-
 </form>
+{% endif %}
+
 </div>
 
 

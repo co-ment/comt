@@ -4,6 +4,7 @@ from cm.models import ApplicationConfiguration, Notification, Configuration, Use
 from cm.models_base import generate_key
 from cm.views import get_text_by_keys_or_404
 from cm.utils.embed import embed_html
+from cm.security import get_request_user
 from django import forms
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -18,10 +19,11 @@ from django.utils.translation import ugettext as _
 import re
 import time
 
-@login_required
+#@login_required
 def followup(request):
-    workspace_notify_check = Notification.objects.filter(text=None,type='workspace',user=request.user, active=True).count()
-    own_notify_check = Notification.objects.filter(text=None,type='own',user=request.user, active=True).count()
+    user = get_request_user(request)
+    workspace_notify_check = Notification.objects.filter(text=None,type='workspace',user=user, active=True).count()
+    own_notify_check = Notification.objects.filter(text=None,type='own',user=user, active=True).count()
     
     if request.method == 'POST':
         if 'activate' in request.POST:
@@ -35,7 +37,7 @@ def followup(request):
             notif_type = 'own' if notif_id == 'own_notify_check' else 'workspace' 
             notif_val = request.POST.get(notif_id,None)
             if notif_val != None :
-                Notification.objects.set_notification(text=None, type=notif_type, active=(notif_val == 'true'), email_or_user=request.user)
+                Notification.objects.set_notification(text=None, type=notif_type, active=(notif_val == 'true'), email_or_user=user)
     
     return render_to_response('site/followup.html', {'workspace_notify_check':workspace_notify_check,
                                                           'own_notify_check' :own_notify_check, 

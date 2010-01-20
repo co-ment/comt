@@ -1,6 +1,8 @@
-co-ment: Web-based text annotation
-Copyright (C) 2006-2007 Sopinspace, Society for Public Information Spaces, www.sopinspace.com
-Developers: Renaud Bernard, Raphaël Badin
+COMT: Web-based text annotation
+Copyright (C) 2006-2010 Sopinspace, Society for Public Information Spaces, www.sopinspace.com
+Key developers: Renaud Bernard, Raphaël Badin
+Software license: GNU AGPLv3 or any later version
+Translation files license: CC-By
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License
