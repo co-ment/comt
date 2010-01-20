@@ -16,7 +16,7 @@ Layout.prototype = {
 		try { 
 			if (!CY.Lang.isUndefined(sv_site_url) && !CY.Lang.isUndefined(parent) && !CY.Lang.isUndefined(parent.parent)) {
 				var parentParentLocation = new String(parent.parent.location) ;
-				// TODO
+				// TODO warn server
 				//CY.log(parentParentLocation) ;
 				ret = (parentParentLocation.indexOf(sv_site_url) == 0);
 			}
