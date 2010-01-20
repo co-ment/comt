@@ -67,8 +67,7 @@ def _text_create_content(request, createForm):
                 text = create_text(request.user, form.cleaned_data)
                 
                 register_activity(request, "text_created", text)
-                
-                display_message(request, _(u'Text "%(text_title)s" has been created' %{"text_title":text.get_latest_version().title}))
+                display_message(request, _(u'Text "%(text_title)s" has been created') %{"text_title":text.get_latest_version().title})
                 return redirect_post_create(text)
     else:
         form = createForm()
@@ -105,7 +104,7 @@ def _text_create_upload(request, createForm):
             
             register_activity(request, "text_created", text)
             
-            display_message(request, _(u'Text "%(text_title)s" has been created' %{"text_title":text.get_latest_version().title}))
+            display_message(request, _(u'Text "%(text_title)s" has been created')%{"text_title":text.get_latest_version().title})
             return redirect_post_create(text)
 
     else:

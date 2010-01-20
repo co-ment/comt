@@ -84,8 +84,8 @@ $(function() {
             </script>
             </th>
             <th>{% up_down user__username %}{% blocktrans %}User{% endblocktrans %}{% endup_down %}</th>
-            <th><a class="tip" href="#" title="{% blocktrans %}The 'Workspace role' is the global role that applies to every text, you can give a user a particular role on this text using the 'local role' column on the right{% endblocktrans %}">{% blocktrans %}Workspace role{% endblocktrans %}</a></th>
-            <th>{% up_down role__name %}{% blocktrans %}Local role{% endblocktrans %}{% endup_down %}</th>
+            <th><a class="tip" href="#" title="{% blocktrans %}The 'Workspace role' is the global role that applies to every text, you can give a user a particular role on this text using the 'text role' column on the right{% endblocktrans %}">{% blocktrans %}Workspace role{% endblocktrans %}</a></th>
+            <th>{% up_down role__name %}{% blocktrans %}Text role{% endblocktrans %}{% endup_down %}</th>
         </tr>
     </thead>
     <tbody>
@@ -98,7 +98,7 @@ $(function() {
 			{% include "site/macros/user_actions.html" %}
         </td>
         <td>
-        {% if userrole.role and user.get_profile.global_userrole.role %}<a class="tip" href="#" title="{% blocktrans with userrole.role.name_i18n as rolename %}This role has been overriden on this text by a local role: {{rolename}}{% endblocktrans %}">{% endif %}
+        {% if userrole.role and user.get_profile.global_userrole.role %}<a class="tip" href="#" title="{% blocktrans with userrole.role.name_i18n as rolename %}This role has been overriden on this text by a text role: {{rolename}}{% endblocktrans %}">{% endif %}
         
         <span {% if userrole.role %}class="non_active"{% endif %}>
         {% if user.get_profile.global_userrole.role %}{{ user.get_profile.global_userrole.role.name_i18n}}{% else %}-{% endif %}

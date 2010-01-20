@@ -183,7 +183,7 @@ def edit_comment(request, key, comment_key):
         ret['errors'] = errors
     else :
     # INSERT
-    # TODO check version still exist ...
+    # TODO check version is latest (if boolean
         #comment = Comment.objects.get(id=edit_comment_id)
         comment = Comment.objects.get(key=comment_key)
         if change_state : # moderation action

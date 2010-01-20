@@ -26,7 +26,7 @@ IComment = function() {
 	var del = gettext("delete") ;
 	var close = gettext("close") ;
 	var showScope = gettext("show scope") ;
-	var scopeRemoved = gettext("Comment is detached : it was created on a previous version and text it applied to has been modified or removed.") ;
+	var scopeRemoved = gettext("Comment is detached: it was created on a previous version and text it applied to has been modified or removed.") ;
 	
 	// no header, no body yet 
 	this.overlay = new CY.Overlay( {

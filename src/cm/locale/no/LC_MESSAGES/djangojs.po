@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-16 17:57+0100\n"
+"POT-Creation-Date: 2010-01-20 21:53+0100\n"
 "PO-Revision-Date: 2010-01-16 18:00+0100\n"
 "Last-Translator: Kirill Miazine <km@krot.org>\n"
 "Language-Team: <no@li.org>\n"
@@ -54,12 +54,13 @@ msgid "Comment will apply to this selection:"
 msgstr "Merknaden vil gjelde følgende tekstområde:"
 
 #: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:14
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:395
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:407
 msgid "Save"
 msgstr "Lagre"
 
 #: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:14
 #: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:100
+#: media/js/site/text_edit.js:93
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -74,7 +75,7 @@ msgstr "Ønsker du å avbryte opprettelsen av en ny merknad?"
 
 #: media/js/client/c_dlg_intercept.js:48 media/js/client/c_dlg_intercept.js:50
 #: media/js/client/c_dlg_intercept.js:52 media/js/client/c_sync.js:223
-#: media/js/site/text_edit.js:84
+#: media/js/site/text_edit.js:85 media/js/site/text_edit.js.py:98
 msgid "Warning"
 msgstr "Advarsel"
 
@@ -154,15 +155,21 @@ msgstr "slett"
 msgid "show scope"
 msgstr "vis rekkevidde"
 
-#: media/js/client/c_icomment.js:274
+#: media/js/client/c_icomment.js:27
+msgid ""
+"Comment is detached: it was created on a previous version and text it "
+"applied to has been modified or removed."
+msgstr ""
+
+#: media/js/client/c_icomment.js:295
 msgid "last modified on %(date)s"
 msgstr "sist endret %(date)s"
 
-#: media/js/client/c_icomment.js:277
+#: media/js/client/c_icomment.js:298
 msgid "Permalink to this comment"
 msgstr "Fast adresse til denne merknaden"
 
-#: media/js/client/c_icomment.js:280
+#: media/js/client/c_icomment.js:301
 msgid "by %(name)s, created on %(date)s"
 msgstr "av %(name)s, opprettet %(date)s"
 
@@ -179,16 +186,18 @@ msgid "no filtered comments left"
 msgstr "ingen filtrerte merknader igjen"
 
 #: media/js/client/c_sync.js:129
+#, fuzzy
 msgid ""
-"Do you want to subscribe to all replies notifications in discussions you "
+"Do you want to be notified of all replies in all discussions you "
 "participated in?"
 msgstr ""
 "Ønsker du å abonnere på varsler for alle svar i diskusjoner hvor du har "
 "deltatt?"
 
 #: media/js/client/c_sync.js:129
-msgid "Follow up"
-msgstr "Følg opp"
+#, fuzzy
+msgid "Reply Notification"
+msgstr "endring"
 
 #: media/js/client/c_sync.js:201 media/js/client/c_sync.js.py:208
 msgid "could not save comment"
@@ -202,7 +211,7 @@ msgstr "Ønsker du å slette denne merknaden?"
 msgid "could not remove comment"
 msgstr "kunne ikke slette merknad"
 
-#: media/js/client/f_client-min.js:1
+#: media/js/client/f_client-min.js:1 media/js/client/f_message.js:17
 msgid "loading..."
 msgstr "laster..."
 
@@ -279,7 +288,7 @@ msgid "Search"
 msgstr "Søk"
 
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:85
-#: media/js/site/f_text_view_frame.js:395
+#: media/js/site/f_text_view_frame.js:407
 msgid "Reset"
 msgstr "Nullstill"
 
@@ -323,101 +332,105 @@ msgstr "se siste merknad"
 msgid "view all comments"
 msgstr "se alle merknader"
 
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:182
-msgid "toggle advance interface"
-msgstr "slå på/av avansert grensesnitt"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:183
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:184
 msgid "print document with/without comments"
 msgstr "skriv ut dokument med/uten merknader"
 
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:184
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:185
 msgid "export document with/without comments"
 msgstr "eksporter dokument med/uten merknader"
 
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:187
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:186
+msgid "toggle full screen view"
+msgstr "slå på/av visning på full side"
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:188
 msgid "add a comment"
 msgstr "opprett merknad"
 
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:203
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:204
 msgid "filter:"
 msgstr "filter:"
 
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:208
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:209
 msgid "browse by:"
 msgstr "navigasjon etter:"
 
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:210
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:211
 msgid "location"
 msgstr "plassering"
 
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:211
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:212
 msgid "modification"
 msgstr "endring"
 
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:354
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:332
+msgid "thread discussions"
+msgstr "vis diskusjonstråder"
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:366
 msgid "Text style"
 msgstr "Stil"
 
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:399
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:411
 msgid "Animation duration"
 msgstr "Varighet for animasjon"
 
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:408
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:420
 msgid "(0.001 to 1 second)"
 msgstr "(fra 0.001 til 1 sekund)"
 
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:434
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:446
 msgid "preferences reset (will apply on next load)"
 msgstr "innstillinger nullstilt (aktiveres ved neste innlasting)"
 
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:440
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:452
 msgid "preferences saved (will apply on next load)"
 msgstr "innstillinger lagret (aktiveres ved neste innlasting)"
 
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:544
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:556
 msgid "filter reset"
 msgstr "filter nullstilt"
 
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:554
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:566
 msgid "filter applied"
 msgstr "filtrert"
 
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:560
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:572
 msgid "discussion"
 msgid_plural "discussions"
 msgstr[0] "diskusjon"
 msgstr[1] "diskusjoner"
 
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:564
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:576
 msgid "comment"
 msgid_plural "comments"
 msgstr[0] "merknad"
 msgstr[1] "merknader"
 
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:567
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:579
 msgid "&nbsp;reply"
 msgid_plural "&nbsp;replies"
 msgstr[0] "&nbsp;svar"
 msgstr[1] "&nbsp;svar"
 
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:589
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:601
 msgid "all"
 msgstr "alle"
 
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:607
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:619
 msgid "last 24 hours (%(nb_comments)s)"
 msgid_plural "last %(nb_days)s days (%(nb_comments)s)"
 msgstr[0] "siste 24 timer (%(nb_comments)s)"
 msgstr[1] "siste %(nb_days)s dager (%(nb_comments)s)"
 
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:721
-#: media/js/site/text_edit.js:78
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:733
+#: media/js/site/text_edit.js:79
 msgid "No"
 msgstr "Nei"
 
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:722
-#: media/js/site/text_edit.js:79
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:734
+#: media/js/site/text_edit.js:80
 msgid "Yes"
 msgstr "Ja"
 
@@ -522,61 +535,75 @@ msgstr "klassisk"
 msgid "code"
 msgstr "kode"
 
-#: media/js/site/f_text_view_frame.js:185
-msgid "toggle full screen view"
-msgstr "slå på/av visning på full side"
+#: media/js/site/f_text_view_frame.js:182
+#, fuzzy
+msgid "view all detached comments"
+msgstr "se alle merknader"
 
-#: media/js/site/f_text_view_frame.js:186
+#: media/js/site/f_text_view_frame.js:183
+msgid "toggle advance interface"
+msgstr "slå på/av avansert grensesnitt"
+
+#: media/js/site/f_text_view_frame.js:187
 msgid "text feed"
 msgstr "textstrøm"
 
-#: media/js/site/f_text_view_frame.js:317
+#: media/js/site/f_text_view_frame.js:329
 msgid "unthread discussions"
 msgstr "skjul diskusjonstråder"
 
-#: media/js/site/f_text_view_frame.js:320
-msgid "thread discussions"
-msgstr "vis diskusjonstråder"
-
-#: media/js/site/text_edit.js:26
+#: media/js/site/text_edit.js:9
 msgid ""
-"%(nb_comments)s comment will be removed because the text it applies to has "
-"been changed."
-msgid_plural ""
-"%(nb_comments)s comments will be removed because the text they apply to has "
-"been changed."
+"Should these comments be detached (i.e. kept with no scope) or removed from "
+"new version?"
+msgstr ""
+
+#: media/js/site/text_edit.js:27 media/js/site/text_edit.js.py:44
+#, fuzzy
+msgid "%(nb_comments)s comment applies to text that was modified."
+msgid_plural "%(nb_comments)s comments apply to text that was modified."
 msgstr[0] ""
-"%(nb_comments)s merknad vil bli slettet, fordi teksten som den er knyttet til "
+"%(nb_comments)s merknad vil bli tapt, fordi teksten som den er knyttet til "
 "har blitt endret."
 msgstr[1] ""
-"%(nb_comments)s merknader vil bli slettet, fordi teksten som de er knyttet til "
+"%(nb_comments)s merknader vil bli tapt, fordi teksten som de er knyttet til "
 "har blitt endret."
 
-#: media/js/site/text_edit.js:30 media/js/site/text_edit.js.py:49
-#: media/js/site/text_edit.js:66
-msgid "Do you want to continue?"
-msgstr "Ønsker du å fortsette?"
-
-#: media/js/site/text_edit.js:43
-msgid ""
-"%(nb_comments)s comment will be lost because the text it applies to has been "
-"changed."
-msgid_plural ""
-"%(nb_comments)s comments will be lost because the text they apply to has "
-"been changed."
-msgstr[0] ""
-"%(nb_comments)s merknad vil bli tapt, fordi teksten som den er knyttet til har "
-"blitt endret."
-msgstr[1] ""
-"%(nb_comments)s merknader vil bli tapt, fordi teksten som de er knyttet til har "
-"blitt endret."
-
-#: media/js/site/text_edit.js:47
+#: media/js/site/text_edit.js:48
 msgid "(We suggest you create a new version)"
 msgstr "(Vi anbefaler at du oppretter en ny versjon)"
 
-#: media/js/site/text_edit.js:64
-msgid ""
-"Since you chose not to create a new version all comments will be deleted"
+#: media/js/site/text_edit.js:65
+#, fuzzy
+msgid "You chose not to create a new version all comments will be deleted"
 msgstr ""
 "Siden du ikke ønsket å opprette en ny versjon, vil alle merknader bli slettet"
+
+#: media/js/site/text_edit.js:67
+msgid "Do you want to continue?"
+msgstr "Ønsker du å fortsette?"
+
+#: media/js/site/text_edit.js:91
+#, fuzzy
+msgid "Detach"
+msgstr "Søk"
+
+#: media/js/site/text_edit.js:92
+msgid "Remove"
+msgstr ""
+
+#~ msgid "Follow up"
+#~ msgstr "Følg opp"
+
+#~ msgid ""
+#~ "%(nb_comments)s comment will be removed because the text it applies to "
+#~ "has been changed."
+#~ msgid_plural ""
+#~ "%(nb_comments)s comments will be removed because the text they apply to "
+#~ "has been changed."
+#~ msgstr[0] ""
+#~ "%(nb_comments)s merknad vil bli slettet, fordi teksten som den er knyttet "
+#~ "til har blitt endret."
+#~ msgstr[1] ""
+#~ "%(nb_comments)s merknader vil bli slettet, fordi teksten som de er "
+#~ "knyttet til har blitt endret."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-16 17:56+0100\n"
+"POT-Creation-Date: 2010-01-20 22:02+0100\n"
 "PO-Revision-Date: 2010-01-16 18:00+0100\n"
 "Last-Translator: Kirill Miazine <km@krot.org>\n"
 "Language-Team: <no@li.org>\n"
@@ -21,8 +21,8 @@ msgstr ""
 msgid ""
 "A selection is required. Select in the text the part your comment applies to."
 msgstr ""
-"Et område i teksten må merkes. Merk et område i teksten som din merknad "
-"skal gjelde"
+"Et område i teksten må merkes. Merk et område i teksten som din merknad skal "
+"gjelde"
 
 #: client.py:133
 msgid "name is required"
@@ -64,7 +64,7 @@ msgstr "Samlet lengde på etiketter kan ikke overstige 250 tegn."
 msgid "unknown"
 msgstr "ukjent"
 
-#: models.py:175 views/create.py:30 views/create.py:45 views/texts.py:613
+#: models.py:175 views/create.py:30 views/create.py:45 views/texts.py:611
 msgid "Title"
 msgstr "Overskrift"
 
@@ -76,7 +76,7 @@ msgstr "Format"
 msgid "Content"
 msgstr "Innhold"
 
-#: models.py:178 models.py:579
+#: models.py:178 models.py:594
 msgid "Tags"
 msgstr "Etiketter"
 
@@ -88,121 +88,121 @@ msgstr "Kommentar"
 msgid "Moderation a posteriori?"
 msgstr "Godkjenning i ettertid?"
 
-#: models.py:274
+#: models.py:280
 msgid "Format:"
 msgstr "Format:"
 
-#: models.py:341
+#: models.py:356
 #, python-format
 msgid "%(workspace_name)s's workspace"
 msgstr "Arbeidsområde til %(workspace_name)s"
 
-#: models.py:482
+#: models.py:497
 msgid "name"
 msgstr "navn"
 
-#: models.py:483
+#: models.py:498
 msgid "description"
 msgstr "beskrivelse"
 
-#: models.py:573
+#: models.py:588
 msgid "Allow contact"
 msgstr "Tillatt kontakt"
 
-#: models.py:573
+#: models.py:588
 msgid "Allow email messages from other users"
 msgstr "Motta epost fra andre brukere"
 
-#: models.py:574
+#: models.py:589
 msgid "Preferred language"
 msgstr "Foretrukket språk"
 
-#: models.py:577
+#: models.py:592
 msgid "Suspended access"
 msgstr "Sperret tilgang"
 
-#: models.py:601
+#: models.py:616
 msgid "suspended"
 msgstr "sperret"
 
-#: models.py:603
+#: models.py:618
 msgid "waiting approval"
 msgstr "venter på godkjenning"
 
-#: models.py:609
+#: models.py:624
 msgid "pending"
 msgstr "pågående"
 
-#: models.py:624
+#: models.py:639
 msgid "Invitation"
 msgstr "Invitasjon"
 
-#: models.py:692
+#: models.py:707
 #, python-format
 msgid "Text %(link_to_text)s edited"
 msgstr "Tekst %(link_to_text)s endret"
 
-#: models.py:693
+#: models.py:708
 #, python-format
 msgid "Text %(link_to_text)s edited (new version created)"
 msgstr "Tekst %(link_to_text)s endret (ny versjon opprettet)"
 
-#: models.py:694
+#: models.py:709
 #, python-format
 msgid "Text %(link_to_text)s added"
 msgstr "Tekst %(link_to_text)s lagt til"
 
-#: models.py:695
+#: models.py:710
 #, python-format
 msgid "Text %(link_to_text)s removed"
 msgstr "Tekst %(link_to_text)s slettet"
 
-#: models.py:696
+#: models.py:711
 #, python-format
 msgid "Comment %(link_to_comment)s added on text %(link_to_text)s"
 msgstr "Merknad %(link_to_comment)s lagt til teksten %(link_to_text)s"
 
-#: models.py:697
+#: models.py:712
 #, python-format
 msgid "Comment %(link_to_comment)s removed from text %(link_to_text)s"
 msgstr "Merknad %(link_to_comment)s slettet fra teksten %(link_to_text)s"
 
-#: models.py:698
+#: models.py:713
 #, python-format
 msgid "User %(username)s added"
 msgstr "Bruker %(username)s opprettet"
 
-#: models.py:699
+#: models.py:714
 #, python-format
 msgid "User %(username)s access to workspace enabled"
 msgstr "Aktivert tilgang for brukeren %(username)s"
 
-#: models.py:700
+#: models.py:715
 #, python-format
 msgid "User %(username)s access to workspace refused"
 msgstr "Nektet tilgang for brukeren %(username)s"
 
-#: models.py:701
+#: models.py:716
 #, python-format
 msgid "User %(username)s access to workspace suspended"
 msgstr "Stoppet tilgang for brukeren %(username)s"
 
-#: models.py:702
+#: models.py:717
 #, python-format
 msgid "User %(username)s access to workspace activated"
 msgstr "Aktivert tilgang for brukeren %(username)s"
 
-#: models.py:703
+#: models.py:718
 #, python-format
 msgid "User %(username)s has activated his account"
 msgstr "Bruker %(username)s har aktivert kontoen"
 
-#: models.py:758 models.py:766
+#: models.py:773 models.py:781
 #, python-format
 msgid "by \"%(username)s\""
 msgstr "av %(username)s"
 
-#: models.py:760
+#: models.py:775
 #, python-format
 msgid "%(time_since)s ago"
 msgstr "for %(time_since)s siden"
@@ -613,8 +613,8 @@ msgid ""
 "others unless you want them to see all activities on the workspace."
 msgstr ""
 "Dette er den private strømmen for arbeidsområdet. Ikke del adressen for "
-"denne strømmen med andre, men mindre du ønsker at de skal kunne se alt "
-"som skjer på arbeidsområdet."
+"denne strømmen med andre, men mindre du ønsker at de skal kunne se alt som "
+"skjer på arbeidsområdet."
 
 #: templates/site/followup.html:45 templates/site/text_followup.html:47
 msgid "Reset private feed url"
@@ -688,7 +688,7 @@ msgid "Your profile (%(username)s)"
 msgstr "Din profil (%(username)s)"
 
 #: templates/site/profile.html:26 templates/site/text_create_content.html:45
-#: templates/site/text_create_upload.html:40 templates/site/text_edit.html:34
+#: templates/site/text_create_upload.html:40 templates/site/text_edit.html:36
 #: templates/site/text_settings.html:23 templates/site/text_share.html:153
 #: templates/site/user_activate.html:27 templates/site/user_list.html:210
 #: templates/site/layout/base_workspace_form.html:32
@@ -733,8 +733,8 @@ msgid ""
 "be able to add comments from your site depending an anonymous users' roles."
 msgstr ""
 "Kopier denne koden til din side for å vise teksten med merknader. Avhengig "
-"av rettighetene til anonyme brukere, vil andre muligens også kunne kommentere "
-"teksten direkte fra din side."
+"av rettighetene til anonyme brukere, vil andre muligens også kunne "
+"kommentere teksten direkte fra din side."
 
 #: templates/site/text_embed.html:33
 msgid "Warning:"
@@ -954,9 +954,10 @@ msgid "User"
 msgstr "Bruker"
 
 #: templates/site/text_share.html:87
+#, fuzzy
 msgid ""
 "The 'Workspace role' is the global role that applies to every text, you can "
-"give a user a particular role on this text using the 'local role' column on "
+"give a user a particular role on this text using the 'text role' column on "
 "the right"
 msgstr ""
 "Rollen 'Rolle for arbeidsområde' er en global rolle, som vil anvendes på "
@@ -968,12 +969,13 @@ msgid "Workspace role"
 msgstr "Rolle for arbeidsområde"
 
 #: templates/site/text_share.html:88
-msgid "Local role"
+#, fuzzy
+msgid "Text role"
 msgstr "Tekstrolle"
 
 #: templates/site/text_share.html:101
-#, python-format
-msgid "This role has been overriden on this text by a local role: %(rolename)s"
+#, fuzzy, python-format
+msgid "This role has been overriden on this text by a text role: %(rolename)s"
 msgstr "Denne rollen viker for en lokal rolle for teksten: %(rolename)s"
 
 #: templates/site/text_share.html:128 templates/site/user_edit.html:6
@@ -1215,7 +1217,7 @@ msgstr "Du må angi en fil til å laste opp"
 msgid "The title of your text"
 msgstr "Overskriften for din tekst"
 
-#: views/create.py:71 views/create.py:108
+#: views/create.py:70 views/create.py:107
 #, python-format
 msgid "Text \"%(text_title)s\" has been created"
 msgstr "Teksten %(text_title)s har blitt opprettet"
@@ -1365,32 +1367,32 @@ msgstr "Innstillinger lagret"
 msgid "%(nb_texts)i text(s) deleted"
 msgstr "%(nb_texts)i tekst(er) slettet"
 
-#: views/texts.py:211
+#: views/texts.py:210
 #, python-format
 msgid "Text %(text_title)s deleted"
 msgstr "Tekstet %(text_title)s slettet"
 
-#: views/texts.py:617
+#: views/texts.py:615
 msgid "Note (optional)"
 msgstr "Kommentar (valgfritt)"
 
-#: views/texts.py:620
+#: views/texts.py:618
 msgid "Add a note to explain the modifications made to the text"
 msgstr "Legg til en kommentar for å beskrive foretatte endringer i teksten"
 
-#: views/texts.py:630
+#: views/texts.py:628
 msgid "New version (optional)"
 msgstr "Ny versjon (valgfritt)"
 
-#: views/texts.py:633
+#: views/texts.py:631
 msgid "Create a new version of this text (recommended)"
 msgstr "Opprett ny versjon av teksten (anbefales)"
 
-#: views/texts.py:636
+#: views/texts.py:634
 msgid "Keep comments (optional)"
 msgstr "Behold merknader (valgfritt)"
 
-#: views/texts.py:639
+#: views/texts.py:637
 msgid "Keep comments (if not affected by the edit)"
 msgstr "Behold merknadene (dersom de ikke er påvirket av endringene i teksten)"
 
@@ -1573,3 +1575,6 @@ msgstr ""
 msgid ""
 "You've been registered, please check your email for the confirm message."
 msgstr "Du er blitt registert. Se din epost for en melding med bekreftelsen."
+
+#~ msgid "Local role"
+#~ msgstr "Tekstrolle"

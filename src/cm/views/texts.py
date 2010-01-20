@@ -239,35 +239,36 @@ def text_view_comments(request, key, version_key=None, adminkey=None):
                               context_instance=RequestContext(request))
 def client_exchange(request):
     ret = None
-    function_name = request.POST['fun']# function called from client
-    user = request.user
-    if function_name == 'experiment' :
-        ret = experiment()
-    elif function_name == 'warn' :
-# TODO: (RBE to RBA) send mail withinfos
-        ret = "warn test"
-        #print request.POST
-    elif request.POST:
-        key = request.POST['key']
-        version_key = request.POST['version_key']
-
-        text = Text.objects.get(key=key) ;
-        #TODO: stupid why restrict to latest ? 
-        text_version = text.get_latest_version()
-        
-        if (text != None) :
-            if function_name == 'ownNotify' : 
-                ret = own_notify(request=request, key=key)
-            if function_name in ('editComment', 'addComment', 'removeComment',) :
-                if function_name == 'editComment' :
-                    ret = edit_comment(request=request, key=key, comment_key=request.POST['comment_key'])
-                elif function_name == 'addComment' :
-                    ret = add_comment(request=request, key=key, version_key=version_key)
-                elif function_name == 'removeComment' :
-                    ret = remove_comment(request=request, key=key, comment_key=request.POST['comment_key'])
-                    
-                ret['filterData'] = get_filter_datas(request, text_version, text)
-                #ret['tagCloud'] = get_tagcloud(key)
+    if request.method == 'POST' :
+        function_name = request.POST['fun']# function called from client
+        user = request.user
+        if function_name == 'experiment' :
+            ret = experiment()
+        elif function_name == 'warn' :
+            # TODO: (RBE to RBA) send mail withinfos
+            ret = "warn test"
+            #print request.POST
+        else :
+            key = request.POST['key']
+            version_key = request.POST['version_key']
+    
+            text = Text.objects.get(key=key) ;
+            #TODO: stupid why restrict to latest ? 
+            text_version = text.get_latest_version()
+            
+            if (text != None) :
+                if function_name == 'ownNotify' : 
+                    ret = own_notify(request=request, key=key)
+                if function_name in ('editComment', 'addComment', 'removeComment',) :
+                    if function_name == 'editComment' :
+                        ret = edit_comment(request=request, key=key, comment_key=request.POST['comment_key'])
+                    elif function_name == 'addComment' :
+                        ret = add_comment(request=request, key=key, version_key=version_key)
+                    elif function_name == 'removeComment' :
+                        ret = remove_comment(request=request, key=key, comment_key=request.POST['comment_key'])
+                        
+                    ret['filterData'] = get_filter_datas(request, text_version, text)
+                    #ret['tagCloud'] = get_tagcloud(key)
     if ret :
         if type(ret) != HttpResponseRedirect and type(ret) != HttpResponse:
             ret = HttpResponse(simplejson.dumps(ret, cls=RequestComplexEncoder, request=request))        

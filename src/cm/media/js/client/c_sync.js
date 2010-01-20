@@ -127,7 +127,7 @@ Sync.prototype = {
 				if ("ask_for_notification" in ret) {  
 					if (ret['ask_for_notification']) {
 						// TODO ask for notification ...or use AUTO_CONTRIB ?
-						parent.f_yesNoDialog(gettext("Do you want to subscribe to all replies notifications in discussions you participated in?"), gettext("Follow up"), 
+						parent.f_yesNoDialog(gettext("Do you want to be notified of all replies in all discussions you participated in?"), gettext("Reply notification"), 
 							function() { // special case : no waiting for the return, no error check, nothing !
 									var cfg = {
 									method: "POST", 

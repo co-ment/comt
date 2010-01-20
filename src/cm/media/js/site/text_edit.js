@@ -6,7 +6,8 @@ function check_save(){
 
     var new_content = $('#id_content').val()
     var new_format = $('#id_format').val()
-    
+    var mess = gettext( 'Should these comments be detached (i.e. kept with no scope) or removed from new version?') ;
+
     if (commentsKept) {
         var pre_edit_url = tb_conf['pre_edit_url'] ;
 
@@ -27,7 +28,7 @@ function check_save(){
                 				'%(nb_comments)s comments apply to text that was modified.', 
 								nb_removed) ;
                 		message += '<br />' ;
-                		message += gettext( 'Should comments be kept with no scope or entirely removed from new version?') ;
+                		message += mess ;
                 		message = interpolate(message,{'nb_comments':nb_removed}, true) ;		
                 		
                         $('#remove_scope_choice_dlg').html(message) ;
@@ -46,7 +47,7 @@ function check_save(){
                 		message += '<br />' ;
                 		message += gettext( '(We suggest you create a new version)') ;
                 		message += '<br />' ;
-                		message += gettext( 'Should comments be kept with no scope or entirely removed?') ;
+                		message += mess ;
                 		message = interpolate(message,{'nb_comments':nb_removed}, true) ;		
 
                  		$('#remove_scope_choice_dlg').html(message) ;
