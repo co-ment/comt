@@ -16,15 +16,16 @@ Layout.prototype = {
 		try { 
 			if (!CY.Lang.isUndefined(sv_site_url) && !CY.Lang.isUndefined(parent) && !CY.Lang.isUndefined(parent.parent)) {
 				var parentParentLocation = new String(parent.parent.location) ;
-				CY.log(parentParentLocation) ;
+				// TODO
+				//CY.log(parentParentLocation) ;
 				ret = (parentParentLocation.indexOf(sv_site_url) == 0);
 			}
 		}
 		catch (e) {
 			ret=false;
-			CY.log("error thrown while trying to access parent.parent.location") ;
+			//CY.log("error thrown while trying to access parent.parent.location") ;
 		}
-		CY.log("inComentSite returned : " + ret) ;
+		//CY.log("inComentSite returned : " + ret) ;
 		return ret ;
 	},
 	
