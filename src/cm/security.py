@@ -120,7 +120,7 @@ def get_texts_with_perm(request, perm_name):
     #    return Text.objects.filter(Q(userrole__role__permissions__codename__exact=perm_name), Q(userrole__user=user) | Q(userrole__user=None)).distinct()
 
     # local role OVERRIDES global role:
-    texts_with_local_role = Text.objects.filter(userrole__in=UserRole.objects.filter(user=user)) # .filter(~Q(role=None))
+    texts_with_local_role = Text.objects.filter(userrole__in=UserRole.objects.filter(Q(user=user) | Q(user=None)).filter(~Q(role=None)))
     #Text.objects.filter(Q(userrole__user=user) & ~Q(userrole__role=None))
     texts_without_local_role = Text.objects.exclude(id__in=texts_with_local_role)
 
