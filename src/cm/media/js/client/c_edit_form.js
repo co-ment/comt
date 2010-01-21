@@ -96,6 +96,11 @@ onEditCancelClick = function(iCommentHost) {
 onChangeScopeClick = function() {
 	if (readyForAction())
 		gSync.changeScopeFormClick() ;
+	else {// (onChangeScopeClick triggers an animation : checking for readyForAction does not prevent the checkbox change ...)
+		var chckCtrl = CY.get("#"+gEdit['ids']['changeScopeInputId']+" input") ;
+		var chck = chckCtrl.get('checked') ;
+		chckCtrl.set('checked', !chck) ; // set it back 
+	}
 }
 changeScopeFormClick = function() {
 	var node = CY.get("#"+gEdit['ids']['currentSelId']) ;
