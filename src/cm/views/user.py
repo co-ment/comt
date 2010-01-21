@@ -207,7 +207,7 @@ class UserProfileForm(ModelForm):
 class MyUserProfileForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('allow_contact', 'preferred_language')
+        fields = ('allow_contact', 'preferred_language', 'tags')
 
 class UserProfileAddForm(ModelForm):
     class Meta:
