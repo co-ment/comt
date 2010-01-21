@@ -19,6 +19,7 @@ TIME_ZONE = 'Europe/Paris' #UTC
 # it's not the format js client users will see the dates in !
 # it's the format that's used to communicate dates to js client (python date -> JSON str -> parsed to js date)
 CLIENT_DATE_FMT = {'python_output' : '%Y-%m-%dT%H:%M:%S', 'js_parse' : "Y-m-d\\\\TH:i:s"}
+ALLOW_CLIENT_MODIF_ON_LAST_VERSION_ONLY = True
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html

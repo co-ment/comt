@@ -23,6 +23,10 @@ Db.prototype = {
 	init : function() {
 		// at first server side ordered comment by asc ids, replies by creation date :
 		this.allComments = CY.JSON.parse(sv_comments) ;
+		if (sv_read_only) {
+			this.initToReadOnly() ;
+		}
+		
 	    this._computeAllCommentsByDbId() ;
 	    
 	    this._reorder() ;
@@ -250,6 +254,16 @@ Db.prototype = {
 			isChild = (comment.id == parentDbId) ; ;
 		}
 		return isChild ;
+	},	
+	
+	initToReadOnly : function(commentDbId, parentDbId) {
+		for (var i = 0, ilen = this.allComments.length ; i < ilen ; i++) {
+			var comment = this.allComments[i] ;
+			for (var prop in comment) {
+				if (0 == prop.indexOf("can_") && typeof comment[prop] === 'boolean')
+					comment[prop] = false ;
+			}
+		}
 	},	
 	
 //////////////////////////////
