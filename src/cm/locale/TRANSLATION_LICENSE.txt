@@ -1,0 +1,6 @@
+Interface translation for COMT: Web-based text annotation
+Copyright (C) 2006-2010 Sopinspace, Society for Public Information Spaces, www.sopinspace.com
+Translator name(s) indicated in each language file
+
+The translations for the interface messages are licensed under a Creative Commons Attribution License, http://creativecommons.org/licenses/by/3.0/
+
