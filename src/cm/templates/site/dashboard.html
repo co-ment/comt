@@ -136,6 +136,7 @@ $("#comment-approve-{{ comment.key }}").click(function(){
             'comment_key':'{{ comment.key }}',
             'fun':'editComment',
             'key':'{{ comment.text_version.text.key }}',
+            'version_key':'{{ comment.text_version.key }}',
             'state':'approved'
                  },
                function(data){
@@ -152,6 +153,7 @@ $("#comment-refuse-{{ comment.key }}").click(function(){
             'comment_key':'{{ comment.key }}',
             'fun':'editComment',
             'key':'{{ comment.text_version.text.key }}',
+            'version_key':'{{ comment.text_version.key }}',            
             'state':'unapproved'
                  },
                function(data){
