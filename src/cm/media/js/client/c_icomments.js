@@ -151,7 +151,7 @@ IComments.prototype = {
 
 		setAnimationToPositions : function (y) {
 			this._initAnimations();
-			CY.log(gPrefs.get('comments','threadpad')) ;
+			//CY.log(gPrefs.get('comments','threadpad')) ;
 			var lpad = (gPrefs.get('comments','threadpad') == '1') ? 15 : 0 ; // gIThreadPad ... TODO 'configurize'
 
 			var nextY = y ;

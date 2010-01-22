@@ -215,11 +215,15 @@ def text_delete(request, key):
 @has_perm_on_text('can_view_text') # only protected by text_view / comment filtering done in view
 def text_view_comments(request, key, version_key=None, adminkey=None):
     text = get_text_by_keys_or_404(key)
+    
+    read_only = False
     if version_key :
         text_version = get_textversion_by_keys_or_404(version_key, adminkey, key)
+        if settings.ALLOW_CLIENT_MODIF_ON_LAST_VERSION_ONLY :
+            read_only = (text.last_text_version_id != text_version.id) 
     else :
         text_version = text.get_latest_version()
-
+    
     comments = get_viewable_comments(request, text_version.comment_set.filter(reply_to__isnull=True),text)
     filter_datas = get_filter_datas(request, text_version, text)
     
@@ -233,6 +237,7 @@ def text_view_comments(request, key, version_key=None, adminkey=None):
                                'json_filter_datas':jsonize(filter_datas, request),
                                'content' : wrapped_text_version,
                                'client_date_fmt' : settings.CLIENT_DATE_FMT,
+                               'read_only' : read_only,
                                }
     return render_to_response('site/text_view_comments.html',
                               template_dict,
