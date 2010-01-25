@@ -1,5 +1,6 @@
 from pandoc_converters import pandoc_convert
 import chardet 
+from cm.utils.string import to_unicode 
 import re
 
 # TODO: move that in text_base: save images
@@ -7,19 +8,6 @@ def convert_from_mimetype(file_name, mime_type, format):
     input = open(file_name, 'r').read()
     return _convert_from_mimetype(input, mime_type, format)
 
-def to_unicode(input):
-    if type(input) == str:
-        res = None
-        for encoding in [chardet.detect(input)['encoding'], 'utf8', 'latin1']:
-            try:
-                res = unicode(input, encoding)
-                break;
-            except UnicodeDecodeError:
-                pass
-        if not res:
-            raise Exception('UnicodeDecodeError: could not decode')
-        return res
-    return input
 
 def _convert_from_mimetype(input, mime_type, format):
     #input = to_unicode(input)

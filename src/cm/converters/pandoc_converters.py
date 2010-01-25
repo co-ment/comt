@@ -10,7 +10,7 @@ import os
 from tempfile import mkstemp
 import StringIO
 import tidy
-
+from cm.utils.string import to_unicode
 
 PANDOC_BIN = "pandoc"
 PANDOC_OPTIONS = "--sanitize-html "
@@ -46,7 +46,11 @@ def pandoc_convert(content, from_format, to_format, full=False):
     # pandoc does not react well when html is not valid
     # use tidy to clean html  
     if from_format == 'html':
-        content = do_tidy(content)
+        try:
+            content = do_tidy(content)
+        except:
+            # tidy fails ... try pandoc anyway...
+            content = to_unicode(content)
     # if to_format is pdf: use markdown2pdf
     if to_format == 'pdf':        
         if from_format != 'markdown':
@@ -83,7 +87,7 @@ def do_tidy(content=None, file_name=None):
                         input_encoding='utf8',
                         output_encoding='utf8',
                         )
-    tidyied_content = tidy.parseString(content.encode('utf8'), **tidy_options)
+    tidyied_content = tidy.parseString(to_unicode(content).encode('utf8'), **tidy_options)
     tidyied_content = str(tidyied_content)
     if content and not tidyied_content.strip():
         raise Exception('Content could not be tidyfied') 
