@@ -35,10 +35,13 @@ def _convert_from_mimetype(input, mime_type, format):
         converted_input = pandoc_convert(xhtml_input, 'html', format)
         
     ##############################
+    # latex
+    elif mime_type in ['application/x-latex','text/x-tex',]:
+        converted_input = pandoc_convert(to_unicode(input), 'latex', format)
+    
+    ##############################
     # anything looks like code: put them into markdown citation
-    elif mime_type.startswith('text/x-') or mime_type in ['application/x-latex',
-                                                          'application/x-ruby',
-                       ]:
+    elif mime_type.startswith('text/x-') or mime_type in ['application/x-ruby',]:
         converted_input = markdown_from_code(input)
 
     ##############################
