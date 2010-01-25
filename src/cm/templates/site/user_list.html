@@ -131,7 +131,7 @@ $(function() {
             </th>
             <th>{% up_down user__username %}{% blocktrans %}User{% endblocktrans %}{% endup_down %}</th>
             {% if SHOW_EMAILS_IN_ADMIN %}<th>{% up_down user__email %}{% blocktrans %}Email{% endblocktrans %}{% endup_down %}</th>{% endif %}
-            <th>{% up_down user__date_joined %}{% blocktrans %}Date joined{% endblocktrans %}{% endup_down %}</th>
+            <th>{% up_down -user__date_joined %}{% blocktrans %}Date joined{% endblocktrans %}{% endup_down %}</th>
             <th>{% up_down role__name %}{% blocktrans %}Role{% endblocktrans %}{% endup_down %}</th>
             <th>{% blocktrans %}Last week activity{% endblocktrans %}</th>
         </tr>

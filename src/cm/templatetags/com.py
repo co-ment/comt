@@ -189,7 +189,10 @@ class UpDownNode(template.Node):
             order = None
         if order == self.sort_name:
             node_class = DOWN_CLASS
-            to_link = '-%s' %self.sort_name
+            if self.sort_name[0]=="-":
+                to_link = self.sort_name[1:]
+            else:
+                to_link = '-%s' %self.sort_name
         elif order and order[0]=='-' and order[1:] == self.sort_name:
             node_class = UP_CLASS
             to_link = self.sort_name
