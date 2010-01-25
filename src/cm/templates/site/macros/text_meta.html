@@ -3,7 +3,7 @@
 {% nb_comments text as nb_comments %}
 
 <span class="metadata">
-<abbr title="{{ text_version.created|local_date:tz }}">{% blocktrans with text_version.created|timesince as duration %}last modified {{ duration }} ago{% endblocktrans %}</abbr>
+<abbr title="{{ text.last_text_version.created|local_date:tz }}">{% blocktrans with text.last_text_version.created|timesince as duration %}last modified {{ duration }} ago{% endblocktrans %}</abbr>
 /
 {% blocktrans count text.get_versions_number as versions_number %}1 version{% plural%}{{ versions_number }} versions{% endblocktrans %}
 </span>
