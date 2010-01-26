@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-25 12:51+0100\n"
+"POT-Creation-Date: 2010-01-26 12:23+0100\n"
 "PO-Revision-Date: 2010-01-16 18:00+0100\n"
 "Last-Translator: Kirill Miazine <km@krot.org>\n"
 "Language-Team: <no@li.org>\n"
@@ -215,7 +215,7 @@ msgstr "Navn:"
 msgid "Email:"
 msgstr "Epost:"
 
-#: notifications.py:60 templates/email/activity_notification.txt:1
+#: notifications.py:60
 msgid "Notification:"
 msgstr "Varsler:"
 
@@ -238,6 +238,10 @@ msgstr "Engelsk"
 #: settings.py:108
 msgid "Norwegian"
 msgstr "Norsk"
+
+#: settings.py:109
+msgid "Brazilian Portuguese"
+msgstr ""
 
 #: static_i18n.py:6 static_i18n.py:11
 msgid "Observer"
@@ -350,39 +354,6 @@ msgstr "Serverfeil"
 #: templates/500.html:6
 msgid "An error has occurred."
 msgstr "En feil har oppstått."
-
-#: templates/email/activation_email.txt:2
-#, python-format
-msgid "You've been invited to join the workspace %(workspace_name)s."
-msgstr ""
-
-#: templates/email/activation_email.txt:3
-#: templates/email/invitation_email.txt:3
-msgid ""
-"Click the following link to complete your registration and access the "
-"workspace:"
-msgstr ""
-
-#: templates/email/base_email_notification.txt:2
-#, python-format
-msgid ""
-"If you'd like to unsubscribe from this notification, click the following "
-"link: %(SITE_URL)s%(desactivate_notification_url)s."
-msgstr ""
-
-#: templates/email/site_contact_email.txt:4
-#, fuzzy, python-format
-msgid "Contact from user: %(name)s / %(email)s"
-msgstr "Kontakt bruker %(username)s"
-
-#: templates/email/text_created.txt:4
-#, fuzzy, python-format
-msgid "Your text \"%(title)s\" has been created."
-msgstr "Teksten %(text_title)s har blitt opprettet"
-
-#: templates/email/text_created.txt:6
-msgid "To publish it click on the following link:"
-msgstr ""
 
 #: templates/site/activate.html:10 templates/site/user_activate.html:10
 #: views/user.py:325
@@ -705,11 +676,6 @@ msgstr[1] "%(counter)s offentlige tekster"
 #: templates/site/notifications_desactivate.html:8
 msgid "Desactivate notification"
 msgstr "Stopp varsler"
-
-#: templates/site/notifications_desactivate.html:19
-#, python-format
-msgid "%(title)s"
-msgstr "%(title)s"
 
 #: templates/site/notifications_desactivate.html:31
 msgid "Desactivate"
@@ -1157,10 +1123,23 @@ msgstr "Tekster (%(nb_texts)s)"
 msgid "People  (%(nb_users)s)"
 msgstr "Personer (%(nb_users)s)"
 
+#: templates/site/macros/paginator.html:5
+msgid "Previous page"
+msgstr ""
+
 #: templates/site/macros/paginator.html:6
 #, python-format
 msgid "%(sindex)s-%(eindex)s of %(pcount)s"
 msgstr "%(sindex)s-%(eindex)s av %(pcount)s"
+
+#: templates/site/macros/paginator.html:7
+msgid "Next page"
+msgstr ""
+
+#: templates/site/macros/paginator.html:9
+#, fuzzy
+msgid "View all"
+msgstr "Se"
 
 #: templates/site/macros/paginator.html:11
 msgid "paginate"
@@ -1620,6 +1599,17 @@ msgstr ""
 msgid ""
 "You've been registered, please check your email for the confirm message."
 msgstr "Du er blitt registert. Se din epost for en melding med bekreftelsen."
+
+#, fuzzy
+#~ msgid "Contact from user: %(name)s / %(email)s"
+#~ msgstr "Kontakt bruker %(username)s"
+
+#, fuzzy
+#~ msgid "Your text \"%(title)s\" has been created."
+#~ msgstr "Teksten %(text_title)s har blitt opprettet"
+
+#~ msgid "%(title)s"
+#~ msgstr "%(title)s"
 
 #~ msgid "Local role"
 #~ msgstr "Tekstrolle"

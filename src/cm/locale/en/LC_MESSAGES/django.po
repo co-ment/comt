@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-25 12:52+0100\n"
+"POT-Creation-Date: 2010-01-26 12:24+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -212,7 +212,7 @@ msgstr ""
 msgid "Email:"
 msgstr ""
 
-#: notifications.py:60 templates/email/activity_notification.txt:1
+#: notifications.py:60
 msgid "Notification:"
 msgstr ""
 
@@ -234,6 +234,10 @@ msgstr ""
 
 #: settings.py:108
 msgid "Norwegian"
+msgstr ""
+
+#: settings.py:109
+msgid "Brazilian Portuguese"
 msgstr ""
 
 #: static_i18n.py:6 static_i18n.py:11
@@ -346,39 +350,6 @@ msgstr ""
 
 #: templates/500.html:6
 msgid "An error has occurred."
-msgstr ""
-
-#: templates/email/activation_email.txt:2
-#, python-format
-msgid "You've been invited to join the workspace %(workspace_name)s."
-msgstr ""
-
-#: templates/email/activation_email.txt:3
-#: templates/email/invitation_email.txt:3
-msgid ""
-"Click the following link to complete your registration and access the "
-"workspace:"
-msgstr ""
-
-#: templates/email/base_email_notification.txt:2
-#, python-format
-msgid ""
-"If you'd like to unsubscribe from this notification, click the following "
-"link: %(SITE_URL)s%(desactivate_notification_url)s."
-msgstr ""
-
-#: templates/email/site_contact_email.txt:4
-#, fuzzy, python-format
-msgid "Contact from user: %(name)s / %(email)s"
-msgstr "Ajouter un utilisateur"
-
-#: templates/email/text_created.txt:4
-#, python-format
-msgid "Your text \"%(title)s\" has been created."
-msgstr ""
-
-#: templates/email/text_created.txt:6
-msgid "To publish it click on the following link:"
 msgstr ""
 
 #: templates/site/activate.html:10 templates/site/user_activate.html:10
@@ -701,11 +672,6 @@ msgstr[1] ""
 
 #: templates/site/notifications_desactivate.html:8
 msgid "Desactivate notification"
-msgstr ""
-
-#: templates/site/notifications_desactivate.html:19
-#, python-format
-msgid "%(title)s"
 msgstr ""
 
 #: templates/site/notifications_desactivate.html:31
@@ -1146,9 +1112,21 @@ msgstr ""
 msgid "People  (%(nb_users)s)"
 msgstr ""
 
+#: templates/site/macros/paginator.html:5
+msgid "Previous page"
+msgstr ""
+
 #: templates/site/macros/paginator.html:6
 #, python-format
 msgid "%(sindex)s-%(eindex)s of %(pcount)s"
+msgstr ""
+
+#: templates/site/macros/paginator.html:7
+msgid "Next page"
+msgstr ""
+
+#: templates/site/macros/paginator.html:9
+msgid "View all"
 msgstr ""
 
 #: templates/site/macros/paginator.html:11
@@ -1594,6 +1572,10 @@ msgstr ""
 msgid ""
 "You've been registered, please check your email for the confirm message."
 msgstr ""
+
+#, fuzzy
+#~ msgid "Contact from user: %(name)s / %(email)s"
+#~ msgstr "Ajouter un utilisateur"
 
 #~ msgid "Add user"
 #~ msgstr "Ajouter un utilisateur"

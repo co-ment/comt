@@ -2,13 +2,13 @@
 {% load i18n %}
 <span id="paginator" style="float:right;">
     {% if page_obj %}
-        {% if page_obj.has_previous %}<a title="Previous page" href="?{% newparams 'page' page_obj.previous_page_number %}">&laquo;</a>{% else %}&nbsp;{% endif %}
+        {% if page_obj.has_previous %}<a title="{% blocktrans %}Previous page{% endblocktrans %}" href="?{% newparams 'page' page_obj.previous_page_number %}">&laquo;</a>{% else %}&nbsp;{% endif %}
                 {% blocktrans with page_obj.start_index as sindex and page_obj.end_index as eindex and paginator.count as pcount %}{{ sindex }}-{{ eindex }} of {{ pcount }}{% endblocktrans %} 
-        {% if page_obj.has_next %}<a title="Next page" href="?{% newparams 'page' page_obj.next_page_number %}">&raquo;</a>{% else %}&nbsp;{% endif %}
+        {% if page_obj.has_next %}<a title="{% blocktrans %}Next page{% endblocktrans %}" href="?{% newparams 'page' page_obj.next_page_number %}">&raquo;</a>{% else %}&nbsp;{% endif %}
 
-        {% if page_obj.has_previous or page_obj.has_next %}(<a title="View all" href="?{% newparams 'paginate' '0' %}">{% blocktrans %}all{% endblocktrans %}</a>){% endif %}
+        {% if page_obj.has_previous or page_obj.has_next %}(<a title="{% blocktrans %}View all{% endblocktrans %}" href="?{% newparams 'paginate' '0' %}">{% blocktrans %}all{% endblocktrans %}</a>){% endif %}
     {% else %}
-    (<a title="View by pages" href="?{% newparams 'paginate' '' %}">{% blocktrans %}paginate{% endblocktrans %}</a>)
+    (<a title="{% blocktrans %}paginate{% endblocktrans %}" href="?{% newparams 'paginate' '' %}">{% blocktrans %}paginate{% endblocktrans %}</a>)
     {% endif %}
 </span>
         
