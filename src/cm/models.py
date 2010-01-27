@@ -264,9 +264,14 @@ class CommentManager(Manager):
         comment.save(keep_dates=keep_dates)
         return comment
     
+from cm.models_base import KEY_MAX_SIZE, generate_key
+
 class Comment(PermanentModel, AuthorModel):
     modified = models.DateTimeField()
     created = models.DateTimeField()
+
+    # key to identify same comments across versions
+    id_key = models.CharField(max_length=KEY_MAX_SIZE, db_index=True, default=generate_key)
 
     text_version = models.ForeignKey("TextVersion")
 
