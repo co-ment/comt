@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-20 21:53+0100\n"
+"POT-Creation-Date: 2010-01-25 09:50+0100\n"
 "PO-Revision-Date: 2010-01-16 18:00+0100\n"
 "Last-Translator: Kirill Miazine <km@krot.org>\n"
 "Language-Team: <no@li.org>\n"
@@ -159,7 +159,8 @@ msgstr "vis rekkevidde"
 msgid ""
 "Comment is detached: it was created on a previous version and text it "
 "applied to has been modified or removed."
-msgstr ""
+msgstr "Merknad er frakoblet: den var opprettet i en tidligere versjon, og teksten, "
+"som merknaden er knyttet til er blitt endret eller slettet."
 
 #: media/js/client/c_icomment.js:295
 msgid "last modified on %(date)s"
@@ -186,7 +187,6 @@ msgid "no filtered comments left"
 msgstr "ingen filtrerte merknader igjen"
 
 #: media/js/client/c_sync.js:129
-#, fuzzy
 msgid ""
 "Do you want to be notified of all replies in all discussions you "
 "participated in?"
@@ -195,9 +195,8 @@ msgstr ""
 "deltatt?"
 
 #: media/js/client/c_sync.js:129
-#, fuzzy
-msgid "Reply Notification"
-msgstr "endring"
+msgid "Reply notification"
+msgstr "Varsel om svar"
 
 #: media/js/client/c_sync.js:201 media/js/client/c_sync.js.py:208
 msgid "could not save comment"
@@ -211,7 +210,7 @@ msgstr "Ønsker du å slette denne merknaden?"
 msgid "could not remove comment"
 msgstr "kunne ikke slette merknad"
 
-#: media/js/client/f_client-min.js:1 media/js/client/f_message.js:17
+#: media/js/client/f_client-min.js:1
 msgid "loading..."
 msgstr "laster..."
 
@@ -536,9 +535,8 @@ msgid "code"
 msgstr "kode"
 
 #: media/js/site/f_text_view_frame.js:182
-#, fuzzy
 msgid "view all detached comments"
-msgstr "se alle merknader"
+msgstr "se alle frakoblede merknader"
 
 #: media/js/site/f_text_view_frame.js:183
 msgid "toggle advance interface"
@@ -556,25 +554,21 @@ msgstr "skjul diskusjonstråder"
 msgid ""
 "Should these comments be detached (i.e. kept with no scope) or removed from "
 "new version?"
-msgstr ""
+msgstr "Skal disse merknadene frakobles (dvs. tape kontekst) eller slettes i den nye versjonen?"
 
 #: media/js/site/text_edit.js:27 media/js/site/text_edit.js.py:44
-#, fuzzy
 msgid "%(nb_comments)s comment applies to text that was modified."
 msgid_plural "%(nb_comments)s comments apply to text that was modified."
 msgstr[0] ""
-"%(nb_comments)s merknad vil bli tapt, fordi teksten som den er knyttet til "
-"har blitt endret."
+"%(nb_comments)s kommentar gjelder den endrede teksten."
 msgstr[1] ""
-"%(nb_comments)s merknader vil bli tapt, fordi teksten som de er knyttet til "
-"har blitt endret."
+"%(nb_comments)s kommentarer gjelder den endrede teksten."
 
 #: media/js/site/text_edit.js:48
 msgid "(We suggest you create a new version)"
 msgstr "(Vi anbefaler at du oppretter en ny versjon)"
 
 #: media/js/site/text_edit.js:65
-#, fuzzy
 msgid "You chose not to create a new version all comments will be deleted"
 msgstr ""
 "Siden du ikke ønsket å opprette en ny versjon, vil alle merknader bli slettet"
@@ -584,13 +578,12 @@ msgid "Do you want to continue?"
 msgstr "Ønsker du å fortsette?"
 
 #: media/js/site/text_edit.js:91
-#, fuzzy
 msgid "Detach"
-msgstr "Søk"
+msgstr "Koble fra"
 
 #: media/js/site/text_edit.js:92
 msgid "Remove"
-msgstr ""
+msgstr "Fjern"
 
 #~ msgid "Follow up"
 #~ msgstr "Følg opp"

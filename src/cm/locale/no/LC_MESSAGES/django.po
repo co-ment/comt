@@ -241,7 +241,7 @@ msgstr "Norsk"
 
 #: settings.py:109
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Brasiliansk portugisisk"
 
 #: static_i18n.py:6 static_i18n.py:11
 msgid "Observer"
@@ -953,7 +953,6 @@ msgid "User"
 msgstr "Bruker"
 
 #: templates/site/text_share.html:87
-#, fuzzy
 msgid ""
 "The 'Workspace role' is the global role that applies to every text, you can "
 "give a user a particular role on this text using the 'text role' column on "
@@ -968,12 +967,10 @@ msgid "Workspace role"
 msgstr "Rolle for arbeidsområde"
 
 #: templates/site/text_share.html:88
-#, fuzzy
 msgid "Text role"
 msgstr "Tekstrolle"
 
 #: templates/site/text_share.html:101
-#, fuzzy, python-format
 msgid "This role has been overriden on this text by a text role: %(rolename)s"
 msgstr "Denne rollen viker for en lokal rolle for teksten: %(rolename)s"
 
@@ -1134,12 +1131,11 @@ msgstr "%(sindex)s-%(eindex)s av %(pcount)s"
 
 #: templates/site/macros/paginator.html:7
 msgid "Next page"
-msgstr ""
+msgstr "Neste side"
 
 #: templates/site/macros/paginator.html:9
-#, fuzzy
 msgid "View all"
-msgstr "Se"
+msgstr "Vis alle"
 
 #: templates/site/macros/paginator.html:11
 msgid "paginate"
@@ -1163,12 +1159,12 @@ msgstr ""
 "tapt. Ønsker du å forlate denne siden?"
 
 #: templates/site/macros/text_meta.html:6
-#, fuzzy, python-format
+#, python-format
 msgid "last modified %(duration)s ago"
 msgstr "endret for %(duration)s siden"
 
 #: templates/site/macros/text_meta.html:8
-#, fuzzy, python-format
+#, python-format
 msgid "1 version"
 msgid_plural "%(versions_number)s versions"
 msgstr[0] "Versjoner"
