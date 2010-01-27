@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-26 12:23+0100\n"
+"POT-Creation-Date: 2010-01-27 14:59+0100\n"
 "PO-Revision-Date: 2010-01-16 18:00+0100\n"
 "Last-Translator: Kirill Miazine <km@krot.org>\n"
 "Language-Team: <no@li.org>\n"
@@ -589,7 +589,7 @@ msgid "Public feed"
 msgstr "Offentlig strøm"
 
 #: templates/site/followup.html:22 templates/site/followup.html.py:35
-#: templates/site/help.html:6 templates/site/text_embed.html:26
+#: templates/site/help.html:6 templates/site/text_embed.html:27
 #: templates/site/layout/footer.html:26
 #: templates/site/macros/form_fields.html:15
 msgid "Help"
@@ -722,24 +722,29 @@ msgstr "Tekster"
 msgid "Text notifications"
 msgstr "Tekstvarsler"
 
-#: templates/site/text_embed.html:24
+#: templates/site/text_embed.html:25
 msgid "Embed text"
 msgstr "Integrer tekst"
 
-#: templates/site/text_embed.html:25
+#: templates/site/text_embed.html:26
+msgid "Copy this code into your site to display text with comments."
+msgstr ""
+
+#: templates/site/text_embed.html:26
+#, fuzzy
 msgid ""
-"Copy this code into your site to display text with comments. Users will also "
-"be able to add comments from your site depending an anonymous users' roles."
+"Users will also be able to add comments from your site depending on "
+"anonymous users' roles."
 msgstr ""
 "Kopier denne koden til din side for å vise teksten med merknader. Avhengig "
 "av rettighetene til anonyme brukere, vil andre muligens også kunne "
 "kommentere teksten direkte fra din side."
 
-#: templates/site/text_embed.html:33
+#: templates/site/text_embed.html:36
 msgid "Warning:"
 msgstr "Advarsel:"
 
-#: templates/site/text_embed.html:33
+#: templates/site/text_embed.html:36
 msgid ""
 "You won't successfully embed the text before you give anonymous users a role "
 "allowing them to view the text."
@@ -971,6 +976,7 @@ msgid "Text role"
 msgstr "Tekstrolle"
 
 #: templates/site/text_share.html:101
+#, python-format
 msgid "This role has been overriden on this text by a text role: %(rolename)s"
 msgstr "Denne rollen viker for en lokal rolle for teksten: %(rolename)s"
 
@@ -1178,7 +1184,7 @@ msgstr "Personer"
 msgid "Versions"
 msgstr "Versjoner"
 
-#: templates/site/macros/text_tabs.html:25
+#: templates/site/macros/text_tabs.html:24
 msgid "Embed"
 msgstr "Integrer"
 
