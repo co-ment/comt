@@ -10,6 +10,7 @@
 {% block main %}
 {% get_local_perm request can_manage_workspace as can_manage_workspace %}
 {% get_local_perm request can_view_unapproved_comment as can_view_unapproved_comment %}
+{% get_local_text_perm request text can_manage_text as can_manage_text %}
 
 <script type="text/javascript">
 <!--
@@ -22,15 +23,18 @@ tb_conf['current_tab'] = 'embed';
 <form id="embed" enctype="multipart/form-data" action="." method="post">
 
 <h2 class="title_first">{% blocktrans %}Embed text{% endblocktrans %}</h2>
-{% blocktrans %}Copy this code into your site to display text with comments. Users will also be able to add comments from your site depending an anonymous users' roles.{% endblocktrans %}
+{% blocktrans %}Copy this code into your site to display text with comments.{% endblocktrans %} {% blocktrans %}Users will also be able to add comments from your site depending on anonymous users' roles.{% endblocktrans %}
 (<a title="{% blocktrans %}Help{% endblocktrans %}" target="_blank" href="{% url help %}#embed">?</a>)
 <br/>
 <br/>
 <input style="width:100%;background-color:#DDDDDD;" value="{{ embed_code }}" type="text" readonly="true"></input>
 </textarea>
+
 {% if not anonymous_can_view_text %}
+{% if can_manage_text %}
 <br/>
 <span style="color:#F00;">{% blocktrans %}Warning:{% endblocktrans %}</span>{% blocktrans %}You won't successfully embed the text before you give anonymous users a role allowing them to view the text.{% endblocktrans %}</span>
+{% endif %}
 {% endif %}
 </form>
 </div>

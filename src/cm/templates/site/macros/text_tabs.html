@@ -21,9 +21,7 @@
         {% if user.is_authenticated %}
         <li><a id="followup_tab_link" class="cust_behav" href="#followup_settings">{% blocktrans %}Followup{% endblocktrans %}</a></li>
         {% endif %}
-        {% if can_manage_text %}
         <li><a id="embed_tab_link" class="cust_behav" href="#text_embed">{% blocktrans %}Embed{% endblocktrans %}</a></li>
-        {% endif %}
     </ul> 
 </div>
 
@@ -45,54 +43,53 @@ tb_conf['settings-view-url'] = "{% url text-settings text.key %}";
 tb_conf['followup-view-url'] = "{% url text-followup text.key %}";
 {% endif %}
 
-{% if can_manage_text %}
 tb_conf['embed-view-url'] = "{% url text-embed text.key %}";
-{% endif %}
 
 renderTabs = function (current_tab) {
 
+    var delta = -1;
     var tab_index = 0;
     
+	delta = delta + 1;
     if (current_tab == 'view') {
-        tab_index = 0;
+        tab_index = delta;
     }    
 
-    var delta = 0;    
     {% if can_edit_text %}
-    delta = 1;        
+	delta = delta + 1;
     if (current_tab == 'edit') {
-        tab_index = 1;
+        tab_index = delta;
     }
     {% endif %}    
 
     {% if can_manage_text %}
-    delta = 2;       
+	delta = delta + 1;
     if (current_tab == 'share') {
-        tab_index = 2;
+        tab_index = delta;
     }
     {% endif %}
+	delta = delta + 1;
     if (current_tab == 'history') {
-        tab_index = 1 + delta;        
+        tab_index = delta;
     }    
     
     {% if can_manage_text %}
-    delta = 3;        
+	delta = delta + 1;
     if (current_tab == 'settings') {
-        tab_index = 4;
+        tab_index = delta;
     }
     {% endif %}
     {% if user.is_authenticated %}    
+	delta = delta + 1;
     if (current_tab == 'followup') {
-        tab_index = 2 + delta;        
+        tab_index = delta;
     }
     {% endif %}
-    {% if can_manage_text %}
+	delta = delta + 1;
     if (current_tab == 'embed') {
-        tab_index = 3 + delta;
+        tab_index = delta;
     }
-    {% endif %}
-    
-        
+
     $("#text-tabs").tabs({ ajaxOptions: { async: false }, selected: tab_index}) ;
     
     $('.cust_behav').click(function() {
