@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-26 12:23+0100\n"
+"POT-Creation-Date: 2010-01-26 17:28+0100\n"
 "PO-Revision-Date: 2010-01-23 12:00-0300\n"
 "Last-Translator: Paulo Rená da Silva Santarém <pbrss@yahoo.com.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -583,7 +583,7 @@ msgid "Public feed"
 msgstr "Feed público"
 
 #: templates/site/followup.html:22 templates/site/followup.html.py:35
-#: templates/site/help.html:6 templates/site/text_embed.html:26
+#: templates/site/help.html:6 templates/site/text_embed.html:27
 #: templates/site/layout/footer.html:26
 #: templates/site/macros/form_fields.html:15
 msgid "Help"
@@ -715,24 +715,29 @@ msgstr "Lista de textos"
 msgid "Text notifications"
 msgstr "Aviso de texto"
 
-#: templates/site/text_embed.html:24
+#: templates/site/text_embed.html:25
 msgid "Embed text"
 msgstr "Embutir texto"
 
-#: templates/site/text_embed.html:25
+#: templates/site/text_embed.html:26
+msgid "Copy this code into your site to display text with comments."
+msgstr ""
+
+#: templates/site/text_embed.html:26
+#, fuzzy
 msgid ""
-"Copy this code into your site to display text with comments. Users will also "
-"be able to add comments from your site depending an anonymous users' roles."
+"Users will also be able to add comments from your site depending on "
+"anonymous users' roles."
 msgstr ""
 "Copiar esse código para o seu site para exibir o texto com comentários. "
 "Usuários poderão adicionar comentários pelo seu site de acordo com as "
 "funções de um usuário anônimo."
 
-#: templates/site/text_embed.html:33
+#: templates/site/text_embed.html:36
 msgid "Warning:"
 msgstr "Atenção:"
 
-#: templates/site/text_embed.html:33
+#: templates/site/text_embed.html:36
 msgid ""
 "You won't successfully embed the text before you give anonymous users a role "
 "allowing them to view the text."
@@ -1173,7 +1178,7 @@ msgstr "Pessoas"
 msgid "Versions"
 msgstr "Versões"
 
-#: templates/site/macros/text_tabs.html:25
+#: templates/site/macros/text_tabs.html:24
 msgid "Embed"
 msgstr "Embutir"
 

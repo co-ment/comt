@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-26 12:24+0100\n"
+"POT-Creation-Date: 2010-01-26 17:29+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -589,7 +589,7 @@ msgid "Public feed"
 msgstr ""
 
 #: templates/site/followup.html:22 templates/site/followup.html.py:35
-#: templates/site/help.html:6 templates/site/text_embed.html:26
+#: templates/site/help.html:6 templates/site/text_embed.html:27
 #: templates/site/layout/footer.html:26
 #: templates/site/macros/form_fields.html:15
 msgid "Help"
@@ -718,21 +718,25 @@ msgstr "Ajouter un utilisateur"
 msgid "Text notifications"
 msgstr ""
 
-#: templates/site/text_embed.html:24
+#: templates/site/text_embed.html:25
 msgid "Embed text"
 msgstr ""
 
-#: templates/site/text_embed.html:25
-msgid ""
-"Copy this code into your site to display text with comments. Users will also "
-"be able to add comments from your site depending an anonymous users' roles."
+#: templates/site/text_embed.html:26
+msgid "Copy this code into your site to display text with comments."
 msgstr ""
 
-#: templates/site/text_embed.html:33
+#: templates/site/text_embed.html:26
+msgid ""
+"Users will also be able to add comments from your site depending on "
+"anonymous users' roles."
+msgstr ""
+
+#: templates/site/text_embed.html:36
 msgid "Warning:"
 msgstr ""
 
-#: templates/site/text_embed.html:33
+#: templates/site/text_embed.html:36
 msgid ""
 "You won't successfully embed the text before you give anonymous users a role "
 "allowing them to view the text."
@@ -1168,7 +1172,7 @@ msgstr ""
 msgid "Versions"
 msgstr ""
 
-#: templates/site/macros/text_tabs.html:25
+#: templates/site/macros/text_tabs.html:24
 msgid "Embed"
 msgstr ""
 
