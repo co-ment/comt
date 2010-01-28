@@ -1,4 +1,4 @@
-DEBUG = True
+DEBUG = False
 CLIENT_DEBUG = DEBUG
 TEMPLATE_DEBUG = DEBUG
 
@@ -71,7 +71,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.i18n",    
     "django.core.context_processors.media",    
     'djangoflash.context_processors.flash',
-    'django.core.context_processors.request',    
 )
 
 MIDDLEWARE_CLASSES = (
