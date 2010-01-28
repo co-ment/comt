@@ -213,6 +213,11 @@ class UserProfileAddForm(ModelForm):
     class Meta:
         model = UserProfile
         fields = ('preferred_language', 'tags')
+        
+class UserProfileRegisterForm(ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('preferred_language', )        
 
 class UserAddForm(forms.Form):
     note = forms.CharField(label=ugettext_lazy(u'Note'),
@@ -548,7 +553,7 @@ def logout(request):
 def register(request):
     if request.method == 'POST':
         userform = UserForm(request.POST)
-        userprofileaddform = UserProfileAddForm(request.POST)
+        userprofileaddform = UserProfileRegisterForm(request.POST)
         
         if userform.is_valid() and userprofileaddform.is_valid():
             data = userform.cleaned_data
@@ -565,6 +570,6 @@ def register(request):
             return HttpResponseRedirect(reverse('index'))
     else:    
         userform = UserForm()
-        userprofileaddform = UserProfileAddForm()
+        userprofileaddform = UserProfileRegisterForm()
     
     return render_to_response('site/register.html', {'forms':[userform, userprofileaddform]}, context_instance=RequestContext(request))
