@@ -19,9 +19,13 @@ ALL_TYPES = {u'seconds': timedelta(seconds=1),
 
 TYPE_FULL_SHORT = {
              u'hour': (60, u'minutes'),
-             u'day': (24*4, u'1/4hour'),
-             u'week': (7*24, u'hour'),
-             u'month': (31*24, u'hour'),
+#             u'day': (24*4, u'1/4hour'),
+             u'day': (24, u'hour'),
+#             u'week': (7*24, u'hour'),
+             u'week': (7*24/4, u'1/4day'),             
+#             u'week': (7*24/8, u'1/2day'),             
+#             u'month': (31*24, u'hour'),
+             u'month': (31, u'day'),
              } 
 
 KINDS = (u"''",u"'raw'")
