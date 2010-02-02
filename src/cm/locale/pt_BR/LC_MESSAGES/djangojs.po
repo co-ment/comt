@@ -1,6 +1,7 @@
 # COMT pt_BR translation
 # Paulo Rená da Silva Santarém <pbrss@yahoo.com.br>, 2010.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"

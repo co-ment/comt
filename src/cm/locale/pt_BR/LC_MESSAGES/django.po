@@ -1,6 +1,7 @@
 # COMT pt_BR translation
 # Paulo Rená da Silva Santarém <pbrss@yahoo.com.br>, 2010.
-# #
+# 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
@@ -52,7 +53,7 @@ msgstr "comentário salvo, aguarda moderação"
 
 #: client.py:336
 msgid "Tags input must be no longer than 250 characters."
-msgstr "Palavras-chave não pode exceder 250 caracteres"
+msgstr "Palavras-chave não pode exceder 250 caracteres."
 
 #: diff.py:53
 msgid "unknown"
