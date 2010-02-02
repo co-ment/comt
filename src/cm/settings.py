@@ -106,6 +106,7 @@ LANGUAGES = (
     ('en', _(u'English')),
     ('no', _('Norwegian')),
     ('pt_BR', _('Brazilian Portuguese')),
+    ('es', _('Spanish')),
 )
 
 AUTH_PROFILE_MODULE = 'cm.UserProfile'
