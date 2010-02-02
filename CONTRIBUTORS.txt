@@ -1,0 +1,10 @@
+The PRIMARY AUTHORS are (and/or have been):
+
+Renaud Bernard <renaud.bernard@sopinspace.com>
+Raphaël Badin <raphael.badin@sopinspace.com>
+
+The MUCH-APPRECIATED CONTRIBUTORS (people submitted patches, reported bugs, added translations, helped):
+
+Kirill Miazine (http://km.krot.org/)
+Paulo Rená da Silva Santarém <pbrss@yahoo.com.br>
+

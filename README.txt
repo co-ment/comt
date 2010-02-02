@@ -145,11 +145,6 @@ Community
 =========
 The Comt web site http://www.co-ment.org is the place to ask questions, report bugs, check out the source code or download the releases of Comt.
 
-Credits
-========
-We'd like to thank:
-- Kirill Miazine (http://km.krot.org/) for the Norwegian translation
-
 How to contribute
 =================
 
