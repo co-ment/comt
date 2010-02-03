@@ -357,8 +357,9 @@ from cm.role_models import change_role_model
 
 class ConfigurationManager(models.Manager):
     def set_workspace_name(self, workspace_name):
-        if workspace_name and not self.get_key('workspace_name')!=u'Workspace':
-            self.set_key('workspace_name', _(u"%(workspace_name)s's workspace") %{'workspace_name':workspace_name})
+        if workspace_name:
+            #self.set_key('workspace_name', _(u"%(workspace_name)s's workspace") %{'workspace_name':workspace_name})
+            self.set_key('workspace_name', workspace_name)
 
     def get_key(self, key, default_value=None):
         try:
