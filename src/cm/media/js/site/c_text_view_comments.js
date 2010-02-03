@@ -276,9 +276,9 @@ onDomReady = function(arg1) {
 				parent.f_removeLoadingMsg();
 			}
 			// if there is a comment id in the url display it
-			if ("comment_key" in gGETValues) {
-				var key = gGETValues["comment_key"] ;
-				var comment = gDb.getCommentByKey(key) ;
+			if ("comment_id_key" in gGETValues) {
+				var id_key = gGETValues["comment_id_key"] ;
+				var comment = gDb.getCommentByIdKey(id_key) ;
 				if (comment != null) {
 					var path = gDb.getPath(comment) ;
 					var topParentComment = path[path.length - 1] ;

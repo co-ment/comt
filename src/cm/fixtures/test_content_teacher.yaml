@@ -142,6 +142,7 @@
     content: "comment 1 content" 
     content_html: "<p>comment 1 content</p>" 
     key: "comment_key_1" 
+    id_key: "comment_id_key_1" 
     adminkey: "comment_adminkey_1"
     reply_to: null
     user: 1
@@ -162,6 +163,7 @@
     content: "comment 2 content" 
     content_html: "<p>comment 2 content</p>" 
     key: "comment_key_2" 
+    id_key: "comment_id_key_2" 
     adminkey: "comment_adminkey_2"
     reply_to: null
     user: 2

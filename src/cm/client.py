@@ -54,6 +54,7 @@ class RequestComplexEncoder(simplejson.JSONEncoder):
             
             return {'id' : comment.id, 
                     'key' : comment.key,
+                    'id_key' : comment.id_key,
                    'created_user_str' : datetime_to_user_str(request_tz_convert(comment.created, self.request)),
                    'modified_user_str' : datetime_to_user_str(request_tz_convert(comment.modified, self.request)),
 #                   'created_str' : datetime_to_str(comment.created), # TODO change to a simple number as modified if possible
@@ -76,7 +77,7 @@ class RequestComplexEncoder(simplejson.JSONEncoder):
                    'start_offset' : comment.start_offset, 
                    'end_offset' : comment.end_offset,
                    'state' : comment.state,
-                   'permalink' : reverse('text-view-show-comment', args=[text.key, comment.key]),
+                   'permalink' : reverse('text-view-show-comment', args=[text.key, comment.id_key]),
                    # permission
                    'can_edit' : can_edit,
                    'can_delete' : can_delete,

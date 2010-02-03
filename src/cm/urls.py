@@ -55,7 +55,7 @@ urlpatterns += patterns('',
 
      # text
      url(r'^text/(?P<key>\w*)/view/$', text_view, name="text-view"),
-     url(r'^text/(?P<key>\w*)/view/\?comment_key=(?P<id>\w*)$', text_view, name="text-view-show-comment"), 
+     url(r'^text/(?P<key>\w*)/view/\?comment_id_key=(?P<id>\w*)$', text_view, name="text-view-show-comment"), 
      
 #     url(r'^text/(?P<key>\w*)/view/(?P<version_key>\w*)/$', text_view, name="text-view-version"),
      

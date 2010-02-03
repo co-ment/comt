@@ -783,7 +783,8 @@ xxx xxx xxx xxx xxx xxx xxxxxx xxx xxx xxx xxx xxx xxx xxx xxx xxx xxx xxx xxx x
     title: "comment 0" 
     content: "comment 0 content" 
     content_html: "<p>comment 0 content</p>" 
-    key: "comment_key_0" 
+    key: "comment_key_0"
+    id_key: "comment_id_key_0"
     adminkey: "comment_adminkey_0"
     reply_to: null
     user: 1

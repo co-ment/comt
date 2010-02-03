@@ -743,7 +743,7 @@ class Activity(models.Model):
 
     def linkable_comment_title(self, html=True, link=True):
         if self.comment:
-            format_args = {'link':absolute_reverse('text-view-show-comment', args=[self.text.key, self.comment.key]), 'title':self.comment.title}
+            format_args = {'link':absolute_reverse('text-view-show-comment', args=[self.text.key, self.comment.id_key]), 'title':self.comment.title}
             if html and not self.comment.deleted and not self.text.deleted:
                 return mark_safe(u'<a href="%(link)s">%(title)s</a>' % format_args)
             else :

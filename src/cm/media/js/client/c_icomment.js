@@ -162,12 +162,12 @@ IComment.prototype = {
 				var link = e.target ;
 				var showCommentUrl = sv_site_url + sv_text_view_show_comment_url ;
 				if (link.get('href').indexOf(showCommentUrl) == 0) { 
-					var res = (new RegExp('comment_key=([^&]*)', "g")).exec(link.get('href')) ;
+					var res = (new RegExp('comment_id_key=([^&]*)', "g")).exec(link.get('href')) ;
 					if (res != null) {
 						// open new comment .... we'll suppose it satisfies the filter for now
 						// TODO : should we reset the filter in this case ? instead of having the link open in a new window
-						var key = res[1] ;
-						var comment = gDb.getCommentByKey(key) ;
+						var id_key = res[1] ;
+						var comment = gDb.getCommentByIdKey(id_key) ;
 						if (comment != null) {
 							e.halt() ;
 							if (!link.hasClass("c-permalink")) {// clicking on the permalink itself should do anything
