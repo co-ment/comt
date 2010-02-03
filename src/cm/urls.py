@@ -73,11 +73,11 @@ urlpatterns += patterns('',
      url(r'^text/(?P<key>\w*)/diff/(?P<id_v1>\w*)/(?P<id_v2>\w*)/$', text_diff, name="text-diff"),
 #     url(r'^text/(?P<key>\w*)/version/(?P<id_version>\w*)/$', text_version, name="text-version"),
      
+     # main client frame
      url(r'^text/(?P<key>\w*)/comments_frame/$', text_view_frame, name="text-view-comments-frame"),
-     url(r'^text/(?P<key>\w*)/comments_frame/\?comment_key=(?P<id>\w*)$', text_view_frame, name="text-view-comments-frame-show-comment"), 
      url(r'^text/(?P<key>\w*)/comments_frame/(?P<version_key>\w*)/$', text_view_frame, name="text-view-comments-frame-version"),
-     url(r'^text/(?P<key>\w*)/comments_frame/\?comment_key=(?P<id>\w*)$', text_view_frame, name="text-view-comments-frame-version-show-comment"), 
-     
+
+     # included in text_view_frame
      url(r'^text/(?P<key>\w*)/comments/$', text_view_comments, name="text-view-comments"),
      url(r'^text/(?P<key>\w*)/comments/(?P<version_key>\w*)/$', text_view_comments, name="text-view-comments-version"),
 
