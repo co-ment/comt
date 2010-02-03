@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: djangojs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-20 21:53+0100\n"
+"POT-Creation-Date: 2010-02-02 16:43+0100\n"
 "PO-Revision-Date: 2010-01-20 21:59+0100\n"
 "Last-Translator: renaud bernard <renaud.bernard@sopinspace.com>\n"
 "Language-Team:  <en@li.org>\n"
@@ -157,7 +157,6 @@ msgid "show scope"
 msgstr "afficher la portée"
 
 #: media/js/client/c_icomment.js:27
-
 msgid ""
 "Comment is detached: it was created on a previous version and text it "
 "applied to has been modified or removed."
@@ -194,11 +193,12 @@ msgid ""
 "Do you want to be notified of all replies in all discussions you "
 "participated in?"
 msgstr ""
-"Voulez-vous vous abonner aux notifications portant sur toutes les discussions "
-"auxquelles vous avez participé ?"
+"Voulez-vous vous abonner aux notifications portant sur toutes les "
+"discussions auxquelles vous avez participé ?"
 
 #: media/js/client/c_sync.js:129
-msgid "Reply Notification"
+#, fuzzy
+msgid "Reply notification"
 msgstr "Notification des réponses"
 
 #: media/js/client/c_sync.js:201 media/js/client/c_sync.js.py:208
@@ -561,13 +561,17 @@ msgstr ""
 msgid ""
 "Should these comments be detached (i.e. kept with no scope) or removed from "
 "new version?"
-msgstr "Ces commentaires doivent ils être détachés (i.e. conservés sans portée) ou supprimés de la nouvelle version ?"
+msgstr ""
+"Ces commentaires doivent ils être détachés (i.e. conservés sans portée) ou "
+"supprimés de la nouvelle version ?"
 
 #: media/js/site/text_edit.js:27 media/js/site/text_edit.js.py:44
 msgid "%(nb_comments)s comment applies to text that was modified."
 msgid_plural "%(nb_comments)s comments apply to text that was modified."
-msgstr[0] "%(nb_comments)s commentaire s'applique à du texte qui a été modifié."
-msgstr[1] "%(nb_comments)s commentaires s'appliquent à du texte qui a été modifié."
+msgstr[0] ""
+"%(nb_comments)s commentaire s'applique à du texte qui a été modifié."
+msgstr[1] ""
+"%(nb_comments)s commentaires s'appliquent à du texte qui a été modifié."
 
 #: media/js/site/text_edit.js:48
 msgid "(We suggest you create a new version)"
@@ -590,4 +594,3 @@ msgstr "Détacher"
 #: media/js/site/text_edit.js:92
 msgid "Remove"
 msgstr "Supprimer"
-

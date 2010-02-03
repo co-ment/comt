@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-25 09:50+0100\n"
+"POT-Creation-Date: 2010-02-02 16:43+0100\n"
 "PO-Revision-Date: 2010-01-16 18:00+0100\n"
 "Last-Translator: Kirill Miazine <km@krot.org>\n"
 "Language-Team: <no@li.org>\n"
@@ -159,7 +159,8 @@ msgstr "vis rekkevidde"
 msgid ""
 "Comment is detached: it was created on a previous version and text it "
 "applied to has been modified or removed."
-msgstr "Merknad er frakoblet: den var opprettet i en tidligere versjon, og teksten, "
+msgstr ""
+"Merknad er frakoblet: den var opprettet i en tidligere versjon, og teksten, "
 "som merknaden er knyttet til er blitt endret eller slettet."
 
 #: media/js/client/c_icomment.js:295
@@ -210,7 +211,7 @@ msgstr "Ønsker du å slette denne merknaden?"
 msgid "could not remove comment"
 msgstr "kunne ikke slette merknad"
 
-#: media/js/client/f_client-min.js:1
+#: media/js/client/f_client-min.js:1 media/js/client/f_message.js:17
 msgid "loading..."
 msgstr "laster..."
 
@@ -554,15 +555,15 @@ msgstr "skjul diskusjonstråder"
 msgid ""
 "Should these comments be detached (i.e. kept with no scope) or removed from "
 "new version?"
-msgstr "Skal disse merknadene frakobles (dvs. tape kontekst) eller slettes i den nye versjonen?"
+msgstr ""
+"Skal disse merknadene frakobles (dvs. tape kontekst) eller slettes i den nye "
+"versjonen?"
 
 #: media/js/site/text_edit.js:27 media/js/site/text_edit.js.py:44
 msgid "%(nb_comments)s comment applies to text that was modified."
 msgid_plural "%(nb_comments)s comments apply to text that was modified."
-msgstr[0] ""
-"%(nb_comments)s kommentar gjelder den endrede teksten."
-msgstr[1] ""
-"%(nb_comments)s kommentarer gjelder den endrede teksten."
+msgstr[0] "%(nb_comments)s kommentar gjelder den endrede teksten."
+msgstr[1] "%(nb_comments)s kommentarer gjelder den endrede teksten."
 
 #: media/js/site/text_edit.js:48
 msgid "(We suggest you create a new version)"

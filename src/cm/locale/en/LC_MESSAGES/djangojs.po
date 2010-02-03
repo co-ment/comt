@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-20 21:53+0100\n"
+"POT-Creation-Date: 2010-02-02 16:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -191,7 +191,7 @@ msgid ""
 msgstr ""
 
 #: media/js/client/c_sync.js:129
-msgid "Reply Notification"
+msgid "Reply notification"
 msgstr ""
 
 #: media/js/client/c_sync.js:201 media/js/client/c_sync.js.py:208

@@ -1,12 +1,12 @@
 # COMT pt_BR translation
 # Paulo Rená da Silva Santarém <pbrss@yahoo.com.br>, 2010.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-27 14:58+0100\n"
+"POT-Creation-Date: 2010-02-02 16:40+0100\n"
 "PO-Revision-Date: 2010-01-23 12:00-0300\n"
 "Last-Translator: Paulo Rená da Silva Santarém <pbrss@yahoo.com.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,11 +71,11 @@ msgstr "Formatar"
 msgid "Content"
 msgstr "Conteúdo"
 
-#: models.py:178 models.py:594
+#: models.py:178 models.py:599
 msgid "Tags"
 msgstr "Palavras-chave"
 
-#: models.py:180 views/user.py:218
+#: models.py:180 views/user.py:223
 msgid "Note"
 msgstr "Observação"
 
@@ -83,121 +83,121 @@ msgstr "Observação"
 msgid "Moderation a posteriori?"
 msgstr "Moderação a posteriori?"
 
-#: models.py:280
+#: models.py:285
 msgid "Format:"
 msgstr "Formatar:"
 
-#: models.py:356
+#: models.py:361
 #, python-format
 msgid "%(workspace_name)s's workspace"
 msgstr "%(workspace_name)s da área de trabalho"
 
-#: models.py:497
+#: models.py:502
 msgid "name"
 msgstr "nome"
 
-#: models.py:498
+#: models.py:503
 msgid "description"
 msgstr "descrição"
 
-#: models.py:588
+#: models.py:593
 msgid "Allow contact"
 msgstr "Permitir contato"
 
-#: models.py:588
+#: models.py:593
 msgid "Allow email messages from other users"
 msgstr "Permitir mensagens de email de outros usuários"
 
-#: models.py:589
+#: models.py:594
 msgid "Preferred language"
 msgstr "Idioma preferido"
 
-#: models.py:592
+#: models.py:597
 msgid "Suspended access"
 msgstr "Suspender acesso"
 
-#: models.py:616
+#: models.py:621
 msgid "suspended"
 msgstr "suspenso"
 
-#: models.py:618
+#: models.py:623
 msgid "waiting approval"
 msgstr "aguardando aprovação"
 
-#: models.py:624
+#: models.py:629
 msgid "pending"
 msgstr "pendente"
 
-#: models.py:639
+#: models.py:644
 msgid "Invitation"
 msgstr "Convite"
 
-#: models.py:707
+#: models.py:712
 #, python-format
 msgid "Text %(link_to_text)s edited"
 msgstr "Texto %(link_to_text)s editado"
 
-#: models.py:708
+#: models.py:713
 #, python-format
 msgid "Text %(link_to_text)s edited (new version created)"
 msgstr "Texto %(link_to_text)s editado (criada nova versão)"
 
-#: models.py:709
+#: models.py:714
 #, python-format
 msgid "Text %(link_to_text)s added"
 msgstr "Texto %(link_to_text)s adicionado"
 
-#: models.py:710
+#: models.py:715
 #, python-format
 msgid "Text %(link_to_text)s removed"
 msgstr "Texto %(link_to_text)s removido"
 
-#: models.py:711
+#: models.py:716
 #, python-format
 msgid "Comment %(link_to_comment)s added on text %(link_to_text)s"
 msgstr "Comentário %(link_to_comment)s adicionado ao texto %(link_to_text)s "
 
-#: models.py:712
+#: models.py:717
 #, python-format
 msgid "Comment %(link_to_comment)s removed from text %(link_to_text)s"
 msgstr "Comentário %(link_to_comment)s removido do texto %(link_to_text)s"
 
-#: models.py:713
+#: models.py:718
 #, python-format
 msgid "User %(username)s added"
 msgstr "Usuário %(username)s adicionado"
 
-#: models.py:714
+#: models.py:719
 #, python-format
 msgid "User %(username)s access to workspace enabled"
 msgstr "Acesso do usuário %(username)s à área de trabalho permitido"
 
-#: models.py:715
+#: models.py:720
 #, python-format
 msgid "User %(username)s access to workspace refused"
 msgstr "Acesso do usuário %(username)s à área de trabalho recusado"
 
-#: models.py:716
+#: models.py:721
 #, python-format
 msgid "User %(username)s access to workspace suspended"
 msgstr "Acesso do usuário %(username)s à área de trabalho suspenso"
 
-#: models.py:717
+#: models.py:722
 #, python-format
 msgid "User %(username)s access to workspace activated"
 msgstr "Acesso do usuário %(username)s à área de trabalho ativado"
 
-#: models.py:718
+#: models.py:723
 #, python-format
 msgid "User %(username)s has activated his account"
 msgstr "O usuário %(username)s ativou sua conta"
 
-#: models.py:773 models.py:781
+#: models.py:778 models.py:786
 #, python-format
 msgid "by \"%(username)s\""
 msgstr "por \"%(username)s\""
 
-#: models.py:775
+#: models.py:780
 #, python-format
 msgid "%(time_since)s ago"
 msgstr "há %(time_since)s"
@@ -222,20 +222,24 @@ msgstr "Genérico"
 msgid "Class (education)"
 msgstr "Classe (educação)"
 
-#: settings.py:106
+#: settings.py:105
 msgid "French"
 msgstr "Francês"
 
-#: settings.py:107
+#: settings.py:106
 msgid "English"
 msgstr "Inglês"
 
-#: settings.py:108
+#: settings.py:107
 msgid "Norwegian"
 msgstr "Norueguês"
 
-#: settings.py:109
+#: settings.py:108
 msgid "Brazilian Portuguese"
+msgstr ""
+
+#: settings.py:109
+msgid "Spanish"
 msgstr ""
 
 #: static_i18n.py:6 static_i18n.py:11
@@ -351,7 +355,7 @@ msgid "An error has occurred."
 msgstr "Ocorreu um erro."
 
 #: templates/site/activate.html:10 templates/site/user_activate.html:10
-#: views/user.py:325
+#: views/user.py:330
 msgid "Activate your account"
 msgstr "Ativar sua conta"
 
@@ -1061,7 +1065,7 @@ msgstr "Permitir acesso"
 msgid "Change role to %(role_name)s"
 msgstr "Alterar a função para %(role_name)s"
 
-#: templates/site/user_list.html:133 views/user.py:278
+#: templates/site/user_list.html:133 views/user.py:283
 msgid "Email"
 msgstr "Email"
 
@@ -1309,7 +1313,7 @@ msgstr "Desativar aviso?"
 msgid "Private notifications feed reseted."
 msgstr "Feed privado de avisos restabelecido."
 
-#: views/site.py:81 views/texts.py:132 views/user.py:520
+#: views/site.py:81 views/texts.py:132 views/user.py:525
 msgid "You're logged in!"
 msgstr "Você entrou!"
 
@@ -1488,105 +1492,105 @@ msgstr "Função do texto"
 msgid "This role will apply only to this text."
 msgstr "Essa função se aplicará apenas a esse texto."
 
-#: views/user.py:219
+#: views/user.py:224
 msgid "Optional text to add to invitation email"
 msgstr "Texto opcional para adicionar ao email convite"
 
-#: views/user.py:254
+#: views/user.py:259
 #, python-format
 msgid "%(nb_users)d user added"
 msgid_plural "%(nb_users)d users added"
 msgstr[0] "%(nb_users)d usuário adicionado"
 msgstr[1] "%(nb_users)d usuários adicionados"
 
-#: views/user.py:272
+#: views/user.py:277
 msgid "Save user"
 msgid_plural "Save users"
 msgstr[0] "salvar usuário"
 msgstr[1] "salvar usuários"
 
-#: views/user.py:294
+#: views/user.py:299
 msgid "This username is already in use. Please supply a different username."
 msgstr ""
 "Esse nome de usuário já está em uso. Por favor tente um nome de usuário "
 "diferente."
 
-#: views/user.py:315 views/user.py:331
+#: views/user.py:320 views/user.py:336
 msgid "Your account has been activated. You're now logged-in."
 msgstr "Sua conta foi ativada. Você entrou."
 
-#: views/user.py:326
+#: views/user.py:331
 msgid "activate account"
 msgstr "ativar conta"
 
-#: views/user.py:356
+#: views/user.py:361
 #, python-format
 msgid "User's access %(prof)s has been suspended."
 msgstr "O acesso do usuário %(prof)s foi suspenso"
 
-#: views/user.py:362
+#: views/user.py:367
 #, python-format
 msgid "User's access %(prof)s has been refused."
 msgstr "O acesso do usuário %(prof)s foi rejeitado."
 
-#: views/user.py:374
+#: views/user.py:379
 #, python-format
 msgid "User's access %(prof)s has been restored."
 msgstr "O acesso do usuário %(prof)s foi restaurado."
 
-#: views/user.py:378
+#: views/user.py:383
 #, python-format
 msgid "User's access %(prof)s has been approved."
 msgstr "O acesso do usuário %(prof)s foi aprovado."
 
-#: views/user.py:388
+#: views/user.py:393
 #, python-format
 msgid "A new invitation has been sent to user %(prof)s."
 msgstr "Um novo convite foi enviado ao usuário %(prof)s."
 
-#: views/user.py:402
+#: views/user.py:407
 msgid "Profile updated"
 msgstr "Perfil atualizado"
 
-#: views/user.py:432
+#: views/user.py:437
 msgid "Anonymous user role modified."
 msgstr "Função de usuário anônimo alterada."
 
-#: views/user.py:454
+#: views/user.py:459
 msgid "User modified"
 msgstr "Usuário alterado"
 
-#: views/user.py:469
+#: views/user.py:474
 msgid "Subject"
 msgstr "Assunto"
 
-#: views/user.py:470
+#: views/user.py:475
 msgid "Subject of the email"
 msgstr "Assunto do email"
 
-#: views/user.py:473
+#: views/user.py:478
 msgid "Body"
 msgstr "Corpo"
 
-#: views/user.py:474
+#: views/user.py:479
 msgid "Body of the email"
 msgstr "Corpo do email"
 
-#: views/user.py:494
+#: views/user.py:499
 msgid "Email sent."
 msgstr "Email enviado."
 
-#: views/user.py:514
+#: views/user.py:519
 msgid "This account is suspended, contact the workspace administrator."
 msgstr ""
 "Essa conta estpa suspensa, entre em contato com o administrador da área de "
 "trabalho."
 
-#: views/user.py:545
+#: views/user.py:550
 msgid "You've been logged out."
 msgstr "Você saiu."
 
-#: views/user.py:561
+#: views/user.py:566
 msgid ""
 "You've been registered, you will receive a confirmation mail once a "
 "moderator has approved your membership."
@@ -1594,7 +1598,7 @@ msgstr ""
 "Você se inscreveu. Você receberá um email de confirmação quando o moderador "
 "aprovar sua participação."
 
-#: views/user.py:564
+#: views/user.py:569
 msgid ""
 "You've been registered, please check your email for the confirm message."
 msgstr ""
