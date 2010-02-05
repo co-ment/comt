@@ -99,7 +99,6 @@ def text_followup(request, key):
 
 def text_embed(request, key):
     text = get_text_by_keys_or_404(key)
-    #embed_code = '<iframe frameborder="0" src="%s%s" style="height: 166px; width: 99.9%%; position: relative; top: 0px;">'%(settings.SITE_URL, reverse('text-view-comments-frame', args=[text.key]))
     embed_code = embed_html(text.key) ;   
     template_dict = {
                      'text' : text,

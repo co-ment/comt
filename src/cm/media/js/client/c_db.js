@@ -234,10 +234,10 @@ Db.prototype = {
 		return this.commentsByDbId[dbId] ;
 	},	
 	
-	getCommentByKey : function(key) {
+	getCommentByIdKey : function(id_key) {
 		for (var id in this.commentsByDbId) {
 			var comment = this.commentsByDbId[id] ;
-			if (comment.key == key) { 
+			if (comment.id_key == id_key) { 
 				return comment ;
 			}
 		}

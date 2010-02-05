@@ -440,8 +440,9 @@
     end_offset: 11
     title: "comment 1" 
     content: "comment 1 content" 
-    content_html: "<p>comment 1 content, this <a href='http://localhost:8000/text/text_key_2/view/?comment_key=comment_key_4'>link</a> is a link to another comment, and <a href='http://www.lemonde.fr'>this one</a> is a link to lemonde</sp></p>" 
+    content_html: "<p>comment 1 content, this <a href='http://localhost:8000/text/text_key_2/view/?comment_id_key=comment_id_key_4'>link</a> is a link to another comment, and <a href='http://www.lemonde.fr'>this one</a> is a link to lemonde</sp></p>" 
     key: "comment_key_1" 
+    id_key: "comment_id_key_1"
     adminkey: "comment_adminkey_1"
     reply_to: null
     user: 1
@@ -462,6 +463,7 @@
     content: "comment 2 content" 
     content_html: "<p>comment 2 content</p>" 
     key: "comment_key_2" 
+    id_key: "comment_id_key_2"
     adminkey: "comment_adminkey_2"
     reply_to: null
     user: 1
@@ -482,6 +484,7 @@
     content: "comment 3 content" 
     content_html: "<p>comment 3 content</p>" 
     key: "comment_key_3" 
+    id_key: "comment_id_key_3"
     adminkey: "comment_adminkey_3"
     reply_to: null
     user: 1
@@ -498,6 +501,7 @@
     content: "comment 4 content" 
     content_html: "<p>comment 4 content</p>" 
     key: "comment_key_4" 
+    id_key: "comment_id_key_4"
     adminkey: "comment_adminkey_4"
     reply_to: 3
     user: 1

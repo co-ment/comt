@@ -117,14 +117,14 @@ $("#user-refuse-{{ user.get_profile.key }}").click(function(){
 						<img class="dashlog_img" src="{{ MEDIA_URL }}img/note_error_small.png"/>
 						<span class="dashlog_data">
             	
-		            	{% blocktrans %}comment{% endblocktrans %} <a href="{% url text-view-show-comment comment.text_version.text.key comment.key %}">{{ comment.title }}</a>
+		            	{% blocktrans %}comment{% endblocktrans %} <a href="{% url text-view-show-comment comment.text_version.text.key comment.id_key %}">{{ comment.title }}</a>
 		            	{% blocktrans with comment.user as cuser %}by {{ cuser }} on text{% endblocktrans %} <a href="{% url text-view comment.text_version.text.key %}">{{ comment.text_version.text.title }}</a> {% blocktrans %}awaits approval{% endblocktrans %}<br />
 		            	</span>
 		            	<div style="padding-left:22px;" class="mod_actions">
 <img src="{{ MEDIA_URL }}img/bullet_go_small.png"/>
 
 <a id="comment-approve-{{ comment.key }}" href="#">{% blocktrans %}approve{% endblocktrans %}</a>/<a id="comment-refuse-{{ comment.key }}" href="#">{% blocktrans %}refuse{% endblocktrans %}</a> {% blocktrans %}comment{% endblocktrans %},
-<a href="{% url text-view-show-comment comment.text_version.text.key comment.key %}">{% blocktrans %}view in context{% endblocktrans %}</a>
+<a href="{% url text-view-show-comment comment.text_version.text.key comment.id_key %}">{% blocktrans %}view in context{% endblocktrans %}</a>
 <script type="text/javascript">
 <!--
 $("#comment-approve-{{ comment.key }}").click(function(){
