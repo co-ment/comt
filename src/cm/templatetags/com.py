@@ -209,11 +209,14 @@ class UpDownNode(template.Node):
 
 
 from cm.security import get_viewable_comments
+from cm.models import Text
 
 @register.filter(name='nb_comments')
 def nb_comments(text, request):
-    return len(get_viewable_comments(request, text.last_text_version.comment_set.all(), text))
-
+    if type(text) == Text:
+        return len(get_viewable_comments(request, text.last_text_version.comment_set.all(), text))
+    else:
+        return len(get_viewable_comments(request, text.comment_set.all(), text))
 ## number tags
 
 from cm.security import get_texts_with_perm, get_viewable_comments
@@ -297,3 +300,7 @@ def do_newparams(parser, token):
     all_params = all_params[1:]    
     return NewParams([a for a in all_params])
 
+@register.filter(name='invneg')
+def do_invneg(value, arg):
+    """."""
+    return int(arg) - int(value)

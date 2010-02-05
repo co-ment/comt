@@ -1,0 +1,50 @@
+{% extends "site/layout/base_text.html" %}
+{% load com %}
+{% load i18n %}
+{% load local_perms %}
+{% block main %}
+
+{% get_local_text_perm request text can_edit_text as can_edit_text %}
+
+<script type="text/javascript">
+<!--
+tb_conf['current_tab'] = 'history';
+-->
+</script>
+
+<div id="text_history" class="tab-meta">   
+
+<script type="text/javascript">
+<!--
+$(function() {
+    $(".hidden-text-actions").css('visibility','hidden');   
+}) ;
+-->
+
+</script>
+
+
+<ul class="sub_list">
+    <li><a href="{% url text-history text.key %}">{% blocktrans %}Version list{% endblocktrans %}</a></li>
+    <li> / </li>
+    <li class="active_sub">{% blocktrans with text_version.get_version_number as version_number %}Version {{ version_number }}{% endblocktrans %}</li>
+    {% if text_version.get_previous_version %}
+    <li> / </li>
+    <li><a href="{% url text-history-compare text.key text_version.get_previous_version.key text_version.key %}">{% blocktrans %}Compare with previous version{% endblocktrans %}</a></li>
+    {% endif %}
+    {% if text_version.get_next_version %}
+    <li> / </li>
+    <li><a href="{% url text-history-compare text.key text_version.key text_version.get_next_version.key %}">{% blocktrans %}Compare with next version{% endblocktrans %}</a></li>
+    {% endif %}
+</ul>
+
+<div style="clear:both;"></div>
+
+<div id="autoexpand_text_view_frame_container">
+{% autoescape off %}
+{{ embed_code }}
+{% endautoescape %}
+</div>
+
+</div>
+{% endblock %}
