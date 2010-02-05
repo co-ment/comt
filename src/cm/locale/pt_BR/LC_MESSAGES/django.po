@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-02 16:40+0100\n"
+"POT-Creation-Date: 2010-02-05 12:36+0100\n"
 "PO-Revision-Date: 2010-01-23 12:00-0300\n"
 "Last-Translator: Paulo Rená da Silva Santarém <pbrss@yahoo.com.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,39 +19,39 @@ msgid ""
 "A selection is required. Select in the text the part your comment applies to."
 msgstr "Favor selecionar no texto o trecho ao qual se refere o seu comentário."
 
-#: client.py:133
+#: client.py:134
 msgid "name is required"
 msgstr "Favor preencher o nome"
 
-#: client.py:136
+#: client.py:137
 msgid "email is required"
 msgstr "Favor preencher email"
 
-#: client.py:138
+#: client.py:139
 msgid "invalid email"
 msgstr "Email inválido"
 
-#: client.py:140
+#: client.py:141
 msgid "title is required"
 msgstr "Favor preencher título"
 
-#: client.py:142
+#: client.py:143
 msgid "content is required"
 msgstr "Favor preencher conteúdo"
 
-#: client.py:157
+#: client.py:158
 msgid "comment removed"
 msgstr "Conteúdo removido"
 
-#: client.py:208 client.py:273
+#: client.py:209 client.py:274
 msgid "comment saved"
 msgstr "comentário salvo"
 
-#: client.py:275
+#: client.py:276
 msgid "comment saved, it is being held for moderation"
 msgstr "comentário salvo, aguarda moderação"
 
-#: client.py:336
+#: client.py:337
 msgid "Tags input must be no longer than 250 characters."
 msgstr "Palavras-chave não pode exceder 250 caracteres."
 
@@ -59,7 +59,8 @@ msgstr "Palavras-chave não pode exceder 250 caracteres."
 msgid "unknown"
 msgstr "desconhecido"
 
-#: models.py:175 views/create.py:30 views/create.py:45 views/texts.py:617
+#: models.py:175 templates/site/text_history.html:77 views/create.py:30
+#: views/create.py:45 views/texts.py:612
 msgid "Title"
 msgstr "Título"
 
@@ -67,11 +68,11 @@ msgstr "Título"
 msgid "Format"
 msgstr "Formatar"
 
-#: models.py:177 views/texts.py:708
+#: models.py:177 views/texts.py:703
 msgid "Content"
 msgstr "Conteúdo"
 
-#: models.py:178 models.py:599
+#: models.py:178 models.py:615
 msgid "Tags"
 msgstr "Palavras-chave"
 
@@ -83,121 +84,116 @@ msgstr "Observação"
 msgid "Moderation a posteriori?"
 msgstr "Moderação a posteriori?"
 
-#: models.py:285
+#: models.py:300
 msgid "Format:"
 msgstr "Formatar:"
 
-#: models.py:361
-#, python-format
-msgid "%(workspace_name)s's workspace"
-msgstr "%(workspace_name)s da área de trabalho"
-
-#: models.py:502
+#: models.py:518
 msgid "name"
 msgstr "nome"
 
-#: models.py:503
+#: models.py:519
 msgid "description"
 msgstr "descrição"
 
-#: models.py:593
+#: models.py:609
 msgid "Allow contact"
 msgstr "Permitir contato"
 
-#: models.py:593
+#: models.py:609
 msgid "Allow email messages from other users"
 msgstr "Permitir mensagens de email de outros usuários"
 
-#: models.py:594
+#: models.py:610
 msgid "Preferred language"
 msgstr "Idioma preferido"
 
-#: models.py:597
+#: models.py:613
 msgid "Suspended access"
 msgstr "Suspender acesso"
 
-#: models.py:621
+#: models.py:637
 msgid "suspended"
 msgstr "suspenso"
 
-#: models.py:623
+#: models.py:639
 msgid "waiting approval"
 msgstr "aguardando aprovação"
 
-#: models.py:629
+#: models.py:645
 msgid "pending"
 msgstr "pendente"
 
-#: models.py:644
+#: models.py:660
 msgid "Invitation"
 msgstr "Convite"
 
-#: models.py:712
+#: models.py:728
 #, python-format
 msgid "Text %(link_to_text)s edited"
 msgstr "Texto %(link_to_text)s editado"
 
-#: models.py:713
+#: models.py:729
 #, python-format
 msgid "Text %(link_to_text)s edited (new version created)"
 msgstr "Texto %(link_to_text)s editado (criada nova versão)"
 
-#: models.py:714
+#: models.py:730
 #, python-format
 msgid "Text %(link_to_text)s added"
 msgstr "Texto %(link_to_text)s adicionado"
 
-#: models.py:715
+#: models.py:731
 #, python-format
 msgid "Text %(link_to_text)s removed"
 msgstr "Texto %(link_to_text)s removido"
 
-#: models.py:716
+#: models.py:732
 #, python-format
 msgid "Comment %(link_to_comment)s added on text %(link_to_text)s"
 msgstr "Comentário %(link_to_comment)s adicionado ao texto %(link_to_text)s "
 
-#: models.py:717
+#: models.py:733
 #, python-format
 msgid "Comment %(link_to_comment)s removed from text %(link_to_text)s"
 msgstr "Comentário %(link_to_comment)s removido do texto %(link_to_text)s"
 
-#: models.py:718
+#: models.py:734
 #, python-format
 msgid "User %(username)s added"
 msgstr "Usuário %(username)s adicionado"
 
-#: models.py:719
+#: models.py:735
 #, python-format
 msgid "User %(username)s access to workspace enabled"
 msgstr "Acesso do usuário %(username)s à área de trabalho permitido"
 
-#: models.py:720
+#: models.py:736
 #, python-format
 msgid "User %(username)s access to workspace refused"
 msgstr "Acesso do usuário %(username)s à área de trabalho recusado"
 
-#: models.py:721
+#: models.py:737
 #, python-format
 msgid "User %(username)s access to workspace suspended"
 msgstr "Acesso do usuário %(username)s à área de trabalho suspenso"
 
-#: models.py:722
+#: models.py:738
 #, python-format
 msgid "User %(username)s access to workspace activated"
 msgstr "Acesso do usuário %(username)s à área de trabalho ativado"
 
-#: models.py:723
+#: models.py:739
 #, python-format
 msgid "User %(username)s has activated his account"
 msgstr "O usuário %(username)s ativou sua conta"
 
-#: models.py:778 models.py:786
+#: models.py:794 models.py:802
 #, python-format
 msgid "by \"%(username)s\""
 msgstr "por \"%(username)s\""
 
-#: models.py:780
+#: models.py:796
 #, python-format
 msgid "%(time_since)s ago"
 msgstr "há %(time_since)s"
@@ -545,7 +541,7 @@ msgstr "Atividades"
 msgid "texts"
 msgstr "textos"
 
-#: templates/site/dashboard.html:264 templates/site/text_list.html:139
+#: templates/site/dashboard.html:264
 msgid "comments"
 msgstr "comentários"
 
@@ -791,49 +787,88 @@ msgstr ""
 msgid "Subscribe to all text notifications"
 msgstr "Receber todas as notificações"
 
-#: templates/site/text_history.html:38
-msgid "Versions:"
-msgstr "Versões:"
+#: templates/site/text_history.html:56
+#: templates/site/text_history_compare.html:28
+#: templates/site/text_history_version.html:28
+#, fuzzy
+msgid "Version list"
+msgstr "Versões"
 
-#: templates/site/text_history.html:46
-#, python-format
-msgid "version #%(v1number)s"
-msgstr "versão #%(v1number)s"
+#: templates/site/text_history.html:59
+msgid "Compare last two versions"
+msgstr ""
 
-#: templates/site/text_history.html:46
-#, python-format
-msgid "by %(v1name)s"
-msgstr "por %(v1name)s"
+#: templates/site/text_history.html:65
+msgid "Compare selected versions"
+msgstr ""
 
-#: templates/site/text_history.html:46
-#, python-format
-msgid "created %(v1created)s"
-msgstr "criado %(v1created)s"
+#: templates/site/text_history.html:75
+#, fuzzy
+msgid "Version"
+msgstr "Versões"
 
-#: templates/site/text_history.html:54
-#, python-format
-msgid "differences between version #%(v1number)s and #%(v2number)s"
-msgstr "diferenças entre a versão #%(v1number)s e a versão #%(v2number)s"
+#: templates/site/text_history.html:76
+#, fuzzy
+msgid "Selection"
+msgstr "Ações"
 
-#: templates/site/text_history.html:66
-#, python-format
-msgid "Revert to version #%(v1_nid)s"
-msgstr "Reverter para a versão #%(v1_nid)s"
+#: templates/site/text_history.html:78 templates/site/text_list.html:137
+msgid "Author"
+msgstr "Autor"
 
-#: templates/site/text_history.html:70
-#, python-format
-msgid "Differences between version #%(v1_nid)s and version #%(v2_nid)s:"
-msgstr "Diferenças entre a versão #%(v1_nid)s e a versão #%(v2_nid)s:"
+#: templates/site/text_history.html:79
+msgid "Created"
+msgstr ""
 
-#: templates/site/text_history.html:73 templates/site/text_history.html:85
-#: templates/site/text_history.html:91
-#, python-format
-msgid "Version #%(version_number)s created on %(date)s"
-msgstr "Versão #%(version_number)s criada em %(date)s"
+#: templates/site/text_history.html:80 templates/site/text_list.html:139
+#, fuzzy
+msgid "# comments"
+msgstr "comentários"
+
+#: templates/site/text_history.html:100 templates/site/text_list.html:159
+msgid "View"
+msgstr "Ver"
 
 #: templates/site/text_history.html:101
+#: templates/site/text_history_version.html:33
+msgid "Compare with previous version"
+msgstr ""
+
+#: templates/site/text_history.html:102
+#, fuzzy
+msgid "Revert to this version"
+msgstr "Reverter para a versão #%(v1_nid)s"
+
+#: templates/site/text_history.html:103 templates/site/text_list.html:80
+#: templates/site/text_list.html.py:161
+msgid "Delete"
+msgstr "Apagar"
+
+#: templates/site/text_history.html:109
+#, fuzzy
+msgid "Are you sure you want to delete this version?"
+msgstr "Confirmar a exclusão desse texto?"
+
+#: templates/site/text_history_compare.html:30
+#: templates/site/text_history_compare.html:34
+#: templates/site/text_history_version.html:30
+#, fuzzy, python-format
+msgid "Version %(version_number)s"
+msgstr "versão #%(v1number)s"
+
+#: templates/site/text_history_compare.html:32
+#, fuzzy, python-format
+msgid ""
+"Comparison between version #%(version_1_number)s and #%(version_2_number)s"
+msgstr "diferenças entre a versão #%(v1number)s e a versão #%(v2number)s"
+
+#: templates/site/text_history_compare.html:42
 msgid "No differences"
 msgstr "Sem diferenças"
+
+#: templates/site/text_history_version.html:37
+msgid "Compare with next version"
+msgstr ""
 
 #: templates/site/text_list.html:12
 msgid "Texts"
@@ -859,10 +894,6 @@ msgstr "Todas"
 msgid "Bulk Actions"
 msgstr "Ações em massa"
 
-#: templates/site/text_list.html:80 templates/site/text_list.html.py:161
-msgid "Delete"
-msgstr "Apagar"
-
 #: templates/site/text_list.html:83 templates/site/user_list.html:81
 msgid "Apply"
 msgstr "Aplicar"
@@ -874,10 +905,6 @@ msgstr "Confirma?"
 #: templates/site/text_list.html:136 templates/site/macros/text_tabs.html:10
 msgid "Text"
 msgstr "Texto"
-
-#: templates/site/text_list.html:137
-msgid "Author"
-msgstr "Autor"
 
 #: templates/site/text_list.html:138
 msgid "Modified"
@@ -897,10 +924,6 @@ msgstr "palavras-chave:"
 #, python-format
 msgid "Filter by tag: %(tag_name)s"
 msgstr "Filtrar por palavra chave: %(tag_name)s"
-
-#: templates/site/text_list.html:159
-msgid "View"
-msgstr "Ver"
 
 #: templates/site/text_list.html:160 templates/site/macros/text_tabs.html:12
 #: templates/site/macros/user_actions.html:19
@@ -1397,49 +1420,54 @@ msgstr "%(nb_texts)i texto(s) apagado(s)"
 msgid "Text %(text_title)s deleted"
 msgstr "Texto %(text_title)s apagado"
 
-#: views/texts.py:621
+#: views/texts.py:221
+#, fuzzy, python-format
+msgid "Text version %(text_version_title)s deleted"
+msgstr "Texto %(text_title)s apagado"
+
+#: views/texts.py:616
 msgid "Note (optional)"
 msgstr "Observação (opcional)"
 
-#: views/texts.py:624
+#: views/texts.py:619
 msgid "Add a note to explain the modifications made to the text"
 msgstr "Adicionar uma observação para explicar as mudanças feitas no texto"
 
-#: views/texts.py:634
+#: views/texts.py:629
 msgid "New version (optional)"
 msgstr "Nova versão (opcional)"
 
-#: views/texts.py:637
+#: views/texts.py:632
 msgid "Create a new version of this text (recommended)"
 msgstr "Criar uma nova versão desse texto (recomendado)"
 
-#: views/texts.py:640
+#: views/texts.py:635
 msgid "Keep comments (optional)"
 msgstr "Manter comentários (opcional)"
 
-#: views/texts.py:643
+#: views/texts.py:638
 msgid "Keep comments (if not affected by the edit)"
 msgstr "Manter comentários (se não afetados pela edição)"
 
-#: views/texts.py:706
+#: views/texts.py:701
 msgid "Name (optional)"
 msgstr "Nome (opcional)"
 
-#: views/texts.py:707
+#: views/texts.py:702
 msgid "Email (optional)"
 msgstr "Email (opcional)"
 
-#: views/texts.py:757
-#, python-format
-msgid "A new version (copied from version %(version_id)s) has been created"
+#: views/texts.py:752
+#, fuzzy, python-format
+msgid "A new version (copied from version %(version_title)s) has been created"
 msgstr "Uma mova versão (copiada da versão %(version_id)s) foi criada"
 
-#: views/texts.py:865 views/user.py:79 views/user.py:99
+#: views/texts.py:860 views/user.py:79 views/user.py:99
 #, python-format
 msgid "%(count)i user(s) role modified"
 msgstr "%(count)i função do(s) usuário(s) modificada"
 
-#: views/texts.py:923
+#: views/texts.py:918
 msgid "Text settings updated"
 msgstr "Configurações do texto atualizadas"
 
@@ -1603,6 +1631,24 @@ msgid ""
 "You've been registered, please check your email for the confirm message."
 msgstr ""
 "Você se inscreveu. Favor verifique em seu email a mensagem de confirmação."
+
+#~ msgid "%(workspace_name)s's workspace"
+#~ msgstr "%(workspace_name)s da área de trabalho"
+
+#~ msgid "Versions:"
+#~ msgstr "Versões:"
+
+#~ msgid "by %(v1name)s"
+#~ msgstr "por %(v1name)s"
+
+#~ msgid "created %(v1created)s"
+#~ msgstr "criado %(v1created)s"
+
+#~ msgid "Differences between version #%(v1_nid)s and version #%(v2_nid)s:"
+#~ msgstr "Diferenças entre a versão #%(v1_nid)s e a versão #%(v2_nid)s:"
+
+#~ msgid "Version #%(version_number)s created on %(date)s"
+#~ msgstr "Versão #%(version_number)s criada em %(date)s"
 
 #~ msgid "%(title)s"
 #~ msgstr "%(title)s"
