@@ -32,7 +32,8 @@ $(function() {
     <li class="active_sub">{% blocktrans with v1.get_version_number as version_1_number and v2.get_version_number as version_2_number %}Comparison between version #{{ version_1_number }} and #{{ version_2_number }}{% endblocktrans %}</li>
     <li> / </li>
     <li><a href="{% url text-history-version text.key v2.key %}">{% blocktrans with v2.get_version_number as version_number %}Version {{ version_number }}{% endblocktrans %}</a></li>
-    
+    <li> / </li>
+    <li><a href="{% url text-history-version text.key text.last_text_version.key %}">{% blocktrans %}Most recent version{% endblocktrans %}</a></li>    
 </ul>
 
 <div style="clear:both;"></div>

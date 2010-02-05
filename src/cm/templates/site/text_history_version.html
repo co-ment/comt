@@ -36,6 +36,8 @@ $(function() {
     <li> / </li>
     <li><a href="{% url text-history-compare text.key text_version.key text_version.get_next_version.key %}">{% blocktrans %}Compare with next version{% endblocktrans %}</a></li>
     {% endif %}
+    <li> / </li>
+    <li><a href="{% url text-history-version text.key text.last_text_version.key %}">{% blocktrans %}Most recent version{% endblocktrans %}</a></li>    
 </ul>
 
 <div style="clear:both;"></div>
