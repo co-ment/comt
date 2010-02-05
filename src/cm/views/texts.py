@@ -3,8 +3,6 @@ from cm.activity import register_activity
 from cm.client import jsonize, get_filter_datas, edit_comment, remove_comment, \
     add_comment, RequestComplexEncoder, comments_thread, own_notify
 from cm.cm_settings import NEW_TEXT_VERSION_ON_EDIT
-from cm.diff import text_diff as _text_diff, text_history as inner_text_history, \
-    get_colors
 from cm.exception import UnauthorizedException
 from cm.message import *
 from cm.models import *
@@ -471,12 +469,16 @@ def text_history_version(request, key, version_key):
                               context_instance=RequestContext(request))
 
 #@has_perm_on_text('can_view_text')
-def text_history_compare(request, key, v1_version_key, v2_version_key):
+def text_history_compare(request, key, v1_version_key, v2_version_key, mode=''):
     text = get_text_by_keys_or_404(key)
     v1 = get_textversion_by_keys_or_404(v1_version_key, key=key)
     v2 = get_textversion_by_keys_or_404(v2_version_key, key=key)
 
     content = get_uniffied_inner_diff_table(cleanup_textarea(v1.content), cleanup_textarea(v2.content))
+    if mode=='1':
+        # alternate diff
+        from cm.utils.diff import text_diff
+        content = text_diff(v1.get_content(), v2.get_content())
 
     template_dict = {
                      'text' : text,
@@ -582,31 +584,10 @@ def get_uniffied_inner_diff_table(text1, text2):
 #         template_dict['admin'] = True          
 #    return render_to_response('site/text_history.html', template_dict, context_instance=RequestContext(request))
 #
-#def _text_history_version(request, text, admin=False):
-#    pass
-#    
 class TextVersionForm(ModelForm):
     class Meta:
         model = TextVersion
         fields = ('title', 'content', 'format')
-
-@has_perm_on_text('can_view_text')
-def text_diff(request, key, id_v1, id_v2):
-    text = get_text_by_keys_or_404(key)
-    text_version_1 = TextVersion.objects.get(pk=id_v1)
-    text_version_2 = TextVersion.objects.get(pk=id_v2)
-    content = _text_diff(text_version_1.get_content(), text_version_2.get_content())
-    title = _text_diff(text_version_1.title, text_version_2.title)
-    return render_to_response('site/text_view.html', {'text' : text, 'text_version_1' : text_version_1, 'text_version_2' : text_version_2, 'title' : title, 'content' : content}, context_instance=RequestContext(request))
-
-# commented out, unused suspected 
-#@has_perm_on_text('can_view_text')
-#def text_version(request, key, id_version):
-#    text = get_text_by_keys_or_404(key)
-#    text_version = TextVersion.objects.get(pk=id_version)
-#    # TODO : assert text_v in text ...
-#    # TODO : do not use db id    
-#    return render_to_response('site/text_view.html', {'text' : text, 'text_version' : text_version, 'title' : text_version.title, 'content' : text_version.get_content()}, context_instance=RequestContext(request))
 
 class EditTextForm(ModelForm):
     title = forms.CharField(label=_("Title"), widget=forms.TextInput)

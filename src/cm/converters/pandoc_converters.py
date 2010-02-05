@@ -10,7 +10,7 @@ import os
 from tempfile import mkstemp
 import StringIO
 import tidy
-from cm.utils.string import to_unicode
+from cm.utils.string_utils import to_unicode
 
 PANDOC_BIN = "pandoc"
 PANDOC_OPTIONS = "--sanitize-html "

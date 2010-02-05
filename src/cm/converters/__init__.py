@@ -1,6 +1,6 @@
 from pandoc_converters import pandoc_convert
 import chardet 
-from cm.utils.string import to_unicode 
+from cm.utils.string_utils import to_unicode 
 import re
 
 # TODO: move that in text_base: save images
