@@ -139,6 +139,10 @@ CHOICES_INPUT_FORMATS = getattr(settings, 'CHOICES_INPUT_FORMATS', CHOICES_INPUT
 
 class TextVersionManager(KeyManager):
 
+    def save(self):
+        self.content = re.sub(r'\r\n|\r|\n', '\n', self.content)
+        super.save() 
+            
     def duplicate(self, text_version, duplicate_comments=True):
         #import pdb;pdb.set_trace()
         old_comment_set = set(text_version.comment_set.all())

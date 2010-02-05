@@ -19,12 +19,3 @@ def surrond_text_node(html_chunk, start_html, end_html):
 # utilities    
 def get_text_nodes(soup):
     return soup(text=lambda text:not isinstance(text, Comment))
-
-
-import re
-
-def cleanup_textarea(input):
-    """
-    Cleanup \r\n to standard \n    
-    """
-    return re.sub('(\r\n)|(\n)|(\r)','\n',input)

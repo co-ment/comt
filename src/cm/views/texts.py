@@ -15,7 +15,6 @@ from cm.security import get_texts_with_perm, has_perm, get_viewable_comments, \
 from cm.utils import get_among, get_among, get_int
 from cm.utils.comment_positioning import compute_new_comment_positions, \
     insert_comment_markers
-from cm.utils.html import cleanup_textarea
 from cm.utils.spannifier import spannify
 from cm.views import get_keys_from_dict, get_textversion_by_keys_or_404, get_text_by_keys_or_404, redirect
 from cm.views.export import content_export2, content_export
@@ -483,7 +482,7 @@ def text_history(request, key, v1_nid=None, v2_nid=None, adminkey=False):
     if v1_nid and not v2_nid:
         embed_code = embed_html(key, 'id="text_view_frame" name="text_view_frame"', v1.key)
     else:
-        content = get_uniffied_inner_diff_table(cleanup_textarea(v1.content), cleanup_textarea(v2.content))
+        content = get_uniffied_inner_diff_table(v1.content, v2.content)
 
     template_dict = {'paired_versions' : paired_versions,
                      'text' : text,
