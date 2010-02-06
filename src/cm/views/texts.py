@@ -468,7 +468,7 @@ def text_history_version(request, key, version_key):
                               template_dict,
                               context_instance=RequestContext(request))
 
-#@has_perm_on_text('can_view_text')
+@has_perm_on_text('can_view_text')
 def text_history_compare(request, key, v1_version_key, v2_version_key, mode=''):
     text = get_text_by_keys_or_404(key)
     v1 = get_textversion_by_keys_or_404(v1_version_key, key=key)
