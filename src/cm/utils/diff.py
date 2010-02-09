@@ -108,7 +108,7 @@ def createlist(x, b=0):
                 out.append(cur)
                 if b: cur = '['
                 else: cur = c
-                mode = 'tag'
+                mode = 'tag'            
             elif c in string.whitespace: out.append(cur+c); cur = ''
             else: cur += c
     out.append(cur)

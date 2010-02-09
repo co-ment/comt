@@ -3,8 +3,6 @@ from cm.activity import register_activity
 from cm.client import jsonize, get_filter_datas, edit_comment, remove_comment, \
     add_comment, RequestComplexEncoder, comments_thread, own_notify
 from cm.cm_settings import NEW_TEXT_VERSION_ON_EDIT
-from cm.diff import text_diff as _text_diff, text_history as inner_text_history, \
-    get_colors
 from cm.exception import UnauthorizedException
 from cm.message import *
 from cm.models import *
@@ -210,6 +208,19 @@ def text_delete(request, key):
     register_activity(request, "text_removed", text=text)    
     text.delete()
     return HttpResponse('') # no redirect because this is called by js
+
+@has_perm_on_text('can_delete_text')
+def text_version_delete(request, key, text_version_key):
+    text_version = TextVersion.objects.get(key=text_version_key)
+    text=text_version.text
+    if request.method != 'POST':
+        raise UnauthorizedException('Unauthorized')
+    display_message(request, _(u'Text version %(text_version_title)s deleted') %{'text_version_title':text_version.title})
+    register_activity(request, "text_version_removed", text=text)
+    import pdb;pdb.set_trace()
+    text_version.delete()
+    return HttpResponse('') # no redirect because this is called by js
+
 
 @has_perm_on_text('can_view_text') # only protected by text_view / comment filtering done in view
 def text_view_comments(request, key, version_key=None, adminkey=None):
@@ -445,59 +456,61 @@ def text_view_frame(request, key, version_key=None, adminkey=None):
 
 
 @has_perm_on_text('can_view_text')
-def text_history(request, key, v1_nid=None, v2_nid=None, adminkey=False):
-    text = get_text_by_keys_or_404(key)    
-    text_versions = text.get_versions()
-    author_colors = get_colors([t.get_name() for t in text.get_inversed_versions()])
-    
-    if v1_nid:
-        v1_nid = int(v1_nid)
-    else:
-        v1_nid = text.get_versions_number()
-        
-    v1 = text.get_version(v1_nid)
+def text_history_version(request, key, version_key):
+    text = get_text_by_keys_or_404(key)
+    text_version = get_textversion_by_keys_or_404(version_key, key=key)
+    template_dict = {'text' : text,
+                     'text_version' : text_version,
+                     'embed_code' : embed_html(key, 'id="text_view_frame" name="text_view_frame"', version_key),
+                      }
+    return render_to_response('site/text_history_version.html',
+                              template_dict,
+                              context_instance=RequestContext(request))
 
-    v1_id = v1.id
-    
-    v2_id = None
-    v2 = None
-    if v2_nid:
-        v2_nid = int(v2_nid)
-        v2 = text.get_version(v2_nid)
-        v2_id = v2.id
+@has_perm_on_text('can_view_text')
+def text_history_compare(request, key, v1_version_key, v2_version_key, mode=''):
+    text = get_text_by_keys_or_404(key)
+    v1 = get_textversion_by_keys_or_404(v1_version_key, key=key)
+    v2 = get_textversion_by_keys_or_404(v2_version_key, key=key)
 
-    versions = text.get_inversed_versions()
-    paired_versions = []
-    colors_dict = dict(author_colors)
-    for index in range(len(versions)):
-        vv1 = versions[index]
-        if index + 1 < len(versions):
-            vv2 = versions[index + 1]
-        else:
-            vv2 = None
-        paired_versions.append((vv1, vv2, colors_dict.get(vv1.get_name(), '#D9D9D9')))
+    content = get_uniffied_inner_diff_table(v1.content, v2.content)
+    if mode=='1':
+        # alternate diff
+        from cm.utils.diff import text_diff
+        content = text_diff(v1.get_content(), v2.get_content())
 
-    embed_code = ""
-    content = ""
-    if v1_nid and not v2_nid:
-        embed_code = embed_html(key, 'id="text_view_frame" name="text_view_frame"', v1.key)
-    else:
-        content = get_uniffied_inner_diff_table(v1.content, v2.content)
-
-    template_dict = {'paired_versions' : paired_versions,
+    template_dict = {
                      'text' : text,
-                     'v1_nid' : v1_nid,
-                     'v2_nid' : v2_nid,
-                     'v1_id' : v1_id,
-                     'v2_id' : v2_id,
-                     'version1': v1,
-                     'version2': v2,
+                     'v1': v1,
+                     'v2': v2,
                      'content' : content.strip(),
-                     'embed_code':embed_code,
-                     'is_diff' : content !='<table class="diff"><tbody></tbody></table>',
-                     'author_colors' : author_colors,
+                     'empty' : '<table class="diff"><tbody></tbody></table>'==content,
                      }
-    return render_to_response('site/text_history.html', template_dict, context_instance=RequestContext(request))
+    return render_to_response('site/text_history_compare.html',
+                              template_dict,
+                              context_instance=RequestContext(request))
+    
+@has_perm_on_text('can_view_text')
+def text_history(request, key):
+    text = get_text_by_keys_or_404(key)
+    
+    if request.method == 'POST':
+        v1_key = request.POST.get('newkey',None)
+        v2_key = request.POST.get('oldkey',None)
+        if v1_key and v2_key:  
+            return redirect(request, 'text-history-compare', args=[text.key, v2_key, v1_key ])
+        
+    text_versions = text.get_versions()
+    paginate_by = get_int(request.GET,'paginate',TEXT_PAGINATION)
+
+    last_last_version = text_versions[1] if len(text_versions)>1 else None 
+    context = {'text':text, 'last_version':text.last_text_version, 'last_last_version':last_last_version}
+    return object_list(request, text_versions,
+                       template_name = 'site/text_history.html',
+                       paginate_by = paginate_by,
+                       extra_context=context,
+                       )
+    
 
 # taken from trac
 def _get_change_extent(str1, str2):
@@ -558,22 +571,6 @@ def get_uniffied_inner_diff_table(text1, text2):
     res.append('</tbody></table>')
     return ''.join(res)
 
-@has_perm_on_text('can_view_text')
-def text_history_compare(request, key, v1_nid=None, v2_nid=None, adminkey=None):
-    text = get_text_by_keys_or_404(key)
-
-    vis_diff = difflib.HtmlDiff()
-    v1 = text.get_version(int(v1_nid))
-    v2 = text.get_version(int(v2_nid))
-    content = _text_diff(v2.get_content(), v1.get_content())
-    #content = vis_diff.make_table(v1.content.split('\n'), v2.content.split('\n'), v1_nid, v2_nid, context=None)
-    
-    template_dict = {
-                     'text' : text,
-                     'content' : content,
-                     }
-    return render_to_response('site/text_history_compare.html', template_dict, context_instance=RequestContext(request))
-
 #def text_history_version(request, key):
 #    text = get_text_by_keys_or_404(key=key)
 #    return _text_history_version(request, text)
@@ -586,31 +583,10 @@ def text_history_compare(request, key, v1_nid=None, v2_nid=None, adminkey=None):
 #         template_dict['admin'] = True          
 #    return render_to_response('site/text_history.html', template_dict, context_instance=RequestContext(request))
 #
-#def _text_history_version(request, text, admin=False):
-#    pass
-#    
 class TextVersionForm(ModelForm):
     class Meta:
         model = TextVersion
         fields = ('title', 'content', 'format')
-
-@has_perm_on_text('can_view_text')
-def text_diff(request, key, id_v1, id_v2):
-    text = get_text_by_keys_or_404(key)
-    text_version_1 = TextVersion.objects.get(pk=id_v1)
-    text_version_2 = TextVersion.objects.get(pk=id_v2)
-    content = _text_diff(text_version_1.get_content(), text_version_2.get_content())
-    title = _text_diff(text_version_1.title, text_version_2.title)
-    return render_to_response('site/text_view.html', {'text' : text, 'text_version_1' : text_version_1, 'text_version_2' : text_version_2, 'title' : title, 'content' : content}, context_instance=RequestContext(request))
-
-# commented out, unused suspected 
-#@has_perm_on_text('can_view_text')
-#def text_version(request, key, id_version):
-#    text = get_text_by_keys_or_404(key)
-#    text_version = TextVersion.objects.get(pk=id_version)
-#    # TODO : assert text_v in text ...
-#    # TODO : do not use db id    
-#    return render_to_response('site/text_view.html', {'text' : text, 'text_version' : text_version, 'title' : text_version.title, 'content' : text_version.get_content()}, context_instance=RequestContext(request))
 
 class EditTextForm(ModelForm):
     title = forms.CharField(label=_("Title"), widget=forms.TextInput)
@@ -749,11 +725,11 @@ def text_edit(request, key, adminkey=None):
 
 # TODO: modif de la base => if POST
 @has_perm_on_text('can_edit_text')
-def text_revert(request, key, v1_nid, adminkey=None):
+def text_revert(request, key, text_version_key):
     text = get_text_by_keys_or_404(key)
 
-    text.revert_to_version(v1_nid)
-    display_message(request, _(u'A new version (copied from version %(version_id)s) has been created') % {'version_id':v1_nid})
+    text_version = text.revert_to_version(text_version_key)
+    display_message(request, _(u'A new version (copied from version %(version_title)s) has been created') % {'version_title':text_version.title})
 
     return HttpResponseRedirect(reverse('text-history', args=[text.key]))
     

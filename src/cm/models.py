@@ -85,12 +85,10 @@ class Text(PermanentModel, AuthorModel):
         """
         versions = TextVersion.objects.filter(text__exact=self).order_by('-created')
         # TODO: use new postgresql 8.4 row_number as extra select to do that
-        for index in xrange(len(versions)):
-            v = versions[index]
-            # version_number is 1-based
-            setattr(v, 'version_number', len(versions) - index)
-        #for v in versions:
-        #    print v.created,v.id,v.version_number
+        #for index in xrange(len(versions)):
+        #    v = versions[index]
+        #    # version_number is 1-based
+        #    setattr(v, 'version_number', len(versions) - index)
         return versions
 
     def get_version(self, version_number):        
@@ -103,10 +101,10 @@ class Text(PermanentModel, AuthorModel):
     def get_inversed_versions(self):
         versions = TextVersion.objects.filter(text__exact=self).order_by('created')
         # TODO: use new postgresql 8.4 row_number as extra select to do that
-        for index in xrange(len(versions)):
-            v = versions[index]
-            # version_number is 1-based
-            setattr(v, 'version_number', index + 1)
+        #for index in xrange(len(versions)):
+        #    v = versions[index]
+        #    # version_number is 1-based
+        #    setattr(v, 'version_number', index + 1)
         return versions
 
     def get_versions_number(self):
@@ -118,8 +116,10 @@ class Text(PermanentModel, AuthorModel):
         else:
             return False
 
-    def revert_to_version(self, v_id):
-        text_version = self.get_version(int(v_id))
+    def revert_to_version(self, text_version_key):
+        text_version = TextVersion.objects.get(key=text_version_key)
+        if text_version.text != self:
+            raise Exception('Invalid revert attempt')
         new_text_version = TextVersion.objects.duplicate(text_version, True)
         return new_text_version
         
@@ -256,7 +256,22 @@ class TextVersion(AuthorModel, KeyModel):
         self.content = new_content
         self.format = new_format
         self.save()
-        
+
+    def get_next_version(self):        
+        other_versions = TextVersion.objects.filter(text__exact=self.text).order_by('created').filter(created__gt=self.created)
+        return other_versions[0] if other_versions else None 
+        if other_versions:
+            return 
+        else:
+            return None
+
+    def get_previous_version(self):
+        other_versions = TextVersion.objects.filter(text__exact=self.text).order_by('-created').filter(created__lt=self.created)
+        return other_versions[0] if other_versions else None
+
+    def get_version_number(self):
+        return TextVersion.objects.filter(text__exact=self.text).order_by('created').filter(created__lte=self.created).count()
+    
 class CommentManager(Manager):
     
     def duplicate(self, comment, text_version, reply_to=None, keep_dates=False):

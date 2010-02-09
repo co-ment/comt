@@ -1,5 +1,3 @@
-from cm.diff import text_diff as _text_diff, \
-    text_history as inner_text_history, get_colors
 from cm.message import display_message
 from cm.models import Text, TextVersion, Attachment, Comment, Configuration
 from cm.security import has_global_perm

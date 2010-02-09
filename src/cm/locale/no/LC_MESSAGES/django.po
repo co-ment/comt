@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-02 16:41+0100\n"
+"POT-Creation-Date: 2010-02-05 15:11+0100\n"
 "PO-Revision-Date: 2010-01-16 18:00+0100\n"
 "Last-Translator: Kirill Miazine <km@krot.org>\n"
 "Language-Team: <no@li.org>\n"
@@ -24,39 +24,39 @@ msgstr ""
 "Et område i teksten må merkes. Merk et område i teksten som din merknad skal "
 "gjelde"
 
-#: client.py:133
+#: client.py:134
 msgid "name is required"
 msgstr "navn må angis"
 
-#: client.py:136
+#: client.py:137
 msgid "email is required"
 msgstr "epost må angis"
 
-#: client.py:138
+#: client.py:139
 msgid "invalid email"
 msgstr "ugyldig epost"
 
-#: client.py:140
+#: client.py:141
 msgid "title is required"
 msgstr "overskriften må angis"
 
-#: client.py:142
+#: client.py:143
 msgid "content is required"
 msgstr "teksten må fylles ut"
 
-#: client.py:157
+#: client.py:158
 msgid "comment removed"
 msgstr "merknad slettet"
 
-#: client.py:208 client.py:273
+#: client.py:209 client.py:274
 msgid "comment saved"
 msgstr "merknad lagret"
 
-#: client.py:275
+#: client.py:276
 msgid "comment saved, it is being held for moderation"
 msgstr "merknad lagret og holdes tilbake for godkjenning"
 
-#: client.py:336
+#: client.py:337
 msgid "Tags input must be no longer than 250 characters."
 msgstr "Samlet lengde på etiketter kan ikke overstige 250 tegn."
 
@@ -64,7 +64,8 @@ msgstr "Samlet lengde på etiketter kan ikke overstige 250 tegn."
 msgid "unknown"
 msgstr "ukjent"
 
-#: models.py:175 views/create.py:30 views/create.py:45 views/texts.py:617
+#: models.py:175 templates/site/text_history.html:79 views/create.py:30
+#: views/create.py:45 views/texts.py:612
 msgid "Title"
 msgstr "Overskrift"
 
@@ -72,11 +73,11 @@ msgstr "Overskrift"
 msgid "Format"
 msgstr "Format"
 
-#: models.py:177 views/texts.py:708
+#: models.py:177 views/texts.py:703
 msgid "Content"
 msgstr "Innhold"
 
-#: models.py:178 models.py:599
+#: models.py:178 models.py:615
 msgid "Tags"
 msgstr "Etiketter"
 
@@ -88,121 +89,116 @@ msgstr "Kommentar"
 msgid "Moderation a posteriori?"
 msgstr "Godkjenning i ettertid?"
 
-#: models.py:285
+#: models.py:300
 msgid "Format:"
 msgstr "Format:"
 
-#: models.py:361
-#, python-format
-msgid "%(workspace_name)s's workspace"
-msgstr "Arbeidsområde til %(workspace_name)s"
-
-#: models.py:502
+#: models.py:518
 msgid "name"
 msgstr "navn"
 
-#: models.py:503
+#: models.py:519
 msgid "description"
 msgstr "beskrivelse"
 
-#: models.py:593
+#: models.py:609
 msgid "Allow contact"
 msgstr "Tillatt kontakt"
 
-#: models.py:593
+#: models.py:609
 msgid "Allow email messages from other users"
 msgstr "Motta epost fra andre brukere"
 
-#: models.py:594
+#: models.py:610
 msgid "Preferred language"
 msgstr "Foretrukket språk"
 
-#: models.py:597
+#: models.py:613
 msgid "Suspended access"
 msgstr "Sperret tilgang"
 
-#: models.py:621
+#: models.py:637
 msgid "suspended"
 msgstr "sperret"
 
-#: models.py:623
+#: models.py:639
 msgid "waiting approval"
 msgstr "venter på godkjenning"
 
-#: models.py:629
+#: models.py:645
 msgid "pending"
 msgstr "pågående"
 
-#: models.py:644
+#: models.py:660
 msgid "Invitation"
 msgstr "Invitasjon"
 
-#: models.py:712
+#: models.py:728
 #, python-format
 msgid "Text %(link_to_text)s edited"
 msgstr "Tekst %(link_to_text)s endret"
 
-#: models.py:713
+#: models.py:729
 #, python-format
 msgid "Text %(link_to_text)s edited (new version created)"
 msgstr "Tekst %(link_to_text)s endret (ny versjon opprettet)"
 
-#: models.py:714
+#: models.py:730
 #, python-format
 msgid "Text %(link_to_text)s added"
 msgstr "Tekst %(link_to_text)s lagt til"
 
-#: models.py:715
+#: models.py:731
 #, python-format
 msgid "Text %(link_to_text)s removed"
 msgstr "Tekst %(link_to_text)s slettet"
 
-#: models.py:716
+#: models.py:732
 #, python-format
 msgid "Comment %(link_to_comment)s added on text %(link_to_text)s"
 msgstr "Merknad %(link_to_comment)s lagt til teksten %(link_to_text)s"
 
-#: models.py:717
+#: models.py:733
 #, python-format
 msgid "Comment %(link_to_comment)s removed from text %(link_to_text)s"
 msgstr "Merknad %(link_to_comment)s slettet fra teksten %(link_to_text)s"
 
-#: models.py:718
+#: models.py:734
 #, python-format
 msgid "User %(username)s added"
 msgstr "Bruker %(username)s opprettet"
 
-#: models.py:719
+#: models.py:735
 #, python-format
 msgid "User %(username)s access to workspace enabled"
 msgstr "Aktivert tilgang for brukeren %(username)s"
 
-#: models.py:720
+#: models.py:736
 #, python-format
 msgid "User %(username)s access to workspace refused"
 msgstr "Nektet tilgang for brukeren %(username)s"
 
-#: models.py:721
+#: models.py:737
 #, python-format
 msgid "User %(username)s access to workspace suspended"
 msgstr "Stoppet tilgang for brukeren %(username)s"
 
-#: models.py:722
+#: models.py:738
 #, python-format
 msgid "User %(username)s access to workspace activated"
 msgstr "Aktivert tilgang for brukeren %(username)s"
 
-#: models.py:723
+#: models.py:739
 #, python-format
 msgid "User %(username)s has activated his account"
 msgstr "Bruker %(username)s har aktivert kontoen"
 
-#: models.py:778 models.py:786
+#: models.py:794 models.py:802
 #, python-format
 msgid "by \"%(username)s\""
 msgstr "av %(username)s"
 
-#: models.py:780
+#: models.py:796
 #, python-format
 msgid "%(time_since)s ago"
 msgstr "for %(time_since)s siden"
@@ -245,7 +241,7 @@ msgstr "Brasiliansk portugisisk"
 
 #: settings.py:109
 msgid "Spanish"
-msgstr ""
+msgstr "Spansk"
 
 #: static_i18n.py:6 static_i18n.py:11
 msgid "Observer"
@@ -550,7 +546,7 @@ msgstr "Aktivitetsjournal"
 msgid "texts"
 msgstr "tekster"
 
-#: templates/site/dashboard.html:264 templates/site/text_list.html:139
+#: templates/site/dashboard.html:264
 msgid "comments"
 msgstr "merknader"
 
@@ -732,16 +728,14 @@ msgstr "Integrer tekst"
 
 #: templates/site/text_embed.html:26
 msgid "Copy this code into your site to display text with comments."
-msgstr ""
+msgstr "Kopier denne koden til din side for å vise tekst med merknader."
 
 #: templates/site/text_embed.html:26
-#, fuzzy
 msgid ""
 "Users will also be able to add comments from your site depending on "
 "anonymous users' roles."
 msgstr ""
-"Kopier denne koden til din side for å vise teksten med merknader. Avhengig "
-"av rettighetene til anonyme brukere, vil andre muligens også kunne "
+"Avhengig av rettighetene til anonyme brukere, vil andre muligens også kunne "
 "kommentere teksten direkte fra din side."
 
 #: templates/site/text_embed.html:36
@@ -797,49 +791,88 @@ msgstr ""
 msgid "Subscribe to all text notifications"
 msgstr "Abonner på alle varsler for teksten"
 
-#: templates/site/text_history.html:38
-msgid "Versions:"
-msgstr "Versjoner:"
+#: templates/site/text_history.html:56
+#: templates/site/text_history_compare.html:28
+#: templates/site/text_history_version.html:28
+msgid "Version list"
+msgstr "Versjoner"
 
-#: templates/site/text_history.html:46
+#: templates/site/text_history.html:59
+msgid "Compare last two versions"
+msgstr "Sammenlikn siste to versjoner"
+
+#: templates/site/text_history.html:61
+#: templates/site/text_history_compare.html:36
+#: templates/site/text_history_version.html:40
+msgid "Most recent version"
+msgstr "Nyeste versjon"
+
+#: templates/site/text_history.html:67
+msgid "Compare selected versions"
+msgstr "Sammenlikn valgte versjoner"
+
+#: templates/site/text_history.html:77
+msgid "Version"
+msgstr "Versjon"
+
+#: templates/site/text_history.html:78
+msgid "Selection"
+msgstr "Tekstområde"
+
+#: templates/site/text_history.html:80 templates/site/text_list.html:137
+msgid "Author"
+msgstr "Forfatter"
+
+#: templates/site/text_history.html:81
+msgid "Created"
+msgstr "Opprettet"
+
+#: templates/site/text_history.html:82 templates/site/text_list.html:139
+msgid "# comments"
+msgstr "# merknader"
+
+#: templates/site/text_history.html:102 templates/site/text_list.html:159
+msgid "View"
+msgstr "Se"
+
+#: templates/site/text_history.html:103
+#: templates/site/text_history_version.html:33
+msgid "Compare with previous version"
+msgstr "Sammenlikn med forrige versjon"
+
+#: templates/site/text_history.html:104
+msgid "Revert to this version"
+msgstr "Still tilbake til denne versjonen"
+
+#: templates/site/text_history.html:105 templates/site/text_list.html:80
+#: templates/site/text_list.html.py:161
+msgid "Delete"
+msgstr "Slett"
+
+#: templates/site/text_history.html:111
+msgid "Are you sure you want to delete this version?"
+msgstr "Ønsker du å slette denne versjonen?"
+
+#: templates/site/text_history_compare.html:30
+#: templates/site/text_history_compare.html:34
+#: templates/site/text_history_version.html:30
 #, python-format
-msgid "version #%(v1number)s"
-msgstr "versjon #%(v1number)s"
+msgid "Version %(version_number)s"
+msgstr "Versjon %(version_number)s"
 
-#: templates/site/text_history.html:46
+#: templates/site/text_history_compare.html:32
 #, python-format
-msgid "by %(v1name)s"
-msgstr "av %(v1name)s"
+msgid ""
+"Comparison between version #%(version_1_number)s and #%(version_2_number)s"
+msgstr "Sammenlikning mellom versjoner #%(version_1_number)s og #%(version_2_number)s"
 
-#: templates/site/text_history.html:46
-#, python-format
-msgid "created %(v1created)s"
-msgstr "opprettet %(v1created)s"
-
-#: templates/site/text_history.html:54
-#, python-format
-msgid "differences between version #%(v1number)s and #%(v2number)s"
-msgstr "forskjeller mellom versjonene #%(v1number)s og #%(v2number)s"
-
-#: templates/site/text_history.html:66
-#, python-format
-msgid "Revert to version #%(v1_nid)s"
-msgstr "Still tilbake til versjonen #%(v1_nid)s"
-
-#: templates/site/text_history.html:70
-#, python-format
-msgid "Differences between version #%(v1_nid)s and version #%(v2_nid)s:"
-msgstr "Forskjeller mellom versjon #%(v1_nid)s og versjon #%(v2_nid)s:"
-
-#: templates/site/text_history.html:73 templates/site/text_history.html:85
-#: templates/site/text_history.html:91
-#, python-format
-msgid "Version #%(version_number)s created on %(date)s"
-msgstr "Versjon #%(version_number)s opprettet %(date)s"
-
-#: templates/site/text_history.html:101
+#: templates/site/text_history_compare.html:43
 msgid "No differences"
 msgstr "Ingen forskjeller"
+
+#: templates/site/text_history_version.html:37
+msgid "Compare with next version"
+msgstr "Sammenlikn med neste versjon"
 
 #: templates/site/text_list.html:12
 msgid "Texts"
@@ -865,10 +898,6 @@ msgstr "Alle"
 msgid "Bulk Actions"
 msgstr "Handlinger"
 
-#: templates/site/text_list.html:80 templates/site/text_list.html.py:161
-msgid "Delete"
-msgstr "Slett"
-
 #: templates/site/text_list.html:83 templates/site/user_list.html:81
 msgid "Apply"
 msgstr "Utfør"
@@ -880,10 +909,6 @@ msgstr "Er du sikker?"
 #: templates/site/text_list.html:136 templates/site/macros/text_tabs.html:10
 msgid "Text"
 msgstr "Tekst"
-
-#: templates/site/text_list.html:137
-msgid "Author"
-msgstr "Forfatter"
 
 #: templates/site/text_list.html:138
 msgid "Modified"
@@ -903,10 +928,6 @@ msgstr "etiketter:"
 #, python-format
 msgid "Filter by tag: %(tag_name)s"
 msgstr "Filtrer etter etikett: %(tag_name)s"
-
-#: templates/site/text_list.html:159
-msgid "View"
-msgstr "Se"
 
 #: templates/site/text_list.html:160 templates/site/macros/text_tabs.html:12
 #: templates/site/macros/user_actions.html:19
@@ -1132,7 +1153,7 @@ msgstr "Personer (%(nb_users)s)"
 
 #: templates/site/macros/paginator.html:5
 msgid "Previous page"
-msgstr ""
+msgstr "Forrige side"
 
 #: templates/site/macros/paginator.html:6
 #, python-format
@@ -1402,49 +1423,54 @@ msgstr "%(nb_texts)i tekst(er) slettet"
 msgid "Text %(text_title)s deleted"
 msgstr "Tekstet %(text_title)s slettet"
 
-#: views/texts.py:621
+#: views/texts.py:221
+#, python-format
+msgid "Text version %(text_version_title)s deleted"
+msgstr "Tekstversjon %(text_version_title)s slettet"
+
+#: views/texts.py:616
 msgid "Note (optional)"
 msgstr "Kommentar (valgfritt)"
 
-#: views/texts.py:624
+#: views/texts.py:619
 msgid "Add a note to explain the modifications made to the text"
 msgstr "Legg til en kommentar for å beskrive foretatte endringer i teksten"
 
-#: views/texts.py:634
+#: views/texts.py:629
 msgid "New version (optional)"
 msgstr "Ny versjon (valgfritt)"
 
-#: views/texts.py:637
+#: views/texts.py:632
 msgid "Create a new version of this text (recommended)"
 msgstr "Opprett ny versjon av teksten (anbefales)"
 
-#: views/texts.py:640
+#: views/texts.py:635
 msgid "Keep comments (optional)"
 msgstr "Behold merknader (valgfritt)"
 
-#: views/texts.py:643
+#: views/texts.py:638
 msgid "Keep comments (if not affected by the edit)"
 msgstr "Behold merknadene (dersom de ikke er påvirket av endringene i teksten)"
 
-#: views/texts.py:706
+#: views/texts.py:701
 msgid "Name (optional)"
 msgstr "Navn (valgfritt)"
 
-#: views/texts.py:707
+#: views/texts.py:702
 msgid "Email (optional)"
 msgstr "Epost (valgfritt)"
 
-#: views/texts.py:757
+#: views/texts.py:752
 #, python-format
-msgid "A new version (copied from version %(version_id)s) has been created"
-msgstr "Ny versjon (kopiert fra versjon %(version_id)s) har blitt opprettet"
+msgid "A new version (copied from version %(version_title)s) has been created"
+msgstr "Ny versjon (kopiert fra versjon %(version_title)s) har blitt opprettet"
 
-#: views/texts.py:865 views/user.py:79 views/user.py:99
+#: views/texts.py:860 views/user.py:79 views/user.py:99
 #, python-format
 msgid "%(count)i user(s) role modified"
 msgstr "Roller for %(count)i bruker(e) endret"
 
-#: views/texts.py:923
+#: views/texts.py:918
 msgid "Text settings updated"
 msgstr "Tekstinnstillinger oppdatert"
 
@@ -1605,6 +1631,24 @@ msgstr ""
 msgid ""
 "You've been registered, please check your email for the confirm message."
 msgstr "Du er blitt registert. Se din epost for en melding med bekreftelsen."
+
+#~ msgid "%(workspace_name)s's workspace"
+#~ msgstr "Arbeidsområde til %(workspace_name)s"
+
+#~ msgid "Versions:"
+#~ msgstr "Versjoner:"
+
+#~ msgid "by %(v1name)s"
+#~ msgstr "av %(v1name)s"
+
+#~ msgid "created %(v1created)s"
+#~ msgstr "opprettet %(v1created)s"
+
+#~ msgid "Differences between version #%(v1_nid)s and version #%(v2_nid)s:"
+#~ msgstr "Forskjeller mellom versjon #%(v1_nid)s og versjon #%(v2_nid)s:"
+
+#~ msgid "Version #%(version_number)s created on %(date)s"
+#~ msgstr "Versjon #%(version_number)s opprettet %(date)s"
 
 #, fuzzy
 #~ msgid "Contact from user: %(name)s / %(email)s"
