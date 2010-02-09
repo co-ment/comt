@@ -1,3 +1,4 @@
+import re
 from cm.converters.pandoc_converters import \
     CHOICES_INPUT_FORMATS as CHOICES_INPUT_FORMATS_PANDOC, \
     DEFAULT_INPUT_FORMAT as DEFAULT_INPUT_FORMAT_PANDOC, pandoc_convert
@@ -139,10 +140,6 @@ CHOICES_INPUT_FORMATS = getattr(settings, 'CHOICES_INPUT_FORMATS', CHOICES_INPUT
 
 class TextVersionManager(KeyManager):
 
-    def save(self):
-        self.content = re.sub(r'\r\n|\r|\n', '\n', self.content)
-        super.save() 
-            
     def duplicate(self, text_version, duplicate_comments=True):
         #import pdb;pdb.set_trace()
         old_comment_set = set(text_version.comment_set.all())
@@ -271,6 +268,10 @@ class TextVersion(AuthorModel, KeyModel):
 
     def get_version_number(self):
         return TextVersion.objects.filter(text__exact=self.text).order_by('created').filter(created__lte=self.created).count()
+
+    def save(self, force_insert=False, force_update=False):
+        self.content = re.sub('\r\n|\r|\n', '\n', self.content)
+        super(AuthorModel, self).save() 
     
 class CommentManager(Manager):
     
