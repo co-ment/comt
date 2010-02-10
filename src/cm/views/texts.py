@@ -217,7 +217,6 @@ def text_version_delete(request, key, text_version_key):
         raise UnauthorizedException('Unauthorized')
     display_message(request, _(u'Text version %(text_version_title)s deleted') %{'text_version_title':text_version.title})
     register_activity(request, "text_version_removed", text=text)
-    import pdb;pdb.set_trace()
     text_version.delete()
     return HttpResponse('') # no redirect because this is called by js
 
