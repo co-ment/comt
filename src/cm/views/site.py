@@ -162,7 +162,7 @@ class SettingsForm(forms.Form):
                                                 )
 
     workspace_registration_moderation = forms.BooleanField(label=ugettext_lazy("Workspace registration moderation"),
-                                                           help_text=ugettext_lazy("Should new users be moderated (registration will require manager's approval)"),
+                                                           help_text=ugettext_lazy("Should new users be moderated (registration will require manager's approval)?"),
                                                            required=False,
                                                            )
 
