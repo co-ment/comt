@@ -6,7 +6,7 @@
                 {% blocktrans with page_obj.start_index as sindex and page_obj.end_index as eindex and paginator.count as pcount %}{{ sindex }}-{{ eindex }} of {{ pcount }}{% endblocktrans %} 
         {% if page_obj.has_next %}<a title="{% blocktrans %}Next page{% endblocktrans %}" href="?{% newparams 'page' page_obj.next_page_number %}">&raquo;</a>{% else %}&nbsp;{% endif %}
 
-        {% if page_obj.has_previous or page_obj.has_next %}(<a title="{% blocktrans %}View all{% endblocktrans %}" href="?{% newparams 'paginate' '0' %}">{% blocktrans %}all{% endblocktrans %}</a>){% endif %}
+        {% if not_show_all %}{% else %}{% if page_obj.has_previous or page_obj.has_next %}(<a title="{% blocktrans %}View all{% endblocktrans %}" href="?{% newparams 'paginate' '0' %}">{% blocktrans %}all{% endblocktrans %}</a>){% endif %}{% endif %}
     {% else %}
     (<a title="{% blocktrans %}paginate{% endblocktrans %}" href="?{% newparams 'paginate' '' %}">{% blocktrans %}paginate{% endblocktrans %}</a>)
     {% endif %}

@@ -256,7 +256,9 @@ $("#comment-refuse-{{ comment.key }}").click(function(){
 	    <thead>
 	        <tr>
 	        <th>       
-	        {% include "site/macros/paginator.html" %}    
+	        {% with "yes" as not_show_all%}
+	        {% include "site/macros/paginator.html" %}
+	        {% endwith %}    
 		        <span class="em">{% blocktrans %}Activities{% endblocktrans %}</span>
 		        <br />
 	        <span class="view_options">
