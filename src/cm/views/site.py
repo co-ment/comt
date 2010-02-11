@@ -193,7 +193,6 @@ class SettingsForm(forms.Form):
     def save_file(self, logo_file):
         attach = Attachment.objects.create_attachment(filename='wp_logo', data=logo_file.read(), text_version=None)
         Configuration.objects.set_key('workspace_logo_file_key', attach.key)
-        print attach.key
         
 @has_global_perm('can_manage_workspace')
 def settingss(request):
