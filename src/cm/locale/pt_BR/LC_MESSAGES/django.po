@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-05 15:10+0100\n"
+"POT-Creation-Date: 2010-02-11 17:10+0100\n"
 "PO-Revision-Date: 2010-01-23 12:00-0300\n"
 "Last-Translator: Paulo Rená da Silva Santarém <pbrss@yahoo.com.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,145 +55,141 @@ msgstr "comentário salvo, aguarda moderação"
 msgid "Tags input must be no longer than 250 characters."
 msgstr "Palavras-chave não pode exceder 250 caracteres."
 
-#: diff.py:53
-msgid "unknown"
-msgstr "desconhecido"
-
-#: models.py:175 templates/site/text_history.html:79 views/create.py:30
-#: views/create.py:45 views/texts.py:612
+#: models.py:176 templates/site/text_history.html:79 views/create.py:30
+#: views/create.py:45 views/texts.py:591
 msgid "Title"
 msgstr "Título"
 
-#: models.py:176
+#: models.py:177
 msgid "Format"
 msgstr "Formatar"
 
-#: models.py:177 views/texts.py:703
+#: models.py:178 views/texts.py:682
 msgid "Content"
 msgstr "Conteúdo"
 
-#: models.py:178 models.py:615
+#: models.py:179 models.py:637
 msgid "Tags"
 msgstr "Palavras-chave"
 
-#: models.py:180 views/user.py:223
+#: models.py:181 views/user.py:223
 msgid "Note"
 msgstr "Observação"
 
-#: models.py:182
+#: models.py:183
 msgid "Moderation a posteriori?"
 msgstr "Moderação a posteriori?"
 
-#: models.py:300
+#: models.py:305
 msgid "Format:"
 msgstr "Formatar:"
 
-#: models.py:518
+#: models.py:540
 msgid "name"
 msgstr "nome"
 
-#: models.py:519
+#: models.py:541
 msgid "description"
 msgstr "descrição"
 
-#: models.py:609
+#: models.py:631
 msgid "Allow contact"
 msgstr "Permitir contato"
 
-#: models.py:609
+#: models.py:631
 msgid "Allow email messages from other users"
 msgstr "Permitir mensagens de email de outros usuários"
 
-#: models.py:610
+#: models.py:632
 msgid "Preferred language"
 msgstr "Idioma preferido"
 
-#: models.py:613
+#: models.py:635
 msgid "Suspended access"
 msgstr "Suspender acesso"
 
-#: models.py:637
+#: models.py:659
 msgid "suspended"
 msgstr "suspenso"
 
-#: models.py:639
+#: models.py:661
 msgid "waiting approval"
 msgstr "aguardando aprovação"
 
-#: models.py:645
+#: models.py:667
 msgid "pending"
 msgstr "pendente"
 
-#: models.py:660
+#: models.py:682
 msgid "Invitation"
 msgstr "Convite"
 
-#: models.py:728
+#: models.py:750
 #, python-format
 msgid "Text %(link_to_text)s edited"
 msgstr "Texto %(link_to_text)s editado"
 
-#: models.py:729
+#: models.py:751
 #, python-format
 msgid "Text %(link_to_text)s edited (new version created)"
 msgstr "Texto %(link_to_text)s editado (criada nova versão)"
 
-#: models.py:730
+#: models.py:752
 #, python-format
 msgid "Text %(link_to_text)s added"
 msgstr "Texto %(link_to_text)s adicionado"
 
-#: models.py:731
+#: models.py:753
 #, python-format
 msgid "Text %(link_to_text)s removed"
 msgstr "Texto %(link_to_text)s removido"
 
-#: models.py:732
+#: models.py:754
 #, python-format
 msgid "Comment %(link_to_comment)s added on text %(link_to_text)s"
 msgstr "Comentário %(link_to_comment)s adicionado ao texto %(link_to_text)s "
 
-#: models.py:733
+#: models.py:755
 #, python-format
 msgid "Comment %(link_to_comment)s removed from text %(link_to_text)s"
 msgstr "Comentário %(link_to_comment)s removido do texto %(link_to_text)s"
 
-#: models.py:734
+#: models.py:756
 #, python-format
 msgid "User %(username)s added"
 msgstr "Usuário %(username)s adicionado"
 
-#: models.py:735
+#: models.py:757
 #, python-format
 msgid "User %(username)s access to workspace enabled"
 msgstr "Acesso do usuário %(username)s à área de trabalho permitido"
 
-#: models.py:736
+#: models.py:758
 #, python-format
 msgid "User %(username)s access to workspace refused"
 msgstr "Acesso do usuário %(username)s à área de trabalho recusado"
 
-#: models.py:737
+#: models.py:759
 #, python-format
 msgid "User %(username)s access to workspace suspended"
 msgstr "Acesso do usuário %(username)s à área de trabalho suspenso"
 
-#: models.py:738
+#: models.py:760
 #, python-format
 msgid "User %(username)s access to workspace activated"
 msgstr "Acesso do usuário %(username)s à área de trabalho ativado"
 
-#: models.py:739
+#: models.py:761
 #, python-format
 msgid "User %(username)s has activated his account"
 msgstr "O usuário %(username)s ativou sua conta"
 
-#: models.py:794 models.py:802
+#: models.py:816 models.py:824
 #, python-format
 msgid "by \"%(username)s\""
 msgstr "por \"%(username)s\""
 
-#: models.py:796
+#: models.py:818
 #, python-format
 msgid "%(time_since)s ago"
 msgstr "há %(time_since)s"
@@ -533,23 +529,23 @@ msgstr "Carregando"
 msgid "Commenting"
 msgstr "Comentando"
 
-#: templates/site/dashboard.html:260
+#: templates/site/dashboard.html:262
 msgid "Activities"
 msgstr "Atividades"
 
-#: templates/site/dashboard.html:263
+#: templates/site/dashboard.html:265
 msgid "texts"
 msgstr "textos"
 
-#: templates/site/dashboard.html:264
+#: templates/site/dashboard.html:266
 msgid "comments"
 msgstr "comentários"
 
-#: templates/site/dashboard.html:266
+#: templates/site/dashboard.html:268
 msgid "users"
 msgstr "usuário"
 
-#: templates/site/dashboard.html:306
+#: templates/site/dashboard.html:308
 msgid "No activities"
 msgstr "Sem atividades"
 
@@ -585,7 +581,7 @@ msgstr "Feed público"
 
 #: templates/site/followup.html:22 templates/site/followup.html.py:35
 #: templates/site/help.html:6 templates/site/text_embed.html:27
-#: templates/site/layout/footer.html:26
+#: templates/site/layout/footer.html:13
 #: templates/site/macros/form_fields.html:15
 msgid "Help"
 msgstr "Ajuda"
@@ -701,7 +697,12 @@ msgstr "%(wname)s Inscrição"
 msgid "Settings"
 msgstr "Configurações"
 
-#: templates/site/settings.html:32
+#: templates/site/settings.html:25
+#, fuzzy
+msgid "Delete logo"
+msgstr "Apagar"
+
+#: templates/site/settings.html:34
 msgid ""
 "Are you sure you want to change the role model? All roles (except managers) "
 "will be resetted!"
@@ -1113,18 +1114,18 @@ msgstr ""
 "Os usuários receberão um convite por email para entrar na área de trabalho."
 
 #: templates/site/layout/base_text.html:16
-#: templates/site/layout/base_workspace.html:14
+#: templates/site/layout/base_workspace.html:20
 msgid "back to workspace"
 msgstr "voltar para área de trabalho"
 
-#: templates/site/layout/base_workspace.html:17
+#: templates/site/layout/base_workspace.html:30
 #, python-format
 msgid "%(nb_texts)s text"
 msgid_plural "%(nb_texts)s texts"
 msgstr[0] "%(nb_texts)s texto"
 msgstr[1] "%(nb_texts)s textos"
 
-#: templates/site/layout/base_workspace.html:17
+#: templates/site/layout/base_workspace.html:30
 #, python-format
 msgid "%(nb_users)s user"
 msgid_plural "%(nb_users)s users"
@@ -1255,6 +1256,10 @@ msgstr "F j, Y \\a\\t g:i a"
 msgid "%Y-%m-%d %H:%M"
 msgstr "%Y-%m-%d %H:%M"
 
+#: utils/diff.py:53
+msgid "unknown"
+msgstr "desconhecido"
+
 #: views/create.py:26
 msgid "Upload file (optional)"
 msgstr "Carregar arquivo (opcional)"
@@ -1342,7 +1347,7 @@ msgstr "Desativar aviso?"
 msgid "Private notifications feed reseted."
 msgstr "Feed privado de avisos restabelecido."
 
-#: views/site.py:81 views/texts.py:132 views/user.py:525
+#: views/site.py:81 views/texts.py:129 views/user.py:525
 msgid "You're logged in!"
 msgstr "Você entrou!"
 
@@ -1383,10 +1388,15 @@ msgid "Workspace tagline"
 msgstr "Slogan da área de trabalho"
 
 #: views/site.py:159
+#, fuzzy
+msgid "Workspace logo"
+msgstr "Função da área de trabalho"
+
+#: views/site.py:161
 msgid "Workspace registration"
 msgstr "Registro da área de trabalho"
 
-#: views/site.py:160
+#: views/site.py:162
 msgid ""
 "Can users register themselves into the workspace? (if not, only invitations "
 "by managers can create new users)"
@@ -1394,86 +1404,87 @@ msgstr ""
 "Usuários podem se inscrever na área de trabalho? (se não, apenas convites "
 "por gerentes podem criar novos usuários)"
 
-#: views/site.py:164
+#: views/site.py:166
 msgid "Workspace registration moderation"
 msgstr "Moderação de registro da área de trabalho"
 
-#: views/site.py:165
+#: views/site.py:167
+#, fuzzy
 msgid ""
-"Should new users be moderated (registration will require manager's approval)"
+"Should new users be moderated (registration will require manager's approval)?"
 msgstr ""
 "Novos usuários devem ser moderados? (registro exigirá aprovação de gerente) "
 
-#: views/site.py:169
+#: views/site.py:171
 msgid "Role model"
 msgstr "Função modelo"
 
-#: views/site.py:170
+#: views/site.py:172
 msgid "Change the roles available in the workspace"
 msgstr "Alterar as funções disponível na área de trabalho"
 
-#: views/site.py:195
+#: views/site.py:202 views/site.py:211
 msgid "Settings saved"
 msgstr "Configurações salvas"
 
-#: views/texts.py:165
+#: views/texts.py:162
 #, python-format
 msgid "%(nb_texts)i text(s) deleted"
 msgstr "%(nb_texts)i texto(s) apagado(s)"
 
-#: views/texts.py:210
+#: views/texts.py:207
 #, python-format
 msgid "Text %(text_title)s deleted"
 msgstr "Texto %(text_title)s apagado"
 
-#: views/texts.py:221
+#: views/texts.py:218
 #, fuzzy, python-format
 msgid "Text version %(text_version_title)s deleted"
 msgstr "Texto %(text_title)s apagado"
 
-#: views/texts.py:616
+#: views/texts.py:595
 msgid "Note (optional)"
 msgstr "Observação (opcional)"
 
-#: views/texts.py:619
+#: views/texts.py:598
 msgid "Add a note to explain the modifications made to the text"
 msgstr "Adicionar uma observação para explicar as mudanças feitas no texto"
 
-#: views/texts.py:629
+#: views/texts.py:608
 msgid "New version (optional)"
 msgstr "Nova versão (opcional)"
 
-#: views/texts.py:632
+#: views/texts.py:611
 msgid "Create a new version of this text (recommended)"
 msgstr "Criar uma nova versão desse texto (recomendado)"
 
-#: views/texts.py:635
+#: views/texts.py:614
 msgid "Keep comments (optional)"
 msgstr "Manter comentários (opcional)"
 
-#: views/texts.py:638
+#: views/texts.py:617
 msgid "Keep comments (if not affected by the edit)"
 msgstr "Manter comentários (se não afetados pela edição)"
 
-#: views/texts.py:701
+#: views/texts.py:680
 msgid "Name (optional)"
 msgstr "Nome (opcional)"
 
-#: views/texts.py:702
+#: views/texts.py:681
 msgid "Email (optional)"
 msgstr "Email (opcional)"
 
-#: views/texts.py:752
+#: views/texts.py:731
 #, fuzzy, python-format
 msgid "A new version (copied from version %(version_title)s) has been created"
 msgstr "Uma mova versão (copiada da versão %(version_id)s) foi criada"
 
-#: views/texts.py:860 views/user.py:79 views/user.py:99
+#: views/texts.py:839 views/user.py:79 views/user.py:99
 #, python-format
 msgid "%(count)i user(s) role modified"
 msgstr "%(count)i função do(s) usuário(s) modificada"
 
-#: views/texts.py:918
+#: views/texts.py:897
 msgid "Text settings updated"
 msgstr "Configurações do texto atualizadas"
 
