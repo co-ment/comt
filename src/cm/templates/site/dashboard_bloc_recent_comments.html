@@ -15,7 +15,7 @@
            {% for comment in last_comments %}
            <li class="dashlog_item">
 			    <div class="dashlog">            	
-					<img class="dashlog_img" src="{{ MEDIA_URL }}img/note_small.png"/>
+					<img class="dashlog_img" src="{{ CM_MEDIA_PREFIX }}img/note_small.png"/>
 					<span class="dashlog_data">
 						<a href="{% url text-view-show-comment comment.text_version.text.key comment.id_key %}">{{ comment.title }}</a> {% blocktrans %}on text{% endblocktrans %} <a href="{% url text-view comment.text_version.text.key %}">{{ comment.text_version.title }}</a>						
                    </span>

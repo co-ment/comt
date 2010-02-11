@@ -2,13 +2,17 @@
 <div class="footer">
 
 <div id="footerbar">
-<div class="footlinks">
-<ul class="navlinks">
-    <li><a href="#">{% blocktrans %}About{% endblocktrans %}</a></li>
-    <li>&#183;</li>
-    <li><a href="{% url contact %}">{% blocktrans %}Contact{% endblocktrans %}</a></li>
-    <li>&#183;</li>
-    <li>
+<div class="footlinks" style="padding-top: 10px;">
+<span class="navlinks navleft">
+    <a href="#">{% blocktrans %}About{% endblocktrans %}</a>
+    &#183;
+    <a href="{% url contact %}">{% blocktrans %}Contact{% endblocktrans %}</a>
+    &#183;
+    <a id="comentlink" title="co-ment" href="http://www.co-ment.com">Powered by <img src="{{ CM_MEDIA_PREFIX }}img/logo-co-ment-50.png"></img></a>
+    &#183;    
+    <a href="{% url help %}">{% blocktrans %}Help{% endblocktrans %}</a>
+    
+    &#183;
     {% for lang in LOCAL_LANGUAGES %}
         {% ifequal lang.0 LANGUAGE_CODE %}
             {{ lang.1 }}
@@ -16,15 +20,15 @@
             <a title="{{ lang.1 }}" href="{% url setlang lang.0 %}">{{ lang.1 }}</a>
         {% endifequal %}
         {% if not forloop.last %}
-        &nbsp;/&nbsp; 
+        &nbsp; 
         {% endif %}
     {% endfor %}
-    </li>
-    <li>&#183;</li>
-    <li><a id="sopinspacelink" href="http://www.sopinspace.com">&copy; 2007-{% now "Y" %} Sopinspace</a></li>
-    <li>&#183;</li>    
-    <li><a href="{% url help %}">{% blocktrans %}Help{% endblocktrans %}</a></li>
-</ul>
+    
+    
+</span>
+<span class="navlinks navright">    
+    
+</span>
 </div>
 </div>
 </div>

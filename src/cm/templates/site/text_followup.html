@@ -25,7 +25,7 @@ tb_conf['current_tab'] = 'followup';
 
 <div>
 <a href="{{SITE_URL}}{% url text-feed text.key  %}" title="{% blocktrans with text.title as title %}Public feed for text {{ title }}{% endblocktrans %}">
-	<img style="vertical-align:middle;" src="{{ MEDIA_URL }}img/xml.gif" /> {{SITE_URL}}{% url text-feed text.key  %} 
+	<img style="vertical-align:middle;" src="{{ CM_MEDIA_PREFIX }}img/xml.gif" /> {{SITE_URL}}{% url text-feed text.key  %} 
 </a>
 </div>
 {% blocktrans %}This is the public feed for the text.{% endblocktrans %}
@@ -39,7 +39,7 @@ tb_conf['current_tab'] = 'followup';
 {% if text.private_feed_key %}
 <div>
 <a href="{{SITE_URL}}{% url text-private-feed text.key text.private_feed_key %}" title="{% blocktrans %}Private feed for text {% endblocktrans %}">
-	<img style="vertical-align:middle;" src="{{ MEDIA_URL }}img/xml.gif" /> {{SITE_URL}}{% url text-private-feed text.key text.private_feed_key %} 
+	<img style="vertical-align:middle;" src="{{ CM_MEDIA_PREFIX }}img/xml.gif" /> {{SITE_URL}}{% url text-private-feed text.key text.private_feed_key %} 
 </a>
 </div>
 {% blocktrans %}This is the private feed for the text. Don't share this address with others unless you want them to see all activities on this text.{% endblocktrans %}

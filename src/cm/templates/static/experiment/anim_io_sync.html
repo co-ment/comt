@@ -17,8 +17,8 @@ body {
 }
 </style>
 
-<link type="text/css" rel="stylesheet" href="{{ MEDIA_URL }}js/lib/yui/{{ YUI_VERSION }}/build/cssfonts/fonts-min.css" />
-<script type="text/javascript" src="{{ MEDIA_URL }}js/lib/yui/{{ YUI_VERSION }}/build/yui/yui-min.js"></script>
+<link type="text/css" rel="stylesheet" href="{{ CM_MEDIA_PREFIX }}js/lib/yui/{{ YUI_VERSION }}/build/cssfonts/fonts-min.css" />
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/lib/yui/{{ YUI_VERSION }}/build/yui/yui-min.js"></script>
 
 
 <!--begin custom header content for this example-->
@@ -111,8 +111,8 @@ body {
 
 <button id="init">Initialize Application</button>
 
-<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_server_exchange.js"></script>
-<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_util.js"></script>
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_server_exchange.js"></script>
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_util.js"></script>
 <script type="text/javascript">
 
 
@@ -278,7 +278,7 @@ MyApp.prototype = {
 
 
 
-YUI({base:"{{ MEDIA_URL }}js/lib/yui/{{ YUI_VERSION }}/build/", timeout: 10000}).use("anim", "queue", "io","json",function (Y) {
+YUI({base:"{{ CM_MEDIA_PREFIX }}js/lib/yui/{{ YUI_VERSION }}/build/", timeout: 10000}).use("anim", "queue", "io","json",function (Y) {
 CY = Y;
 var myApp = new MyApp() ;
 

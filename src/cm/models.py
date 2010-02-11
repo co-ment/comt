@@ -386,6 +386,12 @@ class ConfigurationManager(models.Manager):
             return self.get(key=key).value
         except Configuration.DoesNotExist:
             return DEFAULT_CONF.get(key, default_value)
+
+    def del_key(self, key):
+        try:
+            self.get(key=key).delete()
+        except Configuration.DoesNotExist:
+            return None
         
     def set_key(self, key, value):
         conf, created = self.get_or_create(key=key)
@@ -396,7 +402,18 @@ class ConfigurationManager(models.Manager):
                 change_role_model(value)
 
     def __getitem__(self, key):
-        return self.get_key(key, None)
+        if not key.startswith('f_'):
+            return self.get_key(key, None)
+        else:
+            return getattr(self,key)()
+    
+    def f_get_logo_url(self):
+        key = self.get_key('workspace_logo_file_key', None)
+        if key:
+            attach = Attachment.objects.get(key=key)
+            return attach.data.url
+        else:
+            return None 
     
 import base64
 
@@ -428,7 +445,7 @@ class AttachmentManager(KeyManager):
     
 class Attachment(KeyModel):
     data = models.FileField(upload_to="attachments/%Y/%m/%d/", max_length=1000)
-    text_version = models.ForeignKey(TextVersion)
+    text_version = models.ForeignKey(TextVersion, null=True)
 
     objects = AttachmentManager()
     

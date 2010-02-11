@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     {% include "site/layout/req_yui.html" %}
     
-<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/site/text_view_comments/text_view_comments.css">
+<link rel="stylesheet" type="text/css" href="{{ CM_MEDIA_PREFIX }}css/site/text_view_comments/text_view_comments.css">
 </head>
 
 <body>
@@ -28,14 +28,14 @@
 </div>
 </body>
 
-<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/site/text_view_comments/c-text.css">
-<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/site/text_view_comments/c-text-styles.css">
-<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/site/text_view_comments/c-style-comment.css">
-<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/site/text_view_comments/c-style-gray.css">
-<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/site/text_view_comments/c-style-notelike.css">  
+<link rel="stylesheet" type="text/css" href="{{ CM_MEDIA_PREFIX }}css/site/text_view_comments/c-text.css">
+<link rel="stylesheet" type="text/css" href="{{ CM_MEDIA_PREFIX }}css/site/text_view_comments/c-text-styles.css">
+<link rel="stylesheet" type="text/css" href="{{ CM_MEDIA_PREFIX }}css/site/text_view_comments/c-style-comment.css">
+<link rel="stylesheet" type="text/css" href="{{ CM_MEDIA_PREFIX }}css/site/text_view_comments/c-style-gray.css">
+<link rel="stylesheet" type="text/css" href="{{ CM_MEDIA_PREFIX }}css/site/text_view_comments/c-style-notelike.css">  
 <!-- date library, to be used by filter, maybe get rid of that when decent date parsing is offered elsewhere -->
 <!-- we're round tripping from object python date to str back to date to filter, TODO consider setting the date from python... -->
-<script type="text/javascript" src="{{ MEDIA_URL }}js/lib/flexible-js-formatting/dates/date-functions.js"></script>
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/lib/flexible-js-formatting/dates/date-functions.js"></script>
 
 <script type="text/javascript">
 <!--
@@ -85,28 +85,28 @@ sv_media_url = "{{ MEDIA_URL|escapejs }}";
 
 <script type="text/javascript" src="{% url django.views.i18n.javascript_catalog %}"></script>
 {% if CLIENT_DEBUG  %}
-<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_permissions.js"></script> 
-<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_preferences.js"></script>
-<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_layout.js"></script>
-<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_icomment.js"></script>
-<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_db.js"></script>
-<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_sync.js"></script>
-<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_icomments.js"></script> 
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_permissions.js"></script> 
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_preferences.js"></script>
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_layout.js"></script>
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_icomment.js"></script>
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_db.js"></script>
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_sync.js"></script>
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_icomments.js"></script> 
 
-<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_util.js"></script>
-<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_server_exchange.js"></script>
-<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_selection.js"></script>
-<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_scopes.js"></script>
-<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_interface_forms.js"></script>
-<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_addcomment_form.js"></script>
-<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_reply_form.js"></script>
-<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_edit_form.js"></script>
-<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_dlg_intercept.js"></script>
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_util.js"></script>
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_server_exchange.js"></script>
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_selection.js"></script>
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_scopes.js"></script>
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_interface_forms.js"></script>
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_addcomment_form.js"></script>
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_reply_form.js"></script>
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_edit_form.js"></script>
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_dlg_intercept.js"></script>
 
-<script type="text/javascript" src="{{ MEDIA_URL }}js/site/c_text_view_comments_to_frame.js"></script>
-<script type="text/javascript" src="{{ MEDIA_URL }}js/site/c_text_view_comments.js"></script> 
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/site/c_text_view_comments_to_frame.js"></script>
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/site/c_text_view_comments.js"></script> 
 {% else %}
-<script type="text/javascript" src="{{ MEDIA_URL }}js/client/c_client-min.js?1265230064"></script> 
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_client-min.js?1265230064"></script> 
 {% endif %}
 
 

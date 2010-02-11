@@ -17,8 +17,8 @@ body {
 }
 </style>
 
-<link type="text/css" rel="stylesheet" href="{{ MEDIA_URL }}js/lib/yui/{{ YUI_VERSION }}/build/cssfonts/fonts-min.css" />
-<script type="text/javascript" src="{{ MEDIA_URL }}js/lib/yui/{{ YUI_VERSION }}/build/yui/yui-min.js"></script>
+<link type="text/css" rel="stylesheet" href="{{ CM_MEDIA_PREFIX }}js/lib/yui/{{ YUI_VERSION }}/build/cssfonts/fonts-min.css" />
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/lib/yui/{{ YUI_VERSION }}/build/yui/yui-min.js"></script>
 
 </head>
 
@@ -44,7 +44,7 @@ YUI.add('coment', function(Y) {
 	Y.Coment = Coment;
 	}, '0.0.1');
 
-YUI({base:"{{ MEDIA_URL }}js/lib/yui/{{ YUI_VERSION }}/build/", timeout: 10000}).use("coment",function (Y) {
+YUI({base:"{{ CM_MEDIA_PREFIX }}js/lib/yui/{{ YUI_VERSION }}/build/", timeout: 10000}).use("coment",function (Y) {
 	Y.log('in here') ;
     var coment = new Y.Coment() ;
     coment.fun() ;

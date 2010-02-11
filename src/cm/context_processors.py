@@ -9,7 +9,8 @@ def static(request):
             'SITE_URL' : settings.SITE_URL,
             'CLIENT_DEBUG' : settings.CLIENT_DEBUG,
             'YUI_VERSION' : settings.YUI_VERSION,
-            'CONF': ApplicationConfiguration
+            'CONF': ApplicationConfiguration,
+            'CM_MEDIA_PREFIX' : settings.CM_MEDIA_PREFIX,
             }
 
 

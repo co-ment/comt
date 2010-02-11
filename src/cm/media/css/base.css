@@ -416,16 +416,15 @@ table th,table td {
 	text-align:right;
 }
 
-#sopinspacelink:hover {
+#comentlink:hover {
 	color:#EB5700;
 	text-decoration:underline;
 }
 
-#sopinspacelink, #sopinspacelink:visited {
+#comentlink, #comentlink:visited {
 	color:#EB5700;
 	text-decoration:none;
 }
-
 
 .ui-widget-content {
 	border-left:0;
@@ -437,13 +436,16 @@ table th,table td {
 	color:#00F;
 }
 
-ul.navlinks li {
-	display:inline;
-	list-style-image:none;
-	list-style-position:outside;
-	list-style-type:none;
-	padding:0 0.5em 0 0;
+.footlinks {
+	padding-top: 10px;
+}
+
+.navlinks {
+	padding:0em 0.5em 0 0;
 	white-space:nowrap;
+}
+.navright {
+	float:right;
 }
 
 a.title {

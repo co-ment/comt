@@ -1,6 +1,6 @@
 {% load i18n %}
-<script type="text/javascript" src="{{ MEDIA_URL }}js/lib/fg-menu/fg.menu.js"></script>
-<link type="text/css" href="{{ MEDIA_URL }}js/lib/fg-menu/fg.menu.css" media="screen" rel="stylesheet" />
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/lib/fg-menu/fg.menu.js"></script>
+<link type="text/css" href="{{ CM_MEDIA_PREFIX }}js/lib/fg-menu/fg.menu.css" media="screen" rel="stylesheet" />
         
         <style type="text/css">
                 .fg-menu-action .fg-menu li { width: 95%; }
@@ -9,12 +9,12 @@
         </style>
 <div class="text-buttons">
 
-<a id="share" class="fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all" id="flat"><span class="ui-icon ui-icon-triangle-1-s"></span>{% blocktrans %}Share{% endblocktrans %}&nbsp;<img class="align-mid" src="{{ MEDIA_URL }}img/social/facebook.gif" /><img class="align-mid" src="{{ MEDIA_URL }}img/social/digg.gif" /></a>
+<a id="share" class="fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all" id="flat"><span class="ui-icon ui-icon-triangle-1-s"></span>{% blocktrans %}Share{% endblocktrans %}&nbsp;<img class="align-mid" src="{{ CM_MEDIA_PREFIX }}img/social/facebook.gif" /><img class="align-mid" src="{{ CM_MEDIA_PREFIX }}img/social/digg.gif" /></a>
 <div id="share-options" class="hidden">
 <ul>
-        <li><a href="http://www.facebook.com/sharer.php?u={{ SITE_URL }}{% url text-view text.key %}"><img class="align-mid" src="{{ MEDIA_URL }}img/social/facebook.gif" /> Facebook</a></li>
-        <li><a href="http://digg.com/remote-submit/?phase=2&url={{ SITE_URL }}{% url text-view text.key %}"><img class="align-mid" src="{{ MEDIA_URL }}img/social/digg.gif" /> Digg</a></li>
-        <li><a href="http://www.linkedin.com/shareArticle?mini=true&url={{ SITE_URL }}{% url text-view text.key %}"><img class="align-mid" src="{{ MEDIA_URL }}img/social/linkedin.gif" /> Linkedin</a></li>
+        <li><a href="http://www.facebook.com/sharer.php?u={{ SITE_URL }}{% url text-view text.key %}"><img class="align-mid" src="{{ CM_MEDIA_PREFIX }}img/social/facebook.gif" /> Facebook</a></li>
+        <li><a href="http://digg.com/remote-submit/?phase=2&url={{ SITE_URL }}{% url text-view text.key %}"><img class="align-mid" src="{{ CM_MEDIA_PREFIX }}img/social/digg.gif" /> Digg</a></li>
+        <li><a href="http://www.linkedin.com/shareArticle?mini=true&url={{ SITE_URL }}{% url text-view text.key %}"><img class="align-mid" src="{{ CM_MEDIA_PREFIX }}img/social/linkedin.gif" /> Linkedin</a></li>
 </ul>
 </div>
 

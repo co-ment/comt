@@ -45,12 +45,12 @@ $(function() {
 		</thead>
 		<tbody>
 	        <tr><td>	
-            {% if can_create_text %}<div class="dash_action"><a class="" href="{% url text-create-content %}"><img align="middle" src="{{ MEDIA_URL }}img/sop_write.png"/>&nbsp;{% blocktrans %}Write a text{% endblocktrans %}</a></div>{% endif %}
-            {% if can_create_text %}<div class="dash_action"><a class="" href="{% url text-create-upload %}"><img align="middle" src="{{ MEDIA_URL }}img/sop_upload.png"/>&nbsp;{% blocktrans %}Upload a text{% endblocktrans %}</a></div>{% endif %}
-            {% if can_manage_workspace %}<div class="dash_action"><a class="" href="{% url user-add %}"><img align="middle" src="{{ MEDIA_URL }}img/group_add.png"/>&nbsp;{% blocktrans %}Invite user{% endblocktrans %}</a></div>{% endif %}
-            <div class="dash_action"><a class="" href="{% url profile %}"><img align="middle" src="{{ MEDIA_URL }}img/user_edit.png"/>&nbsp;{% blocktrans %}Edit your profile{% endblocktrans %}</a></div>
-            <div class="dash_action"><a class="" href="{% url text %}"><img align="middle" src="{{ MEDIA_URL }}img/page_white_stack.png"/>&nbsp;{% blocktrans %}View text list{% endblocktrans %}</a></div>
-            {% if can_manage_workspace %}<div class="dash_action"><a class="" href="{% url settings %}"><img align="middle" src="{{ MEDIA_URL }}img/cog_edit.png"/>&nbsp;{% blocktrans %}Configure workspace{% endblocktrans %}</a></div>{% endif %}
+            {% if can_create_text %}<div class="dash_action"><a class="" href="{% url text-create-content %}"><img align="middle" src="{{ CM_MEDIA_PREFIX }}img/sop_write.png"/>&nbsp;{% blocktrans %}Write a text{% endblocktrans %}</a></div>{% endif %}
+            {% if can_create_text %}<div class="dash_action"><a class="" href="{% url text-create-upload %}"><img align="middle" src="{{ CM_MEDIA_PREFIX }}img/sop_upload.png"/>&nbsp;{% blocktrans %}Upload a text{% endblocktrans %}</a></div>{% endif %}
+            {% if can_manage_workspace %}<div class="dash_action"><a class="" href="{% url user-add %}"><img align="middle" src="{{ CM_MEDIA_PREFIX }}img/group_add.png"/>&nbsp;{% blocktrans %}Invite user{% endblocktrans %}</a></div>{% endif %}
+            <div class="dash_action"><a class="" href="{% url profile %}"><img align="middle" src="{{ CM_MEDIA_PREFIX }}img/user_edit.png"/>&nbsp;{% blocktrans %}Edit your profile{% endblocktrans %}</a></div>
+            <div class="dash_action"><a class="" href="{% url text %}"><img align="middle" src="{{ CM_MEDIA_PREFIX }}img/page_white_stack.png"/>&nbsp;{% blocktrans %}View text list{% endblocktrans %}</a></div>
+            {% if can_manage_workspace %}<div class="dash_action"><a class="" href="{% url settings %}"><img align="middle" src="{{ CM_MEDIA_PREFIX }}img/cog_edit.png"/>&nbsp;{% blocktrans %}Configure workspace{% endblocktrans %}</a></div>{% endif %}
             </td>
             </tr>
 		
@@ -71,12 +71,12 @@ $(function() {
             	{% with profile.user as user %}
             	<li class="dashlog_item">
 				    <div class="dashlog">            	
-						<img class="dashlog_img" src="{{ MEDIA_URL }}img/user_error_small.png"/>
+						<img class="dashlog_img" src="{{ CM_MEDIA_PREFIX }}img/user_error_small.png"/>
 						<span class="dashlog_data">
             			{% blocktrans %}user {{ user }} awaits approval{% endblocktrans %}
             			</span>
             			<div class="mod_actions">
-<img src="{{ MEDIA_URL }}img/bullet_go_small.png"/>
+<img src="{{ CM_MEDIA_PREFIX }}img/bullet_go_small.png"/>
 <a id="user-approve-{{ user.get_profile.key }}" href="#">{% blocktrans %}approve{% endblocktrans %}</a>/<a id="user-refuse-{{ user.get_profile.key }}" href="#">{% blocktrans %}refuse{% endblocktrans %}</a> {% blocktrans %}membership{% endblocktrans %}
 <script type="text/javascript">
 <!--
@@ -114,14 +114,14 @@ $("#user-refuse-{{ user.get_profile.key }}").click(function(){
             {% for comment in to_mod_comments %}
             	<li class="dashlog_item">
 				    <div class="dashlog">            	
-						<img class="dashlog_img" src="{{ MEDIA_URL }}img/note_error_small.png"/>
+						<img class="dashlog_img" src="{{ CM_MEDIA_PREFIX }}img/note_error_small.png"/>
 						<span class="dashlog_data">
             	
 		            	{% blocktrans %}comment{% endblocktrans %} <a href="{% url text-view-show-comment comment.text_version.text.key comment.id_key %}">{{ comment.title }}</a>
 		            	{% blocktrans with comment.user as cuser %}by {{ cuser }} on text{% endblocktrans %} <a href="{% url text-view comment.text_version.text.key %}">{{ comment.text_version.text.title }}</a> {% blocktrans %}awaits approval{% endblocktrans %}<br />
 		            	</span>
 		            	<div style="padding-left:22px;" class="mod_actions">
-<img src="{{ MEDIA_URL }}img/bullet_go_small.png"/>
+<img src="{{ CM_MEDIA_PREFIX }}img/bullet_go_small.png"/>
 
 <a id="comment-approve-{{ comment.key }}" href="#">{% blocktrans %}approve{% endblocktrans %}</a>/<a id="comment-refuse-{{ comment.key }}" href="#">{% blocktrans %}refuse{% endblocktrans %}</a> {% blocktrans %}comment{% endblocktrans %},
 <a href="{% url text-view-show-comment comment.text_version.text.key comment.id_key %}">{% blocktrans %}view in context{% endblocktrans %}</a>
@@ -192,7 +192,7 @@ $("#comment-refuse-{{ comment.key }}").click(function(){
             {% for text in last_texts %}
             <li class="dashlog_item">
 				    <div class="dashlog">            	
-						<img class="dashlog_img" src="{{ MEDIA_URL }}img/page_white.png"/>
+						<img class="dashlog_img" src="{{ CM_MEDIA_PREFIX }}img/page_white.png"/>
 						<span class="dashlog_data">
 							<a href="{% url text-view text.key %}">{{ text.title }}</a>						
                     </span>
@@ -295,7 +295,7 @@ $("#comment-refuse-{{ comment.key }}").click(function(){
                 {% for activity in object_list %}
                     <li class="dashlog_item">
 				    <div class="dashlog">                    
-                    <img class="dashlog_img" src={{ MEDIA_URL }}img/{{ activity.img_name }} />
+                    <img class="dashlog_img" src={{ CM_MEDIA_PREFIX }}img/{{ activity.img_name }} />
                     <span class="dashlog_data">                    
                     {{ activity.printable_data }}
                     </span>

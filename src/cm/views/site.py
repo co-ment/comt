@@ -148,13 +148,15 @@ from django.utils.safestring import mark_safe
 class SettingsForm(forms.Form):
     workspace_name = forms.CharField(label=ugettext_lazy("Workspace name"),
                                      widget=forms.TextInput,
-                                     required=True,
+                                     required=False,
                                      )
     
     workspace_tagline = forms.CharField(label=ugettext_lazy("Workspace tagline"),
                                         widget=forms.TextInput,
                                         required=False,
                                         )
+
+    workspace_logo_file  = forms.FileField(label=ugettext_lazy("Workspace logo"),required=False)
 
     workspace_registration = forms.BooleanField(label=ugettext_lazy("Workspace registration"),
                                                 help_text=ugettext_lazy("Can users register themselves into the workspace? (if not, only invitations by managers can create new users)"),
@@ -171,6 +173,8 @@ class SettingsForm(forms.Form):
                                              choices=role_models_choices,
                                              required=False,
                                              )
+    
+    
     # fields to save in the Configuration objects
     conf_fields = ['workspace_name', 'workspace_tagline', 'workspace_registration', 'workspace_registration_moderation', 'workspace_role_model']
 
@@ -185,15 +189,28 @@ class SettingsForm(forms.Form):
             if field in self.conf_fields:
                 val = self.cleaned_data[field]
                 Configuration.objects.set_key(field, val)
+        #handle_uploaded_file()
+    def save_file(self, logo_file):
+        attach = Attachment.objects.create_attachment(filename='wp_logo', data=logo_file.read(), text_version=None)
+        Configuration.objects.set_key('workspace_logo_file_key', attach.key)
+        print attach.key
         
 @has_global_perm('can_manage_workspace')
 def settingss(request):
     if request.method == 'POST':
-        form = SettingsForm(data=request.POST)
-        if form.is_valid() :
-            form.save()
+        if 'delete_logo' in request.POST:
+            Configuration.objects.del_key('workspace_logo_file_key')
             display_message(request, _(u'Settings saved'))
-            return HttpResponseRedirect(reverse('index'))
+            return HttpResponseRedirect(reverse('index'))            
+        else:
+            form = SettingsForm(data=request.POST)
+            if form.is_valid() :
+                form.save()
+                logo_file = request.FILES.get('workspace_logo_file',None)
+                if logo_file:
+                    form.save_file(logo_file)
+                display_message(request, _(u'Settings saved'))
+                return HttpResponseRedirect(reverse('index'))
     else:
         form = SettingsForm()
     
