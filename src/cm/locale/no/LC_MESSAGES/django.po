@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-02-11 17:11+0100\n"
-"PO-Revision-Date: 2010-01-16 18:00+0100\n"
+"PO-Revision-Date: 2010-02-12 12:25+0100\n"
 "Last-Translator: Kirill Miazine <km@krot.org>\n"
 "Language-Team: <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -702,9 +702,8 @@ msgid "Settings"
 msgstr "Innstillinger"
 
 #: templates/site/settings.html:25
-#, fuzzy
 msgid "Delete logo"
-msgstr "Slett"
+msgstr "Slett logo"
 
 #: templates/site/settings.html:34
 msgid ""
@@ -1385,9 +1384,8 @@ msgid "Workspace tagline"
 msgstr "Beskrivelse av arbeidsområde"
 
 #: views/site.py:159
-#, fuzzy
 msgid "Workspace logo"
-msgstr "Rolle for arbeidsområde"
+msgstr "Logo for arbeidsområde"
 
 #: views/site.py:161
 msgid "Workspace registration"
@@ -1406,7 +1404,6 @@ msgid "Workspace registration moderation"
 msgstr "Godkjenning av registreringer på arbeidsområde"
 
 #: views/site.py:167
-#, fuzzy
 msgid ""
 "Should new users be moderated (registration will require manager's approval)?"
 msgstr ""
