@@ -21,6 +21,7 @@ urlpatterns += patterns('',
      url(r'^$', dashboard, name="index"),
      url(r'^text/$', text_list, name="text"),
      url(r'^settings/$', settingss, name="settings"),
+     url(r'^settings/design/$', settings_design, name="settings-design"),
 
      # system pages
      url(r'^i18n/setlang/(?P<lang_code>\w+)/$', i18n.set_language, name="setlang"),

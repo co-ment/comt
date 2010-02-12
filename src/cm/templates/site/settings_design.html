@@ -18,15 +18,17 @@ tb_conf['current_tab'] = 'settings';
 <div id="settings" class="tab-meta">   
 
 <ul class="sub_list">
-    <li class="active_sub">{% blocktrans %}General{% endblocktrans %}</li>
+    <li><a href="{% url settings %}">{% blocktrans %}General{% endblocktrans %}</a></li>
     <li> / </li>
-    <li><a href="{% url settings-design %}">{% blocktrans %}Appearance{% endblocktrans %}</a></li>
+    <li class="active_sub">{% blocktrans %}Design{% endblocktrans %}</li>
 </ul>
 
 {% endblock %}
 
 {% block buttons %}
     <input name="cancel" type="button" id="cancel_button" value="{% blocktrans %}Cancel{% endblocktrans %}"/>
+    &nbsp;|&nbsp; 
+    <input name="delete_logo" type="submit" id="delete_logo_button" value="{% blocktrans %}Delete logo{% endblocktrans %}"/>
     <script type="text/javascript">
     <!--
 
