@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-11 17:10+0100\n"
+"POT-Creation-Date: 2010-02-12 13:08+0100\n"
 "PO-Revision-Date: 2010-01-23 12:00-0300\n"
 "Last-Translator: Paulo Rená da Silva Santarém <pbrss@yahoo.com.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -366,7 +366,8 @@ msgstr "Enviar"
 
 #: templates/site/contact.html:26
 #: templates/site/notifications_desactivate.html:32
-#: templates/site/settings.html:23 templates/site/text_create_content.html:47
+#: templates/site/settings.html:29 templates/site/settings_design.html:29
+#: templates/site/text_create_content.html:47
 #: templates/site/text_create_upload.html:42 templates/site/user_add.html:34
 #: templates/site/user_add_text.html:38 templates/site/user_contact.html:25
 #: templates/site/user_edit.html:29 templates/site/user_mass_add.html:34
@@ -691,22 +692,31 @@ msgstr "Salvar"
 msgid "%(wname)s Registration"
 msgstr "%(wname)s Inscrição"
 
-#: templates/site/settings.html:5 templates/site/text_list.html:181
-#: templates/site/macros/main_tabs.html:14
+#: templates/site/settings.html:5 templates/site/settings_design.html:5
+#: templates/site/text_list.html:181 templates/site/macros/main_tabs.html:14
 #: templates/site/macros/text_tabs.html:19
 msgid "Settings"
 msgstr "Configurações"
 
-#: templates/site/settings.html:25
+#: templates/site/settings.html:21 templates/site/settings_design.html:21
 #, fuzzy
-msgid "Delete logo"
-msgstr "Apagar"
+msgid "General"
+msgstr "Genérico"
 
-#: templates/site/settings.html:34
+#: templates/site/settings.html:23 templates/site/settings_design.html:23
+msgid "Appearance"
+msgstr ""
+
+#: templates/site/settings.html:38 templates/site/settings_design.html:40
 msgid ""
 "Are you sure you want to change the role model? All roles (except managers) "
 "will be resetted!"
 msgstr "Confirmar alteração de "
+
+#: templates/site/settings_design.html:31
+#, fuzzy
+msgid "Delete logo"
+msgstr "Apagar"
 
 #: templates/site/text_create_content.html:26
 #: templates/site/text_create_upload.html:24 templates/site/text_list.html:37
@@ -1379,24 +1389,19 @@ msgstr "Cópia da mensagem:"
 msgid "Email sent. We will get back to you as quickly as possible."
 msgstr "Email enviado. Retornaremos assim que possível."
 
-#: views/site.py:149
+#: views/site.py:164
 msgid "Workspace name"
 msgstr "Nome da área de trabalho"
 
-#: views/site.py:154
+#: views/site.py:169
 msgid "Workspace tagline"
 msgstr "Slogan da área de trabalho"
 
-#: views/site.py:159
-#, fuzzy
-msgid "Workspace logo"
-msgstr "Função da área de trabalho"
-
-#: views/site.py:161
+#: views/site.py:174
 msgid "Workspace registration"
 msgstr "Registro da área de trabalho"
 
-#: views/site.py:162
+#: views/site.py:175
 msgid ""
 "Can users register themselves into the workspace? (if not, only invitations "
 "by managers can create new users)"
@@ -1404,28 +1409,44 @@ msgstr ""
 "Usuários podem se inscrever na área de trabalho? (se não, apenas convites "
 "por gerentes podem criar novos usuários)"
 
-#: views/site.py:166
+#: views/site.py:179
 msgid "Workspace registration moderation"
 msgstr "Moderação de registro da área de trabalho"
 
-#: views/site.py:167
+#: views/site.py:180
 #, fuzzy
 msgid ""
 "Should new users be moderated (registration will require manager's approval)?"
 msgstr ""
 "Novos usuários devem ser moderados? (registro exigirá aprovação de gerente) "
 
-#: views/site.py:171
+#: views/site.py:184
 msgid "Role model"
 msgstr "Função modelo"
 
-#: views/site.py:172
+#: views/site.py:185
 msgid "Change the roles available in the workspace"
 msgstr "Alterar as funções disponível na área de trabalho"
 
-#: views/site.py:202 views/site.py:211
+#: views/site.py:200 views/site.py:206 views/site.py:234 views/site.py:243
 msgid "Settings saved"
 msgstr "Configurações salvas"
+
+#: views/site.py:214
+#, fuzzy
+msgid "Workspace logo"
+msgstr "Função da área de trabalho"
+
+#: views/site.py:216
+#, fuzzy
+msgid "Workspace html code"
+msgstr "Função da área de trabalho"
+
+#: views/site.py:217
+msgid ""
+"Add stylesheets etc. Warning: this code will be added to the workspace code, "
+"make sure you know what you're doing before adding something here."
+msgstr ""
 
 #: views/texts.py:162
 #, python-format
@@ -1648,6 +1669,10 @@ msgid ""
 "You've been registered, please check your email for the confirm message."
 msgstr ""
 "Você se inscreveu. Favor verifique em seu email a mensagem de confirmação."
+
+#, fuzzy
+#~ msgid "Design"
+#~ msgstr "Versões"
 
 #~ msgid "%(workspace_name)s's workspace"
 #~ msgstr "%(workspace_name)s da área de trabalho"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-11 17:11+0100\n"
+"POT-Creation-Date: 2010-02-12 13:09+0100\n"
 "PO-Revision-Date: 2010-02-12 12:25+0100\n"
 "Last-Translator: Kirill Miazine <km@krot.org>\n"
 "Language-Team: <no@li.org>\n"
@@ -371,7 +371,8 @@ msgstr "Send"
 
 #: templates/site/contact.html:26
 #: templates/site/notifications_desactivate.html:32
-#: templates/site/settings.html:23 templates/site/text_create_content.html:47
+#: templates/site/settings.html:29 templates/site/settings_design.html:29
+#: templates/site/text_create_content.html:47
 #: templates/site/text_create_upload.html:42 templates/site/user_add.html:34
 #: templates/site/user_add_text.html:38 templates/site/user_contact.html:25
 #: templates/site/user_edit.html:29 templates/site/user_mass_add.html:34
@@ -695,23 +696,32 @@ msgstr "Lagre"
 msgid "%(wname)s Registration"
 msgstr "Registrering på %(wname)s"
 
-#: templates/site/settings.html:5 templates/site/text_list.html:181
-#: templates/site/macros/main_tabs.html:14
+#: templates/site/settings.html:5 templates/site/settings_design.html:5
+#: templates/site/text_list.html:181 templates/site/macros/main_tabs.html:14
 #: templates/site/macros/text_tabs.html:19
 msgid "Settings"
 msgstr "Innstillinger"
 
-#: templates/site/settings.html:25
-msgid "Delete logo"
-msgstr "Slett logo"
+#: templates/site/settings.html:21 templates/site/settings_design.html:21
+#, fuzzy
+msgid "General"
+msgstr "Generell"
 
-#: templates/site/settings.html:34
+#: templates/site/settings.html:23 templates/site/settings_design.html:23
+msgid "Appearance"
+msgstr ""
+
+#: templates/site/settings.html:38 templates/site/settings_design.html:40
 msgid ""
 "Are you sure you want to change the role model? All roles (except managers) "
 "will be resetted!"
 msgstr ""
 "Ønsker du å endre rollemodellen? Alle roller (untatt administrator) vil bli "
 "nullstilt!"
+
+#: templates/site/settings_design.html:31
+msgid "Delete logo"
+msgstr "Slett logo"
 
 #: templates/site/text_create_content.html:26
 #: templates/site/text_create_upload.html:24 templates/site/text_list.html:37
@@ -1375,23 +1385,19 @@ msgid "Email sent. We will get back to you as quickly as possible."
 msgstr ""
 "Eposten er blitt sendt. Vi vil komme tilbake til deg så raskt som mulig."
 
-#: views/site.py:149
+#: views/site.py:164
 msgid "Workspace name"
 msgstr "Navn for arbeidsområde"
 
-#: views/site.py:154
+#: views/site.py:169
 msgid "Workspace tagline"
 msgstr "Beskrivelse av arbeidsområde"
 
-#: views/site.py:159
-msgid "Workspace logo"
-msgstr "Logo for arbeidsområde"
-
-#: views/site.py:161
+#: views/site.py:174
 msgid "Workspace registration"
 msgstr "Registering på arbeidsområde"
 
-#: views/site.py:162
+#: views/site.py:175
 msgid ""
 "Can users register themselves into the workspace? (if not, only invitations "
 "by managers can create new users)"
@@ -1399,28 +1405,43 @@ msgstr ""
 "Skal brukere kunne registrere seg på arbeidsområdet? (Hvis ikke, må brukere "
 "inviteres av en administrator.)"
 
-#: views/site.py:166
+#: views/site.py:179
 msgid "Workspace registration moderation"
 msgstr "Godkjenning av registreringer på arbeidsområde"
 
-#: views/site.py:167
+#: views/site.py:180
 msgid ""
 "Should new users be moderated (registration will require manager's approval)?"
 msgstr ""
 "Skal nye brukere godkjennes (registrering vil kreve administratorens "
 "godkjenning)"
 
-#: views/site.py:171
+#: views/site.py:184
 msgid "Role model"
 msgstr "Rollemodell"
 
-#: views/site.py:172
+#: views/site.py:185
 msgid "Change the roles available in the workspace"
 msgstr "Endre roller i arbeidsområdet"
 
-#: views/site.py:202 views/site.py:211
+#: views/site.py:200 views/site.py:206 views/site.py:234 views/site.py:243
 msgid "Settings saved"
 msgstr "Innstillinger lagret"
+
+#: views/site.py:214
+msgid "Workspace logo"
+msgstr "Logo for arbeidsområde"
+
+#: views/site.py:216
+#, fuzzy
+msgid "Workspace html code"
+msgstr "Rolle for arbeidsområde"
+
+#: views/site.py:217
+msgid ""
+"Add stylesheets etc. Warning: this code will be added to the workspace code, "
+"make sure you know what you're doing before adding something here."
+msgstr ""
 
 #: views/texts.py:162
 #, python-format
@@ -1640,6 +1661,10 @@ msgstr ""
 msgid ""
 "You've been registered, please check your email for the confirm message."
 msgstr "Du er blitt registert. Se din epost for en melding med bekreftelsen."
+
+#, fuzzy
+#~ msgid "Design"
+#~ msgstr "Versjon"
 
 #~ msgid "%(workspace_name)s's workspace"
 #~ msgstr "Arbeidsområde til %(workspace_name)s"
