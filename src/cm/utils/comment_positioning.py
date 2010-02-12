@@ -21,9 +21,6 @@ def compute_new_comment_positions(old_content, old_format, new_content, new_form
         newVersionContent = pandoc_convert(new_content, new_format, 'html')
     else:
         newVersionContent = new_content
-
-#$$$$$    
-    #import pdb;pdb.set_trace()
     _, previous_char_list, span_starts_previous = spannify(previousVersionContent)
     _, new_char_list, span_starts_new = spannify(newVersionContent)
     
