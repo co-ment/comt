@@ -21,7 +21,9 @@ def compute_new_comment_positions(old_content, old_format, new_content, new_form
         newVersionContent = pandoc_convert(new_content, new_format, 'html')
     else:
         newVersionContent = new_content
-    
+
+#$$$$$    
+    #import pdb;pdb.set_trace()
     _, previous_char_list, span_starts_previous = spannify(previousVersionContent)
     _, new_char_list, span_starts_new = spannify(newVersionContent)
     
@@ -68,21 +70,21 @@ def compute_new_comment_positions(old_content, old_format, new_content, new_form
                     
         #    id, initial_start, initial_end, computed_start, computed_end, valid = self.computationResults[i]
 
-    for c in commentList:        
-        if c.valid:
+    for cc in commentList:        
+        if cc.valid:
             for id in xrange(len(span_starts_new.keys())):
                 start = span_starts_new.get(id)
                 end = span_starts_new.get(id+1, sys.maxint)
 
                 # adjust start                
-                if c.computed_start_offset >= start and c.computed_start_offset < end:
-                    c.start_wrapper = id
-                    c.start_offset = c.computed_start_offset - start
+                if cc.computed_start_offset >= start and cc.computed_start_offset < end:
+                    cc.start_wrapper = id
+                    cc.start_offset = cc.computed_start_offset - start
                 
                 # adjust end                        
-                if c.computed_end_offset >= start and c.computed_end_offset < end:
-                    c.end_wrapper = id
-                    c.end_offset = c.computed_end_offset - start
+                if cc.computed_end_offset >= start and cc.computed_end_offset < end:
+                    cc.end_wrapper = id
+                    cc.end_offset = cc.computed_end_offset - start
             
     # returns to_modify, to_remove
     return [c for c in commentList if c.valid], \
