@@ -4,8 +4,8 @@ function check_save(){
     var newVersion = $('#id_new_version').attr('checked') ;
     var commentsKept = $('#id_keep_comments').attr('checked') ;
 
-    var new_content = $('#id_content').val()
-    var new_format = $('#id_format').val()
+    var new_content = $('#id_content').val() ;
+    var new_format = $('#id_format').val() ;
     var mess = gettext( 'Should these comments be detached (i.e. kept with no scope) or removed from new version?') ;
 
     if (commentsKept) {
