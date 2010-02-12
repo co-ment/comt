@@ -1,23 +1,20 @@
 # COMT es translation
-# 
-#, fuzzy
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-12 13:09+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Alejandro Martin Ortin <alejandromartinortin@gmail.com>\n"
+"POT-Creation-Date: 2010-02-12 15:49+0100\n"
+"PO-Revision-Date: 2010-02-12 15:53+0100\n"
+"Last-Translator: dev <dev@sopinspace.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: client.py:25
-msgid ""
-"A selection is required. Select in the text the part your comment applies to."
-msgstr ""
-"Se necesita una selección. Seleccione el texto cuya parte desee comentar."
+msgid "A selection is required. Select in the text the part your comment applies to."
+msgstr "Se necesita una selección. Seleccione el texto cuya parte desee comentar."
 
 #: client.py:134
 msgid "name is required"
@@ -43,7 +40,8 @@ msgstr "el contenido es obligatorio"
 msgid "comment removed"
 msgstr "comentario borrado"
 
-#: client.py:209 client.py:274
+#: client.py:209
+#: client.py:274
 msgid "comment saved"
 msgstr "comentario guardado"
 
@@ -55,8 +53,11 @@ msgstr "comentario guardado, se reserva para moderación"
 msgid "Tags input must be no longer than 250 characters."
 msgstr "El contenido de las etiquetas no debe exceder los 250 caracteres"
 
-#: models.py:176 templates/site/text_history.html:79 views/create.py:30
-#: views/create.py:45 views/texts.py:591
+#: models.py:176
+#: templates/site/text_history.html:79
+#: views/create.py:30
+#: views/create.py:45
+#: views/texts.py:591
 msgid "Title"
 msgstr "Título"
 
@@ -64,15 +65,18 @@ msgstr "Título"
 msgid "Format"
 msgstr "Formato"
 
-#: models.py:178 views/texts.py:682
+#: models.py:178
+#: views/texts.py:682
 msgid "Content"
 msgstr "Contenido"
 
-#: models.py:179 models.py:637
+#: models.py:179
+#: models.py:637
 msgid "Tags"
 msgstr "Etiquetas"
 
-#: models.py:181 views/user.py:223
+#: models.py:181
+#: views/user.py:223
 msgid "Note"
 msgstr "Nota"
 
@@ -184,7 +188,8 @@ msgstr "Activado el acceso del Usuario %(username)s al espacio de trabajo"
 msgid "User %(username)s has activated his account"
 msgstr "El usuario %(username)s ha activado su cuenta"
 
-#: models.py:816 models.py:824
+#: models.py:816
+#: models.py:824
 #, python-format
 msgid "by \"%(username)s\""
 msgstr "por \"%(username)s\""
@@ -234,7 +239,8 @@ msgstr ""
 msgid "Spanish"
 msgstr "Español"
 
-#: static_i18n.py:6 static_i18n.py:11
+#: static_i18n.py:6
+#: static_i18n.py:11
 msgid "Observer"
 msgstr "Supervisor"
 
@@ -346,7 +352,8 @@ msgstr "Error del servidor"
 msgid "An error has occurred."
 msgstr "Se ha producido un error"
 
-#: templates/site/activate.html:10 templates/site/user_activate.html:10
+#: templates/site/activate.html:10
+#: templates/site/user_activate.html:10
 #: views/user.py:330
 msgid "Activate your account"
 msgstr "Activar su cuenta"
@@ -355,7 +362,8 @@ msgstr "Activar su cuenta"
 msgid "Activate"
 msgstr "Activar"
 
-#: templates/site/contact.html:6 templates/site/layout/footer.html:9
+#: templates/site/contact.html:6
+#: templates/site/layout/footer.html:9
 #: templates/site/macros/user_actions.html:20
 msgid "Contact"
 msgstr "Contactar"
@@ -366,16 +374,21 @@ msgstr "Enviar"
 
 #: templates/site/contact.html:26
 #: templates/site/notifications_desactivate.html:32
-#: templates/site/settings.html:29 templates/site/settings_design.html:29
+#: templates/site/settings.html:29
+#: templates/site/settings_design.html:29
 #: templates/site/text_create_content.html:47
-#: templates/site/text_create_upload.html:42 templates/site/user_add.html:34
-#: templates/site/user_add_text.html:38 templates/site/user_contact.html:25
-#: templates/site/user_edit.html:29 templates/site/user_mass_add.html:34
+#: templates/site/text_create_upload.html:42
+#: templates/site/user_add.html:34
+#: templates/site/user_add_text.html:38
+#: templates/site/user_contact.html:25
+#: templates/site/user_edit.html:29
+#: templates/site/user_mass_add.html:34
 #: templates/site/user_mass_add_text.html:38
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: templates/site/dashboard.html:12 templates/site/macros/main_tabs.html:10
+#: templates/site/dashboard.html:12
+#: templates/site/macros/main_tabs.html:10
 msgid "Dashboard"
 msgstr "Tablero"
 
@@ -383,16 +396,20 @@ msgstr "Tablero"
 msgid "Actions"
 msgstr "Acciones"
 
-#: templates/site/dashboard.html:48 templates/site/text_create_content.html:4
+#: templates/site/dashboard.html:48
+#: templates/site/text_create_content.html:4
 #: templates/site/text_create_content.html:28
-#: templates/site/text_create_upload.html:26 templates/site/text_list.html:40
+#: templates/site/text_create_upload.html:26
+#: templates/site/text_list.html:40
 #: templates/site/layout/header.html:10
 msgid "Write a text"
 msgstr "Escribir un texto"
 
-#: templates/site/dashboard.html:49 templates/site/text_create_content.html:30
+#: templates/site/dashboard.html:49
+#: templates/site/text_create_content.html:30
 #: templates/site/text_create_upload.html:4
-#: templates/site/text_create_upload.html:28 templates/site/text_list.html:42
+#: templates/site/text_create_upload.html:28
+#: templates/site/text_list.html:42
 #: templates/site/layout/header.html:11
 msgid "Upload a text"
 msgstr "Subir un texto"
@@ -423,11 +440,13 @@ msgstr "Cola de moderación"
 msgid "user %(user)s awaits approval"
 msgstr "El usuario %(user)s está a la espera de aprobación"
 
-#: templates/site/dashboard.html:80 templates/site/dashboard.html.py:126
+#: templates/site/dashboard.html:80
+#: templates/site/dashboard.html.py:126
 msgid "approve"
 msgstr "Aprobar"
 
-#: templates/site/dashboard.html:80 templates/site/dashboard.html.py:126
+#: templates/site/dashboard.html:80
+#: templates/site/dashboard.html.py:126
 msgid "refuse"
 msgstr "Rechazar"
 
@@ -437,26 +456,21 @@ msgstr "Afiliación"
 
 #: templates/site/dashboard.html:85
 #: templates/site/macros/user_moderation.html:8
-msgid ""
-"Are you sure you want to approve this user's membership to the workspace?"
-msgstr ""
-"¿Está seguro/a de que desea aprobar la afiliación de este usuario al espacio "
-"de trabajo?"
+msgid "Are you sure you want to approve this user's membership to the workspace?"
+msgstr "¿Está seguro/a de que desea aprobar la afiliación de este usuario al espacio de trabajo?"
 
 #: templates/site/dashboard.html:94
 #: templates/site/macros/user_moderation.html:17
-msgid ""
-"Are you sure you want to refuse this user's membership to the workspace?"
-msgstr ""
-"¿Está seguro/a de que desea rechazar la afiliación de este usuario al "
-"espacio de trabajo?"
+msgid "Are you sure you want to refuse this user's membership to the workspace?"
+msgstr "¿Está seguro/a de que desea rechazar la afiliación de este usuario al espacio de trabajo?"
 
 #: templates/site/dashboard.html:106
 #, python-format
 msgid "registered %(duration)s ago"
 msgstr "resgistrado hace %(duration)s"
 
-#: templates/site/dashboard.html:120 templates/site/dashboard.html.py:126
+#: templates/site/dashboard.html:120
+#: templates/site/dashboard.html.py:126
 msgid "comment"
 msgstr "Comentar"
 
@@ -481,7 +495,8 @@ msgstr "¿Está seguro/a de que desea aprobar este comentario?"
 msgid "Are you sure you want to refuse this comment?"
 msgstr "¿Está seguro/a de que desea rechazar este comentario?"
 
-#: templates/site/dashboard.html:168 templates/site/dashboard.html.py:201
+#: templates/site/dashboard.html:168
+#: templates/site/dashboard.html.py:201
 #, python-format
 msgid "modified %(duration)s ago"
 msgstr "modificado hace %(duration)s"
@@ -490,7 +505,8 @@ msgstr "modificado hace %(duration)s"
 msgid "Recent texts"
 msgstr "Textos recientes"
 
-#: templates/site/dashboard.html:186 templates/site/macros/paginator.html:9
+#: templates/site/dashboard.html:186
+#: templates/site/macros/paginator.html:9
 msgid "all"
 msgstr "Todo"
 
@@ -501,7 +517,8 @@ msgid_plural "%(nb_comments)s comments"
 msgstr[0] "%(nb_comments)s Comentario"
 msgstr[1] "%(nb_comments)s Comentarios"
 
-#: templates/site/dashboard.html:206 templates/site/text_list.html:221
+#: templates/site/dashboard.html:206
+#: templates/site/text_list.html:221
 msgid "No texts yet"
 msgstr "Aún no hay ningún texto"
 
@@ -525,8 +542,10 @@ msgstr "24 horas"
 msgid "Access"
 msgstr "Acceso"
 
-#: templates/site/dashboard.html:233 templates/site/dashboard.html.py:244
-#: templates/site/text_list.html:206 templates/site/user_list.html:158
+#: templates/site/dashboard.html:233
+#: templates/site/dashboard.html.py:244
+#: templates/site/text_list.html:206
+#: templates/site/user_list.html:158
 #: templates/site/user_list.html.py:188
 msgid "Loading..."
 msgstr "Cargando..."
@@ -573,21 +592,26 @@ msgstr "creado hace %(duration)s"
 msgid "No comments yet"
 msgstr "Aún no hay ningún comentario"
 
-#: templates/site/followup.html:7 templates/site/macros/main_tabs.html:16
+#: templates/site/followup.html:7
+#: templates/site/macros/main_tabs.html:16
 #: templates/site/macros/text_tabs.html:22
 msgid "Followup"
 msgstr ""
 
-#: templates/site/followup.html:20 templates/site/text_followup.html:22
+#: templates/site/followup.html:20
+#: templates/site/text_followup.html:22
 msgid "Feeds"
 msgstr "Respuestas"
 
-#: templates/site/followup.html:22 templates/site/text_followup.html:24
+#: templates/site/followup.html:22
+#: templates/site/text_followup.html:24
 msgid "Public feed"
 msgstr "Respuesta pública"
 
-#: templates/site/followup.html:22 templates/site/followup.html.py:35
-#: templates/site/help.html:6 templates/site/text_embed.html:27
+#: templates/site/followup.html:22
+#: templates/site/followup.html.py:35
+#: templates/site/help.html:6
+#: templates/site/text_embed.html:27
 #: templates/site/layout/footer.html:13
 #: templates/site/macros/form_fields.html:15
 msgid "Help"
@@ -601,7 +625,8 @@ msgstr "Respuesta pública para el espacio de trabajo"
 msgid "This is the public feed for the workspace."
 msgstr "Esta es la respuesta pública para el espacio de trabajo"
 
-#: templates/site/followup.html:35 templates/site/text_followup.html:37
+#: templates/site/followup.html:35
+#: templates/site/text_followup.html:37
 msgid "Private feed"
 msgstr "Respuesta privada"
 
@@ -610,28 +635,25 @@ msgid "Private feed for workspace"
 msgstr "Respuesta privada para el espacio de trabajo"
 
 #: templates/site/followup.html:43
-msgid ""
-"This is the private feed for the workspace. Don't share this address with "
-"others unless you want them to see all activities on the workspace."
-msgstr ""
-"Esta es la respuesta privada para el espacio de trabajo. No comparta esta "
-"dirección con otras personas, a menos que desee que vean todas las "
-"actividades del espacio de trabajo."
+msgid "This is the private feed for the workspace. Don't share this address with others unless you want them to see all activities on the workspace."
+msgstr "Esta es la respuesta privada para el espacio de trabajo. No comparta esta dirección con otras personas, a menos que desee que vean todas las actividades del espacio de trabajo."
 
-#: templates/site/followup.html:45 templates/site/text_followup.html:47
+#: templates/site/followup.html:45
+#: templates/site/text_followup.html:47
 msgid "Reset private feed url"
 msgstr "Reinciar la url de respuesta privada"
 
-#: templates/site/followup.html:49 templates/site/text_followup.html:51
+#: templates/site/followup.html:49
+#: templates/site/text_followup.html:51
 msgid "Activate private feed"
 msgstr "Activar respuestas privadas"
 
 #: templates/site/followup.html:51
 msgid "The private feed for this workspace is not yet activated."
-msgstr ""
-"Las respuestas privadas de este espacio de trabajo aún no han sido activadas"
+msgstr "Las respuestas privadas de este espacio de trabajo aún no han sido activadas"
 
-#: templates/site/followup.html:55 templates/site/text_followup.html:58
+#: templates/site/followup.html:55
+#: templates/site/text_followup.html:58
 msgid "Email notifications"
 msgstr "Avisos de correo electrónico"
 
@@ -641,14 +663,11 @@ msgstr "Suscribirse a los avisos del espacio de trabajo"
 
 #: templates/site/followup.html:62
 #, fuzzy
-msgid ""
-"Subscribe to all replies notifications in discussions where you have "
-"participated"
-msgstr ""
-"Subscribirse a todos los avisos de comentario/respuesta de los debates en "
-"los que ha participado"
+msgid "Subscribe to all replies notifications in discussions where you have participated"
+msgstr "Subscribirse a todos los avisos de comentario/respuesta de los debates en los que ha participado"
 
-#: templates/site/login.html:8 templates/site/login_form.html:19
+#: templates/site/login.html:8
+#: templates/site/login_form.html:19
 #: templates/site/layout/header.html:17
 msgid "Login"
 msgstr "Identificación"
@@ -658,7 +677,8 @@ msgstr "Identificación"
 msgid "%(wname)s Login"
 msgstr "Identificación de %(wname)s"
 
-#: templates/site/login_form.html:20 templates/site/register.html:8
+#: templates/site/login_form.html:20
+#: templates/site/register.html:8
 #: templates/site/layout/header.html:18
 msgid "Register"
 msgstr "Registro"
@@ -680,18 +700,23 @@ msgid "Desactivate notification"
 msgstr "Desactivar aviso"
 
 #: templates/site/notifications_desactivate.html:31
-msgid "Desactivate"
+msgid "Deactivate"
 msgstr "Desactivar"
 
-#: templates/site/profile.html:6 templates/site/profile.html.py:14
+#: templates/site/profile.html:6
+#: templates/site/profile.html.py:14
 #, python-format
 msgid "Your profile (%(username)s)"
 msgstr "Su perfil (%(username)s)"
 
-#: templates/site/profile.html:26 templates/site/text_create_content.html:45
-#: templates/site/text_create_upload.html:40 templates/site/text_edit.html:36
-#: templates/site/text_settings.html:23 templates/site/text_share.html:153
-#: templates/site/user_activate.html:27 templates/site/user_list.html:210
+#: templates/site/profile.html:26
+#: templates/site/text_create_content.html:45
+#: templates/site/text_create_upload.html:40
+#: templates/site/text_edit.html:36
+#: templates/site/text_settings.html:23
+#: templates/site/text_share.html:153
+#: templates/site/user_activate.html:27
+#: templates/site/user_list.html:210
 #: templates/site/layout/base_workspace_form.html:32
 msgid "Save"
 msgstr "Guardar"
@@ -701,28 +726,29 @@ msgstr "Guardar"
 msgid "%(wname)s Registration"
 msgstr "Registro de %(wname)s"
 
-#: templates/site/settings.html:5 templates/site/settings_design.html:5
-#: templates/site/text_list.html:181 templates/site/macros/main_tabs.html:14
+#: templates/site/settings.html:5
+#: templates/site/settings_design.html:5
+#: templates/site/text_list.html:181
+#: templates/site/macros/main_tabs.html:14
 #: templates/site/macros/text_tabs.html:19
 msgid "Settings"
 msgstr "Ajustes"
 
-#: templates/site/settings.html:21 templates/site/settings_design.html:21
+#: templates/site/settings.html:21
+#: templates/site/settings_design.html:21
 #, fuzzy
 msgid "General"
 msgstr "Genérico"
 
-#: templates/site/settings.html:23 templates/site/settings_design.html:23
+#: templates/site/settings.html:23
+#: templates/site/settings_design.html:23
 msgid "Appearance"
 msgstr ""
 
-#: templates/site/settings.html:38 templates/site/settings_design.html:40
-msgid ""
-"Are you sure you want to change the role model? All roles (except managers) "
-"will be resetted!"
-msgstr ""
-"¿Está seguro/a de querer cambiar el modelo de perfiles? ¡Todos los roles "
-"(excepto los administradores) se reiniciarán!"
+#: templates/site/settings.html:38
+#: templates/site/settings_design.html:40
+msgid "Are you sure you want to change the role model? All roles (except managers) will be resetted!"
+msgstr "¿Está seguro/a de querer cambiar el modelo de perfiles? ¡Todos los roles (excepto los administradores) se reiniciarán!"
 
 #: templates/site/settings_design.html:31
 #, fuzzy
@@ -730,7 +756,8 @@ msgid "Delete logo"
 msgstr "Borrar"
 
 #: templates/site/text_create_content.html:26
-#: templates/site/text_create_upload.html:24 templates/site/text_list.html:37
+#: templates/site/text_create_upload.html:24
+#: templates/site/text_list.html:37
 msgid "Text list"
 msgstr "Lista de textos"
 
@@ -748,9 +775,7 @@ msgid "Copy this code into your site to display text with comments."
 msgstr ""
 
 #: templates/site/text_embed.html:26
-msgid ""
-"Users will also be able to add comments from your site depending on "
-"anonymous users' roles."
+msgid "Users will also be able to add comments from your site depending on anonymous users' roles."
 msgstr ""
 
 #: templates/site/text_embed.html:36
@@ -758,9 +783,7 @@ msgid "Warning:"
 msgstr ""
 
 #: templates/site/text_embed.html:36
-msgid ""
-"You won't successfully embed the text before you give anonymous users a role "
-"allowing them to view the text."
+msgid "You won't successfully embed the text before you give anonymous users a role allowing them to view the text."
 msgstr ""
 
 #: templates/site/text_followup.html:7
@@ -781,22 +804,15 @@ msgid "Private feed for text "
 msgstr "Respuesta privada para el texto."
 
 #: templates/site/text_followup.html:45
-msgid ""
-"This is the private feed for the text. Don't share this address with others "
-"unless you want them to see all activities on this text."
-msgstr ""
-"Esta es la respuesta privada para el texto. No comparta esta dirección con "
-"otras personas a no ser que desee que dichas personas puedan ver todas las "
-"actividades de este texto."
+msgid "This is the private feed for the text. Don't share this address with others unless you want them to see all activities on this text."
+msgstr "Esta es la respuesta privada para el texto. No comparta esta dirección con otras personas a no ser que desee que dichas personas puedan ver todas las actividades de este texto."
 
 #: templates/site/text_followup.html:53
 msgid "The private feed for this text is not yet activated."
 msgstr "La respuesta privada para este texto aún no ha sido activada"
 
 #: templates/site/text_followup.html:61
-msgid ""
-"You will receive text notifications because you subscribed to notifications "
-"at the workspace level"
+msgid "You will receive text notifications because you subscribed to notifications at the workspace level"
 msgstr ""
 
 #: templates/site/text_followup.html:64
@@ -834,7 +850,8 @@ msgstr "Versiones"
 msgid "Selection"
 msgstr "Acciones"
 
-#: templates/site/text_history.html:80 templates/site/text_list.html:137
+#: templates/site/text_history.html:80
+#: templates/site/text_list.html:137
 msgid "Author"
 msgstr "Autor"
 
@@ -842,12 +859,14 @@ msgstr "Autor"
 msgid "Created"
 msgstr ""
 
-#: templates/site/text_history.html:82 templates/site/text_list.html:139
+#: templates/site/text_history.html:82
+#: templates/site/text_list.html:139
 #, fuzzy
 msgid "# comments"
 msgstr "comentarios"
 
-#: templates/site/text_history.html:102 templates/site/text_list.html:159
+#: templates/site/text_history.html:102
+#: templates/site/text_list.html:159
 msgid "View"
 msgstr "Visualizar"
 
@@ -861,7 +880,8 @@ msgstr ""
 msgid "Revert to this version"
 msgstr "Volver a la versión #%(v1_nid)s:"
 
-#: templates/site/text_history.html:105 templates/site/text_list.html:80
+#: templates/site/text_history.html:105
+#: templates/site/text_list.html:80
 #: templates/site/text_list.html.py:161
 msgid "Delete"
 msgstr "Borrar"
@@ -880,8 +900,7 @@ msgstr "version %(title)s /  #%(version_number)s"
 
 #: templates/site/text_history_compare.html:32
 #, fuzzy, python-format
-msgid ""
-"Comparison between version #%(version_1_number)s and #%(version_2_number)s"
+msgid "Comparison between version #%(version_1_number)s and #%(version_2_number)s"
 msgstr "diferencias entre las versiones #%(v1number)s y #%(v2number)s"
 
 #: templates/site/text_history_compare.html:43
@@ -897,36 +916,45 @@ msgstr ""
 msgid "Texts"
 msgstr "Textos"
 
-#: templates/site/text_list.html:47 templates/site/text_share.html:35
-#: templates/site/user_list.html:7 templates/site/user_list.html.py:32
-#: templates/site/user_list.html:40 templates/site/user_list.html.py:116
+#: templates/site/text_list.html:47
+#: templates/site/text_share.html:35
+#: templates/site/user_list.html:7
+#: templates/site/user_list.html.py:32
+#: templates/site/user_list.html:40
+#: templates/site/user_list.html.py:116
 msgid "People' list"
 msgstr "Lista de personas"
 
-#: templates/site/text_list.html:50 templates/site/text_share.html:40
+#: templates/site/text_list.html:50
+#: templates/site/text_share.html:40
 #: templates/site/user_list.html:45
 msgid "Filter by tag:"
 msgstr ""
 
-#: templates/site/text_list.html:52 templates/site/text_share.html:42
+#: templates/site/text_list.html:52
+#: templates/site/text_share.html:42
 #: templates/site/user_list.html:47
 #, fuzzy
 msgid "All"
 msgstr "Todo"
 
-#: templates/site/text_list.html:79 templates/site/user_list.html:72
+#: templates/site/text_list.html:79
+#: templates/site/user_list.html:72
 msgid "Bulk Actions"
 msgstr "Acciones masivas"
 
-#: templates/site/text_list.html:83 templates/site/user_list.html:81
+#: templates/site/text_list.html:83
+#: templates/site/user_list.html:81
 msgid "Apply"
 msgstr "Aplicar"
 
-#: templates/site/text_list.html:104 templates/site/user_list.html:102
+#: templates/site/text_list.html:104
+#: templates/site/user_list.html:102
 msgid "Are you sure?"
 msgstr "¿Está seguro/a?"
 
-#: templates/site/text_list.html:136 templates/site/macros/text_tabs.html:10
+#: templates/site/text_list.html:136
+#: templates/site/macros/text_tabs.html:10
 msgid "Text"
 msgstr "Texto"
 
@@ -934,7 +962,8 @@ msgstr "Texto"
 msgid "Modified"
 msgstr "Modificado"
 
-#: templates/site/text_list.html:140 templates/site/user_list.html:136
+#: templates/site/text_list.html:140
+#: templates/site/user_list.html:136
 msgid "Last week activity"
 msgstr "Actividad de la pasada semana"
 
@@ -950,7 +979,8 @@ msgstr "Etiquetas"
 msgid "Filter by tag: %(tag_name)s"
 msgstr ""
 
-#: templates/site/text_list.html:160 templates/site/macros/text_tabs.html:12
+#: templates/site/text_list.html:160
+#: templates/site/macros/text_tabs.html:12
 #: templates/site/macros/user_actions.html:19
 #, fuzzy
 msgid "Edit"
@@ -970,17 +1000,24 @@ msgstr "Usuarios"
 msgid "Edit user"
 msgstr "Editar usuario"
 
-#: templates/site/text_share.html:27 templates/site/user_add.html:20
-#: templates/site/user_add_text.html:23 templates/site/user_contact.html:19
-#: templates/site/user_edit.html:20 templates/site/user_mass_add.html:20
+#: templates/site/text_share.html:27
+#: templates/site/user_add.html:20
+#: templates/site/user_add_text.html:23
+#: templates/site/user_contact.html:19
+#: templates/site/user_edit.html:20
+#: templates/site/user_mass_add.html:20
 #: templates/site/user_mass_add_text.html:23
 msgid "Users' list"
 msgstr "Lista de los usuarios"
 
-#: templates/site/text_share.html:29 templates/site/user_add.html:6
-#: templates/site/user_add.html.py:22 templates/site/user_add_text.html:6
-#: templates/site/user_add_text.html:25 templates/site/user_contact.html:19
-#: templates/site/user_edit.html:22 templates/site/user_list.html:34
+#: templates/site/text_share.html:29
+#: templates/site/user_add.html:6
+#: templates/site/user_add.html.py:22
+#: templates/site/user_add_text.html:6
+#: templates/site/user_add_text.html:25
+#: templates/site/user_contact.html:19
+#: templates/site/user_edit.html:22
+#: templates/site/user_list.html:34
 #: templates/site/user_mass_add.html:22
 #: templates/site/user_mass_add_text.html:6
 #: templates/site/user_mass_add_text.html:25
@@ -988,37 +1025,37 @@ msgstr "Lista de los usuarios"
 msgid "Add a new user"
 msgstr "Añadir un nuevo usuario"
 
-#: templates/site/text_share.html:31 templates/site/user_add.html:24
-#: templates/site/user_add_text.html:27 templates/site/user_list.html:36
-#: templates/site/user_mass_add.html:6 templates/site/user_mass_add.html:24
+#: templates/site/text_share.html:31
+#: templates/site/user_add.html:24
+#: templates/site/user_add_text.html:27
+#: templates/site/user_list.html:36
+#: templates/site/user_mass_add.html:6
+#: templates/site/user_mass_add.html:24
 #: templates/site/user_mass_add_text.html:27
 #, fuzzy
 msgid "Add users in bulk"
 msgstr "Añadir usuarios masivamente"
 
-#: templates/site/text_share.html:38 templates/site/user_list.html:43
+#: templates/site/text_share.html:38
+#: templates/site/user_list.html:43
 msgid "Hide suspended users"
 msgstr "Ocultar usuarios desactivados"
 
-#: templates/site/text_share.html:38 templates/site/user_list.html:43
+#: templates/site/text_share.html:38
+#: templates/site/user_list.html:43
 msgid "Display suspended users"
 msgstr "Mostrar usuarios desactivados"
 
-#: templates/site/text_share.html:86 templates/site/user_list.html:132
+#: templates/site/text_share.html:86
+#: templates/site/user_list.html:132
 #, fuzzy
 msgid "User"
 msgstr "Usuario"
 
 #: templates/site/text_share.html:87
 #, fuzzy
-msgid ""
-"The 'Workspace role' is the global role that applies to every text, you can "
-"give a user a particular role on this text using the 'text role' column on "
-"the right"
-msgstr ""
-"El 'perfil del espacio de trabajo' es el perfil que se aplica a cada texto. "
-"Puede otorgar un perfil concreto para este texto mediante la columna 'perfil "
-"local'."
+msgid "The 'Workspace role' is the global role that applies to every text, you can give a user a particular role on this text using the 'text role' column on the right"
+msgstr "El 'perfil del espacio de trabajo' es el perfil que se aplica a cada texto. Puede otorgar un perfil concreto para este texto mediante la columna 'perfil local'."
 
 #: templates/site/text_share.html:87
 msgid "Workspace role"
@@ -1034,13 +1071,16 @@ msgstr "Nivel del perfil del texto"
 msgid "This role has been overriden on this text by a text role: %(rolename)s"
 msgstr "Este perfil ha sido invalidado por el perfil local: %( rolename)s"
 
-#: templates/site/text_share.html:128 templates/site/user_edit.html:6
-#: templates/site/user_edit.html.py:24 templates/site/user_list.html:177
+#: templates/site/text_share.html:128
+#: templates/site/user_edit.html:6
+#: templates/site/user_edit.html.py:24
+#: templates/site/user_list.html:177
 #, fuzzy
 msgid "Edit anonymous users"
 msgstr "Editar usuarios anónimos"
 
-#: templates/site/text_share.html:128 templates/site/user_list.html:177
+#: templates/site/text_share.html:128
+#: templates/site/user_list.html:177
 msgid "Anonymous users"
 msgstr "Usuarios anónimos"
 
@@ -1081,23 +1121,18 @@ msgid ""
 "The user will receive an email invitation to join the workspace.\n"
 "You can customize the email sent by using the 'Note' field bellow."
 msgstr ""
-"El usuario recibirá una invitación para unirse al espacio de trabajo "
-"mediante correo electrónico.\n"
-"Puede personalizar el correo electrónico que se enviará usando el campo "
-"'Nota' que tiene en la parte inferior."
+"El usuario recibirá una invitación para unirse al espacio de trabajo mediante correo electrónico.\n"
+"Puede personalizar el correo electrónico que se enviará usando el campo 'Nota' que tiene en la parte inferior."
 
 #: templates/site/user_add_text.html:29
 msgid "The user will receive an email invitation to join the workspace."
-msgstr ""
-"El usuario recibirá una invitación por correo electrónico para unirse al "
-"espacio de trabajo."
+msgstr "El usuario recibirá una invitación por correo electrónico para unirse al espacio de trabajo."
 
-#: templates/site/user_add_text.html:30 templates/site/user_mass_add.html:27
+#: templates/site/user_add_text.html:30
+#: templates/site/user_mass_add.html:27
 #: templates/site/user_mass_add_text.html:30
 msgid "You can customize the email sent by using the 'Note' field bellow."
-msgstr ""
-"Puede personalizar el correo electrónico que se enviará usando el campo "
-"'Nota' que tiene en la parte inferior."
+msgstr "Puede personalizar el correo electrónico que se enviará usando el campo 'Nota' que tiene en la parte inferior."
 
 #: templates/site/user_contact.html:6
 msgid "Contact user"
@@ -1108,16 +1143,19 @@ msgstr "Contactar con un usuario"
 msgid "Contact user %(username)s"
 msgstr "Contactar con el usuario %(username)s"
 
-#: templates/site/user_edit.html:6 templates/site/user_edit.html.py:24
+#: templates/site/user_edit.html:6
+#: templates/site/user_edit.html.py:24
 #, python-format
 msgid "Edit user %(username)s"
 msgstr "Editar usuario %(username)s"
 
-#: templates/site/user_list.html:73 templates/site/macros/user_actions.html:28
+#: templates/site/user_list.html:73
+#: templates/site/macros/user_actions.html:28
 msgid "Suspend access"
 msgstr "Anular acceso"
 
-#: templates/site/user_list.html:74 templates/site/macros/user_actions.html:23
+#: templates/site/user_list.html:74
+#: templates/site/macros/user_actions.html:23
 msgid "Enable access"
 msgstr "Activar acceso"
 
@@ -1126,7 +1164,8 @@ msgstr "Activar acceso"
 msgid "Change role to %(role_name)s"
 msgstr "Cambiar al perfil %(role_name)s"
 
-#: templates/site/user_list.html:133 views/user.py:283
+#: templates/site/user_list.html:133
+#: views/user.py:283
 msgid "Email"
 msgstr "Email"
 
@@ -1141,9 +1180,7 @@ msgstr "Perfil"
 #: templates/site/user_mass_add.html:26
 #: templates/site/user_mass_add_text.html:29
 msgid "The users will receive an email invitation to join the workspace."
-msgstr ""
-"Los usuarios recibirán una invitación por correo electrónico para unirse al "
-"espacio de trabajo."
+msgstr "Los usuarios recibirán una invitación por correo electrónico para unirse al espacio de trabajo."
 
 #: templates/site/layout/base_text.html:16
 #: templates/site/layout/base_workspace.html:20
@@ -1218,9 +1255,7 @@ msgid "by %(name)s on %(date)s"
 msgstr "por %(name)s en %(date)s"
 
 #: templates/site/macros/text_editor.html:38
-msgid ""
-"You have attempted to leave this page. Unsaved changes will be lost. Are you "
-"sure you want to exit this page?"
+msgid "You have attempted to leave this page. Unsaved changes will be lost. Are you sure you want to exit this page?"
 msgstr ""
 
 #: templates/site/macros/text_meta.html:6
@@ -1263,21 +1298,15 @@ msgstr "(Re)enviar invitación"
 
 #: templates/site/macros/user_actions.html:38
 msgid "Are you sure you want to suspend this user's access to the workspace?"
-msgstr ""
-"¿Está seguro/a de querer anular el acceso de este usuario al espacio de "
-"trabajo?"
+msgstr "¿Está seguro/a de querer anular el acceso de este usuario al espacio de trabajo?"
 
 #: templates/site/macros/user_actions.html:47
 msgid "Are you sure you want to enable this user's access to the workspace?"
-msgstr ""
-"¿Está seguro/a de querer activar el acceso de este usuario al espacio de "
-"trabajo?"
+msgstr "¿Está seguro/a de querer activar el acceso de este usuario al espacio de trabajo?"
 
 #: templates/site/macros/user_actions.html:56
 msgid "Are you sure you want to send this user an invitation to the workspace?"
-msgstr ""
-"¿Está seguro/a de querer enviar una invitación para el espacio de trabajo a "
-"este usuario?"
+msgstr "¿Está seguro/a de querer enviar una invitación para el espacio de trabajo a este usuario?"
 
 #: templates/site/macros/user_moderation.html:3
 msgid "Approve"
@@ -1300,11 +1329,8 @@ msgid "Upload file (optional)"
 msgstr "Subir archivo (opcional)"
 
 #: views/create.py:27
-msgid ""
-"Upload a file from your computer instead of using the direct input above"
-msgstr ""
-"Subir un archivo desde su equipo en lugar de usar la entrada directa de la "
-"parte superior"
+msgid "Upload a file from your computer instead of using the direct input above"
+msgstr "Subir un archivo desde su equipo en lugar de usar la entrada directa de la parte superior"
 
 #: views/create.py:38
 msgid "You should specify a file to upload."
@@ -1314,53 +1340,54 @@ msgstr "Debería especificar un archivo que subir."
 msgid "The title of your text"
 msgstr "El título de su texto"
 
-#: views/create.py:70 views/create.py:107
+#: views/create.py:70
+#: views/create.py:107
 #, python-format
 msgid "Text \"%(text_title)s\" has been created"
 msgstr "El texto \"%(text_title)s\" ha sido creado"
 
-#: views/feeds.py:26
+#: views/feeds.py:25
 #, python-format
 msgid "%(workspace_name)s's public feed"
 msgstr "Respuesta pública del espacio %(workspace_name)s"
 
-#: views/feeds.py:27
+#: views/feeds.py:26
 #, python-format
 msgid "Workspace %(workspace_name)s public activity feed"
-msgstr ""
-"Respuesta de la actividad pública del espacio de trabajo %(workspace_name)s"
+msgstr "Respuesta de la actividad pública del espacio de trabajo %(workspace_name)s"
 
-#: views/feeds.py:37
+#: views/feeds.py:36
 #, python-format
 msgid "%(workspace_name)s's private feed"
 msgstr "Respuesta privada de %(workspace_name)s"
 
-#: views/feeds.py:38
+#: views/feeds.py:37
 #, python-format
 msgid "Workspace %(workspace_name)s private feed"
 msgstr "Respuesta privada del espacio %(workspace_name)s"
 
-#: views/feeds.py:73
+#: views/feeds.py:72
 #, python-format
 msgid "Text %(text_title)s's public feed"
 msgstr "Respuesta pública del texto %(text_title)s"
 
-#: views/feeds.py:74
+#: views/feeds.py:73
 #, python-format
 msgid "Public activity feed for text %(text_title)s"
 msgstr "Respuesta de la actividad pública del texto %(text_title)s"
 
-#: views/feeds.py:85
+#: views/feeds.py:84
 #, python-format
 msgid "Text %(text_title)s's private feed"
 msgstr "Respuesta privada del texto %(text_title)s"
 
-#: views/feeds.py:86
+#: views/feeds.py:85
 #, python-format
 msgid "Private activity feed for text %(text_title)s"
 msgstr "Respuesta de actividad privada para el texto %(text_title)s"
 
-#: views/followup.py:31 views/followup.py:80
+#: views/followup.py:31
+#: views/followup.py:80
 msgid "Private feed activated."
 msgstr "Respuesta privada activada"
 
@@ -1369,12 +1396,12 @@ msgid "Private feed reseted."
 msgstr "Respuesta privada reiniciada"
 
 #: views/followup.py:52
-msgid "This notification has already been desactivated."
+msgid "This notification has already been deactivated."
 msgstr "Este aviso ya ha sido desactivado."
 
 #: views/followup.py:58
-msgid "Notification desactivated."
-msgstr "Aviso desactivado"
+msgid "Notification deactivated."
+msgstr "Aviso desactivado."
 
 #: views/followup.py:62
 msgid "Desactivate notification?"
@@ -1384,7 +1411,9 @@ msgstr "¿Desactivar aviso?"
 msgid "Private notifications feed reseted."
 msgstr "Respuesta de avisos privados reiniciada"
 
-#: views/site.py:81 views/texts.py:129 views/user.py:525
+#: views/site.py:81
+#: views/texts.py:129
+#: views/user.py:525
 msgid "You're logged in!"
 msgstr "¡Se ha conectado!"
 
@@ -1429,13 +1458,8 @@ msgid "Workspace registration"
 msgstr "Registro del espacio de trabajo"
 
 #: views/site.py:175
-msgid ""
-"Can users register themselves into the workspace? (if not, only invitations "
-"by managers can create new users)"
-msgstr ""
-"¿Se permite a los usuarios registrarse en el espacio de trabajo? (En caso "
-"contrario, sólo se podrán usar las invitaciones enviadas por los "
-"administradores para crear nuevos usuarios)"
+msgid "Can users register themselves into the workspace? (if not, only invitations by managers can create new users)"
+msgstr "¿Se permite a los usuarios registrarse en el espacio de trabajo? (En caso contrario, sólo se podrán usar las invitaciones enviadas por los administradores para crear nuevos usuarios)"
 
 #: views/site.py:179
 msgid "Workspace registration moderation"
@@ -1443,11 +1467,8 @@ msgstr "Moderación del registro del espacio de trabajo"
 
 #: views/site.py:180
 #, fuzzy
-msgid ""
-"Should new users be moderated (registration will require manager's approval)?"
-msgstr ""
-"¿Deben moderarse los usuarios nuevos? (el registro requerirá la aprobación "
-"del administrador)"
+msgid "Should new users be moderated (registration will require manager's approval)?"
+msgstr "¿Deben moderarse los usuarios nuevos? (el registro requerirá la aprobación del administrador)"
 
 #: views/site.py:184
 msgid "Role model"
@@ -1457,7 +1478,10 @@ msgstr "Modelo de perfiles"
 msgid "Change the roles available in the workspace"
 msgstr "Cambiar los perfiles disponibles en el espacio de trabajo"
 
-#: views/site.py:200 views/site.py:206 views/site.py:234 views/site.py:243
+#: views/site.py:200
+#: views/site.py:206
+#: views/site.py:234
+#: views/site.py:243
 msgid "Settings saved"
 msgstr "Ajustes guardados"
 
@@ -1472,9 +1496,7 @@ msgid "Workspace html code"
 msgstr "Perfil del espacio de trabajo"
 
 #: views/site.py:217
-msgid ""
-"Add stylesheets etc. Warning: this code will be added to the workspace code, "
-"make sure you know what you're doing before adding something here."
+msgid "Add stylesheets etc. Warning: this code will be added to the workspace code, make sure you know what you're doing before adding something here."
 msgstr ""
 
 #: views/texts.py:162
@@ -1529,7 +1551,9 @@ msgstr "Email (opcional)"
 msgid "A new version (copied from version %(version_title)s) has been created"
 msgstr "Se ha creado una nueva versión (copiada de la versión %(version_id)s)"
 
-#: views/texts.py:839 views/user.py:79 views/user.py:99
+#: views/texts.py:839
+#: views/user.py:79
+#: views/user.py:99
 #, python-format
 msgid "%(count)i user(s) role modified"
 msgstr "Perfil del/de los usuario(s) %(count)i modificado(s)"
@@ -1562,23 +1586,15 @@ msgstr "Direcciones de correo electrónico"
 
 #: views/user.py:164
 msgid "Add multiples emails one per line (or separated by \",\" or \";\")"
-msgstr ""
-"Añadir múltiples direcciones de correo electrónico por línea (o separadas "
-"por \",\" o \";\")"
+msgstr "Añadir múltiples direcciones de correo electrónico por línea (o separadas por \",\" o \";\")"
 
 #: views/user.py:181
 msgid "Workspace level role"
 msgstr "Nivel del perfil del espacio de trabajo"
 
 #: views/user.py:182
-msgid ""
-"This role will apply to every text in the workspace. To share only a (few) "
-"texts with this user, you can leave this blank and delegate roles on texts "
-"once the user is created."
-msgstr ""
-"Este perfil se aplicará a cada texto del espacio de trabajo. Para compartir "
-"sólo (algunos) textos con este usuario, puede dejar este campo en blanco y "
-"realizar la delegación de perfiles en los textos."
+msgid "This role will apply to every text in the workspace. To share only a (few) texts with this user, you can leave this blank and delegate roles on texts once the user is created."
+msgstr "Este perfil se aplicará a cada texto del espacio de trabajo. Para compartir sólo (algunos) textos con este usuario, puede dejar este campo en blanco y realizar la delegación de perfiles en los textos."
 
 #: views/user.py:198
 msgid "Text level role"
@@ -1607,11 +1623,10 @@ msgstr[1] "Guardar usuarios"
 
 #: views/user.py:299
 msgid "This username is already in use. Please supply a different username."
-msgstr ""
-"Este nombre de usuario ya está siendo usado por otra persona. Por favor, "
-"introduzca un nombre de usuario diferente."
+msgstr "Este nombre de usuario ya está siendo usado por otra persona. Por favor, introduzca un nombre de usuario diferente."
 
-#: views/user.py:320 views/user.py:336
+#: views/user.py:320
+#: views/user.py:336
 msgid "Your account has been activated. You're now logged-in."
 msgstr "Su cuenta ha sido creada. Ahora está contectado/a"
 
@@ -1678,48 +1693,33 @@ msgstr "Correo electrónico enviado"
 
 #: views/user.py:519
 msgid "This account is suspended, contact the workspace administrator."
-msgstr ""
-"Esta cuenta está suspendida. Contacte con el administrador del espacio de "
-"trabajo"
+msgstr "Esta cuenta está suspendida. Contacte con el administrador del espacio de trabajo"
 
 #: views/user.py:550
 msgid "You've been logged out."
 msgstr "Se ha desconectado."
 
 #: views/user.py:566
-msgid ""
-"You've been registered, you will receive a confirmation mail once a "
-"moderator has approved your membership."
-msgstr ""
-"Se ha registrado. Recibirá una confirmación por correo electrónico una vez "
-"que el moderador apruebe su inscripción."
+msgid "You've been registered, you will receive a confirmation mail once a moderator has approved your membership."
+msgstr "Se ha registrado. Recibirá una confirmación por correo electrónico una vez que el moderador apruebe su inscripción."
 
 #: views/user.py:569
-msgid ""
-"You've been registered, please check your email for the confirm message."
-msgstr ""
-"Se ha registrado. Por favor, compruebe que ha recibido el mensaje de "
-"confirmación en su correo electrónico."
+msgid "You've been registered, please check your email for the confirm message."
+msgstr "Se ha registrado. Por favor, compruebe que ha recibido el mensaje de confirmación en su correo electrónico."
 
 #, fuzzy
 #~ msgid "Design"
 #~ msgstr "Versiones"
-
 #~ msgid "%(workspace_name)s's workspace"
 #~ msgstr "espacio de trabajo %(workspace_name)s"
-
 #~ msgid "Versions:"
 #~ msgstr "Versiones:"
-
 #~ msgid "version #%(v1number)s"
 #~ msgstr "versión #%(v1number)s"
-
 #~ msgid "by %(v1name)s"
 #~ msgstr "por %(v1name)s"
-
 #~ msgid "created %(v1created)s"
 #~ msgstr "creado %(v1created)s"
-
 #~ msgid "Differences between version #%(v1_nid)s and version #%(v2_nid)s:"
 #~ msgstr "Diferencias entre las versiones #%(v1_nid)s y #%(v2_nid)s"
 
@@ -1728,77 +1728,59 @@ msgstr ""
 #~ msgstr ""
 #~ "La versión #%(version_number)s, titulada \"%(title)s\", y creada en %"
 #~ "(date)s:"
-
 #~ msgid "You've been invited to join the workspace %(workspace_name)s."
 #~ msgstr ""
 #~ "Se le ha invitado a unirse al espacio de trabajo %(workspace_name)s."
-
 #~ msgid ""
 #~ "Click the following link to complete your registration and access the "
 #~ "workspace:"
 #~ msgstr ""
 #~ "Haga clic en el siguiente enlace para completar su registro y acceder al "
 #~ "espacio de trabajo:"
-
 #~ msgid ""
 #~ "If you'd like to unsubscribe from this notification, click the following "
 #~ "link: %(SITE_URL)s%(desactivate_notification_url)s."
 #~ msgstr ""
 #~ "Si desea dar de baja este aviso, haga clic en el siguiente enlace: %"
 #~ "(SITE_URL)s%(desactivate_notification_url)s."
-
 #~ msgid "Contact from user: %(name)s / %(email)s"
 #~ msgstr "Contacto del usuario: %(name)s / %(email)s"
-
 #~ msgid "Your text \"%(title)s\" has been created."
 #~ msgstr "Su texto \"%(title)s\" se ha creado"
-
 #~ msgid "To publish it click on the following link:"
 #~ msgstr "Para publicarlo, haga clic en el siguiente enlace"
-
 #~ msgid "Notifications"
 #~ msgstr "Avisos"
-
 #~ msgid "%(title)s"
 #~ msgstr "%(title)s"
-
 #~ msgid "Preview text"
 #~ msgstr "Previsualizar texto"
-
 #~ msgid ""
 #~ "{nb_comments} comment(s) will be removed because the text they apply to "
 #~ "has been changed. Do you want to continue?"
 #~ msgstr ""
 #~ "{nb_comments} comentario(s) se eliminará(n) debido a que al texto al que "
 #~ "pertenecen se ha cambiado.¿Desea continuar?"
-
 #~ msgid "{nb_comments} comment(s) will be lost, do you want to continue?"
 #~ msgstr "{nb_comments} comentario(s) se perderá(n).¿Desea continuar?"
-
 #~ msgid "We suggest you create a new version"
 #~ msgstr "Le sugerimos que cree una nueva versión"
-
 #~ msgid ""
 #~ "Since you chose not to create a new version all comments will be deleted, "
 #~ "do you want to continue?"
 #~ msgstr ""
 #~ "Ya que ha elegido no crear una nueva versión, todos los comentarios serán "
 #~ "eliminados. ¿Desea continuar?"
-
 #~ msgid "Authors:"
 #~ msgstr "Autores"
-
 #~ msgid "authors"
 #~ msgstr "autores"
-
 #~ msgid "Actions:"
 #~ msgstr "Acciones:"
-
 #~ msgid "created %(date)s"
 #~ msgstr "creado en %(date)s"
-
 #~ msgid "Local role"
 #~ msgstr "Perfil local"
-
 #~ msgid "Add user"
 #~ msgstr "Añadir usuario"
+

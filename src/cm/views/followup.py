@@ -49,13 +49,13 @@ def desactivate_notification(request, adminkey):
     try:
         notification = Notification.objects.get(adminkey=adminkey)
     except Notification.DoesNotExist:        
-        display_message(request, _(u"This notification has already been desactivated."))
+        display_message(request, _(u"This notification has already been deactivated."))
         return HttpResponseRedirect(reverse('index'))
     
     if request.method == 'POST':
         if request.POST['adminkey'] == adminkey:
             notification.desactivate()
-            display_message(request, _(u"Notification desactivated."))                
+            display_message(request, _(u"Notification deactivated."))                
             return HttpResponseRedirect(reverse('index'))
     return render_to_response('site/notifications_desactivate.html', 
                               {'notification' : notification,

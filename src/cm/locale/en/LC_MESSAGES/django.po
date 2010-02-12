@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-12 13:10+0100\n"
+"POT-Creation-Date: 2010-02-12 15:50+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -669,7 +669,7 @@ msgid "Desactivate notification"
 msgstr ""
 
 #: templates/site/notifications_desactivate.html:31
-msgid "Desactivate"
+msgid "Deactivate"
 msgstr ""
 
 #: templates/site/profile.html:6 templates/site/profile.html.py:14
@@ -1260,42 +1260,42 @@ msgstr ""
 msgid "Text \"%(text_title)s\" has been created"
 msgstr ""
 
-#: views/feeds.py:26
+#: views/feeds.py:25
 #, python-format
 msgid "%(workspace_name)s's public feed"
 msgstr ""
 
-#: views/feeds.py:27
+#: views/feeds.py:26
 #, python-format
 msgid "Workspace %(workspace_name)s public activity feed"
 msgstr ""
 
-#: views/feeds.py:37
+#: views/feeds.py:36
 #, python-format
 msgid "%(workspace_name)s's private feed"
 msgstr ""
 
-#: views/feeds.py:38
+#: views/feeds.py:37
 #, python-format
 msgid "Workspace %(workspace_name)s private feed"
 msgstr ""
 
-#: views/feeds.py:73
+#: views/feeds.py:72
 #, python-format
 msgid "Text %(text_title)s's public feed"
 msgstr ""
 
-#: views/feeds.py:74
+#: views/feeds.py:73
 #, python-format
 msgid "Public activity feed for text %(text_title)s"
 msgstr ""
 
-#: views/feeds.py:85
+#: views/feeds.py:84
 #, python-format
 msgid "Text %(text_title)s's private feed"
 msgstr ""
 
-#: views/feeds.py:86
+#: views/feeds.py:85
 #, python-format
 msgid "Private activity feed for text %(text_title)s"
 msgstr ""
@@ -1309,11 +1309,11 @@ msgid "Private feed reseted."
 msgstr ""
 
 #: views/followup.py:52
-msgid "This notification has already been desactivated."
+msgid "This notification has already been deactivated."
 msgstr ""
 
 #: views/followup.py:58
-msgid "Notification desactivated."
+msgid "Notification deactivated."
 msgstr ""
 
 #: views/followup.py:62

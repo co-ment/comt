@@ -94,7 +94,7 @@ urlpatterns += patterns('',
      # notifications
      ## workspace followup
      url(r'^followup/$', followup, name="followup"),
-     url(r'^followup/(?P<adminkey>\w*)/desactivate/$', desactivate_notification, name="desactivate-notification"),
+     url(r'^followup/(?P<adminkey>\w*)/deactivate/$', desactivate_notification, name="desactivate-notification"),
      ## text notifications
      url(r'^text/(?P<key>\w*)/followup/$', text_followup, name="text-followup"),
      ## embed
