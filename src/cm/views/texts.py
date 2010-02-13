@@ -642,7 +642,6 @@ class EditTextForm(ModelForm):
         return version
 
     def save_new_version(self, text, request):
-        print "!!"        
         new_content = request.POST.get('content')
         new_title = request.POST.get('title')
         new_format = request.POST.get('format', text.last_text_version.format)        
