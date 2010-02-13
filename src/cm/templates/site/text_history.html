@@ -77,6 +77,7 @@ function hide_show(elem, name, hide, up, plus) {
             <th>{% blocktrans %}Version{% endblocktrans %}</th>
             <th colspan="2" width="1%">{% blocktrans %}Selection{% endblocktrans %}</th>
             <th>{% blocktrans %}Title{% endblocktrans %}</th>
+            <th>{% blocktrans %}Note{% endblocktrans %}</th>
             <th>{% blocktrans %}Author{% endblocktrans %}</th>
             <th>{% blocktrans %}Created{% endblocktrans %}</th>
             <th>{% blocktrans %}# comments{% endblocktrans %}</th>
@@ -137,6 +138,7 @@ function hide_show(elem, name, hide, up, plus) {
                 --> 
                 </script>
             </td>
+            <td>{{ text_version.note|default_if_none:"" }}</td>
             <td>{{ text_version.get_name }}</td>
             <td>{{ text_version.created|local_date }}</td>
             <td>{{ text_version|nb_comments:request }}</td>
