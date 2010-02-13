@@ -41,6 +41,9 @@ $(function() {
 
 <div style="clear:both;"></div>
 
+<h2>{{ text_version.title }}</h2>
+{% blocktrans with text_version.get_name as author %}by {{ author }}{% endblocktrans %}
+
 <div id="autoexpand_text_view_frame_container">
 {% autoescape off %}
 {{ embed_code }}
