@@ -6,6 +6,7 @@ from cm.models_base import PermanentModel, KeyManager, Manager, KeyModel, Author
 from cm.models_utils import *
 from cm.utils.dj import absolute_reverse
 from cm.utils.date import datetime_to_user_str
+from cm.utils.html import on_content_receive
 from cm.utils.comment_positioning import compute_new_comment_positions
 from django import forms
 from django.db.models import Q
@@ -27,6 +28,7 @@ from datetime import datetime
 
 class TextManager(Manager):
     def create_text(self, title, format, content, note, name, email, tags, user=None, state='approved', **kwargs):
+        content = on_content_receive(content, format)
         text = self.create(name=name, email=email, user=user, state=state)
         text_version = TextVersion.objects.create(title=title, format=format, content=content, text=text, note=note, name=name, email=email, tags=tags, user=user)
         return text
@@ -188,7 +190,6 @@ class TextVersion(AuthorModel, KeyModel):
     
     def get_content(self, format='html'):
         return pandoc_convert(self.content, self.format, format)
-
 #    def _get_comments(self, user = None, filter_reply = 0):        
 #        """
 #        get comments viewable by this user (user = None or user = AnonymousUser => everyone)
@@ -228,7 +229,8 @@ class TextVersion(AuthorModel, KeyModel):
     def __unicode__(self):
         return '<%d> %s' % (self.id, self.title)    
 
-    def edit(self, new_title, new_format, new_content, new_tags=None, new_note=None, keep_comments=True, cancel_modified_scopes=True): 
+    def edit(self, new_title, new_format, new_content, new_tags=None, new_note=None, keep_comments=True, cancel_modified_scopes=True):
+        new_content = on_content_receive(new_content, new_format) 
         if not keep_comments :
             self.comment_set.all().delete()
         elif self.content != new_content or new_format != self.format:
@@ -243,8 +245,6 @@ class TextVersion(AuthorModel, KeyModel):
             else :
                 [comment.delete() for comment in toremove_comments]
                 
-        #TODO: RBE: recompute same text comments links 
-
         self.title = new_title
         if new_tags:
             self.tags = new_tags
@@ -269,10 +269,6 @@ class TextVersion(AuthorModel, KeyModel):
     def get_version_number(self):
         return TextVersion.objects.filter(text__exact=self.text).order_by('created').filter(created__lte=self.created).count()
 
-    def save(self, force_insert=False, force_update=False):
-        self.content = re.sub('\r\n|\r|\n', '\n', self.content)
-        super(AuthorModel, self).save() 
-    
 class CommentManager(Manager):
     
     def duplicate(self, comment, text_version, reply_to=None, keep_dates=False):
@@ -322,7 +318,7 @@ class Comment(PermanentModel, AuthorModel):
         super(PermanentModel, self).save() 
             
     def __unicode__(self):
-        return '<%d> %s' % (self.id, self.title)    
+        return '<%d> %s [st_wrp:%d, st_ofs:%d, e_wrp:%d, e_ofs:%d]' % (self.id, self.title,  self.start_wrapper,  self.start_offset,  self.end_wrapper,  self.end_offset, )    
         
     def is_reply(self):
         return self.reply_to != None

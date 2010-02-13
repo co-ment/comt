@@ -1,4 +1,5 @@
 import chardet
+import re
 
 def to_unicode(input):
     if type(input) == str:
@@ -13,3 +14,8 @@ def to_unicode(input):
             raise Exception('UnicodeDecodeError: could not decode')
         return res
     return input
+
+# strip carriage returns
+def strip_cr(input):
+    return re.sub('\r\n|\r|\n', '\n', input)
+

@@ -11,6 +11,7 @@ from cm.models_base import generate_key
 from cm.security import get_texts_with_perm, has_perm, get_viewable_comments, \
     has_perm_on_text
 from cm.utils import get_among, get_among, get_int
+from cm.utils.html import on_content_receive
 from cm.utils.comment_positioning import compute_new_comment_positions, \
     insert_comment_markers
 from cm.utils.spannifier import spannify
@@ -678,8 +679,8 @@ def text_pre_edit(request, key, adminkey=None):
     
     text_version = text.get_latest_version()
     comments = text_version.get_comments() ;
-    new_content = request.POST['new_content']
     new_format = request.POST['new_format']
+    new_content = on_content_receive(request.POST['new_content'], new_format)
 
     # TODO: RBE : si commentaire mal forme : (position non existante : boom par key error)
     _tomodify_comments, toremove_comments = compute_new_comment_positions(text_version.content, text_version.format, new_content, new_format, comments)

@@ -117,10 +117,9 @@ def text_create_upload(request):
     return _text_create_upload(request, CreateTextUploadForm)
 
 def create_text(user, data):
-    text_content = data['content']
     text = Text.objects.create_text(title=data['title'],
                                     format=data['format'],
-                                    content=text_content,
+                                    content=data['content'],
                                     note=data.get('note', None),
                                     name=data.get('name', None),
                                     email=data.get('email', None),
@@ -129,6 +128,7 @@ def create_text(user, data):
                                     )
     text.update_denorm_fields()
     text_version = text.get_latest_version()
+    text_content = text_version.content
 
     for attach_file in data.get('attachs',  []):
         attach_data = file(attach_file, 'rb').read()
