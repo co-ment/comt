@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-12 15:50+0100\n"
+"POT-Creation-Date: 2010-02-13 12:21+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,141 +57,141 @@ msgstr ""
 msgid "Tags input must be no longer than 250 characters."
 msgstr ""
 
-#: models.py:176 templates/site/text_history.html:79 views/create.py:30
-#: views/create.py:45 views/texts.py:591
+#: models.py:178 templates/site/text_history.html:79 views/create.py:30
+#: views/create.py:45 views/texts.py:600
 msgid "Title"
 msgstr ""
 
-#: models.py:177
+#: models.py:179
 msgid "Format"
 msgstr ""
 
-#: models.py:178 views/texts.py:682
+#: models.py:180 views/texts.py:692
 msgid "Content"
 msgstr ""
 
-#: models.py:179 models.py:637
+#: models.py:181 models.py:633
 msgid "Tags"
 msgstr ""
 
-#: models.py:181 views/user.py:223
+#: models.py:183 templates/site/text_history.html:80 views/user.py:223
 msgid "Note"
 msgstr ""
 
-#: models.py:183
+#: models.py:185
 msgid "Moderation a posteriori?"
 msgstr ""
 
-#: models.py:305
+#: models.py:301
 msgid "Format:"
 msgstr ""
 
-#: models.py:540
+#: models.py:536
 msgid "name"
 msgstr ""
 
-#: models.py:541
+#: models.py:537
 msgid "description"
 msgstr ""
 
-#: models.py:631
+#: models.py:627
 msgid "Allow contact"
 msgstr ""
 
-#: models.py:631
+#: models.py:627
 msgid "Allow email messages from other users"
 msgstr ""
 
-#: models.py:632
+#: models.py:628
 msgid "Preferred language"
 msgstr ""
 
-#: models.py:635
+#: models.py:631
 msgid "Suspended access"
 msgstr ""
 
-#: models.py:659
+#: models.py:655
 msgid "suspended"
 msgstr ""
 
-#: models.py:661
+#: models.py:657
 msgid "waiting approval"
 msgstr ""
 
-#: models.py:667
+#: models.py:663
 msgid "pending"
 msgstr ""
 
-#: models.py:682
+#: models.py:678
 msgid "Invitation"
 msgstr ""
 
-#: models.py:750
+#: models.py:746
 #, python-format
 msgid "Text %(link_to_text)s edited"
 msgstr ""
 
-#: models.py:751
+#: models.py:747
 #, python-format
 msgid "Text %(link_to_text)s edited (new version created)"
 msgstr ""
 
-#: models.py:752
+#: models.py:748
 #, python-format
 msgid "Text %(link_to_text)s added"
 msgstr ""
 
-#: models.py:753
+#: models.py:749
 #, python-format
 msgid "Text %(link_to_text)s removed"
 msgstr ""
 
-#: models.py:754
+#: models.py:750
 #, python-format
 msgid "Comment %(link_to_comment)s added on text %(link_to_text)s"
 msgstr ""
 
-#: models.py:755
+#: models.py:751
 #, python-format
 msgid "Comment %(link_to_comment)s removed from text %(link_to_text)s"
 msgstr ""
 
-#: models.py:756
+#: models.py:752
 #, python-format
 msgid "User %(username)s added"
 msgstr ""
 
-#: models.py:757
+#: models.py:753
 #, python-format
 msgid "User %(username)s access to workspace enabled"
 msgstr ""
 
-#: models.py:758
+#: models.py:754
 #, python-format
 msgid "User %(username)s access to workspace refused"
 msgstr ""
 
-#: models.py:759
+#: models.py:755
 #, python-format
 msgid "User %(username)s access to workspace suspended"
 msgstr ""
 
-#: models.py:760
+#: models.py:756
 #, python-format
 msgid "User %(username)s access to workspace activated"
 msgstr ""
 
-#: models.py:761
+#: models.py:757
 #, python-format
 msgid "User %(username)s has activated his account"
 msgstr ""
 
-#: models.py:816 models.py:824
+#: models.py:812 models.py:820
 #, python-format
 msgid "by \"%(username)s\""
 msgstr ""
 
-#: models.py:818
+#: models.py:814
 #, python-format
 msgid "%(time_since)s ago"
 msgstr ""
@@ -795,8 +795,8 @@ msgid "Compare last two versions"
 msgstr ""
 
 #: templates/site/text_history.html:61
-#: templates/site/text_history_compare.html:36
-#: templates/site/text_history_version.html:40
+#: templates/site/text_history_compare.html:37
+#: templates/site/text_history_version.html:38
 msgid "Most recent version"
 msgstr ""
 
@@ -812,43 +812,47 @@ msgstr ""
 msgid "Selection"
 msgstr ""
 
-#: templates/site/text_history.html:80 templates/site/text_list.html:137
+#: templates/site/text_history.html:81 templates/site/text_list.html:137
 msgid "Author"
 msgstr ""
 
-#: templates/site/text_history.html:81
+#: templates/site/text_history.html:82
 msgid "Created"
 msgstr ""
 
-#: templates/site/text_history.html:82 templates/site/text_list.html:139
+#: templates/site/text_history.html:83 templates/site/text_list.html:139
 msgid "# comments"
 msgstr ""
 
-#: templates/site/text_history.html:102 templates/site/text_list.html:159
+#: templates/site/text_history.html:103 templates/site/text_list.html:159
 msgid "View"
 msgstr ""
 
-#: templates/site/text_history.html:103
-#: templates/site/text_history_version.html:33
+#: templates/site/text_history.html:104
+#: templates/site/text_history_version.html:32
 msgid "Compare with previous version"
 msgstr ""
 
-#: templates/site/text_history.html:104
+#: templates/site/text_history.html:105
 msgid "Revert to this version"
 msgstr ""
 
-#: templates/site/text_history.html:105 templates/site/text_list.html:80
+#: templates/site/text_history.html:106 templates/site/text_list.html:80
 #: templates/site/text_list.html.py:161
 msgid "Delete"
 msgstr ""
 
-#: templates/site/text_history.html:111
+#: templates/site/text_history.html:112
 msgid "Are you sure you want to delete this version?"
 msgstr ""
 
 #: templates/site/text_history_compare.html:30
-#: templates/site/text_history_compare.html:34
-#: templates/site/text_history_version.html:30
+msgid "Previous modification"
+msgstr ""
+
+#: templates/site/text_history_compare.html:31
+#: templates/site/text_history_compare.html:33
+#: templates/site/text_history_version.html:34
 #, python-format
 msgid "Version %(version_number)s"
 msgstr ""
@@ -859,12 +863,24 @@ msgid ""
 "Comparison between version #%(version_1_number)s and #%(version_2_number)s"
 msgstr ""
 
-#: templates/site/text_history_compare.html:43
+#: templates/site/text_history_compare.html:34
+msgid "Next modification"
+msgstr ""
+
+#: templates/site/text_history_compare.html:44
 msgid "No differences"
 msgstr ""
 
-#: templates/site/text_history_version.html:37
+#: templates/site/text_history_version.html:31
+msgid "Previous version"
+msgstr ""
+
+#: templates/site/text_history_version.html:36
 msgid "Compare with next version"
+msgstr ""
+
+#: templates/site/text_history_version.html:37
+msgid "Next version"
 msgstr ""
 
 #: templates/site/text_list.html:12
@@ -1324,7 +1340,7 @@ msgstr ""
 msgid "Private notifications feed reseted."
 msgstr ""
 
-#: views/site.py:81 views/texts.py:129 views/user.py:525
+#: views/site.py:81 views/texts.py:130 views/user.py:525
 msgid "You're logged in!"
 msgstr ""
 
@@ -1409,64 +1425,69 @@ msgid ""
 "make sure you know what you're doing before adding something here."
 msgstr ""
 
-#: views/texts.py:162
+#: views/texts.py:163
 #, python-format
 msgid "%(nb_texts)i text(s) deleted"
 msgstr ""
 
-#: views/texts.py:207
+#: views/texts.py:208
 #, python-format
 msgid "Text %(text_title)s deleted"
 msgstr ""
 
-#: views/texts.py:218
+#: views/texts.py:219
 #, python-format
 msgid "Text version %(text_version_title)s deleted"
 msgstr ""
 
-#: views/texts.py:595
+#: views/texts.py:478 views/texts.py:479
+#, python-format
+msgid "by %(author)s"
+msgstr ""
+
+#: views/texts.py:604
 msgid "Note (optional)"
 msgstr ""
 
-#: views/texts.py:598
+#: views/texts.py:607
 msgid "Add a note to explain the modifications made to the text"
 msgstr ""
 
-#: views/texts.py:608
+#: views/texts.py:617
 msgid "New version (optional)"
 msgstr ""
 
-#: views/texts.py:611
+#: views/texts.py:620
 msgid "Create a new version of this text (recommended)"
 msgstr ""
 
-#: views/texts.py:614
+#: views/texts.py:623
 msgid "Keep comments (optional)"
 msgstr ""
 
-#: views/texts.py:617
+#: views/texts.py:626
 msgid "Keep comments (if not affected by the edit)"
 msgstr ""
 
-#: views/texts.py:680
+#: views/texts.py:690
 msgid "Name (optional)"
 msgstr ""
 
-#: views/texts.py:681
+#: views/texts.py:691
 msgid "Email (optional)"
 msgstr ""
 
-#: views/texts.py:731
+#: views/texts.py:741
 #, python-format
 msgid "A new version (copied from version %(version_title)s) has been created"
 msgstr ""
 
-#: views/texts.py:839 views/user.py:79 views/user.py:99
+#: views/texts.py:849 views/user.py:79 views/user.py:99
 #, python-format
 msgid "%(count)i user(s) role modified"
 msgstr ""
 
-#: views/texts.py:897
+#: views/texts.py:907
 msgid "Text settings updated"
 msgstr ""
 
