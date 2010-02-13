@@ -12,14 +12,13 @@ from cm.models import ApplicationConfiguration, Activity, Configuration
 import time
 from cm.exception import UnauthorizedException
 import re
+from urlparse import urlparse
 # taken from django's feedgenerator.py and changed to support multiple posts in minute
 def get_tag_uri(url, date):
     "Creates a TagURI. See http://diveintomark.org/archives/2004/05/28/howto-atom-id"
-    tag = re.sub('^http://', '', url)
-    if date is not None:
-        tag = re.sub('/', ',%s:/' % time.mktime(date.timetuple()), tag, 1)
-    tag = re.sub('#', '/', tag)
-    return u'tag:' + tag
+    parsed_url = urlparse(url)
+    time_stp = time.mktime(date.timetuple()) if date is not None else ''
+    return u'tag:%s,%s:%s' %(parsed_url.hostname, time_stp, parsed_url.path) # + '/' + parsed_url.fragment
 
 
 def public_feed(request):

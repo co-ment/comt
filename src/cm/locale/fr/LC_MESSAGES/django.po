@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-11 17:12+0100\n"
-"PO-Revision-Date: 2010-02-11 17:13+0100\n"
+"POT-Creation-Date: 2010-02-12 15:51+0100\n"
+"PO-Revision-Date: 2010-02-12 15:52+0100\n"
 "Last-Translator: dev <dev@sopinspace.com>\n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -379,7 +379,8 @@ msgstr "Envoyer"
 
 #: templates/site/contact.html:26
 #: templates/site/notifications_desactivate.html:32
-#: templates/site/settings.html:23
+#: templates/site/settings.html:29
+#: templates/site/settings_design.html:29
 #: templates/site/text_create_content.html:47
 #: templates/site/text_create_upload.html:42
 #: templates/site/user_add.html:34
@@ -701,7 +702,7 @@ msgid "Desactivate notification"
 msgstr "Désactiver la notification"
 
 #: templates/site/notifications_desactivate.html:31
-msgid "Desactivate"
+msgid "Deactivate"
 msgstr "Désactiver"
 
 #: templates/site/profile.html:6
@@ -728,19 +729,31 @@ msgid "%(wname)s Registration"
 msgstr "S'enregistrer sur %(wname)s"
 
 #: templates/site/settings.html:5
+#: templates/site/settings_design.html:5
 #: templates/site/text_list.html:181
 #: templates/site/macros/main_tabs.html:14
 #: templates/site/macros/text_tabs.html:19
 msgid "Settings"
 msgstr "Paramètres"
 
-#: templates/site/settings.html:25
-msgid "Delete logo"
-msgstr "Supprimer le logo"
+#: templates/site/settings.html:21
+#: templates/site/settings_design.html:21
+msgid "General"
+msgstr "Général"
 
-#: templates/site/settings.html:34
+#: templates/site/settings.html:23
+#: templates/site/settings_design.html:23
+msgid "Appearance"
+msgstr "Apparence"
+
+#: templates/site/settings.html:38
+#: templates/site/settings_design.html:40
 msgid "Are you sure you want to change the role model? All roles (except managers) will be resetted!"
 msgstr "Etes-vous sur de vouloir modifier le modèle des rôles ? Tous les roles actifs (excepté les gestionnaires) seront remis à zéro !"
+
+#: templates/site/settings_design.html:31
+msgid "Delete logo"
+msgstr "Supprimer le logo"
 
 #: templates/site/text_create_content.html:26
 #: templates/site/text_create_upload.html:24
@@ -1313,42 +1326,42 @@ msgstr "Le titre de votre texte"
 msgid "Text \"%(text_title)s\" has been created"
 msgstr "Le texte \"%(text_title)s\" a été créé"
 
-#: views/feeds.py:26
+#: views/feeds.py:25
 #, python-format
 msgid "%(workspace_name)s's public feed"
 msgstr "Flux public pour %(workspace_name)s"
 
-#: views/feeds.py:27
+#: views/feeds.py:26
 #, python-format
 msgid "Workspace %(workspace_name)s public activity feed"
 msgstr "Flux public de l'espace de travail %(workspace_name)s"
 
-#: views/feeds.py:37
+#: views/feeds.py:36
 #, python-format
 msgid "%(workspace_name)s's private feed"
 msgstr "Flux privé pour %(workspace_name)s"
 
-#: views/feeds.py:38
+#: views/feeds.py:37
 #, python-format
 msgid "Workspace %(workspace_name)s private feed"
 msgstr "Flux privé de l'espace de travail %(workspace_name)s"
 
-#: views/feeds.py:73
+#: views/feeds.py:72
 #, python-format
 msgid "Text %(text_title)s's public feed"
 msgstr "Flux public du texte %(text_title)s"
 
-#: views/feeds.py:74
+#: views/feeds.py:73
 #, python-format
 msgid "Public activity feed for text %(text_title)s"
 msgstr "Flux public pour le texte %(text_title)s"
 
-#: views/feeds.py:85
+#: views/feeds.py:84
 #, python-format
 msgid "Text %(text_title)s's private feed"
 msgstr "Flux privé du texte %(text_title)s"
 
-#: views/feeds.py:86
+#: views/feeds.py:85
 #, python-format
 msgid "Private activity feed for text %(text_title)s"
 msgstr "Flux public pour le texte %(text_title)s"
@@ -1363,11 +1376,11 @@ msgid "Private feed reseted."
 msgstr "Flux privé réinitialisé."
 
 #: views/followup.py:52
-msgid "This notification has already been desactivated."
+msgid "This notification has already been deactivated."
 msgstr "Cette notification a été désactivée."
 
 #: views/followup.py:58
-msgid "Notification desactivated."
+msgid "Notification deactivated."
 msgstr "Notification désactivée."
 
 #: views/followup.py:62
@@ -1412,46 +1425,56 @@ msgstr "Copie du message :"
 msgid "Email sent. We will get back to you as quickly as possible."
 msgstr "Message envoyé. Nous vous répondrons dans les meilleurs délais."
 
-#: views/site.py:149
+#: views/site.py:164
 msgid "Workspace name"
 msgstr "Nom de l'espace de travail"
 
-#: views/site.py:154
+#: views/site.py:169
 msgid "Workspace tagline"
 msgstr "Slogan de l'espace de travail"
 
-#: views/site.py:159
-msgid "Workspace logo"
-msgstr "Logo de l'espace de travail"
-
-#: views/site.py:161
+#: views/site.py:174
 msgid "Workspace registration"
 msgstr "S'enregistrer sur l'espace de travail"
 
-#: views/site.py:162
+#: views/site.py:175
 msgid "Can users register themselves into the workspace? (if not, only invitations by managers can create new users)"
 msgstr "Les utilisateurs peuvent-ils s'enregistrer sur l'espace de travail ? (dans le cas contraire l'ajout d'utilisateurs à l'espace de travail peut seulement se faire par l'envoi d'invitations par les gestionnaires)"
 
-#: views/site.py:166
+#: views/site.py:179
 msgid "Workspace registration moderation"
 msgstr "Modération de l'enregistrement sur l'espace de travail"
 
-#: views/site.py:167
+#: views/site.py:180
 msgid "Should new users be moderated (registration will require manager's approval)?"
 msgstr "Les nouveaux utilisateurs doivent-ils être modérés (l'enregistrement exigera alors l'approbation par un gestionnaire) ?"
 
-#: views/site.py:171
+#: views/site.py:184
 msgid "Role model"
 msgstr "Modèle des rôles"
 
-#: views/site.py:172
+#: views/site.py:185
 msgid "Change the roles available in the workspace"
 msgstr "Modifie les rôles disponibles dans l'espace de travail"
 
-#: views/site.py:202
-#: views/site.py:211
+#: views/site.py:200
+#: views/site.py:206
+#: views/site.py:234
+#: views/site.py:243
 msgid "Settings saved"
 msgstr "Paramètres sauvegardés"
+
+#: views/site.py:214
+msgid "Workspace logo"
+msgstr "Logo de l'espace de travail"
+
+#: views/site.py:216
+msgid "Workspace html code"
+msgstr "Code html de l'espace de travail"
+
+#: views/site.py:217
+msgid "Add stylesheets etc. Warning: this code will be added to the workspace code, make sure you know what you're doing before adding something here."
+msgstr "Ajouter des feuilles de style etc.. Attention : ce code sera ajouté à celui de l'espace de travail, à manipuler avec prudence."
 
 #: views/texts.py:162
 #, python-format
@@ -1661,6 +1684,8 @@ msgstr "Enregistrement réussi, vous recevrez un message de confirmation quand u
 msgid "You've been registered, please check your email for the confirm message."
 msgstr "Enregistrement réussi, un message de confirmation vous a été envoyé"
 
+#~ msgid "Design"
+#~ msgstr "Design"
 #~ msgid "%(workspace_name)s's workspace"
 #~ msgstr "espace de travail : %(workspace_name)s"
 #~ msgid "Versions:"

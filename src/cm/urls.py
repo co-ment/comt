@@ -21,6 +21,7 @@ urlpatterns += patterns('',
      url(r'^$', dashboard, name="index"),
      url(r'^text/$', text_list, name="text"),
      url(r'^settings/$', settingss, name="settings"),
+     url(r'^settings/design/$', settings_design, name="settings-design"),
 
      # system pages
      url(r'^i18n/setlang/(?P<lang_code>\w+)/$', i18n.set_language, name="setlang"),
@@ -93,7 +94,7 @@ urlpatterns += patterns('',
      # notifications
      ## workspace followup
      url(r'^followup/$', followup, name="followup"),
-     url(r'^followup/(?P<adminkey>\w*)/desactivate/$', desactivate_notification, name="desactivate-notification"),
+     url(r'^followup/(?P<adminkey>\w*)/deactivate/$', desactivate_notification, name="desactivate-notification"),
      ## text notifications
      url(r'^text/(?P<key>\w*)/followup/$', text_followup, name="text-followup"),
      ## embed

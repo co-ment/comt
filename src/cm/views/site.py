@@ -145,7 +145,22 @@ def global_feed(request):
 from cm.role_models import role_models_choices
 from django.utils.safestring import mark_safe
 
-class SettingsForm(forms.Form):
+class BaseSettingsForm(forms.Form):
+    def __init__(self, data=None, initial=None):
+        forms.Form.__init__(self, data=data, initial=initial)
+        for field in self.fields:
+            if field in self.conf_fields:
+                self.fields[field].initial = Configuration.objects.get_key(field)
+                
+                self.fields[field].initial = Configuration.objects.get_key(field)
+    
+    def save(self):
+        for field in self.fields:
+            if field in self.conf_fields:
+                val = self.cleaned_data[field]
+                Configuration.objects.set_key(field, val)
+                                    
+class SettingsForm(BaseSettingsForm):
     workspace_name = forms.CharField(label=ugettext_lazy("Workspace name"),
                                      widget=forms.TextInput,
                                      required=False,
@@ -155,8 +170,6 @@ class SettingsForm(forms.Form):
                                         widget=forms.TextInput,
                                         required=False,
                                         )
-
-    workspace_logo_file  = forms.FileField(label=ugettext_lazy("Workspace logo"),required=False)
 
     workspace_registration = forms.BooleanField(label=ugettext_lazy("Workspace registration"),
                                                 help_text=ugettext_lazy("Can users register themselves into the workspace? (if not, only invitations by managers can create new users)"),
@@ -178,22 +191,7 @@ class SettingsForm(forms.Form):
     # fields to save in the Configuration objects
     conf_fields = ['workspace_name', 'workspace_tagline', 'workspace_registration', 'workspace_registration_moderation', 'workspace_role_model']
 
-    def __init__(self, data=None, initial=None):
-        forms.Form.__init__(self, data=data, initial=initial)
-        for field in self.fields:
-            if field in self.conf_fields:
-                self.fields[field].initial = Configuration.objects.get_key(field)
-    
-    def save(self):
-        for field in self.fields:
-            if field in self.conf_fields:
-                val = self.cleaned_data[field]
-                Configuration.objects.set_key(field, val)
-        #handle_uploaded_file()
-    def save_file(self, logo_file):
-        attach = Attachment.objects.create_attachment(filename='wp_logo', data=logo_file.read(), text_version=None)
-        Configuration.objects.set_key('workspace_logo_file_key', attach.key)
-        
+
 @has_global_perm('can_manage_workspace')
 def settingss(request):
     if request.method == 'POST':
@@ -205,9 +203,6 @@ def settingss(request):
             form = SettingsForm(data=request.POST)
             if form.is_valid() :
                 form.save()
-                logo_file = request.FILES.get('workspace_logo_file',None)
-                if logo_file:
-                    form.save_file(logo_file)
                 display_message(request, _(u'Settings saved'))
                 return HttpResponseRedirect(reverse('index'))
     else:
@@ -215,6 +210,43 @@ def settingss(request):
     
     return render_to_response('site/settings.html', {'form' : form, 'help_links' : {'workspace_role_model':'role_model'}}, context_instance=RequestContext(request))
 
+class SettingsDesignForm(BaseSettingsForm):
+    workspace_logo_file  = forms.FileField(label=ugettext_lazy("Workspace logo"),required=False)
+    
+    workspace_code = forms.CharField(label=ugettext_lazy("Workspace html code"),
+                                     help_text=(ugettext_lazy("Add stylesheets etc. Warning: this code will be added to the workspace code, make sure you know what you're doing before adding something here.")),
+                                     widget=forms.Textarea,
+                                     required=False,
+                                     )
+
+    conf_fields = ['workspace_code']
+    
+    def save_file(self, logo_file):
+        attach = Attachment.objects.create_attachment(filename='wp_logo', data=logo_file.read(), text_version=None)
+        Configuration.objects.set_key('workspace_logo_file_key', attach.key)
+        
+    
+@has_global_perm('can_manage_workspace')
+def settings_design(request):
+    if request.method == 'POST':
+        if 'delete_logo' in request.POST:
+            Configuration.objects.del_key('workspace_logo_file_key')
+            display_message(request, _(u'Settings saved'))
+            return HttpResponseRedirect(reverse('index'))            
+        else:
+            form = SettingsDesignForm(data=request.POST)
+            if form.is_valid() :
+                form.save()
+                logo_file = request.FILES.get('workspace_logo_file',None)
+                if logo_file:
+                    form.save_file(logo_file)
+                display_message(request, _(u'Settings saved'))
+                return HttpResponseRedirect(reverse('index'))
+    else:
+        form = SettingsDesignForm()
+    
+    return render_to_response('site/settings_design.html', {'form' : form}, context_instance=RequestContext(request))
+    
 def help(request):
     return render_to_response('site/help.html', context_instance=RequestContext(request))
 

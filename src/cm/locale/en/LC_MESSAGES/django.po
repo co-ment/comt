@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-11 17:11+0100\n"
+"POT-Creation-Date: 2010-02-12 15:50+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -368,7 +368,8 @@ msgstr ""
 
 #: templates/site/contact.html:26
 #: templates/site/notifications_desactivate.html:32
-#: templates/site/settings.html:23 templates/site/text_create_content.html:47
+#: templates/site/settings.html:29 templates/site/settings_design.html:29
+#: templates/site/text_create_content.html:47
 #: templates/site/text_create_upload.html:42 templates/site/user_add.html:34
 #: templates/site/user_add_text.html:38 templates/site/user_contact.html:25
 #: templates/site/user_edit.html:29 templates/site/user_mass_add.html:34
@@ -668,7 +669,7 @@ msgid "Desactivate notification"
 msgstr ""
 
 #: templates/site/notifications_desactivate.html:31
-msgid "Desactivate"
+msgid "Deactivate"
 msgstr ""
 
 #: templates/site/profile.html:6 templates/site/profile.html.py:14
@@ -689,20 +690,28 @@ msgstr ""
 msgid "%(wname)s Registration"
 msgstr ""
 
-#: templates/site/settings.html:5 templates/site/text_list.html:181
-#: templates/site/macros/main_tabs.html:14
+#: templates/site/settings.html:5 templates/site/settings_design.html:5
+#: templates/site/text_list.html:181 templates/site/macros/main_tabs.html:14
 #: templates/site/macros/text_tabs.html:19
 msgid "Settings"
 msgstr ""
 
-#: templates/site/settings.html:25
-msgid "Delete logo"
+#: templates/site/settings.html:21 templates/site/settings_design.html:21
+msgid "General"
 msgstr ""
 
-#: templates/site/settings.html:34
+#: templates/site/settings.html:23 templates/site/settings_design.html:23
+msgid "Appearance"
+msgstr ""
+
+#: templates/site/settings.html:38 templates/site/settings_design.html:40
 msgid ""
 "Are you sure you want to change the role model? All roles (except managers) "
 "will be resetted!"
+msgstr ""
+
+#: templates/site/settings_design.html:31
+msgid "Delete logo"
 msgstr ""
 
 #: templates/site/text_create_content.html:26
@@ -1251,42 +1260,42 @@ msgstr ""
 msgid "Text \"%(text_title)s\" has been created"
 msgstr ""
 
-#: views/feeds.py:26
+#: views/feeds.py:25
 #, python-format
 msgid "%(workspace_name)s's public feed"
 msgstr ""
 
-#: views/feeds.py:27
+#: views/feeds.py:26
 #, python-format
 msgid "Workspace %(workspace_name)s public activity feed"
 msgstr ""
 
-#: views/feeds.py:37
+#: views/feeds.py:36
 #, python-format
 msgid "%(workspace_name)s's private feed"
 msgstr ""
 
-#: views/feeds.py:38
+#: views/feeds.py:37
 #, python-format
 msgid "Workspace %(workspace_name)s private feed"
 msgstr ""
 
-#: views/feeds.py:73
+#: views/feeds.py:72
 #, python-format
 msgid "Text %(text_title)s's public feed"
 msgstr ""
 
-#: views/feeds.py:74
+#: views/feeds.py:73
 #, python-format
 msgid "Public activity feed for text %(text_title)s"
 msgstr ""
 
-#: views/feeds.py:85
+#: views/feeds.py:84
 #, python-format
 msgid "Text %(text_title)s's private feed"
 msgstr ""
 
-#: views/feeds.py:86
+#: views/feeds.py:85
 #, python-format
 msgid "Private activity feed for text %(text_title)s"
 msgstr ""
@@ -1300,11 +1309,11 @@ msgid "Private feed reseted."
 msgstr ""
 
 #: views/followup.py:52
-msgid "This notification has already been desactivated."
+msgid "This notification has already been deactivated."
 msgstr ""
 
 #: views/followup.py:58
-msgid "Notification desactivated."
+msgid "Notification deactivated."
 msgstr ""
 
 #: views/followup.py:62
@@ -1347,47 +1356,57 @@ msgstr ""
 msgid "Email sent. We will get back to you as quickly as possible."
 msgstr ""
 
-#: views/site.py:149
+#: views/site.py:164
 msgid "Workspace name"
 msgstr ""
 
-#: views/site.py:154
+#: views/site.py:169
 msgid "Workspace tagline"
 msgstr ""
 
-#: views/site.py:159
-msgid "Workspace logo"
-msgstr ""
-
-#: views/site.py:161
+#: views/site.py:174
 msgid "Workspace registration"
 msgstr ""
 
-#: views/site.py:162
+#: views/site.py:175
 msgid ""
 "Can users register themselves into the workspace? (if not, only invitations "
 "by managers can create new users)"
 msgstr ""
 
-#: views/site.py:166
+#: views/site.py:179
 msgid "Workspace registration moderation"
 msgstr ""
 
-#: views/site.py:167
+#: views/site.py:180
 msgid ""
 "Should new users be moderated (registration will require manager's approval)?"
 msgstr ""
 
-#: views/site.py:171
+#: views/site.py:184
 msgid "Role model"
 msgstr ""
 
-#: views/site.py:172
+#: views/site.py:185
 msgid "Change the roles available in the workspace"
 msgstr ""
 
-#: views/site.py:202 views/site.py:211
+#: views/site.py:200 views/site.py:206 views/site.py:234 views/site.py:243
 msgid "Settings saved"
+msgstr ""
+
+#: views/site.py:214
+msgid "Workspace logo"
+msgstr ""
+
+#: views/site.py:216
+msgid "Workspace html code"
+msgstr ""
+
+#: views/site.py:217
+msgid ""
+"Add stylesheets etc. Warning: this code will be added to the workspace code, "
+"make sure you know what you're doing before adding something here."
 msgstr ""
 
 #: views/texts.py:162

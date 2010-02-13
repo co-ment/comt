@@ -44,6 +44,12 @@
       -->
       </script>
   
+    {% if CONF.workspace_code %}
+    	{% autoescape off %}
+    	{{ CONF.workspace_code }}
+    	{% endautoescape %}
+    {% endif %}
+    	
     {% block head_base %}
     {% endblock %}
     {% block head %}
