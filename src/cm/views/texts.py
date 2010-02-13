@@ -472,7 +472,12 @@ def text_history_compare(request, key, v1_version_key, v2_version_key, mode=''):
     v1 = get_textversion_by_keys_or_404(v1_version_key, key=key)
     v2 = get_textversion_by_keys_or_404(v2_version_key, key=key)
 
-    content = get_uniffied_inner_diff_table(v1.content, v2.content)
+    content = get_uniffied_inner_diff_table(v1.title,
+                                            v2.title, 
+                                            _("by %(author)s") %{'author' : v1.get_name()},
+                                            _("by %(author)s") %{'author' : v2.get_name()},
+                                            v1.content,
+                                            v2.content)
     if mode=='1':
         # alternate diff
         from cm.utils.diff import text_diff
@@ -532,13 +537,16 @@ def _get_change_extent(str1, str2):
 def diff_decorate(minus, plus):
     return minus, plus
 
-def get_uniffied_inner_diff_table(text1, text2):
+def get_uniffied_inner_diff_table(title1, title2, author1, author2, text1, text2):
     """
     Return the inner of the html table for text1 vs text2 diff
     """
     gen = unified_diff(text1.split('\n'), text2.split('\n'), n=3)
     index = 0
     res = ['<table class="diff"><tbody>']
+    res.append('<tr><td></td><td class="diff-title">%s</td><td></td><td></td><td class="diff-title">%s</td></tr>' %(title1, title2))
+    res.append('<tr><td></td><td class="diff-author">%s</td><td></td><td></td><td class="diff-author">%s</td></tr>' %(author1, author2))
+    res.append('<tr><td colspan="5"></td></tr>')
     #res.append('<tr><td width="50%" colspan="2"></td><td width="50%" colspan="2"></td></tr>')
     
     for g in gen:
@@ -634,20 +642,22 @@ class EditTextForm(ModelForm):
         return version
 
     def save_new_version(self, text, request):
-        new_text_version = TextVersion.objects.duplicate(text.get_latest_version(), True) 
-        new_text_version.user = request.user if request.user.is_authenticated() else None
-        new_text_version.note = request.POST.get('note','')
-        new_text_version.email = request.POST.get('email','')
-        new_text_version.name = request.POST.get('name','')
-        new_text_version.save()
-        
+        print "!!"        
         new_content = request.POST.get('content')
         new_title = request.POST.get('title')
         new_format = request.POST.get('format', text.last_text_version.format)        
         new_note = request.POST.get('note',None)
         new_tags = request.POST.get('tags',None)
         cancel_modified_scopes = (request.POST.get('cancel_modified_scopes',u'1') == u'1')
+        
+        new_text_version = text.edit(new_title, new_format, new_content, new_tags, new_note, keep_comments=True, cancel_modified_scopes=cancel_modified_scopes, new_version=True)
+        
         new_text_version.edit(new_title, new_format, new_content, new_tags, new_note, True, cancel_modified_scopes)
+        new_text_version.user = request.user if request.user.is_authenticated() else None
+        new_text_version.note = request.POST.get('note','')
+        new_text_version.email = request.POST.get('email','')
+        new_text_version.name = request.POST.get('name','')
+        new_text_version.save()
         
         return new_text_version
 

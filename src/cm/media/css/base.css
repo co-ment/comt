@@ -170,8 +170,18 @@ table.diff th,table.diff td {
 	padding: 0.1em;
 }
 
+.diff-title {
+	font-size:140%;
+}
+
+.diff-author {
+	font-size:100%;
+	/*font-style: italic;*/
+}
+
+
 .diff-lineno {
-	font-weight: bold;
+	/*font-weight: bold;*/
 }
 
 .diff-context {
