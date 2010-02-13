@@ -8,7 +8,6 @@ function check_save(){
 
     if (commentsKept) {
         var pre_edit_url = tb_conf['pre_edit_url'] ;
-
         $.ajax({
            url: pre_edit_url,
            type:'POST',
@@ -18,7 +17,7 @@ function check_save(){
                nb_removed = obj['nb_removed'];
                if (newVersion) {
                     if (nb_removed == 0) {
-                        $('#edit_form').submit();
+                 	   submit_edit_form();
                     }
                     else {
                 		var message = ngettext( 
@@ -35,7 +34,7 @@ function check_save(){
                }
                else {                  
                    if (nb_removed == 0) {
-                        $('#edit_form').submit();
+                	   submit_edit_form();
                     }
                    else {
 	               		var message = ngettext(  
@@ -68,9 +67,14 @@ function check_save(){
             $('#confirm_all_removed_dlg').dialog('open') ;
         }
         else {
-            $('#edit_form').submit();
+        	submit_edit_form() ;    		
         }
     }
+}
+
+function submit_edit_form() {
+	needToConfirm = false;
+    $('#edit_form').submit();
 }
 
 $(function() {
@@ -79,8 +83,7 @@ $(function() {
 		$(this).dialog('close');
 	} ;
 	buttons[gettext('Yes')] = function() {
-		needToConfirm = false;
-		$(this).dialog('close');$('#edit_form').submit();
+		$(this).dialog('close');submit_edit_form();
 	} ;	
 
     $('#confirm_all_removed_dlg').dialog({
@@ -92,14 +95,8 @@ $(function() {
     }) ;
     
 	var buttons0 = {};
-	buttons0[gettext('Detach')] = function() {
-		needToConfirm = false;
-		$(this).dialog('close');$('#cancel_modified_scopes').val("1");$('#edit_form').submit();
-	} ;
-	buttons0[gettext('Remove')] = function() {
-		needToConfirm = false;
-		$(this).dialog('close');$('#cancel_modified_scopes').val("0");$('#edit_form').submit();
-	} ;
+	buttons0[gettext('Detach')] = function() {$(this).dialog('close');$('#cancel_modified_scopes').val("1");submit_edit_form();} ;
+	buttons0[gettext('Remove')] = function() {$(this).dialog('close');$('#cancel_modified_scopes').val("0");submit_edit_form();} ;
 	buttons0[gettext('Cancel')] = function() {$(this).dialog('close');} ;
 
     $('#remove_scope_choice_dlg').dialog({
