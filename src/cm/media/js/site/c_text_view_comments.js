@@ -193,15 +193,13 @@ preventLinksInText = function() {
 		
 		if (a != null && href != null) {
 			//alert(window.location) ;
-			var loc = (new String(window.location)) ;
+			var clean_window_location = window.location.href ;
 			
-			var clean_window_location = loc ;
-			
-			var ind = loc.indexOf('#') ;
+			var ind = clean_window_location.indexOf('#') ;
 			if (ind != -1)
-				clean_window_location = loc.substring(0, ind) ;
+				clean_window_location = clean_window_location.substring(0, ind) ;
 			
-			if (href.indexOf(clean_window_location) == -1q ) {
+			if (href.indexOf(clean_window_location) == -1 ) {
 				window.open(a.get("href"));
 				e.preventDefault(); ;
 			}
