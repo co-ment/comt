@@ -12,15 +12,10 @@ from html5lib import treebuilders
 
 def compute_new_comment_positions(old_content, old_format, new_content, new_format, commentList):
     
-    if old_format!='html':
-        previousVersionContent = pandoc_convert(old_content, old_format, 'html')
-    else:
-        previousVersionContent = old_content
-        
-    if new_format != 'html':
-        newVersionContent = pandoc_convert(new_content, new_format, 'html')
-    else:
-        newVersionContent = new_content
+    # cf. TextVersion.get_content
+    previousVersionContent = pandoc_convert(old_content, old_format, 'html')
+    newVersionContent = pandoc_convert(new_content, new_format, 'html')
+
     _, previous_char_list, span_starts_previous = spannify(previousVersionContent)
     _, new_char_list, span_starts_new = spannify(newVersionContent)
     
