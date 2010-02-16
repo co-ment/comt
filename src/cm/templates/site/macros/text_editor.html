@@ -12,20 +12,25 @@
     myHTMLSettings.previewTemplatePath = "{% url text-wysiwyg-preview "html" %}";
     myMarkdownSettings.previewParserPath = "{% url text-wysiwyg-preview "markdown" %}";
     
+    onMarkitupActions = function() {needToConfirm = true ;} ;
+    
+    myHTMLSettings.afterInsert = onMarkitupActions ;
+    myMarkdownSettings.afterInsert = onMarkitupActions ;
+    
     $(document).ready(function() {
-    adaptMarkitup = function() {
-        $('#id_content').markItUpRemove();  
-        var newSet = $('#id_format').val();
-        switch(newSet) {
-            case 'markdown':
-                $('#id_content').markItUp(myMarkdownSettings);
-                break;
-            case 'html':
-                $('#id_content').markItUp(myHTMLSettings);
-                break;
-        }
-        return false;
-    }
+	    adaptMarkitup = function() {
+	        $('#id_content').markItUpRemove();  
+	        var newSet = $('#id_format').val();
+	        switch(newSet) {
+	            case 'markdown':
+	                $('#id_content').markItUp(myMarkdownSettings);
+	                break;
+	            case 'html':
+	                $('#id_content').markItUp(myHTMLSettings);
+	                break;
+	        }
+	        return false;
+	    }
     
     adaptMarkitup();
     

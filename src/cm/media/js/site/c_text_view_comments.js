@@ -182,20 +182,28 @@ initialConnect = function() {
 	CY.on('resize', onFrameScroll, window, this, true);
 };
 
-// serious tests were made : various browsers + comments on a link.
 preventLinksInText = function() {
 	var interceptLink = function(e) {
-		e.preventDefault();
-
 		var a = e.target;
-		while (a != null && a.get("href") == null) {
+		var href = null;
+		while (a != null && href == null) {
 			a = a.get('parentNode');
+			href = a.get("href");
 		}
-
-		if (a != null && a.get("href") != null) {
-			window.open(a.get("href"));
+		
+		if (a != null && href != null) {
+			//alert(window.location) ;
+			var clean_window_location = window.location.href ;
+			
+			var ind = clean_window_location.indexOf('#') ;
+			if (ind != -1)
+				clean_window_location = clean_window_location.substring(0, ind) ;
+			
+			if (href.indexOf(clean_window_location) == -1 ) {
+				window.open(a.get("href"));
+				e.preventDefault(); ;
+			}
 		}
-
 	} ;
 
 	CY.all("#textcontainer a").on("click", interceptLink);
