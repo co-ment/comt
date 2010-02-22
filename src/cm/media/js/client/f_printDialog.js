@@ -6,7 +6,7 @@ gFormats = [{'actions':['print'], 'extension':'html', 'label': gettext('print fr
             {'actions':['export'], 'extension':'html', 'label': gettext('download html file (.html)')},
             {'actions':['print', 'export'], 'extension':'markdown', 'label': gettext('download markdown file (.mkd)')},
             {'actions':['print', 'export'], 'extension':'pdf', 'label': gettext('download portable object format file (.pdf)')},
-            {'actions':['print', 'export'], 'extension':'tex', 'label': gettext('download latex file (.tex)')},
+            {'actions':['print', 'export'], 'extension':'latex', 'label': gettext('download latex file (.tex)')},
             {'actions':['print', 'export'], 'extension':'odt', 'label': gettext('download open document file (.odt)')}] ;
 
 

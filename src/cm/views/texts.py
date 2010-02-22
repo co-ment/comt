@@ -324,7 +324,7 @@ def text_export(request, key, format, download, whichcomments, withcolor, admink
     if with_color :
         use_pandoc = False  # pandoc wouldn't preserve comments scope background colors
     else :
-        if format in ('markdown', 'tex') : 
+        if format in ('markdown', 'latex') : 
             use_pandoc = True
         elif format in ('pdf', 'odt') : 
             use_pandoc = (original_format == "markdown")
