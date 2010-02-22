@@ -36,7 +36,7 @@
     <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/f_printDialog.js"></script>
     <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/site/f_text_view_frame.js"></script>
 {% else %}
-    <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/f_client-min.js?1266064525"></script> 
+    <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/f_client-min.js?1266873664"></script> 
 {% endif %}
     <style type="text/css">
         /*
@@ -97,15 +97,15 @@
     
         <form name="print_export_form" id="print_export_form" method="post" action="" target_action="{% url text-export text.key "FoRmAt" "DoWnLoAd" "WhIcHCoMmEnT" "WiThCoLoR" %}?{{ request.GET.urlencode }}">
 	        <fieldset>
-                <label for="name">{% blocktrans %}Which comments?{% endblocktrans %}</label>
+                <label for="p_comments">{% blocktrans %}Which comments?{% endblocktrans %}</label>
                 <select  name="p_comments" id="p_comments" />
                 </select>
 
-                <label for="name">{% blocktrans %}How do you want to print?{% endblocktrans %}</label>
+                <label id="how" for="p_method"></label>
                 <select name="p_method" id="p_method"/>
                 </select>
 
-	            <label id="p_color_label" for="email">{% blocktrans %}How should comments' scope be shown in text?{% endblocktrans %}</label>
+	            <label id="p_color_label" for="p_color">{% blocktrans %}How should comments' scope be shown in text?{% endblocktrans %}</label>
                 <select name="p_color" id="p_color"/>
                 </select>
 	        </fieldset>

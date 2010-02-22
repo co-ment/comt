@@ -10,8 +10,8 @@ gFormats = [{'actions':['print'], 'extension':'html', 'label': gettext('print fr
             {'actions':['print', 'export'], 'extension':'odt', 'label': gettext('download open document file (.odt)')}] ;
 
 
-gActions = {'print':{'dialogTitle':gettext('Print text'), 'defaultMethod':'pdf', 'defaultWithColors':"no", 'defaultWhichComments':'all'}, 
-			'export':{'dialogTitle':gettext('Export text'), 'defaultMethod':'pdf', 'defaultWithColors':"no", 'defaultWhichComments':'all'}} ; 
+gActions = {'print':{'dialogTitle':gettext('Print text'), 'chooseFormatLabel':gettext('How do you want to print?'), 'defaultMethod':'pdf', 'defaultWithColors':"no", 'defaultWhichComments':'all'}, 
+			'export':{'dialogTitle':gettext('Export text'), 'chooseFormatLabel':gettext('Choose file format'), 'defaultMethod':'pdf', 'defaultWithColors':"no", 'defaultWhichComments':'all'}} ; 
 gCurrentAction = null ; 
 	
 _populateMethod = function(withColors) {
@@ -136,6 +136,7 @@ _prepareOpenInNewWindow = function() {
 _openPrintExportDialog = function(action) {
 	gCurrentAction = action ;
 	$("#ui-dialog-title-dialog_print_export").html(gActions[gCurrentAction]['dialogTitle']) ;
+	$("#how").html(gActions[gCurrentAction]['chooseFormatLabel']) ;
 	$("#print_export_action").val(action) ; // TODO check this still usefull
 	
 	
