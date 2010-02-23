@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-13 12:22+0100\n"
-"PO-Revision-Date: 2010-02-13 12:49+0100\n"
+"POT-Creation-Date: 2010-02-23 17:36+0100\n"
+"PO-Revision-Date: 2010-02-24 01:37+0900\n"
 "Last-Translator: dev <dev@sopinspace.com>\n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -699,7 +699,7 @@ msgstr[0] "Un texte public"
 msgstr[1] "%(counter)s textes publics"
 
 #: templates/site/notifications_desactivate.html:8
-msgid "Desactivate notification"
+msgid "Deactivate notification"
 msgstr "Désactiver la notification"
 
 #: templates/site/notifications_desactivate.html:31
@@ -921,6 +921,13 @@ msgstr "Comparer avec la version suivante"
 msgid "Next version"
 msgstr "Version suivante"
 
+#: templates/site/text_history_version.html:45
+#: views/texts.py:478
+#: views/texts.py:479
+#, python-format
+msgid "by %(author)s"
+msgstr "par %(author)s"
+
 #: templates/site/text_list.html:12
 msgid "Texts"
 msgstr "Textes"
@@ -1102,10 +1109,6 @@ msgstr "Préférences pour le texte"
 msgid "Which comments?"
 msgstr "Quels commentaires ?"
 
-#: templates/site/text_view_frame.html:104
-msgid "How do you want to print?"
-msgstr "Comment voulez vous imprimer ?"
-
 #: templates/site/text_view_frame.html:108
 msgid "How should comments' scope be shown in text?"
 msgstr "Rendu de la portée des commentaires ?"
@@ -1251,7 +1254,7 @@ msgstr "Partager"
 msgid "by %(name)s on %(date)s"
 msgstr "par %(name)s le %(date)s"
 
-#: templates/site/macros/text_editor.html:38
+#: templates/site/macros/text_editor.html:43
 msgid "You have attempted to leave this page. Unsaved changes will be lost. Are you sure you want to exit this page?"
 msgstr "Vous avez tenté de quitter la page. Les modifications non sauvegardées seront perdues. Etes vous sûr de vouloir quitter cette page ?"
 
@@ -1401,7 +1404,7 @@ msgid "Notification deactivated."
 msgstr "Notification désactivée."
 
 #: views/followup.py:62
-msgid "Desactivate notification?"
+msgid "Deactivate notification?"
 msgstr "Désactiver la notification ?"
 
 #: views/followup.py:84
@@ -1507,12 +1510,6 @@ msgstr "texte %(text_title)s supprimé"
 #, python-format
 msgid "Text version %(text_version_title)s deleted"
 msgstr "Version %(text_version_title)s supprimée"
-
-#: views/texts.py:478
-#: views/texts.py:479
-#, python-format
-msgid "by %(author)s"
-msgstr "par %(author)s"
 
 #: views/texts.py:604
 msgid "Note (optional)"
@@ -1707,6 +1704,8 @@ msgstr "Enregistrement réussi, vous recevrez un message de confirmation quand u
 msgid "You've been registered, please check your email for the confirm message."
 msgstr "Enregistrement réussi, un message de confirmation vous a été envoyé"
 
+#~ msgid "How do you want to print?"
+#~ msgstr "Comment voulez vous imprimer ?"
 #~ msgid "Design"
 #~ msgstr "Design"
 #~ msgid "%(workspace_name)s's workspace"
