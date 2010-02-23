@@ -503,6 +503,7 @@ def user_contact(request, key):
     
     return render_to_response('site/user_contact.html', {'form' : contact_form,
                                                          'save_name' : 'send',
+                                                         'recipient_profile' : recipient_profile,
                                                                 }, context_instance=RequestContext(request))
 
 
