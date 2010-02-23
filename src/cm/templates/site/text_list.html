@@ -167,7 +167,7 @@ $(function() {
                             question = "{% blocktrans %}Are you sure you want to delete this text?{% endblocktrans %}";
                             if (confirm(question)) {
                                 $.post(url, function(data){
-                                      window.location = '{% url index %}';
+                                      window.location = '{% url text %}';
                                     });                        
                             }
                         });
