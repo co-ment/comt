@@ -59,7 +59,7 @@ def desactivate_notification(request, adminkey):
             return HttpResponseRedirect(reverse('index'))
     return render_to_response('site/notifications_desactivate.html', 
                               {'notification' : notification,
-                               'title' : _(u'Desactivate notification?'),                               
+                               'title' : _(u'Deactivate notification?'),                               
                                },
                                context_instance=RequestContext(request))
 

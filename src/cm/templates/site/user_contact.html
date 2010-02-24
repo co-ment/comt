@@ -16,7 +16,7 @@ tb_conf['current_tab'] = 'user';
 
 <div id="user" class="tab-meta">
 
-<a href="{% url user %}">{% blocktrans %}Users' list{% endblocktrans %}</a> / <a href="{% url user-add %}">{% blocktrans %}Add a new user{% endblocktrans %}</a> / {% blocktrans with user.get_profile.admin_print as username %}Contact user {{ username }}{% endblocktrans %} 
+<a href="{% url user %}">{% blocktrans %}Users' list{% endblocktrans %}</a> / <a href="{% url user-add %}">{% blocktrans %}Add a new user{% endblocktrans %}</a> / {% blocktrans with recipient_profile.admin_print as username %}Contact user {{ username }}{% endblocktrans %} 
 
 <br /><br />
 {% endblock %}

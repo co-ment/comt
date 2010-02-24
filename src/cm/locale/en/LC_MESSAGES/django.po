@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-13 12:21+0100\n"
+"POT-Creation-Date: 2010-02-23 17:36+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -665,7 +665,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: templates/site/notifications_desactivate.html:8
-msgid "Desactivate notification"
+msgid "Deactivate notification"
 msgstr ""
 
 #: templates/site/notifications_desactivate.html:31
@@ -883,6 +883,12 @@ msgstr ""
 msgid "Next version"
 msgstr ""
 
+#: templates/site/text_history_version.html:45 views/texts.py:478
+#: views/texts.py:479
+#, python-format
+msgid "by %(author)s"
+msgstr ""
+
 #: templates/site/text_list.html:12
 msgid "Texts"
 msgstr ""
@@ -1040,10 +1046,6 @@ msgstr ""
 msgid "Which comments?"
 msgstr ""
 
-#: templates/site/text_view_frame.html:104
-msgid "How do you want to print?"
-msgstr ""
-
 #: templates/site/text_view_frame.html:108
 msgid "How should comments' scope be shown in text?"
 msgstr ""
@@ -1182,7 +1184,7 @@ msgstr ""
 msgid "by %(name)s on %(date)s"
 msgstr ""
 
-#: templates/site/macros/text_editor.html:38
+#: templates/site/macros/text_editor.html:43
 msgid ""
 "You have attempted to leave this page. Unsaved changes will be lost. Are you "
 "sure you want to exit this page?"
@@ -1333,7 +1335,7 @@ msgid "Notification deactivated."
 msgstr ""
 
 #: views/followup.py:62
-msgid "Desactivate notification?"
+msgid "Deactivate notification?"
 msgstr ""
 
 #: views/followup.py:84
@@ -1438,11 +1440,6 @@ msgstr ""
 #: views/texts.py:219
 #, python-format
 msgid "Text version %(text_version_title)s deleted"
-msgstr ""
-
-#: views/texts.py:478 views/texts.py:479
-#, python-format
-msgid "by %(author)s"
 msgstr ""
 
 #: views/texts.py:604
