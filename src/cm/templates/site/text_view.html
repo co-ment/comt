@@ -2,6 +2,11 @@
 {% load com %}
 
 {% block head %}
+<style>
+#footer {
+    display:none ;
+}
+</style>
 {% endblock %}
 
 {% block main %}
@@ -24,9 +29,10 @@ tb_conf['current_tab'] = 'view';
 {% endautoescape %}
 </center>
 </div>
-
+<div style="display:none;"> {# TODO: check that although invisible it will still be referenced in google ... #}
 {% autoescape off %}
 {{ text_version.get_content }}
 {% endautoescape %}
+</div>
 
 {% endblock %}
