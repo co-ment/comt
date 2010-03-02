@@ -16,7 +16,7 @@
 }
 
 .innertube {
-	margin: 5px;
+	margin: 25px 5px 5px 5px;
 }
 .initially_hidden, .displaynone {
     display:none;
