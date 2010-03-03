@@ -128,7 +128,8 @@ from django.utils.dateformat import format
 from datetime import datetime
 from time import struct_time
 from cm.utils.timezone import tz_convert
-
+from pytz import UnknownTimeZoneError
+from cm.utils.log import error_mail_admins
 @register.filter
 def local_date(value, tz=None):
     """Formats a date according to the given local date format."""
@@ -137,7 +138,10 @@ def local_date(value, tz=None):
     if isinstance(value,struct_time): 
         publication_date = datetime(value.tm_year,value.tm_mon,value.tm_mday,value.tm_hour,value.tm_min,value.tm_sec)
 
-    value = tz_convert(value,tz)
+    try:
+        value = tz_convert(value,tz)
+    except UnknownTimeZoneError:
+        error_mail_admins()
     
     arg = _(u"F j, Y \\a\\t g:i a") 
     return format(value, arg)
