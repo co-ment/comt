@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-02 16:43+0100\n"
+"POT-Creation-Date: 2010-03-08 20:06+0100\n"
 "PO-Revision-Date: 2010-02-15 08:00+0100\n"
 "Last-Translator: Kirill Miazine <km@krot.org>\n"
 "Language-Team: <no@li.org>\n"
@@ -60,7 +60,7 @@ msgstr "Lagre"
 
 #: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:14
 #: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:100
-#: media/js/site/text_edit.js:93
+#: media/js/site/text_edit.js:100
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -75,7 +75,7 @@ msgstr "Ønsker du å avbryte opprettelsen av en ny merknad?"
 
 #: media/js/client/c_dlg_intercept.js:48 media/js/client/c_dlg_intercept.js:50
 #: media/js/client/c_dlg_intercept.js:52 media/js/client/c_sync.js:223
-#: media/js/site/text_edit.js:85 media/js/site/text_edit.js.py:98
+#: media/js/site/text_edit.js:92 media/js/site/text_edit.js.py:105
 msgid "Warning"
 msgstr "Advarsel"
 
@@ -243,9 +243,18 @@ msgstr "lest ned fil i OpenDocument-format (.odt)"
 msgid "Print text"
 msgstr "Skriv ut tekst"
 
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:12
+#, fuzzy
+msgid "How do you want to print?"
+msgstr "Ønsker du å fortsette?"
+
 #: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:13
 msgid "Export text"
 msgstr "Eksporter tekst"
+
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:13
+msgid "Choose file format"
+msgstr ""
 
 #: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:40
 msgid "using markers only, no background colors"
@@ -425,12 +434,12 @@ msgstr[0] "siste 24 timer (%(nb_comments)s)"
 msgstr[1] "siste %(nb_days)s dager (%(nb_comments)s)"
 
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:733
-#: media/js/site/text_edit.js:79
+#: media/js/site/text_edit.js:82
 msgid "No"
 msgstr "Nei"
 
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:734
-#: media/js/site/text_edit.js:80
+#: media/js/site/text_edit.js:85
 msgid "Yes"
 msgstr "Ja"
 
@@ -551,7 +560,7 @@ msgstr "textstrøm"
 msgid "unthread discussions"
 msgstr "skjul diskusjonstråder"
 
-#: media/js/site/text_edit.js:9
+#: media/js/site/text_edit.js:7
 msgid ""
 "Should these comments be detached (i.e. kept with no scope) or removed from "
 "new version?"
@@ -559,30 +568,30 @@ msgstr ""
 "Skal disse merknadene frakobles (dvs. tape kontekst) eller slettes i den nye "
 "versjonen?"
 
-#: media/js/site/text_edit.js:27 media/js/site/text_edit.js.py:44
+#: media/js/site/text_edit.js:24 media/js/site/text_edit.js.py:41
 msgid "%(nb_comments)s comment applies to text that was modified."
 msgid_plural "%(nb_comments)s comments apply to text that was modified."
 msgstr[0] "%(nb_comments)s kommentar gjelder den endrede teksten."
 msgstr[1] "%(nb_comments)s kommentarer gjelder den endrede teksten."
 
-#: media/js/site/text_edit.js:48
+#: media/js/site/text_edit.js:45
 msgid "(We suggest you create a new version)"
 msgstr "(Vi anbefaler at du oppretter en ny versjon)"
 
-#: media/js/site/text_edit.js:65
+#: media/js/site/text_edit.js:63
 msgid "You chose not to create a new version all comments will be deleted"
 msgstr ""
 "Siden du ikke ønsket å opprette en ny versjon, vil alle merknader bli slettet"
 
-#: media/js/site/text_edit.js:67
+#: media/js/site/text_edit.js:65
 msgid "Do you want to continue?"
 msgstr "Ønsker du å fortsette?"
 
-#: media/js/site/text_edit.js:91
+#: media/js/site/text_edit.js:98
 msgid "Detach"
 msgstr "Koble fra"
 
-#: media/js/site/text_edit.js:92
+#: media/js/site/text_edit.js:99
 msgid "Remove"
 msgstr "Fjern"
 

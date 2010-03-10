@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-02 16:43+0100\n"
+"POT-Creation-Date: 2010-03-08 20:07+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,7 +59,7 @@ msgstr ""
 
 #: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:14
 #: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:100
-#: media/js/site/text_edit.js:93
+#: media/js/site/text_edit.js:100
 msgid "Cancel"
 msgstr ""
 
@@ -74,7 +74,7 @@ msgstr ""
 
 #: media/js/client/c_dlg_intercept.js:48 media/js/client/c_dlg_intercept.js:50
 #: media/js/client/c_dlg_intercept.js:52 media/js/client/c_sync.js:223
-#: media/js/site/text_edit.js:85 media/js/site/text_edit.js.py:98
+#: media/js/site/text_edit.js:92 media/js/site/text_edit.js.py:105
 msgid "Warning"
 msgstr ""
 
@@ -238,8 +238,16 @@ msgstr ""
 msgid "Print text"
 msgstr ""
 
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:12
+msgid "How do you want to print?"
+msgstr ""
+
 #: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:13
 msgid "Export text"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:13
+msgid "Choose file format"
 msgstr ""
 
 #: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:40
@@ -420,12 +428,12 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:733
-#: media/js/site/text_edit.js:79
+#: media/js/site/text_edit.js:82
 msgid "No"
 msgstr ""
 
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:734
-#: media/js/site/text_edit.js:80
+#: media/js/site/text_edit.js:85
 msgid "Yes"
 msgstr ""
 
@@ -546,34 +554,34 @@ msgstr ""
 msgid "unthread discussions"
 msgstr ""
 
-#: media/js/site/text_edit.js:9
+#: media/js/site/text_edit.js:7
 msgid ""
 "Should these comments be detached (i.e. kept with no scope) or removed from "
 "new version?"
 msgstr ""
 
-#: media/js/site/text_edit.js:27 media/js/site/text_edit.js.py:44
+#: media/js/site/text_edit.js:24 media/js/site/text_edit.js.py:41
 msgid "%(nb_comments)s comment applies to text that was modified."
 msgid_plural "%(nb_comments)s comments apply to text that was modified."
 msgstr[0] ""
 msgstr[1] ""
 
-#: media/js/site/text_edit.js:48
+#: media/js/site/text_edit.js:45
 msgid "(We suggest you create a new version)"
 msgstr ""
 
-#: media/js/site/text_edit.js:65
+#: media/js/site/text_edit.js:63
 msgid "You chose not to create a new version all comments will be deleted"
 msgstr ""
 
-#: media/js/site/text_edit.js:67
+#: media/js/site/text_edit.js:65
 msgid "Do you want to continue?"
 msgstr ""
 
-#: media/js/site/text_edit.js:91
+#: media/js/site/text_edit.js:98
 msgid "Detach"
 msgstr ""
 
-#: media/js/site/text_edit.js:92
+#: media/js/site/text_edit.js:99
 msgid "Remove"
 msgstr ""

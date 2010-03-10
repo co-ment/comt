@@ -1,0 +1,1766 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# bistra <bistra.raykova@free.fr>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-03-08 19:52+0100\n"
+"PO-Revision-Date: 2010-03-10 20:58+0100\n"
+"Last-Translator: bistra <bistra.raykova@free.fr>\n"
+"Language-Team: Français <kde-i18n-doc@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: client.py:25
+msgid ""
+"A selection is required. Select in the text the part your comment applies to."
+msgstr ""
+"Необходим е избор. Изберете частта от текста, върху която се отнася вашият "
+"коментар."
+
+#: client.py:134
+msgid "name is required"
+msgstr "името е задължително"
+
+#: client.py:137
+msgid "email is required"
+msgstr "имейлът е задължителен"
+
+#: client.py:139
+msgid "invalid email"
+msgstr "невалиден имейл"
+
+#: client.py:141
+msgid "title is required"
+msgstr "заглавието е задължително"
+
+#: client.py:143
+msgid "content is required"
+msgstr "текстът е задължителен"
+
+#: client.py:158
+msgid "comment removed"
+msgstr "коментарът е изтрит."
+
+#: client.py:209 client.py:274
+msgid "comment saved"
+msgstr "коментарът е запаметен"
+
+#: client.py:276
+msgid "comment saved, it is being held for moderation"
+msgstr "коментарът е запаметен, запазен е за модериране"
+
+#: client.py:337
+msgid "Tags input must be no longer than 250 characters."
+msgstr "Таговете не трябва да надвишават 250 символа."
+
+#: models.py:178 templates/site/text_history.html:79 views/create.py:30
+#: views/create.py:45 views/texts.py:600
+msgid "Title"
+msgstr "Заглавие"
+
+#: models.py:179
+msgid "Format"
+msgstr "Формат"
+
+#: models.py:180 views/texts.py:692
+msgid "Content"
+msgstr "Съдържание"
+
+#: models.py:181 models.py:633
+msgid "Tags"
+msgstr "Тагове"
+
+#: models.py:183 templates/site/text_history.html:80 views/user.py:223
+msgid "Note"
+msgstr "Бележка"
+
+#: models.py:185
+msgid "Moderation a posteriori?"
+msgstr "Модерирането се извършва по-късно."
+
+#: models.py:301
+msgid "Format:"
+msgstr "Формат"
+
+#: models.py:536
+msgid "name"
+msgstr "име"
+
+#: models.py:537
+msgid "description"
+msgstr "описание"
+
+#: models.py:627
+msgid "Allow contact"
+msgstr "Разрешете връзка"
+
+#: models.py:627
+msgid "Allow email messages from other users"
+msgstr "Разрешете имейл съобщения от други потребители"
+
+#: models.py:628
+msgid "Preferred language"
+msgstr "Предпочитан език"
+
+#: models.py:631
+msgid "Suspended access"
+msgstr "Преустановен достъп"
+
+#: models.py:655
+msgid "suspended"
+msgstr "прекъснат"
+
+#: models.py:657
+msgid "waiting approval"
+msgstr "в очакване на одобрение"
+
+#: models.py:663
+msgid "pending"
+msgstr "предстоящ"
+
+#: models.py:678
+msgid "Invitation"
+msgstr "Покана"
+
+#: models.py:746
+#, python-format
+msgid "Text %(link_to_text)s edited"
+msgstr "Текстът %(link_to_text)s е променен"
+
+#: models.py:747
+#, python-format
+msgid "Text %(link_to_text)s edited (new version created)"
+msgstr "Текстът %(link_to_text)s е променен (създадена е нова версия)"
+
+#: models.py:748
+#, python-format
+msgid "Text %(link_to_text)s added"
+msgstr "Текстът %(link_to_text)s е добавен"
+
+#: models.py:749
+#, python-format
+msgid "Text %(link_to_text)s removed"
+msgstr "Текстът %(link_to_text)s е изтрит"
+
+#: models.py:750
+#, python-format
+msgid "Comment %(link_to_comment)s added on text %(link_to_text)s"
+msgstr "Коментарът %(link_to_comment)s е добавен към текста %(link_to_text)s"
+
+#: models.py:751
+#, python-format
+msgid "Comment %(link_to_comment)s removed from text %(link_to_text)s"
+msgstr "Коментарът %(link_to_comment)s към текста %(link_to_text)s е изтрит"
+
+#: models.py:752
+#, python-format
+msgid "User %(username)s added"
+msgstr "Потребителя %(username)s е добавен"
+
+#: models.py:753
+#, python-format
+msgid "User %(username)s access to workspace enabled"
+msgstr ""
+" гщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщ"
+"щщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщщДостъпът към работното място "
+"е разрешен на потребителя %(username)s"
+
+#: models.py:754
+#, python-format
+msgid "User %(username)s access to workspace refused"
+msgstr "Достъпът към работното място е отказан на потребителя %(username)s"
+
+#: models.py:755
+#, python-format
+msgid "User %(username)s access to workspace suspended"
+msgstr ""
+"Достъпът към работното място е преустановен на потребителя %(username)s"
+
+#: models.py:756
+#, python-format
+msgid "User %(username)s access to workspace activated"
+msgstr "Достъпът към работното място е активиран на потребителя %(username)s"
+
+#: models.py:757
+#, python-format
+msgid "User %(username)s has activated his account"
+msgstr "Потребителя  %(username)s активира своя акаунт"
+
+#: models.py:812 models.py:820
+#, python-format
+msgid "by \"%(username)s\""
+msgstr "От \"%(username)s\""
+
+#: models.py:814
+#, python-format
+msgid "%(time_since)s ago"
+msgstr "преди %(time_since)s"
+
+#: models_base.py:53
+msgid "Name:"
+msgstr "Име:"
+
+#: models_base.py:54
+msgid "Email:"
+msgstr "Email:"
+
+#: notifications.py:60
+msgid "Notification:"
+msgstr "Уведомление:"
+
+#: role_models.py:7
+msgid "Generic"
+msgstr "Генеричен"
+
+#: role_models.py:7
+msgid "Class (education)"
+msgstr "Клас"
+
+#: settings.py:105
+msgid "French"
+msgstr "Френски"
+
+#: settings.py:106
+msgid "English"
+msgstr "Английски"
+
+#: settings.py:107
+msgid "Norwegian"
+msgstr "Норвежки"
+
+#: settings.py:108
+msgid "Brazilian Portuguese"
+msgstr "Бразилски Португалски"
+
+#: settings.py:109
+msgid "Spanish"
+msgstr "Испански"
+
+#: settings.py:110
+msgid "Bulgarian"
+msgstr "Български"
+
+#: static_i18n.py:6 static_i18n.py:11
+msgid "Observer"
+msgstr "Наблюдател"
+
+#: static_i18n.py:7
+msgid "Manager"
+msgstr "Ръководител"
+
+#: static_i18n.py:8
+msgid "Editor"
+msgstr "Редактор"
+
+#: static_i18n.py:9
+msgid "Moderator"
+msgstr "Модератор"
+
+#: static_i18n.py:10
+msgid "Commentator"
+msgstr "Коментатор"
+
+#: static_i18n.py:12
+msgid "Participant"
+msgstr "Участник"
+
+#: static_i18n.py:15
+msgid "Can view text"
+msgstr "Може да види текста"
+
+#: static_i18n.py:16
+msgid "Can edit text"
+msgstr "Може да редактира текста"
+
+#: static_i18n.py:17
+msgid "Can create text"
+msgstr "Може да създава текст"
+
+#: static_i18n.py:18
+msgid "Can delete text"
+msgstr "Може да изтрива текст"
+
+#: static_i18n.py:19
+msgid "Can manage text"
+msgstr "Може да променя текста"
+
+#: static_i18n.py:20
+msgid "Can create comment"
+msgstr "Може да създава коментар"
+
+#: static_i18n.py:21
+msgid "Can delete comment"
+msgstr "Може да изтрие коментар"
+
+#: static_i18n.py:22
+msgid "Can delete own comment"
+msgstr "Може да изтрие собствения си коментар"
+
+#: static_i18n.py:23
+msgid "Can view approved comment"
+msgstr "Може да види одобрен коментар"
+
+#: static_i18n.py:24
+msgid "Can view own comment"
+msgstr "Може да види собствен коментар"
+
+#: static_i18n.py:25
+msgid "Can view unapproved comment"
+msgstr "Може да види неодобрени коментари"
+
+#: static_i18n.py:26
+msgid "Can edit comment"
+msgstr "Може да редактира коментар"
+
+#: static_i18n.py:27
+msgid "Can edit own comment"
+msgstr "Може да редактира собствения си коментар"
+
+#: static_i18n.py:28
+msgid "Can manage workspace"
+msgstr "Може да променя работното място"
+
+#: static_i18n.py:29
+msgid "Can view workspace"
+msgstr "Може да види работното място"
+
+#: static_i18n.py:32
+msgid "Teacher"
+msgstr "Учител"
+
+#: static_i18n.py:33
+msgid "Student"
+msgstr "Учащ се"
+
+#: static_i18n.py:34
+msgid "Individual student"
+msgstr "Индивидуален учащ се"
+
+#: templates/404.html:4
+msgid "Page not found"
+msgstr "Страницата не е намерена"
+
+#: templates/404.html:6
+msgid "The requested page could not be found."
+msgstr "Поисканата страница не беше намерена"
+
+#: templates/500.html:4
+msgid "Server Error"
+msgstr "Грешка на Сървъра"
+
+#: templates/500.html:6
+msgid "An error has occurred."
+msgstr "Възникна грешка."
+
+#: templates/site/activate.html:10 templates/site/user_activate.html:10
+#: views/user.py:330
+msgid "Activate your account"
+msgstr "Активирайте Вашия акаунт"
+
+#: templates/site/activate.html:23
+msgid "Activate"
+msgstr "Активиране"
+
+#: templates/site/contact.html:6 templates/site/layout/footer.html:9
+#: templates/site/macros/user_actions.html:20
+msgid "Contact"
+msgstr "Контакт"
+
+#: templates/site/contact.html:24
+msgid "Send"
+msgstr "Изпращане"
+
+#: templates/site/contact.html:26
+#: templates/site/notifications_desactivate.html:32
+#: templates/site/settings.html:29 templates/site/settings_design.html:29
+#: templates/site/text_create_content.html:47
+#: templates/site/text_create_upload.html:42 templates/site/user_add.html:34
+#: templates/site/user_add_text.html:38 templates/site/user_contact.html:25
+#: templates/site/user_edit.html:29 templates/site/user_mass_add.html:34
+#: templates/site/user_mass_add_text.html:38
+msgid "Cancel"
+msgstr "Отказ"
+
+#: templates/site/dashboard.html:12 templates/site/macros/main_tabs.html:10
+msgid "Dashboard"
+msgstr "Табло"
+
+#: templates/site/dashboard.html:43
+msgid "Actions"
+msgstr "Действия"
+
+#: templates/site/dashboard.html:48 templates/site/text_create_content.html:4
+#: templates/site/text_create_content.html:28
+#: templates/site/text_create_upload.html:26 templates/site/text_list.html:40
+#: templates/site/layout/header.html:10
+msgid "Write a text"
+msgstr "Напишете текст"
+
+#: templates/site/dashboard.html:49 templates/site/text_create_content.html:30
+#: templates/site/text_create_upload.html:4
+#: templates/site/text_create_upload.html:28 templates/site/text_list.html:42
+#: templates/site/layout/header.html:11
+msgid "Upload a text"
+msgstr "Качване на текст"
+
+#: templates/site/dashboard.html:50
+msgid "Invite user"
+msgstr "Покани потребител"
+
+#: templates/site/dashboard.html:51
+msgid "Edit your profile"
+msgstr "Редактиране на вашия профил"
+
+#: templates/site/dashboard.html:52
+msgid "View text list"
+msgstr "Преглед на списъка с текстове"
+
+#: templates/site/dashboard.html:53
+msgid "Configure workspace"
+msgstr "Конфигуриране на работното място"
+
+#: templates/site/dashboard.html:64
+msgid "Moderation queue"
+msgstr "В очакване"
+
+#: templates/site/dashboard.html:76
+#, python-format
+msgid "user %(user)s awaits approval"
+msgstr "Потребителят е в очакване на одобрение"
+
+#: templates/site/dashboard.html:80 templates/site/dashboard.html.py:126
+msgid "approve"
+msgstr "Приемам"
+
+#: templates/site/dashboard.html:80 templates/site/dashboard.html.py:126
+msgid "refuse"
+msgstr "Отказвам"
+
+#: templates/site/dashboard.html:80
+msgid "membership"
+msgstr "членство"
+
+#: templates/site/dashboard.html:85
+#: templates/site/macros/user_moderation.html:8
+msgid ""
+"Are you sure you want to approve this user's membership to the workspace?"
+msgstr ""
+"Сигурни ли сте, че искате да приемете достъпа на този потребител към "
+"работното място?"
+
+#: templates/site/dashboard.html:94
+#: templates/site/macros/user_moderation.html:17
+msgid ""
+"Are you sure you want to refuse this user's membership to the workspace?"
+msgstr ""
+"Сигурни ли сте, че искате да откажете достъпа на този потребител към "
+"работното място?"
+
+#: templates/site/dashboard.html:106
+#, python-format
+msgid "registered %(duration)s ago"
+msgstr "регистриран преди %(duration)s"
+
+#: templates/site/dashboard.html:120 templates/site/dashboard.html.py:126
+msgid "comment"
+msgstr "коментар"
+
+#: templates/site/dashboard.html:121
+#, python-format
+msgid "by %(cuser)s on text"
+msgstr "от %(cuser)s на текста"
+
+#: templates/site/dashboard.html:121
+msgid "awaits approval"
+msgstr "в очакване на одобрение"
+
+#: templates/site/dashboard.html:127
+msgid "view in context"
+msgstr "виж в контекста"
+
+#: templates/site/dashboard.html:132
+msgid "Are you sure you want to approve this comment?"
+msgstr "Сигурни ли сте, че искате да одобри този коментар?"
+
+#: templates/site/dashboard.html:149
+msgid "Are you sure you want to refuse this comment?"
+msgstr "Сигурни ли сте, че искате да откажете този коментар?"
+
+#: templates/site/dashboard.html:168 templates/site/dashboard.html.py:201
+#, python-format
+msgid "modified %(duration)s ago"
+msgstr "променен преди %(duration)s"
+
+#: templates/site/dashboard.html:186
+msgid "Recent texts"
+msgstr "Нови текстове"
+
+#: templates/site/dashboard.html:186 templates/site/macros/paginator.html:9
+msgid "all"
+msgstr "всички"
+
+#: templates/site/dashboard.html:201
+#, python-format
+msgid "%(nb_comments)s comment"
+msgid_plural "%(nb_comments)s comments"
+msgstr[0] "%(nb_comments)s коментар"
+msgstr[1] "%(nb_comments)s коментара"
+
+#: templates/site/dashboard.html:206 templates/site/text_list.html:221
+msgid "No texts yet"
+msgstr "Все още няма текст "
+
+#: templates/site/dashboard.html:225
+msgid "Workspace activity"
+msgstr "Дейност на работното място"
+
+#: templates/site/dashboard.html:226
+msgid "month"
+msgstr "месец"
+
+#: templates/site/dashboard.html:226
+msgid "week"
+msgstr "седмица"
+
+#: templates/site/dashboard.html:226
+msgid "24 hours"
+msgstr "24 часа"
+
+#: templates/site/dashboard.html:232
+msgid "Access"
+msgstr "Достъп"
+
+#: templates/site/dashboard.html:233 templates/site/dashboard.html.py:244
+#: templates/site/text_list.html:206 templates/site/user_list.html:158
+#: templates/site/user_list.html.py:188
+msgid "Loading..."
+msgstr "Зареждане..."
+
+#: templates/site/dashboard.html:243
+msgid "Commenting"
+msgstr "Коментари"
+
+#: templates/site/dashboard.html:262
+msgid "Activities"
+msgstr "Дейности"
+
+#: templates/site/dashboard.html:265
+msgid "texts"
+msgstr "Текстовете"
+
+#: templates/site/dashboard.html:266
+msgid "comments"
+msgstr "коментари"
+
+#: templates/site/dashboard.html:268
+msgid "users"
+msgstr "потребители"
+
+#: templates/site/dashboard.html:308
+msgid "No activities"
+msgstr "Няма дейности"
+
+#: templates/site/dashboard_bloc_recent_comments.html:9
+msgid "Recent comments"
+msgstr "Скорошни коментари"
+
+#: templates/site/dashboard_bloc_recent_comments.html:20
+msgid "on text"
+msgstr "на текста"
+
+#: templates/site/dashboard_bloc_recent_comments.html:23
+#, python-format
+msgid "created %(duration)s ago"
+msgstr "създадени преди %(duration)s"
+
+#: templates/site/dashboard_bloc_recent_comments.html:28
+msgid "No comments yet"
+msgstr "Все още няма коментари"
+
+#: templates/site/followup.html:7 templates/site/macros/main_tabs.html:16
+#: templates/site/macros/text_tabs.html:22
+msgid "Followup"
+msgstr "В отговор"
+
+#: templates/site/followup.html:20 templates/site/text_followup.html:22
+msgid "Feeds"
+msgstr "захранване"
+
+#: templates/site/followup.html:22 templates/site/text_followup.html:24
+msgid "Public feed"
+msgstr "Публично захранване"
+
+#: templates/site/followup.html:22 templates/site/followup.html.py:35
+#: templates/site/help.html:6 templates/site/text_embed.html:27
+#: templates/site/layout/footer.html:13
+#: templates/site/macros/form_fields.html:15
+msgid "Help"
+msgstr "Помощ"
+
+#: templates/site/followup.html:25
+msgid "Public feed for workspace"
+msgstr "Публично захранване за работното място"
+
+#: templates/site/followup.html:29
+msgid "This is the public feed for the workspace."
+msgstr "Това е публичното захранване за работното място."
+
+#: templates/site/followup.html:35 templates/site/text_followup.html:37
+msgid "Private feed"
+msgstr "Частно захранване"
+
+#: templates/site/followup.html:39
+msgid "Private feed for workspace"
+msgstr "Частно захранване на работното място"
+
+#: templates/site/followup.html:43
+msgid ""
+"This is the private feed for the workspace. Don't share this address with "
+"others unless you want them to see all activities on the workspace."
+msgstr ""
+"Това е частното захранване на работното място. Не споделяйте този адрес с "
+"останалите потребители, освен ако не искате те да видят всички дейности в "
+"работното място."
+
+#: templates/site/followup.html:45 templates/site/text_followup.html:47
+msgid "Reset private feed url"
+msgstr "Реинициализирайте частното url захранване "
+
+#: templates/site/followup.html:49 templates/site/text_followup.html:51
+msgid "Activate private feed"
+msgstr "Активирайте частното захранване"
+
+#: templates/site/followup.html:51
+msgid "The private feed for this workspace is not yet activated."
+msgstr "Частното захранване за този url все още не е активирано."
+
+#: templates/site/followup.html:55 templates/site/text_followup.html:58
+msgid "Email notifications"
+msgstr "Уведомления чрез е-майл"
+
+#: templates/site/followup.html:58
+msgid "Subscribe to workspace notifications"
+msgstr "Абонирайте се за уведомления към работното място"
+
+#: templates/site/followup.html:62
+msgid ""
+"Subscribe to all replies notifications in discussions where you have "
+"participated"
+msgstr ""
+"Абонирайте се към всички уведомления отнасящи се до коментари или отговори "
+"към дискусийте в който сте участвали"
+
+#: templates/site/login.html:8 templates/site/login_form.html:19
+#: templates/site/layout/header.html:17
+msgid "Login"
+msgstr "Логин"
+
+#: templates/site/login_form.html:7
+#, python-format
+msgid "%(wname)s Login"
+msgstr "%(wname)s логин"
+
+#: templates/site/login_form.html:20 templates/site/register.html:8
+#: templates/site/layout/header.html:18
+msgid "Register"
+msgstr "Регистрация"
+
+#: templates/site/non_authenticated_index.html:10
+#: templates/site/layout/header.html:8
+msgid "Home"
+msgstr "Начало"
+
+#: templates/site/non_authenticated_index.html:20
+#, python-format
+msgid "One public text"
+msgid_plural "%(counter)s public texts"
+msgstr[0] "Един публичен текст"
+msgstr[1] "%(counter)s публични текста"
+
+#: templates/site/notifications_desactivate.html:8
+msgid "Deactivate notification"
+msgstr "Дезактивирайте уведомленията"
+
+#: templates/site/notifications_desactivate.html:31
+msgid "Deactivate"
+msgstr "Дезактивирай"
+
+#: templates/site/profile.html:6 templates/site/profile.html.py:14
+#, python-format
+msgid "Your profile (%(username)s)"
+msgstr "Вашият профил (%(username)s)"
+
+#: templates/site/profile.html:26 templates/site/text_create_content.html:45
+#: templates/site/text_create_upload.html:40 templates/site/text_edit.html:36
+#: templates/site/text_settings.html:23 templates/site/text_share.html:153
+#: templates/site/user_activate.html:27 templates/site/user_list.html:210
+#: templates/site/layout/base_workspace_form.html:32
+msgid "Save"
+msgstr "Запамети"
+
+#: templates/site/register.html:19
+#, python-format
+msgid "%(wname)s Registration"
+msgstr "%(wname)s Регистрация"
+
+#: templates/site/settings.html:5 templates/site/settings_design.html:5
+#: templates/site/text_list.html:181 templates/site/macros/main_tabs.html:14
+#: templates/site/macros/text_tabs.html:19
+msgid "Settings"
+msgstr "Настройки"
+
+#: templates/site/settings.html:21 templates/site/settings_design.html:21
+msgid "General"
+msgstr "Основен"
+
+#: templates/site/settings.html:23 templates/site/settings_design.html:23
+msgid "Appearance"
+msgstr "Външен вид"
+
+#: templates/site/settings.html:38 templates/site/settings_design.html:40
+msgid ""
+"Are you sure you want to change the role model? All roles (except managers) "
+"will be resetted!"
+msgstr ""
+"Сигурни ли сти, че искате да промените моделът на ролите? Всички роли (освен "
+"на мениджърите) ще бъдат реинициализирани! "
+
+#: templates/site/settings_design.html:31
+msgid "Delete logo"
+msgstr "Изтрийте логото"
+
+#: templates/site/text_create_content.html:26
+#: templates/site/text_create_upload.html:24 templates/site/text_list.html:37
+msgid "Text list"
+msgstr "Списък на текстовете"
+
+#: templates/site/text_embed.html:7
+msgid "Text notifications"
+msgstr "Известия отнасящи се за текста"
+
+#: templates/site/text_embed.html:25
+msgid "Embed text"
+msgstr "Капсулиране на текста"
+
+#: templates/site/text_embed.html:26
+msgid "Copy this code into your site to display text with comments."
+msgstr ""
+"Копирайте този код във вашия сайт, за да афиширате текста и коментарите"
+
+#: templates/site/text_embed.html:26
+msgid ""
+"Users will also be able to add comments from your site depending on "
+"anonymous users' roles."
+msgstr ""
+"Потребителите биха могли да добавят коментари от вашия сайт в зависимост от "
+"ролята на анонимните потребители"
+
+#: templates/site/text_embed.html:36
+msgid "Warning:"
+msgstr "Предупреждение:"
+
+#: templates/site/text_embed.html:36
+msgid ""
+"You won't successfully embed the text before you give anonymous users a role "
+"allowing them to view the text."
+msgstr ""
+"Вие не можете да капсулирате вашия текст във външен сайт ако не дадете на "
+"анонимните потребители роля, която им позволява да видят текста."
+
+#: templates/site/text_followup.html:7
+msgid "Text followup"
+msgstr "Продължение на текста"
+
+#: templates/site/text_followup.html:27
+#, python-format
+msgid "Public feed for text %(title)s"
+msgstr "Частно захранване на текста  %(title)s"
+
+#: templates/site/text_followup.html:31
+msgid "This is the public feed for the text."
+msgstr "Това е частно захранване на текста."
+
+#: templates/site/text_followup.html:41
+msgid "Private feed for text "
+msgstr "Частно захранване на текста"
+
+#: templates/site/text_followup.html:45
+msgid ""
+"This is the private feed for the text. Don't share this address with others "
+"unless you want them to see all activities on this text."
+msgstr ""
+"Това е частно захранване на текста. Не споделяйте този адрес с останалети "
+"потребители освен ако не искате те да видят всички дейности върху този текст."
+
+#: templates/site/text_followup.html:53
+msgid "The private feed for this text is not yet activated."
+msgstr "Частното захранване на този текст все още не е активирано."
+
+#: templates/site/text_followup.html:61
+msgid ""
+"You will receive text notifications because you subscribed to notifications "
+"at the workspace level"
+msgstr ""
+"Вие ще получавате известия за този текст, защото вие сте се абонирали за "
+"известията към цялото работно място"
+
+#: templates/site/text_followup.html:64
+msgid "Subscribe to all text notifications"
+msgstr "Абонирайте се към всички известия към текст"
+
+#: templates/site/text_history.html:56
+#: templates/site/text_history_compare.html:28
+#: templates/site/text_history_version.html:28
+msgid "Version list"
+msgstr "Списък с версийте"
+
+#: templates/site/text_history.html:59
+msgid "Compare last two versions"
+msgstr "Сравнете последните две версий"
+
+#: templates/site/text_history.html:61
+#: templates/site/text_history_compare.html:37
+#: templates/site/text_history_version.html:38
+msgid "Most recent version"
+msgstr "Най—нова версия"
+
+#: templates/site/text_history.html:67
+msgid "Compare selected versions"
+msgstr "Сравнете избраните версий"
+
+#: templates/site/text_history.html:77
+msgid "Version"
+msgstr "Версия"
+
+#: templates/site/text_history.html:78
+msgid "Selection"
+msgstr "Подбор"
+
+#: templates/site/text_history.html:81 templates/site/text_list.html:137
+msgid "Author"
+msgstr "Автор"
+
+#: templates/site/text_history.html:82
+msgid "Created"
+msgstr "Създаден"
+
+#: templates/site/text_history.html:83 templates/site/text_list.html:139
+msgid "# comments"
+msgstr "# коментари"
+
+#: templates/site/text_history.html:103 templates/site/text_list.html:159
+msgid "View"
+msgstr "Виж"
+
+#: templates/site/text_history.html:104
+#: templates/site/text_history_version.html:32
+msgid "Compare with previous version"
+msgstr "Сравнете с предишни версий"
+
+#: templates/site/text_history.html:105
+msgid "Revert to this version"
+msgstr "Върнете се към тази версия"
+
+#: templates/site/text_history.html:106 templates/site/text_list.html:80
+#: templates/site/text_list.html.py:161
+msgid "Delete"
+msgstr "Изтриване"
+
+#: templates/site/text_history.html:112
+msgid "Are you sure you want to delete this version?"
+msgstr "Сигурни ли сте, че искате да изтриете тази версия?"
+
+#: templates/site/text_history_compare.html:30
+msgid "Previous modification"
+msgstr "Предишни модификаций"
+
+#: templates/site/text_history_compare.html:31
+#: templates/site/text_history_compare.html:33
+#: templates/site/text_history_version.html:34, python-format
+msgid "Version %(version_number)s"
+msgstr "версия #%(version_number)s"
+
+#: templates/site/text_history_compare.html:32, python-format
+msgid ""
+"Comparison between version #%(version_1_number)s and #%(version_2_number)s"
+msgstr "Разлики между версия #%(version_1_number)s и #%(version_2_number)s"
+
+#: templates/site/text_history_compare.html:34
+msgid "Next modification"
+msgstr "Следваща модификация"
+
+#: templates/site/text_history_compare.html:44
+msgid "No differences"
+msgstr "Няма разлики"
+
+#: templates/site/text_history_version.html:31
+msgid "Previous version"
+msgstr "Предходна версия"
+
+#: templates/site/text_history_version.html:36
+msgid "Compare with next version"
+msgstr "Сравнете със следващата версия"
+
+#: templates/site/text_history_version.html:37
+msgid "Next version"
+msgstr "Следваща версия"
+
+#: templates/site/text_history_version.html:45 views/texts.py:478
+#: views/texts.py:479, python-format
+msgid "by %(author)s"
+msgstr "от %(author)s"
+
+#: templates/site/text_list.html:12
+msgid "Texts"
+msgstr "Текстове"
+
+#: templates/site/text_list.html:47 templates/site/text_share.html:35
+#: templates/site/user_list.html:7 templates/site/user_list.html.py:32
+#: templates/site/user_list.html:40 templates/site/user_list.html.py:116
+msgid "People' list"
+msgstr "Списък на потребителите"
+
+#: templates/site/text_list.html:50 templates/site/text_share.html:40
+#: templates/site/user_list.html:45
+msgid "Filter by tag:"
+msgstr "Филтър с ключовата дума"
+
+#: templates/site/text_list.html:52 templates/site/text_share.html:42
+#: templates/site/user_list.html:47
+msgid "All"
+msgstr "Всички"
+
+#: templates/site/text_list.html:79 templates/site/user_list.html:72
+msgid "Bulk Actions"
+msgstr "Множествени действия"
+
+#: templates/site/text_list.html:83 templates/site/user_list.html:81
+msgid "Apply"
+msgstr "Приложи"
+
+#: templates/site/text_list.html:104 templates/site/user_list.html:102
+msgid "Are you sure?"
+msgstr "Сигурни ли сте?"
+
+#: templates/site/text_list.html:136 templates/site/macros/text_tabs.html:10
+msgid "Text"
+msgstr "Текст"
+
+#: templates/site/text_list.html:138
+msgid "Modified"
+msgstr "Изменен"
+
+#: templates/site/text_list.html:140 templates/site/user_list.html:136
+msgid "Last week activity"
+msgstr "Дейност от изминалата седмица"
+
+#: templates/site/text_list.html:156
+#: templates/site/macros/user_actions.html:13
+msgid "tags:"
+msgstr "Тагове"
+
+#: templates/site/text_list.html:156
+#: templates/site/macros/user_actions.html:13
+#, python-format
+msgid "Filter by tag: %(tag_name)s"
+msgstr "Филтър по тагове: %(tag_name)s"
+
+#: templates/site/text_list.html:160 templates/site/macros/text_tabs.html:12
+#: templates/site/macros/user_actions.html:19
+msgid "Edit"
+msgstr "Редактиране"
+
+#: templates/site/text_list.html:167
+msgid "Are you sure you want to delete this text?"
+msgstr "Сигурни ли сте, че искате да изтриете този текст?"
+
+#: templates/site/text_list.html:180
+msgid "Users"
+msgstr "Потребители"
+
+#: templates/site/text_list.html:198
+msgid "Edit user"
+msgstr "Редактиране на потребител"
+
+#: templates/site/text_share.html:27 templates/site/user_add.html:20
+#: templates/site/user_add_text.html:23 templates/site/user_contact.html:19
+#: templates/site/user_edit.html:20 templates/site/user_mass_add.html:20
+#: templates/site/user_mass_add_text.html:23
+msgid "Users' list"
+msgstr "Списък на потребителите"
+
+#: templates/site/text_share.html:29 templates/site/user_add.html:6
+#: templates/site/user_add.html.py:22 templates/site/user_add_text.html:6
+#: templates/site/user_add_text.html:25 templates/site/user_contact.html:19
+#: templates/site/user_edit.html:22 templates/site/user_list.html:34
+#: templates/site/user_mass_add.html:22
+#: templates/site/user_mass_add_text.html:6
+#: templates/site/user_mass_add_text.html:25
+msgid "Add a new user"
+msgstr "Добавяне на нов потребител"
+
+#: templates/site/text_share.html:31 templates/site/user_add.html:24
+#: templates/site/user_add_text.html:27 templates/site/user_list.html:36
+#: templates/site/user_mass_add.html:6 templates/site/user_mass_add.html:24
+#: templates/site/user_mass_add_text.html:27
+msgid "Add users in bulk"
+msgstr "Добави потребители наведнъж"
+
+#: templates/site/text_share.html:38 templates/site/user_list.html:43
+msgid "Hide suspended users"
+msgstr "Скрий преустановените потребители"
+
+#: templates/site/text_share.html:38 templates/site/user_list.html:43
+msgid "Display suspended users"
+msgstr "Покажи преустановените потребители"
+
+#: templates/site/text_share.html:86 templates/site/user_list.html:132
+msgid "User"
+msgstr "Потребител"
+
+#: templates/site/text_share.html:87
+msgid ""
+"The 'Workspace role' is the global role that applies to every text, you can "
+"give a user a particular role on this text using the 'text role' column on "
+"the right"
+msgstr ""
+"\"Ролята в работното място\" е глобалната роля, която се прилага към всички "
+"текстове. Вие можете да дадете на един определен потребител различна роля за "
+"този текст чрез колоната \"роля върху този текст\" от дясно"
+
+#: templates/site/text_share.html:87
+msgid "Workspace role"
+msgstr "Роля в работното място"
+
+#: templates/site/text_share.html:88
+msgid "Text role"
+msgstr "Роля в текста"
+
+#: templates/site/text_share.html:101
+#, python-format
+msgid "This role has been overriden on this text by a text role: %(rolename)s"
+msgstr "Тази роля е заменена за този текст с ролята: %(rolename)s"
+
+#: templates/site/text_share.html:128 templates/site/user_edit.html:6
+#: templates/site/user_edit.html.py:24 templates/site/user_list.html:177
+msgid "Edit anonymous users"
+msgstr "Редактирай анонимните потребители"
+
+#: templates/site/text_share.html:128 templates/site/user_list.html:177
+msgid "Anonymous users"
+msgstr "Анонимни потребители"
+
+#: templates/site/text_view_frame.html:63
+msgid "add a comment"
+msgstr "добави коментар"
+
+#: templates/site/text_view_frame.html:73
+msgid "Filter comments"
+msgstr "Филтрирай коментарите"
+
+#: templates/site/text_view_frame.html:74
+msgid "Preferences"
+msgstr "Предпочитания"
+
+#: templates/site/text_view_frame.html:75
+msgid "Text preferences"
+msgstr "Предпочитания за текста"
+
+#: templates/site/text_view_frame.html:100
+msgid "Which comments?"
+msgstr "Кой коментар?"
+
+#: templates/site/text_view_frame.html:108
+msgid "How should comments' scope be shown in text?"
+msgstr "Как да бъде показан обхватът на коментарите в текста?"
+
+#: templates/site/unauthorized.html:5
+msgid "Unauthorized"
+msgstr "Неразрешен"
+
+#: templates/site/user_add.html:26
+msgid ""
+"The user will receive an email invitation to join the workspace.\n"
+"You can customize the email sent by using the 'Note' field bellow."
+msgstr ""
+"Потребителят ще получи имейл покана да се присъедини към работното място.\n"
+"Вие можете да персонализирате изпратения имейл, като използвате полето  "
+"'Note'."
+
+#: templates/site/user_add_text.html:29
+msgid "The user will receive an email invitation to join the workspace."
+msgstr ""
+"Потребителят ще получи имейл покана да се присъедини към работното място."
+
+#: templates/site/user_add_text.html:30 templates/site/user_mass_add.html:27
+#: templates/site/user_mass_add_text.html:30
+msgid "You can customize the email sent by using the 'Note' field bellow."
+msgstr ""
+"Вие можете да персонализирате изпратения имейл, като използвате полето  "
+"'Note'."
+
+#: templates/site/user_contact.html:6
+msgid "Contact user"
+msgstr "Свържете се с потребителя"
+
+#: templates/site/user_contact.html:19
+#, python-format
+msgid "Contact user %(username)s"
+msgstr "Свържете се с потребителя %(username)s"
+
+#: templates/site/user_edit.html:6 templates/site/user_edit.html.py:24
+#, python-format
+msgid "Edit user %(username)s"
+msgstr "Редактирайте потребител %(username)s"
+
+#: templates/site/user_list.html:73 templates/site/macros/user_actions.html:28
+msgid "Suspend access"
+msgstr "Дезактивирайте достъпа"
+
+#: templates/site/user_list.html:74 templates/site/macros/user_actions.html:23
+msgid "Enable access"
+msgstr "Позволете достъпа"
+
+#: templates/site/user_list.html:76
+#, python-format
+msgid "Change role to %(role_name)s"
+msgstr "Сменете ролятя на %(role_name)s"
+
+#: templates/site/user_list.html:133 views/user.py:283
+msgid "Email"
+msgstr "Имейл"
+
+#: templates/site/user_list.html:134
+msgid "Date joined"
+msgstr "Дата на присъединяване"
+
+#: templates/site/user_list.html:135
+msgid "Role"
+msgstr "Роля"
+
+#: templates/site/user_mass_add.html:26
+#: templates/site/user_mass_add_text.html:29
+msgid "The users will receive an email invitation to join the workspace."
+msgstr ""
+"Потребителят ще получи покана по имейл да се присъедини към работното място."
+
+#: templates/site/layout/base_text.html:16
+#: templates/site/layout/base_workspace.html:20
+msgid "back to workspace"
+msgstr "обратно към работното място"
+
+#: templates/site/layout/base_workspace.html:30
+#, python-format
+msgid "%(nb_texts)s text"
+msgid_plural "%(nb_texts)s texts"
+msgstr[0] "%(nb_texts)s текст"
+msgstr[1] "%(nb_texts)s текста"
+
+#: templates/site/layout/base_workspace.html:30
+#, python-format
+msgid "%(nb_users)s user"
+msgid_plural "%(nb_users)s users"
+msgstr[0] "%(nb_users)s потребител"
+msgstr[1] "%(nb_users)s потребителя"
+
+#: templates/site/layout/footer.html:7
+msgid "About"
+msgstr "Относно"
+
+#: templates/site/layout/header.html:14
+msgid "Profile"
+msgstr "Профил"
+
+#: templates/site/layout/header.html:15
+msgid "Logout"
+msgstr "Излез"
+
+#: templates/site/macros/main_tabs.html:11
+#, python-format
+msgid "Texts (%(nb_texts)s)"
+msgstr "Текстове (%(nb_texts)s)"
+
+#: templates/site/macros/main_tabs.html:13
+#, python-format
+msgid "People  (%(nb_users)s)"
+msgstr "Потребители (%(nb_users)s)"
+
+#: templates/site/macros/paginator.html:5
+msgid "Previous page"
+msgstr "Предходна страница"
+
+#: templates/site/macros/paginator.html:6
+#, python-format
+msgid "%(sindex)s-%(eindex)s of %(pcount)s"
+msgstr "%(sindex)s-%(eindex)s от %(pcount)s"
+
+#: templates/site/macros/paginator.html:7
+msgid "Next page"
+msgstr "Следваща страница"
+
+#: templates/site/macros/paginator.html:9
+msgid "View all"
+msgstr "Виж всички"
+
+#: templates/site/macros/paginator.html:11
+msgid "paginate"
+msgstr "Раздели на страници"
+
+#: templates/site/macros/text_actions.html:12
+msgid "Share"
+msgstr "Сподели"
+
+#: templates/site/macros/text_comments.html:18
+#, python-format
+msgid "by %(name)s on %(date)s"
+msgstr "от %(name)s на %(date)s"
+
+#: templates/site/macros/text_editor.html:43
+msgid ""
+"You have attempted to leave this page. Unsaved changes will be lost. Are you "
+"sure you want to exit this page?"
+msgstr ""
+"Вие се опитахте да напуснете тази страница. Незапаметените промени ще бъдат "
+"загубени. Сигурни ли сте, че искате да напуснете тази страница?"
+
+#: templates/site/macros/text_meta.html:6, python-format
+msgid "last modified %(duration)s ago"
+msgstr "последна промяна преди %(duration)s"
+
+#: templates/site/macros/text_meta.html:8, python-format
+msgid "1 version"
+msgid_plural "%(versions_number)s versions"
+msgstr[0] "1 версия"
+msgstr[1] "Версий"
+
+#: templates/site/macros/text_tabs.html:15
+msgid "People"
+msgstr "Потребители"
+
+#: templates/site/macros/text_tabs.html:17
+msgid "Versions"
+msgstr "Версий"
+
+#: templates/site/macros/text_tabs.html:24
+msgid "Embed"
+msgstr "Постави"
+
+#: templates/site/macros/user_actions.html:6
+#: templates/site/macros/user_actions.html:17
+msgid "Your profile"
+msgstr "Вашият профил"
+
+#: templates/site/macros/user_actions.html:8
+#, python-format
+msgid "Edit user %(userprint)s"
+msgstr "Редактерайте потребител %(userprint)s"
+
+#: templates/site/macros/user_actions.html:29
+msgid "(Re-)send invitation"
+msgstr "Изпрати (наново) покана"
+
+#: templates/site/macros/user_actions.html:38
+msgid "Are you sure you want to suspend this user's access to the workspace?"
+msgstr ""
+"Сигурни ли сте, че искате да преустановите достъпът на този потребител към "
+"работното място?"
+
+#: templates/site/macros/user_actions.html:47
+msgid "Are you sure you want to enable this user's access to the workspace?"
+msgstr ""
+"Сигурни ли сте, че искате да разрешите достъпът на този потребител към "
+"работното място?"
+
+#: templates/site/macros/user_actions.html:56
+msgid "Are you sure you want to send this user an invitation to the workspace?"
+msgstr ""
+"Сигурни ли сте, че искате да изпратите покана за достъп на този потребител "
+"към работното място?"
+
+#: templates/site/macros/user_moderation.html:3
+msgid "Approve"
+msgstr "Одобри"
+
+#: templatetags/com.py:146
+msgid "F j, Y \\a\\t g:i a"
+msgstr "F j, Y \\a\\t g:i a"
+
+#: utils/date.py:6
+msgid "%Y-%m-%d %H:%M"
+msgstr "%Y-%m-%d %H:%M"
+
+#: utils/diff.py:53
+msgid "unknown"
+msgstr "неизвестен"
+
+#: views/create.py:26
+msgid "Upload file (optional)"
+msgstr "Качи файл (по избор)"
+
+#: views/create.py:27
+msgid ""
+"Upload a file from your computer instead of using the direct input above"
+msgstr ""
+"Качете файл от вашия компютър вместо да използвате полето за директно "
+"изписване на файла"
+
+#: views/create.py:38
+msgid "You should specify a file to upload."
+msgstr "Необходимо е да изберете файл за качване."
+
+#: views/create.py:46
+msgid "The title of your text"
+msgstr "Заглавие на вашия текст"
+
+#: views/create.py:70 views/create.py:107
+#, python-format
+msgid "Text \"%(text_title)s\" has been created"
+msgstr "Текстът \"%(text_title)s\" е създаден"
+
+#: views/feeds.py:25
+#, python-format
+msgid "%(workspace_name)s's public feed"
+msgstr "Публично захранване на %(workspace_name)s"
+
+#: views/feeds.py:26
+#, python-format
+msgid "Workspace %(workspace_name)s public activity feed"
+msgstr "Публично захранване на работното място %(workspace_name)s"
+
+#: views/feeds.py:36
+#, python-format
+msgid "%(workspace_name)s's private feed"
+msgstr "Частно захранване на %(workspace_name)s"
+
+#: views/feeds.py:37
+#, python-format
+msgid "Workspace %(workspace_name)s private feed"
+msgstr "Частно захранване на работното място %(workspace_name)s"
+
+#: views/feeds.py:72
+#, python-format
+msgid "Text %(text_title)s's public feed"
+msgstr "Публично захранване на текста %(text_title)s"
+
+#: views/feeds.py:73
+#, python-format
+msgid "Public activity feed for text %(text_title)s"
+msgstr "Публична дейност за текста %(text_title)s"
+
+#: views/feeds.py:84
+#, python-format
+msgid "Text %(text_title)s's private feed"
+msgstr "Частно захранване на текста %(text_title)s"
+
+#: views/feeds.py:85
+#, python-format
+msgid "Private activity feed for text %(text_title)s"
+msgstr "Частно захранване за дейностите за текста %(text_title)s"
+
+#: views/followup.py:31 views/followup.py:80
+msgid "Private feed activated."
+msgstr "Частното захранване е активирано."
+
+#: views/followup.py:34
+msgid "Private feed reseted."
+msgstr "Частното захранване е реинициализирано."
+
+#: views/followup.py:52
+msgid "This notification has already been deactivated."
+msgstr "Тази нотификация вече е дезктивирана."
+
+#: views/followup.py:58
+msgid "Notification deactivated."
+msgstr "Уведомяването е дезактивирано."
+
+#: views/followup.py:62
+msgid "Deactivate notification?"
+msgstr "Дезактивиране на уведомяването?"
+
+#: views/followup.py:84
+msgid "Private notifications feed reseted."
+msgstr "Частното захранване на уведомяването е реинициализирано."
+
+#: views/site.py:81 views/texts.py:130 views/user.py:526
+msgid "You're logged in!"
+msgstr "Вие сте включени!"
+
+#: views/site.py:99
+msgid "Your name"
+msgstr "Вашето име"
+
+#: views/site.py:101
+msgid "Your email address"
+msgstr "Вашият имейл"
+
+#: views/site.py:104
+msgid "Subject of the message"
+msgstr "Тема на съобщението"
+
+#: views/site.py:105
+msgid "Body of the message"
+msgstr "Главна част на съобщението"
+
+#: views/site.py:107
+msgid "Send me a copy of the email"
+msgstr "Изпратете ми копие он имейла"
+
+#: views/site.py:133
+msgid "Copy of message:"
+msgstr "Копие на съобщението:"
+
+#: views/site.py:135
+msgid "Email sent. We will get back to you as quickly as possible."
+msgstr "Имейлът е изпратен. Ще ви отговорим възможно тай бързо."
+
+#: views/site.py:164
+msgid "Workspace name"
+msgstr "Име на работноно място"
+
+#: views/site.py:169
+msgid "Workspace tagline"
+msgstr "Лозунг на работното място"
+
+#: views/site.py:174
+msgid "Workspace registration"
+msgstr "Регистрация към работното място"
+
+#: views/site.py:175
+msgid ""
+"Can users register themselves into the workspace? (if not, only invitations "
+"by managers can create new users)"
+msgstr ""
+"Могат ли потребителите да се регистрират в работното място? (ако не, само "
+"покана от менидър може да създаде нов потребител)"
+
+#: views/site.py:179
+msgid "Workspace registration moderation"
+msgstr "Модериране на регистрация към работното място"
+
+#: views/site.py:180
+msgid ""
+"Should new users be moderated (registration will require manager's approval)?"
+msgstr ""
+"Трябва ли новите потребители да са модерирани?(Регистрацията ще изисква "
+"одобрение на мениджър)"
+
+#: views/site.py:184
+msgid "Role model"
+msgstr "Модел на роля"
+
+#: views/site.py:185
+msgid "Change the roles available in the workspace"
+msgstr "Променете ролите в работното място"
+
+#: views/site.py:200 views/site.py:206 views/site.py:234 views/site.py:243
+msgid "Settings saved"
+msgstr "Настройките са запаметени"
+
+#: views/site.py:214
+msgid "Workspace logo"
+msgstr "Лого на работното място"
+
+#: views/site.py:216
+msgid "Workspace html code"
+msgstr "Код html на работното място"
+
+#: views/site.py:217
+msgid ""
+"Add stylesheets etc. Warning: this code will be added to the workspace code, "
+"make sure you know what you're doing before adding something here."
+msgstr ""
+"Добавете лист за стилове и др, "
+"Предупреждение: този код ще бъде добавен към кода на работното място, "
+"уверете се, че познавате рисковете преди да добавите нещо тук,"
+
+#: views/texts.py:163
+#, python-format
+msgid "%(nb_texts)i text(s) deleted"
+msgstr "%(nb_texts)i изтрит(и) текстове"
+
+#: views/texts.py:208
+#, python-format
+msgid "Text %(text_title)s deleted"
+msgstr "Текстът %(text_title)s е изтит"
+
+#: views/texts.py:219, python-format
+msgid "Text version %(text_version_title)s deleted"
+msgstr "Версията на текста %(text_version_title)s е изтит"
+
+#: views/texts.py:604
+msgid "Note (optional)"
+msgstr "Бележка (по избор)"
+
+#: views/texts.py:607
+msgid "Add a note to explain the modifications made to the text"
+msgstr "Добавете бележка за да обясните промените извършени върху текста"
+
+#: views/texts.py:617
+msgid "New version (optional)"
+msgstr "Нова версия (по избор)"
+
+#: views/texts.py:620
+msgid "Create a new version of this text (recommended)"
+msgstr "Създайте нова версия на текста (препоръчително)"
+
+#: views/texts.py:623
+msgid "Keep comments (optional)"
+msgstr "Запазете коментарите (по избор)"
+
+#: views/texts.py:626
+msgid "Keep comments (if not affected by the edit)"
+msgstr "Запазете коментарите  (ако не са засегнати от редактирането)"
+
+#: views/texts.py:690
+msgid "Name (optional)"
+msgstr "Име (по избор)"
+
+#: views/texts.py:691
+msgid "Email (optional)"
+msgstr "Майл (по избор)"
+
+#: views/texts.py:741, python-format
+msgid "A new version (copied from version %(version_title)s) has been created"
+msgstr "Нова версия (копирана от %(version_title)s версия ) е създадена"
+
+#: views/texts.py:849 views/user.py:79 views/user.py:99
+#, python-format
+msgid "%(count)i user(s) role modified"
+msgstr "роля(и) на потребителя са изменени"
+
+#: views/texts.py:907
+msgid "Text settings updated"
+msgstr "Параметрите са актуализирани"
+
+#: views/user.py:61
+#, python-format
+msgid "%(count)i User's access suspended"
+msgstr "достъп на потребителя дезактивиран(и)"
+
+#: views/user.py:68
+#, python-format
+msgid "%(count)i User's access enabled"
+msgstr "%(count)i достъп на потребителя активиран(и)"
+
+#: views/user.py:140
+msgid "E-mail address"
+msgstr "Имейл"
+
+#: views/user.py:160
+msgid "This user is already a member."
+msgstr "Този потребител е вече член."
+
+#: views/user.py:163
+msgid "Emails"
+msgstr "Имейли"
+
+#: views/user.py:164
+msgid "Add multiples emails one per line (or separated by \",\" or \";\")"
+msgstr ""
+"Добавете няколко имайла (по един на ред или разделени с \",\" или \";\")"
+
+#: views/user.py:181
+msgid "Workspace level role"
+msgstr "Роля в работноно място"
+
+#: views/user.py:182
+msgid ""
+"This role will apply to every text in the workspace. To share only a (few) "
+"texts with this user, you can leave this blank and delegate roles on texts "
+"once the user is created."
+msgstr ""
+"Тази роля ще се приложи към всички текстове в работното място. За да "
+"споделите само няколко текста с този потребител, можете да оставите това "
+"поле празно и да дадете роли на текстовете след като потребителите са "
+"създадени."
+
+#: views/user.py:198
+msgid "Text level role"
+msgstr "Роля върху текста"
+
+#: views/user.py:199
+msgid "This role will apply only to this text."
+msgstr "Тази роля се прлага само към този текст."
+
+#: views/user.py:224
+msgid "Optional text to add to invitation email"
+msgstr "Допълнителен текст, който може да бъде добавен в имейл поканата"
+
+#: views/user.py:259
+#, python-format
+msgid "%(nb_users)d user added"
+msgid_plural "%(nb_users)d users added"
+msgstr[0] "Потребителят %(nb_users)d е добавен"
+msgstr[1] "Потребителите %(nb_users)d са добавени"
+
+#: views/user.py:277
+msgid "Save user"
+msgid_plural "Save users"
+msgstr[0] "Запамети този потребител"
+msgstr[1] "Запамети тези потребители"
+
+#: views/user.py:299
+msgid "This username is already in use. Please supply a different username."
+msgstr "Вече съществува потребител с това име. Моля изберете друго име."
+
+#: views/user.py:320 views/user.py:336
+msgid "Your account has been activated. You're now logged-in."
+msgstr "Вашият акаунт е активиран. Вие сте свързани."
+
+#: views/user.py:331
+msgid "activate account"
+msgstr "акивиране на акаунта"
+
+#: views/user.py:361
+#, python-format
+msgid "User's access %(prof)s has been suspended."
+msgstr "Достъпът на потребителя %(prof)s е дезактивиран."
+
+#: views/user.py:367
+#, python-format
+msgid "User's access %(prof)s has been refused."
+msgstr "Достъпът на потребителя %(prof)s е отказан."
+
+#: views/user.py:379
+#, python-format
+msgid "User's access %(prof)s has been restored."
+msgstr "Достъпът на потребителя %(prof)s е възстановен."
+
+#: views/user.py:383
+#, python-format
+msgid "User's access %(prof)s has been approved."
+msgstr "Достъпът на потребителя %(prof)s е активиран."
+
+#: views/user.py:393
+#, python-format
+msgid "A new invitation has been sent to user %(prof)s."
+msgstr "Нова покана е изпратена на потребителя %(prof)s."
+
+#: views/user.py:407
+msgid "Profile updated"
+msgstr "Профилът е  актуализиран"
+
+#: views/user.py:437
+msgid "Anonymous user role modified."
+msgstr "Ролята на анонимния потребител е променена."
+
+#: views/user.py:459
+msgid "User modified"
+msgstr "Променен потребител"
+
+#: views/user.py:474
+msgid "Subject"
+msgstr "Тема"
+
+#: views/user.py:475
+msgid "Subject of the email"
+msgstr "Тема на имейлa"
+
+#: views/user.py:478
+msgid "Body"
+msgstr "Основна част"
+
+#: views/user.py:479
+msgid "Body of the email"
+msgstr "Основна част на майла"
+
+#: views/user.py:499
+msgid "Email sent."
+msgstr "Имейлът е изпратен"
+
+#: views/user.py:520
+msgid "This account is suspended, contact the workspace administrator."
+msgstr ""
+"Този акаунт е дезактивиран. Моля контактирайте администратор на работното "
+"място."
+
+#: views/user.py:551
+msgid "You've been logged out."
+msgstr "Вие сте офлайн"
+
+#: views/user.py:567
+msgid ""
+"You've been registered, you will receive a confirmation mail once a "
+"moderator has approved your membership."
+msgstr ""
+"Регистрацията завърши успешно, едно потвърдително съобщение ще ви бъде "
+"изпратено на вашия имейл, след като вашия акаунт е активиран от "
+"администратор на работното място"
+
+#: views/user.py:570
+msgid ""
+"You've been registered, please check your email for the confirm message."
+msgstr ""
+"Регистрацията завърши успешно, едно потвърдително съобщение е изпратено на "
+"вашия имейл"
+
+#~ msgid "%(workspace_name)s's workspace"
+#~ msgstr "Работно място: %(workspace_name)"
+
+#~ msgid "%(title)s"
+#~ msgstr "%(title)s"
+
+#~ msgid "Versions:"
+#~ msgstr "Версии:"
+
+#~ msgid "created %(v1created)s"
+#~ msgstr "създадена %(v1created)s"
+
+#~ msgid "Differences between version #%(v1_nid)s and version #%(v2_nid)s:"
+#~ msgstr "Разлики между версия #%(v1_nid)s и #%(v2_nid)s:"
+
+#~ msgid "Version #%(version_number)s created on %(date)s"
+#~ msgstr "Версия #%(version_number)s създадена на %(date)s"
+
+#~ msgid "How do you want to print?"
+#~ msgstr "Как искате да бъде напечатано?"

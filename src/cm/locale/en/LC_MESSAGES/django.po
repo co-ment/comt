@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-23 17:36+0100\n"
+"POT-Creation-Date: 2010-03-08 19:52+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -234,6 +234,10 @@ msgstr ""
 
 #: settings.py:109
 msgid "Spanish"
+msgstr ""
+
+#: settings.py:110
+msgid "Bulgarian"
 msgstr ""
 
 #: static_i18n.py:6 static_i18n.py:11
@@ -1244,7 +1248,7 @@ msgstr ""
 msgid "Approve"
 msgstr ""
 
-#: templatetags/com.py:142
+#: templatetags/com.py:146
 msgid "F j, Y \\a\\t g:i a"
 msgstr ""
 
@@ -1342,7 +1346,7 @@ msgstr ""
 msgid "Private notifications feed reseted."
 msgstr ""
 
-#: views/site.py:81 views/texts.py:130 views/user.py:525
+#: views/site.py:81 views/texts.py:130 views/user.py:526
 msgid "You're logged in!"
 msgstr ""
 
@@ -1619,21 +1623,21 @@ msgstr ""
 msgid "Email sent."
 msgstr ""
 
-#: views/user.py:519
+#: views/user.py:520
 msgid "This account is suspended, contact the workspace administrator."
 msgstr ""
 
-#: views/user.py:550
+#: views/user.py:551
 msgid "You've been logged out."
 msgstr ""
 
-#: views/user.py:566
+#: views/user.py:567
 msgid ""
 "You've been registered, you will receive a confirmation mail once a "
 "moderator has approved your membership."
 msgstr ""
 
-#: views/user.py:569
+#: views/user.py:570
 msgid ""
 "You've been registered, please check your email for the confirm message."
 msgstr ""
