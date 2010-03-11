@@ -46,7 +46,7 @@ Installation (development install)
 2. Install pandoc
 	(ubuntu users : 'sudo apt-get install pandoc')
 3. Install openoffice (headless mode) [used for document conversion]
-	(ubuntu users : 'sudo apt-get install sun-java6-jre openoffice.org openoffice.org-headless xvfb)
+	(ubuntu users : 'sudo apt-get install sun-java6-jre openoffice.org openoffice.org-headless xvfb')
 4. Install/configure database [skip this step if you plan to use a sqlite database]
 	4 a) Postgresql
 		- Install and configure database server [skip this step if use an external database server] 
