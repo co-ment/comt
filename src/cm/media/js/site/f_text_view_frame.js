@@ -580,7 +580,7 @@ f_updateFilterCountResult = function(nbDiscussions, nbComments, nbReplies, nbAll
 	$("#c_f_res_nb_com_txt").html(ngettext('comment', 'comments', nbComments)) ;
 	$("#c_f_res_nb_rep").html(nbReplies) ; 
 	$("#c_f_res_nb_tot_rep").html(nbAllReplies) ; 
-	$("#c_f_res_nb_rep_txt").html(ngettext('&nbsp;reply', '&nbsp;replies', nbReplies)) ;
+	$("#c_f_res_nb_rep_txt").html('&nbsp;' + ngettext('reply', 'replies', nbReplies)) ;
 
 	// update browser infos
 	$("#c_browse_indx_total").html(nbDiscussions) ; 

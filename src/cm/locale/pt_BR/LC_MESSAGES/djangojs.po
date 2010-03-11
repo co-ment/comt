@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-02 16:43+0100\n"
+"POT-Creation-Date: 2010-03-10 22:01+0100\n"
 "PO-Revision-Date: 2010-01-24 21:40-0300\n"
 "Last-Translator: Paulo Rená da Silva Santarém <pbrss@yahoo.com.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,13 +51,12 @@ msgid "Comment will apply to this selection:"
 msgstr "O comentário se aplicará a essa seleção:"
 
 #: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:14
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:407
+#: media/js/site/f_text_view_frame.js:407
 msgid "Save"
 msgstr "Salvar"
 
 #: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:14
-#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:100
-#: media/js/site/text_edit.js:93
+#: media/js/client/f_printDialog.js:100 media/js/site/text_edit.js:100
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -72,7 +71,7 @@ msgstr "O novo comentário será cancelado. Continuar?"
 
 #: media/js/client/c_dlg_intercept.js:48 media/js/client/c_dlg_intercept.js:50
 #: media/js/client/c_dlg_intercept.js:52 media/js/client/c_sync.js:223
-#: media/js/site/text_edit.js:85 media/js/site/text_edit.js.py:98
+#: media/js/site/text_edit.js:92 media/js/site/text_edit.js.py:105
 msgid "Warning"
 msgstr "Aviso"
 
@@ -128,9 +127,11 @@ msgstr "mostrar respostas"
 msgid "change to:"
 msgstr "mudar para:"
 
-#: media/js/client/c_icomment.js:20
+#: media/js/client/c_icomment.js:20 media/js/site/f_text_view_frame.js:579
 msgid "reply"
-msgstr "responder"
+msgid_plural "replies"
+msgstr[0] "resposta"
+msgstr[1] "respostas"
 
 #: media/js/client/c_icomment.js:21
 msgid "edit comment"
@@ -208,228 +209,74 @@ msgstr "Tem certeza de que deseja deletar esse comentário?"
 msgid "could not remove comment"
 msgstr "o comentário não pôde ser removido"
 
-#: media/js/client/f_client-min.js:1 media/js/client/f_message.js:17
+#: media/js/client/f_message.js:17
 msgid "loading..."
 msgstr "carregando"
 
-#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:4
+#: media/js/client/f_printDialog.js:4
 msgid "print from the browser"
 msgstr "imprimir do navegador"
 
-#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:5
+#: media/js/client/f_printDialog.js:5
 msgid "download html file (.html)"
 msgstr "baixar arquivo html (.html)"
 
-#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:6
+#: media/js/client/f_printDialog.js:6
 msgid "download markdown file (.mkd)"
 msgstr "baixar arquivo markdown (.mkd)"
 
-#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:7
+#: media/js/client/f_printDialog.js:7
 msgid "download portable object format file (.pdf)"
 msgstr "baixar arquivo PDF (.pdf)"
 
-#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:8
+#: media/js/client/f_printDialog.js:8
 msgid "download latex file (.tex)"
 msgstr "baixar arquivo LaTex (.tex)"
 
-#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:9
+#: media/js/client/f_printDialog.js:9
 msgid "download open document file (.odt)"
 msgstr "baixar aquivo ODT (.odt)"
 
-#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:12
+#: media/js/client/f_printDialog.js:12
 msgid "Print text"
 msgstr "Imprimir texto"
 
-#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:13
+#: media/js/client/f_printDialog.js:12
+#, fuzzy
+msgid "How do you want to print?"
+msgstr "Deseja continuar?"
+
+#: media/js/client/f_printDialog.js:13
 msgid "Export text"
 msgstr "Exportar texto"
 
-#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:40
+#: media/js/client/f_printDialog.js:13
+msgid "Choose file format"
+msgstr ""
+
+#: media/js/client/f_printDialog.js:40
 msgid "using markers only, no background colors"
 msgstr "usar apenas marcadores, sem cores de fundo"
 
-#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:41
+#: media/js/client/f_printDialog.js:41
 msgid "using markers and background colors"
 msgstr "usar marcadores e cores de fundo"
 
-#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:53
+#: media/js/client/f_printDialog.js:53
 msgid "all (%(nb_comments)s)"
 msgstr "todos (%(nb_comments)s)"
 
-#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:54
+#: media/js/client/f_printDialog.js:54
 msgid "current filtered ones (%(nb_comments)s)"
 msgstr "atualmente filtrados (%(nb_comments)s)"
 
-#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:56
+#: media/js/client/f_printDialog.js:56
 msgid "none (0)"
 msgstr "nenhum (0)"
 
-#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:89
+#: media/js/client/f_printDialog.js:89
 msgid "Go !"
 msgstr "Vá !"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:43
-msgid "click to show options"
-msgstr "clique para mostrar opções"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:44
-msgid "click to hide options"
-msgstr "clique para ocultar opções"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:76
-msgid "Text"
-msgstr "Texto"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:80
-msgid "Search"
-msgstr "Pesquisar"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:85
-#: media/js/site/f_text_view_frame.js:407
-msgid "Reset"
-msgstr "Restabelecer"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:86
-msgid "Hide all Comments"
-msgstr "Ocultar todos os Comentários"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:94
-msgid "Authors"
-msgstr "Autores"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:102
-msgid "States"
-msgstr "Estados"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:111
-msgid "Dates"
-msgstr "Datas"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:119
-msgid "Tags"
-msgstr "Palavras-chave"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:177
-msgid "view previous comment"
-msgstr "ver comentário anterior"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:178
-msgid "view next comment"
-msgstr "ver próximo comentário"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:179
-msgid "view first comment"
-msgstr "ver primeiro comentário"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:180
-msgid "view last next comment"
-msgstr "ver último comentário"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:181
-msgid "view all comments"
-msgstr "ver todos comentários"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:184
-msgid "print document with/without comments"
-msgstr "imprimir documento com/sem comentários"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:185
-msgid "export document with/without comments"
-msgstr "exportar documento com/sem comentários"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:186
-msgid "toggle full screen view"
-msgstr "alternar tela cheia"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:188
-msgid "add a comment"
-msgstr "comentar"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:204
-msgid "filter:"
-msgstr "filtrar:"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:209
-msgid "browse by:"
-msgstr "navegar por:"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:211
-msgid "location"
-msgstr "local"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:212
-msgid "modification"
-msgstr "alteração"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:332
-msgid "thread discussions"
-msgstr "agrupar discussões"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:366
-msgid "Text style"
-msgstr "Estilo do texto"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:411
-msgid "Animation duration"
-msgstr "Duração da animação"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:420
-msgid "(0.001 to 1 second)"
-msgstr "(0,001 a 1 segundo)"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:446
-msgid "preferences reset (will apply on next load)"
-msgstr "preferências restabelecidas (será aplicado no próxima sessão) "
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:452
-msgid "preferences saved (will apply on next load)"
-msgstr "preferências salvas (será aplicado no próxima sessão) "
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:556
-msgid "filter reset"
-msgstr "filtro restabelecido"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:566
-msgid "filter applied"
-msgstr "filtro aplicado"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:572
-msgid "discussion"
-msgid_plural "discussions"
-msgstr[0] "discussão"
-msgstr[1] "discussões"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:576
-msgid "comment"
-msgid_plural "comments"
-msgstr[0] "comentário"
-msgstr[1] "comentários"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:579
-msgid "&nbsp;reply"
-msgid_plural "&nbsp;replies"
-msgstr[0] "&nbsp;resposta"
-msgstr[1] "&nbsp;respostas"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:601
-msgid "all"
-msgstr "todos"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:619
-msgid "last 24 hours (%(nb_comments)s)"
-msgid_plural "last %(nb_days)s days (%(nb_comments)s)"
-msgstr[0] ""
-msgstr[1] ""
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:733
-#: media/js/site/text_edit.js:79
-msgid "No"
-msgstr "Não"
-
-#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:734
-#: media/js/site/text_edit.js:80
-msgid "Yes"
-msgstr "Sim"
 
 #: media/js/markitup/sets.js:18 media/js/markitup/sets.js.py:64
 msgid "First Level Heading"
@@ -532,6 +379,67 @@ msgstr "clássico"
 msgid "code"
 msgstr "código"
 
+#: media/js/site/f_text_view_frame.js:43
+msgid "click to show options"
+msgstr "clique para mostrar opções"
+
+#: media/js/site/f_text_view_frame.js:44
+msgid "click to hide options"
+msgstr "clique para ocultar opções"
+
+#: media/js/site/f_text_view_frame.js:76
+msgid "Text"
+msgstr "Texto"
+
+#: media/js/site/f_text_view_frame.js:80
+msgid "Search"
+msgstr "Pesquisar"
+
+#: media/js/site/f_text_view_frame.js:85
+#: media/js/site/f_text_view_frame.js:407
+msgid "Reset"
+msgstr "Restabelecer"
+
+#: media/js/site/f_text_view_frame.js:86
+msgid "Hide all Comments"
+msgstr "Ocultar todos os Comentários"
+
+#: media/js/site/f_text_view_frame.js:94
+msgid "Authors"
+msgstr "Autores"
+
+#: media/js/site/f_text_view_frame.js:102
+msgid "States"
+msgstr "Estados"
+
+#: media/js/site/f_text_view_frame.js:111
+msgid "Dates"
+msgstr "Datas"
+
+#: media/js/site/f_text_view_frame.js:119
+msgid "Tags"
+msgstr "Palavras-chave"
+
+#: media/js/site/f_text_view_frame.js:177
+msgid "view previous comment"
+msgstr "ver comentário anterior"
+
+#: media/js/site/f_text_view_frame.js:178
+msgid "view next comment"
+msgstr "ver próximo comentário"
+
+#: media/js/site/f_text_view_frame.js:179
+msgid "view first comment"
+msgstr "ver primeiro comentário"
+
+#: media/js/site/f_text_view_frame.js:180
+msgid "view last next comment"
+msgstr "ver último comentário"
+
+#: media/js/site/f_text_view_frame.js:181
+msgid "view all comments"
+msgstr "ver todos comentários"
+
 #: media/js/site/f_text_view_frame.js:182
 #, fuzzy
 msgid "view all detached comments"
@@ -541,21 +449,115 @@ msgstr "ver todos comentários"
 msgid "toggle advance interface"
 msgstr "alternar interface avançada"
 
+#: media/js/site/f_text_view_frame.js:184
+msgid "print document with/without comments"
+msgstr "imprimir documento com/sem comentários"
+
+#: media/js/site/f_text_view_frame.js:185
+msgid "export document with/without comments"
+msgstr "exportar documento com/sem comentários"
+
+#: media/js/site/f_text_view_frame.js:186
+msgid "toggle full screen view"
+msgstr "alternar tela cheia"
+
 #: media/js/site/f_text_view_frame.js:187
 msgid "text feed"
 msgstr "feed do texto"
+
+#: media/js/site/f_text_view_frame.js:188
+msgid "add a comment"
+msgstr "comentar"
+
+#: media/js/site/f_text_view_frame.js:204
+msgid "filter:"
+msgstr "filtrar:"
+
+#: media/js/site/f_text_view_frame.js:209
+msgid "browse by:"
+msgstr "navegar por:"
+
+#: media/js/site/f_text_view_frame.js:211
+msgid "location"
+msgstr "local"
+
+#: media/js/site/f_text_view_frame.js:212
+msgid "modification"
+msgstr "alteração"
 
 #: media/js/site/f_text_view_frame.js:329
 msgid "unthread discussions"
 msgstr "desagrupar discussões"
 
-#: media/js/site/text_edit.js:9
+#: media/js/site/f_text_view_frame.js:332
+msgid "thread discussions"
+msgstr "agrupar discussões"
+
+#: media/js/site/f_text_view_frame.js:366
+msgid "Text style"
+msgstr "Estilo do texto"
+
+#: media/js/site/f_text_view_frame.js:411
+msgid "Animation duration"
+msgstr "Duração da animação"
+
+#: media/js/site/f_text_view_frame.js:420
+msgid "(0.001 to 1 second)"
+msgstr "(0,001 a 1 segundo)"
+
+#: media/js/site/f_text_view_frame.js:446
+msgid "preferences reset (will apply on next load)"
+msgstr "preferências restabelecidas (será aplicado no próxima sessão) "
+
+#: media/js/site/f_text_view_frame.js:452
+msgid "preferences saved (will apply on next load)"
+msgstr "preferências salvas (será aplicado no próxima sessão) "
+
+#: media/js/site/f_text_view_frame.js:556
+msgid "filter reset"
+msgstr "filtro restabelecido"
+
+#: media/js/site/f_text_view_frame.js:566
+msgid "filter applied"
+msgstr "filtro aplicado"
+
+#: media/js/site/f_text_view_frame.js:572
+msgid "discussion"
+msgid_plural "discussions"
+msgstr[0] "discussão"
+msgstr[1] "discussões"
+
+#: media/js/site/f_text_view_frame.js:576
+msgid "comment"
+msgid_plural "comments"
+msgstr[0] "comentário"
+msgstr[1] "comentários"
+
+#: media/js/site/f_text_view_frame.js:601
+msgid "all"
+msgstr "todos"
+
+#: media/js/site/f_text_view_frame.js:619
+msgid "last 24 hours (%(nb_comments)s)"
+msgid_plural "last %(nb_days)s days (%(nb_comments)s)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: media/js/site/f_text_view_frame.js:733 media/js/site/text_edit.js:82
+msgid "No"
+msgstr "Não"
+
+#: media/js/site/f_text_view_frame.js:734 media/js/site/text_edit.js:85
+msgid "Yes"
+msgstr "Sim"
+
+#: media/js/site/text_edit.js:7
 msgid ""
 "Should these comments be detached (i.e. kept with no scope) or removed from "
 "new version?"
 msgstr ""
 
-#: media/js/site/text_edit.js:27 media/js/site/text_edit.js.py:44
+#: media/js/site/text_edit.js:24 media/js/site/text_edit.js.py:41
 #, fuzzy
 msgid "%(nb_comments)s comment applies to text that was modified."
 msgid_plural "%(nb_comments)s comments apply to text that was modified."
@@ -566,29 +568,34 @@ msgstr[1] ""
 "%(nb_comments)s os comentários serão perdidos porque o texto a que eles se "
 "referem foi alterado"
 
-#: media/js/site/text_edit.js:48
+#: media/js/site/text_edit.js:45
 msgid "(We suggest you create a new version)"
 msgstr "(Sugerimos criar uma nova versão)"
 
-#: media/js/site/text_edit.js:65
+#: media/js/site/text_edit.js:63
 #, fuzzy
 msgid "You chose not to create a new version all comments will be deleted"
 msgstr ""
 "Você optou por não criar uma nova versão. Todos os comentários serão "
 "excluídos."
 
-#: media/js/site/text_edit.js:67
+#: media/js/site/text_edit.js:65
 msgid "Do you want to continue?"
 msgstr "Deseja continuar?"
 
-#: media/js/site/text_edit.js:91
+#: media/js/site/text_edit.js:98
 #, fuzzy
 msgid "Detach"
 msgstr "Pesquisar"
 
-#: media/js/site/text_edit.js:92
+#: media/js/site/text_edit.js:99
 msgid "Remove"
 msgstr ""
+
+#~ msgid "&nbsp;reply"
+#~ msgid_plural "&nbsp;replies"
+#~ msgstr[0] "&nbsp;resposta"
+#~ msgstr[1] "&nbsp;respostas"
 
 #~ msgid "Follow up"
 #~ msgstr "Acompanhamento"
