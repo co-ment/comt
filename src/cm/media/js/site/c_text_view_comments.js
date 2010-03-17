@@ -7,6 +7,7 @@ gSync = null;
 gGETValues = null;
 
 gConf = {'iCommentLeftPadding':4, 
+		'iCommentThreadPadding':12,
         'defaultCommentFormat':'markdown',
         'sliderFixedMin':.9,
         'sliderFixedMax':.1,
