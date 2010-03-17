@@ -52,7 +52,8 @@ class CreateTextContentForm(ModelForm):
 
 @has_global_perm('can_create_text')
 def text_create_content(request):
-    return _text_create_content(request, CreateTextContentForm)
+    text, rep = _text_create_content(request, CreateTextContentForm)
+    return rep
     
 def redirect_post_create(text) :
     return HttpResponseRedirect(reverse('text-view', args=[text.key]))
@@ -68,11 +69,11 @@ def _text_create_content(request, createForm):
                 
                 register_activity(request, "text_created", text)
                 display_message(request, _(u'Text "%(text_title)s" has been created') %{"text_title":text.get_latest_version().title})
-                return redirect_post_create(text)
+                return text, redirect_post_create(text)
     else:
         form = createForm()
         
-    return render_to_response('site/text_create_content.html', {'document':document, 'form' : form}, context_instance=RequestContext(request))
+    return None, render_to_response('site/text_create_content.html', {'document':document, 'form' : form}, context_instance=RequestContext(request))
 
 def _text_create_upload(request, createForm):
     
@@ -105,16 +106,17 @@ def _text_create_upload(request, createForm):
             register_activity(request, "text_created", text)
             
             display_message(request, _(u'Text "%(text_title)s" has been created')%{"text_title":text.get_latest_version().title})
-            return redirect_post_create(text)
+            return text, redirect_post_create(text)
 
     else:
         form = createForm()
         
-    return render_to_response('site/text_create_upload.html', {'form' : form}, context_instance=RequestContext(request))
+    return None, render_to_response('site/text_create_upload.html', {'form' : form}, context_instance=RequestContext(request))
 
 @has_global_perm('can_create_text')
 def text_create_upload(request):
-    return _text_create_upload(request, CreateTextUploadForm)
+    text, rep = _text_create_upload(request, CreateTextUploadForm)
+    return rep
 
 def create_text(user, data):
     text = Text.objects.create_text(title=data['title'],

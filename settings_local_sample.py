@@ -31,6 +31,12 @@ MEDIA_ROOT = '/the/path/' # YOUR_SETTINGS
 # it will be used to add some randomness to every crypto operation Comt does
 SECRET_KEY = 'random_text_qs57Dd_-dqsdqd' # YOUR_SETTINGS
 
+MEDIA_URL = '/site_media/'
+
+CM_MEDIA_PREFIX = '/cmmedia/'
+
+ADMIN_MEDIA_PREFIX = '/media/'
+
 MEDIA_ROOT = 'urls'
 
 ADMINS = (

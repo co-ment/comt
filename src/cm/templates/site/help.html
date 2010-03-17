@@ -11,86 +11,82 @@
 
 {% block content %}
 
-<h1>Help</h1>
+<h1>{% blocktrans %}Help{% endblocktrans %}</h1>
 
-<h2>General Presentation</h2>
+<h2>{% blocktrans %}General Presentation{% endblocktrans %}</h2>
 
-XXX
+{% blocktrans %}co-ment is a web based text annotation system.{% endblocktrans %} <a href="http://www.co-ment.org" alt="link to community site">COMT is the open source software behind it</a>. <a href="http://www.co-ment.com" >See www.co-ment.com for more details</a>.
 
-<h2>Glossary</h2>
+<h2>{% blocktrans %}Glossary{% endblocktrans %}</h2>
 
-<h3>Text edition</h3>
-
-<dl>
-  <dt><a name="markdown"></a>Markdown</dt>
-    <dd>XXX</dd>
-    
-</dl>
-
-<h3>Texts</h3>
+<h3>{% blocktrans %}Collaboration{% endblocktrans %}</h3>
 
 <dl>
-  <dt><a name="version_edit"></a>Edit</dt>
-    <dd></dd>
+  <dt><a name="collaboration"></a>{% blocktrans %}Collaboration{% endblocktrans %}</dt>
+    <dd>{% blocktrans %}co-ment 2 collaboration is based on assigning roles for users.{% endblocktrans %} <a href="#roles">{% blocktrans %}Click here for more details{% endblocktrans %}</a>. {% blocktrans %}The basic assumption in the collaboration model is that some users will have an overall management role, while others will have roles that are defined in relationship with texts or a given text.{% endblocktrans %}
 </dl>
 
-<h3>Comments</h3>
+<h3>{% blocktrans %}Comments{% endblocktrans %}</h3>
 
 <dl>
-  <dt><a name="collaboration"></a>Collaboration <em>à remonter</em></dt>
-    <dd>For now co-ment chose to allow groups of people to collaborate using an unilateral moderation scheme. A group of users, initially chosen by the creator of the workspace, are given supervisors kind of rôles, that allow them to moderate others' comments. This privileged group of users, having say, a Manager rôle could be singled out to a teacher managing a classroom. The right management scheme allows for temporary delegation and offers the minimum openness and organizational incentives we thought we should expect from community driven softwares.
-     
-    un peu de feedback  un lien vers contact dans la newsletter
-    Give it a try. And remember to tell us about moderation policy you chose.</dd>
+  <dt><a name="comment_moderation"></a>{% blocktrans %}Moderation{% endblocktrans %}</dt>
+    <dd>{% blocktrans %}Comment moderation is the process of editing/removing comments from a text. The moderator role is the collection of permissions required to edit/remove a comment submitted by users of the workspace.
+    Although this is not the default, you can require comments to be approved before becoming public by unticking the "a posteriori moderation" box in the settings for the text. If you do so, comments from users with an Observer or Commentator role won't be visible to users who do not have moderation permissions before a user (with at least Moderator role) approves them.{% endblocktrans %}
     
-  <dt><a name="comment_moderation"></a>Moderation</dt>
-    <dd><p>Comment moderation is the process of editing/removing comments from a text. Moderator rôle is the collection of permissions required to edit/remove a comment submitted by users of the workspace.</p> 
-    <p>Although this is not the default, you can choose that "pending comments require publishing" and what that really means is that comments from users with an Observer or Commentator role won't be visible to their author's peers before a user (with at least Moderator role) actually validate the content.</p> 
-    Moderators is the mimimum rôle to publish comments.
-  <dt><a name="comment_state"></a>States</dt>
-    <dd>co-ment uses states to manage its featured moderation policies. Unapproved comments are only visible to Managers, Editors and Moderators. Approved comments are visible to users with any rôle. Pending comments will be visible if you decide so in the settings tab of the text.</dd>
-  <dt><a name="comment_tag"></a>Tags</dt>
-    <dd>Here at co-ment.org we think that simple workflow as well as basic classification needs will be satisfied using tags one clever way or another. We find it usefull to use tag for TODOs, peer revisions, and general content follow up.</dd>
+  <dt><a name="comment_state"></a>{% blocktrans %}States{% endblocktrans %}</dt>
+    <dd>{% blocktrans %}co-ment uses states to implement moderation policies.{% endblocktrans %} <a href="#moderation">{% blocktrans %}Click here for more details{% endblocktrans %}</a>. {% blocktrans %}Unapproved or pending comments are visible only to Managers, Editors and Moderators. Approved comments are visible to users with any role. The pending state exists only when a priori moderation is selected in settings.{% endblocktrans %}</dd>
     
-  <dt><a name="comment_inter_links"></a>Linking to a comment</dt>
-    <dd>You may find yourself needing to link to a comment from another one. In such case you can do so by copying your target comment's permalink that shows up when you hover over a comment title.  Please note: Your visitor experience will be different if the comment you are referring to belongs to same text. If it does then the link won't open a new window and getting back to the referrer comment can be a difficult task. (allowing a systematic new window on comment links is still to be implemented as is the even better solution of updating comment referrences between versions <em>BUG link</em> we rely on users feedback <em>link</em>for  proper behaviors on situations like this). If the referrenced comment is in another text then opening a new window is the default behavior.</dd>
+  <dt><a name="comment_tag"></a>{% blocktrans %}Tags{% endblocktrans %}</dt>
+    <dd>{% blocktrans %}We believe that an adequate use of tags is sufficient to implement a variety of workflows for processing comments. You can use tags for signalling TODOs or decisions on future revisions. You can also use them to classify comments according to the issues or topics they address.{% endblocktrans %}</dd>
     
-  <dt><a name="comment_scope"></a>Scope</dt>
-    <dd>We call scope of the comment the annotated part of the text the comment is about.</dd>
-  <dt><a name="comment_versions"></a>Keeping your comments across versions</dt>
-    <dd>When you create a new version of the text, comments are duplicated.  In case the text edition did not change the <a href="#comment_scope">scope</a> of the comment co-ment will retain comment's scope between versions through a simple computation. If the scope has been modified then a decision has to be made regarding the conservation of the comment in the new version. For all such comments you'll be given a choice wether you want them kept in the new version as 'detached' from the text (annotation won't be highlighted in the new version's but comments will still be available when browsing) or entirely removed from the new version.</dd>
+  <dt><a name="comment_inter_links"></a>{% blocktrans %}Linking to a comment{% endblocktrans %}</dt>
+    <dd>{% blocktrans %}You may find yourself needing to link to a comment from another one. In such case you can do so by copying your target comment's permalink that shows up when you hover over the paragraph (&#182;) sign at the end of the comment title.{% endblocktrans %}</dd>
     
+  <dt><a name="comment_scope"></a>{% blocktrans %}Scope{% endblocktrans %}</dt>
+    <dd>{% blocktrans %}The scope of the comment is the part of the text to which it applies. A comment's scope can be modified by anyone who has a role allowing to modify the comment.{% endblocktrans %}</dd>
+    
+  <dt><a name="comment_versions"></a>{% blocktrans %}Keeping your comments across versions{% endblocktrans %}</dt>
+    <dd>{% blocktrans %}When you create a new version of the text, comments are duplicated. In case the text edition did not change the scope of the comment, it will be kept "as is". If the text of the comment scope has been modified then a decision has to be made regarding the conservation of such comments in the new version: you'll be given a choice of either keep them in the new version as "detached" from the text (they do not have a scope in the new version's but are still visible when browsing, and you can give them a new scope) or simply removed from the new version.{% endblocktrans %}</dd>
 </dl>
 
-<h3>Roles</h3>
-<dl>
-  <dt><a name="roles"></a>Roles</dt>
-    <dd>Roles are predefined sets of permissions. </dd>
-    <dd>Your text will not be available by public vistors before anonymous users are given a role on the text.</dd>
-    
-  <dt><a name="local_role"></a>Text role</dt>
-    <dd>A text role is a role that is set for a specific user on a specific text.  It can be used to override a possibly existing workspace-level role or to give a user a role on a text (and not on every text in the workspace).</dd>
-
-  <dt><a name="role_model"></a>Role model</dt>
-    <dd>A role model is a role set useful in a specific use case</dd>
-
-</dl>
-
-<h3>Notification and feeds</h3>
+<h3>{% blocktrans %}Notification and feeds{% endblocktrans %}</h3>
 
 <dl>    
-  <dt><a name="email_notifications"></a>Email notification</dt>
-    <dd>Email notifications are a way for users to be informed when a new comment is added on a text they follow by receiving emails.</dd>
+  <dt><a name="email_notifications"></a>{% blocktrans %}Email notification{% endblocktrans %}</dt>
+    <dd>{% blocktrans %}Email notifications are a way for users to be informed by email when a new comment is added on a text or a text is edited and a new version gets created.{% endblocktrans %}</dd>
     
-  <dt><a name="feed"></a>Feeds</dt>
-    <dd>A <a title="Web feed definition on Wikipedia" href="http://en.wikipedia.org/wiki/Web_feed">(web) feed</a> is a news feed on a specific text or on the whole workspace.</dd>
+  <dt><a name="feed"></a>{% blocktrans %}Feeds{% endblocktrans %}</dt>
+    <dd><a title="{% blocktrans %}Web feed definition on Wikipedia{% endblocktrans %}" href="http://en.wikipedia.org/wiki/Web_feed">{% blocktrans %}Web feed definition on Wikipedia{% endblocktrans %}</a>. {% blocktrans %}You can subscribe to the feed for a specific text or to a global feed for the full workspace.{% endblocktrans %}</dd>
     
-  <dt><a name="public_private_feed"></a>Public and private feeds</dt>
-    <dd>The public feed includes all the events publically accessible on the workspace or a specific text.  The private feed includes all events.  Be sure to share this feed with caution.</dd>
+  <dt><a name="public_private_feed"></a>{% blocktrans %}Public and private feeds{% endblocktrans %}</dt>
+    <dd>{% blocktrans %}The public feed includes all the events publically accessible on the workspace or a specific text. The private feed includes all events: do not publicize it to people who are not registered in your workspace unless you really want them to know what's happening in it.{% endblocktrans %}</dd>
 
-  <dt><a name="embed"></a>Text embedding</dt>
-    <dd>You can embed your text into a page of your own website. Visitors will be able to add comments from your website depending on anonymous users' roles on the text. For a proper test condition when embedding in your own site, in particular for experiencing links referencing comments in the same or different text, be sure your are not logged into your workspace in another tab of your browser. </dd>
+  <dt><a name="embed"></a>{% blocktrans %}Text embedding{% endblocktrans %}</dt>
+    <dd>{% blocktrans %}You can embed your text into a page of your own website. Visitors will be able to add comments without leaving your website if the anonymous users' roles on the text allow it. For a proper test condition when embedding in your own site, in particular for experiencing links referencing comments in the same or different text, be sure your are not logged into your workspace in another tab of your browser.{% endblocktrans %}</dd>
     
+</dl>
+
+<h3>{% blocktrans %}Roles{% endblocktrans %}</h3>
+<dl>
+  <dt><a name="roles"></a>{% blocktrans %}Roles{% endblocktrans %}</dt>
+    <dd>{% blocktrans %}Roles are predefined sets of permissions.{% endblocktrans %}</dd>
+    <dd>{% blocktrans %}A text is visible to the public (non-logged-in visitors, aka anonymous users) only if anonymous users are given a role on the text.{% endblocktrans %}</dd>
+  <dt><a name="local_role"></a>{% blocktrans %}Text role{% endblocktrans %}</dt>
+    <dd>{% blocktrans %}A text role is a role that is set for a specific user on a specific text. It can be used to override a possibly existing workspace-level role or to give a user a role on a text (and not on every text in the workspace).{% endblocktrans %}</dd>
+  <dt><a name="role_model"></a>{% blocktrans %}Role model{% endblocktrans %}</dt>
+    <dd>{% blocktrans %}A role model is a role set useful in a specific use case. When you set up a co-ment service, you have to select a role model. The default model addresses most cases. A specialized role model such as "teacher" includes specific roles making in this particular case possible for comments to be privately shared between a teacher and each student.{% endblocktrans %}</dd>
+</dl>
+
+<h3>{% blocktrans %}Text edition{% endblocktrans %}</h3>
+
+<dl>
+  <dt><a name="format"></a>{% blocktrans %}Text formats{% endblocktrans %}</dt>
+    <dd>{% blocktrans %}There are at this date 3 text formats: markdown (default/preferred format), HTML and RST.{% endblocktrans %}</dd>
+</dl>
+
+<dl>
+  <dt><a name="markdown"></a>{% blocktrans %}Markdown{% endblocktrans %}</dt>
+    <dd>{% blocktrans %}Unless some import needs make it preferable to use HTML, we recommend that you use markdown for creating or importing texts. Our software and Web services use the pandoc extended version of markdown.{% endblocktrans %} <a href="http://johnmacfarlane.net/pandoc/README.html#pandocs-markdown-vs.standard-markdown" alt="link to comparison between pandoc markdown and standard markdown">{% blocktrans %}Read more about this{% endblocktrans %}</a>.</dd>
 </dl>
 
 {% endblock %}

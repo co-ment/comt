@@ -42,11 +42,11 @@ Requirements
 Installation (development install)
 ============
 1. Install python2.5+ and all required libraries
-	(ubuntu users : 'sudo apt-get install python python-magic python-setuptools python-uno libyaml-0-1 python-dev git-core')
+	(ubuntu users : 'sudo apt-get install python python-magic python-setuptools python-uno libyaml-0-1 python-dev git-core python-utidylib')
 2. Install pandoc
 	(ubuntu users : 'sudo apt-get install pandoc')
 3. Install openoffice (headless mode) [used for document conversion]
-	(ubuntu users : 'sudo apt-get install sun-java6-jre openoffice.org openoffice.org-headless xvfb)
+	(ubuntu users : 'sudo apt-get install sun-java6-jre openoffice.org openoffice.org-headless xvfb')
 4. Install/configure database [skip this step if you plan to use a sqlite database]
 	4 a) Postgresql
 		- Install and configure database server [skip this step if use an external database server] 
@@ -83,7 +83,10 @@ Installation (development install)
 
 Installation (production environment)
 =============
-If you'd like to install Comt on a production environment, check out django installation guide at http://www.djangoproject.com/documentation/modpython/
+This README.txt does not cover in details a production environment because this kind of setup is too platform dependant for us to provide a guide.
+A few tips thought:
+- recommended way to install it is using apache and wsgi, check out django installation guide at http://www.djangoproject.com/documentation/modpython/
+- if you use apache as a frontend, you will need to create {{ APACHE_HOME: usually /var/www }}/.python-eggs and chown it to apache
 
 Upgrade
 =======

@@ -53,7 +53,11 @@ def has_perm(request, perm_name, text=None):
         if UserRole.objects.filter(Q(user=user),Q(text=text),~Q(role=None)): # if non void local role
             return UserRole.objects.filter(user=user).filter(text=text).filter(Q(role__permissions__codename__exact=perm_name)).count() != 0
         else:
-            return UserRole.objects.filter(user=user).filter(text=None).filter(Q(role__permissions__codename__exact=perm_name)).count() != 0            
+            # local role for anon users
+            # OR global role for anon users
+            # OR global role for this user
+            return UserRole.objects.filter(Q(user=user) | Q(user=None)).filter(Q(text=None) | Q(text=text)).filter(Q(role__permissions__codename__exact=perm_name)).count() != 0            
+            #return UserRole.objects.filter(user=user).filter(text=None).filter(Q(role__permissions__codename__exact=perm_name)).count() != 0
         
 def has_own_perm(request, perm_name, text, comment):
     
