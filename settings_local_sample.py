@@ -37,8 +37,6 @@ CM_MEDIA_PREFIX = '/cmmedia/'
 
 ADMIN_MEDIA_PREFIX = '/media/'
 
-MEDIA_ROOT = 'urls'
-
 ADMINS = (
     ('Comt admin', CONTACT_DEST),
 )
