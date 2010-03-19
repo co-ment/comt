@@ -19,6 +19,7 @@ from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.utils.translation import get_language, ugettext as _, ugettext_lazy
 from django.views.generic.list_detail import object_list
+from django.contrib.auth.models import User
 from cm.models import Text, TextVersion, Attachment, Comment, Configuration, Activity
 
 ACTIVITY_PAGINATION = 10
@@ -247,6 +248,62 @@ def settings_design(request):
     
     return render_to_response('site/settings_design.html', {'form' : form}, context_instance=RequestContext(request))
     
+class ForgotPWForm(forms.Form):
+    name_or_email = forms.CharField(label=ugettext_lazy("Username or email"),
+                                     required=True,
+                                     )
+     
+def forgot_pw(request):
+    if request.method == 'POST':
+        form = ForgotPWForm(data=request.POST)
+        if form.is_valid() :
+            name_or_email = form.cleaned_data.get("name_or_email")
+            # try email
+            user = None
+            try:
+                user = User.objects.get(email__iexact = name_or_email)
+            except User.DoesNotExist:
+                pass
+                # try email
+                try:
+                    user = User.objects.get(username__exact = name_or_email)
+                except User.DoesNotExist:
+                    pass
+            if user:
+                message = render_to_string('email/forgot_pw.txt',
+                                           { 
+                                             'reset_url' : reverse('reset-pw', args=[user.get_profile().adminkey]),
+                                             'CONF': Configuration.objects
+                                              })
+            
+                send_mail(_(u'How to reset your password'), message, Configuration.objects['email_from'], [user.email])
+                
+                display_message(request, _(u'A link to reset your password has been sent to the profile email. Please check your email.'))
+            else:
+                display_message(request, _(u'No user found.'))
+            return HttpResponseRedirect(reverse('index'))
+    else:
+        form = ForgotPWForm()
+    
+    return render_to_response('site/forgot_pw.html', {'form' : form}, context_instance=RequestContext(request))
+
+from django.contrib.auth.forms import SetPasswordForm
+
+def reset_pw(request, adminkey):
+    try:
+        profile = UserProfile.objects.get(adminkey=adminkey)
+        if request.method == 'POST':
+            form = SetPasswordForm(profile.user,data=request.POST)
+            if form.is_valid():
+                form.save()
+                display_message(request, _(u'Your password has been changed.'))
+                return HttpResponseRedirect(reverse('index'))                
+        else:
+            form = SetPasswordForm(profile.user)
+        return render_to_response('site/reset_pw.html', {'form' : form}, context_instance=RequestContext(request))
+    except UserProfile.DoesNotExist:
+        from django.http import Http404
+
 def help(request):
     return render_to_response('site/help.html', context_instance=RequestContext(request))
 

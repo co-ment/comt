@@ -16,8 +16,9 @@
         </td>
         <td>
             <label></label>
-            <input name="login" type="submit" value="{% blocktrans %}Login{% endblocktrans %}"/>
-            {% if CONF.workspace_registration %}<a href="{% url register %}">{% blocktrans %}Register{% endblocktrans %}</a>{% endif %}
+            <input name="login" type="submit" value="{% blocktrans %}Login{% endblocktrans %}"/>           
+            {% if CONF.workspace_registration %}<br/><a href="{% url register %}">{% blocktrans %}Register{% endblocktrans %}</a>{% endif %}
+            <br /><a href="{% url forgot-pw %}">{% blocktrans %}Forgot password?{% endblocktrans %}</a>
         </td>
     </tr>
     </tbody>

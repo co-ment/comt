@@ -1,0 +1,4 @@
+{% extends "email/base_email.txt" %}{% load i18n %}{% block content %}
+{% blocktrans %}Click the following link to reset your password:{% endblocktrans %}
+{{ CONF.site_url }}{{ reset_url }}
+{% endblock %}

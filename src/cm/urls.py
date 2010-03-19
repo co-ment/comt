@@ -31,6 +31,8 @@ urlpatterns += patterns('',
      # user login/logout/profile pages
      url(r'^login/$', login, name="login"),
      url(r'^register/$', register, name="register"),
+     url(r'^forgot-pw/$', forgot_pw, name="forgot-pw"),
+     url(r'^reset-pw/(?P<adminkey>\w*)/$', reset_pw, name="reset-pw"),
      url(r'^logout/$', logout, name="logout"),
      url(r'^profile/$', profile, name="profile"),    
      
@@ -130,7 +132,7 @@ urlpatterns += patterns('',
 if settings.DEBUG:
      urlpatterns += patterns('',
      (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
-                          
+
      (r'^cmmedia/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'src/cm/media/'}),
      (r'^robots.txt$', 'django.views.static.serve', {'document_root': 'src/cm/media/', 'path':'robots.txt'}),
      (r'^favicon.ico$', 'django.views.static.serve', {'document_root': 'src/cm/media/', 'path':'favicon.ico'}),

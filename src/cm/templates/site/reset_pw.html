@@ -1,0 +1,30 @@
+{% extends "site/layout/base_workspace.html" %}
+{% load com %}
+{% load i18n %}
+
+{% block title %}
+{% blocktrans %}Reset your password{% endblocktrans %}
+{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+
+<h1>{% blocktrans %}Reset your password{% endblocktrans %}</h1>
+<form id="profile" enctype="multipart/form-data" class="wizard-form" action="." method="post">
+<table class="wide_form">
+    <tbody>
+            {% include "site/macros/form_fields.html" %}
+    <tr>
+        <td style="vertical-align: top; width: 20%; text-align:right;">
+        </td>
+        <td>
+            <label></label>
+            <input name="reset" type="submit" value="{% blocktrans %}Reset your password{% endblocktrans %}"/>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</form>
+{% endblock %}

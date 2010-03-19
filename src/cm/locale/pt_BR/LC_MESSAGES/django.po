@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-08 19:51+0100\n"
+"POT-Creation-Date: 2010-03-19 16:14+0100\n"
 "PO-Revision-Date: 2010-02-24 01:36+0900\n"
 "Last-Translator: dev <dev@sopinspace.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,7 +67,7 @@ msgstr "Formatar"
 msgid "Content"
 msgstr "Conteúdo"
 
-#: models.py:181 models.py:633
+#: models.py:181 models.py:633 templates/site/help.html:39
 msgid "Tags"
 msgstr "Palavras-chave"
 
@@ -369,7 +369,8 @@ msgstr "Enviar"
 
 #: templates/site/contact.html:26
 #: templates/site/notifications_desactivate.html:32
-#: templates/site/settings.html:29 templates/site/settings_design.html:29
+#: templates/site/settings.html:29 templates/site/settings_data.html:58
+#: templates/site/settings_design.html:29
 #: templates/site/text_create_content.html:47
 #: templates/site/text_create_upload.html:42 templates/site/user_add.html:34
 #: templates/site/user_add_text.html:38 templates/site/user_contact.html:25
@@ -575,7 +576,8 @@ msgstr "Sem comentários ainda"
 msgid "Followup"
 msgstr "Acompanhamento"
 
-#: templates/site/followup.html:20 templates/site/text_followup.html:22
+#: templates/site/followup.html:20 templates/site/help.html:58
+#: templates/site/text_followup.html:22
 msgid "Feeds"
 msgstr "Feeds"
 
@@ -584,8 +586,8 @@ msgid "Public feed"
 msgstr "Feed público"
 
 #: templates/site/followup.html:22 templates/site/followup.html.py:35
-#: templates/site/help.html:6 templates/site/text_embed.html:27
-#: templates/site/layout/footer.html:13
+#: templates/site/help.html:6 templates/site/help.html.py:14
+#: templates/site/text_embed.html:27 templates/site/layout/footer.html:13
 #: templates/site/macros/form_fields.html:15
 msgid "Help"
 msgstr "Ajuda"
@@ -642,6 +644,257 @@ msgid ""
 msgstr ""
 "Receber todas os avisos de resposta em discussões nas quais você participou"
 
+#: templates/site/forgot_pw.html:6 templates/site/forgot_pw.html.py:14
+#: templates/site/login_form.html:21
+msgid "Forgot password?"
+msgstr ""
+
+#: templates/site/forgot_pw.html:24
+msgid "Remind my password"
+msgstr ""
+
+#: templates/site/help.html:16
+msgid "General Presentation"
+msgstr ""
+
+#: templates/site/help.html:18
+msgid "co-ment is a web based text annotation system."
+msgstr ""
+
+#: templates/site/help.html:20
+msgid "Glossary"
+msgstr ""
+
+#: templates/site/help.html:22 templates/site/help.html.py:25
+msgid "Collaboration"
+msgstr ""
+
+#: templates/site/help.html:26
+msgid "co-ment 2 collaboration is based on assigning roles for users."
+msgstr ""
+
+#: templates/site/help.html:26 templates/site/help.html.py:37
+msgid "Click here for more details"
+msgstr ""
+
+#: templates/site/help.html:26
+msgid ""
+"The basic assumption in the collaboration model is that some users will have "
+"an overall management role, while others will have roles that are defined in "
+"relationship with texts or a given text."
+msgstr ""
+
+#: templates/site/help.html:29
+#, fuzzy
+msgid "Comments"
+msgstr "comentários"
+
+#: templates/site/help.html:32
+#, fuzzy
+msgid "Moderation"
+msgstr "Moderador"
+
+#: templates/site/help.html:33
+msgid ""
+"Comment moderation is the process of editing/removing comments from a text. "
+"The moderator role is the collection of permissions required to edit/remove "
+"a comment submitted by users of the workspace.\n"
+"    Although this is not the default, you can require comments to be "
+"approved before becoming public by unticking the \"a posteriori moderation\" "
+"box in the settings for the text. If you do so, comments from users with an "
+"Observer or Commentator role won't be visible to users who do not have "
+"moderation permissions before a user (with at least Moderator role) approves "
+"them."
+msgstr ""
+
+#: templates/site/help.html:36
+#, fuzzy
+msgid "States"
+msgstr "Salvar"
+
+#: templates/site/help.html:37
+msgid "co-ment uses states to implement moderation policies."
+msgstr ""
+
+#: templates/site/help.html:37
+msgid ""
+"Unapproved or pending comments are visible only to Managers, Editors and "
+"Moderators. Approved comments are visible to users with any role. The "
+"pending state exists only when a priori moderation is selected in settings."
+msgstr ""
+
+#: templates/site/help.html:40
+msgid ""
+"We believe that an adequate use of tags is sufficient to implement a variety "
+"of workflows for processing comments. You can use tags for signalling TODOs "
+"or decisions on future revisions. You can also use them to classify comments "
+"according to the issues or topics they address."
+msgstr ""
+
+#: templates/site/help.html:42
+#, fuzzy
+msgid "Linking to a comment"
+msgstr "Pode editar comentário"
+
+#: templates/site/help.html:43
+msgid ""
+"You may find yourself needing to link to a comment from another one. In such "
+"case you can do so by copying your target comment's permalink that shows up "
+"when you hover over the paragraph (&#182;) sign at the end of the comment "
+"title."
+msgstr ""
+
+#: templates/site/help.html:45
+msgid "Scope"
+msgstr ""
+
+#: templates/site/help.html:46
+msgid ""
+"The scope of the comment is the part of the text to which it applies. A "
+"comment's scope can be modified by anyone who has a role allowing to modify "
+"the comment."
+msgstr ""
+
+#: templates/site/help.html:48
+msgid "Keeping your comments across versions"
+msgstr ""
+
+#: templates/site/help.html:49
+msgid ""
+"When you create a new version of the text, comments are duplicated. In case "
+"the text edition did not change the scope of the comment, it will be kept "
+"\"as is\". If the text of the comment scope has been modified then a "
+"decision has to be made regarding the conservation of such comments in the "
+"new version: you'll be given a choice of either keep them in the new version "
+"as \"detached\" from the text (they do not have a scope in the new version's "
+"but are still visible when browsing, and you can give them a new scope) or "
+"simply removed from the new version."
+msgstr ""
+
+#: templates/site/help.html:52
+#, fuzzy
+msgid "Notification and feeds"
+msgstr "Aviso desativado."
+
+#: templates/site/help.html:55
+#, fuzzy
+msgid "Email notification"
+msgstr "Aviso de email"
+
+#: templates/site/help.html:56
+msgid ""
+"Email notifications are a way for users to be informed by email when a new "
+"comment is added on a text or a text is edited and a new version gets "
+"created."
+msgstr ""
+
+#: templates/site/help.html:59
+msgid "Web feed definition on Wikipedia"
+msgstr ""
+
+#: templates/site/help.html:59
+msgid ""
+"You can subscribe to the feed for a specific text or to a global feed for "
+"the full workspace."
+msgstr ""
+
+#: templates/site/help.html:61
+#, fuzzy
+msgid "Public and private feeds"
+msgstr "Feed privado"
+
+#: templates/site/help.html:62
+msgid ""
+"The public feed includes all the events publically accessible on the "
+"workspace or a specific text. The private feed includes all events: do not "
+"publicize it to people who are not registered in your workspace unless you "
+"really want them to know what's happening in it."
+msgstr ""
+
+#: templates/site/help.html:64
+msgid "Text embedding"
+msgstr ""
+
+#: templates/site/help.html:65
+msgid ""
+"You can embed your text into a page of your own website. Visitors will be "
+"able to add comments without leaving your website if the anonymous users' "
+"roles on the text allow it. For a proper test condition when embedding in "
+"your own site, in particular for experiencing links referencing comments in "
+"the same or different text, be sure your are not logged into your workspace "
+"in another tab of your browser."
+msgstr ""
+
+#: templates/site/help.html:69 templates/site/help.html.py:71
+#, fuzzy
+msgid "Roles"
+msgstr "Função"
+
+#: templates/site/help.html:72
+msgid "Roles are predefined sets of permissions."
+msgstr ""
+
+#: templates/site/help.html:73
+msgid ""
+"A text is visible to the public (non-logged-in visitors, aka anonymous "
+"users) only if anonymous users are given a role on the text."
+msgstr ""
+
+#: templates/site/help.html:74 templates/site/text_share.html:88
+msgid "Text role"
+msgstr "Função do texto"
+
+#: templates/site/help.html:75
+msgid ""
+"A text role is a role that is set for a specific user on a specific text. It "
+"can be used to override a possibly existing workspace-level role or to give "
+"a user a role on a text (and not on every text in the workspace)."
+msgstr ""
+
+#: templates/site/help.html:76 views/site.py:185
+msgid "Role model"
+msgstr "Função modelo"
+
+#: templates/site/help.html:77
+msgid ""
+"A role model is a role set useful in a specific use case. When you set up a "
+"co-ment service, you have to select a role model. The default model "
+"addresses most cases. A specialized role model such as \"teacher\" includes "
+"specific roles making in this particular case possible for comments to be "
+"privately shared between a teacher and each student."
+msgstr ""
+
+#: templates/site/help.html:80
+#, fuzzy
+msgid "Text edition"
+msgstr "Aviso de texto"
+
+#: templates/site/help.html:83
+#, fuzzy
+msgid "Text formats"
+msgstr "Aviso de texto"
+
+#: templates/site/help.html:84
+msgid ""
+"There are at this date 3 text formats: markdown (default/preferred format), "
+"HTML and RST."
+msgstr ""
+
+#: templates/site/help.html:88
+msgid "Markdown"
+msgstr ""
+
+#: templates/site/help.html:89
+msgid ""
+"Unless some import needs make it preferable to use HTML, we recommend that "
+"you use markdown for creating or importing texts. Our software and Web "
+"services use the pandoc extended version of markdown."
+msgstr ""
+
+#: templates/site/help.html:89
+msgid "Read more about this"
+msgstr ""
+
 #: templates/site/login.html:8 templates/site/login_form.html:19
 #: templates/site/layout/header.html:17
 msgid "Login"
@@ -695,28 +948,49 @@ msgstr "Salvar"
 msgid "%(wname)s Registration"
 msgstr "%(wname)s Inscrição"
 
-#: templates/site/settings.html:5 templates/site/settings_design.html:5
-#: templates/site/text_list.html:181 templates/site/macros/main_tabs.html:14
+#: templates/site/reset_pw.html:6 templates/site/reset_pw.html.py:14
+#: templates/site/reset_pw.html:24
+msgid "Reset your password"
+msgstr ""
+
+#: templates/site/settings.html:5 templates/site/settings_data.html:5
+#: templates/site/settings_design.html:5 templates/site/text_list.html:181
+#: templates/site/macros/main_tabs.html:14
 #: templates/site/macros/text_tabs.html:19
 msgid "Settings"
 msgstr "Configurações"
 
-#: templates/site/settings.html:21 templates/site/settings_design.html:21
+#: templates/site/settings.html:21 templates/site/settings_data.html:21
+#: templates/site/settings_design.html:21
 #, fuzzy
 msgid "General"
 msgstr "Genérico"
 
-#: templates/site/settings.html:23 templates/site/settings_design.html:23
+#: templates/site/settings.html:23 templates/site/settings_data.html:23
+#: templates/site/settings_design.html:23
 msgid "Appearance"
 msgstr ""
 
-#: templates/site/settings.html:38 templates/site/settings_design.html:40
+#: templates/site/settings.html:38 templates/site/settings_data.html:69
+#: templates/site/settings_design.html:40
 msgid ""
 "Are you sure you want to change the role model? All roles (except managers) "
 "will be resetted!"
 msgstr "Confirmar alteração de "
 
-#: templates/site/settings_design.html:31
+#: templates/site/settings_data.html:25
+msgid "Data"
+msgstr ""
+
+#: templates/site/settings_data.html:36
+msgid "Export data"
+msgstr ""
+
+#: templates/site/settings_data.html:45
+msgid "Import data"
+msgstr ""
+
+#: templates/site/settings_data.html:60 templates/site/settings_design.html:31
 #, fuzzy
 msgid "Delete logo"
 msgstr "Apagar"
@@ -1038,10 +1312,6 @@ msgstr ""
 msgid "Workspace role"
 msgstr "Função da área de trabalho"
 
-#: templates/site/text_share.html:88
-msgid "Text role"
-msgstr "Função do texto"
-
 #: templates/site/text_share.html:101
 #, python-format
 msgid "This role has been overriden on this text by a text role: %(rolename)s"
@@ -1313,7 +1583,7 @@ msgstr "Favor especificar o arquivo a ser carregado."
 msgid "The title of your text"
 msgstr "O título do seu texto"
 
-#: views/create.py:70 views/create.py:107
+#: views/create.py:71 views/create.py:108
 #, python-format
 msgid "Text \"%(text_title)s\" has been created"
 msgstr "O texto \"%(text_title)s\" foi criado"
@@ -1382,51 +1652,51 @@ msgstr "Desativar aviso?"
 msgid "Private notifications feed reseted."
 msgstr "Feed privado de avisos restabelecido."
 
-#: views/site.py:81 views/texts.py:130 views/user.py:526
+#: views/site.py:82 views/texts.py:130 views/user.py:526
 msgid "You're logged in!"
 msgstr "Você entrou!"
 
-#: views/site.py:99
+#: views/site.py:100
 msgid "Your name"
 msgstr "Seu nome"
 
-#: views/site.py:101
+#: views/site.py:102
 msgid "Your email address"
 msgstr "Seu endereço de email"
 
-#: views/site.py:104
+#: views/site.py:105
 msgid "Subject of the message"
 msgstr "Assunto da mensagem"
 
-#: views/site.py:105
+#: views/site.py:106
 msgid "Body of the message"
 msgstr "Corpo da mensagem"
 
-#: views/site.py:107
+#: views/site.py:108
 msgid "Send me a copy of the email"
 msgstr "Envie-me uma cópia do email"
 
-#: views/site.py:133
+#: views/site.py:134
 msgid "Copy of message:"
 msgstr "Cópia da mensagem:"
 
-#: views/site.py:135
+#: views/site.py:136
 msgid "Email sent. We will get back to you as quickly as possible."
 msgstr "Email enviado. Retornaremos assim que possível."
 
-#: views/site.py:164
+#: views/site.py:165
 msgid "Workspace name"
 msgstr "Nome da área de trabalho"
 
-#: views/site.py:169
+#: views/site.py:170
 msgid "Workspace tagline"
 msgstr "Slogan da área de trabalho"
 
-#: views/site.py:174
+#: views/site.py:175
 msgid "Workspace registration"
 msgstr "Registro da área de trabalho"
 
-#: views/site.py:175
+#: views/site.py:176
 msgid ""
 "Can users register themselves into the workspace? (if not, only invitations "
 "by managers can create new users)"
@@ -1434,43 +1704,61 @@ msgstr ""
 "Usuários podem se inscrever na área de trabalho? (se não, apenas convites "
 "por gerentes podem criar novos usuários)"
 
-#: views/site.py:179
+#: views/site.py:180
 msgid "Workspace registration moderation"
 msgstr "Moderação de registro da área de trabalho"
 
-#: views/site.py:180
+#: views/site.py:181
 #, fuzzy
 msgid ""
 "Should new users be moderated (registration will require manager's approval)?"
 msgstr ""
 "Novos usuários devem ser moderados? (registro exigirá aprovação de gerente) "
 
-#: views/site.py:184
-msgid "Role model"
-msgstr "Função modelo"
-
-#: views/site.py:185
+#: views/site.py:186
 msgid "Change the roles available in the workspace"
 msgstr "Alterar as funções disponível na área de trabalho"
 
-#: views/site.py:200 views/site.py:206 views/site.py:234 views/site.py:243
+#: views/site.py:201 views/site.py:207 views/site.py:235 views/site.py:244
 msgid "Settings saved"
 msgstr "Configurações salvas"
 
-#: views/site.py:214
+#: views/site.py:215
 #, fuzzy
 msgid "Workspace logo"
 msgstr "Função da área de trabalho"
 
-#: views/site.py:216
+#: views/site.py:217
 #, fuzzy
 msgid "Workspace html code"
 msgstr "Função da área de trabalho"
 
-#: views/site.py:217
+#: views/site.py:218
 msgid ""
 "Add stylesheets etc. Warning: this code will be added to the workspace code, "
 "make sure you know what you're doing before adding something here."
+msgstr ""
+
+#: views/site.py:252
+msgid "Username or email"
+msgstr ""
+
+#: views/site.py:279
+msgid "How to reset your password"
+msgstr ""
+
+#: views/site.py:281
+msgid ""
+"A link to reset your password has been sent to the profile email. Please "
+"check your email."
+msgstr ""
+
+#: views/site.py:283
+msgid "No user found."
+msgstr ""
+
+#: views/site.py:299
+msgid "Your password has been changed."
 msgstr ""
 
 #: views/texts.py:163

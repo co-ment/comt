@@ -20,7 +20,7 @@
 <h2>{% blocktrans count public_texts|length as counter %}One public text{% plural %}{{ counter }} public texts{% endblocktrans %}</h2>
 <ul>
 {% for text in public_texts %}
-<li><a title="{{ text.title }}" href="{% url text-view text.key %}">{{ text.title }}</a>
+<li style="padding-bottom:10px;"><a title="{{ text.title }}" href="{% url text-view text.key %}">{{ text.title }}</a>
 <br/>
 {% include "site/macros/text_meta.html" %}   
 </li>
