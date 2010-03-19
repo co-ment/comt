@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-10 22:01+0100\n"
-"PO-Revision-Date: 2010-02-15 08:00+0100\n"
+"PO-Revision-Date: 2010-03-17 22:00+0100\n"
 "Last-Translator: Kirill Miazine <km@krot.org>\n"
 "Language-Team: <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -245,9 +245,8 @@ msgid "Print text"
 msgstr "Skriv ut tekst"
 
 #: media/js/client/f_printDialog.js:12
-#, fuzzy
 msgid "How do you want to print?"
-msgstr "Ønsker du å fortsette?"
+msgstr "Hvordan ønsker du å skrive ut?"
 
 #: media/js/client/f_printDialog.js:13
 msgid "Export text"
@@ -255,7 +254,7 @@ msgstr "Eksporter tekst"
 
 #: media/js/client/f_printDialog.js:13
 msgid "Choose file format"
-msgstr ""
+msgstr "Velg filformat"
 
 #: media/js/client/f_printDialog.js:40
 msgid "using markers only, no background colors"

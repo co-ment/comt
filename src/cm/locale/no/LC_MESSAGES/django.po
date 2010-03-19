@@ -241,7 +241,7 @@ msgstr "Spansk"
 
 #: settings.py:110
 msgid "Bulgarian"
-msgstr ""
+msgstr "Bulgarsk"
 
 #: static_i18n.py:6 static_i18n.py:11
 msgid "Observer"
