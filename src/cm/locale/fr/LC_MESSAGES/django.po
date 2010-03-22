@@ -662,7 +662,7 @@ msgstr "Réinitialiser mon mot de passe"
 
 #: templates/site/forgot_pw.html:35
 msgid "This link is invalid."
-msgstr "Ce lien est invalid."
+msgstr "Ce lien est invalide."
 
 #: templates/site/forgot_pw.html:40 templates/site/login_form.html:21
 msgid "Forgot password?"
