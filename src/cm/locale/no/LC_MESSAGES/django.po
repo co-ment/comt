@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-22 12:40+0100\n"
+"POT-Creation-Date: 2010-03-22 15:10+0100\n"
 "PO-Revision-Date: 2010-02-24 01:37+0900\n"
 "Last-Translator: dev <dev@sopinspace.com>\n"
 "Language-Team:  <no@li.org>\n"
@@ -130,18 +130,18 @@ msgid "Invitation"
 msgstr "Invitasjon"
 
 #: models.py:746
-#, python-format
-msgid "Text %(link_to_text)s edited"
+#, fuzzy, python-format
+msgid "Text %(link_to_text)s edited by %(creator)s"
 msgstr "Tekst %(link_to_text)s endret"
 
 #: models.py:747
-#, python-format
-msgid "Text %(link_to_text)s edited (new version created)"
+#, fuzzy, python-format
+msgid "Text %(link_to_text)s edited (new version created) by %(creator)s"
 msgstr "Tekst %(link_to_text)s endret (ny versjon opprettet)"
 
 #: models.py:748
-#, python-format
-msgid "Text %(link_to_text)s added"
+#, fuzzy, python-format
+msgid "Text %(link_to_text)s added by %(creator)s"
 msgstr "Tekst %(link_to_text)s lagt til"
 
 #: models.py:749
@@ -150,8 +150,9 @@ msgid "Text %(link_to_text)s removed"
 msgstr "Tekst %(link_to_text)s slettet"
 
 #: models.py:750
-#, python-format
-msgid "Comment %(link_to_comment)s added on text %(link_to_text)s"
+#, fuzzy, python-format
+msgid ""
+"Comment %(link_to_comment)s added on text %(link_to_text)s by %(creator)s"
 msgstr "Merknad %(link_to_comment)s lagt til teksten %(link_to_text)s"
 
 #: models.py:751
@@ -189,12 +190,17 @@ msgstr "Aktivert tilgang for brukeren %(username)s"
 msgid "User %(username)s has activated his account"
 msgstr "Bruker %(username)s har aktivert kontoen"
 
-#: models.py:812 models.py:820
+#: models.py:806
+#, fuzzy
+msgid "anonymous"
+msgstr "Anonyme brukere"
+
+#: models.py:813 models.py:821
 #, python-format
 msgid "by \"%(username)s\""
 msgstr "av %(username)s"
 
-#: models.py:814
+#: models.py:815
 #, python-format
 msgid "%(time_since)s ago"
 msgstr "for %(time_since)s siden"
@@ -485,7 +491,7 @@ msgstr "Ønsker du å godkjenne denne merknaden?"
 msgid "Are you sure you want to refuse this comment?"
 msgstr "Ønsker du å nekte å godkjenne denne merknaden?"
 
-#: templates/site/dashboard.html:168 templates/site/dashboard.html.py:201
+#: templates/site/dashboard.html:168 templates/site/dashboard.html.py:203
 #, python-format
 msgid "modified %(duration)s ago"
 msgstr "endret for %(duration)s siden"
@@ -505,57 +511,64 @@ msgid_plural "%(nb_comments)s comments"
 msgstr[0] "%(nb_comments)s merknad"
 msgstr[1] "%(nb_comments)s merknader"
 
-#: templates/site/dashboard.html:206 templates/site/text_list.html:221
+#: templates/site/dashboard.html:202 templates/site/macros/text_meta.html:8
+#, python-format
+msgid "1 version"
+msgid_plural "%(versions_number)s versions"
+msgstr[0] "Versjoner"
+msgstr[1] "Versjoner"
+
+#: templates/site/dashboard.html:208 templates/site/text_list.html:221
 msgid "No texts yet"
 msgstr "Ingen tekster ennå"
 
-#: templates/site/dashboard.html:225
+#: templates/site/dashboard.html:227
 msgid "Workspace activity"
 msgstr "Aktivitet i arbeidsområde"
 
-#: templates/site/dashboard.html:226
+#: templates/site/dashboard.html:228
 msgid "month"
 msgstr "måned"
 
-#: templates/site/dashboard.html:226
+#: templates/site/dashboard.html:228
 msgid "week"
 msgstr "uke"
 
-#: templates/site/dashboard.html:226
+#: templates/site/dashboard.html:228
 msgid "24 hours"
 msgstr "24 timer"
 
-#: templates/site/dashboard.html:232
+#: templates/site/dashboard.html:234
 msgid "Access"
 msgstr "Tilgang"
 
-#: templates/site/dashboard.html:233 templates/site/dashboard.html.py:244
+#: templates/site/dashboard.html:235 templates/site/dashboard.html.py:246
 #: templates/site/text_list.html:206 templates/site/user_list.html:158
 #: templates/site/user_list.html.py:188
 msgid "Loading..."
 msgstr "Laster..."
 
-#: templates/site/dashboard.html:243
+#: templates/site/dashboard.html:245
 msgid "Commenting"
 msgstr "Kommentering"
 
-#: templates/site/dashboard.html:262
+#: templates/site/dashboard.html:264
 msgid "Activities"
 msgstr "Aktivitetsjournal"
 
-#: templates/site/dashboard.html:265
+#: templates/site/dashboard.html:267
 msgid "texts"
 msgstr "tekster"
 
-#: templates/site/dashboard.html:266
+#: templates/site/dashboard.html:268
 msgid "comments"
 msgstr "merknader"
 
-#: templates/site/dashboard.html:268
+#: templates/site/dashboard.html:270
 msgid "users"
 msgstr "brukere"
 
-#: templates/site/dashboard.html:308
+#: templates/site/dashboard.html:310
 msgid "No activities"
 msgstr "Ingen aktiviteter"
 
@@ -572,7 +585,12 @@ msgstr "til teksten"
 msgid "created %(duration)s ago"
 msgstr "opprettet for %(duration)s siden"
 
-#: templates/site/dashboard_bloc_recent_comments.html:28
+#: templates/site/dashboard_bloc_recent_comments.html:24
+#, fuzzy, python-format
+msgid "by %(username)s"
+msgstr "av %(username)s"
+
+#: templates/site/dashboard_bloc_recent_comments.html:29
 msgid "No comments yet"
 msgstr "Ingen merknader ennå"
 
@@ -1489,13 +1507,6 @@ msgstr ""
 #, python-format
 msgid "last modified %(duration)s ago"
 msgstr "endret for %(duration)s siden"
-
-#: templates/site/macros/text_meta.html:8
-#, python-format
-msgid "1 version"
-msgid_plural "%(versions_number)s versions"
-msgstr[0] "Versjoner"
-msgstr[1] "Versjoner"
 
 #: templates/site/macros/text_tabs.html:15
 msgid "People"

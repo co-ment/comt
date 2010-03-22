@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-22 12:39+0100\n"
+"POT-Creation-Date: 2010-03-22 15:09+0100\n"
 "PO-Revision-Date: 2010-02-24 01:36+0900\n"
 "Last-Translator: dev <dev@sopinspace.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -124,18 +124,18 @@ msgid "Invitation"
 msgstr "Convite"
 
 #: models.py:746
-#, python-format
-msgid "Text %(link_to_text)s edited"
+#, fuzzy, python-format
+msgid "Text %(link_to_text)s edited by %(creator)s"
 msgstr "Texto %(link_to_text)s editado"
 
 #: models.py:747
-#, python-format
-msgid "Text %(link_to_text)s edited (new version created)"
+#, fuzzy, python-format
+msgid "Text %(link_to_text)s edited (new version created) by %(creator)s"
 msgstr "Texto %(link_to_text)s editado (criada nova versão)"
 
 #: models.py:748
-#, python-format
-msgid "Text %(link_to_text)s added"
+#, fuzzy, python-format
+msgid "Text %(link_to_text)s added by %(creator)s"
 msgstr "Texto %(link_to_text)s adicionado"
 
 #: models.py:749
@@ -144,8 +144,9 @@ msgid "Text %(link_to_text)s removed"
 msgstr "Texto %(link_to_text)s removido"
 
 #: models.py:750
-#, python-format
-msgid "Comment %(link_to_comment)s added on text %(link_to_text)s"
+#, fuzzy, python-format
+msgid ""
+"Comment %(link_to_comment)s added on text %(link_to_text)s by %(creator)s"
 msgstr "Comentário %(link_to_comment)s adicionado ao texto %(link_to_text)s "
 
 #: models.py:751
@@ -183,12 +184,17 @@ msgstr "Acesso do usuário %(username)s à área de trabalho ativado"
 msgid "User %(username)s has activated his account"
 msgstr "O usuário %(username)s ativou sua conta"
 
-#: models.py:812 models.py:820
+#: models.py:806
+#, fuzzy
+msgid "anonymous"
+msgstr "Usuários anônimos"
+
+#: models.py:813 models.py:821
 #, python-format
 msgid "by \"%(username)s\""
 msgstr "por \"%(username)s\""
 
-#: models.py:814
+#: models.py:815
 #, python-format
 msgid "%(time_since)s ago"
 msgstr "há %(time_since)s"
@@ -479,7 +485,7 @@ msgstr "Confirmar aprovação desse comentário?"
 msgid "Are you sure you want to refuse this comment?"
 msgstr "Confirmar rejeição desse comentário?"
 
-#: templates/site/dashboard.html:168 templates/site/dashboard.html.py:201
+#: templates/site/dashboard.html:168 templates/site/dashboard.html.py:203
 #, python-format
 msgid "modified %(duration)s ago"
 msgstr "modificado há %(duration)s"
@@ -499,57 +505,64 @@ msgid_plural "%(nb_comments)s comments"
 msgstr[0] "%(nb_comments)s commentário"
 msgstr[1] "%(nb_comments)s commentárioss"
 
-#: templates/site/dashboard.html:206 templates/site/text_list.html:221
+#: templates/site/dashboard.html:202 templates/site/macros/text_meta.html:8
+#, fuzzy, python-format
+msgid "1 version"
+msgid_plural "%(versions_number)s versions"
+msgstr[0] "Versões"
+msgstr[1] "Versões"
+
+#: templates/site/dashboard.html:208 templates/site/text_list.html:221
 msgid "No texts yet"
 msgstr "Sem textos ainda"
 
-#: templates/site/dashboard.html:225
+#: templates/site/dashboard.html:227
 msgid "Workspace activity"
 msgstr "Atividade na área de trabalho"
 
-#: templates/site/dashboard.html:226
+#: templates/site/dashboard.html:228
 msgid "month"
 msgstr "mês"
 
-#: templates/site/dashboard.html:226
+#: templates/site/dashboard.html:228
 msgid "week"
 msgstr "semana"
 
-#: templates/site/dashboard.html:226
+#: templates/site/dashboard.html:228
 msgid "24 hours"
 msgstr "24 horas"
 
-#: templates/site/dashboard.html:232
+#: templates/site/dashboard.html:234
 msgid "Access"
 msgstr "Acessar"
 
-#: templates/site/dashboard.html:233 templates/site/dashboard.html.py:244
+#: templates/site/dashboard.html:235 templates/site/dashboard.html.py:246
 #: templates/site/text_list.html:206 templates/site/user_list.html:158
 #: templates/site/user_list.html.py:188
 msgid "Loading..."
 msgstr "Carregando"
 
-#: templates/site/dashboard.html:243
+#: templates/site/dashboard.html:245
 msgid "Commenting"
 msgstr "Comentando"
 
-#: templates/site/dashboard.html:262
+#: templates/site/dashboard.html:264
 msgid "Activities"
 msgstr "Atividades"
 
-#: templates/site/dashboard.html:265
+#: templates/site/dashboard.html:267
 msgid "texts"
 msgstr "textos"
 
-#: templates/site/dashboard.html:266
+#: templates/site/dashboard.html:268
 msgid "comments"
 msgstr "comentários"
 
-#: templates/site/dashboard.html:268
+#: templates/site/dashboard.html:270
 msgid "users"
 msgstr "usuário"
 
-#: templates/site/dashboard.html:308
+#: templates/site/dashboard.html:310
 msgid "No activities"
 msgstr "Sem atividades"
 
@@ -566,7 +579,12 @@ msgstr "no texto"
 msgid "created %(duration)s ago"
 msgstr "criado há %(duration)s"
 
-#: templates/site/dashboard_bloc_recent_comments.html:28
+#: templates/site/dashboard_bloc_recent_comments.html:24
+#, fuzzy, python-format
+msgid "by %(username)s"
+msgstr "por \"%(username)s\""
+
+#: templates/site/dashboard_bloc_recent_comments.html:29
 msgid "No comments yet"
 msgstr "Sem comentários ainda"
 
@@ -1496,13 +1514,6 @@ msgstr ""
 #, fuzzy, python-format
 msgid "last modified %(duration)s ago"
 msgstr "modificado há %(duration)s"
-
-#: templates/site/macros/text_meta.html:8
-#, fuzzy, python-format
-msgid "1 version"
-msgid_plural "%(versions_number)s versions"
-msgstr[0] "Versões"
-msgstr[1] "Versões"
 
 #: templates/site/macros/text_tabs.html:15
 msgid "People"

@@ -198,7 +198,9 @@ $("#comment-refuse-{{ comment.key }}").click(function(){
                     </span>
                     <div style="padding-left:22px;" class="dashlog_metadata">
                     {% nb_comments text as nb_comments %}
-					{% blocktrans count nb_comments as nb_comments %}{{ nb_comments }} comment{% plural %}{{ nb_comments }} comments{% endblocktrans %}, {% blocktrans with text.modified|timesince as duration %}modified {{ duration }} ago{% endblocktrans %}
+					{% blocktrans count nb_comments as nb_comments %}{{ nb_comments }} comment{% plural %}{{ nb_comments }} comments{% endblocktrans %},
+					{% blocktrans count text.get_versions_number as versions_number %}1 version{% plural%}{{ versions_number }} versions{% endblocktrans %},
+					{% blocktrans with text.modified|timesince as duration %}modified {{ duration }} ago{% endblocktrans %}
                     </div>
                     </div>
                     </li>

@@ -743,11 +743,11 @@ class Activity(models.Model):
     
     #type/msg
     MSGS = {
-         'text_edited' : ugettext_lazy(u'Text %(link_to_text)s edited'),
-         'text_edited_new_version' : ugettext_lazy(u'Text %(link_to_text)s edited (new version created)'),
-         'text_created' :  ugettext_lazy(u'Text %(link_to_text)s added'),
+         'text_edited' : ugettext_lazy(u'Text %(link_to_text)s edited by %(creator)s'),
+         'text_edited_new_version' : ugettext_lazy(u'Text %(link_to_text)s edited (new version created) by %(creator)s'),
+         'text_created' :  ugettext_lazy(u'Text %(link_to_text)s added by %(creator)s'),
          'text_removed' : ugettext_lazy(u'Text %(link_to_text)s removed'),
-         'comment_created' : ugettext_lazy(u'Comment %(link_to_comment)s added on text %(link_to_text)s'),
+         'comment_created' : ugettext_lazy(u'Comment %(link_to_comment)s added on text %(link_to_text)s by %(creator)s'),
          'comment_removed' : ugettext_lazy(u'Comment %(link_to_comment)s removed from text %(link_to_text)s'),
          'user_created' : ugettext_lazy(u'User %(username)s added'),
          'user_enabled' : ugettext_lazy(u'User %(username)s access to workspace enabled'),
@@ -803,6 +803,7 @@ class Activity(models.Model):
                                      'link_to_text' : self.linkable_text_title(html=html, link=link) if self.text else None,
                                      'link_to_comment' : self.linkable_comment_title(html=html, link=link) if self.comment else None,
                                      'username' : self.user.username if self.user else None,
+                                     'creator' : self.originator_user.username if self.originator_user else ugettext_lazy(u'anonymous'),
                                     })
         return ''
     

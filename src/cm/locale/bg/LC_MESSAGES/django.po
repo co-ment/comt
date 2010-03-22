@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-22 12:39+0100\n"
+"POT-Creation-Date: 2010-03-22 15:10+0100\n"
 "PO-Revision-Date: 2010-03-10 20:58+0100\n"
 "Last-Translator: bistra <bistra.raykova@free.fr>\n"
 "Language-Team: Français <kde-i18n-doc@kde.org>\n"
@@ -129,18 +129,18 @@ msgid "Invitation"
 msgstr "Покана"
 
 #: models.py:746
-#, python-format
-msgid "Text %(link_to_text)s edited"
+#, fuzzy, python-format
+msgid "Text %(link_to_text)s edited by %(creator)s"
 msgstr "Текстът %(link_to_text)s е променен"
 
 #: models.py:747
-#, python-format
-msgid "Text %(link_to_text)s edited (new version created)"
+#, fuzzy, python-format
+msgid "Text %(link_to_text)s edited (new version created) by %(creator)s"
 msgstr "Текстът %(link_to_text)s е променен (създадена е нова версия)"
 
 #: models.py:748
-#, python-format
-msgid "Text %(link_to_text)s added"
+#, fuzzy, python-format
+msgid "Text %(link_to_text)s added by %(creator)s"
 msgstr "Текстът %(link_to_text)s е добавен"
 
 #: models.py:749
@@ -149,8 +149,9 @@ msgid "Text %(link_to_text)s removed"
 msgstr "Текстът %(link_to_text)s е изтрит"
 
 #: models.py:750
-#, python-format
-msgid "Comment %(link_to_comment)s added on text %(link_to_text)s"
+#, fuzzy, python-format
+msgid ""
+"Comment %(link_to_comment)s added on text %(link_to_text)s by %(creator)s"
 msgstr "Коментарът %(link_to_comment)s е добавен към текста %(link_to_text)s"
 
 #: models.py:751
@@ -191,12 +192,17 @@ msgstr "Достъпът към работното място е активир�
 msgid "User %(username)s has activated his account"
 msgstr "Потребителя  %(username)s активира своя акаунт"
 
-#: models.py:812 models.py:820
+#: models.py:806
+#, fuzzy
+msgid "anonymous"
+msgstr "Анонимни потребители"
+
+#: models.py:813 models.py:821
 #, python-format
 msgid "by \"%(username)s\""
 msgstr "От \"%(username)s\""
 
-#: models.py:814
+#: models.py:815
 #, python-format
 msgid "%(time_since)s ago"
 msgstr "преди %(time_since)s"
@@ -429,8 +435,7 @@ msgid "Moderation queue"
 msgstr "В очакване"
 
 #: templates/site/dashboard.html:76
-#, python-format
-#, fuzzy
+#, fuzzy, python-format
 msgid "user %(user)s awaits approval"
 msgstr "Потребителят е в очакване на одобрение"
 
@@ -492,7 +497,7 @@ msgstr "Сигурни ли сте, че искате да одобри този
 msgid "Are you sure you want to refuse this comment?"
 msgstr "Сигурни ли сте, че искате да откажете този коментар?"
 
-#: templates/site/dashboard.html:168 templates/site/dashboard.html.py:201
+#: templates/site/dashboard.html:168 templates/site/dashboard.html.py:203
 #, python-format
 msgid "modified %(duration)s ago"
 msgstr "променен преди %(duration)s"
@@ -512,57 +517,64 @@ msgid_plural "%(nb_comments)s comments"
 msgstr[0] "%(nb_comments)s коментар"
 msgstr[1] "%(nb_comments)s коментара"
 
-#: templates/site/dashboard.html:206 templates/site/text_list.html:221
+#: templates/site/dashboard.html:202 templates/site/macros/text_meta.html:8
+#, fuzzy, python-format
+msgid "1 version"
+msgid_plural "%(versions_number)s versions"
+msgstr[0] "1 версия"
+msgstr[1] "Версий"
+
+#: templates/site/dashboard.html:208 templates/site/text_list.html:221
 msgid "No texts yet"
 msgstr "Все още няма текст "
 
-#: templates/site/dashboard.html:225
+#: templates/site/dashboard.html:227
 msgid "Workspace activity"
 msgstr "Дейност на работното място"
 
-#: templates/site/dashboard.html:226
+#: templates/site/dashboard.html:228
 msgid "month"
 msgstr "месец"
 
-#: templates/site/dashboard.html:226
+#: templates/site/dashboard.html:228
 msgid "week"
 msgstr "седмица"
 
-#: templates/site/dashboard.html:226
+#: templates/site/dashboard.html:228
 msgid "24 hours"
 msgstr "24 часа"
 
-#: templates/site/dashboard.html:232
+#: templates/site/dashboard.html:234
 msgid "Access"
 msgstr "Достъп"
 
-#: templates/site/dashboard.html:233 templates/site/dashboard.html.py:244
+#: templates/site/dashboard.html:235 templates/site/dashboard.html.py:246
 #: templates/site/text_list.html:206 templates/site/user_list.html:158
 #: templates/site/user_list.html.py:188
 msgid "Loading..."
 msgstr "Зареждане..."
 
-#: templates/site/dashboard.html:243
+#: templates/site/dashboard.html:245
 msgid "Commenting"
 msgstr "Коментари"
 
-#: templates/site/dashboard.html:262
+#: templates/site/dashboard.html:264
 msgid "Activities"
 msgstr "Дейности"
 
-#: templates/site/dashboard.html:265
+#: templates/site/dashboard.html:267
 msgid "texts"
 msgstr "Текстовете"
 
-#: templates/site/dashboard.html:266
+#: templates/site/dashboard.html:268
 msgid "comments"
 msgstr "коментари"
 
-#: templates/site/dashboard.html:268
+#: templates/site/dashboard.html:270
 msgid "users"
 msgstr "потребители"
 
-#: templates/site/dashboard.html:308
+#: templates/site/dashboard.html:310
 msgid "No activities"
 msgstr "Няма дейности"
 
@@ -579,7 +591,12 @@ msgstr "на текста"
 msgid "created %(duration)s ago"
 msgstr "създадени преди %(duration)s"
 
-#: templates/site/dashboard_bloc_recent_comments.html:28
+#: templates/site/dashboard_bloc_recent_comments.html:24
+#, fuzzy, python-format
+msgid "by %(username)s"
+msgstr "От \"%(username)s\""
+
+#: templates/site/dashboard_bloc_recent_comments.html:29
 msgid "No comments yet"
 msgstr "Все още няма коментари"
 
@@ -1501,13 +1518,6 @@ msgstr ""
 msgid "last modified %(duration)s ago"
 msgstr "последна промяна преди %(duration)s"
 
-#: templates/site/macros/text_meta.html:8
-#, fuzzy, python-format
-msgid "1 version"
-msgid_plural "%(versions_number)s versions"
-msgstr[0] "1 версия"
-msgstr[1] "Версий"
-
 #: templates/site/macros/text_tabs.html:15
 msgid "People"
 msgstr "Потребители"
@@ -1807,8 +1817,7 @@ msgid "A new version (copied from version %(version_title)s) has been created"
 msgstr "Нова версия (копирана от %(version_title)s версия ) е създадена"
 
 #: views/texts.py:849 views/user.py:79 views/user.py:99
-#, python-format
-#, fuzzy
+#, fuzzy, python-format
 msgid "%(count)i user(s) role modified"
 msgstr "роля(и) на потребителя са изменени"
 
@@ -1817,8 +1826,7 @@ msgid "Text settings updated"
 msgstr "Параметрите са актуализирани"
 
 #: views/user.py:61
-#, python-format
-#, fuzzy
+#, fuzzy, python-format
 msgid "%(count)i User's access suspended"
 msgstr "достъп на потребителя дезактивиран(и)"
 

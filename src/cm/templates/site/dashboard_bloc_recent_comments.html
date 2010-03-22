@@ -20,7 +20,8 @@
 						<a href="{% url text-view-show-comment comment.text_version.text.key comment.id_key %}">{{ comment.title }}</a> {% blocktrans %}on text{% endblocktrans %} <a href="{% url text-view comment.text_version.text.key %}">{{ comment.text_version.title }}</a>						
                    </span>
                    <div style="padding-left:22px;" class="dashlog_metadata">
-				{% blocktrans with comment.created|timesince as duration %}created {{ duration }} ago{% endblocktrans %}
+				{% blocktrans with comment.created|timesince as duration %}created {{ duration }} ago{% endblocktrans %},
+				{% blocktrans with comment.get_name as username %}by {{ username }}{% endblocktrans %}
                    </div>
                    </div>
                    </li>

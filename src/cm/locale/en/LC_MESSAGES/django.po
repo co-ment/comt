@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-22 12:41+0100\n"
+"POT-Creation-Date: 2010-03-22 15:11+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -128,17 +128,17 @@ msgstr ""
 
 #: models.py:746
 #, python-format
-msgid "Text %(link_to_text)s edited"
+msgid "Text %(link_to_text)s edited by %(creator)s"
 msgstr ""
 
 #: models.py:747
 #, python-format
-msgid "Text %(link_to_text)s edited (new version created)"
+msgid "Text %(link_to_text)s edited (new version created) by %(creator)s"
 msgstr ""
 
 #: models.py:748
 #, python-format
-msgid "Text %(link_to_text)s added"
+msgid "Text %(link_to_text)s added by %(creator)s"
 msgstr ""
 
 #: models.py:749
@@ -148,7 +148,8 @@ msgstr ""
 
 #: models.py:750
 #, python-format
-msgid "Comment %(link_to_comment)s added on text %(link_to_text)s"
+msgid ""
+"Comment %(link_to_comment)s added on text %(link_to_text)s by %(creator)s"
 msgstr ""
 
 #: models.py:751
@@ -186,12 +187,16 @@ msgstr ""
 msgid "User %(username)s has activated his account"
 msgstr ""
 
-#: models.py:812 models.py:820
+#: models.py:806
+msgid "anonymous"
+msgstr ""
+
+#: models.py:813 models.py:821
 #, python-format
 msgid "by \"%(username)s\""
 msgstr ""
 
-#: models.py:814
+#: models.py:815
 #, python-format
 msgid "%(time_since)s ago"
 msgstr ""
@@ -482,7 +487,7 @@ msgstr ""
 msgid "Are you sure you want to refuse this comment?"
 msgstr ""
 
-#: templates/site/dashboard.html:168 templates/site/dashboard.html.py:201
+#: templates/site/dashboard.html:168 templates/site/dashboard.html.py:203
 #, python-format
 msgid "modified %(duration)s ago"
 msgstr ""
@@ -502,57 +507,64 @@ msgid_plural "%(nb_comments)s comments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/site/dashboard.html:206 templates/site/text_list.html:221
+#: templates/site/dashboard.html:202 templates/site/macros/text_meta.html:8
+#, python-format
+msgid "1 version"
+msgid_plural "%(versions_number)s versions"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/site/dashboard.html:208 templates/site/text_list.html:221
 msgid "No texts yet"
 msgstr ""
 
-#: templates/site/dashboard.html:225
+#: templates/site/dashboard.html:227
 msgid "Workspace activity"
 msgstr ""
 
-#: templates/site/dashboard.html:226
+#: templates/site/dashboard.html:228
 msgid "month"
 msgstr ""
 
-#: templates/site/dashboard.html:226
+#: templates/site/dashboard.html:228
 msgid "week"
 msgstr ""
 
-#: templates/site/dashboard.html:226
+#: templates/site/dashboard.html:228
 msgid "24 hours"
 msgstr ""
 
-#: templates/site/dashboard.html:232
+#: templates/site/dashboard.html:234
 msgid "Access"
 msgstr ""
 
-#: templates/site/dashboard.html:233 templates/site/dashboard.html.py:244
+#: templates/site/dashboard.html:235 templates/site/dashboard.html.py:246
 #: templates/site/text_list.html:206 templates/site/user_list.html:158
 #: templates/site/user_list.html.py:188
 msgid "Loading..."
 msgstr ""
 
-#: templates/site/dashboard.html:243
+#: templates/site/dashboard.html:245
 msgid "Commenting"
 msgstr ""
 
-#: templates/site/dashboard.html:262
+#: templates/site/dashboard.html:264
 msgid "Activities"
 msgstr ""
 
-#: templates/site/dashboard.html:265
+#: templates/site/dashboard.html:267
 msgid "texts"
 msgstr ""
 
-#: templates/site/dashboard.html:266
+#: templates/site/dashboard.html:268
 msgid "comments"
 msgstr ""
 
-#: templates/site/dashboard.html:268
+#: templates/site/dashboard.html:270
 msgid "users"
 msgstr ""
 
-#: templates/site/dashboard.html:308
+#: templates/site/dashboard.html:310
 msgid "No activities"
 msgstr ""
 
@@ -569,7 +581,12 @@ msgstr ""
 msgid "created %(duration)s ago"
 msgstr ""
 
-#: templates/site/dashboard_bloc_recent_comments.html:28
+#: templates/site/dashboard_bloc_recent_comments.html:24
+#, python-format
+msgid "by %(username)s"
+msgstr ""
+
+#: templates/site/dashboard_bloc_recent_comments.html:29
 msgid "No comments yet"
 msgstr ""
 
@@ -1452,13 +1469,6 @@ msgstr ""
 #, python-format
 msgid "last modified %(duration)s ago"
 msgstr ""
-
-#: templates/site/macros/text_meta.html:8
-#, python-format
-msgid "1 version"
-msgid_plural "%(versions_number)s versions"
-msgstr[0] ""
-msgstr[1] ""
 
 #: templates/site/macros/text_tabs.html:15
 msgid "People"
