@@ -42,7 +42,7 @@ Requirements
 Installation (development install)
 ============
 1. Install python2.5+ and all required libraries
-	(ubuntu users : 'sudo apt-get install python python-magic python-setuptools python-uno libyaml-0-1 python-dev git-core python-utidylib')
+	(ubuntu users : 'sudo apt-get install python python-magic python-setuptools python-uno libyaml-0-1 python-yaml python-dev git-core python-utidylib')
 2. Install pandoc
 	(ubuntu users : 'sudo apt-get install pandoc')
 3. Install openoffice (headless mode) [used for document conversion]
