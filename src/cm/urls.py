@@ -14,6 +14,7 @@ from cm.views.feeds import *
 from cm.views.followup import *
 from cm.views import i18n
 
+ 
 urlpatterns = patterns('',
 )
 
@@ -31,10 +32,9 @@ urlpatterns += patterns('',
      # user login/logout/profile pages
      url(r'^login/$', login, name="login"),
      url(r'^register/$', register, name="register"),
-     url(r'^forgot-pw/$', forgot_pw, name="forgot-pw"),
-     url(r'^reset-pw/(?P<adminkey>\w*)/$', reset_pw, name="reset-pw"),
      url(r'^logout/$', logout, name="logout"),
      url(r'^profile/$', profile, name="profile"),    
+     url(r'^profile-pw/$', profile_pw, name="profile-pw"),    
      
      # users
      url(r'^user/$', user_list, name="user"),
@@ -111,6 +111,17 @@ urlpatterns += patterns('',
      url(r'^text/(?P<key>\w*)/feed/(?P<private_feed_key>\w*)/$', text_feed_private, name="text-private-feed"),
 
      url(r'^wysiwyg-preview/(?P<format>\w*)/$', text_wysiwyg_preview, name="text-wysiwyg-preview"),
+)
+
+# this is to make django.contrib.auth.views work with our templates
+from django.contrib.sites.models import Site
+Site._meta.installed = False
+
+urlpatterns += patterns('django.contrib.auth.views',    
+    (r'^password_reset/$', 'password_reset', {'template_name': 'site/forgot_pw.html', 'email_template_name':'email/forgot_pw.txt', 'post_reset_redirect':'/password_reset/done/'}, 'forgot-pw'),
+    (r'^password_reset/done/$', password_reset_done),
+    (r'^reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', 'password_reset_confirm', {'template_name': 'site/forgot_pw.html', 'post_reset_redirect':'/reset/done/'}),
+    (r'^reset/done/$', password_reset_complete),
 )
 
 # static pages

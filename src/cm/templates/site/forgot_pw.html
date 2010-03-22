@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block title %}
-{% blocktrans %}Forgot password?{% endblocktrans %}
+{% blocktrans %}Reset my password{% endblocktrans %}
 {% endblock %}
 
 {% block head %}
@@ -11,8 +11,11 @@
 
 {% block content %}
 
-<h1>{% blocktrans %}Forgot password?{% endblocktrans %}</h1>
+<h1>{% blocktrans %}Reset my password{% endblocktrans %}</h1>
+
+{% if form %}
 <form id="profile" enctype="multipart/form-data" class="wizard-form" action="." method="post">
+
 <table class="wide_form">
     <tbody>
             {% include "site/macros/form_fields.html" %}
@@ -21,10 +24,25 @@
         </td>
         <td>
             <label></label>
-            <input name="remind" type="submit" value="{% blocktrans %}Remind my password{% endblocktrans %}"/>
+            <input name="remind" type="submit" value="{% blocktrans %}Reset my password{% endblocktrans %}"/>
         </td>
     </tr>
     </tbody>
 </table>
 </form>
+{% else %}
+<center>
+{% blocktrans %}This link is invalid.{% endblocktrans %}
+
+
+<br />
+
+<a href="{% url forgot-pw %}">{% blocktrans %}Forgot password?{% endblocktrans %}</a>
+
+</center>
+
+<br />
+<br />
+<br />
+{% endif %}
 {% endblock %}

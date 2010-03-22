@@ -1,4 +1,11 @@
-{% extends "email/base_email.txt" %}{% load i18n %}{% block content %}
-{% blocktrans %}Click the following link to reset your password:{% endblocktrans %}
-{{ CONF.site_url }}{{ reset_url }}
+{% load i18n %}{% autoescape off %}
+{% trans "You're receiving this e-mail because you requested a password reset" %}
+{% blocktrans %}for your user account at {{ site_name }}{% endblocktrans %}.
+
+{% trans "Please go to the following page and choose a new password:" %}
+{% block reset_link %}
+{{ protocol }}://{{ domain }}{% url django.contrib.auth.views.password_reset_confirm uidb36=uid, token=token %}
 {% endblock %}
+{% trans "Your username, in case you've forgotten:" %} {{ user.username }}
+
+{% endautoescape %}

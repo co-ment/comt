@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-19 16:15+0100\n"
+"POT-Creation-Date: 2010-03-22 12:40+0100\n"
 "PO-Revision-Date: 2010-02-24 01:37+0900\n"
 "Last-Translator: dev <dev@sopinspace.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -369,8 +369,7 @@ msgstr "Enviar"
 
 #: templates/site/contact.html:26
 #: templates/site/notifications_desactivate.html:32
-#: templates/site/settings.html:29 templates/site/settings_data.html:58
-#: templates/site/settings_design.html:29
+#: templates/site/settings.html:29 templates/site/settings_design.html:29
 #: templates/site/text_create_content.html:47
 #: templates/site/text_create_upload.html:42 templates/site/user_add.html:34
 #: templates/site/user_add_text.html:38 templates/site/user_contact.html:25
@@ -654,12 +653,16 @@ msgstr ""
 "los que ha participado"
 
 #: templates/site/forgot_pw.html:6 templates/site/forgot_pw.html.py:14
-#: templates/site/login_form.html:21
-msgid "Forgot password?"
+#: templates/site/forgot_pw.html:27
+msgid "Reset my password"
 msgstr ""
 
-#: templates/site/forgot_pw.html:24
-msgid "Remind my password"
+#: templates/site/forgot_pw.html:35
+msgid "This link is invalid."
+msgstr ""
+
+#: templates/site/forgot_pw.html:40 templates/site/login_form.html:21
+msgid "Forgot password?"
 msgstr ""
 
 #: templates/site/help.html:16
@@ -941,11 +944,22 @@ msgid "Deactivate"
 msgstr "Desactivar"
 
 #: templates/site/profile.html:6 templates/site/profile.html.py:14
+#: templates/site/profile_pw.html:6 templates/site/profile_pw.html.py:14
 #, python-format
 msgid "Your profile (%(username)s)"
 msgstr "Su perfil (%(username)s)"
 
-#: templates/site/profile.html:26 templates/site/text_create_content.html:45
+#: templates/site/profile.html:17 templates/site/profile_pw.html:17
+#: templates/site/layout/header.html:14
+msgid "Profile"
+msgstr "Perfil"
+
+#: templates/site/profile.html:19 templates/site/profile_pw.html:19
+msgid "Password"
+msgstr ""
+
+#: templates/site/profile.html:33 templates/site/profile_pw.html:33
+#: templates/site/text_create_content.html:45
 #: templates/site/text_create_upload.html:40 templates/site/text_edit.html:36
 #: templates/site/text_settings.html:23 templates/site/text_share.html:153
 #: templates/site/user_activate.html:27 templates/site/user_list.html:210
@@ -963,26 +977,22 @@ msgstr "Registro de %(wname)s"
 msgid "Reset your password"
 msgstr ""
 
-#: templates/site/settings.html:5 templates/site/settings_data.html:5
-#: templates/site/settings_design.html:5 templates/site/text_list.html:181
-#: templates/site/macros/main_tabs.html:14
+#: templates/site/settings.html:5 templates/site/settings_design.html:5
+#: templates/site/text_list.html:181 templates/site/macros/main_tabs.html:14
 #: templates/site/macros/text_tabs.html:19
 msgid "Settings"
 msgstr "Ajustes"
 
-#: templates/site/settings.html:21 templates/site/settings_data.html:21
-#: templates/site/settings_design.html:21
+#: templates/site/settings.html:21 templates/site/settings_design.html:21
 #, fuzzy
 msgid "General"
 msgstr "Genérico"
 
-#: templates/site/settings.html:23 templates/site/settings_data.html:23
-#: templates/site/settings_design.html:23
+#: templates/site/settings.html:23 templates/site/settings_design.html:23
 msgid "Appearance"
 msgstr ""
 
-#: templates/site/settings.html:38 templates/site/settings_data.html:69
-#: templates/site/settings_design.html:40
+#: templates/site/settings.html:38 templates/site/settings_design.html:40
 msgid ""
 "Are you sure you want to change the role model? All roles (except managers) "
 "will be resetted!"
@@ -990,19 +1000,7 @@ msgstr ""
 "¿Está seguro/a de querer cambiar el modelo de perfiles? ¡Todos los roles "
 "(excepto los administradores) se reiniciarán!"
 
-#: templates/site/settings_data.html:25
-msgid "Data"
-msgstr ""
-
-#: templates/site/settings_data.html:36
-msgid "Export data"
-msgstr ""
-
-#: templates/site/settings_data.html:45
-msgid "Import data"
-msgstr ""
-
-#: templates/site/settings_data.html:60 templates/site/settings_design.html:31
+#: templates/site/settings_design.html:31
 #, fuzzy
 msgid "Delete logo"
 msgstr "Borrar"
@@ -1463,10 +1461,6 @@ msgstr[1] "%(nb_users)s usuarios"
 msgid "About"
 msgstr "Acerca de"
 
-#: templates/site/layout/header.html:14
-msgid "Profile"
-msgstr "Perfil"
-
 #: templates/site/layout/header.html:15
 msgid "Logout"
 msgstr "Desconectarse"
@@ -1679,7 +1673,7 @@ msgstr "¿Desactivar aviso?"
 msgid "Private notifications feed reseted."
 msgstr "Respuesta de avisos privados reiniciada"
 
-#: views/site.py:82 views/texts.py:130 views/user.py:526
+#: views/site.py:82 views/texts.py:130 views/user.py:545
 msgid "You're logged in!"
 msgstr "¡Se ha conectado!"
 
@@ -1768,27 +1762,15 @@ msgid ""
 "make sure you know what you're doing before adding something here."
 msgstr ""
 
-#: views/site.py:252
-msgid "Username or email"
-msgstr ""
-
-#: views/site.py:279
-msgid "How to reset your password"
-msgstr ""
-
-#: views/site.py:281
+#: views/site.py:253
 msgid ""
 "A link to reset your password has been sent to the profile email. Please "
 "check your email."
 msgstr ""
 
-#: views/site.py:283
-msgid "No user found."
-msgstr ""
-
-#: views/site.py:299
+#: views/site.py:257 views/user.py:428
 #, fuzzy
-msgid "Your password has been changed."
+msgid "Password changed"
 msgstr "Su texto \"%(title)s\" se ha creado"
 
 #: views/texts.py:163
@@ -1958,49 +1940,49 @@ msgstr "El acceso del usuario %(prof)s ha sido aprobado"
 msgid "A new invitation has been sent to user %(prof)s."
 msgstr "Se ha enviado una nueva invitación al usuario %(prof)s."
 
-#: views/user.py:407
+#: views/user.py:410
 msgid "Profile updated"
 msgstr "Perfil actualizado"
 
-#: views/user.py:437
+#: views/user.py:456
 msgid "Anonymous user role modified."
 msgstr "Perfil de usuario anónimo modificado"
 
-#: views/user.py:459
+#: views/user.py:478
 msgid "User modified"
 msgstr "Usuario modificado"
 
-#: views/user.py:474
+#: views/user.py:493
 msgid "Subject"
 msgstr "Asunto"
 
-#: views/user.py:475
+#: views/user.py:494
 msgid "Subject of the email"
 msgstr "Asunto del correo electrónico"
 
-#: views/user.py:478
+#: views/user.py:497
 msgid "Body"
 msgstr "Cuerpo"
 
-#: views/user.py:479
+#: views/user.py:498
 msgid "Body of the email"
 msgstr "Cuerpo del mensaje"
 
-#: views/user.py:499
+#: views/user.py:518
 msgid "Email sent."
 msgstr "Correo electrónico enviado"
 
-#: views/user.py:520
+#: views/user.py:539
 msgid "This account is suspended, contact the workspace administrator."
 msgstr ""
 "Esta cuenta está suspendida. Contacte con el administrador del espacio de "
 "trabajo"
 
-#: views/user.py:551
+#: views/user.py:570
 msgid "You've been logged out."
 msgstr "Se ha desconectado."
 
-#: views/user.py:567
+#: views/user.py:586
 msgid ""
 "You've been registered, you will receive a confirmation mail once a "
 "moderator has approved your membership."
@@ -2008,12 +1990,16 @@ msgstr ""
 "Se ha registrado. Recibirá una confirmación por correo electrónico una vez "
 "que el moderador apruebe su inscripción."
 
-#: views/user.py:570
+#: views/user.py:589
 msgid ""
 "You've been registered, please check your email for the confirm message."
 msgstr ""
 "Se ha registrado. Por favor, compruebe que ha recibido el mensaje de "
 "confirmación en su correo electrónico."
+
+#, fuzzy
+#~ msgid "Your password has been reset."
+#~ msgstr "Su texto \"%(title)s\" se ha creado"
 
 #~ msgid "How do you want to print?"
 #~ msgstr "¿Cómo desea realizar la impresión?"

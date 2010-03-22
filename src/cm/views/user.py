@@ -394,6 +394,8 @@ def user_send_invitation(request, key):
         return HttpResponse('') # no redirect because this is called by js
     raise UnauthorizedException('')
 
+from django.contrib.auth.forms import PasswordChangeForm
+
 @login_required()
 def profile(request):
     user = request.user
@@ -401,6 +403,7 @@ def profile(request):
     if request.method == 'POST':
         userform = UserForm(request.POST, instance=user)
         userprofileform = MyUserProfileForm(request.POST, instance=profile)
+        
         if userform.is_valid() and userprofileform.is_valid():
             userform.save()
             userprofileform.save()
@@ -412,6 +415,22 @@ def profile(request):
     
     return render_to_response('site/profile.html', {'forms' : [userform, userprofileform],
                                                                'title' : 'Profile',
+                                                                }, context_instance=RequestContext(request))
+
+@login_required()
+def profile_pw(request):
+    user = request.user
+    profile = user.get_profile()
+    if request.method == 'POST':
+        pwform = PasswordChangeForm(profile.user, data = request.POST)
+        if pwform.is_valid():
+            pwform.save()
+            display_message(request, _(u'Password changed'))
+            return HttpResponseRedirect(reverse('profile'))
+    else:
+        pwform = PasswordChangeForm(profile.user)
+    return render_to_response('site/profile_pw.html', {'forms' : [pwform],
+                                                               'title' : 'Password',
                                                                 }, context_instance=RequestContext(request))
 
 class AnonUserRoleForm(UserRoleForm):

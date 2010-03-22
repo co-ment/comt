@@ -14,9 +14,9 @@
 <h1>{% blocktrans with user.username as username %}Your profile ({{ username }}){% endblocktrans %}</h1>
 
 <ul class="sub_list">
-    <li class="active_sub">{% blocktrans %}Profile{% endblocktrans %}</li>
+    <li><a href="{% url profile %}">{% blocktrans %}Profile{% endblocktrans %}</a></li>
     <li> / </li>
-    <li><a href="{% url profile-pw %}">{% blocktrans %}Password{% endblocktrans %}</a></li>
+    <li class="active_sub">{% blocktrans %}Password{% endblocktrans %}</li>
 </ul>
 
 <form id="profile" enctype="multipart/form-data" class="wizard-form" action="." method="post">

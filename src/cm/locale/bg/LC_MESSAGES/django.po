@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-19 16:15+0100\n"
+"POT-Creation-Date: 2010-03-22 12:39+0100\n"
 "PO-Revision-Date: 2010-03-10 20:58+0100\n"
 "Last-Translator: bistra <bistra.raykova@free.fr>\n"
 "Language-Team: Français <kde-i18n-doc@kde.org>\n"
@@ -377,8 +377,7 @@ msgstr "Изпращане"
 
 #: templates/site/contact.html:26
 #: templates/site/notifications_desactivate.html:32
-#: templates/site/settings.html:29 templates/site/settings_data.html:58
-#: templates/site/settings_design.html:29
+#: templates/site/settings.html:29 templates/site/settings_design.html:29
 #: templates/site/text_create_content.html:47
 #: templates/site/text_create_upload.html:42 templates/site/user_add.html:34
 #: templates/site/user_add_text.html:38 templates/site/user_contact.html:25
@@ -431,6 +430,7 @@ msgstr "В очакване"
 
 #: templates/site/dashboard.html:76
 #, python-format
+#, fuzzy
 msgid "user %(user)s awaits approval"
 msgstr "Потребителят е в очакване на одобрение"
 
@@ -658,12 +658,16 @@ msgstr ""
 "към дискусийте в който сте участвали"
 
 #: templates/site/forgot_pw.html:6 templates/site/forgot_pw.html.py:14
-#: templates/site/login_form.html:21
-msgid "Forgot password?"
+#: templates/site/forgot_pw.html:27
+msgid "Reset my password"
 msgstr ""
 
-#: templates/site/forgot_pw.html:24
-msgid "Remind my password"
+#: templates/site/forgot_pw.html:35
+msgid "This link is invalid."
+msgstr ""
+
+#: templates/site/forgot_pw.html:40 templates/site/login_form.html:21
+msgid "Forgot password?"
 msgstr ""
 
 #: templates/site/help.html:16
@@ -944,11 +948,22 @@ msgid "Deactivate"
 msgstr "Дезактивирай"
 
 #: templates/site/profile.html:6 templates/site/profile.html.py:14
+#: templates/site/profile_pw.html:6 templates/site/profile_pw.html.py:14
 #, python-format
 msgid "Your profile (%(username)s)"
 msgstr "Вашият профил (%(username)s)"
 
-#: templates/site/profile.html:26 templates/site/text_create_content.html:45
+#: templates/site/profile.html:17 templates/site/profile_pw.html:17
+#: templates/site/layout/header.html:14
+msgid "Profile"
+msgstr "Профил"
+
+#: templates/site/profile.html:19 templates/site/profile_pw.html:19
+msgid "Password"
+msgstr ""
+
+#: templates/site/profile.html:33 templates/site/profile_pw.html:33
+#: templates/site/text_create_content.html:45
 #: templates/site/text_create_upload.html:40 templates/site/text_edit.html:36
 #: templates/site/text_settings.html:23 templates/site/text_share.html:153
 #: templates/site/user_activate.html:27 templates/site/user_list.html:210
@@ -966,25 +981,21 @@ msgstr "%(wname)s Регистрация"
 msgid "Reset your password"
 msgstr ""
 
-#: templates/site/settings.html:5 templates/site/settings_data.html:5
-#: templates/site/settings_design.html:5 templates/site/text_list.html:181
-#: templates/site/macros/main_tabs.html:14
+#: templates/site/settings.html:5 templates/site/settings_design.html:5
+#: templates/site/text_list.html:181 templates/site/macros/main_tabs.html:14
 #: templates/site/macros/text_tabs.html:19
 msgid "Settings"
 msgstr "Настройки"
 
-#: templates/site/settings.html:21 templates/site/settings_data.html:21
-#: templates/site/settings_design.html:21
+#: templates/site/settings.html:21 templates/site/settings_design.html:21
 msgid "General"
 msgstr "Основен"
 
-#: templates/site/settings.html:23 templates/site/settings_data.html:23
-#: templates/site/settings_design.html:23
+#: templates/site/settings.html:23 templates/site/settings_design.html:23
 msgid "Appearance"
 msgstr "Външен вид"
 
-#: templates/site/settings.html:38 templates/site/settings_data.html:69
-#: templates/site/settings_design.html:40
+#: templates/site/settings.html:38 templates/site/settings_design.html:40
 msgid ""
 "Are you sure you want to change the role model? All roles (except managers) "
 "will be resetted!"
@@ -992,19 +1003,7 @@ msgstr ""
 "Сигурни ли сти, че искате да промените моделът на ролите? Всички роли (освен "
 "на мениджърите) ще бъдат реинициализирани! "
 
-#: templates/site/settings_data.html:25
-msgid "Data"
-msgstr ""
-
-#: templates/site/settings_data.html:36
-msgid "Export data"
-msgstr ""
-
-#: templates/site/settings_data.html:45
-msgid "Import data"
-msgstr ""
-
-#: templates/site/settings_data.html:60 templates/site/settings_design.html:31
+#: templates/site/settings_design.html:31
 msgid "Delete logo"
 msgstr "Изтрийте логото"
 
@@ -1445,10 +1444,6 @@ msgstr[1] "%(nb_users)s потребителя"
 msgid "About"
 msgstr "Относно"
 
-#: templates/site/layout/header.html:14
-msgid "Profile"
-msgstr "Профил"
-
 #: templates/site/layout/header.html:15
 msgid "Logout"
 msgstr "Излез"
@@ -1661,7 +1656,7 @@ msgstr "Дезактивиране на уведомяването?"
 msgid "Private notifications feed reseted."
 msgstr "Частното захранване на уведомяването е реинициализирано."
 
-#: views/site.py:82 views/texts.py:130 views/user.py:526
+#: views/site.py:82 views/texts.py:130 views/user.py:545
 msgid "You're logged in!"
 msgstr "Вие сте включени!"
 
@@ -1749,26 +1744,14 @@ msgstr ""
 "кода на работното място, уверете се, че познавате рисковете преди да "
 "добавите нещо тук,"
 
-#: views/site.py:252
-msgid "Username or email"
-msgstr ""
-
-#: views/site.py:279
-msgid "How to reset your password"
-msgstr ""
-
-#: views/site.py:281
+#: views/site.py:253
 msgid ""
 "A link to reset your password has been sent to the profile email. Please "
 "check your email."
 msgstr ""
 
-#: views/site.py:283
-msgid "No user found."
-msgstr ""
-
-#: views/site.py:299
-msgid "Your password has been changed."
+#: views/site.py:257 views/user.py:428
+msgid "Password changed"
 msgstr ""
 
 #: views/texts.py:163
@@ -1825,6 +1808,7 @@ msgstr "Нова версия (копирана от %(version_title)s верс�
 
 #: views/texts.py:849 views/user.py:79 views/user.py:99
 #, python-format
+#, fuzzy
 msgid "%(count)i user(s) role modified"
 msgstr "роля(и) на потребителя са изменени"
 
@@ -1834,6 +1818,7 @@ msgstr "Параметрите са актуализирани"
 
 #: views/user.py:61
 #, python-format
+#, fuzzy
 msgid "%(count)i User's access suspended"
 msgstr "достъп на потребителя дезактивиран(и)"
 
@@ -1936,49 +1921,49 @@ msgstr "Достъпът на потребителя %(prof)s е активир�
 msgid "A new invitation has been sent to user %(prof)s."
 msgstr "Нова покана е изпратена на потребителя %(prof)s."
 
-#: views/user.py:407
+#: views/user.py:410
 msgid "Profile updated"
 msgstr "Профилът е  актуализиран"
 
-#: views/user.py:437
+#: views/user.py:456
 msgid "Anonymous user role modified."
 msgstr "Ролята на анонимния потребител е променена."
 
-#: views/user.py:459
+#: views/user.py:478
 msgid "User modified"
 msgstr "Променен потребител"
 
-#: views/user.py:474
+#: views/user.py:493
 msgid "Subject"
 msgstr "Тема"
 
-#: views/user.py:475
+#: views/user.py:494
 msgid "Subject of the email"
 msgstr "Тема на имейлa"
 
-#: views/user.py:478
+#: views/user.py:497
 msgid "Body"
 msgstr "Основна част"
 
-#: views/user.py:479
+#: views/user.py:498
 msgid "Body of the email"
 msgstr "Основна част на майла"
 
-#: views/user.py:499
+#: views/user.py:518
 msgid "Email sent."
 msgstr "Имейлът е изпратен"
 
-#: views/user.py:520
+#: views/user.py:539
 msgid "This account is suspended, contact the workspace administrator."
 msgstr ""
 "Този акаунт е дезактивиран. Моля контактирайте администратор на работното "
 "място."
 
-#: views/user.py:551
+#: views/user.py:570
 msgid "You've been logged out."
 msgstr "Вие сте офлайн"
 
-#: views/user.py:567
+#: views/user.py:586
 msgid ""
 "You've been registered, you will receive a confirmation mail once a "
 "moderator has approved your membership."
@@ -1987,12 +1972,16 @@ msgstr ""
 "изпратено на вашия имейл, след като вашия акаунт е активиран от "
 "администратор на работното място"
 
-#: views/user.py:570
+#: views/user.py:589
 msgid ""
 "You've been registered, please check your email for the confirm message."
 msgstr ""
 "Регистрацията завърши успешно, едно потвърдително съобщение е изпратено на "
 "вашия имейл"
+
+#, fuzzy
+#~ msgid "Your password has been reset."
+#~ msgstr "Достъпът на потребителя %(prof)s е отказан."
 
 #~ msgid "%(workspace_name)s's workspace"
 #~ msgstr "Работно място: %(workspace_name)"
