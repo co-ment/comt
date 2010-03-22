@@ -434,12 +434,6 @@ IComment.prototype = {
 		
 		return this.animation ;
 	},
-	setWidth : function(width) {
-		var boundingBoxNode = this.overlay.get('boundingBox') ;
-
-		// POSITION
-	    boundingBoxNode.setStyle("width", width + 'px');
-	},
 	getHeight : function() {
 		return this.overlay.get('boundingBox').get('offsetHeight') ;
 	},

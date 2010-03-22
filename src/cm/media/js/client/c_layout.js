@@ -45,7 +45,8 @@ Layout.prototype = {
 	},
 	
 	getTopICommentsWidthFromWidth : function(val) {
-		return val - 7;
+		var ret = val - ( 2 * gConf['iCommentThreadPadding']) ; // PhA said : a threaded discussion with a depth of 2 still shoudn't hide the text 20100317
+		return ret - 7;
 	},
 	
 	setLeftColumnWidth : function (colWidth) {
