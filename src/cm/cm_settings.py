@@ -24,3 +24,5 @@ AUTO_CONTRIB_REGISTER = get_setting('AUTO_CONTRIB_REGISTER', False)
 
 # show email in user list
 SHOW_EMAILS_IN_ADMIN = get_setting('SHOW_EMAILS_IN_ADMIN', True)
+
+TRACKING_HTML = get_setting('TRACKING_HTML', '')

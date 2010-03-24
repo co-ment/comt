@@ -1,6 +1,6 @@
 from django.conf import settings
 from cm.models import ApplicationConfiguration
-
+from cm.cm_settings import TRACKING_HTML
 def static(request):
     """
     add static data to be used in templates
@@ -11,6 +11,7 @@ def static(request):
             'YUI_VERSION' : settings.YUI_VERSION,
             'CONF': ApplicationConfiguration,
             'CM_MEDIA_PREFIX' : settings.CM_MEDIA_PREFIX,
+            'TRACKING_HTML' : TRACKING_HTML,
             }
 
 
