@@ -36,3 +36,6 @@ syntax: regexp
 syntax: glob
 *.pyc
 
+
+syntax: regexp
+^develop-eggs$
