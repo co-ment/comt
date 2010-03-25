@@ -308,3 +308,10 @@ def do_newparams(parser, token):
 def do_invneg(value, arg):
     """."""
     return int(arg) - int(value)
+
+@register.filter(name='url_args')
+def url_args(url):
+    if '?' in url:
+        return '&'
+    else:
+        return '?'

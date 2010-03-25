@@ -732,15 +732,17 @@ def text_edit(request, key, adminkey=None):
 
     return render_to_response('site/text_edit.html', template_dict , context_instance=RequestContext(request))
 
-# TODO: modif de la base => if POST
 @has_perm_on_text('can_edit_text')
 def text_revert(request, key, text_version_key):
+    if request.method != 'POST':
+        raise UnauthorizedException('Unauthorized')
+        
     text = get_text_by_keys_or_404(key)
 
     text_version = text.revert_to_version(text_version_key)
     display_message(request, _(u'A new version (copied from version %(version_title)s) has been created') % {'version_title':text_version.title})
 
-    return HttpResponseRedirect(reverse('text-history', args=[text.key]))
+    return HttpResponse('') # no redirect because this is called by js
     
 @has_perm_on_text('can_view_text')
 def text_attach(request, key, attach_key):

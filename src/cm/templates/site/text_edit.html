@@ -13,7 +13,8 @@
 <!--
 tb_conf['current_tab'] = 'edit';
 // keep get parameters!! 
-tb_conf['pre_edit_url'] = '{% url text-preedit text.key %}?{{ request.GET.urlencode }}';
+{% url text-preedit text.key as preedit_url %}
+tb_conf['pre_edit_url'] = '{{ preedit_url }}{{ preedit_url|url_args }}{{ request.GET.urlencode }}';
 -->
 </script>
 

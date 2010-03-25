@@ -102,7 +102,21 @@ function hide_show(elem, name, hide, up, plus) {
                 <div class="hidden-text-actions text-actions-{{ text_version.key }}">
                     <a href="{% url text-history-version text.key text_version.key %}">{% blocktrans %}View{% endblocktrans %}</a> 
                     {% if text_version.get_previous_version %}| <a href="{% url text-history-compare text.key text_version.get_previous_version.key text_version.key %}">{% blocktrans %}Compare with previous version{% endblocktrans %}</a>{% endif %}
-                    {% if can_edit_text %} | <a href="{% url text-revert text.key text_version.key %}">{% blocktrans %}Revert to this version{% endblocktrans %}</a>{% endif %}
+                    {% if can_edit_text %}
+                    | <a id="text-revert-{{ text_version.key }}" href="#">{% blocktrans %}Revert to this version{% endblocktrans %}</a>
+                    <script type="text/javascript">                
+                    <!--
+                    $(function() {
+                        $("#text-revert-{{ text_version.key }}").click(function(){
+                            var url = '{% url text-revert text.key text_version.key %}';
+                            $.post(url, function(data){
+                                  window.location = '{% url text-history text.key %}';
+                                });                        
+                        });                        
+                    }) ;
+                    --> 
+                    </script>                                                            
+                    {% endif %}
                     {% comment %}{% if can_delete_text %}<a id="text-delete-{{ text_version.key }}" href="#">{% blocktrans %}Delete{% endblocktrans %}</a>
                     <script type="text/javascript">                
                     <!--

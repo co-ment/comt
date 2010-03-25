@@ -81,9 +81,10 @@
             <div id="c_text_preferences" class="c_tab">
             </div>
 	    </DIV>
-         <iframe id="text_view_comments" name="text_view_comments" class="ui-layout-center"
+	    {% url text-view-comments-version text.key text_version.key as frame_url %}
+	             <iframe id="text_view_comments" name="text_view_comments" class="ui-layout-center"
             width="100%" height="100%" frameborder="0" scrolling="auto"
-            src="{% url text-view-comments-version text.key text_version.key %}?{{ request.GET.urlencode }}"></iframe>
+            src="{{ frame_url }}{{ frame_url|url_args }}{{ request.GET.urlencode }}"></iframe>
              
 <!--  exemple de passage d'arguments        <iframe id="text_view_comments" name="text_view_comments" class="ui-layout-center"
             width="100%" height="100%" frameborder="0" scrolling="auto"
@@ -94,8 +95,9 @@
     <div id="dialog_h"></div>
     <div id="dialog_print_export" title="">
 <!--         <p id="validateTips">All form fields are required.</p> -->
-    
-        <form name="print_export_form" id="print_export_form" method="post" action="" target_action="{% url text-export text.key "FoRmAt" "DoWnLoAd" "WhIcHCoMmEnT" "WiThCoLoR" %}?{{ request.GET.urlencode }}">
+
+		{% url text-export text.key "FoRmAt" "DoWnLoAd" "WhIcHCoMmEnT" "WiThCoLoR" as export_url %}    
+        <form name="print_export_form" id="print_export_form" method="post" action="" target_action="{{ export_url }}{{ export_url|url_args }}{{ request.GET.urlencode }}">
 	        <fieldset>
                 <label for="p_comments">{% blocktrans %}Which comments?{% endblocktrans %}</label>
                 <select  name="p_comments" id="p_comments" />
