@@ -40,6 +40,7 @@ import logging
 import mimetypes
 import simplejson
 import sys
+import re
 from django.db.models.sql.datastructures import EmptyResultSet
 
 def get_text_and_admin(key, adminkey, assert_admin = False):
@@ -293,6 +294,18 @@ def client_exchange(request):
     return ret 
 
 
+def from_html_links_to_abs_links(content):
+    """
+    Replaces (html) links to attachs with real file path on server
+    """
+    attach_re = r'/text/(?P<key>\w*)/attach/(?P<attach_key>\w*)/'
+    attach_str = r'/text/%s/attach/%s/'
+    for match in re.findall(attach_re, content):
+        link = attach_str %match
+        attach = Attachment.objects.get(key=match[1], text_version__text__key=match[0])                
+        content = content.replace(link, attach.data.path)
+    return content
+
 #NOTE : some arguments like : withcolor = "yes" + format = "markdown" are incompatible
 #http://localhost:8000/text/text_key_1/export/pdf/1/all/1
 def text_export(request, key, format, download, whichcomments, withcolor, adminkey=None):
@@ -328,8 +341,13 @@ def text_export(request, key, format, download, whichcomments, withcolor, admink
             use_pandoc = True
         elif format in ('pdf', 'odt') : 
             use_pandoc = (original_format == "markdown")
-        elif format in ('doc', 'html') : 
+        elif format in ('doc', 'html') :
             use_pandoc = False
+
+    # correct attach path => real path
+    if format in ('pdf','odt') :        
+        original_content = from_html_links_to_abs_links(original_content)
+            
     if len(comments) == 0 : #want to bypass html conversion in this case
         return content_export2(request, original_content, text_version.title, original_format, format, use_pandoc, download_response)
     else : # case comments to be added  
