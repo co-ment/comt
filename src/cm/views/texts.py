@@ -352,7 +352,7 @@ def text_export(request, key, format, download, whichcomments, withcolor, admink
         return content_export2(request, original_content, text_version.title, original_format, format, use_pandoc, download_response)
     else : # case comments to be added  
         #comments = comments.order_by('start_wrapper','start_offset','end_wrapper','end_offset')
-        html = text_version.get_content()
+        html = pandoc_convert(original_content, original_format, 'html')
         wrapped_text_version, _ , _ = spannify(html)
         with_markers = True
         marked_content = insert_comment_markers(wrapped_text_version, comments, with_markers, with_color)
