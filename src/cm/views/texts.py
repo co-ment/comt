@@ -638,7 +638,7 @@ class EditTextForm(ModelForm):
                            help_text=ugettext_lazy("Create a new version of this text (recommended)")
                            )
 
-    keep_comments = forms.BooleanField(label=_("Keep comments (optional)"),
+    keep_comments = forms.BooleanField(label=ugettext_lazy("Keep comments (optional)"),
                            required=False,
                            initial=True,
                            help_text=ugettext_lazy("Keep comments (if not affected by the edit)")
