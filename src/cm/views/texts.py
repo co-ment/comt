@@ -615,14 +615,14 @@ class TextVersionForm(ModelForm):
         fields = ('title', 'content', 'format')
 
 class EditTextForm(ModelForm):
-    title = forms.CharField(label=_("Title"), widget=forms.TextInput)
+    title = forms.CharField(label=ugettext_lazy("Title"), widget=forms.TextInput)
     #format = forms.CharField(label=_("Format"))
     #content = forms.TextField(label=_("Content"))
 
-    note = forms.CharField(label=_("Note (optional)"),
+    note = forms.CharField(label=ugettext_lazy("Note (optional)"),
                            widget=forms.TextInput,
                            required=False,
-                           help_text=_("Add a note to explain the modifications made to the text")
+                           help_text=ugettext_lazy("Add a note to explain the modifications made to the text")
                            )
 
     #tags = forms.CharField(label=_("Tags (optional)"),
@@ -632,16 +632,16 @@ class EditTextForm(ModelForm):
     #                       )
 
 
-    new_version = forms.BooleanField(label=_("New version (optional)"),
+    new_version = forms.BooleanField(label=ugettext_lazy("New version (optional)"),
                            required=False,
                            initial=True,
-                           help_text=_("Create a new version of this text (recommended)")
+                           help_text=ugettext_lazy("Create a new version of this text (recommended)")
                            )
 
     keep_comments = forms.BooleanField(label=_("Keep comments (optional)"),
                            required=False,
                            initial=True,
-                           help_text=_("Keep comments (if not affected by the edit)")
+                           help_text=ugettext_lazy("Keep comments (if not affected by the edit)")
                            )
     
     class Meta:
