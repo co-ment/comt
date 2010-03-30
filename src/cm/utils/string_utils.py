@@ -4,7 +4,11 @@ import re
 def to_unicode(input):
     if type(input) == str:
         res = None
-        for encoding in [chardet.detect(input)['encoding'], 'utf8', 'latin1']:
+        encodings = ['utf8', 'latin1']
+        doc_enc = chardet.detect(input)['encoding']
+        if doc_enc:
+            encodings = [doc_enc,] + encodings  
+        for encoding in encodings:
             try:
                 res = unicode(input, encoding)
                 break;
