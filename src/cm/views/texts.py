@@ -738,7 +738,7 @@ def text_edit(request, key, adminkey=None):
                         'format': text_version.format,
                         'tags': text_version.tags,
                         'new_version': NEW_TEXT_VERSION_ON_EDIT,
-                        'note' : text_version.note,
+                        'note' : '',
                         'keep_comments' : True,
                        }        
         if request.user.is_authenticated():
