@@ -7,7 +7,7 @@
      <td>
         <div {% if field.errors %}class="error"{% endif %}>{{ field }}
         {% ifequal field.name "format" %}
-        <a target="_blank" href="{% url help-format %}">?</a>
+        <a target="_blank" href="{% url help %}#format">?</a>
         {% endifequal %}
         </div>                
 
