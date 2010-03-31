@@ -1,7 +1,7 @@
 {% extends "site/layout/base_workspace.html" %}
 {% load i18n %}
 
-{% block title %}{% blocktrans %}Write a text{% endblocktrans %}{% endblock %}
+{% block title %}{% blocktrans %}Create a text{% endblocktrans %}{% endblock %}
 
 {% block main %}
     {% include "site/macros/text_editor.html" %}
@@ -25,7 +25,7 @@ $(function() {
 <ul class="sub_list">
     <li><a href="{% url text %}">{% blocktrans %}Text list{% endblocktrans %}</a></li>
     <li> / </li>
-    <li class="active_sub">{% blocktrans %}Write a text{% endblocktrans %}</li>
+    <li class="active_sub">{% blocktrans %}Create a text{% endblocktrans %}</li>
     <li> / </li>
     <li><a href="{% url text-create-upload %}">{% blocktrans %}Upload a text{% endblocktrans %}</a></li>
 </ul>

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-22 15:10+0100\n"
+"POT-Creation-Date: 2010-03-31 11:35+0200\n"
 "PO-Revision-Date: 2010-03-10 20:58+0100\n"
 "Last-Translator: bistra <bistra.raykova@free.fr>\n"
 "Language-Team: Français <kde-i18n-doc@kde.org>\n"
@@ -60,7 +60,7 @@ msgid "Tags input must be no longer than 250 characters."
 msgstr "Таговете не трябва да надвишават 250 символа."
 
 #: models.py:178 templates/site/text_history.html:79 views/create.py:30
-#: views/create.py:45 views/texts.py:600
+#: views/create.py:45 views/texts.py:618
 msgid "Title"
 msgstr "Заглавие"
 
@@ -68,11 +68,11 @@ msgstr "Заглавие"
 msgid "Format"
 msgstr "Формат"
 
-#: models.py:180 views/texts.py:692
+#: models.py:180 views/texts.py:710
 msgid "Content"
 msgstr "Съдържание"
 
-#: models.py:181 models.py:633 templates/site/help.html:39
+#: models.py:181 models.py:633 templates/site/help.html:47
 msgid "Tags"
 msgstr "Тагове"
 
@@ -404,8 +404,17 @@ msgstr "Действия"
 #: templates/site/text_create_content.html:28
 #: templates/site/text_create_upload.html:26 templates/site/text_list.html:40
 #: templates/site/layout/header.html:10
-msgid "Write a text"
+#, fuzzy
+msgid "Create a text"
 msgstr "Напишете текст"
+
+#: templates/site/dashboard.html:48 templates/site/dashboard.html.py:49
+#: templates/site/followup.html:22 templates/site/followup.html.py:35
+#: templates/site/help.html:6 templates/site/help.html.py:14
+#: templates/site/text_embed.html:27 templates/site/layout/footer.html:13
+#: templates/site/macros/form_fields.html:15
+msgid "Help"
+msgstr "Помощ"
 
 #: templates/site/dashboard.html:49 templates/site/text_create_content.html:30
 #: templates/site/text_create_upload.html:4
@@ -605,7 +614,7 @@ msgstr "Все още няма коментари"
 msgid "Followup"
 msgstr "В отговор"
 
-#: templates/site/followup.html:20 templates/site/help.html:58
+#: templates/site/followup.html:20 templates/site/help.html:66
 #: templates/site/text_followup.html:22
 msgid "Feeds"
 msgstr "захранване"
@@ -613,13 +622,6 @@ msgstr "захранване"
 #: templates/site/followup.html:22 templates/site/text_followup.html:24
 msgid "Public feed"
 msgstr "Публично захранване"
-
-#: templates/site/followup.html:22 templates/site/followup.html.py:35
-#: templates/site/help.html:6 templates/site/help.html.py:14
-#: templates/site/text_embed.html:27 templates/site/layout/footer.html:13
-#: templates/site/macros/form_fields.html:15
-msgid "Help"
-msgstr "Помощ"
 
 #: templates/site/followup.html:25
 msgid "Public feed for workspace"
@@ -699,36 +701,58 @@ msgstr ""
 msgid "Glossary"
 msgstr ""
 
-#: templates/site/help.html:22 templates/site/help.html.py:25
+#: templates/site/help.html:22
+#, fuzzy
+msgid "Contents"
+msgstr "Съдържание"
+
+#: templates/site/help.html:24 templates/site/help.html.py:30
+#: templates/site/help.html:33
 msgid "Collaboration"
 msgstr ""
 
-#: templates/site/help.html:26
+#: templates/site/help.html:25 templates/site/help.html.py:37
+#, fuzzy
+msgid "Comments"
+msgstr "коментари"
+
+#: templates/site/help.html:26 templates/site/help.html.py:60
+#, fuzzy
+msgid "Notification and feeds"
+msgstr "Уведомяването е дезактивирано."
+
+#: templates/site/help.html:27 templates/site/help.html.py:77
+#: templates/site/help.html:79
+#, fuzzy
+msgid "Roles"
+msgstr "Роля"
+
+#: templates/site/help.html:28 templates/site/help.html.py:88
+#: templates/site/text_list.html:12
+msgid "Texts"
+msgstr "Текстове"
+
+#: templates/site/help.html:34
 msgid "co-ment 2 collaboration is based on assigning roles for users."
 msgstr ""
 
-#: templates/site/help.html:26 templates/site/help.html.py:37
+#: templates/site/help.html:34 templates/site/help.html.py:45
 msgid "Click here for more details"
 msgstr ""
 
-#: templates/site/help.html:26
+#: templates/site/help.html:34
 msgid ""
 "The basic assumption in the collaboration model is that some users will have "
 "an overall management role, while others will have roles that are defined in "
 "relationship with texts or a given text."
 msgstr ""
 
-#: templates/site/help.html:29
-#, fuzzy
-msgid "Comments"
-msgstr "коментари"
-
-#: templates/site/help.html:32
+#: templates/site/help.html:40
 #, fuzzy
 msgid "Moderation"
 msgstr "Модератор"
 
-#: templates/site/help.html:33
+#: templates/site/help.html:41
 msgid ""
 "Comment moderation is the process of editing/removing comments from a text. "
 "The moderator role is the collection of permissions required to edit/remove "
@@ -741,23 +765,23 @@ msgid ""
 "them."
 msgstr ""
 
-#: templates/site/help.html:36
+#: templates/site/help.html:44
 #, fuzzy
 msgid "States"
 msgstr "Запамети"
 
-#: templates/site/help.html:37
+#: templates/site/help.html:45
 msgid "co-ment uses states to implement moderation policies."
 msgstr ""
 
-#: templates/site/help.html:37
+#: templates/site/help.html:45
 msgid ""
 "Unapproved or pending comments are visible only to Managers, Editors and "
 "Moderators. Approved comments are visible to users with any role. The "
 "pending state exists only when a priori moderation is selected in settings."
 msgstr ""
 
-#: templates/site/help.html:40
+#: templates/site/help.html:48
 msgid ""
 "We believe that an adequate use of tags is sufficient to implement a variety "
 "of workflows for processing comments. You can use tags for signalling TODOs "
@@ -765,12 +789,12 @@ msgid ""
 "according to the issues or topics they address."
 msgstr ""
 
-#: templates/site/help.html:42
+#: templates/site/help.html:50
 #, fuzzy
 msgid "Linking to a comment"
 msgstr "Може да редактира коментар"
 
-#: templates/site/help.html:43
+#: templates/site/help.html:51
 msgid ""
 "You may find yourself needing to link to a comment from another one. In such "
 "case you can do so by copying your target comment's permalink that shows up "
@@ -778,22 +802,22 @@ msgid ""
 "title."
 msgstr ""
 
-#: templates/site/help.html:45
+#: templates/site/help.html:53
 msgid "Scope"
 msgstr ""
 
-#: templates/site/help.html:46
+#: templates/site/help.html:54
 msgid ""
 "The scope of the comment is the part of the text to which it applies. A "
 "comment's scope can be modified by anyone who has a role allowing to modify "
 "the comment."
 msgstr ""
 
-#: templates/site/help.html:48
+#: templates/site/help.html:56
 msgid "Keeping your comments across versions"
 msgstr ""
 
-#: templates/site/help.html:49
+#: templates/site/help.html:57
 msgid ""
 "When you create a new version of the text, comments are duplicated. In case "
 "the text edition did not change the scope of the comment, it will be kept "
@@ -805,39 +829,34 @@ msgid ""
 "simply removed from the new version."
 msgstr ""
 
-#: templates/site/help.html:52
-#, fuzzy
-msgid "Notification and feeds"
-msgstr "Уведомяването е дезактивирано."
-
-#: templates/site/help.html:55
+#: templates/site/help.html:63
 #, fuzzy
 msgid "Email notification"
 msgstr "Уведомления чрез е-майл"
 
-#: templates/site/help.html:56
+#: templates/site/help.html:64
 msgid ""
 "Email notifications are a way for users to be informed by email when a new "
 "comment is added on a text or a text is edited and a new version gets "
 "created."
 msgstr ""
 
-#: templates/site/help.html:59
+#: templates/site/help.html:67
 msgid "Web feed definition on Wikipedia"
 msgstr ""
 
-#: templates/site/help.html:59
+#: templates/site/help.html:67
 msgid ""
 "You can subscribe to the feed for a specific text or to a global feed for "
 "the full workspace."
 msgstr ""
 
-#: templates/site/help.html:61
+#: templates/site/help.html:69
 #, fuzzy
 msgid "Public and private feeds"
 msgstr "Частно захранване"
 
-#: templates/site/help.html:62
+#: templates/site/help.html:70
 msgid ""
 "The public feed includes all the events publically accessible on the "
 "workspace or a specific text. The private feed includes all events: do not "
@@ -845,11 +864,11 @@ msgid ""
 "really want them to know what's happening in it."
 msgstr ""
 
-#: templates/site/help.html:64
+#: templates/site/help.html:72
 msgid "Text embedding"
 msgstr ""
 
-#: templates/site/help.html:65
+#: templates/site/help.html:73
 msgid ""
 "You can embed your text into a page of your own website. Visitors will be "
 "able to add comments without leaving your website if the anonymous users' "
@@ -859,37 +878,32 @@ msgid ""
 "in another tab of your browser."
 msgstr ""
 
-#: templates/site/help.html:69 templates/site/help.html.py:71
-#, fuzzy
-msgid "Roles"
-msgstr "Роля"
-
-#: templates/site/help.html:72
+#: templates/site/help.html:80
 msgid "Roles are predefined sets of permissions."
 msgstr ""
 
-#: templates/site/help.html:73
+#: templates/site/help.html:81
 msgid ""
 "A text is visible to the public (non-logged-in visitors, aka anonymous "
 "users) only if anonymous users are given a role on the text."
 msgstr ""
 
-#: templates/site/help.html:74 templates/site/text_share.html:88
+#: templates/site/help.html:82 templates/site/text_share.html:88
 msgid "Text role"
 msgstr "Роля в текста"
 
-#: templates/site/help.html:75
+#: templates/site/help.html:83
 msgid ""
 "A text role is a role that is set for a specific user on a specific text. It "
 "can be used to override a possibly existing workspace-level role or to give "
 "a user a role on a text (and not on every text in the workspace)."
 msgstr ""
 
-#: templates/site/help.html:76 views/site.py:185
+#: templates/site/help.html:84 views/site.py:185
 msgid "Role model"
 msgstr "Модел на роля"
 
-#: templates/site/help.html:77
+#: templates/site/help.html:85
 msgid ""
 "A role model is a role set useful in a specific use case. When you set up a "
 "co-ment service, you have to select a role model. The default model "
@@ -898,34 +912,42 @@ msgid ""
 "privately shared between a teacher and each student."
 msgstr ""
 
-#: templates/site/help.html:80
-#, fuzzy
-msgid "Text edition"
-msgstr "Следваща модификация"
+#: templates/site/help.html:91
+msgid "Create or upload?"
+msgstr ""
 
-#: templates/site/help.html:83
+#: templates/site/help.html:92
+msgid ""
+"There are 3 main ways to produce a text in co-ment. If you start from "
+"scratch, create your text in markdown format. If you start from an existing "
+"file upload it to a markdown format. If you start from a Web page, create a "
+"text with HTML as format, and copy and paste the full Web page into the "
+"editor."
+msgstr ""
+
+#: templates/site/help.html:96
 #, fuzzy
 msgid "Text formats"
 msgstr "Известия отнасящи се за текста"
 
-#: templates/site/help.html:84
+#: templates/site/help.html:97
 msgid ""
 "There are at this date 3 text formats: markdown (default/preferred format), "
 "HTML and RST."
 msgstr ""
 
-#: templates/site/help.html:88
+#: templates/site/help.html:101
 msgid "Markdown"
 msgstr ""
 
-#: templates/site/help.html:89
+#: templates/site/help.html:102
 msgid ""
 "Unless some import needs make it preferable to use HTML, we recommend that "
 "you use markdown for creating or importing texts. Our software and Web "
 "services use the pandoc extended version of markdown."
 msgstr ""
 
-#: templates/site/help.html:89
+#: templates/site/help.html:102
 msgid "Read more about this"
 msgstr ""
 
@@ -981,7 +1003,7 @@ msgstr ""
 
 #: templates/site/profile.html:33 templates/site/profile_pw.html:33
 #: templates/site/text_create_content.html:45
-#: templates/site/text_create_upload.html:40 templates/site/text_edit.html:36
+#: templates/site/text_create_upload.html:40 templates/site/text_edit.html:37
 #: templates/site/text_settings.html:23 templates/site/text_share.html:153
 #: templates/site/user_activate.html:27 templates/site/user_list.html:210
 #: templates/site/layout/base_workspace_form.html:32
@@ -1152,16 +1174,16 @@ msgstr "Виж"
 msgid "Compare with previous version"
 msgstr "Сравнете с предишни версий"
 
-#: templates/site/text_history.html:105
+#: templates/site/text_history.html:106
 msgid "Revert to this version"
 msgstr "Върнете се към тази версия"
 
-#: templates/site/text_history.html:106 templates/site/text_list.html:80
+#: templates/site/text_history.html:120 templates/site/text_list.html:80
 #: templates/site/text_list.html.py:161
 msgid "Delete"
 msgstr "Изтриване"
 
-#: templates/site/text_history.html:112
+#: templates/site/text_history.html:126
 msgid "Are you sure you want to delete this version?"
 msgstr "Сигурни ли сте, че искате да изтриете тази версия?"
 
@@ -1202,15 +1224,11 @@ msgstr "Сравнете със следващата версия"
 msgid "Next version"
 msgstr "Следваща версия"
 
-#: templates/site/text_history_version.html:45 views/texts.py:478
-#: views/texts.py:479
+#: templates/site/text_history_version.html:45 views/texts.py:496
+#: views/texts.py:497
 #, python-format
 msgid "by %(author)s"
 msgstr "от %(author)s"
-
-#: templates/site/text_list.html:12
-msgid "Texts"
-msgstr "Текстове"
 
 #: templates/site/text_list.html:47 templates/site/text_share.html:35
 #: templates/site/user_list.html:7 templates/site/user_list.html.py:32
@@ -1360,11 +1378,11 @@ msgstr "Предпочитания"
 msgid "Text preferences"
 msgstr "Предпочитания за текста"
 
-#: templates/site/text_view_frame.html:100
+#: templates/site/text_view_frame.html:102
 msgid "Which comments?"
 msgstr "Кой коментар?"
 
-#: templates/site/text_view_frame.html:108
+#: templates/site/text_view_frame.html:110
 msgid "How should comments' scope be shown in text?"
 msgstr "Как да бъде показан обхватът на коментарите в текста?"
 
@@ -1666,7 +1684,7 @@ msgstr "Дезактивиране на уведомяването?"
 msgid "Private notifications feed reseted."
 msgstr "Частното захранване на уведомяването е реинициализирано."
 
-#: views/site.py:82 views/texts.py:130 views/user.py:545
+#: views/site.py:82 views/texts.py:131 views/user.py:545
 msgid "You're logged in!"
 msgstr "Вие сте включени!"
 
@@ -1764,64 +1782,64 @@ msgstr ""
 msgid "Password changed"
 msgstr ""
 
-#: views/texts.py:163
+#: views/texts.py:164
 #, python-format
 msgid "%(nb_texts)i text(s) deleted"
 msgstr "%(nb_texts)i изтрит(и) текстове"
 
-#: views/texts.py:208
+#: views/texts.py:209
 #, python-format
 msgid "Text %(text_title)s deleted"
 msgstr "Текстът %(text_title)s е изтит"
 
-#: views/texts.py:219
+#: views/texts.py:220
 #, python-format
 msgid "Text version %(text_version_title)s deleted"
 msgstr "Версията на текста %(text_version_title)s е изтит"
 
-#: views/texts.py:604
+#: views/texts.py:622
 msgid "Note (optional)"
 msgstr "Бележка (по избор)"
 
-#: views/texts.py:607
+#: views/texts.py:625
 msgid "Add a note to explain the modifications made to the text"
 msgstr "Добавете бележка за да обясните промените извършени върху текста"
 
-#: views/texts.py:617
+#: views/texts.py:635
 msgid "New version (optional)"
 msgstr "Нова версия (по избор)"
 
-#: views/texts.py:620
+#: views/texts.py:638
 msgid "Create a new version of this text (recommended)"
 msgstr "Създайте нова версия на текста (препоръчително)"
 
-#: views/texts.py:623
+#: views/texts.py:641
 msgid "Keep comments (optional)"
 msgstr "Запазете коментарите (по избор)"
 
-#: views/texts.py:626
+#: views/texts.py:644
 msgid "Keep comments (if not affected by the edit)"
 msgstr "Запазете коментарите  (ако не са засегнати от редактирането)"
 
-#: views/texts.py:690
+#: views/texts.py:708
 msgid "Name (optional)"
 msgstr "Име (по избор)"
 
-#: views/texts.py:691
+#: views/texts.py:709
 msgid "Email (optional)"
 msgstr "Майл (по избор)"
 
-#: views/texts.py:741
+#: views/texts.py:761
 #, python-format
 msgid "A new version (copied from version %(version_title)s) has been created"
 msgstr "Нова версия (копирана от %(version_title)s версия ) е създадена"
 
-#: views/texts.py:849 views/user.py:79 views/user.py:99
+#: views/texts.py:869 views/user.py:79 views/user.py:99
 #, fuzzy, python-format
 msgid "%(count)i user(s) role modified"
 msgstr "роля(и) на потребителя са изменени"
 
-#: views/texts.py:907
+#: views/texts.py:927
 msgid "Text settings updated"
 msgstr "Параметрите са актуализирани"
 
@@ -1986,6 +2004,10 @@ msgid ""
 msgstr ""
 "Регистрацията завърши успешно, едно потвърдително съобщение е изпратено на "
 "вашия имейл"
+
+#, fuzzy
+#~ msgid "Text edition"
+#~ msgstr "Следваща модификация"
 
 #, fuzzy
 #~ msgid "Your password has been reset."

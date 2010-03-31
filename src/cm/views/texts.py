@@ -686,7 +686,7 @@ class EditTextForm(ModelForm):
 
         # override manually to disabled
         format_field = self.fields['format']
-        format_field.widget.attrs = attrs={'disabled':'disabled'}
+        format_field.widget.attrs = {'disabled':'disabled'}
         format_field.required = False
 
         self.fields['format'] = format_field

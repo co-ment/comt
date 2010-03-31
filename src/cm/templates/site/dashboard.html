@@ -45,8 +45,8 @@ $(function() {
 		</thead>
 		<tbody>
 	        <tr><td>	
-            {% if can_create_text %}<div class="dash_action"><a class="" href="{% url text-create-content %}"><img align="middle" src="{{ CM_MEDIA_PREFIX }}img/sop_write.png"/>&nbsp;{% blocktrans %}Write a text{% endblocktrans %}</a></div>{% endif %}
-            {% if can_create_text %}<div class="dash_action"><a class="" href="{% url text-create-upload %}"><img align="middle" src="{{ CM_MEDIA_PREFIX }}img/sop_upload.png"/>&nbsp;{% blocktrans %}Upload a text{% endblocktrans %}</a></div>{% endif %}
+            {% if can_create_text %}<div class="dash_action"><a class="" href="{% url text-create-content %}"><img align="middle" src="{{ CM_MEDIA_PREFIX }}img/sop_write.png"/>&nbsp;{% blocktrans %}Create a text{% endblocktrans %}</a>&nbsp;(<a target="_blank" title="{% blocktrans %}Help{% endblocktrans %}" href="{% url help-format %}#format">?</a>)</div>{% endif %}
+            {% if can_create_text %}<div class="dash_action"><a class="" href="{% url text-create-upload %}"><img align="middle" src="{{ CM_MEDIA_PREFIX }}img/sop_upload.png"/>&nbsp;{% blocktrans %}Upload a text{% endblocktrans %}</a>&nbsp;(<a target="_blank" title="{% blocktrans %}Help{% endblocktrans %}" href="{% url help-format %}#format">?</a>)</div>{% endif %}
             {% if can_manage_workspace %}<div class="dash_action"><a class="" href="{% url user-add %}"><img align="middle" src="{{ CM_MEDIA_PREFIX }}img/group_add.png"/>&nbsp;{% blocktrans %}Invite user{% endblocktrans %}</a></div>{% endif %}
             <div class="dash_action"><a class="" href="{% url profile %}"><img align="middle" src="{{ CM_MEDIA_PREFIX }}img/user_edit.png"/>&nbsp;{% blocktrans %}Edit your profile{% endblocktrans %}</a></div>
             <div class="dash_action"><a class="" href="{% url text %}"><img align="middle" src="{{ CM_MEDIA_PREFIX }}img/page_white_stack.png"/>&nbsp;{% blocktrans %}View text list{% endblocktrans %}</a></div>

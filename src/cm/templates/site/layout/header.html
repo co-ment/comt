@@ -7,7 +7,7 @@
 {% if user.is_authenticated %}<b>{{ user.username }}</b> ·{% endif %} 
    <a title="{% blocktrans %}Home{% endblocktrans %}" href="{% url index %}">{% blocktrans %}Home{% endblocktrans %}</a>
    {% if can_create_text %}    
- · <a title="{% blocktrans %}Write a text{% endblocktrans %}" href="{% url text-create-content %}">{% blocktrans %}Write a text{% endblocktrans %}</a>
+ · <a title="{% blocktrans %}Create a text{% endblocktrans %}" href="{% url text-create-content %}">{% blocktrans %}Create a text{% endblocktrans %}</a>
  · <a title="{% blocktrans %}Upload a text{% endblocktrans %}" href="{% url text-create-upload %}">{% blocktrans %}Upload a text{% endblocktrans %}</a>
    {% endif %}
 {% if user.is_authenticated %}

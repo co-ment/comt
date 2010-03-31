@@ -19,14 +19,22 @@
 
 <h2>{% blocktrans %}Glossary{% endblocktrans %}</h2>
 
-<h3>{% blocktrans %}Collaboration{% endblocktrans %}</h3>
+<h3>{% blocktrans %}Contents{% endblocktrans %}</h3>
+
+<a href="#Collaboration">{% blocktrans %}Collaboration{% endblocktrans %}</a><br />
+<a href="#Comments">{% blocktrans %}Comments{% endblocktrans %}</a><br />
+<a href="#Notifandfeeds">{% blocktrans %}Notification and feeds{% endblocktrans %}</a><br />
+<a href="#Roles">{% blocktrans %}Roles{% endblocktrans %}</a><br />
+<a href="#Texts">{% blocktrans %}Texts{% endblocktrans %}</a><br />
+
+<a name="Collaboration"></a><h3>{% blocktrans %}Collaboration{% endblocktrans %}</h3>
 
 <dl>
   <dt><a name="collaboration"></a>{% blocktrans %}Collaboration{% endblocktrans %}</dt>
     <dd>{% blocktrans %}co-ment 2 collaboration is based on assigning roles for users.{% endblocktrans %} <a href="#roles">{% blocktrans %}Click here for more details{% endblocktrans %}</a>. {% blocktrans %}The basic assumption in the collaboration model is that some users will have an overall management role, while others will have roles that are defined in relationship with texts or a given text.{% endblocktrans %}
 </dl>
 
-<h3>{% blocktrans %}Comments{% endblocktrans %}</h3>
+<a name="Comments"></a><h3>{% blocktrans %}Comments{% endblocktrans %}</h3>
 
 <dl>
   <dt><a name="comment_moderation"></a>{% blocktrans %}Moderation{% endblocktrans %}</dt>
@@ -49,7 +57,7 @@
     <dd>{% blocktrans %}When you create a new version of the text, comments are duplicated. In case the text edition did not change the scope of the comment, it will be kept "as is". If the text of the comment scope has been modified then a decision has to be made regarding the conservation of such comments in the new version: you'll be given a choice of either keep them in the new version as "detached" from the text (they do not have a scope in the new version's but are still visible when browsing, and you can give them a new scope) or simply removed from the new version.{% endblocktrans %}</dd>
 </dl>
 
-<h3>{% blocktrans %}Notification and feeds{% endblocktrans %}</h3>
+<a name="Notifandfeeds"></a><h3>{% blocktrans %}Notification and feeds{% endblocktrans %}</h3>
 
 <dl>    
   <dt><a name="email_notifications"></a>{% blocktrans %}Email notification{% endblocktrans %}</dt>
@@ -66,7 +74,7 @@
     
 </dl>
 
-<h3>{% blocktrans %}Roles{% endblocktrans %}</h3>
+<a name="Roles"></a><h3>{% blocktrans %}Roles{% endblocktrans %}</h3>
 <dl>
   <dt><a name="roles"></a>{% blocktrans %}Roles{% endblocktrans %}</dt>
     <dd>{% blocktrans %}Roles are predefined sets of permissions.{% endblocktrans %}</dd>
@@ -77,7 +85,12 @@
     <dd>{% blocktrans %}A role model is a role set useful in a specific use case. When you set up a co-ment service, you have to select a role model. The default model addresses most cases. A specialized role model such as "teacher" includes specific roles making in this particular case possible for comments to be privately shared between a teacher and each student.{% endblocktrans %}</dd>
 </dl>
 
-<h3>{% blocktrans %}Text edition{% endblocktrans %}</h3>
+<a name="Texts"></a><h3>{% blocktrans %}Texts{% endblocktrans %}</h3>
+
+<dl>
+  <dt><a name="create-upload"></a>{% blocktrans %}Create or upload?{% endblocktrans %}</dt>
+    <dd>{% blocktrans %}There are 3 main ways to produce a text in co-ment. If you start from scratch, create your text in markdown format. If you start from an existing file upload it to a markdown format. If you start from a Web page, create a text with HTML as format, and copy and paste the full Web page into the editor.{% endblocktrans %}</dd>
+</dl>
 
 <dl>
   <dt><a name="format"></a>{% blocktrans %}Text formats{% endblocktrans %}</dt>

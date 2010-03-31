@@ -90,8 +90,8 @@ urlpatterns += patterns('',
      url(r'^text/(?P<key>\w*)/user/mass-add/$', user_mass_add, name="user-mass-add-text"),
      
      # site
-     url(r'^contact/', contact, name="contact"),
-     url(r'^help/', help, name="help"),
+     url(r'^contact/$', contact, name="contact"),
+     url(r'^help/$', help, name="help"),
      
      # notifications
      ## workspace followup
