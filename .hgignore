@@ -9,8 +9,8 @@ syntax: regexp
 ^bin$
 syntax: regexp
 ^develop-eggs$
-syntax: regexp
-^eggs/(?!\.hidden).+$
+syntax: glob
+eggs/**
 syntax: regexp
 ^src/comt\.egg-info$
 syntax: regexp
