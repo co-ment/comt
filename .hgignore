@@ -10,7 +10,7 @@ syntax: regexp
 syntax: regexp
 ^develop-eggs$
 syntax: regexp
-^eggs$
+^eggs/(?!\.hidden).+$
 syntax: regexp
 ^src/comt\.egg-info$
 syntax: regexp
