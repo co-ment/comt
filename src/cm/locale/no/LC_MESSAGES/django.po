@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-31 11:36+0200\n"
-"PO-Revision-Date: 2010-02-24 01:37+0900\n"
-"Last-Translator: dev <dev@sopinspace.com>\n"
+"PO-Revision-Date: 2010-04-07 09:45+0200\n"
+"Last-Translator: km@krot.org\n"
 "Language-Team:  <no@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -130,19 +130,19 @@ msgid "Invitation"
 msgstr "Invitasjon"
 
 #: models.py:746
-#, fuzzy, python-format
+#, python-format
 msgid "Text %(link_to_text)s edited by %(creator)s"
-msgstr "Tekst %(link_to_text)s endret"
+msgstr "Tekst %(link_to_text)s endret av %(creator)s"
 
 #: models.py:747
-#, fuzzy, python-format
+#, python-format
 msgid "Text %(link_to_text)s edited (new version created) by %(creator)s"
-msgstr "Tekst %(link_to_text)s endret (ny versjon opprettet)"
+msgstr "Tekst %(link_to_text)s endret (ny versjon opprettet) av %(creator)s"
 
 #: models.py:748
-#, fuzzy, python-format
+#, python-format
 msgid "Text %(link_to_text)s added by %(creator)s"
-msgstr "Tekst %(link_to_text)s lagt til"
+msgstr "Tekst %(link_to_text)s lagt til av %(creator)s"
 
 #: models.py:749
 #, python-format
@@ -150,10 +150,10 @@ msgid "Text %(link_to_text)s removed"
 msgstr "Tekst %(link_to_text)s slettet"
 
 #: models.py:750
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Comment %(link_to_comment)s added on text %(link_to_text)s by %(creator)s"
-msgstr "Merknad %(link_to_comment)s lagt til teksten %(link_to_text)s"
+msgstr "Merknad %(link_to_comment)s lagt til teksten %(link_to_text)s av %(creator)s"
 
 #: models.py:751
 #, python-format
@@ -191,9 +191,8 @@ msgid "User %(username)s has activated his account"
 msgstr "Bruker %(username)s har aktivert kontoen"
 
 #: models.py:806
-#, fuzzy
 msgid "anonymous"
-msgstr "Anonyme brukere"
+msgstr "anonym bruker"
 
 #: models.py:813 models.py:821
 #, python-format
@@ -402,9 +401,8 @@ msgstr "Handlinger"
 #: templates/site/text_create_content.html:28
 #: templates/site/text_create_upload.html:26 templates/site/text_list.html:40
 #: templates/site/layout/header.html:10
-#, fuzzy
 msgid "Create a text"
-msgstr "Skriv tekst"
+msgstr "Opprett en tekst"
 
 #: templates/site/dashboard.html:48 templates/site/dashboard.html.py:49
 #: templates/site/followup.html:22 templates/site/followup.html.py:35
@@ -595,7 +593,7 @@ msgid "created %(duration)s ago"
 msgstr "opprettet for %(duration)s siden"
 
 #: templates/site/dashboard_bloc_recent_comments.html:24
-#, fuzzy, python-format
+#, python-format
 msgid "by %(username)s"
 msgstr "av %(username)s"
 
@@ -671,19 +669,19 @@ msgstr "Abonner på varsler for svar i diskusjoner hvor du har deltatt"
 #: templates/site/forgot_pw.html:6 templates/site/forgot_pw.html.py:14
 #: templates/site/forgot_pw.html:27
 msgid "Reset my password"
-msgstr ""
+msgstr "Nullstill mitt passord"
 
 #: templates/site/forgot_pw.html:35
 msgid "This link is invalid."
-msgstr ""
+msgstr "Denne adressen er ugyldig."
 
 #: templates/site/forgot_pw.html:40 templates/site/login_form.html:21
 msgid "Forgot password?"
-msgstr ""
+msgstr "Glemt passord?"
 
 #: templates/site/help.html:16
 msgid "General Presentation"
-msgstr ""
+msgstr "Presentasjon"
 
 #: templates/site/help.html:18
 msgid "co-ment is a web based text annotation system."
@@ -691,33 +689,29 @@ msgstr ""
 
 #: templates/site/help.html:20
 msgid "Glossary"
-msgstr ""
+msgstr "Ord og begreper"
 
 #: templates/site/help.html:22
-#, fuzzy
 msgid "Contents"
 msgstr "Innhold"
 
 #: templates/site/help.html:24 templates/site/help.html.py:30
 #: templates/site/help.html:33
 msgid "Collaboration"
-msgstr ""
+msgstr "Samarbeid"
 
 #: templates/site/help.html:25 templates/site/help.html.py:37
-#, fuzzy
 msgid "Comments"
-msgstr "merknader"
+msgstr "Merknader"
 
 #: templates/site/help.html:26 templates/site/help.html.py:60
-#, fuzzy
 msgid "Notification and feeds"
-msgstr "Varsel stoppet."
+msgstr "Varsler og strømmer"
 
 #: templates/site/help.html:27 templates/site/help.html.py:77
 #: templates/site/help.html:79
-#, fuzzy
 msgid "Roles"
-msgstr "Rolle"
+msgstr "Roller"
 
 #: templates/site/help.html:28 templates/site/help.html.py:88
 #: templates/site/text_list.html:12
@@ -740,9 +734,8 @@ msgid ""
 msgstr ""
 
 #: templates/site/help.html:40
-#, fuzzy
 msgid "Moderation"
-msgstr "Moderator"
+msgstr ""
 
 #: templates/site/help.html:41
 msgid ""
@@ -758,9 +751,8 @@ msgid ""
 msgstr ""
 
 #: templates/site/help.html:44
-#, fuzzy
 msgid "States"
-msgstr "Lagre"
+msgstr ""
 
 #: templates/site/help.html:45
 msgid "co-ment uses states to implement moderation policies."
@@ -782,9 +774,8 @@ msgid ""
 msgstr ""
 
 #: templates/site/help.html:50
-#, fuzzy
 msgid "Linking to a comment"
-msgstr "Kan endre merknader"
+msgstr ""
 
 #: templates/site/help.html:51
 msgid ""
@@ -822,9 +813,8 @@ msgid ""
 msgstr ""
 
 #: templates/site/help.html:63
-#, fuzzy
 msgid "Email notification"
-msgstr "Epostvarsler"
+msgstr ""
 
 #: templates/site/help.html:64
 msgid ""
@@ -844,9 +834,8 @@ msgid ""
 msgstr ""
 
 #: templates/site/help.html:69
-#, fuzzy
 msgid "Public and private feeds"
-msgstr "Privat strøm"
+msgstr ""
 
 #: templates/site/help.html:70
 msgid ""
@@ -918,9 +907,8 @@ msgid ""
 msgstr ""
 
 #: templates/site/help.html:96
-#, fuzzy
 msgid "Text formats"
-msgstr "Tekstvarsler"
+msgstr ""
 
 #: templates/site/help.html:97
 msgid ""
@@ -991,7 +979,7 @@ msgstr "Profil"
 
 #: templates/site/profile.html:19 templates/site/profile_pw.html:19
 msgid "Password"
-msgstr ""
+msgstr "Passord"
 
 #: templates/site/profile.html:33 templates/site/profile_pw.html:33
 #: templates/site/text_create_content.html:45
@@ -1010,7 +998,7 @@ msgstr "Registrering på %(wname)s"
 #: templates/site/reset_pw.html:6 templates/site/reset_pw.html.py:14
 #: templates/site/reset_pw.html:24
 msgid "Reset your password"
-msgstr ""
+msgstr "Nullstill ditt passord"
 
 #: templates/site/settings.html:5 templates/site/settings_design.html:5
 #: templates/site/text_list.html:181 templates/site/macros/main_tabs.html:14
@@ -1758,12 +1746,12 @@ msgstr ""
 msgid ""
 "A link to reset your password has been sent to the profile email. Please "
 "check your email."
-msgstr ""
+msgstr "Adresse for å nullstille ditt passord er blitt sendt til din epostadresse. Sjekk "
+"din epost."
 
 #: views/site.py:257 views/user.py:428
-#, fuzzy
 msgid "Password changed"
-msgstr "Teksten %(text_title)s har blitt opprettet"
+msgstr "Passord har blitt endret"
 
 #: views/texts.py:164
 #, python-format
