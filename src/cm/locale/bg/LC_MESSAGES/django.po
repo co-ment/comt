@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-31 11:35+0200\n"
+"POT-Creation-Date: 2010-04-14 16:59+0200\n"
 "PO-Revision-Date: 2010-03-10 20:58+0100\n"
 "Last-Translator: bistra <bistra.raykova@free.fr>\n"
 "Language-Team: Français <kde-i18n-doc@kde.org>\n"
@@ -60,7 +60,7 @@ msgid "Tags input must be no longer than 250 characters."
 msgstr "Таговете не трябва да надвишават 250 символа."
 
 #: models.py:178 templates/site/text_history.html:79 views/create.py:30
-#: views/create.py:45 views/texts.py:618
+#: views/create.py:45 views/texts.py:622
 msgid "Title"
 msgstr "Заглавие"
 
@@ -68,7 +68,7 @@ msgstr "Заглавие"
 msgid "Format"
 msgstr "Формат"
 
-#: models.py:180 views/texts.py:710
+#: models.py:180 views/texts.py:714
 msgid "Content"
 msgstr "Съдържание"
 
@@ -386,7 +386,7 @@ msgstr "Изпращане"
 #: templates/site/settings.html:29 templates/site/settings_design.html:29
 #: templates/site/text_create_content.html:47
 #: templates/site/text_create_upload.html:42 templates/site/user_add.html:34
-#: templates/site/user_add_text.html:38 templates/site/user_contact.html:25
+#: templates/site/user_add_text.html:37 templates/site/user_contact.html:25
 #: templates/site/user_edit.html:29 templates/site/user_mass_add.html:34
 #: templates/site/user_mass_add_text.html:38
 msgid "Cancel"
@@ -1797,49 +1797,49 @@ msgstr "Текстът %(text_title)s е изтит"
 msgid "Text version %(text_version_title)s deleted"
 msgstr "Версията на текста %(text_version_title)s е изтит"
 
-#: views/texts.py:622
+#: views/texts.py:626
 msgid "Note (optional)"
 msgstr "Бележка (по избор)"
 
-#: views/texts.py:625
+#: views/texts.py:629
 msgid "Add a note to explain the modifications made to the text"
 msgstr "Добавете бележка за да обясните промените извършени върху текста"
 
-#: views/texts.py:635
+#: views/texts.py:639
 msgid "New version (optional)"
 msgstr "Нова версия (по избор)"
 
-#: views/texts.py:638
+#: views/texts.py:642
 msgid "Create a new version of this text (recommended)"
 msgstr "Създайте нова версия на текста (препоръчително)"
 
-#: views/texts.py:641
+#: views/texts.py:645
 msgid "Keep comments (optional)"
 msgstr "Запазете коментарите (по избор)"
 
-#: views/texts.py:644
+#: views/texts.py:648
 msgid "Keep comments (if not affected by the edit)"
 msgstr "Запазете коментарите  (ако не са засегнати от редактирането)"
 
-#: views/texts.py:708
+#: views/texts.py:712
 msgid "Name (optional)"
 msgstr "Име (по избор)"
 
-#: views/texts.py:709
+#: views/texts.py:713
 msgid "Email (optional)"
 msgstr "Майл (по избор)"
 
-#: views/texts.py:761
+#: views/texts.py:765
 #, python-format
 msgid "A new version (copied from version %(version_title)s) has been created"
 msgstr "Нова версия (копирана от %(version_title)s версия ) е създадена"
 
-#: views/texts.py:869 views/user.py:79 views/user.py:99
+#: views/texts.py:873 views/user.py:79 views/user.py:99
 #, fuzzy, python-format
 msgid "%(count)i user(s) role modified"
 msgstr "роля(и) на потребителя са изменени"
 
-#: views/texts.py:927
+#: views/texts.py:931
 msgid "Text settings updated"
 msgstr "Параметрите са актуализирани"
 
@@ -1905,10 +1905,11 @@ msgstr[0] "Потребителят %(nb_users)d е добавен"
 msgstr[1] "Потребителите %(nb_users)d са добавени"
 
 #: views/user.py:277
-msgid "Save user"
-msgid_plural "Save users"
-msgstr[0] "Запамети този потребител"
-msgstr[1] "Запамети тези потребители"
+#, fuzzy
+msgid "Add user"
+msgid_plural "Add users"
+msgstr[0] "Добавяне на нов потребител"
+msgstr[1] "Добавяне на нов потребител"
 
 #: views/user.py:299
 msgid "This username is already in use. Please supply a different username."
@@ -2004,6 +2005,11 @@ msgid ""
 msgstr ""
 "Регистрацията завърши успешно, едно потвърдително съобщение е изпратено на "
 "вашия имейл"
+
+#~ msgid "Save user"
+#~ msgid_plural "Save users"
+#~ msgstr[0] "Запамети този потребител"
+#~ msgstr[1] "Запамети тези потребители"
 
 #, fuzzy
 #~ msgid "Text edition"

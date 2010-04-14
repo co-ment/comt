@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-31 11:37+0200\n"
-"PO-Revision-Date: 2010-03-31 11:40+0100\n"
+"POT-Creation-Date: 2010-04-14 17:01+0200\n"
+"PO-Revision-Date: 2010-04-14 17:04+0100\n"
 "Last-Translator: dev <dev@sopinspace.com>\n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -62,7 +62,7 @@ msgstr "La longueur des tags est limitée à 250 caractères."
 #: templates/site/text_history.html:79
 #: views/create.py:30
 #: views/create.py:45
-#: views/texts.py:618
+#: views/texts.py:622
 msgid "Title"
 msgstr "Titre"
 
@@ -71,7 +71,7 @@ msgid "Format"
 msgstr "Format"
 
 #: models.py:180
-#: views/texts.py:710
+#: views/texts.py:714
 msgid "Content"
 msgstr "Texte"
 
@@ -394,7 +394,7 @@ msgstr "Envoyer"
 #: templates/site/text_create_content.html:47
 #: templates/site/text_create_upload.html:42
 #: templates/site/user_add.html:34
-#: templates/site/user_add_text.html:38
+#: templates/site/user_add_text.html:37
 #: templates/site/user_contact.html:25
 #: templates/site/user_edit.html:29
 #: templates/site/user_mass_add.html:34
@@ -1751,51 +1751,51 @@ msgstr "texte %(text_title)s supprimé"
 msgid "Text version %(text_version_title)s deleted"
 msgstr "Version %(text_version_title)s supprimée"
 
-#: views/texts.py:622
+#: views/texts.py:626
 msgid "Note (optional)"
 msgstr "Note (facultative)"
 
-#: views/texts.py:625
+#: views/texts.py:629
 msgid "Add a note to explain the modifications made to the text"
 msgstr "Ajouter une note pour expliquer les modifications apportées au texte"
 
-#: views/texts.py:635
+#: views/texts.py:639
 msgid "New version (optional)"
 msgstr "Nouvelle version (facultative)"
 
-#: views/texts.py:638
+#: views/texts.py:642
 msgid "Create a new version of this text (recommended)"
 msgstr "créér une nouvelle version de ce texte (recommandé)"
 
-#: views/texts.py:641
+#: views/texts.py:645
 msgid "Keep comments (optional)"
 msgstr "Conserver les commentaires (facultatif)"
 
-#: views/texts.py:644
+#: views/texts.py:648
 msgid "Keep comments (if not affected by the edit)"
 msgstr "Conserver les commentaires dont la portée n'a pas été affectée par l'édition"
 
-#: views/texts.py:708
+#: views/texts.py:712
 msgid "Name (optional)"
 msgstr "Nom (facultatif)"
 
-#: views/texts.py:709
+#: views/texts.py:713
 msgid "Email (optional)"
 msgstr "Email (facultatif)"
 
-#: views/texts.py:761
+#: views/texts.py:765
 #, python-format
 msgid "A new version (copied from version %(version_title)s) has been created"
 msgstr "Une nouvelle version (copiée depuis la version %(version_title)s) a été créée"
 
-#: views/texts.py:869
+#: views/texts.py:873
 #: views/user.py:79
 #: views/user.py:99
 #, python-format
 msgid "%(count)i user(s) role modified"
 msgstr "%(count)i rôle(s) d'utilisateur modifié(s)"
 
-#: views/texts.py:927
+#: views/texts.py:931
 msgid "Text settings updated"
 msgstr "Paramètres mis à jour"
 
@@ -1853,10 +1853,10 @@ msgstr[0] "%(nb_users)d utilisateur ajouté"
 msgstr[1] "%(nb_users)d utilisateurs ajoutés"
 
 #: views/user.py:277
-msgid "Save user"
-msgid_plural "Save users"
-msgstr[0] "Enregistrer l'utilisateur"
-msgstr[1] "Enregistrer les utilisateurs"
+msgid "Add user"
+msgid_plural "Add users"
+msgstr[0] "Ajouter l'utilisateur"
+msgstr[1] "Ajouter les utilisateurs"
 
 #: views/user.py:299
 msgid "This username is already in use. Please supply a different username."
@@ -1944,6 +1944,10 @@ msgstr "Enregistrement réussi, vous recevrez un message de confirmation quand u
 msgid "You've been registered, please check your email for the confirm message."
 msgstr "Enregistrement réussi, un message de confirmation vous a été envoyé"
 
+#~ msgid "Save user"
+#~ msgid_plural "Save users"
+#~ msgstr[0] "Enregistrer l'utilisateur"
+#~ msgstr[1] "Enregistrer les utilisateurs"
 #~ msgid "Text edition"
 #~ msgstr "Edition du texte"
 #~ msgid "Your password has been reset."

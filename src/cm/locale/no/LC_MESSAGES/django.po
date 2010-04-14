@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-31 11:36+0200\n"
+"POT-Creation-Date: 2010-04-14 17:00+0200\n"
 "PO-Revision-Date: 2010-04-07 09:45+0200\n"
 "Last-Translator: km@krot.org\n"
 "Language-Team:  <no@li.org>\n"
@@ -61,7 +61,7 @@ msgid "Tags input must be no longer than 250 characters."
 msgstr "Samlet lengde på etiketter kan ikke overstige 250 tegn."
 
 #: models.py:178 templates/site/text_history.html:79 views/create.py:30
-#: views/create.py:45 views/texts.py:618
+#: views/create.py:45 views/texts.py:622
 msgid "Title"
 msgstr "Overskrift"
 
@@ -69,7 +69,7 @@ msgstr "Overskrift"
 msgid "Format"
 msgstr "Format"
 
-#: models.py:180 views/texts.py:710
+#: models.py:180 views/texts.py:714
 msgid "Content"
 msgstr "Innhold"
 
@@ -153,7 +153,8 @@ msgstr "Tekst %(link_to_text)s slettet"
 #, python-format
 msgid ""
 "Comment %(link_to_comment)s added on text %(link_to_text)s by %(creator)s"
-msgstr "Merknad %(link_to_comment)s lagt til teksten %(link_to_text)s av %(creator)s"
+msgstr ""
+"Merknad %(link_to_comment)s lagt til teksten %(link_to_text)s av %(creator)s"
 
 #: models.py:751
 #, python-format
@@ -383,7 +384,7 @@ msgstr "Send"
 #: templates/site/settings.html:29 templates/site/settings_design.html:29
 #: templates/site/text_create_content.html:47
 #: templates/site/text_create_upload.html:42 templates/site/user_add.html:34
-#: templates/site/user_add_text.html:38 templates/site/user_contact.html:25
+#: templates/site/user_add_text.html:37 templates/site/user_contact.html:25
 #: templates/site/user_edit.html:29 templates/site/user_mass_add.html:34
 #: templates/site/user_mass_add_text.html:38
 msgid "Cancel"
@@ -1746,8 +1747,9 @@ msgstr ""
 msgid ""
 "A link to reset your password has been sent to the profile email. Please "
 "check your email."
-msgstr "Adresse for å nullstille ditt passord er blitt sendt til din epostadresse. Sjekk "
-"din epost."
+msgstr ""
+"Adresse for å nullstille ditt passord er blitt sendt til din epostadresse. "
+"Sjekk din epost."
 
 #: views/site.py:257 views/user.py:428
 msgid "Password changed"
@@ -1768,49 +1770,49 @@ msgstr "Tekstet %(text_title)s slettet"
 msgid "Text version %(text_version_title)s deleted"
 msgstr "Tekstversjon %(text_version_title)s slettet"
 
-#: views/texts.py:622
+#: views/texts.py:626
 msgid "Note (optional)"
 msgstr "Kommentar (valgfritt)"
 
-#: views/texts.py:625
+#: views/texts.py:629
 msgid "Add a note to explain the modifications made to the text"
 msgstr "Legg til en kommentar for å beskrive foretatte endringer i teksten"
 
-#: views/texts.py:635
+#: views/texts.py:639
 msgid "New version (optional)"
 msgstr "Ny versjon (valgfritt)"
 
-#: views/texts.py:638
+#: views/texts.py:642
 msgid "Create a new version of this text (recommended)"
 msgstr "Opprett ny versjon av teksten (anbefales)"
 
-#: views/texts.py:641
+#: views/texts.py:645
 msgid "Keep comments (optional)"
 msgstr "Behold merknader (valgfritt)"
 
-#: views/texts.py:644
+#: views/texts.py:648
 msgid "Keep comments (if not affected by the edit)"
 msgstr "Behold merknadene (dersom de ikke er påvirket av endringene i teksten)"
 
-#: views/texts.py:708
+#: views/texts.py:712
 msgid "Name (optional)"
 msgstr "Navn (valgfritt)"
 
-#: views/texts.py:709
+#: views/texts.py:713
 msgid "Email (optional)"
 msgstr "Epost (valgfritt)"
 
-#: views/texts.py:761
+#: views/texts.py:765
 #, python-format
 msgid "A new version (copied from version %(version_title)s) has been created"
 msgstr "Ny versjon (kopiert fra versjon %(version_title)s) har blitt opprettet"
 
-#: views/texts.py:869 views/user.py:79 views/user.py:99
+#: views/texts.py:873 views/user.py:79 views/user.py:99
 #, python-format
 msgid "%(count)i user(s) role modified"
 msgstr "Roller for %(count)i bruker(e) endret"
 
-#: views/texts.py:927
+#: views/texts.py:931
 msgid "Text settings updated"
 msgstr "Tekstinnstillinger oppdatert"
 
@@ -1875,10 +1877,11 @@ msgstr[0] "%(nb_users)d bruker opprettet"
 msgstr[1] "%(nb_users)d brukere opprettet"
 
 #: views/user.py:277
-msgid "Save user"
-msgid_plural "Save users"
-msgstr[0] "Lagre bruker"
-msgstr[1] "Lagre brukere"
+#, fuzzy
+msgid "Add user"
+msgid_plural "Add users"
+msgstr[0] "Opprett ny bruker"
+msgstr[1] "Opprett ny bruker"
 
 #: views/user.py:299
 msgid "This username is already in use. Please supply a different username."
@@ -1971,6 +1974,11 @@ msgstr ""
 msgid ""
 "You've been registered, please check your email for the confirm message."
 msgstr "Du er blitt registert. Se din epost for en melding med bekreftelsen."
+
+#~ msgid "Save user"
+#~ msgid_plural "Save users"
+#~ msgstr[0] "Lagre bruker"
+#~ msgstr[1] "Lagre brukere"
 
 #, fuzzy
 #~ msgid "Text edition"
