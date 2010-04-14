@@ -274,7 +274,7 @@ def user_add(request, key=None, mass=False):
         template = 'site/user_mass_add.html' if mass else 'site/user_add.html'
 
     return render_to_response(template, {'forms' : [userform, userprofileform , userroleform, noteform, localroleform],
-                                                               'save_name' : ungettext(u'Save user', u'Save users', 2 if mass else 1),
+                                                               'save_name' : ungettext(u'Add user', u'Add users', 2 if mass else 1),
                                                                'mass' : mass,
                                                                'text' : text,
                                                                 }, context_instance=RequestContext(request))
