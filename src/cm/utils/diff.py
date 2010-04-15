@@ -113,3 +113,41 @@ def createlist(x, b=0):
             else: cur += c
     out.append(cur)
     return filter(lambda x: x is not '', out)
+
+# 
+
+from ext.diff_match_patch import diff_match_patch
+
+class diff_match_patch2(diff_match_patch):
+    def diff_prettyHtml_one_way(self, diffs, way=False, mode='red'):
+      """Convert a diff array into a pretty HTML report.
+    
+      Args:
+        diffs: Array of diff tuples.
+        way: [None, 1, 2]
+        mode: ['ins_del', 'red']
+    
+      Returns:
+        HTML representation.
+      """
+      html = []
+      i = 0
+      for (op, data) in diffs:
+        text = data #(data.replace("&", "&amp;").replace("<", "&lt;")
+                   #.replace(">", "&gt;").replace("\n", "&para;<BR>"))
+        if op == self.DIFF_INSERT and (not way or way==1):
+            if mode=='red':
+                html.append('<span class="diffchange-ins">%s</span>' % (text))
+            else:
+                html.append('<ins>%s</ins>' % (text))
+                
+        elif op == self.DIFF_DELETE and (not way or way==2):
+            if mode=='red':
+                html.append('<span class="diffchange-del">%s</span>'% (text))
+            else:
+                html.append('<del>%s</del>'% (text))                
+        elif op == self.DIFF_EQUAL:
+          html.append("<SPAN>%s</SPAN>" % (text))
+        if op != self.DIFF_DELETE:
+          i += len(data)
+      return "".join(html)

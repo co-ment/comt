@@ -146,6 +146,9 @@ ul.text-tabs li {
 	
 }
 
+.diffchange-del, .diffchange-ins {
+	color: #FF0000;
+}
 ins,ins p {
 	background: #bfb
 }
@@ -191,6 +194,7 @@ table.diff th,table.diff td {
 .diff-addedline {
 	background-color: #CCFFCC;
 	width: 42%;
+	vertical-align: top; 
 }
 
 .diff-marker {
@@ -206,6 +210,7 @@ table.diff th,table.diff td {
 .diff-deletedline {
 	background-color: #FFFFAA;
 	width: 42%;
+	vertical-align: top; 
 }
 
 .diff-head {

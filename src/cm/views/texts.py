@@ -15,6 +15,7 @@ from cm.utils.html import on_content_receive
 from cm.utils.comment_positioning import compute_new_comment_positions, \
     insert_comment_markers
 from cm.utils.spannifier import spannify
+from cm.utils.diff import diff_match_patch2
 from cm.views import get_keys_from_dict, get_textversion_by_keys_or_404, get_text_by_keys_or_404, redirect
 from cm.views.export import content_export2, content_export
 from cm.views.user import AnonUserRoleForm, cm_login
@@ -499,8 +500,9 @@ def text_history_compare(request, key, v1_version_key, v2_version_key, mode=''):
                                             v2.content)
     if mode=='1':
         # alternate diff
-        from cm.utils.diff import text_diff
-        content = text_diff(v1.get_content(), v2.get_content())
+        #from cm.utils.diff import text_diff
+        dif = diff_match_patch2()
+        content = dif.diff_prettyHtml_one_way(dif.diff_main(v1.get_content(), v2.get_content()), mode='ins_del')
 
     template_dict = {
                      'text' : text,
@@ -591,7 +593,14 @@ def get_uniffied_inner_diff_table(title1, title2, author1, author2, text1, text2
                     except StopIteration:
                         break
                 minus, plus = diff_decorate(minus, plus)
-                res.append('<tr><td class="diff-marker">-</td><td class="diff-deletedline">%s</td><td class="diff-separator"></td><td class="diff-marker">+</td><td class="diff-addedline">%s</td></tr>' % ('<br />'.join(minus), '<br />'.join(plus)))
+                
+                
+                minus, plus = '<br />'.join(minus), '<br />'.join(plus)                
+                dif = diff_match_patch2()
+                p = dif.diff_prettyHtml_one_way(dif.diff_main(minus, plus), 1)
+                minus = dif.diff_prettyHtml_one_way(dif.diff_main(minus, plus), 2)
+                plus = p
+                res.append('<tr><td class="diff-marker">-</td><td class="diff-deletedline">%s</td><td class="diff-separator"></td><td class="diff-marker">+</td><td class="diff-addedline">%s</td></tr>' % (minus, plus))
              
         index += 1
     res.append('</tbody></table>')
