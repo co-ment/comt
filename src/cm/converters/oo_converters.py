@@ -223,35 +223,6 @@ THE_OUTFILE = "outfile"
 
 THE_INDIR = "indir"
 THE_INFILE = "infile"
-
-def fix_img_path(html,xhtml,imgs):
-    """
-    imgs : name --> path
-    """
-    finder_re = 'src[\s]*=[\s]*\"((?:(?!https?))[^\"]*)\"'
-    len_res_html = len(re.findall(finder_re,html,re.IGNORECASE))
-    len_res_xhtml = len(re.findall(finder_re,xhtml,re.IGNORECASE))
-    res_html = re.finditer(finder_re,html,re.IGNORECASE)
-    res_xhtml = re.finditer(finder_re,xhtml,re.IGNORECASE)
-    result = []
-    last_index = 0
-    for match_xhtml in res_xhtml:
-        img_path = '' 
-        try:
-            match_html = res_html.next()
-            if match_html:
-                img_name = match_html.group(1)
-                img_path = imgs[img_name]
-        except StopIteration:
-            # TODO : report pb
-            pass 
-        offset = len(match_xhtml.group(0)) - len(match_xhtml.group(1))
-        result.append(xhtml[last_index:match_xhtml.start() + offset - 1])
-        result.append(img_path)
-        last_index = match_xhtml.end() - 1 # -1 because trailing "
-    result.append(xhtml[last_index:len(xhtml)])
-    return u''.join(result)
-
   
 def extract_css_body(xhtml):
     dom = parseString(xhtml.encode('utf8'))

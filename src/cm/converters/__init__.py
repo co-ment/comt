@@ -2,6 +2,7 @@ from pandoc_converters import pandoc_convert
 import chardet 
 from cm.utils.string_utils import to_unicode 
 import re
+import os
 from cm.converters.oo_converters import extract_css_body
 
 
@@ -77,7 +78,7 @@ def fix_img_path(html, xhtml, imgs):
             match_html = res_html.next()
             if match_html:
                 img_name = match_html.group(1)
-                img_path = imgs[img_name]
+                img_path = os.path.split(img_name)[-1]
         except StopIteration:
             # TODO : report pb
             pass 
@@ -104,24 +105,26 @@ def convert_oo_to_html(input):
         raise Exception('UnicodeDecodeError: could not decode')
     return res_content_html, images
 
+def fix_html_img_path(html):
+    return html.replace('IMG SRC="../outdir/','IMG SRC="')
+    
 def convert_oo_to_html_and_xhtml(input): 
     from oo_converters import convert   
     html_input, images = convert(input, 'html')
     xhtml_input, _not_used_ = convert(input, 'xhtml')
-    
     enc = chardet.detect(xhtml_input)['encoding']
     try_encodings = [enc, 'utf8', 'latin1']
     for encoding in try_encodings:
         try:
-            # TODO: fix path and manage images
-            #res_content = fix_img_path(unicode(html_res_content,encoding),
-            #                           unicode(xhtml_res_content,encoding),
-            #                           iimg)
             res_content_html = unicode(html_input, encoding)
             res_content_xhtml = unicode(xhtml_input, encoding)
             break;
         except UnicodeDecodeError:
             pass
+
+    res_content_xhtml = fix_img_path(res_content_html, res_content_xhtml, images)
+    res_content_html = fix_html_img_path(res_content_html)
+    
     if not res_content_html or not res_content_xhtml:
         raise Exception('UnicodeDecodeError: could not decode')
     return res_content_html, cleanup(res_content_xhtml), images
