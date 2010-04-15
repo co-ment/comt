@@ -13,7 +13,7 @@ import tidy
 from cm.utils.string_utils import to_unicode
 
 PANDOC_BIN = "pandoc"
-PANDOC_OPTIONS = "--sanitize-html "
+PANDOC_OPTIONS = " -R "
 
 MARKDOWN2PDF_BIN = "markdown2pdf"
 

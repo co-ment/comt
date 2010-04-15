@@ -189,7 +189,10 @@ class TextVersion(AuthorModel, KeyModel):
     objects = TextVersionManager()
     
     def get_content(self, format='html'):
-        return pandoc_convert(self.content, self.format, format)
+        if format == self.format:
+            return self.content
+        else:
+            return pandoc_convert(self.content, self.format, format)
 #    def _get_comments(self, user = None, filter_reply = 0):        
 #        """
 #        get comments viewable by this user (user = None or user = AnonymousUser => everyone)
