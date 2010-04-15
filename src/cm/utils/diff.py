@@ -116,7 +116,7 @@ def createlist(x, b=0):
 
 # 
 
-from ext.diff_match_patch import diff_match_patch
+from cm.ext.diff_match_patch import diff_match_patch
 
 class diff_match_patch2(diff_match_patch):
     def diff_prettyHtml_one_way(self, diffs, way=False, mode='red'):
