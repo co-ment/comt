@@ -189,6 +189,8 @@ table.diff th,table.diff td {
 
 .diff-context {
 	background-color: #EEEEEE;
+	width: 42%;
+	vertical-align: top; 
 }
 
 .diff-addedline {
