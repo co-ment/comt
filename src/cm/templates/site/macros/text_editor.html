@@ -22,7 +22,9 @@
     
     $(document).ready(function() {
 	    adaptMarkitup = function() {
-	        $('#id_content').markItUpRemove();  
+	        $('#id_content').markItUpRemove();
+	        var o=CKEDITOR.instances['id_content'];
+	        if (o) o.destroy()
 	        var newSet = $('#id_format').val();
 	        switch(newSet) {
 	            case 'markdown':
