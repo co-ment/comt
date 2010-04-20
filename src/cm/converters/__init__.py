@@ -2,6 +2,9 @@ from pandoc_converters import pandoc_convert
 import chardet 
 from cm.utils.string_utils import to_unicode 
 import re
+import os
+from cm.converters.oo_converters import extract_css_body
+
 
 # TODO: move that in text_base: save images
 def convert_from_mimetype(file_name, mime_type, format):
@@ -19,8 +22,12 @@ def _convert_from_mimetype(input, mime_type, format):
                      'application/msword',
                      ]:
         
-        xhtml_input, attachs = convert_oo_to_html(input)
-        converted_input = pandoc_convert(xhtml_input, 'html', format)
+        html_input, xhtml_input, attachs = convert_oo_to_html_and_xhtml(input)
+        if format == 'html':
+                _not_used_css, converted_input = extract_css_body(xhtml_input)
+                #converted_input = xhtml_input
+        
+        converted_input = pandoc_convert(html_input, 'html', format)
         
     ##############################
     # latex
@@ -37,8 +44,8 @@ def _convert_from_mimetype(input, mime_type, format):
     elif mime_type in ['text/html', 'application/xhtml+xml']:
         if format == 'html':
             converted_input = input
-        else:
-            converted_input = pandoc_convert(input, 'html', format)
+        
+        converted_input = pandoc_convert(input, 'html', format)
     ##############################
     # anything looks like text -> markdown
     elif mime_type in ['text/plain',
@@ -71,7 +78,7 @@ def fix_img_path(html, xhtml, imgs):
             match_html = res_html.next()
             if match_html:
                 img_name = match_html.group(1)
-                img_path = imgs[img_name]
+                img_path = os.path.split(img_name)[-1]
         except StopIteration:
             # TODO : report pb
             pass 
@@ -88,7 +95,6 @@ def convert_oo_to_html(input):
     
     enc = chardet.detect(html_input)['encoding']
     try_encodings = [enc, 'utf8', 'latin1']
-    res_content = None
     for encoding in try_encodings:
         try:
             res_content_html = unicode(html_input, encoding)
@@ -99,29 +105,33 @@ def convert_oo_to_html(input):
         raise Exception('UnicodeDecodeError: could not decode')
     return res_content_html, images
 
-def old_convert_oo_to_html(input): 
+def fix_html_img_path(html):
+    return html.replace('IMG SRC="../outdir/','IMG SRC="')
+    
+def convert_oo_to_html_and_xhtml(input): 
     from oo_converters import convert   
     html_input, images = convert(input, 'html')
     xhtml_input, _not_used_ = convert(input, 'xhtml')
-    
     enc = chardet.detect(xhtml_input)['encoding']
     try_encodings = [enc, 'utf8', 'latin1']
-    res_content = None
     for encoding in try_encodings:
         try:
-            # TODO: fix path and manage images
-            #res_content = fix_img_path(unicode(html_res_content,encoding),
-            #                           unicode(xhtml_res_content,encoding),
-            #                           iimg)
             res_content_html = unicode(html_input, encoding)
             res_content_xhtml = unicode(xhtml_input, encoding)
             break;
         except UnicodeDecodeError:
             pass
+
+    res_content_xhtml = fix_img_path(res_content_html, res_content_xhtml, images)
+    res_content_html = fix_html_img_path(res_content_html)
+    
     if not res_content_html or not res_content_xhtml:
         raise Exception('UnicodeDecodeError: could not decode')
-    return res_content_html, res_content_xhtml, images
+    return res_content_html, cleanup(res_content_xhtml), images
         
+def cleanup(string):
+    return string.replace(u'\xc2\xa0',u'')
+
 def markdown_from_code(code):
     CODE_INDICATOR = "    " # 4 spaces
     return '\n'.join([CODE_INDICATOR + line for line in code.split('\n')])
