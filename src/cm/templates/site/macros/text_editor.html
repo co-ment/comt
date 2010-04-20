@@ -2,9 +2,12 @@
 <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/lib/markitup/1.1.5/markitup/jquery.markitup.js"></script>
 <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/markitup/sets.js"></script>
 
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/ckeditor/ckeditor.js"></script>
+
 <link rel="stylesheet" type="text/css" href="{{ CM_MEDIA_PREFIX }}js/lib/markitup/1.1.5/markitup/skins/markitup/style.css" />
 <link rel="stylesheet" type="text/css" href="{{ CM_MEDIA_PREFIX }}css/markitup/style.css" />
 <link rel="stylesheet" type="text/css" href="{{ CM_MEDIA_PREFIX }}css/markitup/editor.css" />
+
 
 <script type="text/javascript" >
 
@@ -19,14 +22,34 @@
     
     $(document).ready(function() {
 	    adaptMarkitup = function() {
-	        $('#id_content').markItUpRemove();  
+	        $('#id_content').markItUpRemove();
+	        var o=CKEDITOR.instances['id_content'];
+	        if (o) o.destroy()
 	        var newSet = $('#id_format').val();
 	        switch(newSet) {
 	            case 'markdown':
 	                $('#id_content').markItUp(myMarkdownSettings);
 	                break;
 	            case 'html':
-	                $('#id_content').markItUp(myHTMLSettings);
+	                //$('#id_content').markItUp(myHTMLSettings);
+					CKEDITOR.replace( 'id_content',
+					    {
+							language : '{{ LANGUAGE_CODE }}',
+							toolbar : 'CMToolbar',
+							toolbar_CMToolbar : [['Source','-','Templates'], //'Save','NewPage','Preview','-',
+												 ['Cut','Copy','Paste','PasteText','PasteFromWord','-','Print'], //,'SpellChecker','Scayt'
+												 ['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
+												 //['Form','Checkbox','Radio','TextField','Textarea','Select','Button','ImageButton','HiddenField'],
+												 '/',
+												 ['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
+												 ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote','CreateDiv'],
+												 ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+												 ['Link','Unlink','Anchor'],
+												 ['Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],'/', //'Image','Flash',
+												 ['Styles','Format','Font','FontSize'],
+												 ['TextColor','BGColor'],
+												 ['Maximize','ShowBlocks','-','About']]							
+					    });	                
 	                break;
 	        }
 	        return false;
