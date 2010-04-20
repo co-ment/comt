@@ -13,7 +13,8 @@ import tidy
 from cm.utils.string_utils import to_unicode
 
 PANDOC_BIN = "pandoc"
-PANDOC_OPTIONS = " -R "
+PANDOC_OPTIONS = " --sanitize-html "
+PANDOC_OPTIONS_RAW = " -R "
 
 MARKDOWN2PDF_BIN = "markdown2pdf"
 
@@ -37,7 +38,7 @@ DEFAULT_INPUT_FORMAT = 'markdown'
 _PANDOC_ENCODING = 'utf8'
 
 @memoize
-def pandoc_convert(content, from_format, to_format, full=False):
+def pandoc_convert(content, from_format, to_format, full=False, raw=False):
     """
     Convert markdown content to pdf
     
@@ -56,7 +57,7 @@ def pandoc_convert(content, from_format, to_format, full=False):
         if from_format != 'markdown':
             content = pandoc_convert(content, from_format, 'markdown', True)
         return pandoc_markdown2pdf(content)
-    return pandoc_pandoc(content, from_format, to_format, full)
+    return pandoc_pandoc(content, from_format, to_format, full, from_format==to_format=='html') # use raw pandoc convertion if html->html
 
 def content_or_file_name(content, file_name):
     if not content and not file_name:
@@ -154,7 +155,7 @@ def pandoc_markdown2pdf(content=None, file_name=None):
 # TODO: use tidy to cleanup html
 
 @memoize
-def pandoc_pandoc(content, from_format, to_format, full=False):
+def pandoc_pandoc(content, from_format, to_format, full=False, raw=False):
     """
     Convert content (should be unicode) from from_format to to_format
     (if full: includes header & co [html, latex])
@@ -189,7 +190,11 @@ def pandoc_pandoc(content, from_format, to_format, full=False):
     input_file.close()
     
     # pandoc arguments and command line
-    cmd_args = ' %s -o %s ' %(PANDOC_OPTIONS,output_temp_name) 
+    p_options = PANDOC_OPTIONS
+    if raw:
+        p_options = PANDOC_OPTIONS_RAW
+                
+    cmd_args = ' %s -o %s ' %(p_options,output_temp_name) 
     if full:
         cmd_args += ' -s '
     cmd_args += ' -f %s ' % from_format

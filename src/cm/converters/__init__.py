@@ -26,8 +26,8 @@ def _convert_from_mimetype(input, mime_type, format):
         if format == 'html':
                 _not_used_css, converted_input = extract_css_body(xhtml_input)
                 #converted_input = xhtml_input
-        else:
-            converted_input = pandoc_convert(html_input, 'html', format)
+        
+        converted_input = pandoc_convert(html_input, 'html', format)
         
     ##############################
     # latex
@@ -44,8 +44,8 @@ def _convert_from_mimetype(input, mime_type, format):
     elif mime_type in ['text/html', 'application/xhtml+xml']:
         if format == 'html':
             converted_input = input
-        else:
-            converted_input = pandoc_convert(input, 'html', format)
+        
+        converted_input = pandoc_convert(input, 'html', format)
     ##############################
     # anything looks like text -> markdown
     elif mime_type in ['text/plain',
