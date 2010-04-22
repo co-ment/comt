@@ -220,7 +220,8 @@ def nb_comments(text, request):
     if type(text) == Text:
         return len(get_viewable_comments(request, text.last_text_version.comment_set.all(), text))
     else:
-        return len(get_viewable_comments(request, text.comment_set.all(), text))
+        # text is text version
+        return len(get_viewable_comments(request, text.comment_set.all(), text.text))
 ## number tags
 
 from cm.security import get_texts_with_perm, get_viewable_comments
