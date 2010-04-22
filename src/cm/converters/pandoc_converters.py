@@ -1,6 +1,6 @@
 # python 2.5 compat
 from __future__ import with_statement
-from cm.utils.cache import memoize
+from cm.utils.cache import memoize, dj_memoize
 ######
 ## This module requires pandoc v > 1.0 (pandoc & markdown executables) 
 ######
@@ -37,7 +37,7 @@ DEFAULT_INPUT_FORMAT = 'markdown'
 
 _PANDOC_ENCODING = 'utf8'
 
-@memoize
+@dj_memoize
 def pandoc_convert(content, from_format, to_format, full=False, raw=False):
     """
     Convert markdown content to pdf
@@ -72,7 +72,7 @@ def content_or_file_name(content, file_name):
 
     return content
 
-@memoize
+@dj_memoize
 def do_tidy(content=None, file_name=None):
     """
     Tidy (html) content
@@ -109,7 +109,7 @@ LATEX_HEADER_PATH = os.path.join(*_tmp_)
 if not os.path.isfile(LATEX_HEADER_PATH):
     raise Exception('LATEX_HEADER_PATH is not a file!')
 
-@memoize
+@dj_memoize
 def pandoc_markdown2pdf(content=None, file_name=None):
     """
     Convert markdown content to pdf
@@ -154,7 +154,7 @@ def pandoc_markdown2pdf(content=None, file_name=None):
 # TODO: manage images in pandoc (?)
 # TODO: use tidy to cleanup html
 
-@memoize
+@dj_memoize
 def pandoc_pandoc(content, from_format, to_format, full=False, raw=False):
     """
     Convert content (should be unicode) from from_format to to_format

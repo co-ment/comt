@@ -1,9 +1,10 @@
 from django.core.cache import cache
+from hashlib import sha1
 
 # adapted [to django] from http://code.activestate.com/recipes/325205/
 def dj_memoize(f):
     def g(*args, **kwargs):
-        key = ( f.__name__, f, tuple(args), frozenset(kwargs.items()) )
+        key = sha1( str((f.__name__, f, tuple(args), frozenset(kwargs.items())) )).hexdigest()
         val = cache.get(key)
         if not val:
             val = f(*args, **kwargs)
