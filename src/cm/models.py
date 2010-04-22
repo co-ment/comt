@@ -318,7 +318,7 @@ class Comment(PermanentModel, AuthorModel):
         super(PermanentModel, self).save() 
             
     def __unicode__(self):
-        return '<%d> %s [st_wrp:%d, st_ofs:%d, e_wrp:%d, e_ofs:%d]' % (self.id, self.title,  self.start_wrapper,  self.start_offset,  self.end_wrapper,  self.end_offset, )    
+        return '<%d> %s [st_wrp:%s, st_ofs:%s, e_wrp:%s, e_ofs:%s]' % (self.id, self.title,  self.start_wrapper ,  self.start_offset,  self.end_wrapper,  self.end_offset, )    
         
     def is_reply(self):
         return self.reply_to != None
