@@ -3,6 +3,10 @@ function check_save(){
     var commentsKept = $('#id_keep_comments').attr('checked') ;
 
     var new_content = $('#id_content').val() ;
+    
+    var o=CKEDITOR.instances['id_content'];
+    if (o) new_content=o.getData();
+    
     var new_format = $('#id_format').val() ;
     var mess = gettext( 'Should these comments be detached (i.e. kept with no scope) or removed from new version?') ;
 
