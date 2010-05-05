@@ -84,6 +84,8 @@ function hide_show(elem, name, hide, up, plus) {
         </tr>
     </thead>
     <tbody>
+    	{% with object_list|length as object_list_len %}
+    	
         {% for text_version in object_list %}
         
         {% get_local_text_perm request text can_edit_text as can_edit_text %}
@@ -92,7 +94,7 @@ function hide_show(elem, name, hide, up, plus) {
         
         <tr class="text-{{ text_version.key }} {% cycle 'odd' 'even' %}">
             {% if can_manage_workspace %}<td><input type="checkbox" class="text_check" name="check-{{ text_version.key }}"/></td>{% endif %}
-            <td>#{{ forloop.counter0|add:page_obj.start_index|invneg:paginator.count|add:"1" }}</td>
+            <td>#{% if page_obj %}{{ forloop.counter0|add:page_obj.start_index|invneg:paginator.count|add:"1" }}{% else %}{{ forloop.counter0|invneg:object_list_len }}{% endif %}</td>
             <td><input id="oldkey-{{ forloop.counter0 }}" type="radio" name="oldkey" value="{{ text_version.key }}"/></td>
             <td><input id="newkey-{{ forloop.counter0 }}" type="radio" name="newkey" value="{{ text_version.key }}"/></td>                        
             <td>
@@ -159,6 +161,8 @@ function hide_show(elem, name, hide, up, plus) {
 
         </tr>
         {% endfor %}
+        
+        {% endwith %}
     </tbody>
 </table>
 
