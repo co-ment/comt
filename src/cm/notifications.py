@@ -35,7 +35,7 @@ def notify(sender, **kwargs):
                                              Comment.objects.filter(id__in = [activity.comment.id]),
                                              text=activity.text)
             if viewable and \
-                ((notification.type == 'own' and activity.comment.top_comment().user == notification.user) or
+                ((notification.type == 'own' and activity.comment.user != notification.user and activity.comment.top_comment().user == notification.user) or
                  (notification.type != 'own')):
                 if not notification.user in allready_notified:
                     send_notification(activity, notification)
