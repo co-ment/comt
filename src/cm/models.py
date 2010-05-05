@@ -487,6 +487,9 @@ class Notification(KeyModel, AuthorModel):
         else:
             self.delete()
     
+    def __unicode__(self):
+        return u"%s: %s %s %s %s" % (self.__class__.__name__, self.user, self.text, self.type, self.active )
+    
 # right management
 class UserRoleManager(models.Manager):
     def create_userroles_text(self, text):
