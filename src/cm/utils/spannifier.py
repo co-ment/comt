@@ -12,7 +12,9 @@ def is_real_text_node(textNode):
 
 def get_the_soup(input):
     return BeautifulSoup(input, convertEntities=["xml", "html"])
-                     
+     
+from cm.utils.cache import memoize, dj_memoize
+@dj_memoize
 def spannify(input):
     """ 
     wrap textNodes in spans 
