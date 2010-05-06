@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-10 22:01+0100\n"
-"PO-Revision-Date: 2010-04-07 09:45+0200\n"
+"PO-Revision-Date: 2010-05-06 09:45+0200\n"
 "Last-Translator: Kirill Miazine <km@krot.org>\n"
 "Language-Team: <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgstr "Etikett:"
 
 #: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:11
 msgid "Modify comment's scope:"
-msgstr "Endre merknadens rekkevidde:"
+msgstr "Endre merknadens kontekst:"
 
 #: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:13
 msgid "Comment will apply to this selection:"
@@ -154,7 +154,7 @@ msgstr "slett"
 
 #: media/js/client/c_icomment.js:26
 msgid "show scope"
-msgstr "vis rekkevidde"
+msgstr "vis kontekst"
 
 #: media/js/client/c_icomment.js:27
 msgid ""

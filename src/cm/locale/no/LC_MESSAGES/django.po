@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-04-14 17:00+0200\n"
-"PO-Revision-Date: 2010-04-07 09:45+0200\n"
+"PO-Revision-Date: 2010-05-06 09:45+0200\n"
 "Last-Translator: km@krot.org\n"
 "Language-Team:  <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -686,7 +686,7 @@ msgstr "Presentasjon"
 
 #: templates/site/help.html:18
 msgid "co-ment is a web based text annotation system."
-msgstr ""
+msgstr "co-ment er et nettbasert system for å kommentere tekster."
 
 #: templates/site/help.html:20
 msgid "Glossary"
@@ -736,7 +736,7 @@ msgstr ""
 
 #: templates/site/help.html:40
 msgid "Moderation"
-msgstr ""
+msgstr "Godkjenning"
 
 #: templates/site/help.html:41
 msgid ""
@@ -753,7 +753,7 @@ msgstr ""
 
 #: templates/site/help.html:44
 msgid "States"
-msgstr ""
+msgstr "Tilstander"
 
 #: templates/site/help.html:45
 msgid "co-ment uses states to implement moderation policies."
@@ -788,7 +788,7 @@ msgstr ""
 
 #: templates/site/help.html:53
 msgid "Scope"
-msgstr ""
+msgstr "Kontekst"
 
 #: templates/site/help.html:54
 msgid ""
@@ -815,7 +815,7 @@ msgstr ""
 
 #: templates/site/help.html:63
 msgid "Email notification"
-msgstr ""
+msgstr "Epostvarsler"
 
 #: templates/site/help.html:64
 msgid ""
@@ -836,7 +836,7 @@ msgstr ""
 
 #: templates/site/help.html:69
 msgid "Public and private feeds"
-msgstr ""
+msgstr "Offentlige og private strømmer"
 
 #: templates/site/help.html:70
 msgid ""
@@ -848,7 +848,7 @@ msgstr ""
 
 #: templates/site/help.html:72
 msgid "Text embedding"
-msgstr ""
+msgstr "Tekstintegrering"
 
 #: templates/site/help.html:73
 msgid ""
@@ -1877,11 +1877,10 @@ msgstr[0] "%(nb_users)d bruker opprettet"
 msgstr[1] "%(nb_users)d brukere opprettet"
 
 #: views/user.py:277
-#, fuzzy
 msgid "Add user"
 msgid_plural "Add users"
 msgstr[0] "Opprett ny bruker"
-msgstr[1] "Opprett ny bruker"
+msgstr[1] "Opprett nye brukere"
 
 #: views/user.py:299
 msgid "This username is already in use. Please supply a different username."
