@@ -19,7 +19,6 @@ def notify(sender, **kwargs):
     from cm.security import get_viewable_comments, has_perm
     allready_notified = set() # avoid sending multiple notifications to same user
     
-    #import pdb;pdb.set_trace()
     activity = kwargs['instance']
     if activity.type in Activity.VIEWABLE_ACTIVITIES.get('view_users'): # user activity: only viewed by managers
         notifications = Notification.objects.filter(text=None, active=True).exclude(type='own')
