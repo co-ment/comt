@@ -19,9 +19,10 @@ def notify(sender, **kwargs):
     from cm.security import get_viewable_comments, has_perm
     allready_notified = set() # avoid sending multiple notifications to same user
     
+    #import pdb;pdb.set_trace()
     activity = kwargs['instance']
     if activity.type in Activity.VIEWABLE_ACTIVITIES.get('view_users'): # user activity: only viewed by managers
-        notifications = Notification.objects.filter(text=None, active=True)
+        notifications = Notification.objects.filter(text=None, active=True).exclude(type='own')
         for notification in notifications:
             if notification.user:
                 from cm.security import user_has_perm # import here!
@@ -41,7 +42,7 @@ def notify(sender, **kwargs):
                     send_notification(activity, notification)
                     allready_notified.add(notification.user)            
     elif activity.type in Activity.VIEWABLE_ACTIVITIES.get('view_texts'):
-        notifications = Notification.objects.filter(Q(text=activity.text) | Q(text=None), active=True)
+        notifications = Notification.objects.filter(Q(text=activity.text) | Q(text=None), active=True).exclude(type='own')
         for notification in notifications:
             if notification.user:
                 from cm.security import user_has_perm # import here!
