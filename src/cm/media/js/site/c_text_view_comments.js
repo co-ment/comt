@@ -295,6 +295,11 @@ onDomReady = function(arg1) {
 				}
 			}
 			
+			// if comment_auto_display: show all comments
+			if ("comments_auto_display" in gGETValues) {
+				gSync.showAllComments();
+			}
+			
 //			else {
 //			gSync.showAllComments() ;// show all
 //			}
