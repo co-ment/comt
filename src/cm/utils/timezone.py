@@ -1,5 +1,5 @@
 from datetime import timedelta
-from pytz import timezone, utc
+from pytz import timezone, utc, UnknownTimeZoneError
 from django.conf import settings
 
 local_tz = timezone(settings.TIME_ZONE)
@@ -23,9 +23,14 @@ def tz_convert(date, tz):
             res = utc.normalize(utc_time + timedelta(hours=utc_offset))
             return res
         except:
-            # real timezone
-            timez = timezone(tz)
-            local_date = system_local_date.astimezone(timez)
-            return local_date            
+            try:
+                # real timezone
+                timez = timezone(tz)
+                local_date = system_local_date.astimezone(timez)
+                return local_date
+            except UnknownTimeZoneError:
+                # fall back to date
+                return date
+                        
     else:
         return date        
