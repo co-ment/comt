@@ -70,19 +70,19 @@ def dashboard(request):
     request.session.set_test_cookie()
     if request.user.is_authenticated():
         act_view = {
-                    'view_texts' : get_int(request.GET,'view_texts',1),
-                    'view_comments' : get_int(request.GET,'view_comments',1),
-                    'view_users' : get_int(request.GET,'view_users',1),
+                    'view_texts' : get_int(request.GET, 'view_texts',1),
+                    'view_comments' : get_int(request.GET, 'view_comments',1),
+                    'view_users' : get_int(request.GET, 'view_users',1),
                     }
             
-        paginate_by = get_int(request.GET,'paginate',ACTIVITY_PAGINATION)
+        paginate_by = get_int(request.GET, 'paginate', ACTIVITY_PAGINATION)
                 
         # texts with can_view_unapproved_comment perms
         moderator_texts = get_texts_with_perm(request, 'can_view_unapproved_comment')
         viewer_texts = get_texts_with_perm(request, 'can_view_approved_comment')
         all_texts_ids = [t.id for t in moderator_texts] + [t.id for t in viewer_texts]
                     
-        span = get_among(request.GET,'span',('day','month','week',),'week')        
+        span = get_among(request.GET, 'span', ('day','month','week',),'week')        
         template_dict = { 
                          'span' : span,
                          'last_texts' : get_texts_with_perm(request, 'can_view_text').order_by('-modified')[:RECENT_TEXT_NB],
@@ -268,7 +268,7 @@ def client_exchange(request):
             key = request.POST['key']
             version_key = request.POST['version_key']
     
-            text = Text.objects.get(key=key) ;
+            text = Text.objects.get(key=key)
             #TODO: stupid why restrict to latest ? 
             text_version = text.get_latest_version()
             
@@ -453,8 +453,8 @@ def text_print(request, key, adminkey=None):
                        'client_date_fmt' : settings.CLIENT_DATE_FMT
                        }
         if admin:
-             template_dict['adminkey'] = text.adminkey   
-             template_dict['admin'] = True       
+            template_dict['adminkey'] = text.adminkey   
+            template_dict['admin'] = True       
         return render_to_response('site/text_print.html',
                                   template_dict,
                                   context_instance=RequestContext(request))
@@ -708,7 +708,7 @@ def text_pre_edit(request, key, adminkey=None):
     text = get_text_by_keys_or_404(key)
     
     text_version = text.get_latest_version()
-    comments = text_version.get_comments() ;
+    comments = text_version.get_comments()
     new_format = request.POST['new_format']
     new_content = on_content_receive(request.POST['new_content'], new_format)
 
