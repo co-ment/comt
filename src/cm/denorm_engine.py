@@ -18,7 +18,8 @@ def update_text_from_last_version(sender, **kwargs):
         text = text_version.text
         text.update_denorm_fields()
     except Text.DoesNotExist:
-        logging.warning('No text found for text_version: %i' %text_version.id)
+        pass
+        #logging.warning('No text found for text_version: %i' %text_version.id)
         
         
 def connect_all():

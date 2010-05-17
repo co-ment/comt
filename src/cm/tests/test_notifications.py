@@ -19,7 +19,7 @@ class NotificationTest(TestCase):
 
         # subscribe to workspace notifications
         response = c.post('/followup/', {'notif_id': u'workspace_notify_check', 
-                                         'workspace_notify_check': u'workspace_notify_check',
+                                         'workspace_notify_check': u'true',
                                          })
 
         self.assertEquals(len(Notification.objects.all()), 1)

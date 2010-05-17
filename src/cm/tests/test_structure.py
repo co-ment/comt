@@ -25,7 +25,7 @@ class StructureTest(TestCase):
         # edit with duplication changing content
         new_text = text.edit(new_title='my title', 
                   new_format='html', 
-                  new_content='simple text <p>simple text</p> <p>simple text</p> ', 
+                  new_content=u'simple text <p>simple text</p> <p>simple text</p> ', 
                   keep_comments = True, 
                   cancel_modified_scopes=False,                  
                   new_version = True)
@@ -35,7 +35,7 @@ class StructureTest(TestCase):
         # edit without duplication, completely changing content
         new_text = text.edit(new_title='my title', 
                   new_format='html', 
-                  new_content='xxxxxx', 
+                  new_content=u'xxxxxx', 
                   keep_comments = True, 
                   cancel_modified_scopes=False,                  
                   new_version = False)
@@ -48,7 +48,7 @@ class StructureTest(TestCase):
         text = Text.objects.all()[0]
         new_text = text.edit(new_title='my title', 
                   new_format='html', 
-                  new_content='xxxxxx', 
+                  new_content=u'xxxxxx', 
                   keep_comments = False, 
                   cancel_modified_scopes=False,                  
                   new_version = False)
@@ -61,7 +61,7 @@ class StructureTest(TestCase):
         text = Text.objects.all()[0]
         new_text = text.edit(new_title='my title', 
                   new_format='html', 
-                  new_content='xxxxxx', 
+                  new_content=u'xxxxxx', 
                   keep_comments = False, 
                   cancel_modified_scopes=False,                  
                   new_version = True)

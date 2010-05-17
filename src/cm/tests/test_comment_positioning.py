@@ -55,32 +55,32 @@ class CommentPositioningTest(TestCase):
                 self.assert_comment(id, x, y, z, k) 
             
     def test_wrapper_shifted(self):
-        content     = """<html><body>This is a <b>test</b> text</body></html>"""
-        new_content = """<html><body>This is a <b>te</b>e<b>est</b> text</body></html>"""
+        content     = u"""<html><body>This is a <b>test</b> text</body></html>"""
+        new_content = u"""<html><body>This is a <b>te</b>e<b>est</b> text</body></html>"""
         self.preserve_comment_pos(content, new_content, [([2,2,2,4],[4,4,2,4]),])
 
     def test_comment_removed(self):
-        content     = """<html><body>This is a <b>test</b> text</body></html>"""
-        new_content = """<html><body>This is a <b>test</b> txt</body></html>"""
+        content     = u"""<html><body>This is a <b>test</b> text</body></html>"""
+        new_content = u"""<html><body>This is a <b>test</b> txt</body></html>"""
         self.preserve_comment_pos(content, new_content, [([2,2,2,4],None),])
 
     def test_offset_shifted(self):
-        content     = """<html><body>This is a <b>test</b> text</body></html>"""
-        new_content = """<html><body>a <b>teXXXst</b>a text</body></html>"""
+        content     = u"""<html><body>This is a <b>test</b> text</body></html>"""
+        new_content = u"""<html><body>a <b>teXXXst</b>a text</body></html>"""
         self.preserve_comment_pos(content, new_content, [([2,2,2,4],[2,2,3,5]),])
 
     def test_insert_wrapper(self):
-        content     = """<html><body>This is a <b>test</b> text</body></html>"""
-        new_content = """<html><body>This is a <b>test</b> te<b>x</b>t</body></html>"""
+        content     = u"""<html><body>This is a <b>test</b> text</body></html>"""
+        new_content = u"""<html><body>This is a <b>test</b> te<b>x</b>t</body></html>"""
         self.preserve_comment_pos(content, new_content, [([2,2,2,5],[2,4,2,1]),])
 
     def test_multiwrapper(self):
-        content     = """<html><body>This is a <b>test</b> text</body></html>"""
-        new_content = """<html><body>This is a <b>testXXX<b>X</b>XXXXXXX</b>X text</body></html>"""
+        content     = u"""<html><body>This is a <b>test</b> text</body></html>"""
+        new_content = u"""<html><body>This is a <b>testXXX<b>X</b>XXXXXXX</b>X text</body></html>"""
         self.preserve_comment_pos(content, new_content, [([0,2,2,4],None),])
 
-    def test_insert_wrapper(self):
-        content     = """<html><body>aa<b>test</b>bb</body></html>"""
-        new_content     = """<html><body>aXa<b>test</b>bXb</body></html>"""
+    def test_insert_wrapper2(self):
+        content     = u"""<html><body>aa<b>test</b>bb</body></html>"""
+        new_content = u"""<html><body>aXa<b>test</b>bXb</body></html>"""
         self.preserve_comment_pos(content, new_content, [([0,2,1,1],[0,2,2,1]),])
 
