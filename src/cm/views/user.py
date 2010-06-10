@@ -264,7 +264,7 @@ def user_add(request, key=None, mass=False):
     else:
         userform = UserForm() if not mass else MassUserForm()
         userroleform = UserRoleForm()
-        userprofileform = UserProfileAddForm()
+        userprofileform = UserProfileAddForm({'preferred_language' : request.LANGUAGE_CODE})
         noteform = UserAddForm()
         localroleform = UserRoleTextForm(prefix="local") if key else None
     
