@@ -590,6 +590,6 @@ def register(request):
             return HttpResponseRedirect(reverse('index'))
     else:    
         userform = UserForm()
-        userprofileaddform = UserProfileRegisterForm()
+        userprofileaddform = UserProfileRegisterForm({'preferred_language' : request.LANGUAGE_CODE})
     
     return render_to_response('site/register.html', {'forms':[userform, userprofileaddform]}, context_instance=RequestContext(request))
