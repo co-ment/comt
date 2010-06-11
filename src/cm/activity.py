@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 from time import mktime
 import django.dispatch
 import logging
+from cm.cm_settings import STORE_ACTIVITY_IP
 
 def register_activity(request, type, text=None, comment=None, user=None, text_version=None):
     signal_activity.send(sender=text, request=request, type=type, comment=comment, user=user, text_version=text_version)
@@ -22,13 +23,18 @@ def _save_activity(sender, **kwargs):
     text = sender
     text_version = kwargs.get('text_version', None)
     if not text_version and text:
-    	text_version = text.last_text_version
+        text_version = text.last_text_version
         
     if request.user.is_anonymous():
         originator_user = None
     else:
         originator_user = request.user
-    ip = request.META['REMOTE_ADDR']
+    
+    if STORE_ACTIVITY_IP:
+        ip = request.META['REMOTE_ADDR']
+    else:
+        ip = None
+    
     Activity.objects.create(text=text, user=user, text_version=text_version, comment=comment, type=type, ip=ip, originator_user=originator_user)
     
 def connect_all():

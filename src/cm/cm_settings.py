@@ -26,3 +26,6 @@ AUTO_CONTRIB_REGISTER = get_setting('AUTO_CONTRIB_REGISTER', False)
 SHOW_EMAILS_IN_ADMIN = get_setting('SHOW_EMAILS_IN_ADMIN', True)
 
 TRACKING_HTML = get_setting('TRACKING_HTML', '')
+
+# Store IP (or not) in activity 
+STORE_ACTIVITY_IP = get_setting('STORE_ACTIVITY_IP', True)
