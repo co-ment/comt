@@ -1,0 +1,75 @@
+{% extends "site/layout/base_workspace.html" %}
+{% load com %}
+{% load i18n %}
+
+{% block title %}
+{% blocktrans %}API Documentation{% endblocktrans %}
+{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+
+
+
+  <style type="text/css" media="screen">
+a.reflink {
+color:#C60F0F;
+font-size:0.8em;
+padding:0 4px;
+text-decoration:none;
+visibility:hidden;
+}
+
+:hover > a.reflink {
+visibility:visible;
+}
+  </style>
+
+
+<h1>API Documentation</h1>
+
+<h2>Presentation</h2>
+
+The API exposes method for external application to deal with content store in COMT.
+
+The authentification is done using <a href="http://fr.wikipedia.org/wiki/HTTP_Authentification">HTTP Authentification</a>.
+
+The default return format is 'json', add '?format=other_format' where other_format is 'json', 'xml', 'yaml' to change the results' format. 
+{% load markup %}
+
+		{% regroup docs by type as grouped_docs %}
+
+		
+		{% for dd in grouped_docs %}
+			<h2>{{ dd.grouper }}</h2>
+		    {% for doc in dd.list %}
+			{% if not doc.handler.no_display %}
+			<h3>{{ doc.handler.title }}&nbsp;<a href="#{{ doc.handler.title|iriencode }}" class="reflink" title="Permalink" name="{{ doc.handler.title|iriencode }}">¶</a></h3>
+			
+			<p>{{ doc.handler.desc }}</p>
+			<p>
+				{{ doc.doc|default:""|restructuredtext }}
+			</p>
+			
+			<p>
+				Endpoint: <b>{{ doc.handler.endpoint }}</b>
+			</p>
+			
+			<p>
+				Method: {% for meth in doc.allowed_methods %}<b>{{ meth }}</b>{% if not forloop.last %}, {% endif %}{% endfor %}
+			</p>
+
+			<p>
+				Args: {% if doc.handler.args %}{{ doc.handler.args|safe }}{% else %}None{% endif %}
+			</p>
+			
+					
+			<br />		
+			{% endif %}		
+			{% endfor %}
+		{% endfor %}
+	</body>
+</html>
+{% endblock %}

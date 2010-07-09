@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.utils.http import urlquote
 from django.db.models import Q
-
+from piston.utils import rc
 import logging
 
 from cm.models import *
@@ -210,8 +210,14 @@ def has_global_perm(perm_name, must_be_logged_in=False, redirect_field_name=REDI
 
         return _check_global_perm
     return _dec    
+
+def has_perm_on_text_api(perm_name, must_be_logged_in=False, redirect_field_name=REDIRECT_FIELD_NAME):    
+    return _has_perm_on_text(perm_name, must_be_logged_in, redirect_field_name, api=True)
     
-def has_perm_on_text(perm_name, must_be_logged_in=False, redirect_field_name=REDIRECT_FIELD_NAME):    
+def has_perm_on_text(perm_name, must_be_logged_in=False, redirect_field_name=REDIRECT_FIELD_NAME, api=False):
+    return _has_perm_on_text(perm_name, must_be_logged_in, redirect_field_name, api)
+
+def _has_perm_on_text(perm_name, must_be_logged_in=False, redirect_field_name=REDIRECT_FIELD_NAME, api=False):    
     """
     decorator protection checking for perm for logged in user
     force logged in (i.e. redirect to connection screen if not if must_be_logged_in 
@@ -222,15 +228,24 @@ def has_perm_on_text(perm_name, must_be_logged_in=False, redirect_field_name=RED
                 return view_func(request, *args, **kwargs)
 
             if must_be_logged_in and not is_authenticated(request):
-                login_url = reverse('login')
-                return HttpResponseRedirect('%s?%s=%s' % (login_url, redirect_field_name, urlquote(request.get_full_path())))
+                if not api:
+                    login_url = reverse('login')
+                    return HttpResponseRedirect('%s?%s=%s' % (login_url, redirect_field_name, urlquote(request.get_full_path())))
+                else:
+                    return rc.FORBIDDEN
+
             
             if 'key' in kwargs: 
                 text = get_object_or_404(Text, key=kwargs['key'])                
             else:
                 raise Exception('no security check possible')
-                                    
-            if has_perm(request, perm_name, text=text): 
+                
+            # in api, the view has an object as first parameter, request is args[0]
+            if not api:                
+                req = request
+            else:                    
+                req = args[0]     
+            if has_perm(req, perm_name, text=text): 
                 return view_func(request, *args, **kwargs)
             #else:
                 # TODO: (? useful ?) if some user have the perm and not logged-in : redirect to login
@@ -238,7 +253,11 @@ def has_perm_on_text(perm_name, must_be_logged_in=False, redirect_field_name=RED
                 #    return HttpResponseRedirect('%s?%s=%s' % (login_url, redirect_field_name, urlquote(request.get_full_path())))                    
             # else : unauthorized
             
-            raise UnauthorizedException('No perm %s' % perm_name)
+            if not api:
+                raise UnauthorizedException('No perm %s' % perm_name)
+            else:
+                return rc.FORBIDDEN
+
         _check_local_perm.__doc__ = view_func.__doc__
         _check_local_perm.__dict__ = view_func.__dict__
 

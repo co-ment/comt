@@ -157,3 +157,7 @@ js_info_dict = {
 urlpatterns += patterns('',
     (r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
 )
+
+urlpatterns += patterns('',
+   (r'^api/', include('cm.api.urls')),
+)

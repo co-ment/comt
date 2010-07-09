@@ -17,19 +17,19 @@ class SecurityTest(TestCase):
     def test_access_rights(self):
         # anon user sees no text
         request = FalseRequest(None)                
-        self.assertEqual(get_texts_with_perm(request, 'can_view_text').count(), 0)
+        self.assertEqual(get_texts_with_perm(request, 'can_view_text').count(), 2)
 
         # user 1 sees all texts
         user1 = UserProfile.objects.get(id=1).user        
         request = FalseRequest(user1)       
-        self.assertEqual(get_texts_with_perm(request, 'can_view_text').count(), 3)
+        self.assertEqual(get_texts_with_perm(request, 'can_view_text').count(), 5)
         
-        # user 2 sees only 2 texts
+        # user 2 sees only 4 texts
         user2 = UserProfile.objects.get(id=2).user
         request = FalseRequest(user2)        
-        self.assertEqual(get_texts_with_perm(request, 'can_view_text').count(), 2)
+        self.assertEqual(get_texts_with_perm(request, 'can_view_text').count(), 4)
 
-        # user 4 sees only 2 texts (global manager but commentator on text 4
+        # user 4 manages only 2 texts (global manager but commentator on text 4
         user4 = UserProfile.objects.get(id=4).user
         request = FalseRequest(user4)
         self.assertEqual(get_texts_with_perm(request, 'can_manage_text').count(), 2)

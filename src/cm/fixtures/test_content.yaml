@@ -360,6 +360,58 @@
     adminkey: "text_adminkey_3"
     user: 2    
 
+# text 4
+- model : cm.textversion
+  pk: 4
+  fields:
+    created: "2009-02-13 04:01:12"
+    modified: "2009-02-13 04:01:12"
+    title: 'title 4, public text'
+    format: 'markdown'
+    content: 'aaa bbb ccc ddd eee fff ggg'
+    text: 4
+    mod_posteriori: True
+    key: "textversion_key_4" 
+    adminkey: "tv_adminkey_4" 
+    
+- model : cm.text
+  pk: 4
+  fields:
+    created: "2009-02-13 04:01:12"
+    modified: "2009-02-13 04:01:12"
+    last_text_version: 4
+    title: 'title 4, public text'
+    state: "approved"
+    key: "text_key_4" 
+    adminkey: "text_adminkey_4" 
+    user: 1
+
+# text 5
+- model : cm.textversion
+  pk: 5
+  fields:
+    created: "2009-02-13 04:01:12"
+    modified: "2009-02-13 04:01:12"
+    title: 'title 5, public text'
+    format: 'markdown'
+    content: 'aaa bbb ccc ddd eee fff ggg'
+    text: 5
+    mod_posteriori: True
+    key: "textversion_key_5" 
+    adminkey: "tv_adminkey_5" 
+    
+- model : cm.text
+  pk: 5
+  fields:
+    created: "2009-02-13 04:01:12"
+    modified: "2009-02-13 04:01:12"
+    last_text_version: 5
+    title: 'title 5, public text'
+    state: "approved"
+    key: "text_key_5" 
+    adminkey: "text_adminkey_5" 
+    user: 1    
+    
 ############### userrole ############### 
 
 # user 1 is global Manager
@@ -426,6 +478,24 @@
     user: 4
     text: 2
 
+# user null (anon is Commentator on text 4)
+# userrole 8
+- model : cm.userrole
+  pk: 8
+  fields:
+    role: 4
+    user: null
+    text: 4
+    
+# user null (anon is Commentator on text 5)
+# userrole 9
+- model : cm.userrole
+  pk: 9
+  fields:
+    role: 4
+    user: null
+    text: 5
+    
 ############### comment ###############
 
 # comment 1 (visible on text 2)
