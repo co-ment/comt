@@ -62,8 +62,14 @@ class Text(PermanentModel, AuthorModel):
     def update_denorm_fields(self):
         real_last_text_version = self.fetch_latest_version()
     
+        try:
+            last_text_version = self.last_text_version
+        except TextVersion.DoesNotExist:
+            # the text version has just been deleted
+            last_text_version = None
+            
         modif = False
-        if real_last_text_version and real_last_text_version != self.last_text_version:
+        if real_last_text_version and real_last_text_version != last_text_version:
             self.last_text_version = real_last_text_version
             modif = True
             
