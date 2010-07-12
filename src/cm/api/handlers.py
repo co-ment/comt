@@ -8,6 +8,8 @@ from cm.security import get_texts_with_perm, has_perm, get_viewable_comments, \
 from cm.security import get_viewable_comments
 from cm.utils.embed import embed_html
 from cm.views.create import CreateTextContentForm, create_text
+from cm.views.texts import client_exchange, text_view_frame, text_view_comments, text_export
+from cm.views.feeds import text_feed
 from piston.utils import validate
 from settings import SITE_URL
 
@@ -90,7 +92,7 @@ class AnonymousTextListHandler(AnonymousBaseHandler):
 class TextListHandler(BaseHandler):
     title = "Create text"    
     type = "Text methods"    
-    allowed_methods = ('POST', )    
+    allowed_methods = ('GET', 'POST')    
     anonymous = AnonymousTextListHandler
     desc = "Create a text with the provided parameters."
     args = """<br/>
@@ -103,6 +105,11 @@ class TextListHandler(BaseHandler):
     @staticmethod
     def endpoint():
         return URL_PREFIX + '/text/'
+
+    def read(self, request):
+        order_by = '-id'
+        texts = get_texts_with_perm(request, 'can_view_text').order_by(order_by)        
+        return texts
 
     def create(self, request):
         form = CreateTextContentForm(request.POST)
@@ -129,12 +136,11 @@ class TextDeleteHandler(BaseHandler):
     def endpoint():
         return URL_PREFIX + '/text/{key}/delete/'
 
-    def create(self, request):
+    def create(self, request, key):
         """
         Delete text identified by `key`.
         """
         try:
-            key = request.POST.get('key')
             text_delete(request, key=key)
         except UnauthorizedException:
             return rc.FORBIDDEN
@@ -188,7 +194,144 @@ class TextEditHandler(BaseHandler):
         text_version = text.last_text_version
         return {'version_key' : text_version.key , 'created': text_version.created}
 
-from django.contrib.auth import authenticate
+
+class AnonymousTextFeedHandler(AnonymousBaseHandler):
+    allowed_methods = ('GET',)    
+    type = "Text methods"
+    title = "Text feed"
+    desc = "Returns text RSS feed."
+    args = None
+    
+    @staticmethod
+    def endpoint():
+        return URL_PREFIX + '/text/{key}/feed/?'
+    
+    def read(self, request, key):
+        return text_feed(request, key=key)
+
+class TextFeedHandler(BaseHandler):    
+    type = "Text methods"
+    anonymous = AnonymousTextFeedHandler
+    allowed_methods = ('GET',)  
+    no_display = True 
+## client methods
+
+class AnonymousClientHandler(AnonymousBaseHandler):
+    allowed_methods = ('POST',)    
+    type = "Client methods"
+    title = "Handles client methods"
+    desc = "Handles client (ajax text view) methods."
+    args = """<br />
+post arguments
+    """ 
+    
+    @staticmethod
+    def endpoint():
+        return URL_PREFIX + '/client/'
+    
+    def create(self, request):
+        return client_exchange(request)
+
+class ClientHandler(BaseHandler):    
+    type = "Client methods"
+    anonymous = AnonymousClientHandler
+    allowed_methods = ('POST',)  
+    no_display = True 
+
+    def create(self, request):
+        return client_exchange(request)
+
+## embed methods
+from django.views.i18n import javascript_catalog
+
+class JSI18NHandler(AnonymousBaseHandler):
+    allowed_methods = ('GET',)    
+    type = "Embed methods"
+    title = "Get js i18n dicts"
+    desc = ""
+    args = None
+    
+    @staticmethod
+    def endpoint():
+        return URL_PREFIX + '/jsi18n/'
+    
+    def read(self, request):
+        return javascript_catalog(request)
+
+
+class AnonymousCommentFrameHandler(AnonymousBaseHandler):
+    allowed_methods = ('GET',)    
+    type = "Embed methods"
+    title = "Displays embedable frame"
+    desc = ""
+    args = None
+    
+    @staticmethod
+    def endpoint():
+        return URL_PREFIX + '/text/{key}/comments_frame/?prefix=/api'
+    
+    def read(self, request, key):
+        return text_view_frame(request, key=key)
+
+class CommentFrameHandler(BaseHandler):    
+    type = "Embed methods"
+    anonymous = AnonymousCommentFrameHandler
+    allowed_methods = ('GET',)  
+    no_display = True 
+
+    def read(self, request, key):
+        return text_view_frame(request, key=key)
+
+class AnonymousCommentHandler(AnonymousBaseHandler):
+    allowed_methods = ('GET',)    
+    type = "Embed methods"
+    title = "Displays embedable frame"
+    no_display = True 
+    desc = ""
+    args = None
+    
+    @staticmethod
+    def endpoint():
+        return URL_PREFIX + '/text/{key}/comments/{version_key}/?'
+    
+    def read(self, request, key, version_key):
+        return text_view_comments(request, key=key, version_key=version_key)
+
+class CommentHandler(BaseHandler):    
+    type = "Embed methods"
+    anonymous = AnonymousCommentHandler
+    allowed_methods = ('GET',)  
+    no_display = True 
+
+    def read(self, request, key, version_key):
+        return text_view_comments(request, key=key, version_key=version_key)
+
+
+class AnonymousTextExportHandler(AnonymousBaseHandler):
+    allowed_methods = ('POST',)    
+    type = "Embed methods"
+    title = "undocumented"
+    no_display = True 
+    desc = ""
+    args = None
+    
+    @staticmethod
+    def endpoint():
+        return URL_PREFIX + ' undocumented'
+    
+    def create(self, request, key, format, download, whichcomments, withcolor):
+        return text_export(request, key, format, download, whichcomments, withcolor, adminkey=None)
+
+class TextExportHandler(BaseHandler):    
+    type = "Embed methods"
+    anonymous = AnonymousTextExportHandler
+    allowed_methods = ('POST',)  
+    no_display = True 
+
+    def create(self, request, key, format, download, whichcomments, withcolor):
+        return text_export(request, key, format, download, whichcomments, withcolor, adminkey=None)
+
+## user methods 
     
 class SetUserHandler(AnonymousBaseHandler):
     allowed_methods = ('POST',)    
@@ -215,6 +358,7 @@ class SetUserHandler(AnonymousBaseHandler):
         else:
             return rc.BAD_REQUEST    
                          
+
 
 
 from piston.doc import documentation_view
