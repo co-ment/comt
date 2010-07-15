@@ -64,11 +64,12 @@ if (sv_read_only)
 //initial comment db as json
 sv_comments = "{{ json_comments|escapejs }}";
 sv_filter_data = "{{ json_filter_datas|escapejs }}";
-sv_site_url = "{{ SITE_URL|escapejs }}";
+sv_site_url = "{% if request.GET.prefix %}{{ request.GET.prefix }}{% else %}{{ SITE_URL|escapejs }}{% endif %}";
+sv_prefix = "{% if request.GET.prefix %}{{ request.GET.prefix }}{% endif %}";
 
-sv_client_url = "{% url text-client-exchange %}?{{ request.GET.urlencode }}" ;
-sv_text_view_show_comment_url = "{% url text-view-show-comment text.key '' %}";
-sv_text_feed_url = "{% url text-feed text.key %}";
+sv_client_url = "{% if request.GET.prefix %}{{ request.GET.prefix }}{% endif %}{% url text-client-exchange %}?{{ request.GET.urlencode }}" ;
+sv_text_view_show_comment_url = "{% if request.GET.prefix %}{{ request.GET.prefix }}{% endif %}{% url text-view-show-comment text.key '' %}";
+sv_text_feed_url = "{% if request.GET.prefix %}{{ request.GET.prefix }}{% endif %}{% url text-feed text.key %}";
 
 sv_client_date_fmt = "{{ client_date_fmt.js_parse }}"; //"%Y-%m-%dT%H:%M:%S" ;
 sv_key = "{{ text.key|escapejs }}";
@@ -83,7 +84,7 @@ sv_media_url = "{{ CM_MEDIA_PREFIX|escapejs }}";
 
 --></script>
 
-<script type="text/javascript" src="{% url django.views.i18n.javascript_catalog %}"></script>
+<script type="text/javascript" src="{% if request.GET.prefix %}{{ request.GET.prefix }}{% endif %}{% url django.views.i18n.javascript_catalog %}"></script>
 {% if CLIENT_DEBUG  %}
 <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_permissions.js"></script> 
 <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_preferences.js"></script>

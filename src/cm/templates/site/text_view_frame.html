@@ -30,7 +30,7 @@
 
     <link type="text/css" href="{{ CM_MEDIA_PREFIX }}css/site/text_view_frame.css" rel="stylesheet" />
 
-    <script type="text/javascript" src="{% url django.views.i18n.javascript_catalog %}"></script>
+    <script type="text/javascript" src="{% if request.GET.prefix %}{{ request.GET.prefix }}{% endif %}{% url django.views.i18n.javascript_catalog %}"></script>
 {% if CLIENT_DEBUG %}
     <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/f_message.js"></script>
     <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/f_printDialog.js"></script>
@@ -59,6 +59,7 @@
 
 </head>
 <BODY>
+
     <DIV id="add_comment_btn" class="initially_hidden"> 
 		<img align="middle" src="{{ CM_MEDIA_PREFIX }}img/note_add_sop_mid.gif" alt="{% blocktrans %}add a comment{% endblocktrans %}" title="{% blocktrans %}add a comment{% endblocktrans %}"/>
     </DIV>
@@ -84,7 +85,8 @@
 	    {% url text-view-comments-version text.key text_version.key as frame_url %}
 	             <iframe id="text_view_comments" name="text_view_comments" class="ui-layout-center"
             width="100%" height="100%" frameborder="0" scrolling="auto"
-            src="{{ frame_url }}{{ frame_url|url_args }}{{ request.GET.urlencode }}"></iframe>
+            src="{% if request.GET.prefix %}{{ request.GET.prefix }}{% else %}{% endif %}{{ frame_url }}{{ frame_url|url_args }}{{ request.GET.urlencode }}"></iframe>
+             
              
 <!--  exemple de passage d'arguments        <iframe id="text_view_comments" name="text_view_comments" class="ui-layout-center"
             width="100%" height="100%" frameborder="0" scrolling="auto"
@@ -97,7 +99,7 @@
 <!--         <p id="validateTips">All form fields are required.</p> -->
 
 		{% url text-export text.key "FoRmAt" "DoWnLoAd" "WhIcHCoMmEnT" "WiThCoLoR" as export_url %}    
-        <form name="print_export_form" id="print_export_form" method="post" action="" target_action="{{ export_url }}{{ export_url|url_args }}{{ request.GET.urlencode }}">
+        <form name="print_export_form" id="print_export_form" method="post" action="" target_action="{% if request.GET.prefix %}{{ request.GET.prefix }}{% else %}{% endif %}{{ export_url }}{{ export_url|url_args }}{{ request.GET.urlencode }}">
 	        <fieldset>
                 <label for="p_comments">{% blocktrans %}Which comments?{% endblocktrans %}</label>
                 <select  name="p_comments" id="p_comments" />
