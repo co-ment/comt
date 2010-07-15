@@ -11,9 +11,9 @@ from cm.views.create import CreateTextContentForm, create_text
 from cm.views.texts import client_exchange, text_view_frame, text_view_comments, text_export
 from cm.views.feeds import text_feed
 from piston.utils import validate
-from settings import SITE_URL
+from django.conf import settings
 
-URL_PREFIX = SITE_URL + '/api'
+URL_PREFIX = settings.SITE_URL + '/api'
  
 class AnonymousTextHandler(AnonymousBaseHandler):
     type = "Text methods"
