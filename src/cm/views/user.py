@@ -544,8 +544,12 @@ def cm_login(request, user):
     
     display_message(request, _(u"You're logged in!"))
     next = request.POST.get('next', None)
+    q = request.POST.get('q', None)
     if next and next.startswith('/'):
-        return HttpResponseRedirect(next)
+        if q:
+            return HttpResponseRedirect(next + '?' + q)
+        else:
+            return HttpResponseRedirect(next)
     else:
         return HttpResponseRedirect(reverse('index'))
 

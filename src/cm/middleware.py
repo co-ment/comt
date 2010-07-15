@@ -2,6 +2,7 @@ from cm.exception import UnauthorizedException
 from django.conf import settings
 from django.http import HttpResponseServerError,HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from urllib import urlencode
 
 class CmMiddleware(object):
     
@@ -11,7 +12,8 @@ class CmMiddleware(object):
             traceback.print_exc()
         if type(exception) == UnauthorizedException:
             if request.user.is_anonymous():
-                login_url = reverse('login') + '?next=%s' %request.META['PATH_INFO']
+                query = urlencode({'next': request.META['PATH_INFO'], 'q' : request.META['QUERY_STRING'] })
+                login_url = reverse('login') + '?'  + query
                 return HttpResponseRedirect(login_url)
             else:
                 redirect_url = reverse('unauthorized')

@@ -27,6 +27,9 @@
 {% if request.GET.next %}
 <input type="hidden" name="next" value="{{ request.GET.next }}">
 {% endif %}
+{% if request.GET.q %}
+<input type="hidden" name="q" value="{{ request.GET.q }}">
+{% endif %}
 
 </form>
 
