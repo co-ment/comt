@@ -29,3 +29,6 @@ TRACKING_HTML = get_setting('TRACKING_HTML', '')
 
 # Store IP (or not) in activity 
 STORE_ACTIVITY_IP = get_setting('STORE_ACTIVITY_IP', True)
+
+# Show 'decorated' users in comments (not structural creator id) 
+DECORATED_CREATORS = get_setting('DECORATED_CREATORS', False)

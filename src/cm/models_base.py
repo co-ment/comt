@@ -57,13 +57,17 @@ class AuthorModel(models.Model):
         abstract = True
     
     def get_name(self):
-        if self.user:
+        from cm.cm_settings import DECORATED_CREATORS
+        
+        if self.user and not DECORATED_CREATORS:
             return self.user.username
         else:
             return self.name
 
     def get_email(self):
-        if self.user:
+        from cm.cm_settings import DECORATED_CREATORS
+        
+        if self.user and not DECORATED_CREATORS:
             return self.user.email
         else:
             return self.email
