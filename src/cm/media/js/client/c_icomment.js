@@ -198,13 +198,13 @@ IComment.prototype = {
 	},	
 	
 	onMouseEnterHeader : function () {
-		if (readyForAction() && this.isVisible()) {
+		if (readyForAction() && this.isVisible() && (sv_prefix=="")) {
 			this.overlay.get('contentBox').query(".c-permalink").removeClass('displaynone');
 		}
 	},
 	
 	onMouseLeaveHeader : function () {
-		if (readyForAction() && this.isVisible()) {
+		if (readyForAction() && this.isVisible() && (sv_prefix=="")) {
 			this.overlay.get('contentBox').query(".c-permalink").addClass('displaynone');
 		}
 	},	
@@ -302,7 +302,10 @@ IComment.prototype = {
 		
 		var modifDateTooltip = (comment.modified == comment.created) ? '' : '<a title="' + titleInfos + '"> * </a>' ;
 		var permaTitle = gettext('Permalink to this comment') ;
-		var permalink = '<a class="c-permalink displaynone c-action" target="_blank" title="'+ permaTitle +'" href="" >¶&nbsp;</a>' ;
+		var permalink = "";
+		if (sv_prefix=="") {
+			permalink = '<a class="c-permalink displaynone c-action" target="_blank" title="'+ permaTitle +'" href="" >¶&nbsp;</a>' ;
+		}
 		
 		var infos = interpolate(gettext('by %(name)s, created on %(date)s'),{'name':comment.name, 'date':comment.created_user_str}, true) ;
 		
@@ -335,7 +338,9 @@ IComment.prototype = {
 			prevContentNode.get('parentNode').replaceChild(newContentNode, prevContentNode) ;
 
 		// PERMALINK
-		boundingBoxNode.query(".c-permalink").set("href",sv_site_url + comment.permalink) ;
+		if (sv_prefix=="") {
+			boundingBoxNode.query(".c-permalink").set("href",sv_site_url + comment.permalink) ;
+		}
 
 		// MODERATION
 		this.changeModeration(comment) ;
