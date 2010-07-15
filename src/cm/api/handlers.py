@@ -1,7 +1,7 @@
 from piston.handler import AnonymousBaseHandler, BaseHandler
 from piston.utils import rc
 
-from cm.models import Text,TextVersion, Role, UserRole
+from cm.models import Text,TextVersion, Role, UserRole, Comment
 from cm.views import get_keys_from_dict, get_textversion_by_keys_or_404, get_text_by_keys_or_404, get_textversion_by_keys_or_404, redirect
 from cm.security import get_texts_with_perm, has_perm, get_viewable_comments, \
     has_perm_on_text_api
@@ -69,8 +69,17 @@ class AnonymousTextVersionHandler(AnonymousBaseHandler):
 class TextVersionHandler(BaseHandler):
     type = "Text methods"    
     anonymous = AnonymousTextVersionHandler
-    allowed_methods = ('GET',)  
+    fields = ('key', 'title', 'format', 'content', 'created', 'modified', 'nb_comments',)   
+    allowed_methods = ('GET', )   
+    model = Text
     no_display = True 
+
+    @has_perm_on_text_api('can_view_text')
+    def read(self, request, key, version_key):
+        text_version = get_textversion_by_keys_or_404(version_key, key=key)
+        setattr(text_version,'nb_comments',len(get_viewable_comments(request, text_version.comment_set.all(), text_version.text)))
+
+        return text_version
 
 class AnonymousTextListHandler(AnonymousBaseHandler):
     title = "List texts"    
@@ -93,6 +102,8 @@ class TextListHandler(BaseHandler):
     title = "Create text"    
     type = "Text methods"    
     allowed_methods = ('GET', 'POST')    
+    fields = ('key', 'title', 'created', 'modified', 'nb_comments', 'nb_versions',)   
+    model = Text
     anonymous = AnonymousTextListHandler
     desc = "Create a text with the provided parameters."
     args = """<br/>
@@ -213,7 +224,51 @@ class TextFeedHandler(BaseHandler):
     type = "Text methods"
     anonymous = AnonymousTextFeedHandler
     allowed_methods = ('GET',)  
-    no_display = True 
+    no_display = True
+
+    def read(self, request, key):
+        return text_feed(request, key=key)
+    
+class TextVersionRevertHandler(BaseHandler):
+    allowed_methods = ('POST', )    
+    type = "Text methods"
+    title = "Revert to specific text version"    
+    desc = "Revert to a text version (i.e. copy this text_version which becomes the last text_version)."
+    args = """<br />
+`key`: text's key<br />
+`version_key`: key of the version to revert to<br />
+    """ 
+    
+    @staticmethod
+    def endpoint():
+        return URL_PREFIX + '/text/{key}/{version_key}/revert/'
+    
+    
+    def create(self, request, key, version_key):
+        text_version = get_textversion_by_keys_or_404(version_key, key=key)
+        new_text_version = text_version.text.revert_to_version(version_key)
+        return {'version_key' : new_text_version.key , 'created': new_text_version.created}
+
+class TextVersionDeleteHandler(BaseHandler):
+    allowed_methods = ('POST', )    
+    type = "Text methods"
+    title = "Delete a specific text version"    
+    desc = "Delete a text version."
+    args = """<br />
+`key`: text's key<br />
+`version_key`: key of the version to delete<br />
+    """ 
+    
+    @staticmethod
+    def endpoint():
+        return URL_PREFIX + '/text/{key}/{version_key}/delete/'
+    
+    
+    def create(self, request, key, version_key):
+        text_version = get_textversion_by_keys_or_404(version_key, key=key)
+        text_version.delete()
+        return rc.ALL_OK    
+
 ## client methods
 
 class AnonymousClientHandler(AnonymousBaseHandler):
@@ -243,6 +298,7 @@ class ClientHandler(BaseHandler):
 
 ## embed methods
 from django.views.i18n import javascript_catalog
+from cm.urls import js_info_dict
 
 class JSI18NHandler(AnonymousBaseHandler):
     allowed_methods = ('GET',)    
@@ -256,7 +312,7 @@ class JSI18NHandler(AnonymousBaseHandler):
         return URL_PREFIX + '/jsi18n/'
     
     def read(self, request):
-        return javascript_catalog(request)
+        return javascript_catalog(request, **js_info_dict)
 
 
 class AnonymousCommentFrameHandler(AnonymousBaseHandler):
@@ -331,36 +387,59 @@ class TextExportHandler(BaseHandler):
     def create(self, request, key, format, download, whichcomments, withcolor):
         return text_export(request, key, format, download, whichcomments, withcolor, adminkey=None)
 
-## user methods 
-    
-class SetUserHandler(AnonymousBaseHandler):
-    allowed_methods = ('POST',)    
-    type = "User methods"
-    title = "Set username and email"    
-    desc = "Set username and email to use when commenting."
+class AnonymousCommentsHandler(AnonymousBaseHandler):
+    allowed_methods = ('GET',)    
+    type = "Comment methods"
+    fields = ('id_key', 'title', 'format', 'content', 'created', 'name', ('text_version' , ('key', ('text', ('key',))) ))   
+    model = Comment    
+    title = "Get comments"
+    desc = "Get comments from the workspace, most recent first."
     args = """<br />
-`user_name`: user's name<br />
-`user_email`: user's email<br />
+`keys`: (optional) comma separated keys : limit comments from these texts only<br />
+`name`: (optional) limit comments from this user only
+`limit`: (optional) limit number of comments returned
     """ 
     
     @staticmethod
     def endpoint():
-        return URL_PREFIX + '/setuser/'
+        return URL_PREFIX + '/comments/'
     
-    def create(self, request):
-        user_name = request.POST.get('user_name', None)
-        user_email = request.POST.get('user_email', None)
-        if user_name and user_email: 
-            response = rc.ALL_OK
-            response.set_cookie('user_name', user_name)
-            response.set_cookie('user_email', user_email)
-            return response
-        else:
-            return rc.BAD_REQUEST    
-                         
+    def read(self, request):
+        name = request.GET.get('name', None)
+        limit = request.GET.get('limit', None)
+        keys = request.GET.get('keys', None)
+        query = Comment.objects.all()
+        if keys:            
+            query = query.filter(text_version__text__key__in=keys.split(','))
+        if name:
+            query = query.filter(name=name)
+        query = query.order_by('-created')
+        if limit:
+            query = query[:int(limit)]
+        return query
 
+class CommentsHandler(BaseHandler):    
+    type = "Comment methods"
+    anonymous = AnonymousCommentsHandler
+    allowed_methods = ('GET',)  
+    fields = ('id_key', 'title', 'format', 'content', 'created', 'name', ('text_version' , ('key', ('text', ('key',))) ))   
+    model = Comment
+    no_display = True 
 
-
+    def read(self, request):
+        name = request.GET.get('name', None)
+        limit = request.GET.get('limit', None)
+        keys = request.GET.get('keys', None)
+        query = Comment.objects.all()
+        if keys:            
+            query = query.filter(text_version__text__key__in=keys.split(','))
+        if name:
+            query = query.filter(name=name)
+        query = query.order_by('-created')
+        if limit:
+            query = query[:int(limit)]
+        return query
+    
 from piston.doc import documentation_view
 
 from piston.handler import handler_tracker

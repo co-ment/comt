@@ -135,10 +135,10 @@ class APITest(TestCase):
         user = User.objects.get(pk=1)
         setattr(request, 'user' , user)
         request.method = 'POST'
-        setattr(request, 'POST' , {'key':'text_key_3'})
+        setattr(request, 'POST' , {})
         setattr(request, 'flash' , {})
   
-        response = resource(request, emitter_format='json')
+        response = resource(request, key='text_key_3', emitter_format='json')
         self.assertEquals(204, response.status_code)
 
         # one text deleted
@@ -155,10 +155,10 @@ class APITest(TestCase):
         user = User.objects.get(pk=3)
         setattr(request, 'user' , user)
         request.method = 'POST'
-        setattr(request, 'POST' , {'key':'text_key_3'})
+        setattr(request, 'POST' , {})
         setattr(request, 'flash' , {})
   
-        response = resource(request, emitter_format='json')
+        response = resource(request, key='text_key_3', emitter_format='json')
         self.assertEquals(401, response.status_code)
         
         # no text deleted
@@ -180,28 +180,51 @@ class APITest(TestCase):
         response = resource(request, key='text_key_2', emitter_format='json')
         self.assertEquals(response.content, '{"nb_removed": 3}')
 
-    def xtest_edit(self):
+    def test_edit(self):
         """
         Edit text
         """
         resource = Resource(TextEditHandler)
         request = HttpRequest()
-        setattr(request,'session',None)
+        session = {}
+        setattr(request,'session',{})
+        
         user = User.objects.get(pk=1) 
         setattr(request, 'user' , user)
         request.method = 'POST'
-        setattr(request, 'POST' , {'new_format' : 'markdown', 'new_content' : u'ggg'})
-        setattr(request, 'flash' , {})
+        setattr(request, 'POST' , {'format' : 'markdown', 'content' : u'ggg', 'keep_comments' : True, 'new_version' : True, 'title' : 'new title'})
+        #setattr(request, 'flash' , {})
     
         response = resource(request, key='text_key_2', emitter_format='json')
 
         self.assertEquals(Text.objects.get(pk=2).last_text_version.content , u'ggg')
 
-    
-    def test_setuser(self):
+    def test_text_version(self):
         """
-        Set username/email for commenting
+        Text version operation
         """
         from django.test.client import Client
         c = Client()
-        response = c.post('/setuser/', {'username': 'my_username', 'email': 'my_email'})
+        
+        # revert to text version
+        self.assertEquals(Text.objects.get(pk=1).get_versions_number() , 2)
+
+        resource = Resource(TextVersionRevertHandler)
+        request = HttpRequest()
+        request.method = 'POST'
+        setattr(request, 'POST' , {})
+        
+        response = resource(request, key='text_key_1', version_key='textversion_key_0', emitter_format='json')
+
+        self.assertEquals(Text.objects.get(pk=1).get_versions_number() , 3)
+        
+        # delete text version
+
+        resource = Resource(TextVersionDeleteHandler)
+        request = HttpRequest()
+        request.method = 'POST'
+        setattr(request, 'POST' , {})
+        response = resource(request, key='text_key_1', version_key='textversion_key_0', emitter_format='json')
+        
+        
+        self.assertEquals(Text.objects.get(pk=1).get_versions_number() , 2)

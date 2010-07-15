@@ -121,6 +121,19 @@
     mod_posteriori: True
     key: "textversion_key_1" 
     adminkey: "tv_adminkey_1" 
+
+- model : cm.textversion
+  pk: 0
+  fields:
+    created: "2009-01-14 04:01:12"
+    modified: "2009-01-14 04:01:12"
+    title: 'title 1, aposteriori moderation'
+    format: 'markdown'
+    content: 'zzz hhhh aaa bbb ccc ddd eee fff ggg'
+    text: 1
+    mod_posteriori: True
+    key: "textversion_key_0" 
+    adminkey: "tv_adminkey_0" 
     
 - model : cm.text
   pk: 1
