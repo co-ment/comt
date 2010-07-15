@@ -37,7 +37,6 @@ The API exposes method for external application to deal with content store in CO
 The authentification is done using <a href="http://fr.wikipedia.org/wiki/HTTP_Authentification">HTTP Authentification</a>.
 
 The default return format is 'json', add '?format=other_format' where other_format is 'json', 'xml', 'yaml' to change the results' format. 
-{% load markup %}
 
 		{% regroup docs by type as grouped_docs %}
 
@@ -50,7 +49,7 @@ The default return format is 'json', add '?format=other_format' where other_form
 			
 			<p>{{ doc.handler.desc }}</p>
 			<p>
-				{{ doc.doc|default:""|restructuredtext }}
+				{{ doc.doc|default:"" }}
 			</p>
 			
 			<p>
