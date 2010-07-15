@@ -198,8 +198,7 @@ def has_global_perm(perm_name, must_be_logged_in=False, redirect_field_name=REDI
     def _dec(view_func):
         def _check_global_perm(request, *args, **kwargs):
             if must_be_logged_in and not is_authenticated(request):
-                login_url = reverse('login')
-                return HttpResponseRedirect('%s?%s=%s' % (login_url, redirect_field_name, urlquote(request.get_full_path())))
+                raise UnauthorizedException('Should be logged in')
             
             if has_perm(request, perm_name, text=None): 
                 return view_func(request, *args, **kwargs)
@@ -222,8 +221,7 @@ def has_perm_on_text(perm_name, must_be_logged_in=False, redirect_field_name=RED
                 return view_func(request, *args, **kwargs)
 
             if must_be_logged_in and not is_authenticated(request):
-                login_url = reverse('login')
-                return HttpResponseRedirect('%s?%s=%s' % (login_url, redirect_field_name, urlquote(request.get_full_path())))
+                raise UnauthorizedException('Should be logged in')
             
             if 'key' in kwargs: 
                 text = get_object_or_404(Text, key=kwargs['key'])                
