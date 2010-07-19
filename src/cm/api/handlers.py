@@ -325,7 +325,8 @@ class AnonymousCommentFrameHandler(AnonymousBaseHandler):
     @staticmethod
     def endpoint():
         return URL_PREFIX + '/text/{key}/comments_frame/?prefix=/api'
-    
+
+    @has_perm_on_text_api('can_view_text')    
     def read(self, request, key):
         return text_view_frame(request, key=key)
 
@@ -335,6 +336,7 @@ class CommentFrameHandler(BaseHandler):
     allowed_methods = ('GET',)  
     no_display = True 
 
+    @has_perm_on_text_api('can_view_text')
     def read(self, request, key):
         return text_view_frame(request, key=key)
 
@@ -350,6 +352,7 @@ class AnonymousCommentHandler(AnonymousBaseHandler):
     def endpoint():
         return URL_PREFIX + '/text/{key}/comments/{version_key}/?'
     
+    @has_perm_on_text_api('can_view_text')    
     def read(self, request, key, version_key):
         return text_view_comments(request, key=key, version_key=version_key)
 
@@ -359,6 +362,7 @@ class CommentHandler(BaseHandler):
     allowed_methods = ('GET',)  
     no_display = True 
 
+    @has_perm_on_text_api('can_view_text')
     def read(self, request, key, version_key):
         return text_view_comments(request, key=key, version_key=version_key)
 
@@ -375,6 +379,7 @@ class AnonymousTextExportHandler(AnonymousBaseHandler):
     def endpoint():
         return URL_PREFIX + ' undocumented'
     
+    @has_perm_on_text_api('can_view_text')    
     def create(self, request, key, format, download, whichcomments, withcolor):
         return text_export(request, key, format, download, whichcomments, withcolor, adminkey=None)
 
@@ -384,6 +389,7 @@ class TextExportHandler(BaseHandler):
     allowed_methods = ('POST',)  
     no_display = True 
 
+    @has_perm_on_text_api('can_view_text')
     def create(self, request, key, format, download, whichcomments, withcolor):
         return text_export(request, key, format, download, whichcomments, withcolor, adminkey=None)
 
