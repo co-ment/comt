@@ -191,7 +191,8 @@ class TextEditHandler(BaseHandler):
 `content`: new content (in specified format)<br />
 `note`: note to add to edit<br />
 `new_version`: boolean: should a new version of the text be created?<br />
-`keep_comments`: boolean: should existing comments be keep (if possible)?<br />
+`keep_comments`: boolean: should existing comments be kept (if possible)?<br />
+`cancel_modified_scopes`: if set to 1, existing comments without scope in a new version are detached, otherwise they are deleted<br />
     """ 
     
     @staticmethod
