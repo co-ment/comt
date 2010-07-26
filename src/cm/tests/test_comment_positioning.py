@@ -53,6 +53,23 @@ class CommentPositioningTest(TestCase):
             else:
                 x, y , z, k = new
                 self.assert_comment(id, x, y, z, k) 
+
+    def test_remove_comment(self):
+        content     = u"""<html><body>This is a <b>test</b> text</body></html>"""
+        new_content = u"""<html><body>This is a <b>te</b>e<b>est</b> text</body></html>"""
+
+        text = Text.objects.create_text("text", "html", content, "", "", "", None)
+
+        comment1 = create_comment(2, 2, 2, 4)
+        comment2 = create_comment(2, 2, 2, 4)
+        
+        version = Text.objects.all()[0].get_latest_version()
+
+        self.assertEqual(len(version.get_comments()), 2)
+
+        version.edit("text", "html", new_content, keep_comments = False, cancel_modified_scopes=False)
+
+        self.assertEqual(len(version.get_comments()), 0)
             
     def test_wrapper_shifted(self):
         content     = u"""<html><body>This is a <b>test</b> text</body></html>"""

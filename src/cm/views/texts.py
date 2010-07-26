@@ -666,9 +666,10 @@ class EditTextForm(ModelForm):
         new_format = request.POST.get('format', text.last_text_version.format)
         new_note = request.POST.get('note',None)
         new_tags = request.POST.get('tags',None)
+        keep_comments = bool(request.POST.get('keep_comments',None))
         cancel_modified_scopes = (request.POST.get('cancel_modified_scopes',u'1') == u'1')
         version = text.get_latest_version()
-        version.edit(new_title, new_format, new_content, new_tags, new_note, True, cancel_modified_scopes)
+        version.edit(new_title, new_format, new_content, new_tags, new_note, keep_comments, cancel_modified_scopes)
 
         return version
 
@@ -681,8 +682,9 @@ class EditTextForm(ModelForm):
         cancel_modified_scopes = (request.POST.get('cancel_modified_scopes',u'1') == u'1')
         
         new_text_version = text.edit(new_title, new_format, new_content, new_tags, new_note, keep_comments=True, cancel_modified_scopes=cancel_modified_scopes, new_version=True)
-        
-        new_text_version.edit(new_title, new_format, new_content, new_tags, new_note, True, cancel_modified_scopes)
+
+        keep_comments = bool(request.POST.get('keep_comments',None))
+        new_text_version.edit(new_title, new_format, new_content, new_tags, new_note, keep_comments, cancel_modified_scopes)
         new_text_version.user = request.user if request.user.is_authenticated() else None
         new_text_version.note = request.POST.get('note','')
         new_text_version.email = request.POST.get('email','')
