@@ -1,41 +1,18 @@
-
-syntax: regexp
-^downloads$
-syntax: regexp
-^settings_local\.py$
-syntax: regexp
-^urls_local\.py$
-syntax: regexp
-^bin$
-syntax: regexp
-^develop-eggs$
-syntax: glob
-eggs/**
-syntax: regexp
-^src/comt\.egg-info$
-syntax: regexp
-^parts$
-syntax: regexp
-^\.installed\.cfg$
-
-syntax: regexp
-^develop-eggs$
-syntax: regexp
-^downloads$
-syntax: regexp
-^parts$
-syntax: regexp
-^bin$
-syntax: regexp
-^recreate$
-syntax: regexp
-^\.pydevproject$
-syntax: regexp
-^\.settings/.*$
-
 syntax: glob
 *.pyc
+*~
+syntax: blob
+parts
+store
+eggs
+bin
+develop-eggs
+downloads
+.settings
 
-
-syntax: regexp
-^develop-eggs$
+src/comt.egg-info
+.installed.cfg
+recreate
+.pydevproject
+settings_local.py
+urls_local.py
