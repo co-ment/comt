@@ -1,7 +1,7 @@
 syntax: glob
 *.pyc
 *~
-syntax: blob
+syntax: glob
 parts
 store
 eggs
