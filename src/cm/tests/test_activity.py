@@ -7,7 +7,7 @@ from cm.models import *
 from cm.security import *
 
 class ActivityTest(TestCase):
-    fixtures = ['test_content']
+    fixtures = ['roles_generic','test_content']
     
     def test_process_activities(self):
         text = Text.objects.get(id=1)
