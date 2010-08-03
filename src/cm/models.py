@@ -600,10 +600,11 @@ class RegistrationManager(KeyManager):
     
         
     def create_inactive_user(self, email, send_invitation, **kwargs):
-        #prevent concurrent access 
-        cursor = connection.cursor()
-        sql = "LOCK TABLE auth_user IN EXCLUSIVE MODE"
-        cursor.execute(sql)
+        if 'postgresql' in settings.DATABASE_ENGINE:
+            #prevent concurrent access 
+            cursor = connection.cursor()
+            sql = "LOCK TABLE auth_user IN EXCLUSIVE MODE"
+            cursor.execute(sql)
         
         try:
             user_with_email = User.objects.get(email__iexact=email)
