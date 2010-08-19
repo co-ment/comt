@@ -166,7 +166,14 @@ table.diff {
 	border: medium none;
 	border-spacing: 4px;
 	width: 98%;
+	table-layout:fixed;
 }
+
+table.diff tr td div {
+	overflow:auto;
+	word-wrap:break-word;
+}
+
 
 table.diff th,table.diff td {
 	border: 1px solid transparent;
@@ -175,6 +182,7 @@ table.diff th,table.diff td {
 
 .diff-title {
 	font-size:140%;
+	/*width: 98%;*/
 }
 
 .diff-author {
@@ -187,31 +195,39 @@ table.diff th,table.diff td {
 	/*font-weight: bold;*/
 }
 
+table.diff col.diff-content {
+	width: 42%;
+}
+
+table.diff col.diff-marker {
+	width: 2%;
+}
+
+table.diff col.diff-separator {
+	width: 2%;
+}
+
 .diff-context {
 	background-color: #EEEEEE;
-	width: 42%;
+	/*width: 42%;*/
 	vertical-align: top; 
 }
 
 .diff-addedline {
 	background-color: #CCFFCC;
-	width: 42%;
+	/*width: 42%;*/
 	vertical-align: top; 
 }
 
 .diff-marker {
 	font-size: 120%;
 	text-align: center;
-	width: 5%;
 }
 
-.diff-separator {
-	width: 5%;
-}
 
 .diff-deletedline {
 	background-color: #FFFFAA;
-	width: 42%;
+	/*width: 42%;*/
 	vertical-align: top; 
 }
 

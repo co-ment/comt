@@ -564,7 +564,7 @@ def get_uniffied_inner_diff_table(title1, title2, author1, author2, text1, text2
     """
     gen = unified_diff(text1.split('\n'), text2.split('\n'), n=3)
     index = 0
-    res = ['<table class="diff"><tbody>']
+    res = ['<table class="diff"><col class="diff-marker"/><col class="diff-content"/><col class="diff-separator"/<col class="diff-marker"/><col class="diff-content"/><tbody>']
     res.append('<tr><td></td><td class="diff-title">%s</td><td></td><td></td><td class="diff-title">%s</td></tr>' %(title1, title2))
     res.append('<tr><td></td><td class="diff-author">%s</td><td></td><td></td><td class="diff-author">%s</td></tr>' %(author1, author2))
     res.append('<tr><td colspan="5"></td></tr>')
@@ -603,7 +603,7 @@ def get_uniffied_inner_diff_table(title1, title2, author1, author2, text1, text2
                 p = dif.diff_prettyHtml_one_way(res_diff1, 1)
                 minus = dif.diff_prettyHtml_one_way(res_diff1, 2)
                 plus = p
-                res.append('<tr><td class="diff-marker">-</td><td class="diff-deletedline">%s</td><td class="diff-separator"></td><td class="diff-marker">+</td><td class="diff-addedline">%s</td></tr>' % (minus, plus))
+                res.append('<tr><td class="diff-marker">-</td><td class="diff-deletedline"><div>%s</div></td><td class="diff-separator"></td><td class="diff-marker">+</td><td class="diff-addedline"><div>%s</div></td></tr>' % (minus, plus))
              
         index += 1
     res.append('</tbody></table>')
