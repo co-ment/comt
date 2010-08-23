@@ -1,6 +1,5 @@
 \documentclass{article}
 \usepackage{amsmath}
-\usepackage[mathletters,combine]{ucs}
 \usepackage[utf8x]{inputenc}
 \usepackage{listings}
 \usepackage{eurofont}
