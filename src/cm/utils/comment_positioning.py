@@ -182,9 +182,10 @@ def insert_comment_markers(htmlcontent, comments, with_markers, with_colors) :
         start_color = wrapper_data['start_color']
         offsets = sorted(wrapper_data['offsets'].items(), key=operator.itemgetter(0))
 
-        # TODO: html.find(id = "sv-%d"%wrapper_id) is None (?) when comment detached
-        
-        content = html.find(id = "sv-%d"%wrapper_id).contents[0]
+        d = html.find(id = "sv-%d"%wrapper_id)
+        if not d: # comment detached
+            continue
+        content = d.contents[0]
         
         spans = ""
         
