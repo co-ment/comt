@@ -255,7 +255,7 @@ def user_add(request, key=None, mass=False):
                     if key:
                         localuserrole = UserRole.objects.create(user=user, role=localroleform.cleaned_data['role'], text=text)
                     email_created.add(email)
-                register_activity(request, "user_created", user=user)
+                    register_activity(request, "user_created", user=user)
             display_message(request, ungettext(u'%(nb_users)d user added', u'%(nb_users)d users added', len(email_created)) % {'nb_users': len(email_created)})
             if key:
                 return HttpResponseRedirect(reverse('text-share', args=[text.key]))
