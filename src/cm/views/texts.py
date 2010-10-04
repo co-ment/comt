@@ -634,6 +634,7 @@ class EditTextForm(ModelForm):
     note = forms.CharField(label=ugettext_lazy("Note (optional)"),
                            widget=forms.TextInput,
                            required=False,
+                           max_length=100,
                            help_text=ugettext_lazy("Add a note to explain the modifications made to the text")
                            )
 
