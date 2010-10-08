@@ -43,8 +43,9 @@ $(function() {
     {% endif %}
 </ul>
 
+{% if tag_list %}
 <form id="filter_form" action="." method="get">
-<table summary="{% blocktrans %}People' list{% endblocktrans %}" class="large_table">
+<table class="large_table">
 	<tr>
 		<td>
 		{% blocktrans %}Filter by tag:{% endblocktrans %} 
@@ -60,6 +61,7 @@ $(function() {
 	</tr>
 </table>
 </form>
+{% endif %}
 
 <script type="text/javascript">
 <!--
