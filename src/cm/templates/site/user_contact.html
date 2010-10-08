@@ -1,4 +1,4 @@
-{% extends "site/layout/base_workspace_form.html" %}
+{% extends "site/layout/base_workspace.html" %}
 {% load com %}
 {% load i18n %}
 
@@ -6,7 +6,7 @@
 {% blocktrans %}Contact user{% endblocktrans %}
 {% endblock %}
 
-{% block pre_form %}
+{% block main %}
 
 <script type="text/javascript">
 <!--
@@ -19,9 +19,28 @@ tb_conf['current_tab'] = 'user';
 <a href="{% url user %}">{% blocktrans %}Users' list{% endblocktrans %}</a> / <a href="{% url user-add %}">{% blocktrans %}Add a new user{% endblocktrans %}</a> / {% blocktrans with recipient_profile.admin_print as username %}Contact user {{ username }}{% endblocktrans %} 
 
 <br /><br />
-{% endblock %}
 
-{% block buttons %}
+<form enctype="multipart/form-data" class="wizard-form" action="." method="post">
+
+<table summary="form" class="wide_form">
+    <tbody>
+    {% if form %}
+        {% include "site/macros/form_fields.html" %}
+    {% endif %}
+
+    {% if forms %}
+        {% for form in forms %}
+            {% include "site/macros/form_fields.html" %}
+        {% endfor %}
+    {% endif %}
+    
+    <tr>
+        <td style="vertical-align: top; width: 20%; text-align:right;">
+        </td>
+        <td>
+            <label></label>
+            <input name="send" type="submit" value="{% blocktrans %}Send{% endblocktrans %}"/>
+
             <input name="cancel" type="button" id="cancel_button" value="{% blocktrans %}Cancel{% endblocktrans %}"/>
             <script type="text/javascript">
             <!--
@@ -32,8 +51,12 @@ tb_conf['current_tab'] = 'user';
             }) ;
             -->
             </script>                        
-{% endblock %}
+        </td>
+    </tr>
+    </tbody>
+</table>
 
-{% block post_form %}
+</form>
+
 </div>
 {% endblock %}
