@@ -174,7 +174,7 @@ $(function() {
 
     <tr class="full-border even">
         <td></td>
-        <td><a class="main_object_title" title="{% blocktrans %}Edit anonymous users{% endblocktrans %}" href="{% url user-anon-edit %}">{% blocktrans %}Anonymous users{% endblocktrans %}</a></td>
+        <td><a class="main_object_title" title="{% blocktrans %}Edit anonymous users{% endblocktrans %}" href="{% url user-anon-edit %}">{% blocktrans %}Anonymous users{% endblocktrans %}</a>&nbsp;<a class="tip" href="#" title="{% blocktrans %}Those are non-registered users. Assign them a role to open your texts to simple visitors.{% endblocktrans %}"> </a></td>
         {% if SHOW_EMAILS_IN_ADMIN %}<td>-</td>{% endif %}
         <td>-</td>
         <td>
