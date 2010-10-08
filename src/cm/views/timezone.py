@@ -14,8 +14,12 @@ from cm.utils.timezone import tz_convert
 def timezone_set(request):
     if request.method == 'POST':
         #if request.user.is_authenticated():
-        tz = request.POST.get('tz', DEFAULT_TIME_ZONE)
-        request.session['tz'] = tz
+        try:
+            tz = request.POST.get('tz', DEFAULT_TIME_ZONE)
+            request.session['tz'] = tz
+        except IOError:
+            # silently swallow IOError
+            pass
     
     return HttpResponse('')
     
