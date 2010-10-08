@@ -16,7 +16,15 @@ tb_conf['current_tab'] = 'user';
 
 <div id="user" class="tab-meta">
 
-<a href="{% url user %}">{% blocktrans %}Users' list{% endblocktrans %}</a> / <a href="{% url user-add %}">{% blocktrans %}Add a new user{% endblocktrans %}</a> / {% blocktrans with recipient_profile.admin_print as username %}Contact user {{ username }}{% endblocktrans %} 
+<ul class="sub_list">
+    <li><a href="{% url user %}">{% blocktrans %}People' list{% endblocktrans %}</a></li>
+    <li> / </li>
+    <li><a href="{% url user-add %}">{% blocktrans %}Add a new user{% endblocktrans %}</a></li>
+    <li> / </li>
+    <li><a href="{% url user-mass-add %}">{% blocktrans %}Add users in bulk{% endblocktrans %}</a></li>    
+    <li> / </li>
+    <li class="active_sub">{% blocktrans with recipient_profile.admin_print as username %}Contact user {{ username }}{% endblocktrans %}</li>    
+</ul>
 
 <br /><br />
 
