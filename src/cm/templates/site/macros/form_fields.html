@@ -7,7 +7,12 @@
      <td>
         <div {% if field.errors %}class="error"{% endif %}>{{ field }}
         {% ifequal field.name "format" %}
-        <a target="_blank" href="{% url help %}#format">?</a>
+        	{% ifequal form_type "create_content" %}
+        	<a class="tip" href="#" title="{% blocktrans %}Markdown (or rst) is a structured format which permit simple formatting with simple textual syntax. We recommend you use the 'markown' format unless you want to paste HTML (in which case you should use the 'html' format).{% endblocktrans %}"> </a>
+        	{% endifequal %}
+        	{% ifequal form_type "upload_content" %}
+        	<a class="tip" href="#" title="{% blocktrans %}Markdown (or rst) is a structured format which permit simple formatting with simple textual syntax. We recommend you use the 'markdown' format if your text is mostly text and/or if you will create many revisions of your text. You can use the 'html' format if your text will not be edited or if you want to preserve complex formatting (tables, images, etc.).{% endblocktrans %}"> </a>
+        	{% endifequal %}        	
         {% endifequal %}
         </div>                
 
