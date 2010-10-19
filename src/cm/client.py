@@ -1,4 +1,8 @@
-from django.forms.fields import email_re
+try:
+    from django.core.validators import email_re
+except ImportError:
+    # support for django pre 1.2 alpha 1
+    from django.forms.fields import email_re
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.forms import ValidationError
