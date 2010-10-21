@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-10 22:01+0100\n"
-"PO-Revision-Date: 2010-05-06 09:45+0200\n"
+"PO-Revision-Date: 2010-06-30 09:45+0200\n"
 "Last-Translator: Kirill Miazine <km@krot.org>\n"
 "Language-Team: <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -104,7 +104,7 @@ msgstr "endre tilstand til ikke-godkjent"
 
 #: media/js/client/c_icomment.js:13
 msgid "cancel changing the state of this comment"
-msgstr "avbryt endring av tilstand for merknaden"
+msgstr "avbryt endring av merknadens tilstand"
 
 #: media/js/client/c_icomment.js:14
 msgid "pending"
@@ -162,7 +162,7 @@ msgid ""
 "applied to has been modified or removed."
 msgstr ""
 "Merknad er frakoblet: den var opprettet i en tidligere versjon, og teksten, "
-"som merknaden er knyttet til er blitt endret eller slettet."
+"som merknaden er knyttet til, er blitt endret eller slettet."
 
 #: media/js/client/c_icomment.js:295
 msgid "last modified on %(date)s"
@@ -193,8 +193,7 @@ msgid ""
 "Do you want to be notified of all replies in all discussions you "
 "participated in?"
 msgstr ""
-"Ønsker du å abonnere på varsler for alle svar i diskusjoner hvor du har "
-"deltatt?"
+"Ønsker du å abonnere på varsler for alle svar i diskusjoner hvor du har deltatt?"
 
 #: media/js/client/c_sync.js:129
 msgid "Reply notification"
@@ -258,7 +257,7 @@ msgstr "Velg filformat"
 
 #: media/js/client/f_printDialog.js:40
 msgid "using markers only, no background colors"
-msgstr "bruker bare markører, ingen bakrunnsfarger"
+msgstr "bruker bare markører, ingen bakgrunnsfarger"
 
 #: media/js/client/f_printDialog.js:41
 msgid "using markers and background colors"

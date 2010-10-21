@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-10-11 15:07+0200\n"
-"PO-Revision-Date: 2010-05-06 09:45+0200\n"
+"PO-Revision-Date: 2010-10-21 13:50+0100\n"
 "Last-Translator: km@krot.org\n"
-"Language-Team:  <no@li.org>\n"
+"Language-Team: <no@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -363,7 +363,7 @@ msgstr "En feil har oppstått."
 
 #: templates/api_doc.html:6
 msgid "API Documentation"
-msgstr ""
+msgstr "API dokumentasjon"
 
 #: templates/site/activate.html:10 templates/site/user_activate.html:10
 #: views/user.py:330
@@ -411,7 +411,7 @@ msgstr "Opprett en tekst"
 
 #: templates/site/dashboard.html:48
 msgid "Write a text inside your browser or paste a content from your clipboard"
-msgstr ""
+msgstr "Skriv tekst direkte i din nettleser eller lim teksten inn fra din utklippstavle"
 
 #: templates/site/dashboard.html:49 templates/site/text_create_content.html:30
 #: templates/site/text_create_upload.html:4
@@ -424,7 +424,7 @@ msgstr "Last opp tekst"
 msgid ""
 "Upload a document from your computer (Text document, Open Format document, "
 "Word document)"
-msgstr ""
+msgstr "Last opp et dokument fra din datamaskin (ren tekst, Open Document eller Microsoft Word)"
 
 #: templates/site/dashboard.html:50
 msgid "Invite user"
