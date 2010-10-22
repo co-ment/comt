@@ -13,9 +13,9 @@ class Migration:
 
         db.create_index('cm_textversion', ['adminkey', ], unique=True)
 
-        db.create_unique('cm_textversion', ['key', ])
+        #db.create_unique('cm_textversion', ['key', ])
 
-        db.create_unique('cm_textversion', ['adminkey', ])
+        #db.create_unique('cm_textversion', ['adminkey', ])
         
         
     def backwards(self, orm):
