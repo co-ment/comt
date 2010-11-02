@@ -315,13 +315,13 @@ class Comment(PermanentModel, AuthorModel):
 
     objects = CommentManager()
     
-    def save(self, force_insert=False, force_update=False, keep_dates=False):
+    def save(self, keep_dates=False, **kwargs):
         if not keep_dates:
             now = datetime.now()
             if not self.id: 
                 self.created = now  
             self.modified = now 
-        super(PermanentModel, self).save() 
+        super(PermanentModel, self).save(**kwargs) 
             
     def __unicode__(self):
         return '<%d> %s [st_wrp:%s, st_ofs:%s, e_wrp:%s, e_ofs:%s]' % (self.id, self.title,  self.start_wrapper ,  self.start_offset,  self.end_wrapper,  self.end_offset, )    
