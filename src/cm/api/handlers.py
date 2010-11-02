@@ -12,6 +12,7 @@ from cm.views.texts import client_exchange, text_view_frame, text_view_comments,
 from cm.views.feeds import text_feed
 from piston.utils import validate
 from django.conf import settings
+from django.db.models import F
 
 URL_PREFIX = settings.SITE_URL + '/api'
  
@@ -442,6 +443,7 @@ class CommentsHandler(BaseHandler):
             query = query.filter(text_version__text__key__in=keys.split(','))
         if name:
             query = query.filter(name=name)
+        query = query.filter(text_version__text__last_text_version__exact=F('text_version__id'))
         query = query.order_by('-created')
         if limit:
             query = query[:int(limit)]
