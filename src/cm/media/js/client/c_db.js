@@ -104,16 +104,7 @@ Db.prototype = {
 			var comment = this.allComments[i] ;
 			var commentModif = comment.modified ;
 			
-			mod[comment.id] = commentModif ; 
-
-			for (var j = 0, jlen = comment.replies.length ; j < jlen ; j++) {
-				
-				var reply = comment.replies[j] ;
-				var replyModif = reply.modified ;
-
-				if (replyModif > mod[comment.id])
-					mod[comment.id] = replyModif ;
-			}
+      mod[comment.id] = this._latest_mod(comment);
 		}
 		
 		for (var id in mod) {
@@ -136,6 +127,18 @@ Db.prototype = {
 		
 		this.ordered_comment_ids['modif_thread'] = a ; 
 	},
+
+   // Finds recursively the last modification date of a thread.
+  _latest_mod : function(comment) {
+    var latest_mod = comment.modified;
+    for (var i=0; i<comment.replies.length; i++) {
+      var reply = comment.replies[i] ;
+      var reply_mod = this._latest_mod(reply);
+      if (reply_mod > latest_mod)
+        latest_mod = reply_mod;
+    }
+    return latest_mod;
+  },
 
 	// EDIT OR ADD CASE : when just added id is max and so both (comments and replies) initial id asc order remains
 	_upd : function(arr, dic, c) {
