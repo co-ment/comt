@@ -291,7 +291,8 @@ onDomReady = function(arg1) {
 				if (comment != null) {
 					var path = gDb.getPath(comment) ;
 					var topParentComment = path[path.length - 1] ;
-					gSync.showSingleComment(topParentComment) ;
+          var focusComment = gDb.getCommentByIdKey(id_key);
+					gSync.showFocusSingleComment(topParentComment, focusComment) ;
 				}
 			}
 			

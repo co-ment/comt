@@ -387,10 +387,31 @@ Sync.prototype = {
 				this._animateTo(topY) ;
 		}
 	},
+	_showFocusSingleComment : function(topComment, focusComment) {
+		if (topComment != null) {
+			var topY = 0 ;
+			if (topComment['start_wrapper'] != -1) 
+				topY = CY.get(".c-id-"+topComment.id).getY() ;
+			else 
+				topY = CY.get('document').get('scrollTop') ;
+			
+			this._showComments([topComment.id], topY, false) ;
+			// optim when browsing comments with no reply			
+			if (topComment.replies.length > 0)
+				this._animateToAndFocus(topY, focusComment.id) ;
+		}
+	},
 
 	showSingleComment : function(comment) {
 		this._q.add({fn:CY.bind(this.setPreventClickOn, this)}) ;
 		this._showSingleComment(comment) ;
+		this._q.add({fn:CY.bind(this.setPreventClickOff, this)}) ;
+		this._q.run();
+	},
+	
+	showFocusSingleComment : function(topComment, focusComment) {
+		this._q.add({fn:CY.bind(this.setPreventClickOn, this)}) ;
+		this._showFocusSingleComment(topComment, focusComment) ;
 		this._q.add({fn:CY.bind(this.setPreventClickOff, this)}) ;
 		this._q.run();
 	},
@@ -431,6 +452,14 @@ Sync.prototype = {
 	_animateTo : function(topY) {
 		this._q.add({fn:function() {
 						gIComments.setAnimationToPositions(topY) ;
+						}},
+					{id:"animationRun", autoContinue:false, fn:CY.bind(gIComments.runAnimations, gIComments)}
+	            ) ;
+	},
+	
+	_animateToAndFocus : function(topY, focusCommentId) {
+		this._q.add({fn:function() {
+						gIComments.setAnimationToPositionsAndFocus(topY, focusCommentId) ;
 						}},
 					{id:"animationRun", autoContinue:false, fn:CY.bind(gIComments.runAnimations, gIComments)}
 	            ) ;

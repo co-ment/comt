@@ -423,9 +423,19 @@ IComment.prototype = {
 		if (gIComments.animationsEnded())
 			gIComments.whenAnimationsEnd() ;		
 	},
+	onAnimationEndFocus : function() {
+		if (!CY.Lang.isUndefined(this['animation-handle']) && !CY.Lang.isNull(this['animation-handle'])) { 
+			this['animation-handle'].detach() ;
+			this['animation-handle'] = null ;
+//			CY.log('detached...') ;
+		}
+		gIComments.signalAnimationEnd() ;
+		if (gIComments.animationsEnded())
+			gIComments.whenAnimationsEndFocus() ;		
+	},
 
 	//aa = new CY.Anim({node:gIComments._c[0].overlay.get('boundingBox'), to:{xy : [0,0]}, duration:2.0})
-	setAnimationToPosition : function(toXY) {
+	setAnimationToPosition : function(toXY, focus) {
 		var boundingBoxNode = this.overlay.get('boundingBox') ;
 		
 		// ANIMATION
@@ -435,7 +445,9 @@ IComment.prototype = {
 		
 		this.animation.set('to', { xy: toXY});
 		this.animation.set('duration', gPrefs.get('general','animduration')) ; // shouldn't be here really ...
-		this['animation-handle'] = this.animation.on('end', this.onAnimationEnd, this);
+    if (focus)
+    	this['animation-handle'] = this.animation.on('end', this.onAnimationEndFocus, this);
+    	this['animation-handle'] = this.animation.on('end', this.onAnimationEnd, this);
 		
 		return this.animation ;
 	},

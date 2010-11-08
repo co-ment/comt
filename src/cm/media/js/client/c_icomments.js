@@ -172,6 +172,31 @@ IComments.prototype = {
 			}
 		},
 		
+		setAnimationToPositionsAndFocus : function (y, focusCommentId) {
+			this._initAnimations();
+			var lpad = (gPrefs.get('comments','threadpad') == '1') ? gConf['iCommentThreadPadding'] : 0 ;
+
+			var nextY = y ;
+			for (var i = 0 ; i < this._c.length;i++) {
+				var iComment = this._c[i] ;
+				if (iComment.isfetched && iComment.isVisible()) {
+					var comment_path = gDb.getPath(gDb.getComment(iComment.commentId)) ;
+					var iCommentX = ((comment_path.length - 1) * lpad) + gConf['iCommentLeftPadding'] ;
+
+					if (nextY == null) {
+						var xy = iComment.getPosition() ;
+						nextY = xy[1] ;
+					}
+					
+          if (iComment.commentId == focusCommentId)
+  					this._a.push(iComment.setAnimationToPosition([iCommentX, nextY], focusCommentId)) ;
+          else
+  					this._a.push(iComment.setAnimationToPosition([iCommentX, nextY])) ;
+					nextY += iComment.getHeight() ;
+				}
+			}
+		},
+		
 // ANIMATION FUNCTIONS		
 		_initAnimations : function () {
 			this._a = [] ;
@@ -187,6 +212,17 @@ IComments.prototype = {
 		
 		whenAnimationsEnd : function () {
 			gSync.resume() ; 		
+		},
+		
+		whenAnimationsEndFocus : function () {
+      gGETValues = CY.JSON.parse(sv_get_params);
+      if ("comment_id_key" in gGETValues) {
+        var id_key = gGETValues["comment_id_key"];
+        var focusComment = gDb.getCommentByIdKey(id_key);
+        if (focusComment != null)
+          gIComments.getIComment(focusComment.id).overlay.focus();
+      }
+			gSync.resume();
 		},
 		
 		animationsEnded : function () {
