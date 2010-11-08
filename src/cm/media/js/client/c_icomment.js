@@ -447,6 +447,7 @@ IComment.prototype = {
 		this.animation.set('duration', gPrefs.get('general','animduration')) ; // shouldn't be here really ...
     if (focus)
     	this['animation-handle'] = this.animation.on('end', this.onAnimationEndFocus, this);
+    else
     	this['animation-handle'] = this.animation.on('end', this.onAnimationEnd, this);
 		
 		return this.animation ;
