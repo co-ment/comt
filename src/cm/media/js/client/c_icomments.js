@@ -188,7 +188,7 @@ IComments.prototype = {
 						nextY = xy[1] ;
 					}
 					
-          if (iComment.commentId == focusCommentId)
+          if (iComment.commentId >= focusCommentId)
   					this._a.push(iComment.setAnimationToPosition([iCommentX, nextY], focusCommentId)) ;
           else
   					this._a.push(iComment.setAnimationToPosition([iCommentX, nextY])) ;
