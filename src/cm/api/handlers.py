@@ -437,12 +437,15 @@ class CommentsHandler(BaseHandler):
     def read(self, request):
         name = request.GET.get('name', None)
         limit = request.GET.get('limit', None)
+        comment_key = request.GET.get('comment_key', None)
         keys = request.GET.get('keys', None)
         query = Comment.objects.all()
         if keys:            
             query = query.filter(text_version__text__key__in=keys.split(','))
         if name:
             query = query.filter(name=name)
+        if comment_key:
+            query = query.filter(id_key=comment_key)
         query = query.filter(text_version__text__last_text_version__exact=F('text_version__id'))
         query = query.order_by('-created')
         if limit:
