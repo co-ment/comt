@@ -404,6 +404,7 @@ class AnonymousCommentsHandler(AnonymousBaseHandler):
     desc = "Get comments from the workspace, most recent first."
     args = """<br />
 `keys`: (optional) comma separated keys : limit comments from these texts only<br />
+`comment_key`: (optional) get only this comment
 `name`: (optional) limit comments from this user only
 `limit`: (optional) limit number of comments returned
     """ 
