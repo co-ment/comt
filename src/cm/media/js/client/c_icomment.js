@@ -440,7 +440,7 @@ IComment.prototype = {
 //			CY.log('detached...') ;
 		}
 		gIComments.signalAnimationEnd() ;
-		//if (gIComments.animationsEnded())
+		if (gIComments.animationsEnded())
 			gIComments.whenAnimationsEndReply() ;		
 	},
 

@@ -397,7 +397,7 @@ Sync.prototype = {
 			
 			this._showComments([topComment.id], topY, false) ;
 			// optim when browsing comments with no reply			
-			if (topComment.replies.length > 0)
+			if (topComment.replies.length > 0 || reply)
 				this._animateToAndFocus(topY, focusComment.id, reply) ;
 		}
 	},
