@@ -293,7 +293,7 @@ onDomReady = function(arg1) {
 					var topParentComment = path[path.length - 1] ;
           var focusComment = gDb.getCommentByIdKey(id_key);
           // if comment_op=reply, show reply form
-          if ("comment_op" in gGETValues) {
+          if ("comment_op" in gGETValues && gGETValues["comment_op"] == 'reply') {
             gSync.showFocusSingleComment(topParentComment, focusComment, true) ;
           }
           else {
