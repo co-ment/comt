@@ -70,6 +70,7 @@ instanciateNewReplyForm = function(iCommentToAppendTo) {
 	
 	var width = gLayout.getTopICommentsWidth() ;
 	changeFormFieldsWidth(gNewReply['ids']['formId'], width) ;
+  CY.get("#"+gNewReply['ids']['contentInputId']).focus();
 }
 cleanNewReplyForm = function() {
 	if (gNewReplyHost != null) {
