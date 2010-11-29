@@ -172,7 +172,7 @@ IComments.prototype = {
 			}
 		},
 		
-		setAnimationToPositionsAndFocus : function (y, focusCommentId) {
+		setAnimationToPositionsAndFocus : function (y, focusCommentId, reply) {
 			this._initAnimations();
 			var lpad = (gPrefs.get('comments','threadpad') == '1') ? gConf['iCommentThreadPadding'] : 0 ;
 
@@ -189,7 +189,7 @@ IComments.prototype = {
 					}
 					
           if (iComment.commentId >= focusCommentId)
-  					this._a.push(iComment.setAnimationToPosition([iCommentX, nextY], focusCommentId)) ;
+  					this._a.push(iComment.setAnimationToPosition([iCommentX, nextY], focusCommentId, reply)) ;
           else
   					this._a.push(iComment.setAnimationToPosition([iCommentX, nextY])) ;
 					nextY += iComment.getHeight() ;
@@ -221,6 +221,18 @@ IComments.prototype = {
         var focusComment = gDb.getCommentByIdKey(id_key);
         if (focusComment != null)
           gIComments.getIComment(focusComment.id).overlay.focus();
+      }
+			gSync.resume();
+		},
+		
+		whenAnimationsEndReply : function () {
+      gGETValues = CY.JSON.parse(sv_get_params);
+      if ("comment_id_key" in gGETValues) {
+        var id_key = gGETValues["comment_id_key"];
+        var focusComment = gDb.getCommentByIdKey(id_key);
+        if (focusComment != null) {
+          gSync.showReplyForm(gIComments.getIComment(focusComment.id));
+        }
       }
 			gSync.resume();
 		},

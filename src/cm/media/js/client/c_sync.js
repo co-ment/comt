@@ -387,7 +387,7 @@ Sync.prototype = {
 				this._animateTo(topY) ;
 		}
 	},
-	_showFocusSingleComment : function(topComment, focusComment) {
+	_showFocusSingleComment : function(topComment, focusComment, reply) {
 		if (topComment != null) {
 			var topY = 0 ;
 			if (topComment['start_wrapper'] != -1) 
@@ -398,7 +398,7 @@ Sync.prototype = {
 			this._showComments([topComment.id], topY, false) ;
 			// optim when browsing comments with no reply			
 			if (topComment.replies.length > 0)
-				this._animateToAndFocus(topY, focusComment.id) ;
+				this._animateToAndFocus(topY, focusComment.id, reply) ;
 		}
 	},
 
@@ -409,9 +409,9 @@ Sync.prototype = {
 		this._q.run();
 	},
 	
-	showFocusSingleComment : function(topComment, focusComment) {
+	showFocusSingleComment : function(topComment, focusComment, reply) {
 		this._q.add({fn:CY.bind(this.setPreventClickOn, this)}) ;
-		this._showFocusSingleComment(topComment, focusComment) ;
+		this._showFocusSingleComment(topComment, focusComment, reply) ;
 		this._q.add({fn:CY.bind(this.setPreventClickOff, this)}) ;
 		this._q.run();
 	},
@@ -457,9 +457,9 @@ Sync.prototype = {
 	            ) ;
 	},
 	
-	_animateToAndFocus : function(topY, focusCommentId) {
+	_animateToAndFocus : function(topY, focusCommentId, reply) {
 		this._q.add({fn:function() {
-						gIComments.setAnimationToPositionsAndFocus(topY, focusCommentId) ;
+						gIComments.setAnimationToPositionsAndFocus(topY, focusCommentId, reply) ;
 						}},
 					{id:"animationRun", autoContinue:false, fn:CY.bind(gIComments.runAnimations, gIComments)}
 	            ) ;

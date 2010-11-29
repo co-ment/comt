@@ -433,9 +433,19 @@ IComment.prototype = {
 		if (gIComments.animationsEnded())
 			gIComments.whenAnimationsEndFocus() ;		
 	},
+	onAnimationEndReply : function() {
+		if (!CY.Lang.isUndefined(this['animation-handle']) && !CY.Lang.isNull(this['animation-handle'])) { 
+			this['animation-handle'].detach() ;
+			this['animation-handle'] = null ;
+//			CY.log('detached...') ;
+		}
+		gIComments.signalAnimationEnd() ;
+		//if (gIComments.animationsEnded())
+			gIComments.whenAnimationsEndReply() ;		
+	},
 
 	//aa = new CY.Anim({node:gIComments._c[0].overlay.get('boundingBox'), to:{xy : [0,0]}, duration:2.0})
-	setAnimationToPosition : function(toXY, focus) {
+	setAnimationToPosition : function(toXY, focus, reply) {
 		var boundingBoxNode = this.overlay.get('boundingBox') ;
 		
 		// ANIMATION
@@ -446,7 +456,10 @@ IComment.prototype = {
 		this.animation.set('to', { xy: toXY});
 		this.animation.set('duration', gPrefs.get('general','animduration')) ; // shouldn't be here really ...
     if (focus)
-    	this['animation-handle'] = this.animation.on('end', this.onAnimationEndFocus, this);
+      if (reply)
+    	  this['animation-handle'] = this.animation.on('end', this.onAnimationEndReply, this);
+      else
+    	  this['animation-handle'] = this.animation.on('end', this.onAnimationEndFocus, this);
     else
     	this['animation-handle'] = this.animation.on('end', this.onAnimationEnd, this);
 		

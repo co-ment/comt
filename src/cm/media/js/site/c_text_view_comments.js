@@ -292,10 +292,16 @@ onDomReady = function(arg1) {
 					var path = gDb.getPath(comment) ;
 					var topParentComment = path[path.length - 1] ;
           var focusComment = gDb.getCommentByIdKey(id_key);
-					gSync.showFocusSingleComment(topParentComment, focusComment) ;
+          // if comment_op=reply, show reply form
+          if ("comment_op" in gGETValues) {
+            gSync.showFocusSingleComment(topParentComment, focusComment, true) ;
+          }
+          else {
+            gSync.showFocusSingleComment(topParentComment, focusComment, false) ;
+          }
 				}
 			}
-			
+
 			// if comment_auto_display: show all comments
 			if ("comments_auto_display" in gGETValues) {
 				gSync.showAllComments();
