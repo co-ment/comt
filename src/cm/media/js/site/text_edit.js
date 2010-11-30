@@ -21,37 +21,37 @@ function check_save(){
                nb_removed = obj['nb_removed'];
                if (newVersion) {
                     if (nb_removed == 0) {
-                 	   submit_edit_form();
+                     submit_edit_form();
                     }
                     else {
-                		var message = ngettext( 
-                				'%(nb_comments)s comment applies to text that was modified.',
-                				'%(nb_comments)s comments apply to text that was modified.', 
-								nb_removed) ;
-                		message += '<br />' ;
-                		message += mess ;
-                		message = interpolate(message,{'nb_comments':nb_removed}, true) ;		
-                		
+                    var message = ngettext( 
+                        '%(nb_comments)s comment applies to text that was modified.',
+                        '%(nb_comments)s comments apply to text that was modified.', 
+                nb_removed) ;
+                    message += '<br />' ;
+                    message += mess ;
+                    message = interpolate(message,{'nb_comments':nb_removed}, true) ;   
+                    
                         $('#remove_scope_choice_dlg').html(message) ;
                         $('#remove_scope_choice_dlg').dialog('open') ;
                     }
                }
                else {                  
                    if (nb_removed == 0) {
-                	   submit_edit_form();
+                     submit_edit_form();
                     }
                    else {
-	               		var message = ngettext(  
-	               				'%(nb_comments)s comment applies to text that was modified.',
-                				'%(nb_comments)s comments apply to text that was modified.', 
-								nb_removed) ;
-                		message += '<br />' ;
-                		message += gettext( '(We suggest you create a new version)') ;
-                		message += '<br />' ;
-                		message += mess ;
-                		message = interpolate(message,{'nb_comments':nb_removed}, true) ;		
+                    var message = ngettext(  
+                        '%(nb_comments)s comment applies to text that was modified.',
+                        '%(nb_comments)s comments apply to text that was modified.', 
+                nb_removed) ;
+                    message += '<br />' ;
+                    message += gettext( '(We suggest you create a new version)') ;
+                    message += '<br />' ;
+                    message += mess ;
+                    message = interpolate(message,{'nb_comments':nb_removed}, true) ;   
 
-                 		$('#remove_scope_choice_dlg').html(message) ;
+                    $('#remove_scope_choice_dlg').html(message) ;
                         $('#remove_scope_choice_dlg').dialog('open') ;
                    }
                }
@@ -63,32 +63,32 @@ function check_save(){
     }
     else {
         if (!newVersion) {
-        	
+          
             var message = gettext("You chose not to create a new version all comments will be deleted") ;
-    		message += '<br />' ;
-    		message += gettext( 'Do you want to continue?') ;
+        message += '<br />' ;
+        message += gettext( 'Do you want to continue?') ;
             $('#confirm_all_removed_dlg').html(message) ;
             $('#confirm_all_removed_dlg').dialog('open') ;
         }
         else {
-        	submit_edit_form() ;    		
+          submit_edit_form() ;        
         }
     }
 }
 
 function submit_edit_form() {
-	needToConfirm = false;
+  needToConfirm = false;
     $('#edit_form').submit();
 }
 
 $(function() {
-	var buttons = {};
-	buttons[gettext('No')] = function() {
-		$(this).dialog('close');
-	} ;
-	buttons[gettext('Yes')] = function() {
-		$(this).dialog('close');submit_edit_form();
-	} ;	
+  var buttons = {};
+  buttons[gettext('No')] = function() {
+    $(this).dialog('close');
+  } ;
+  buttons[gettext('Yes')] = function() {
+    $(this).dialog('close');submit_edit_form();
+  } ; 
 
     $('#confirm_all_removed_dlg').dialog({
         bgiframe: true, 
@@ -98,10 +98,10 @@ $(function() {
         buttons:buttons
     }) ;
     
-	var buttons0 = {};
-	buttons0[gettext('Detach')] = function() {$(this).dialog('close');$('#cancel_modified_scopes').val("1");submit_edit_form();} ;
-	buttons0[gettext('Remove')] = function() {$(this).dialog('close');$('#cancel_modified_scopes').val("0");submit_edit_form();} ;
-	buttons0[gettext('Cancel')] = function() {$(this).dialog('close');} ;
+  var buttons0 = {};
+  buttons0[gettext('Detach')] = function() {$(this).dialog('close');$('#cancel_modified_scopes').val("1");submit_edit_form();} ;
+  buttons0[gettext('Remove')] = function() {$(this).dialog('close');$('#cancel_modified_scopes').val("0");submit_edit_form();} ;
+  buttons0[gettext('Cancel')] = function() {$(this).dialog('close');} ;
 
     $('#remove_scope_choice_dlg').dialog({
         bgiframe: true, 

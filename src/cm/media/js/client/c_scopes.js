@@ -7,52 +7,52 @@
 // c-c is a comment marker
 
 paintCommentScope = function(comment) {
-	if (comment.reply_to_id == null && comment['start_wrapper'] != -1) {
-		var selection = { 	'start' : { 'elt' : document.getElementById("sv_"+comment['start_wrapper']), 'offset' : comment['start_offset'] },
-							'end' : { 'elt' : document.getElementById("sv_"+comment['end_wrapper']), 'offset' : comment['end_offset'] }
-						} ;
-		if (document.getElementById("sv_"+comment['start_wrapper'])== null) {
-			warn_server({'from':'paintCommentScope', 'start_wrapper':comment['start_wrapper']}) ;
-		}
-		else {
-			if (document.getElementById("sv_"+comment['end_wrapper'])== null)
-				warn_server({'from':'paintCommentScope', 'end_wrapper':comment['end_wrapper']}) ;
-			else {
-			    selection['start'] = _convertSelectionFromCSToCC(selection['start']) ;
-			    selection['end'] = _convertSelectionFromCSToCC(selection['end']) ;
-			
-			    renderComment(selection, comment['id']) ;
-			}
-		}
-	}
+  if (comment.reply_to_id == null && comment['start_wrapper'] != -1) {
+    var selection = {   'start' : { 'elt' : document.getElementById("sv_"+comment['start_wrapper']), 'offset' : comment['start_offset'] },
+              'end' : { 'elt' : document.getElementById("sv_"+comment['end_wrapper']), 'offset' : comment['end_offset'] }
+            } ;
+    if (document.getElementById("sv_"+comment['start_wrapper'])== null) {
+      warn_server({'from':'paintCommentScope', 'start_wrapper':comment['start_wrapper']}) ;
+    }
+    else {
+      if (document.getElementById("sv_"+comment['end_wrapper'])== null)
+        warn_server({'from':'paintCommentScope', 'end_wrapper':comment['end_wrapper']}) ;
+      else {
+          selection['start'] = _convertSelectionFromCSToCC(selection['start']) ;
+          selection['end'] = _convertSelectionFromCSToCC(selection['end']) ;
+      
+          renderComment(selection, comment['id']) ;
+      }
+    }
+  }
 } ;
 
 getCommentIdsFromClasses = function (elt) {
-	var commentIds = [] ;
-	var classes = elt['className'].split(" ") ;
-	for (var i = 0, ilen = classes.length ; i < ilen ; i++) {
-		if (classes[i].indexOf('c-id-') == 0) {
-			commentIds.push(parseInt(classes[i].substring('c-id-'.length))) ;
-		}
-	}
-	return commentIds ;
+  var commentIds = [] ;
+  var classes = elt['className'].split(" ") ;
+  for (var i = 0, ilen = classes.length ; i < ilen ; i++) {
+    if (classes[i].indexOf('c-id-') == 0) {
+      commentIds.push(parseInt(classes[i].substring('c-id-'.length))) ;
+    }
+  }
+  return commentIds ;
 } ;
 
 renderComment = function (selection, commentId) {
-	var startOffset = selection['start']['offset'] ;
-	var endOffset = selection['end']['offset'] ;
-	var startElt = selection['start']['elt'] ;
-	var endElt = selection['end']['elt'] ;
+  var startOffset = selection['start']['offset'] ;
+  var endOffset = selection['end']['offset'] ;
+  var startElt = selection['start']['elt'] ;
+  var endElt = selection['end']['elt'] ;
 
-	
+  
     if ((startElt != null) && (endElt != null) && _getTextNodeContent(startElt) != '' && _getTextNodeContent(endElt) != ''){
 // log('startElt.id : ' + startElt.id) ;
 // log('endElt.id : ' + endElt.id) ;
-//    	log('startElt.innerHTML : ' + startElt.innerHTML) ;
-//    	log('endElt.innerHTML : ' + endElt.innerHTML) ;
-	    markWholeNodesAsComments(startElt, endElt, commentId) ;
-	    markEndsAsComments(startElt, startOffset, endElt, endOffset, commentId) ;
-	}
+//      log('startElt.innerHTML : ' + startElt.innerHTML) ;
+//      log('endElt.innerHTML : ' + endElt.innerHTML) ;
+      markWholeNodesAsComments(startElt, endElt, commentId) ;
+      markEndsAsComments(startElt, startOffset, endElt, endOffset, commentId) ;
+  }
 } ;
 
 markWholeNodesAsComments = function (startElt, endElt, commentId) {
@@ -73,107 +73,107 @@ _getTextNodeContent = function(txtNodeParent) {
 } ;
 
 markEndsAsComments = function(startElt, startOffset, endElt, endOffset, commentId) {
-	
-//	alert('starting with: ' + startElt.childNodes.length + 'and a length of : ' + startElt.firstChild.data.length) ; 
-//	alert('2 and a length of : ' + CY.DOM.getText(startElt).length) ; 
+  
+//  alert('starting with: ' + startElt.childNodes.length + 'and a length of : ' + startElt.firstChild.data.length) ; 
+//  alert('2 and a length of : ' + CY.DOM.getText(startElt).length) ; 
 
-	var beforeStart = _getTextNodeContent(startElt).substring(0, startOffset) ; 
-	var afterStart = _getTextNodeContent(startElt).substring(startOffset) ;
-	var beforeEnd = _getTextNodeContent(endElt).substring(0, endOffset) ;
-	var afterEnd = _getTextNodeContent(endElt).substring(endOffset) ;
+  var beforeStart = _getTextNodeContent(startElt).substring(0, startOffset) ; 
+  var afterStart = _getTextNodeContent(startElt).substring(startOffset) ;
+  var beforeEnd = _getTextNodeContent(endElt).substring(0, endOffset) ;
+  var afterEnd = _getTextNodeContent(endElt).substring(endOffset) ;
 
     var sameNode = (startElt === endElt) ;
     
 //    log('beforeStart : ' + beforeStart + ' , afterStart : ' + afterStart + ' , beforeEnd : ' + beforeEnd + ' , afterEnd : ' + afterEnd + ' , sameNode : ' + sameNode) ;
  
     // taking care of start node : (and 'sameNode' case when start and end lie
-	// on same node)
+  // on same node)
     if (afterStart != "") { // otherwise nothing to do on the start node
-    	if (CY.DOM.hasClass(startElt, 'c-c')) {
-    		var lastElt = null, afterStartElt = null, afterEndElt = null, beforeStartElt = null ;
-    		
-        	var btw = (sameNode) ? _getTextNodeContent(startElt).substring(startOffset, endOffset) : afterStart ;
-        	        	
+      if (CY.DOM.hasClass(startElt, 'c-c')) {
+        var lastElt = null, afterStartElt = null, afterEndElt = null, beforeStartElt = null ;
+        
+          var btw = (sameNode) ? _getTextNodeContent(startElt).substring(startOffset, endOffset) : afterStart ;
+                    
 
-        	if (sameNode && (afterEnd != "")) {
-				afterEndElt = startElt ;
-				lastElt = afterEndElt ;
-			}
-	    	if (btw != "") {
-	    		if (lastElt == null) {
-	    			afterStartElt = startElt ;
-	    		}
-	    		else {
-	    			afterStartElt = _yuiCloneNode(startElt) ;
-	    			lastElt.parentNode.insertBefore(afterStartElt, lastElt) ;
-	    		}
-				lastElt = afterStartElt ;
-	    	}
-	    	if (beforeStart != "") {
-	    		if (lastElt == null) {
-	    			beforeStartElt = startElt ;
-	    		}
-	    		else {
-	    			beforeStartElt = _yuiCloneNode(startElt) ;
-	    			lastElt.parentNode.insertBefore(beforeStartElt, lastElt) ;
-	    		}
-				lastElt = beforeStartElt ;
-	    	}
-	    	
-			if (afterEndElt != null) {
-				_setTextNodeContent(afterEndElt, afterEnd) ;
-			}
-			
-	    	if (afterStartElt != null) {
-				_setTextNodeContent(afterStartElt, btw) ;
-	    		_addIdClass(afterStartElt, commentId) ;
-	    	}
+          if (sameNode && (afterEnd != "")) {
+        afterEndElt = startElt ;
+        lastElt = afterEndElt ;
+      }
+        if (btw != "") {
+          if (lastElt == null) {
+            afterStartElt = startElt ;
+          }
+          else {
+            afterStartElt = _yuiCloneNode(startElt) ;
+            lastElt.parentNode.insertBefore(afterStartElt, lastElt) ;
+          }
+        lastElt = afterStartElt ;
+        }
+        if (beforeStart != "") {
+          if (lastElt == null) {
+            beforeStartElt = startElt ;
+          }
+          else {
+            beforeStartElt = _yuiCloneNode(startElt) ;
+            lastElt.parentNode.insertBefore(beforeStartElt, lastElt) ;
+          }
+        lastElt = beforeStartElt ;
+        }
+        
+      if (afterEndElt != null) {
+        _setTextNodeContent(afterEndElt, afterEnd) ;
+      }
+      
+        if (afterStartElt != null) {
+        _setTextNodeContent(afterStartElt, btw) ;
+          _addIdClass(afterStartElt, commentId) ;
+        }
 
-//	    	alert('beforeStartElt.firstChild.data.length: ' + beforeStartElt.firstChild.data.length);
-//	    	alert('beforeStartElt.childNodes.length: ' + beforeStartElt.childNodes.length);
-	    	if (beforeStartElt != null) {
-				_setTextNodeContent(beforeStartElt, beforeStart) ; 
-	    	}
-//	    	alert('beforeStartElt.childNodes.length: ' + beforeStartElt.childNodes.length);
-	    	//alert('typeof beforeStartElt: ' + typeof beforeStartElt);
-//	    	alert('beforeStartElt.lastChild ==  beforeStartElt.firstChild : ' + (beforeStartElt.lastChild == beforeStartElt.firstChild));
-	    	
-//	    	alert('beforeStartElt.firstChild.id : ' + beforeStartElt.firstChild.id);
-//	    	alert('beforeStartElt.lastChild.data : ' + beforeStartElt.lastChild.data);
-//	    	alert('beforeStartElt.firstChild.data : ' + beforeStartElt.firstChild.data);
-//	    	alert('afterStartElt.firstChild.data : ' + afterStartElt.firstChild.data);
-//	    	alert('afterEndElt.firstChild.data : ' + afterEndElt.firstChild.data);
-	    	
-       	}
+//        alert('beforeStartElt.firstChild.data.length: ' + beforeStartElt.firstChild.data.length);
+//        alert('beforeStartElt.childNodes.length: ' + beforeStartElt.childNodes.length);
+        if (beforeStartElt != null) {
+        _setTextNodeContent(beforeStartElt, beforeStart) ; 
+        }
+//        alert('beforeStartElt.childNodes.length: ' + beforeStartElt.childNodes.length);
+        //alert('typeof beforeStartElt: ' + typeof beforeStartElt);
+//        alert('beforeStartElt.lastChild ==  beforeStartElt.firstChild : ' + (beforeStartElt.lastChild == beforeStartElt.firstChild));
+        
+//        alert('beforeStartElt.firstChild.id : ' + beforeStartElt.firstChild.id);
+//        alert('beforeStartElt.lastChild.data : ' + beforeStartElt.lastChild.data);
+//        alert('beforeStartElt.firstChild.data : ' + beforeStartElt.firstChild.data);
+//        alert('afterStartElt.firstChild.data : ' + afterStartElt.firstChild.data);
+//        alert('afterEndElt.firstChild.data : ' + afterEndElt.firstChild.data);
+        
+        }
     }
     if ( ( !sameNode ) && ( beforeEnd != "" ) ) { // otherwise nothing to do
-													// on the end node
-    	if (CY.DOM.hasClass(endElt, 'c-c')) {
-    		var lastElt = null, beforeEndElt = null, afterEndElt = null ;
-    		
-	    	if (afterEnd != "") {
-	    		afterEndElt = endElt ;
-				lastElt = endElt ;
-			}
-			
-	    	if (beforeEnd != "") {
-	    		if (lastElt == null)
-	    			beforeEndElt = endElt ;
-	    		else {
-	    			beforeEndElt = _yuiCloneNode(endElt) ;
-	    			lastElt.parentNode.insertBefore(beforeEndElt, lastElt) ;
-	    		}
-				lastElt = beforeEndElt ;
-	    	}
-	    	if (afterEndElt != null) {
-	    		_setTextNodeContent(afterEndElt, afterEnd) ;
-			}
-			
-	    	if (beforeEndElt != null) {
-	    		_addIdClass(beforeEndElt, commentId) ;
-	    		_setTextNodeContent(beforeEndElt, beforeEnd) ;
-	    	}
-    	}
+                          // on the end node
+      if (CY.DOM.hasClass(endElt, 'c-c')) {
+        var lastElt = null, beforeEndElt = null, afterEndElt = null ;
+        
+        if (afterEnd != "") {
+          afterEndElt = endElt ;
+        lastElt = endElt ;
+      }
+      
+        if (beforeEnd != "") {
+          if (lastElt == null)
+            beforeEndElt = endElt ;
+          else {
+            beforeEndElt = _yuiCloneNode(endElt) ;
+            lastElt.parentNode.insertBefore(beforeEndElt, lastElt) ;
+          }
+        lastElt = beforeEndElt ;
+        }
+        if (afterEndElt != null) {
+          _setTextNodeContent(afterEndElt, afterEnd) ;
+      }
+      
+        if (beforeEndElt != null) {
+          _addIdClass(beforeEndElt, commentId) ;
+          _setTextNodeContent(beforeEndElt, beforeEnd) ;
+        }
+      }
     }
 } ;
 
@@ -185,9 +185,9 @@ markEndsAsComments = function(startElt, startOffset, endElt, endOffset, commentI
 // was replaced with :
 // afterStartElt = _yuiCloneNode(startElt) ;
 _yuiCloneNode = function (srcElt) {
-	var ret = CY.Node.getDOMNode(CY.get('#'+srcElt.id).cloneNode(true)) ;
-	ret.id = CY.guid();
-	return ret ;
+  var ret = CY.Node.getDOMNode(CY.get('#'+srcElt.id).cloneNode(true)) ;
+  ret.id = CY.guid();
+  return ret ;
 } ;
 
 // will wrap textNodes into c-c spans going up the DOM tree from elt to ancestor
@@ -201,55 +201,55 @@ _yuiCloneNode = function (srcElt) {
 // prev : will spannify previous siblings if true, next siblings otherwise
 _dynSpanToAnc = function (elt, ancestor, commentId, prev) {
 // log('in : _dynSpanToAnc, elt : ' + elt.id) ;
-	var c = elt ;
+  var c = elt ;
     while ((c != null) && (c !== ancestor) && (c.parentNode !== ancestor)) {
-		var c_sib = null ;
-		if (prev) {
-			c_sib = c.previousSibling ;
-		}
-		else {
-			c_sib = c.nextSibling ;
-		}
-		
-		if (c_sib == null) {
-			c = c.parentNode ;
-		}
-		else {
-			c = c_sib ;			
-			_recAddComment(c, commentId) ;
-		}
-	} ;
+    var c_sib = null ;
+    if (prev) {
+      c_sib = c.previousSibling ;
+    }
+    else {
+      c_sib = c.nextSibling ;
+    }
+    
+    if (c_sib == null) {
+      c = c.parentNode ;
+    }
+    else {
+      c = c_sib ;     
+      _recAddComment(c, commentId) ;
+    }
+  } ;
 } ;
 
 // between elt1 and elt2 (which are excluded)
 _dynSpanInBetween = function (anc, elt1, elt2, commentId) {
-	var a = elt1 ;
-	var elt1Anc = null ;
+  var a = elt1 ;
+  var elt1Anc = null ;
     while (a) {
         if (a.parentNode === anc) {
-        	elt1Anc = a ;
-        	break;
+          elt1Anc = a ;
+          break;
         }
         a = a.parentNode;
     }
-	if (elt1Anc != null) {
-		a = elt2 ;
-		var elt2Anc = null ;
-	    while (a) {
-	        if (a.parentNode === anc) {
-	        	elt2Anc = a ;
-	        	break;
-	        }
-	        a = a.parentNode;
-	    }
-		if (elt2Anc != null) { // found both ancestor, now doing the work
-			a = elt1Anc.nextSibling ;
-			while ((a != null) && (a !== elt2Anc)) {
-				_recAddComment(a, commentId) ;
-				a = a.nextSibling ;
-			}
-		}
-	}
+  if (elt1Anc != null) {
+    a = elt2 ;
+    var elt2Anc = null ;
+      while (a) {
+          if (a.parentNode === anc) {
+            elt2Anc = a ;
+            break;
+          }
+          a = a.parentNode;
+      }
+    if (elt2Anc != null) { // found both ancestor, now doing the work
+      a = elt1Anc.nextSibling ;
+      while ((a != null) && (a !== elt2Anc)) {
+        _recAddComment(a, commentId) ;
+        a = a.nextSibling ;
+      }
+    }
+  }
 } ;
 
 // (copied from YUI dom-base)
@@ -265,32 +265,32 @@ _bruteContains = function(element, needle) {
 
 //elt is supposed to be c-c classed
 _addIdClass = function (elt, commentId) {
-	CY.DOM.addClass(elt, 'c-id-' + commentId) ;
-	_updateCommentCounter(elt) ;
+  CY.DOM.addClass(elt, 'c-id-' + commentId) ;
+  _updateCommentCounter(elt) ;
 } ;
 
 //elt is supposed to be c-c classed
 _removeIdClass = function (elt, commentId) {
-	CY.DOM.removeClass(elt, 'c-id-' + commentId) ;
-	_updateCommentCounter(elt) ;
+  CY.DOM.removeClass(elt, 'c-id-' + commentId) ;
+  _updateCommentCounter(elt) ;
 } ;
 
 //elt is supposed to be c-c classed
 _removeIdClasses = function (elt) {
-	var re = _cgetRegExp('(?:^|\\s+)c-id-(?:\\d+)', 'g');
-	elt['className'] = elt['className'].replace(re, " ") ;
-	_updateCommentCounter(elt) ;
+  var re = _cgetRegExp('(?:^|\\s+)c-id-(?:\\d+)', 'g');
+  elt['className'] = elt['className'].replace(re, " ") ;
+  _updateCommentCounter(elt) ;
 } ;
 
 _recAddComment = function (elt, commentId) {
-	if (CY.DOM.hasClass(elt, 'c-c')) {
-		_addIdClass(elt, commentId) ;
-	}
-	else {
-		var c = elt.firstChild ;
+  if (CY.DOM.hasClass(elt, 'c-c')) {
+    _addIdClass(elt, commentId) ;
+  }
+  else {
+    var c = elt.firstChild ;
         while (c != null) {
-        	_recAddComment(c, commentId) ;
-			c = c.nextSibling ;
+          _recAddComment(c, commentId) ;
+      c = c.nextSibling ;
         }
     }
 } ;
@@ -298,15 +298,15 @@ _recAddComment = function (elt, commentId) {
 // might be expensive ... (? maybe should use contains when available, instead
 // of custom _bruteContains)
 _findCommonAncestor = function (elt1, elt2) {
-	if (_bruteContains(elt1, elt2))
-		return elt1 ;
-	else {
-		var e = elt2 ;
-		while ((e != null) && !_bruteContains(e, elt1)) {
-			e = e.parentNode ; 
-		}
-		return e ;
-	}
+  if (_bruteContains(elt1, elt2))
+    return elt1 ;
+  else {
+    var e = elt2 ;
+    while ((e != null) && !_bruteContains(e, elt1)) {
+      e = e.parentNode ; 
+    }
+    return e ;
+  }
 } ;
 
 _cregexCache = {} ;
@@ -322,45 +322,45 @@ _cgetRegExp = function(str, flags) {
 //c-c should be classed with a c-count-x where x is a number for color graduation
 //c-c should be classed with many c-id-xid where xid is the comment db id of comment that apply to it
 _updateCommentCounter = function (elt) {
-	var re = _cgetRegExp('(?:^|\\s+)c-id-(?:\\d+)', 'g');
-	var matches = elt['className'].match(re);
-	var countIds = (matches == null) ? 0 : matches.length ;
-	
-	re = _cgetRegExp('(?:^|\\s+)c-count-(?:\\d+)', 'g');
-	elt['className'] = elt['className'].replace(re, " ") ;
-	CY.DOM.addClass(elt, 'c-count-'+countIds+' ') ;
+  var re = _cgetRegExp('(?:^|\\s+)c-id-(?:\\d+)', 'g');
+  var matches = elt['className'].match(re);
+  var countIds = (matches == null) ? 0 : matches.length ;
+  
+  re = _cgetRegExp('(?:^|\\s+)c-count-(?:\\d+)', 'g');
+  elt['className'] = elt['className'].replace(re, " ") ;
+  CY.DOM.addClass(elt, 'c-count-'+countIds+' ') ;
 } ;
 
 _convertSelectionFromCCToCS = function (sel) {
-	var offset = sel['offset'] ;
-	var elt = sel['elt'].parentNode ;
-	
-	var e = sel['elt'].previousSibling ;
-	while (e != null) {
-		offset += _getTextNodeContent(e).length ;
-		e = e.previousSibling ; // will be a c-c !!
-	}
-	
-	return  {'elt':elt, 'offset':offset} ;
+  var offset = sel['offset'] ;
+  var elt = sel['elt'].parentNode ;
+  
+  var e = sel['elt'].previousSibling ;
+  while (e != null) {
+    offset += _getTextNodeContent(e).length ;
+    e = e.previousSibling ; // will be a c-c !!
+  }
+  
+  return  {'elt':elt, 'offset':offset} ;
 } ;
 
 _convertSelectionFromCSToCC = function (sel) {
-	var ret = {'elt':null, 'offset':-1} ;
-	
-	var cc = null ;
-	var ccElt = sel['elt'].firstChild ;
-	var length = 0 ;
-	while (ccElt != null) {
-		var prevLength = length ;
-		length += _getTextNodeContent(ccElt).length ;
-		if (length >= sel['offset']) {
-			ret['elt'] = ccElt ;
-			ret['offset'] = sel['offset'] - prevLength ;
-			break ;
-		}
-		ccElt = ccElt.nextSibling ; // will be a c-c !!
-	}
-	return ret ;
+  var ret = {'elt':null, 'offset':-1} ;
+  
+  var cc = null ;
+  var ccElt = sel['elt'].firstChild ;
+  var length = 0 ;
+  while (ccElt != null) {
+    var prevLength = length ;
+    length += _getTextNodeContent(ccElt).length ;
+    if (length >= sel['offset']) {
+      ret['elt'] = ccElt ;
+      ret['offset'] = sel['offset'] - prevLength ;
+      break ;
+    }
+    ccElt = ccElt.nextSibling ; // will be a c-c !!
+  }
+  return ret ;
 } ;
 
 
@@ -371,89 +371,89 @@ _convertSelectionFromCSToCC = function (sel) {
 unpaintCommentScope = function(comment) {
     var dbId = comment.id;
 
-	var classeId = 'c-id-' + dbId ;
-	var toBeRemovedElts = [] ;
+  var classeId = 'c-id-' + dbId ;
+  var toBeRemovedElts = [] ;
 
-	var cNodeList = CY.all("."+classeId) ;
-	if (cNodeList != null) { // null in case of a reply ...
-		for (var i = 0, ilen = cNodeList.size() ; i < ilen ; i++)  {
-			var c = cNodeList.item(i) ;
-			if (c.hasClass('c-c')) { // always will !!
-				var cElt = CY.Node.getDOMNode(c) ;
-				_removeIdClass(cElt, dbId) ;
-				
-				var cIds = getCommentIdsFromClasses(cElt) ;
-				quicksort(cIds) ;
-				
-				var p = c.get('previousSibling') ;
-				if (p != null) {
-					var pElt = CY.Node.getDOMNode(p) ;
-					var pIds = getCommentIdsFromClasses(pElt) ; 
-					quicksort(pIds) ;
-					if (areSortedArraysEqual(cIds, pIds)) {
-						_setTextNodeContent(cElt, _getTextNodeContent(pElt) + _getTextNodeContent(cElt)) ;						
-						toBeRemovedElts.push(pElt) ;
-					}
-				}
-				
-				var n = c.get('nextSibling') ;
-				if (n != null) {
-					var nElt = CY.Node.getDOMNode(n) ;
-					var nIds = getCommentIdsFromClasses(nElt) ; 
-					quicksort(nIds) ;
-					if (areSortedArraysEqual(cIds, nIds)) {
-						cElt.firstChild.data = cElt.firstChild.data + nElt.firstChild.data; 
-						toBeRemovedElts.push(nElt) ;
-					}
-				}
-			}
-			else {
-				alert('HAS NO c-c ? : ' + commentNode.get('id') + " , innerHTML :" + commentNode.get('innerHTML')) ;
-				return ;
-			}
-		}
-	}
-	for (var i = 0, ilen = toBeRemovedElts.length ; i < ilen ; i++)  {
-		toBeRemovedElts[i].parentNode.removeChild(toBeRemovedElts[i]) ;
-	}
+  var cNodeList = CY.all("."+classeId) ;
+  if (cNodeList != null) { // null in case of a reply ...
+    for (var i = 0, ilen = cNodeList.size() ; i < ilen ; i++)  {
+      var c = cNodeList.item(i) ;
+      if (c.hasClass('c-c')) { // always will !!
+        var cElt = CY.Node.getDOMNode(c) ;
+        _removeIdClass(cElt, dbId) ;
+        
+        var cIds = getCommentIdsFromClasses(cElt) ;
+        quicksort(cIds) ;
+        
+        var p = c.get('previousSibling') ;
+        if (p != null) {
+          var pElt = CY.Node.getDOMNode(p) ;
+          var pIds = getCommentIdsFromClasses(pElt) ; 
+          quicksort(pIds) ;
+          if (areSortedArraysEqual(cIds, pIds)) {
+            _setTextNodeContent(cElt, _getTextNodeContent(pElt) + _getTextNodeContent(cElt)) ;            
+            toBeRemovedElts.push(pElt) ;
+          }
+        }
+        
+        var n = c.get('nextSibling') ;
+        if (n != null) {
+          var nElt = CY.Node.getDOMNode(n) ;
+          var nIds = getCommentIdsFromClasses(nElt) ; 
+          quicksort(nIds) ;
+          if (areSortedArraysEqual(cIds, nIds)) {
+            cElt.firstChild.data = cElt.firstChild.data + nElt.firstChild.data; 
+            toBeRemovedElts.push(nElt) ;
+          }
+        }
+      }
+      else {
+        alert('HAS NO c-c ? : ' + commentNode.get('id') + " , innerHTML :" + commentNode.get('innerHTML')) ;
+        return ;
+      }
+    }
+  }
+  for (var i = 0, ilen = toBeRemovedElts.length ; i < ilen ; i++)  {
+    toBeRemovedElts[i].parentNode.removeChild(toBeRemovedElts[i]) ;
+  }
 } ;
 
 // not related to the unpaintCommentScope function (faster)
 unpaintAllComments = function() {
-	var cNodeList= CY.all(".c-s") ;
-	var toBeRemovedElts = [] ;
-	for (var i = 0, ilen = cNodeList.size() ; i < ilen ; i++)  {
-		var c = cNodeList.item(i) ;
-		
-		// remove Classes
-		var fc = c.get('firstChild') ;
-		var fcElt = CY.Node.getDOMNode(c.get('firstChild')) ;
-		_removeIdClasses(fcElt) ;
-		
-		// merge nodes
-		var n = fc.get('nextSibling') ;
-		while (n != null)  {
-			var nElt = CY.Node.getDOMNode(n) ;
-			fcElt.firstChild.data = fcElt.firstChild.data + nElt.firstChild.data; 
-			toBeRemovedElts.push(nElt) ;
-			n = n.get('nextSibling') ;
-		}
-	}
-	for (var i = 0, ilen = toBeRemovedElts.length ; i < ilen ; i++)  {
-		toBeRemovedElts[i].parentNode.removeChild(toBeRemovedElts[i]) ;
-	}
+  var cNodeList= CY.all(".c-s") ;
+  var toBeRemovedElts = [] ;
+  for (var i = 0, ilen = cNodeList.size() ; i < ilen ; i++)  {
+    var c = cNodeList.item(i) ;
+    
+    // remove Classes
+    var fc = c.get('firstChild') ;
+    var fcElt = CY.Node.getDOMNode(c.get('firstChild')) ;
+    _removeIdClasses(fcElt) ;
+    
+    // merge nodes
+    var n = fc.get('nextSibling') ;
+    while (n != null)  {
+      var nElt = CY.Node.getDOMNode(n) ;
+      fcElt.firstChild.data = fcElt.firstChild.data + nElt.firstChild.data; 
+      toBeRemovedElts.push(nElt) ;
+      n = n.get('nextSibling') ;
+    }
+  }
+  for (var i = 0, ilen = toBeRemovedElts.length ; i < ilen ; i++)  {
+    toBeRemovedElts[i].parentNode.removeChild(toBeRemovedElts[i]) ;
+  }
 
 } ;
 
 showScope = function(commentDbId) {
-	var s = CY.all('.c-id-' + commentDbId); 
-	if (s != null)
-		s.addClass('c-scope') ;
+  var s = CY.all('.c-id-' + commentDbId); 
+  if (s != null)
+    s.addClass('c-scope') ;
 } ;
 
 hideScopeAnyway = function() {
-	var s = CY.all('.c-scope'); 
-	if (s != null)
-		s.removeClass('c-scope') ;
+  var s = CY.all('.c-scope'); 
+  if (s != null)
+    s.removeClass('c-scope') ;
 }
 

@@ -1,32 +1,32 @@
 _changeIds = function(elt, suffix) {
-	if (elt.id)
-		elt.id =  elt.id + suffix ;
-	var c = elt.firstChild ;
-	while (c != null) {
-		_changeIds(c, suffix) ;
-		c = c.nextSibling ; 
-	}
+  if (elt.id)
+    elt.id =  elt.id + suffix ;
+  var c = elt.firstChild ;
+  while (c != null) {
+    _changeIds(c, suffix) ;
+    c = c.nextSibling ; 
+  }
 } ;
 
 suffix = 0 ;
 domDuplicate = function(elt) {
-	var newElt = elt.cloneNode(true) ;
-	suffix++ ;
-	_changeIds(newElt, '-'+suffix) ;
-	return newElt ;
+  var newElt = elt.cloneNode(true) ;
+  suffix++ ;
+  _changeIds(newElt, '-'+suffix) ;
+  return newElt ;
 } ;
 
 getDuplicated = function(elt) {
-	return document.getElementById(elt.id + '-' + suffix) ;
+  return document.getElementById(elt.id + '-' + suffix) ;
 } ;
 
 logSel = function(selection) {
-	log('text :' + selection['text'] + ', start id : ' + selection['start']['elt'].id + ' , start offset : ' + selection['start']['offset'] + ' , end id : ' + selection['end']['elt'].id + 'end offset : ' + selection['end']['offset']) ;
+  log('text :' + selection['text'] + ', start id : ' + selection['start']['elt'].id + ' , start offset : ' + selection['start']['offset'] + ' , end id : ' + selection['end']['elt'].id + 'end offset : ' + selection['end']['offset']) ;
 } ;
 
 log = function (msg) {
-	var log = document.getElementById("log") ;
-	log.innerHTML = log.innerHTML + "<li>" + msg + "</li>" ; 
+  var log = document.getElementById("log") ;
+  log.innerHTML = log.innerHTML + "<li>" + msg + "</li>" ; 
 } ;
 
 // from ext
@@ -92,83 +92,83 @@ urlDecode = function(string, overwrite){
 
 
 areSortedArraysEqual = function (a1, a2) {
-	if (a1.length != a2.length) 
-		return false ;
-	for (var i = 0, ilen = a1.length ; i < ilen ; i++) {
-		if (a1[i] != a2[i])
-			return false ;
-	}
-	return true
+  if (a1.length != a2.length) 
+    return false ;
+  for (var i = 0, ilen = a1.length ; i < ilen ; i++) {
+    if (a1[i] != a2[i])
+      return false ;
+  }
+  return true
 } ;
 
 // in place ordering!
 quicksort = function (vec) {
-	_quicksort(vec, 0, vec.length-1) ;
+  _quicksort(vec, 0, vec.length-1) ;
 };
 
 // cf. http://www.4guysfromrolla.com/webtech/012799-1.shtml
 _quicksort = function (vec, loBound, hiBound)
 /**************************************************************
-	This function adapted from the algorithm given in:
-		Data Abstractions & Structures Using C++, by
-		Mark Headington and David Riley, pg. 586.
+  This function adapted from the algorithm given in:
+    Data Abstractions & Structures Using C++, by
+    Mark Headington and David Riley, pg. 586.
 
-	quicksort is the fastest array sorting routine for
-	unordered arrays.  Its big O is n log n.
+  quicksort is the fastest array sorting routine for
+  unordered arrays.  Its big O is n log n.
  **************************************************************/
 {
 
-	var pivot, loSwap, hiSwap, temp;
+  var pivot, loSwap, hiSwap, temp;
 
-	// Two items to sort
-	if (hiBound - loBound == 1)
-	{
-		if (vec[loBound] > vec[hiBound])
-		{
-			temp = vec[loBound];
-			vec[loBound] = vec[hiBound];
-			vec[hiBound] = temp;
-		}
-		return;
-	}
+  // Two items to sort
+  if (hiBound - loBound == 1)
+  {
+    if (vec[loBound] > vec[hiBound])
+    {
+      temp = vec[loBound];
+      vec[loBound] = vec[hiBound];
+      vec[hiBound] = temp;
+    }
+    return;
+  }
 
-	// Three or more items to sort
-	pivot = vec[parseInt((loBound + hiBound) / 2)];
-	vec[parseInt((loBound + hiBound) / 2)] = vec[loBound];
-	vec[loBound] = pivot;
-	loSwap = loBound + 1;
-	hiSwap = hiBound;
+  // Three or more items to sort
+  pivot = vec[parseInt((loBound + hiBound) / 2)];
+  vec[parseInt((loBound + hiBound) / 2)] = vec[loBound];
+  vec[loBound] = pivot;
+  loSwap = loBound + 1;
+  hiSwap = hiBound;
 
-	do {
-		// Find the right loSwap
-		while (loSwap <= hiSwap && vec[loSwap] <= pivot)
-			loSwap++;
+  do {
+    // Find the right loSwap
+    while (loSwap <= hiSwap && vec[loSwap] <= pivot)
+      loSwap++;
 
-		// Find the right hiSwap
-		while (vec[hiSwap] > pivot)
-			hiSwap--;
+    // Find the right hiSwap
+    while (vec[hiSwap] > pivot)
+      hiSwap--;
 
-		// Swap values if loSwap is less than hiSwap
-		if (loSwap < hiSwap)
-		{
-			temp = vec[loSwap];
-			vec[loSwap] = vec[hiSwap];
-			vec[hiSwap] = temp;
-		}
-	} while (loSwap < hiSwap);
+    // Swap values if loSwap is less than hiSwap
+    if (loSwap < hiSwap)
+    {
+      temp = vec[loSwap];
+      vec[loSwap] = vec[hiSwap];
+      vec[hiSwap] = temp;
+    }
+  } while (loSwap < hiSwap);
 
-	vec[loBound] = vec[hiSwap];
-	vec[hiSwap] = pivot;
-
-
-	// Recursively call function...  the beauty of quicksort
-
-	// 2 or more items in first section		
-	if (loBound < hiSwap - 1)
-		_quicksort(vec, loBound, hiSwap - 1);
+  vec[loBound] = vec[hiSwap];
+  vec[hiSwap] = pivot;
 
 
-	// 2 or more items in second section
-	if (hiSwap + 1 < hiBound)
-		_quicksort(vec, hiSwap + 1, hiBound);
+  // Recursively call function...  the beauty of quicksort
+
+  // 2 or more items in first section   
+  if (loBound < hiSwap - 1)
+    _quicksort(vec, loBound, hiSwap - 1);
+
+
+  // 2 or more items in second section
+  if (hiSwap + 1 < hiBound)
+    _quicksort(vec, hiSwap + 1, hiBound);
 } ;
