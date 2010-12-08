@@ -247,9 +247,8 @@ msgid "Print text"
 msgstr "Impression du texte"
 
 #: media/js/client/f_printDialog.js:12
-#, fuzzy
 msgid "How do you want to print?"
-msgstr "Voulez vous continuer ?"
+msgstr "Comment voulez-vous imprimer ?"
 
 #: media/js/client/f_printDialog.js:13
 msgid "Export text"
@@ -257,7 +256,7 @@ msgstr "Export du texte"
 
 #: media/js/client/f_printDialog.js:13
 msgid "Choose file format"
-msgstr ""
+msgstr "Choisissez le format du fichier"
 
 #: media/js/client/f_printDialog.js:40
 msgid "using markers only, no background colors"
