@@ -4,7 +4,7 @@ Comt
 
 Presentation
 ============
-Comt is an open source Web-based text annotation platform.
+Comt is an free software Web-based text annotation platform.
 
 License
 =======
