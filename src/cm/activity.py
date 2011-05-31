@@ -49,6 +49,9 @@ def seconds(t_delta):
 
 VISIT_DURATION = timedelta(seconds=30 * 60) # 30 minutes
 
+from cm.utils.cache import memoize, dj_memoize
+
+@dj_memoize
 def get_activity(text='all', user='all', reference_date=None, nb_slots=31, slot_timedelta=timedelta(days=1), action="all", kind=''):
     """
     text : text: specific text
