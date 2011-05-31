@@ -841,3 +841,5 @@ import cm.notifications
 
 # we fill username with email so we need a bigger value 
 User._meta.get_field('username').max_length = 75
+
+import monkey_patches
