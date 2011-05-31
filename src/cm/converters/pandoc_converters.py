@@ -11,10 +11,12 @@ from tempfile import mkstemp
 import StringIO
 import tidy
 from cm.utils.string_utils import to_unicode
+from xml.dom.minidom import parseString
+import re
 
 PANDOC_BIN = "pandoc"
-PANDOC_OPTIONS = " --sanitize-html "
-PANDOC_OPTIONS_RAW = " -R "
+PANDOC_OPTIONS = " --sanitize-html --email-obfuscation=none  "
+PANDOC_OPTIONS_RAW = " -R --email-obfuscation=none "
 
 MARKDOWN2PDF_BIN = "markdown2pdf"
 
@@ -85,6 +87,8 @@ def do_tidy(content=None, file_name=None):
                         add_xml_decl=0, 
                         indent=0, 
                         tidy_mark=0,
+                        logical_emphasis=1,
+                        wrap=0,
                         input_encoding='utf8',
                         output_encoding='utf8',
                         )
@@ -183,6 +187,26 @@ def pandoc_pandoc(content, from_format, to_format, full=False, raw=False):
     if raw:
         p_options = PANDOC_OPTIONS_RAW
                 
+    # do not use pandoc to convert from html to html
+    if from_format==to_format=='html':
+      # get body content
+      stdoutdata = (content.encode('utf8'))
+      # if for some reason, tidy has not guess the doctype, make xml.dom.minidom happy with HTML entities (&nbsp;)
+      stdoutdata = re.sub(r"&nbsp;", '\xc2\xa0', stdoutdata)
+      dom = parseString(stdoutdata)
+      body = dom.getElementsByTagName("body")[0].toxml()
+      stdoutdata = body[body.find('>')+1:body.rfind('</')]
+      # strip leading spaces
+      stdoutdata = re.sub(r"^\s+", '', stdoutdata)
+      # add new line before closing bracket
+      stdoutdata = re.sub(r"(\/?)>", r"\n\1>", stdoutdata)
+      # do not split closing tag with following opening tag
+      stdoutdata = re.sub(r">\n<", r"><", stdoutdata)
+      # nest headers tags 
+      #stdoutdata = re.sub(r'<h(\d) id="([^"]+)"\n>', r'<div id="\2"><h\1>', stdoutdata)
+      #stdoutdata = re.sub(r'<\/h(\d)\n>', r'</h\1></div>', stdoutdata)
+      return stdoutdata
+
     cmd_args = ' %s -o %s ' %(p_options,output_temp_name) 
     if full:
         cmd_args += ' -s '
