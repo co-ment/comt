@@ -95,19 +95,9 @@ def do_tidy(content=None, file_name=None):
     return str(tidyied_content).decode('utf8')
 
 
-def get_filetemp(mode="r"):
-    (fd, fname) = mkstemp()
+def get_filetemp(mode="r", suffix=''):
+    (fd, fname) = mkstemp(suffix)
     return (os.fdopen(fd, mode), fname)
-
-# build absolute address for latex header file
-_tmp_ = __file__.split(os.path.sep)[:-1]
-_tmp_.append('latex_header.txt')
-_tmp_.insert(0, os.path.sep)
-
-LATEX_HEADER_PATH = os.path.join(*_tmp_)
-
-if not os.path.isfile(LATEX_HEADER_PATH):
-    raise Exception('LATEX_HEADER_PATH is not a file!')
 
 @dj_memoize
 def pandoc_markdown2pdf(content=None, file_name=None):
@@ -119,17 +109,16 @@ def pandoc_markdown2pdf(content=None, file_name=None):
     content = content_or_file_name(content, file_name)
         
     # write file to disk
-    temp_file, input_temp_name = get_filetemp('w')
-    fp_error, error_temp_name = get_filetemp('w')
+    temp_file, input_temp_name = get_filetemp('w', 'input')
+    fp_error, error_temp_name = get_filetemp('w', 'err')
     
     temp_file.write(content.encode(_PANDOC_ENCODING))
     temp_file.close()
     
-    # custom latex header
-    cust_head_tex = " --custom-header=%s " %LATEX_HEADER_PATH
+    cust_tex = " --xetex "
     
     # use markdown2pdf
-    retcode = call(MARKDOWN2PDF_BIN + cust_head_tex + ' ' + input_temp_name, shell=True, stderr=fp_error)
+    retcode = call(MARKDOWN2PDF_BIN + cust_tex + ' ' + input_temp_name, shell=True, stderr=fp_error)
     fp_error.close()
     
     fp_error = file(error_temp_name)
@@ -179,11 +168,11 @@ def pandoc_pandoc(content, from_format, to_format, full=False, raw=False):
         raise Exception('Content is not in unicode format!')
 
     # temp file
-    input_file, input_temp_name = get_filetemp('w')
-    output_temp_fp, output_temp_name = get_filetemp()
+    input_file, input_temp_name = get_filetemp('w', 'input')
+    output_temp_fp, output_temp_name = get_filetemp('r', 'output')
     output_temp_fp.close()
     
-    error_temp_fp, error_temp_name = get_filetemp('w')
+    error_temp_fp, error_temp_name = get_filetemp('w', 'err')
     error_temp_fp.close()
     
     input_file.write(content.encode(_PANDOC_ENCODING))
