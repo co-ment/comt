@@ -562,7 +562,7 @@ def get_uniffied_inner_diff_table(title1, title2, author1, author2, text1, text2
     """
     Return the inner of the html table for text1 vs text2 diff
     """
-    gen = unified_diff(text1.split('\n'), text2.split('\n'), n=3)
+    gen = unified_diff(text1.replace('\r\n','\n').split('\n'), text2.replace('\r\n','\n').split('\n'), n=3)
     index = 0
     res = ['<table class="diff"><col class="diff-marker"/><col class="diff-content"/><col class="diff-separator"/<col class="diff-marker"/><col class="diff-content"/><tbody>']
     res.append('<tr><td></td><td class="diff-title">%s</td><td></td><td></td><td class="diff-title">%s</td></tr>' %(title1, title2))
