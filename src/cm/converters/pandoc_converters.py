@@ -15,7 +15,7 @@ from xml.dom.minidom import parseString
 import re
 
 PANDOC_BIN = "pandoc"
-PANDOC_OPTIONS = " --sanitize-html --email-obfuscation=none  "
+PANDOC_OPTIONS = " --sanitize-html --email-obfuscation=none "
 PANDOC_OPTIONS_RAW = " -R --email-obfuscation=none "
 
 MARKDOWN2PDF_BIN = "markdown2pdf"
@@ -202,7 +202,7 @@ def pandoc_pandoc(content, from_format, to_format, full=False, raw=False):
       stdoutdata = re.sub(r"(\/?)>", r"\n\1>", stdoutdata)
       # do not split closing tag with following opening tag
       stdoutdata = re.sub(r">\n<", r"><", stdoutdata)
-      # nest headers tags 
+      # nest headers tags
       #stdoutdata = re.sub(r'<h(\d) id="([^"]+)"\n>', r'<div id="\2"><h\1>', stdoutdata)
       #stdoutdata = re.sub(r'<\/h(\d)\n>', r'</h\1></div>', stdoutdata)
       return stdoutdata

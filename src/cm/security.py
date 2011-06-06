@@ -98,7 +98,15 @@ def has_own_perm(request, perm_name, text, comment):
        not has_perm(request, 'can_manage_text', text=text):
         return False
     
-    return (comment.user == request.user and has_perm(request, perm_name, text=text)) 
+    actual_own_user = False
+    from cm.cm_settings import DECORATED_CREATORS
+    if comment.user == request.user:
+      if DECORATED_CREATORS:
+        if request.GET.get('name', None) == comment.get_name():
+          actual_own_user = True
+      else:
+        actual_own_user = True
+    return (actual_own_user and has_perm(request, perm_name, text=text)) 
         
 def is_authenticated(request):
     # We customize this to be able to monkey patch it if needed
