@@ -119,12 +119,15 @@ def pandoc_markdown2pdf(content=None, file_name=None):
     temp_file.write(content.encode(_PANDOC_ENCODING))
     temp_file.close()
     
-    # xetex seems to cause "Invalid or incomplete multibyte or wide character" errors
-    #cust_tex = " --xetex "
-    cust_tex = ''
+    cust_tex = " --xetex "
     
     # use markdown2pdf
     retcode = call(MARKDOWN2PDF_BIN + cust_tex + ' ' + input_temp_name, shell=True, stderr=fp_error)
+
+    # xetex seems to randomly cause "Invalid or incomplete multibyte or wide character" errors, try without it
+    if retcode:
+      retcode = call(MARKDOWN2PDF_BIN + ' ' + input_temp_name, shell=True, stderr=fp_error)
+
     fp_error.close()
     
     fp_error = file(error_temp_name)
