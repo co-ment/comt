@@ -126,7 +126,20 @@ def pandoc_markdown2pdf(content=None, file_name=None):
 
     # xetex seems to randomly cause "Invalid or incomplete multibyte or wide character" errors, try without it
     if retcode:
-      retcode = call(MARKDOWN2PDF_BIN + ' ' + input_temp_name, shell=True, stderr=fp_error)
+      # build absolute address for latex header file
+      _tmp_ = __file__.split(os.path.sep)[:-1]
+      _tmp_.append('latex_header.txt')
+      _tmp_.insert(0, os.path.sep)
+
+      LATEX_HEADER_PATH = os.path.join(*_tmp_)
+
+      if not os.path.isfile(LATEX_HEADER_PATH):
+        raise Exception('LATEX_HEADER_PATH is not a file!')
+
+      # custom latex header
+      cust_head_tex = " --custom-header=%s " %LATEX_HEADER_PATH
+
+      retcode = call(MARKDOWN2PDF_BIN + cust_head_tex + ' ' + input_temp_name, shell=True, stderr=fp_error)
 
     fp_error.close()
     
