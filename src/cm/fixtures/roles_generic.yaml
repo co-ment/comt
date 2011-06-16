@@ -39,9 +39,10 @@
     name: "Commentator"
     description: "" 
     anon: true
-    permissions: [52, 11, 34, 31, 38]
+    permissions: [52, 11, 34, 31, 38, 33]
 # can_create_comment
 # can_edit_comment_own
+# can_delete_comment_own
     
 - model : cm.role
   pk: 5
