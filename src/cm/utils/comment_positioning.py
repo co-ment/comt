@@ -130,6 +130,11 @@ def add_marker(text, color, start_ids, end_ids, with_markers, with_colors):
         ret = "%s%s%s"%(''.join(["[%s&gt;"%start_id for start_id in start_ids]), ret, ''.join(["&lt;%s]"%end_id for end_id in end_ids]))
      
     if with_colors and color != 0 :
+      # For some reasons, abiwords can read background style attribute but not background-color
+      from cm.cm_settings import USE_ABI
+      if USE_ABI:
+        ret = "<span style='background:%s;'>%s</span>"%(BCKCOLORS[color], ret)
+      else:
         ret = "<span style='background-color:%s;'>%s</span>"%(BCKCOLORS[color], ret)
         
     return ret
