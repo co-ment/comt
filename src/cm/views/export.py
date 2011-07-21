@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext as _, ugettext_lazy
-from cm.converters.pandoc_converters import pandoc_convert
+from cm.converters.pandoc_converters import pandoc_convert, do_tidy
 from cm.models import Text, TextVersion, Attachment, Comment
 import mimetypes
 import simplejson
@@ -38,7 +38,8 @@ def content_export2(request, content, title, content_format, format, use_pandoc,
                 if USE_ABI:
                   from cm.converters.abi_converters import AbiFileConverter
                   converter = AbiFileConverter()
-                  fix_content = converter.add_html_header(content)
+                  full_content = converter.add_html_header(content)
+                  fix_content = do_tidy(full_content)
                 else:
                   from cm.converters.oo_converters import combine_css_body                
                   fix_content = combine_css_body(content, '')
