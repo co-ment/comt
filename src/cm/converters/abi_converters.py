@@ -255,13 +255,13 @@ class AbiFileConverter(object):
                 out_f.close()
             if infile:
                 infile.close()
-            #top = temp_dir
-            #for root, dirs, files in os.walk(top, topdown=False):
-            #    for name in files:
-            #        os.remove(os.path.join(root, name))
-            #    for name in dirs:
-            #        os.rmdir(os.path.join(root, name))
-            #os.rmdir(top)
+            top = temp_dir
+            for root, dirs, files in os.walk(top, topdown=False):
+                for name in files:
+                    os.remove(os.path.join(root, name))
+                for name in dirs:
+                    os.rmdir(os.path.join(root, name))
+            os.rmdir(top)
           except:
             pass
 
