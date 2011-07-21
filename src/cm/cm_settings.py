@@ -32,3 +32,6 @@ STORE_ACTIVITY_IP = get_setting('STORE_ACTIVITY_IP', True)
 
 # Show 'decorated' users in comments (not structural creator id) 
 DECORATED_CREATORS = get_setting('DECORATED_CREATORS', False)
+
+# Use AbiWord for conversions
+USE_ABI = get_setting('USE_ABI', False)

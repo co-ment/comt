@@ -127,7 +127,7 @@ def add_marker(text, color, start_ids, end_ids, with_markers, with_colors):
     
     if with_markers:
         end_ids.reverse()
-        ret = "%s%s%s"%(''.join(["[%s>"%start_id for start_id in start_ids]), ret, ''.join(["<%s]"%end_id for end_id in end_ids]))
+        ret = "%s%s%s"%(''.join(["[%s&gt;"%start_id for start_id in start_ids]), ret, ''.join(["&lt;%s]"%end_id for end_id in end_ids]))
      
     if with_colors and color != 0 :
         ret = "<span style='background-color:%s;'>%s</span>"%(BCKCOLORS[color], ret)

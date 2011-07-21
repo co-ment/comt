@@ -8,6 +8,7 @@ from cm.converters.pandoc_converters import pandoc_convert
 from cm.models import Text, TextVersion, Attachment, Comment
 import mimetypes
 import simplejson
+from cm.cm_settings import USE_ABI
 EXPORT2_INFOS = {
 # key -> { mimetype, extension}
 's5' :   {},
@@ -34,10 +35,20 @@ def content_export2(request, content, title, content_format, format, use_pandoc,
         else :
             fix_content = content
             if content_format == 'html':
-                from cm.converters.oo_converters import combine_css_body                
-                fix_content = combine_css_body(content, '')
-            from cm.converters.oo_converters import convert_html as oo_convert                
-            export_content = oo_convert(fix_content, format)
+                if USE_ABI:
+                  from cm.converters.abi_converters import AbiFileConverter
+                  converter = AbiFileConverter()
+                  fix_content = converter.add_html_header(content)
+                else:
+                  from cm.converters.oo_converters import combine_css_body                
+                  fix_content = combine_css_body(content, '')
+            if USE_ABI:
+              from cm.converters.abi_converters import AbiFileConverter
+              converter = AbiFileConverter()
+              export_content = converter.convert_from_html(fix_content, format)
+            else:
+              from cm.converters.oo_converters import convert_html as oo_convert                
+              export_content = oo_convert(fix_content, format)
     
     export_infos = EXPORT2_INFOS[format]
      

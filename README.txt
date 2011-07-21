@@ -23,7 +23,8 @@ Environment
 -------------
 - Postgresql 8.3 or Mysql 5+ or sqlite
 - Python 2.5+
-- Openoffice 3.0+ (headless) & Pandoc
+- Abiword or Openoffice 3.0+ (headless)
+- Pandoc
 
 
 Requirements
@@ -32,9 +33,8 @@ Requirements
 - python magic
 - python development headers
 - python setuptools
-- python uno
 - pandoc
-- headless openoffice
+- abiword (or headless openoffice and python uno)
 - git
 - libyaml
 (all other python dependencies will be downloaded by buildout)
@@ -45,7 +45,9 @@ Installation (development install)
 	(ubuntu users : 'sudo apt-get install python python-magic python-setuptools python-uno libyaml-0-1 python-yaml python-dev git-core python-utidylib')
 2. Install pandoc
 	(ubuntu users : 'sudo apt-get install pandoc')
-3. Install openoffice (headless mode) [used for document conversion]
+3. Install abiword
+  (ubuntu users: 'sudo apt-get install abiword')
+   Alternatively, install openoffice (headless mode) [used for document conversion]
 	(ubuntu users : 'sudo apt-get install sun-java6-jre openoffice.org openoffice.org-headless xvfb')
 4. Install/configure database [skip this step if you plan to use a sqlite database]
 	4 a) Postgresql
@@ -105,11 +107,11 @@ If your database was created using comt alpha prior to the revision 29, here are
    - `./bin/django migrate cm 0001_initial --fake`
    - `./bin/django migrate`
 
-Openoffice
-==========
-Comt uses openoffice to convert documents from ODT, MS Word, etc. to html.
-On a development setup, you should make sure no openoffice process is left and launch
-`soffice -headless "-accept=socket,port=2002;urp;"` to start openoffice in background mode.
+Abiword or Openoffice
+=====================
+Comt uses either abiword or openoffice to convert documents from ODT, MS Word, etc. to html.
+Abiword is a lighter and more performant solution. You have to add the configuration parameter `USE_ABI = True` in your settings_local.py to use Abiword. Otherwise openoffice is used.
+To use openoffice, on a development setup, you should make sure no openoffice process is left and launch `soffice -headless "-accept=socket,port=2002;urp;"` to start openoffice in background mode.
 
 Comt uses
 ============
@@ -141,8 +143,24 @@ Icons
 
 FAQ
 ====
-Q: I get 'import error' when starting the server (step #9)
-R: Make sure you installed all required python dependencies
+Q1: How can I check the distribution for errors (libraries etc.):
+R1: After configuring a database and access in your settings_local.py, you can launch the unit test suite with the following command: `./bin/django test cm`
+
+Q2: I'm getting the following error when launching the migrate command:
+`
+line 62, in handle
+    __import__(app_name + '.management', {}, {}, [''])
+  File "/usr/lib/python2.5/site-packages/uno.py", line 300, in _uno_import
+    raise ImportError( "type "+ name + "." +x + " is unknown" )
+ImportError: type django.contrib.sessions.management. is unknown
+`
+R2: This is due to a bug in uno (python openoffice bridge) that monkey patches the import system and messes with django's dynamic module loading system. A workaround to launch the migrate command is to set: `UNO_IMPORT = False` in file src/cm/converters/oo_converters.py and then to launch the migrate command. Set the value back to True and relaunch the server to use openoffice as a conversion backend.
+
+Q3: When using  co-ment Drupal module, I want that the name of commentators to be the same as the Drupal username
+R3: For this feature (commentator name = drupal login name) to be available, a configuration parameter should be set in settings_local.py: `DECORATED_CREATORS = True`
+
+Q4: I get 'import error' when starting the server (step #9)
+R4: Make sure you installed all required python dependencies
                       
 Community
 =========

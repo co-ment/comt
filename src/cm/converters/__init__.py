@@ -3,7 +3,7 @@ import chardet
 from cm.utils.string_utils import to_unicode 
 import re
 import os
-from cm.converters.oo_converters import extract_css_body
+from oo_converters import extract_css_body
 
 
 # TODO: move that in text_base: save images
@@ -18,16 +18,26 @@ def _convert_from_mimetype(input, mime_type, format):
     attachs = []
     attachs_dir = None
     ##############################
+    # OO/MS-Word
     if mime_type in ['application/vnd.oasis.opendocument.text',
                      'application/msword',
+                     'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
                      ]:
         
-        html_input, xhtml_input, attachs = convert_oo_to_html_and_xhtml(input)
-        if format == 'html':
+        from cm.cm_settings import USE_ABI
+        if USE_ABI:
+          from abi_converters import AbiFileConverter
+          converter = AbiFileConverter()
+          html_input, attachs = converter.convert_to_html(input)
+          html_input = re.sub(r' awml:style="[^"]*"', '', html_input)
+          converted_input = pandoc_convert(html_input, 'html', format)
+        else:
+          html_input, xhtml_input, attachs = convert_oo_to_html_and_xhtml(input)
+          if format == 'html':
                 _not_used_css, converted_input = extract_css_body(xhtml_input)
                 #converted_input = xhtml_input
         
-        converted_input = pandoc_convert(html_input, 'html', format)
+          converted_input = pandoc_convert(html_input, 'html', format)
         
     ##############################
     # latex
