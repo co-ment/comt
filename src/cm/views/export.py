@@ -5,6 +5,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext as _, ugettext_lazy
 from cm.converters.pandoc_converters import pandoc_convert
+from cm.converters.abi_converters import AbiFileConverter
 from cm.models import Text, TextVersion, Attachment, Comment
 import mimetypes
 import simplejson
