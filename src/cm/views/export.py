@@ -31,6 +31,15 @@ def content_export2(request, content, title, content_format, format, use_pandoc,
         export_content = content
     else:
         if use_pandoc :
+          # markdown2pdf is buggy => convert to HTML and use abiword to export in PDF
+          if format == 'pdf' and USE_ABI:
+            html_content = pandoc_convert(content, content_format, 'html', full=True)
+            from cm.converters.abi_converters import AbiFileConverter
+            converter = AbiFileConverter()
+            full_content = converter.add_html_header(html_content)
+            fix_content = do_tidy(full_content)
+            export_content = converter.convert_from_html(fix_content, format)
+          else:
             export_content = pandoc_convert(content, content_format, format, full=True)
         else :
             fix_content = content
