@@ -198,7 +198,6 @@ msgstr ""
 "discussions auxquelles vous avez participé ?"
 
 #: media/js/client/c_sync.js:129
-#, fuzzy
 msgid "Reply notification"
 msgstr "Notification des réponses"
 
