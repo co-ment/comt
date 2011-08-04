@@ -610,7 +610,7 @@ f_updateFilterData = function(newFilterData) {
   $("#filter_name").append($("<option name='c_f2_user_all' value=''>" + all + "</option>")) ;
   for (var  i=0, ilen=newFilterData['names'].length; i < ilen ; i++) {
     var item = newFilterData['names'][i] ;
-    $("#filter_name").append($("<option name='c_f2_user_"+ item.name +"' value='"+ item.name +"'>" + item.name +"("+item.nb_comments+")</option>")) ;
+    $("#filter_name").append($("<option name='c_f2_user_"+ item.name +"' value='"+ item.name +"'>" + item.name +" ("+item.nb_comments+")</option>")) ;
   }
   
   $("#filter_name option[name="+selectedNameOption+"]").attr("selected", true);
@@ -641,7 +641,7 @@ f_updateFilterData = function(newFilterData) {
   $("#filter_tag").append($("<option name='c_f2_tag_all' value=''>" + all + "</option>")) ;
   for (var  i=0, ilen=newFilterData['tags'].length; i < ilen ; i++) {
     var item = newFilterData['tags'][i] ;
-    $("#filter_tag").append($("<option name='c_f2_tag_"+ item.name +"' value='"+ item.name +"'>" + item.name +"("+item.nb_comments+")</option>")) ;
+    $("#filter_tag").append($("<option name='c_f2_tag_"+ item.name +"' value='"+ item.name +"'>" + item.name +" ("+item.nb_comments+")</option>")) ;
   }
   $("#filter_tag option[name="+selectedTagOption+"]").attr("selected", true);
   
@@ -653,7 +653,7 @@ f_updateFilterData = function(newFilterData) {
   $("#filter_state").append($("<option name='c_f2_state_all' value=''>" + all + "</option>")) ;
   for (var  i=0, ilen=newFilterData['states'].length; i < ilen ; i++) {
     var item = newFilterData['states'][i] ;
-    $("#filter_state").append($("<option name='c_f2_state_"+ item.state +"' value='"+ item.state +"'>" + gettext(item.state) +"("+item.nb_comments+")</option>")) ;
+    $("#filter_state").append($("<option name='c_f2_state_"+ item.state +"' value='"+ item.state +"'>" + gettext(item.state) +" ("+item.nb_comments+")</option>")) ;
   }
   $("#filter_state option[name="+selectedStateOption+"]").attr("selected", true);
 } ;
