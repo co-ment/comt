@@ -767,7 +767,7 @@ msgstr "Textes"
 
 #: templates/site/help.html:34
 msgid "co-ment 2 collaboration is based on assigning roles for users."
-msgstr ""
+msgstr "La collaboration est basée sur l'assignation de rôles aux utilisateurs dans co-ment 2."
 
 #: templates/site/help.html:34
 #: templates/site/help.html.py:45
@@ -776,7 +776,8 @@ msgstr "Cliquer ici pour plus de détails"
 
 #: templates/site/help.html:34
 msgid "The basic assumption in the collaboration model is that some users will have an overall management role, while others will have roles that are defined in relationship with texts or a given text."
-msgstr ""
+msgstr "L'hypothèse de base de ce modèle de collaboration est que certains utilisateurs auront un rôle de gestion, alors que les autres auront un role défini en relation avec les textes."
+
 
 #: templates/site/help.html:40
 msgid "Moderation"
@@ -786,23 +787,24 @@ msgstr "Modération"
 msgid ""
 "Comment moderation is the process of editing/removing comments from a text. The moderator role is the collection of permissions required to edit/remove a comment submitted by users of the workspace.\n"
 "    Although this is not the default, you can require comments to be approved before becoming public by unticking the \"a posteriori moderation\" box in the settings for the text. If you do so, comments from users with an Observer or Commentator role won't be visible to users who do not have moderation permissions before a user (with at least Moderator role) approves them."
-msgstr ""
+msgstr "La modération des commentaires est le processus suivant lequel les commentaires sont édités ou retirés d'un texte. Le rôle de modérateur est la collection des permissions requises pour éditer/retirer a commentaire proposés par les utilisateurs de l'espace de travail. "
+"    Bien que ce ne soit pas le comportement par défaut, vous pouvez imposer que les commentaires soient approuvés avant de devenir publics en décochant la case « Modération a posteriori » dans les paramètres du texte. Dans ce cas les commentaires des utilisateurs dotés du rôle Observateur ou Commentateur ne seront pas visibles aux utilisateurs dépourvu des droits de modération tant qu'aucun utilisateur doté (au moins) du rôle Moderateur ne les approuve."
 
 #: templates/site/help.html:44
 msgid "States"
-msgstr "Etats"
+msgstr "États"
 
 #: templates/site/help.html:45
 msgid "co-ment uses states to implement moderation policies."
-msgstr ""
+msgstr "co-ment utilise les états pour mettre en place les politiques de modération."
 
 #: templates/site/help.html:45
 msgid "Unapproved or pending comments are visible only to Managers, Editors and Moderators. Approved comments are visible to users with any role. The pending state exists only when a priori moderation is selected in settings."
-msgstr ""
+msgstr "Les commentaires non approuvés ou en attente ne sont visible que des Gestionnaires, Éditeurs et Modérateurs. Les commentaires approuvés sont visible par tous les utilisateurs. L'état « en attente » n'existe que quand la modération a priori est activée dans les paramètres."
 
 #: templates/site/help.html:48
 msgid "We believe that an adequate use of tags is sufficient to implement a variety of workflows for processing comments. You can use tags for signalling TODOs or decisions on future revisions. You can also use them to classify comments according to the issues or topics they address."
-msgstr ""
+msgstr "Nous pensons qu'une utilisation adéquate des tags est suffisante pour implémenter une large variété de processus de travail dans la gestion des commentaires. Vous pouvez utiliser les tags pour signaler des TODO où des décisions à prendre pour de futures révisions. Vous pouvez aussi les utiliser pour classer les commentaires suivant leur but ou leur sujet. "
 
 #: templates/site/help.html:50
 msgid "Linking to a comment"
@@ -810,31 +812,31 @@ msgstr "Lien vers un commentaire"
 
 #: templates/site/help.html:51
 msgid "You may find yourself needing to link to a comment from another one. In such case you can do so by copying your target comment's permalink that shows up when you hover over the paragraph (&#182;) sign at the end of the comment title."
-msgstr ""
+msgstr "Vous pouvez vouloir lier un commentaire à un autre. Dans ce cas, vous pouvez recopier le permalien du commentaire ciblé. Ce permalien apparaît lorsque vous passez la souris sur le symbole de pragraphe (&#182;) situé à la fin du titre d'un commentaire."
 
 #: templates/site/help.html:53
 msgid "Scope"
-msgstr ""
+msgstr "Portée"
 
 #: templates/site/help.html:54
 msgid "The scope of the comment is the part of the text to which it applies. A comment's scope can be modified by anyone who has a role allowing to modify the comment."
-msgstr ""
+msgstr "La portée d'un commentaire est la portion de texte sur lequel il s'applique. La portée d'un commentaire peut être modifiée par tout utilisateur ayant un rôle permettant l'édition d'un commentaire."
 
 #: templates/site/help.html:56
 msgid "Keeping your comments across versions"
-msgstr ""
+msgstr "Conservation des commentaires entre les versions"
 
 #: templates/site/help.html:57
 msgid "When you create a new version of the text, comments are duplicated. In case the text edition did not change the scope of the comment, it will be kept \"as is\". If the text of the comment scope has been modified then a decision has to be made regarding the conservation of such comments in the new version: you'll be given a choice of either keep them in the new version as \"detached\" from the text (they do not have a scope in the new version's but are still visible when browsing, and you can give them a new scope) or simply removed from the new version."
-msgstr ""
+msgstr "Lorsque vous créez une nouvelle version d'un texte, les commentaires sont dupliqués. Dans le cas où l'édition du texte n'a pas modifié la portée d'un commentaire, ce dernier sera conservé tel quel. Si par contre le texte auquel le commentaire se rapportait a été modifié, une décision doit être prise : le choix vous sera donné soit de garder ces commentaires dans la nouvelle version mais « détachés » du texte (ils n'ont plus alors de portée connue mais restent visibles, et vous pouvez alors leur donner une nouvelle portée), soit de supprimer ces commentaires dans la nouvelle version."
 
 #: templates/site/help.html:63
 msgid "Email notification"
-msgstr "Notification par email"
+msgstr "Notification par courriel"
 
 #: templates/site/help.html:64
 msgid "Email notifications are a way for users to be informed by email when a new comment is added on a text or a text is edited and a new version gets created."
-msgstr ""
+msgstr "Les notifications par courriel sont un moyen pour les utilisateurs d'être informés dans leur boîte à lettre électronique quand un nouveau commentaire est ajouté à un texte, ou qu'un texte est édité au point d'en créer une nouvelle version."
 
 #: templates/site/help.html:67
 msgid "Web feed definition on Wikipedia"
@@ -850,7 +852,7 @@ msgstr "Flux privé et public"
 
 #: templates/site/help.html:70
 msgid "The public feed includes all the events publically accessible on the workspace or a specific text. The private feed includes all events: do not publicize it to people who are not registered in your workspace unless you really want them to know what's happening in it."
-msgstr ""
+msgstr "Le flux public inclue tous les évènements publiquement accessibles d'un espace de travail ou d'un texte. Le flux privé comporte lui tous les évènements : ne le rendez pas accessible aux personnes non membre de votre espace de travail à moins que vous ne vouliez les informer de ce qui s'y passe à l'intérieur."
 
 #: templates/site/help.html:72
 msgid "Text embedding"
@@ -858,15 +860,15 @@ msgstr "Encapsulation du texte"
 
 #: templates/site/help.html:73
 msgid "You can embed your text into a page of your own website. Visitors will be able to add comments without leaving your website if the anonymous users' roles on the text allow it. For a proper test condition when embedding in your own site, in particular for experiencing links referencing comments in the same or different text, be sure your are not logged into your workspace in another tab of your browser."
-msgstr ""
+msgstr "Vous pouvez encapsuler votre texte dans une page de votre propre site web. Les visiteurs pourront y déposer des commentaires sans quitter votre site si les utilisateurs anonymes y sont autorisés. Pour de bonnes conditions de test lors de l'encapsulation d'un texte, en particulier concernant les liens des commentaires, assurez-vous de ne pas être logé dans votre espace de travail dans un autre onglet de votre navigateur."
 
 #: templates/site/help.html:80
 msgid "Roles are predefined sets of permissions."
-msgstr ""
+msgstr "Les rôles sont des ensembles prédéfinis de permissions."
 
 #: templates/site/help.html:81
 msgid "A text is visible to the public (non-logged-in visitors, aka anonymous users) only if anonymous users are given a role on the text."
-msgstr ""
+msgstr "Un texte est visible du public (visiteurs non authentifiés, donc utilisateurs anonymes) seulement si les utilisateurs anonymes sont dotés d'un rôle sur le texte en question."
 
 #: templates/site/help.html:82
 #: templates/site/text_share.html:88
@@ -875,7 +877,7 @@ msgstr "Rôle sur le texte"
 
 #: templates/site/help.html:83
 msgid "A text role is a role that is set for a specific user on a specific text. It can be used to override a possibly existing workspace-level role or to give a user a role on a text (and not on every text in the workspace)."
-msgstr ""
+msgstr "Un rôle sur un texte est un ensemble de permission pour un utilisateur donné sur un texte donné. Le rôle peut être utilisé pour outrepasser les permissions déjà mises en place au niveau de l'espace de travail, ou pour donner un rôle sur un texte (et non sur tous les textes de l'espace de travail)."
 
 #: templates/site/help.html:84
 #: views/site.py:185
@@ -884,7 +886,7 @@ msgstr "Modèle des rôles"
 
 #: templates/site/help.html:85
 msgid "A role model is a role set useful in a specific use case. When you set up a co-ment service, you have to select a role model. The default model addresses most cases. A specialized role model such as \"teacher\" includes specific roles making in this particular case possible for comments to be privately shared between a teacher and each student."
-msgstr ""
+msgstr "Un modèle de rôles est un ensemble de rôles prédéfinis, répondant à un cas d'usage anticipé. Lorsque vous installez un co-ment, il vous est demandé de choisir un modèle de rôles. Le modèle par défaut convient dans la plupart des cas. Les modèles spécialisés, comme « professeur », incluent des rôles particuliers permettant, dans ce cas particulier, que des commentaires soient partagés seulement entre un professeur et un étudiant."
 
 #: templates/site/help.html:91
 msgid "Create or upload?"
@@ -892,7 +894,7 @@ msgstr "Créer ou charger ?"
 
 #: templates/site/help.html:92
 msgid "There are 3 main ways to produce a text in co-ment. If you start from scratch, create your text in markdown format. If you start from an existing file upload it to a markdown format. If you start from a Web page, create a text with HTML as format, and copy and paste the full Web page into the editor."
-msgstr ""
+msgstr "Il y a 3 méthodes principales pour produire un texte avec co-ment. Si vous ne partez de rien, créez votre texte en Markdown. Si vous partez d'un texte existant, vous pouvez charger le texte vers un format Markdown. Si vous partez d'une page web, vous pouvez créer votre texte à partir de sa source HTML, ou encore copier/coller la page dans l'éditeur de documents HTML de co-ment."
 
 #: templates/site/help.html:96
 msgid "Text formats"
@@ -900,7 +902,7 @@ msgstr "Formats du texte"
 
 #: templates/site/help.html:97
 msgid "There are at this date 3 text formats: markdown (default/preferred format), HTML and RST."
-msgstr ""
+msgstr "Il y a actuellement 3 formats de texte supportés : Markdown (par défaut), HTML et RST."
 
 #: templates/site/help.html:101
 msgid "Markdown"
@@ -908,7 +910,7 @@ msgstr "Markdown"
 
 #: templates/site/help.html:102
 msgid "Unless some import needs make it preferable to use HTML, we recommend that you use markdown for creating or importing texts. Our software and Web services use the pandoc extended version of markdown."
-msgstr ""
+msgstr "À moins que d'un important besoin de mise en page HTML, nous recommandons l'utilisation du format Markdown pour la création et l'importation de texte dans co-ment. Notre logiciel utilise la version de Markdown étendue par Pandoc."
 
 #: templates/site/help.html:102
 msgid "Read more about this"
@@ -1437,7 +1439,7 @@ msgstr "Rôle"
 
 #: templates/site/user_list.html:177
 msgid "Those are non-registered users. Assign them a role to open your texts to simple visitors."
-msgstr ""
+msgstr "Ce sont des utilisateurs non enregistrés. Assignez leur un rôle pour ouvrir vos textes aux visiteurs."
 
 #: templates/site/user_mass_add.html:26
 #: templates/site/user_mass_add_text.html:29
