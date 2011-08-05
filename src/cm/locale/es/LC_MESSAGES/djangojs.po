@@ -150,15 +150,16 @@ msgid "delete"
 msgstr "borrar"
 
 #: media/js/client/c_icomment.js:26
-#, fuzzy
 msgid "show scope"
-msgstr "mostrar respuestas"
+msgstr "mostrar alcance"
 
 #: media/js/client/c_icomment.js:27
 msgid ""
 "Comment is detached: it was created on a previous version and text it "
 "applied to has been modified or removed."
 msgstr ""
+"Comentario se separa: se creó en una versión anterior y el texto que"
+"aplicado a ha sido modificado o eliminado."
 
 #: media/js/client/c_icomment.js:295
 msgid "last modified on %(date)s"
@@ -189,11 +190,12 @@ msgid ""
 "Do you want to be notified of all replies in all discussions you "
 "participated in?"
 msgstr ""
+"¿Quiere usted ser notificado de todas las respuestas en todas las discusiones "
+"que participó en?"
 
 #: media/js/client/c_sync.js:129
-#, fuzzy
 msgid "Reply notification"
-msgstr "modificación"
+msgstr "Aviso de repuesta"
 
 #: media/js/client/c_sync.js:201 media/js/client/c_sync.js.py:208
 msgid "could not save comment"
@@ -201,7 +203,7 @@ msgstr "no se pudo guardar el comentario"
 
 #: media/js/client/c_sync.js:223
 msgid "Are you sure you want to delete this comment?"
-msgstr "żEstá seguro/a de que desea borrar este comentario?"
+msgstr "¿Está seguro/a de que desea borrar este comentario?"
 
 #: media/js/client/c_sync.js:227
 msgid "could not remove comment"
@@ -241,7 +243,7 @@ msgstr "Imprimir texto"
 
 #: media/js/client/f_printDialog.js:12
 msgid "How do you want to print?"
-msgstr ""
+msgstr "¿Cómo desea imprimir?"
 
 #: media/js/client/f_printDialog.js:13
 msgid "Export text"
@@ -249,7 +251,7 @@ msgstr "Exportar texto"
 
 #: media/js/client/f_printDialog.js:13
 msgid "Choose file format"
-msgstr ""
+msgstr "Elegir el formato de archivo"
 
 #: media/js/client/f_printDialog.js:40
 msgid "using markers only, no background colors"
@@ -438,9 +440,8 @@ msgid "view all comments"
 msgstr "Ver todos los comentarios"
 
 #: media/js/site/f_text_view_frame.js:182
-#, fuzzy
 msgid "view all detached comments"
-msgstr "Ver todos los comentarios"
+msgstr "Ver comentarios desarraigados"
 
 #: media/js/site/f_text_view_frame.js:183
 msgid "toggle advance interface"
@@ -553,33 +554,34 @@ msgid ""
 "Should these comments be detached (i.e. kept with no scope) or removed from "
 "new version?"
 msgstr ""
+"¿Si estos comentarios separarse (es decir, mantenerse sin alcance) o eliminado de"
+"la nueva versión?"
 
 #: media/js/site/text_edit.js:24 media/js/site/text_edit.js.py:41
 msgid "%(nb_comments)s comment applies to text that was modified."
 msgid_plural "%(nb_comments)s comments apply to text that was modified."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(nb_comments)s comentario se aplica al texto que fue modificado."
+msgstr[1] "%(nb_comments)s comentarios se aplican al texto que fue modificado."
 
 #: media/js/site/text_edit.js:45
 msgid "(We suggest you create a new version)"
-msgstr ""
+msgstr "(Le sugerimos que cree una nueva versión)"
 
 #: media/js/site/text_edit.js:63
 msgid "You chose not to create a new version all comments will be deleted"
-msgstr ""
+msgstr "Que optó por no crear una nueva versión todos los comentarios serán eliminados"
 
 #: media/js/site/text_edit.js:65
 msgid "Do you want to continue?"
-msgstr ""
+msgstr "¿Desea continuar?"
 
 #: media/js/site/text_edit.js:98
-#, fuzzy
 msgid "Detach"
-msgstr "Buscar"
+msgstr "Separar"
 
 #: media/js/site/text_edit.js:99
 msgid "Remove"
-msgstr ""
+msgstr "Suprimir"
 
 #~ msgid "&nbsp;reply"
 #~ msgid_plural "&nbsp;replies"

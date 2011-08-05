@@ -124,19 +124,16 @@ msgid "Invitation"
 msgstr "Invitación"
 
 #: models.py:756
-#, fuzzy, python-format
 msgid "Text %(link_to_text)s edited by %(creator)s"
-msgstr "Texto %(link_to_text)s editado "
+msgstr "Texto %(link_to_text)s editado por %(creator)s"
 
 #: models.py:757
-#, fuzzy, python-format
 msgid "Text %(link_to_text)s edited (new version created) by %(creator)s"
-msgstr "Texto %(link_to_text)s editado (se ha creado una nueva versión)"
+msgstr "Texto %(link_to_text)s editado (se ha creado una nueva versión por %(creator)s)"
 
 #: models.py:758
-#, fuzzy, python-format
 msgid "Text %(link_to_text)s added by %(creator)s"
-msgstr "Texto %(link_to_text)s añadido"
+msgstr "Texto %(link_to_text)s añadido por %(creator)s"
 
 #: models.py:759
 #, python-format
@@ -144,10 +141,9 @@ msgid "Text %(link_to_text)s removed"
 msgstr "Texto %(link_to_text)s eliminado"
 
 #: models.py:760
-#, fuzzy, python-format
 msgid ""
 "Comment %(link_to_comment)s added on text %(link_to_text)s by %(creator)s"
-msgstr "Comentario %(link_to_comment)s añadido al texto %(link_to_text)s"
+msgstr "Comentario %(link_to_comment)s añadido al texto %(link_to_text)s por %(creator)s"
 
 #: models.py:761
 #, python-format
@@ -185,7 +181,6 @@ msgid "User %(username)s has activated his account"
 msgstr "El usuario %(username)s ha activado su cuenta"
 
 #: models.py:816
-#, fuzzy
 msgid "anonymous"
 msgstr "Usuarios anónimos"
 
@@ -229,11 +224,11 @@ msgstr "Inglés"
 
 #: settings.py:107
 msgid "Norwegian"
-msgstr ""
+msgstr "Noruego"
 
 #: settings.py:108
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Portugués de Brasil"
 
 #: settings.py:109
 msgid "Spanish"
@@ -241,7 +236,7 @@ msgstr "Español"
 
 #: settings.py:110
 msgid "Bulgarian"
-msgstr ""
+msgstr "Búlgaro"
 
 #: static_i18n.py:6 static_i18n.py:11
 msgid "Observer"
@@ -357,7 +352,7 @@ msgstr "Se ha producido un error"
 
 #: templates/api_doc.html:6
 msgid "API Documentation"
-msgstr ""
+msgstr "Documentación de API"
 
 #: templates/site/activate.html:10 templates/site/user_activate.html:10
 #: views/user.py:330
@@ -400,13 +395,12 @@ msgstr "Acciones"
 #: templates/site/text_create_content.html:28
 #: templates/site/text_create_upload.html:26 templates/site/text_list.html:40
 #: templates/site/layout/header.html:10
-#, fuzzy
 msgid "Create a text"
 msgstr "Escribir un texto"
 
 #: templates/site/dashboard.html:48
 msgid "Write a text inside your browser or paste a content from your clipboard"
-msgstr ""
+msgstr "Escribir un texto dentro de tu navegador o pegar lo desde el portapapeles"
 
 #: templates/site/dashboard.html:49 templates/site/text_create_content.html:30
 #: templates/site/text_create_upload.html:4
@@ -420,9 +414,10 @@ msgid ""
 "Upload a document from your computer (Text document, Open Format document, "
 "Word document)"
 msgstr ""
+"Cargar un documento desde su ordenador (documentos Texto, OpenDocument format, " 
+"Word doc.)"
 
 #: templates/site/dashboard.html:50
-#, fuzzy
 msgid "Invite user"
 msgstr "Invitar a un usuario"
 
@@ -526,10 +521,9 @@ msgstr[0] "%(nb_comments)s Comentario"
 msgstr[1] "%(nb_comments)s Comentarios"
 
 #: templates/site/dashboard.html:202 templates/site/macros/text_meta.html:8
-#, fuzzy, python-format
 msgid "1 version"
 msgid_plural "%(versions_number)s versions"
-msgstr[0] "Versiones"
+msgstr[0] "1 version"
 msgstr[1] "Versiones"
 
 #: templates/site/dashboard.html:208 templates/site/text_list.html:223
@@ -579,7 +573,6 @@ msgid "comments"
 msgstr "comentarios"
 
 #: templates/site/dashboard.html:270
-#, fuzzy
 msgid "users"
 msgstr "usuarios"
 
@@ -601,7 +594,6 @@ msgid "created %(duration)s ago"
 msgstr "creado hace %(duration)s"
 
 #: templates/site/dashboard_bloc_recent_comments.html:24
-#, fuzzy, python-format
 msgid "by %(username)s"
 msgstr "por \"%(username)s\""
 
@@ -612,7 +604,7 @@ msgstr "Aún no hay ningún comentario"
 #: templates/site/followup.html:7 templates/site/macros/main_tabs.html:16
 #: templates/site/macros/text_tabs.html:22
 msgid "Followup"
-msgstr ""
+msgstr "Seguimiento"
 
 #: templates/site/followup.html:20 templates/site/help.html:66
 #: templates/site/text_followup.html:22
@@ -677,7 +669,6 @@ msgid "Subscribe to workspace notifications"
 msgstr "Suscribirse a los avisos del espacio de trabajo"
 
 #: templates/site/followup.html:62
-#, fuzzy
 msgid ""
 "Subscribe to all replies notifications in discussions where you have "
 "participated"
@@ -688,51 +679,47 @@ msgstr ""
 #: templates/site/forgot_pw.html:6 templates/site/forgot_pw.html.py:14
 #: templates/site/forgot_pw.html:27
 msgid "Reset my password"
-msgstr ""
+msgstr "Restablecer mi contraseña"
 
 #: templates/site/forgot_pw.html:35
 msgid "This link is invalid."
-msgstr ""
+msgstr "Este enlace no es válido"
 
 #: templates/site/forgot_pw.html:40 templates/site/login_form.html:21
 msgid "Forgot password?"
-msgstr ""
+msgstr "¿ Olvidó su contraseña ?"
 
 #: templates/site/help.html:16
 msgid "General Presentation"
-msgstr ""
+msgstr "Presentación general"
 
 #: templates/site/help.html:18
 msgid "co-ment is a web based text annotation system."
-msgstr ""
+msgstr "co-ment es un web basado sistema de anotación de texto."
 
 #: templates/site/help.html:20
 msgid "Glossary"
-msgstr ""
+msgstr "Glossario"
 
 #: templates/site/help.html:22
-#, fuzzy
 msgid "Contents"
 msgstr "Contenido"
 
 #: templates/site/help.html:24 templates/site/help.html.py:30
 #: templates/site/help.html:33
 msgid "Collaboration"
-msgstr ""
+msgstr "Colaboración"
 
 #: templates/site/help.html:25 templates/site/help.html.py:37
-#, fuzzy
 msgid "Comments"
-msgstr "comentarios"
+msgstr "Comentarios"
 
 #: templates/site/help.html:26 templates/site/help.html.py:60
-#, fuzzy
 msgid "Notification and feeds"
 msgstr "Avisos"
 
 #: templates/site/help.html:27 templates/site/help.html.py:77
 #: templates/site/help.html:79
-#, fuzzy
 msgid "Roles"
 msgstr "Perfil"
 
@@ -743,11 +730,11 @@ msgstr "Textos"
 
 #: templates/site/help.html:34
 msgid "co-ment 2 collaboration is based on assigning roles for users."
-msgstr ""
+msgstr "co-ment 2 colaboración es basada en la asignación de perfiles a los usarios."
 
 #: templates/site/help.html:34 templates/site/help.html.py:45
 msgid "Click here for more details"
-msgstr ""
+msgstr "Clic aquí para más detalles"
 
 #: templates/site/help.html:34
 msgid ""
@@ -755,9 +742,11 @@ msgid ""
 "an overall management role, while others will have roles that are defined in "
 "relationship with texts or a given text."
 msgstr ""
+"El supuesto básico en el modelo de colaboración es que algunos usuarios se han hecho"
+"una función de gestión global, mientras que otros tienen funciones que se definen en"
+"la relación con los textos o un texto determinado."
 
 #: templates/site/help.html:40
-#, fuzzy
 msgid "Moderation"
 msgstr "Moderador"
 
@@ -773,15 +762,23 @@ msgid ""
 "moderation permissions before a user (with at least Moderator role) approves "
 "them."
 msgstr ""
+"La moderación de comentarios es el proceso de edición / eliminación de los comentarios de un texto. "
+"El papel del moderador es la colección de los permisos necesarios para editar / eliminar "
+"un comentario enviado por los usuarios del espacio de trabajo. \n"
+"    Aunque no esta la predeterminada, puede exigir que las observaciones que se "
+"aprobada antes de convertirse en público deshabilitando el \"a posteriori moderación\" "
+"en la configuración de el texto. Si lo hace, los comentarios de los usuarios con un "
+"papel de Observador o Comentarista no será visible para los usuarios que no tienen "
+"permisos de moderación antes de que un usuario (con al menos el papel de Moderador) aprueba "
+"ellos. "
 
 #: templates/site/help.html:44
-#, fuzzy
 msgid "States"
-msgstr "Guardar"
+msgstr "Estatos"
 
 #: templates/site/help.html:45
 msgid "co-ment uses states to implement moderation policies."
-msgstr ""
+msgstr "co-ment utilisa estados para poner en práctica las políticas de moderación."
 
 #: templates/site/help.html:45
 msgid ""
@@ -789,6 +786,9 @@ msgid ""
 "Moderators. Approved comments are visible to users with any role. The "
 "pending state exists only when a priori moderation is selected in settings."
 msgstr ""
+"No aprobados o pendientes comentarios son visibles sólo a Directores, Editores y"
+"Moderadores. Aprobado comentarios son visibles para los usuarios con cualquier papel. El"
+"pendiente estado sólo existe cuando una moderación a priori es seleccionado en la configuración."
 
 #: templates/site/help.html:48
 msgid ""
@@ -797,11 +797,14 @@ msgid ""
 "or decisions on future revisions. You can also use them to classify comments "
 "according to the issues or topics they address."
 msgstr ""
+"Creemos que un uso adecuado de las etiquetas es suficiente para poner en práctica una gran variedad"
+"de los flujos de trabajo para el procesamiento de los comentarios. Puede utilizar las etiquetas de señalización TODO"
+"o las decisiones sobre las futuras revisiones. También se pueden utilizar para clasificar a los comentarios"
+"de acuerdo a los asuntos o temas que tratan."
 
 #: templates/site/help.html:50
-#, fuzzy
 msgid "Linking to a comment"
-msgstr "Puede editar comentarios"
+msgstr "Enlace a un comentario"
 
 #: templates/site/help.html:51
 msgid ""
@@ -810,10 +813,13 @@ msgid ""
 "when you hover over the paragraph (&#182;) sign at the end of the comment "
 "title."
 msgstr ""
+"Usted puede necesitar de conectar un comentario a un otro. En este"
+"caso lo puede hacer copiando el permalink del comentario que se muestra"
+"cuando se pasa sobre el párrafo (&#182;) firme al final del título del comentario."
 
 #: templates/site/help.html:53
 msgid "Scope"
-msgstr ""
+msgstr "Alcance"
 
 #: templates/site/help.html:54
 msgid ""
@@ -821,10 +827,13 @@ msgid ""
 "comment's scope can be modified by anyone who has a role allowing to modify "
 "the comment."
 msgstr ""
+"El alcance de un comentario es la parte del texto al que se aplica. El "
+"alcance puede ser modificado por cualquiera que tenga un papel que permite modificar "
+"el comentari. "
 
 #: templates/site/help.html:56
 msgid "Keeping your comments across versions"
-msgstr ""
+msgstr "Mantener sus comentarios a través de versiones"
 
 #: templates/site/help.html:57
 msgid ""
@@ -837,9 +846,16 @@ msgid ""
 "but are still visible when browsing, and you can give them a new scope) or "
 "simply removed from the new version."
 msgstr ""
+"Cuando se crea una nueva versión del texto, los comentarios están duplicados. En el caso "
+"la edición de texto no se modificó el alcance del comentario, se va a mantener "
+"\"como es\". Si el texto del alcance del comentario ha sido modificado "
+"una decisión tiene que ser hecho con respecto a la conservación de dichos comentarios en "
+"la nueva versión : se le dará una opción de mantenerlos en la nueva versión "
+"como \"independiente\" del texto (que no tienen un alcance en la nueva versión "
+"pero todavía son visibles cuando se buscan, y se les puede dar un nuevo ámbito) o "
+"simplemente se retira de la nueva versión."
 
 #: templates/site/help.html:63
-#, fuzzy
 msgid "Email notification"
 msgstr "Avisos de correo electrónico"
 
@@ -849,21 +865,24 @@ msgid ""
 "comment is added on a text or a text is edited and a new version gets "
 "created."
 msgstr ""
+"Las notificaciones por correo electrónico son una manera para los usuarios a ser informados por correo electrónico cuando un nuevo"
+"comentario se añade en un texto o un texto se edita y se obtiene una nueva versión."
 
 #: templates/site/help.html:67
 msgid "Web feed definition on Wikipedia"
-msgstr ""
+msgstr "Web feed definición en la Wikipedia"
 
-#: templates/site/help.html:67
+#: template/site/help.html:67
 msgid ""
 "You can subscribe to the feed for a specific text or to a global feed for "
 "the full workspace."
 msgstr ""
+"Usted puede suscribirse a la fuente de un texto específico o a una fuente global de"
+"el espacio de trabajo completo."
 
 #: templates/site/help.html:69
-#, fuzzy
 msgid "Public and private feeds"
-msgstr "Respuesta privada"
+msgstr "Fuentes públicas y privadas"
 
 #: templates/site/help.html:70
 msgid ""
@@ -872,10 +891,14 @@ msgid ""
 "publicize it to people who are not registered in your workspace unless you "
 "really want them to know what's happening in it."
 msgstr ""
+"La alimentación pública incluye todos los eventos de acceso público en el "
+"área de trabajo o un texto específico. La alimentación incluye todos los eventos privados: no "
+"darlo a conocer a las personas que no están registrados en su área de trabajo a menos que usted "
+"realmente quiero que sepan lo que está pasando en ella. "
 
 #: templates/site/help.html:72
 msgid "Text embedding"
-msgstr ""
+msgstr "Texto incrustación"
 
 #: templates/site/help.html:73
 msgid ""
@@ -886,21 +909,28 @@ msgid ""
 "the same or different text, be sure your are not logged into your workspace "
 "in another tab of your browser."
 msgstr ""
+"Se puede integrar el texto en una página de su propio sitio web. Los visitantes serán "
+"capaces de agregar comentarios sin moverse de su sitio web si el perfil de usuario anónimo "
+"le permite para este texto. Para una condición de prueba adecuado al incrustar en "
+"su propio sitio, en particular, para disfrutar de los enlaces de referencia en los comentarios "
+"el texto mismo o diferente, asegúrese de que no está conectado a su espacio de trabajo "
+"en otra pestaña del navegador."
 
 #: templates/site/help.html:80
 msgid "Roles are predefined sets of permissions."
-msgstr ""
+msgstr "Los roles son conjuntos predefinidos de permisos."
 
 #: templates/site/help.html:81
 msgid ""
 "A text is visible to the public (non-logged-in visitors, aka anonymous "
 "users) only if anonymous users are given a role on the text."
 msgstr ""
+"Un texto es visible para el público (sin entrar en los visitantes, también conocido como usuarios "
+"anónimos) sólo si los usuarios anónimos se les da un papel en el texto."
 
 #: templates/site/help.html:82 templates/site/text_share.html:88
-#, fuzzy
 msgid "Text role"
-msgstr "Nivel del perfil del texto"
+msgstr "Nivel de papel del texto"
 
 #: templates/site/help.html:83
 msgid ""
@@ -908,6 +938,9 @@ msgid ""
 "can be used to override a possibly existing workspace-level role or to give "
 "a user a role on a text (and not on every text in the workspace)."
 msgstr ""
+"Una de las funciones de texto es una función que se establece para un usuario específico en un texto específico. "
+"puede ser utilizado para anular un posible espacio de trabajo existentes a nivel de papel o de dar "
+"a un usuario un papel sobre un texto (y no en todos los textos en el espacio de trabajo)."
 
 #: templates/site/help.html:84 views/site.py:185
 msgid "Role model"
@@ -921,10 +954,15 @@ msgid ""
 "specific roles making in this particular case possible for comments to be "
 "privately shared between a teacher and each student."
 msgstr ""
+"Un modelo de perfiles es establecer un papel útil en un caso de uso específico. Cuando se configura una "
+"servicio de co-ment, tiene que seleccionar un modelo de perfiles. El modelo por defecto "
+"anda con la mayoría de los casos. Un modelo de función especializada, como \"maestro\" incluye "
+"funciones específicas que en este caso es posible la formulación de observaciones "
+"privada compartida entre un profesor y cada alumno."
 
 #: templates/site/help.html:91
 msgid "Create or upload?"
-msgstr ""
+msgstr "¿ Crear o subir ?"
 
 #: templates/site/help.html:92
 msgid ""
@@ -934,21 +972,27 @@ msgid ""
 "text with HTML as format, and copy and paste the full Web page into the "
 "editor."
 msgstr ""
+"Hay tres maneras principales de producir un texto en co-ment. Si se comienza desde "
+"cero, crear el texto en formato Wiki. Si se parte de un documiento existente "
+"subir un archivo a un formato de rebajas. Si se parte de una página Web, crear una "
+"el texto con HTML como el formato, y copiar y pegar la página web completa en el "
+"editor."
 
 #: templates/site/help.html:96
-#, fuzzy
 msgid "Text formats"
-msgstr "Avisos del texto"
+msgstr "Formatos de texto"
 
 #: templates/site/help.html:97
 msgid ""
 "There are at this date 3 text formats: markdown (default/preferred format), "
 "HTML and RST."
 msgstr ""
+"Por el momento, hay tres formatos de texto : markdown (por defecto / formato preferido), "
+"HTML y RST."
 
 #: templates/site/help.html:101
 msgid "Markdown"
-msgstr ""
+msgstr "Markdown"
 
 #: templates/site/help.html:102
 msgid ""
@@ -956,10 +1000,13 @@ msgid ""
 "you use markdown for creating or importing texts. Our software and Web "
 "services use the pandoc extended version of markdown."
 msgstr ""
+"A menos que las necesidades de importación hacen preferible usar HTML, se recomienda"
+"utilizar markdown para la creación o la importación de textos. Nuestro software y Web"
+"servicios uso la versión extendida de Pandoc markdown."
 
 #: templates/site/help.html:102
 msgid "Read more about this"
-msgstr ""
+msgstr "Lea mas sobre esto"
 
 #: templates/site/login.html:8 templates/site/login_form.html:19
 #: templates/site/layout/header.html:17
@@ -1009,7 +1056,7 @@ msgstr "Perfil"
 
 #: templates/site/profile.html:19 templates/site/profile_pw.html:19
 msgid "Password"
-msgstr ""
+msgstr "Contraseña"
 
 #: templates/site/profile.html:33 templates/site/profile_pw.html:33
 #: templates/site/text_create_content.html:47
@@ -1028,7 +1075,7 @@ msgstr "Registro de %(wname)s"
 #: templates/site/reset_pw.html:6 templates/site/reset_pw.html.py:14
 #: templates/site/reset_pw.html:24
 msgid "Reset your password"
-msgstr ""
+msgstr "Restablecer su contraseña"
 
 #: templates/site/settings.html:5 templates/site/settings_design.html:5
 #: templates/site/text_list.html:183 templates/site/macros/main_tabs.html:14
@@ -1037,13 +1084,12 @@ msgid "Settings"
 msgstr "Ajustes"
 
 #: templates/site/settings.html:21 templates/site/settings_design.html:21
-#, fuzzy
 msgid "General"
-msgstr "Genérico"
+msgstr "General"
 
 #: templates/site/settings.html:23 templates/site/settings_design.html:23
 msgid "Appearance"
-msgstr ""
+msgstr "Apariencia"
 
 #: templates/site/settings.html:38 templates/site/settings_design.html:40
 msgid ""
@@ -1054,9 +1100,8 @@ msgstr ""
 "(excepto los administradores) se reiniciarán!"
 
 #: templates/site/settings_design.html:31
-#, fuzzy
 msgid "Delete logo"
-msgstr "Borrar"
+msgstr "Borrar logotipo"
 
 #: templates/site/text_create_content.html:26
 #: templates/site/text_create_upload.html:24 templates/site/text_list.html:37
@@ -1068,33 +1113,36 @@ msgid "Text notifications"
 msgstr "Avisos del texto"
 
 #: templates/site/text_embed.html:25
-#, fuzzy
 msgid "Embed text"
-msgstr "Puede editar el texto"
+msgstr "Incorporar texto"
 
 #: templates/site/text_embed.html:26
 msgid "Copy this code into your site to display text with comments."
-msgstr ""
+msgstr "Copia este código en su sitio para mostrar el texto con sus comentarios."
 
 #: templates/site/text_embed.html:26
 msgid ""
 "Users will also be able to add comments from your site depending on "
 "anonymous users' roles."
 msgstr ""
+"Los usuarios también serán capaces de añadir comentarios de su sitio en función del "
+"papel de los usuarios anónimos."
 
 #: templates/site/text_embed.html:36
 msgid "Warning:"
-msgstr ""
+msgstr "Advertencia:"
 
 #: templates/site/text_embed.html:36
 msgid ""
 "You won't successfully embed the text before you give anonymous users a role "
 "allowing them to view the text."
 msgstr ""
+"No con éxito integrar el texto antes de dar a los usuarios anónimos un papel "
+"que les permite ver el texto."
 
 #: templates/site/text_followup.html:7
 msgid "Text followup"
-msgstr ""
+msgstr "Segido del texto"
 
 #: templates/site/text_followup.html:27
 #, python-format
@@ -1127,6 +1175,8 @@ msgid ""
 "You will receive text notifications because you subscribed to notifications "
 "at the workspace level"
 msgstr ""
+"Usted recibirá las notificaciones de texto porque se ha suscrito a las notificaciones "
+"al nivel de área de trabajo"
 
 #: templates/site/text_followup.html:64
 msgid "Subscribe to all text notifications"
@@ -1135,33 +1185,30 @@ msgstr "Suscribirse a todas las notificaciones del texto"
 #: templates/site/text_history.html:56
 #: templates/site/text_history_compare.html:28
 #: templates/site/text_history_version.html:28
-#, fuzzy
 msgid "Version list"
-msgstr "Versiones"
+msgstr "Lista de versiones"
 
 #: templates/site/text_history.html:59
 msgid "Compare last two versions"
-msgstr ""
+msgstr "Comparar las dos últimas versiones"
 
 #: templates/site/text_history.html:61
 #: templates/site/text_history_compare.html:37
 #: templates/site/text_history_version.html:38
 msgid "Most recent version"
-msgstr ""
+msgstr "Versión más reciente"
 
 #: templates/site/text_history.html:67
 msgid "Compare selected versions"
-msgstr ""
+msgstr "Comparar las versiones seleccionada"
 
 #: templates/site/text_history.html:77
-#, fuzzy
 msgid "Version"
-msgstr "Versiones"
+msgstr "Versión"
 
 #: templates/site/text_history.html:78
-#, fuzzy
 msgid "Selection"
-msgstr "Acciones"
+msgstr "Selección"
 
 #: templates/site/text_history.html:81 templates/site/text_list.html:139
 msgid "Author"
@@ -1169,12 +1216,11 @@ msgstr "Autor"
 
 #: templates/site/text_history.html:82
 msgid "Created"
-msgstr ""
+msgstr "Creado"
 
 #: templates/site/text_history.html:83 templates/site/text_list.html:141
-#, fuzzy
 msgid "# comments"
-msgstr "comentarios"
+msgstr "# comentarios"
 
 #: templates/site/text_history.html:105 templates/site/text_list.html:161
 msgid "View"
@@ -1183,12 +1229,11 @@ msgstr "Visualizar"
 #: templates/site/text_history.html:106
 #: templates/site/text_history_version.html:32
 msgid "Compare with previous version"
-msgstr ""
+msgstr "Diferencias con la versión anterior"
 
 #: templates/site/text_history.html:108
-#, fuzzy
 msgid "Revert to this version"
-msgstr "Volver a la versión #%(v1_nid)s:"
+msgstr "Volver a esta versión"
 
 #: templates/site/text_history.html:122 templates/site/text_list.html:82
 #: templates/site/text_list.html.py:163
@@ -1196,66 +1241,56 @@ msgid "Delete"
 msgstr "Borrar"
 
 #: templates/site/text_history.html:128
-#, fuzzy
 msgid "Are you sure you want to delete this version?"
 msgstr "¿Está seguro/a de que desea borrar este texto?"
 
 #: templates/site/text_history_compare.html:30
-#, fuzzy
 msgid "Previous modification"
-msgstr "Avisos del texto"
+msgstr "Cambios anteriores"
 
 #: templates/site/text_history_compare.html:31
 #: templates/site/text_history_compare.html:33
 #: templates/site/text_history_version.html:34
-#, fuzzy, python-format
 msgid "Version %(version_number)s"
-msgstr "version %(title)s /  #%(version_number)s"
+msgstr "versión %(version_number)s"
 
 #: templates/site/text_history_compare.html:32
-#, fuzzy, python-format
 msgid ""
 "Comparison between version #%(version_1_number)s and #%(version_2_number)s"
-msgstr "diferencias entre las versiones #%(v1number)s y #%(v2number)s"
+msgstr "Diferencias entre las versiones #%(version_1_number)s y #%(version_2_number)s"
 
 #: templates/site/text_history_compare.html:34
-#, fuzzy
 msgid "Next modification"
-msgstr "Avisos del texto"
+msgstr "Próximo cambio"
 
 #: templates/site/text_history_compare.html:44
-#, fuzzy
 msgid "No differences"
-msgstr "Preferencias"
+msgstr "No diferencias"
 
 #: templates/site/text_history_version.html:31
-#, fuzzy
 msgid "Previous version"
-msgstr "Versiones"
+msgstr "Versión anterior"
 
 #: templates/site/text_history_version.html:36
 msgid "Compare with next version"
-msgstr ""
+msgstr "Diferencias con la próxima versión"
 
 #: templates/site/text_history_version.html:37
-#, fuzzy
 msgid "Next version"
-msgstr "Versiones"
+msgstr "Próxima versión"
 
 #: templates/site/text_history_version.html:45 views/texts.py:496
 #: views/texts.py:497
-#, fuzzy, python-format
 msgid "by %(author)s"
-msgstr "autores"
+msgstr "por %(author)s"
 
 #: templates/site/text_list.html:51 templates/site/text_share.html:40
 #: templates/site/user_list.html:45
 msgid "Filter by tag:"
-msgstr ""
+msgstr "Filtrar por etiqueta :"
 
 #: templates/site/text_list.html:53 templates/site/text_share.html:42
 #: templates/site/user_list.html:47
-#, fuzzy
 msgid "All"
 msgstr "Todo"
 
@@ -1285,19 +1320,17 @@ msgstr "Actividad de la pasada semana"
 
 #: templates/site/text_list.html:158
 #: templates/site/macros/user_actions.html:13
-#, fuzzy
 msgid "tags:"
-msgstr "Etiquetas"
+msgstr "etiquetas :"
 
 #: templates/site/text_list.html:158
 #: templates/site/macros/user_actions.html:13
 #, python-format
 msgid "Filter by tag: %(tag_name)s"
-msgstr ""
+msgstr "Filtrar por etiqueta : %(tag_name)s"
 
 #: templates/site/text_list.html:162 templates/site/macros/text_tabs.html:12
 #: templates/site/macros/user_actions.html:19
-#, fuzzy
 msgid "Edit"
 msgstr "Editar"
 
@@ -1306,12 +1339,10 @@ msgid "Are you sure you want to delete this text?"
 msgstr "¿Está seguro/a de que desea borrar este texto?"
 
 #: templates/site/text_list.html:182
-#, fuzzy
 msgid "Users"
 msgstr "Usuarios"
 
 #: templates/site/text_list.html:200
-#, fuzzy
 msgid "Edit user"
 msgstr "Editar usuario"
 
@@ -1329,7 +1360,6 @@ msgstr "Lista de los usuarios"
 #: templates/site/user_mass_add.html:22
 #: templates/site/user_mass_add_text.html:6
 #: templates/site/user_mass_add_text.html:25
-#, fuzzy
 msgid "Add a new user"
 msgstr "Añadir un nuevo usuario"
 
@@ -1338,7 +1368,6 @@ msgstr "Añadir un nuevo usuario"
 #: templates/site/user_list.html:36 templates/site/user_mass_add.html:6
 #: templates/site/user_mass_add.html:24
 #: templates/site/user_mass_add_text.html:27
-#, fuzzy
 msgid "Add users in bulk"
 msgstr "Añadir usuarios masivamente"
 
@@ -1357,12 +1386,10 @@ msgid "Display suspended users"
 msgstr "Mostrar usuarios desactivados"
 
 #: templates/site/text_share.html:86 templates/site/user_list.html:132
-#, fuzzy
 msgid "User"
 msgstr "Usuario"
 
 #: templates/site/text_share.html:87
-#, fuzzy
 msgid ""
 "The 'Workspace role' is the global role that applies to every text, you can "
 "give a user a particular role on this text using the 'text role' column on "
@@ -1377,13 +1404,11 @@ msgid "Workspace role"
 msgstr "Perfil del espacio de trabajo"
 
 #: templates/site/text_share.html:101
-#, fuzzy, python-format
 msgid "This role has been overriden on this text by a text role: %(rolename)s"
 msgstr "Este perfil ha sido invalidado por el perfil local: %( rolename)s"
 
 #: templates/site/text_share.html:128 templates/site/user_edit.html:6
 #: templates/site/user_edit.html.py:24 templates/site/user_list.html:177
-#, fuzzy
 msgid "Edit anonymous users"
 msgstr "Editar usuarios anónimos"
 
@@ -1486,6 +1511,8 @@ msgid ""
 "Those are non-registered users. Assign them a role to open your texts to "
 "simple visitors."
 msgstr ""
+"Esos son usuarios no registrados. Les asigne una función para abrir sus textos a"
+"los visitantes simple."
 
 #: templates/site/user_mass_add.html:26
 #: templates/site/user_mass_add_text.html:29
@@ -1523,6 +1550,9 @@ msgid ""
 "simple textual syntax. We recommend you use the 'markown' format unless you "
 "want to paste HTML (in which case you should use the 'html' format)."
 msgstr ""
+"Markdown (o RST) son formatos estructurado permitando un formato sencillo con "
+"sintaxis textual simple. Le recomendamos que utilice el \"markown\" formato a menos que "
+"quieres pegar el código HTML (en el cuadro que se debe utilizar el \"html\" formato)."
 
 #: templates/site/macros/form_fields.html:14
 msgid ""
@@ -1532,6 +1562,11 @@ msgid ""
 "You can use the 'html' format if your text will not be edited or if you want "
 "to preserve complex formatting (tables, images, etc.)."
 msgstr ""
+"Markdown (o RST) que es un formato estructurado permite un formato sencillo con"
+"sintaxis textual simple. Le recomendamos que utilice \"markdown\" si el formato"
+"mayor de sus texto es el texto y/o si muchos se crean las revisiones del texto."
+"Usted puede usar el \"html\" formato si su texto no serán editados o si quieres"
+"conservar el formato complejas (tablas, imágenes, etc.)."
 
 #: templates/site/macros/main_tabs.html:11
 #, python-format
@@ -1545,7 +1580,7 @@ msgstr "Personas (%(nb_users)s)"
 
 #: templates/site/macros/paginator.html:5
 msgid "Previous page"
-msgstr ""
+msgstr "Página anterior"
 
 #: templates/site/macros/paginator.html:6
 #, python-format
@@ -1554,12 +1589,11 @@ msgstr "%(sindex)s-%(eindex)s de %(pcount)s"
 
 #: templates/site/macros/paginator.html:7
 msgid "Next page"
-msgstr ""
+msgstr "Próxima página"
 
 #: templates/site/macros/paginator.html:9
-#, fuzzy
 msgid "View all"
-msgstr "Visualizar"
+msgstr "Visualizar todo"
 
 #: templates/site/macros/paginator.html:11
 msgid "paginate"
@@ -1579,9 +1613,10 @@ msgid ""
 "You have attempted to leave this page. Unsaved changes will be lost. Are you "
 "sure you want to exit this page?"
 msgstr ""
+"Ha intentado salir de esta página. Cambios no guardado se perderá. ¿Es usted"
+"seguro que desea salir de esta página?"
 
 #: templates/site/macros/text_meta.html:6
-#, fuzzy, python-format
 msgid "last modified %(duration)s ago"
 msgstr "modificado hace %(duration)s"
 
@@ -1595,7 +1630,7 @@ msgstr "Versiones"
 
 #: templates/site/macros/text_tabs.html:24
 msgid "Embed"
-msgstr ""
+msgstr "Incrustar"
 
 #: templates/site/macros/user_actions.html:6
 #: templates/site/macros/user_actions.html:17
@@ -1792,7 +1827,6 @@ msgid "Workspace registration moderation"
 msgstr "Moderación del registro del espacio de trabajo"
 
 #: views/site.py:181
-#, fuzzy
 msgid ""
 "Should new users be moderated (registration will require manager's approval)?"
 msgstr ""
@@ -1808,31 +1842,32 @@ msgid "Settings saved"
 msgstr "Ajustes guardados"
 
 #: views/site.py:215
-#, fuzzy
 msgid "Workspace logo"
-msgstr "Perfil del espacio de trabajo"
+msgstr "Logotipo del espacio de trabajo"
 
 #: views/site.py:217
-#, fuzzy
 msgid "Workspace html code"
-msgstr "Perfil del espacio de trabajo"
+msgstr "HTML código del espacio de trabajo"
 
 #: views/site.py:218
 msgid ""
 "Add stylesheets etc. Warning: this code will be added to the workspace code, "
 "make sure you know what you're doing before adding something here."
 msgstr ""
+"Añadir las hojas de estilo, etc. Advertencia : este código se añadirán al código de área de trabajo, "
+"asegúrese de saber lo que estás haciendo antes de agregar algo aquí."
 
 #: views/site.py:253
 msgid ""
 "A link to reset your password has been sent to the profile email. Please "
 "check your email."
 msgstr ""
+"Un enlace para restablecer su contraseña ha sido-a sentir el perfil de correo electrónico. Por favor"
+"revise su correo electrónico."
 
 #: views/site.py:257 views/user.py:428
-#, fuzzy
 msgid "Password changed"
-msgstr "Su texto \"%(title)s\" se ha creado"
+msgstr "Contraseña cambiada"
 
 #: views/texts.py:164
 #, python-format
@@ -1845,9 +1880,8 @@ msgid "Text %(text_title)s deleted"
 msgstr "El texto %(text_title)s ha sido borrado"
 
 #: views/texts.py:220
-#, fuzzy, python-format
 msgid "Text version %(text_version_title)s deleted"
-msgstr "El texto %(text_title)s ha sido borrado"
+msgstr "La versión %(text_version_title)s ha sido borrado"
 
 #: views/texts.py:634
 msgid "Note (optional)"
@@ -1867,11 +1901,11 @@ msgstr "Crear una nueva versión de este texto (recomendado)"
 
 #: views/texts.py:654
 msgid "Keep comments (optional)"
-msgstr "mantener los comentarios (opcional)"
+msgstr "Mantener los comentarios (opcional)"
 
 #: views/texts.py:657
 msgid "Keep comments (if not affected by the edit)"
-msgstr "mantener los comentarios (si no son afectados por la edición)"
+msgstr "Mantener los comentarios (si no son afectados por la edición)"
 
 #: views/texts.py:723
 msgid "Name (optional)"
@@ -1882,9 +1916,8 @@ msgid "Email (optional)"
 msgstr "Email (opcional)"
 
 #: views/texts.py:776
-#, fuzzy, python-format
 msgid "A new version (copied from version %(version_title)s) has been created"
-msgstr "Se ha creado una nueva versión (copiada de la versión %(version_id)s)"
+msgstr "Se ha creado una nueva versión (copiada de la versión %(version_title)s)"
 
 #: views/texts.py:884 views/user.py:79 views/user.py:99
 #, python-format
@@ -1957,11 +1990,10 @@ msgstr[0] "%(nb_users)d usario añadido"
 msgstr[1] "%(nb_users)d usarios añadidos"
 
 #: views/user.py:277
-#, fuzzy
 msgid "Add user"
 msgid_plural "Add users"
 msgstr[0] "Añadir usuario"
-msgstr[1] "Añadir usuario"
+msgstr[1] "Añadir usuarios"
 
 #: views/user.py:299
 msgid "This username is already in use. Please supply a different username."
