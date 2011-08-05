@@ -1,5 +1,5 @@
 # COMT es translation
-# 
+#
 # Alejandro Martin Ortin <alejandromartinortin@gmail.com>, 2010
 # Simon Descarpentries <sid1@sopinspace.com>, 2011
 #
@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-05 13:21+0200\n"
+"POT-Creation-Date: 2011-08-05 17:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Simon Descarpentries <sid1@sopinspace.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -182,6 +182,12 @@ msgstr[1] "respuestas"
 #: media/js/client/c_reply_form.js:37
 msgid "New reply"
 msgstr "Respuesta nueva"
+
+#: media/js/client/c_scopes.js:318
+msgid " comment"
+msgid_plural " comments"
+msgstr[0] " comentario"
+msgstr[1] " comentarios"
 
 #: media/js/client/c_server_exchange.js:49
 msgid "error:"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-05 13:21+0200\n"
+"POT-Creation-Date: 2011-08-05 17:01+0200\n"
 "PO-Revision-Date: 2010-01-24 21:40-0300\n"
 "Last-Translator: Paulo Rená da Silva Santarém <pbrss@yahoo.com.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -178,6 +178,12 @@ msgstr[1] "respostas"
 #: media/js/client/c_reply_form.js:37
 msgid "New reply"
 msgstr "Nova resposta"
+
+#: media/js/client/c_scopes.js:318
+msgid " comment"
+msgid_plural " comments"
+msgstr[0] " comentário"
+msgstr[1] " comentários"
 
 #: media/js/client/c_server_exchange.js:49
 msgid "error:"

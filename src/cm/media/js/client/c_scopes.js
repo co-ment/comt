@@ -329,6 +329,13 @@ _updateCommentCounter = function (elt) {
   re = _cgetRegExp('(?:^|\\s+)c-count-(?:\\d+)', 'g');
   elt['className'] = elt['className'].replace(re, " ") ;
   CY.DOM.addClass(elt, 'c-count-'+countIds+' ') ;
+  if (countIds > 0) {
+    elt.setAttribute ('title', countIds + ngettext(' comment', ' comments', countIds));
+    if (countIds > 25) {
+      // ensure that we have the last color even if there are too many comments on the same place
+      CY.DOM.addClass(elt, 'c-count-25') ;
+    }
+  }
 } ;
 
 _convertSelectionFromCCToCS = function (sel) {

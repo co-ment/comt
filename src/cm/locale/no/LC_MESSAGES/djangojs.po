@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-05 13:21+0200\n"
+"POT-Creation-Date: 2011-08-05 17:01+0200\n"
 "PO-Revision-Date: 2010-06-30 09:45+0200\n"
 "Last-Translator: Kirill Miazine <km@krot.org>\n"
 "Language-Team: <no@li.org>\n"
@@ -183,6 +183,12 @@ msgstr[1] "svar"
 #: media/js/client/c_reply_form.js:37
 msgid "New reply"
 msgstr "Nytt svar"
+
+#: media/js/client/c_scopes.js:318
+msgid " comment"
+msgid_plural " comments"
+msgstr[0] " merknad"
+msgstr[1] " merknader"
 
 #: media/js/client/c_server_exchange.js:49
 msgid "error:"
