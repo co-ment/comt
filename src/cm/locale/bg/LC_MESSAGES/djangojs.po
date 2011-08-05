@@ -6,10 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-10 22:01+0100\n"
+"POT-Creation-Date: 2011-08-05 13:21+0200\n"
 "PO-Revision-Date: 2010-03-10 21:26+0100\n"
 "Last-Translator: RBE <qsdf>\n"
 "Language-Team: Français <kde-i18n-doc@kde.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,9 +21,109 @@ msgstr ""
 msgid "New comment"
 msgstr "Нов коментар"
 
-#: media/js/client/c_client-min.js:1 media/js/client/c_reply_form.js:37
-msgid "New reply"
-msgstr "Нов отговор"
+#: media/js/client/c_client-min.js:1 media/js/client/c_dlg_intercept.js:48
+msgid "New comment will be canceled, continue?"
+msgstr "Новия коментар ще бъде отменен искате ли да продължите?"
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_dlg_intercept.js:48
+#: media/js/client/c_dlg_intercept.js:50 media/js/client/c_dlg_intercept.js:52
+#: media/js/client/c_sync.js:223 media/js/site/text_edit.js:96
+#: media/js/site/text_edit.js.py:109
+msgid "Warning"
+msgstr "Предупреждение"
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_dlg_intercept.js:50
+msgid "Started reply will be canceled, continue?"
+msgstr "Написаният до сега коментар ще бъде изтрит, искате ли да продължите?"
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_dlg_intercept.js:52
+msgid "Started comment edition will be canceled, continue?"
+msgstr "Започнатият коментар ще бъде отменен, искате ли да продължите?"
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_icomment.js:11
+msgid "change comment state to pending"
+msgstr "Сменете на статуса на коментара на 'в очакване'"
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_icomment.js:12
+msgid "change comment state to approved"
+msgstr "Променете статуса на коментара на одобрен"
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_icomment.js:13
+msgid "change comment state to unapproved"
+msgstr "променете състоянието на коментара на неодобрен"
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_icomment.js:15
+msgid "pending"
+msgstr "в очакване"
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_icomment.js:16
+msgid "approved"
+msgstr "одобрен"
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_icomment.js:19
+msgid "show replies"
+msgstr "покажи отговорите"
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_icomment.js:23
+msgid "delete comment"
+msgstr "изтрийте коментарът"
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_icomment.js:24
+msgid "edit"
+msgstr "редактиране"
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_icomment.js:25
+msgid "delete"
+msgstr "изтрий"
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_icomment.js:26
+#: media/js/client/c_interface_forms.js:15
+msgid "close"
+msgstr "затвори"
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_icomment.js:27
+msgid "show scope"
+msgstr "афиширане на обхвата"
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_icomment.js:28
+msgid ""
+"Comment is detached: it was created on a previous version and text it "
+"applied to has been modified or removed."
+msgstr ""
+"Коментарът е отделен : той е създаден към предишна версия и текстът, към "
+"който е принадлежал е променен или изтрит. "
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_icomment.js:296
+msgid "last modified on %(date)s"
+msgstr "последна промяна на  %(date)s"
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_icomment.js:299
+msgid "Permalink to this comment"
+msgstr "Постоянен линк към този коментар"
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_icomment.js:305
+msgid "by %(name)s, created on %(date)s"
+msgstr "от %(name)s, създаден на %(date)s"
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_icomment.js:14
+msgid "cancel changing the state of this comment"
+msgstr "отменете промяната на състоянието на този коментар"
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_icomment.js:17
+msgid "unapproved"
+msgstr "неодобрен"
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_icomment.js:18
+msgid "cancel"
+msgstr "отказ"
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_icomment.js:22
+msgid "edit comment"
+msgstr "редактиране на коментарът"
+
+#: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:1
+msgid "No selection yet"
+msgstr "Все още нищо не е избрано"
 
 #: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:4
 msgid "Username:"
@@ -53,133 +154,36 @@ msgid "Comment will apply to this selection:"
 msgstr "Коментарът ще се отнася за тази част от текста:"
 
 #: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:14
-#: media/js/site/f_text_view_frame.js:407
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:407
 msgid "Save"
 msgstr "Запамети"
 
 #: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:14
-#: media/js/client/f_printDialog.js:100 media/js/site/text_edit.js:100
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:101
+#: media/js/site/text_edit.js:104
 msgid "Cancel"
 msgstr "Отказ"
-
-#: media/js/client/c_client-min.js:1 media/js/client/c_icomment.js:25
-#: media/js/client/c_interface_forms.js:15
-msgid "close"
-msgstr "затвори"
-
-#: media/js/client/c_dlg_intercept.js:48
-msgid "New comment will be canceled, continue?"
-msgstr "Новия коментар ще бъде отменен искате ли да продължите?"
-
-#: media/js/client/c_dlg_intercept.js:48 media/js/client/c_dlg_intercept.js:50
-#: media/js/client/c_dlg_intercept.js:52 media/js/client/c_sync.js:223
-#: media/js/site/text_edit.js:92 media/js/site/text_edit.js.py:105
-msgid "Warning"
-msgstr "Предупреждение"
-
-#: media/js/client/c_dlg_intercept.js:50
-msgid "Started reply will be canceled, continue?"
-msgstr "Написаният до сега коментар ще бъде изтрит, искате ли да продължите?"
-
-#: media/js/client/c_dlg_intercept.js:52
-msgid "Started comment edition will be canceled, continue?"
-msgstr "Започнатият коментар ще бъде отменен, искате ли да продължите?"
 
 #: media/js/client/c_edit_form.js:47
 msgid "Edit comment"
 msgstr "Промяна на коментар"
 
-#: media/js/client/c_icomment.js:10
-msgid "change comment state to pending"
-msgstr "Сменете на статуса на коментара на 'в очакване'"
-
-#: media/js/client/c_icomment.js:11
-msgid "change comment state to approved"
-msgstr "Променете статуса на коментара на одобрен"
-
-#: media/js/client/c_icomment.js:12
-msgid "change comment state to unapproved"
-msgstr "променете състоянието на коментара на неодобрен"
-
-#: media/js/client/c_icomment.js:13
-msgid "cancel changing the state of this comment"
-msgstr "отменете промяната на състоянието на този коментар"
-
-#: media/js/client/c_icomment.js:14
-msgid "pending"
-msgstr "в очакване"
-
-#: media/js/client/c_icomment.js:15
-msgid "approved"
-msgstr "одобрен"
-
-#: media/js/client/c_icomment.js:16
-msgid "unapproved"
-msgstr "неодобрен"
-
-#: media/js/client/c_icomment.js:17
-msgid "cancel"
-msgstr "отказ"
-
-#: media/js/client/c_icomment.js:18
-msgid "show replies"
-msgstr "покажи отговорите"
-
-#: media/js/client/c_icomment.js:19
+#: media/js/client/c_icomment.js:20
 msgid "change to:"
 msgstr "промени на:"
 
-#: media/js/client/c_icomment.js:20 media/js/site/f_text_view_frame.js:579
+#: media/js/client/c_icomment.js:21 media/js/client/f_client-min.js:1
+#: media/js/site/f_text_view_frame.js:579
 msgid "reply"
 msgid_plural "replies"
 msgstr[0] "отговор"
 msgstr[1] "отговори"
 
-#: media/js/client/c_icomment.js:21
-msgid "edit comment"
-msgstr "редактиране на коментарът"
+#: media/js/client/c_reply_form.js:37
+msgid "New reply"
+msgstr "Нов отговор"
 
-#: media/js/client/c_icomment.js:22
-msgid "delete comment"
-msgstr "изтрийте коментарът"
-
-#: media/js/client/c_icomment.js:23
-msgid "edit"
-msgstr "редактиране"
-
-#: media/js/client/c_icomment.js:24
-msgid "delete"
-msgstr "изтрий"
-
-#: media/js/client/c_icomment.js:26
-msgid "show scope"
-msgstr "афиширане на обхвата"
-
-#: media/js/client/c_icomment.js:27
-msgid ""
-"Comment is detached: it was created on a previous version and text it "
-"applied to has been modified or removed."
-msgstr ""
-"Коментарът е отделен : той е създаден към предишна версия и текстът, към "
-"който е принадлежал е променен или изтрит. "
-
-#: media/js/client/c_icomment.js:295
-msgid "last modified on %(date)s"
-msgstr "последна промяна на  %(date)s"
-
-#: media/js/client/c_icomment.js:298
-msgid "Permalink to this comment"
-msgstr "Постоянен линк към този коментар"
-
-#: media/js/client/c_icomment.js:301
-msgid "by %(name)s, created on %(date)s"
-msgstr "от %(name)s, създаден на %(date)s"
-
-#: media/js/client/c_interface_forms.js:1
-msgid "No selection yet"
-msgstr "Все още нищо не е избрано"
-
-#: media/js/client/c_server_exchange.js:48
+#: media/js/client/c_server_exchange.js:49
 msgid "error:"
 msgstr "грешка:"
 
@@ -210,235 +214,333 @@ msgstr "Сигурни ли сте, че искате да изтриете то
 msgid "could not remove comment"
 msgstr "коментарът не можа да бъде изтрит"
 
-#: media/js/client/f_message.js:17
-msgid "loading..."
-msgstr "зареждане..."
-
-#: media/js/client/f_printDialog.js:4
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:5
 msgid "print from the browser"
 msgstr "напечатване от браузъра"
 
-#: media/js/client/f_printDialog.js:5
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:6
 msgid "download html file (.html)"
 msgstr "изтегляне на html фаил (.html)"
 
-#: media/js/client/f_printDialog.js:6
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:7
 msgid "download markdown file (.mkd)"
 msgstr "Изтегляне на мarkdown фаил (.mkd)"
 
-#: media/js/client/f_printDialog.js:7
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:8
 msgid "download portable object format file (.pdf)"
 msgstr "Изтегляне на pdf файл (.pdf)"
 
-#: media/js/client/f_printDialog.js:8
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:9
 msgid "download latex file (.tex)"
 msgstr "изтегляне на latex фаил (.tex)"
 
-#: media/js/client/f_printDialog.js:9
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:10
 msgid "download open document file (.odt)"
 msgstr "Изтегляне на open файл (.odt)"
 
-#: media/js/client/f_printDialog.js:12
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:13
 msgid "Print text"
 msgstr "Отпечатване на текстa"
 
-#: media/js/client/f_printDialog.js:12
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:13
 msgid "How do you want to print?"
 msgstr "Как искате да напечатате текста?"
 
-#: media/js/client/f_printDialog.js:13
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:14
 msgid "Export text"
 msgstr "Експортиране на текст"
 
-#: media/js/client/f_printDialog.js:13
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:14
 msgid "Choose file format"
 msgstr "Изберете формат на файл"
 
-#: media/js/client/f_printDialog.js:40
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:41
 msgid "using markers only, no background colors"
 msgstr "използване само на маркери, без цвят на фона"
 
-#: media/js/client/f_printDialog.js:41
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:42
 msgid "using markers and background colors"
 msgstr "използване на маркери и фонови цветове"
 
-#: media/js/client/f_printDialog.js:53
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:54
 msgid "all (%(nb_comments)s)"
 msgstr "всички (%(nb_comments)s)"
 
-#: media/js/client/f_printDialog.js:54
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:55
 msgid "current filtered ones (%(nb_comments)s)"
 msgstr "филтрирани в момента (%(nb_comments)s)"
 
-#: media/js/client/f_printDialog.js:56
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:57
 msgid "none (0)"
 msgstr "нито един (0)"
 
-#: media/js/client/f_printDialog.js:89
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:90
 msgid "Go !"
 msgstr "Go!"
 
-#: media/js/markitup/sets.js:18 media/js/markitup/sets.js.py:64
-msgid "First Level Heading"
-msgstr "Заглавие от първо ниво"
+#: media/js/client/f_client-min.js:1 media/js/client/f_message.js:18
+msgid "loading..."
+msgstr "зареждане..."
 
-#: media/js/markitup/sets.js:18 media/js/markitup/sets.js.py:19
-#: media/js/markitup/sets.js:20 media/js/markitup/sets.js.py:21
-#: media/js/markitup/sets.js:22 media/js/markitup/sets.js.py:23
-#: media/js/markitup/sets.js:64 media/js/markitup/sets.js.py:65
-#: media/js/markitup/sets.js:66 media/js/markitup/sets.js.py:67
-#: media/js/markitup/sets.js:68 media/js/markitup/sets.js.py:69
-msgid "Your title here..."
-msgstr "Вашето заглавие е тук..."
-
-#: media/js/markitup/sets.js:19 media/js/markitup/sets.js.py:65
-msgid "Second Level Heading"
-msgstr "Заглавие от второ ниво"
-
-#: media/js/markitup/sets.js:20 media/js/markitup/sets.js.py:66
-msgid "Heading 3"
-msgstr "Заглавие 3"
-
-#: media/js/markitup/sets.js:21 media/js/markitup/sets.js.py:67
-msgid "Heading 4"
-msgstr "Заглавие 4"
-
-#: media/js/markitup/sets.js:22 media/js/markitup/sets.js.py:68
-msgid "Heading 5"
-msgstr "Заглавие 5"
-
-#: media/js/markitup/sets.js:23 media/js/markitup/sets.js.py:69
-msgid "Heading 6"
-msgstr "Заглавие 6"
-
-#: media/js/markitup/sets.js:25 media/js/markitup/sets.js.py:72
-msgid "Bold"
-msgstr "Дебел шрифт"
-
-#: media/js/markitup/sets.js:26 media/js/markitup/sets.js.py:73
-msgid "Italic"
-msgstr "Наклонен шрифт"
-
-#: media/js/markitup/sets.js:28 media/js/markitup/sets.js.py:76
-msgid "Bulleted List"
-msgstr "Списък с водещи символи"
-
-#: media/js/markitup/sets.js:29 media/js/markitup/sets.js.py:77
-msgid "Numeric List"
-msgstr "Номериран списък"
-
-#: media/js/markitup/sets.js:33 media/js/markitup/sets.js.py:80
-msgid "Picture"
-msgstr "Картина"
-
-#: media/js/markitup/sets.js:34 media/js/markitup/sets.js.py:81
-msgid "Link"
-msgstr "Връзка"
-
-#: media/js/markitup/sets.js:36
-msgid "Quotes"
-msgstr "Цитати"
-
-#: media/js/markitup/sets.js:37
-msgid "Code Block / Code"
-msgstr "Блок код / Код"
-
-#: media/js/markitup/sets.js:39 media/js/markitup/sets.js.py:84
-msgid "Preview"
-msgstr "Предварителен преглед"
-
-#: media/js/markitup/sets.js:70
-msgid "Paragraph"
-msgstr "Параграф"
-
-#: media/js/markitup/sets.js:74
-msgid "Stroke through"
-msgstr "Задраскан"
-
-#: media/js/markitup/sets.js:78
-msgid "List element"
-msgstr "Елемент на списък"
-
-#: media/js/markitup/sets.js:81
-msgid "Your text to link..."
-msgstr "Вашият текст за връзка ..."
-
-#: media/js/markitup/sets.js:83
-msgid "Clean"
-msgstr "Изтрий"
-
-#: media/js/site/c_text_view_comments.js:18
-msgid "modern"
-msgstr "модерен"
-
-#: media/js/site/c_text_view_comments.js:18
-msgid "classic"
-msgstr "класически"
-
-#: media/js/site/c_text_view_comments.js:18
-msgid "code"
-msgstr "код"
-
-#: media/js/site/f_text_view_frame.js:43
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:43
 msgid "click to show options"
 msgstr "кликнете за да се афишират всички възможности"
 
-#: media/js/site/f_text_view_frame.js:44
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:44
 msgid "click to hide options"
 msgstr "кликнете за да скриете опциите"
 
-#: media/js/site/f_text_view_frame.js:76
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:76
 msgid "Text"
 msgstr "Текст"
 
-#: media/js/site/f_text_view_frame.js:80
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:80
 msgid "Search"
 msgstr "Търсене"
 
-#: media/js/site/f_text_view_frame.js:85
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:85
 #: media/js/site/f_text_view_frame.js:407
 msgid "Reset"
 msgstr "Реинициализиране"
 
-#: media/js/site/f_text_view_frame.js:86
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:86
 msgid "Hide all Comments"
 msgstr "Скрий всички коментари"
 
-#: media/js/site/f_text_view_frame.js:94
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:94
 msgid "Authors"
 msgstr "Автори"
 
-#: media/js/site/f_text_view_frame.js:102
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:102
 msgid "States"
 msgstr "Състояния"
 
-#: media/js/site/f_text_view_frame.js:111
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:111
 msgid "Dates"
 msgstr "Дати"
 
-#: media/js/site/f_text_view_frame.js:119
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:119
 msgid "Tags"
 msgstr "Тагове"
 
-#: media/js/site/f_text_view_frame.js:177
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:177
 msgid "view previous comment"
 msgstr "виж предишните коментари"
 
-#: media/js/site/f_text_view_frame.js:178
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:178
 msgid "view next comment"
 msgstr "виж следващите коментари"
 
-#: media/js/site/f_text_view_frame.js:179
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:179
 msgid "view first comment"
 msgstr "виж първия коментар"
 
-#: media/js/site/f_text_view_frame.js:180
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:180
 msgid "view last next comment"
 msgstr "виж последния коментар"
 
-#: media/js/site/f_text_view_frame.js:181
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:181
 msgid "view all comments"
 msgstr "Виж всички коментари"
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:184
+msgid "print document with/without comments"
+msgstr "Напечатай документа с/без коментари"
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:185
+msgid "export document with/without comments"
+msgstr "Експортирай документа с/без коментари"
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:186
+msgid "toggle full screen view"
+msgstr "Преминете на цял екран"
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:188
+msgid "add a comment"
+msgstr "добавете коментар"
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:204
+msgid "filter:"
+msgstr "филтър:"
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:209
+msgid "browse by:"
+msgstr "Подреждане по:"
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:211
+msgid "location"
+msgstr "място"
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:212
+msgid "modification"
+msgstr "модификация"
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:332
+msgid "thread discussions"
+msgstr ""
+"подравнете отговорите към коментарите, за да се види нишката на дискусията"
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:366
+msgid "Text style"
+msgstr "Стил на текста"
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:411
+msgid "Animation duration"
+msgstr "Продължителност на анимацията "
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:420
+msgid "(0.001 to 1 second)"
+msgstr "(0.001 до 1 секунда)"
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:446
+msgid "preferences reset (will apply on next load)"
+msgstr "Предпочитания на инициализиране (прилагат се при зареждане на текста)"
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:452
+msgid "preferences saved (will apply on next load)"
+msgstr ""
+"Предпочитанията са запазени (ще бъдат приложени при зареждане на текста)"
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:556
+msgid "filter reset"
+msgstr "инициализиране на филтъра"
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:566
+msgid "filter applied"
+msgstr "филтърът е приложен"
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:572
+msgid "discussion"
+msgid_plural "discussions"
+msgstr[0] "дискусия"
+msgstr[1] "дискусии"
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:576
+msgid "comment"
+msgid_plural "comments"
+msgstr[0] "коментар"
+msgstr[1] "коментари"
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:601
+msgid "all"
+msgstr "всички"
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:619
+msgid "last 24 hours (%(nb_comments)s)"
+msgid_plural "last %(nb_days)s days (%(nb_comments)s)"
+msgstr[0] "последните 24 часа (%(nb_comments)s)"
+msgstr[1] "последните %(nb_days)s дена (%(nb_comments)s)"
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:733
+#: media/js/site/text_edit.js:86
+msgid "No"
+msgstr "Не"
+
+#: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:734
+#: media/js/site/text_edit.js:89
+msgid "Yes"
+msgstr "Да"
+
+#: media/js/markitup/sets.js:19 media/js/markitup/sets.js.py:65
+msgid "First Level Heading"
+msgstr "Заглавие от първо ниво"
+
+#: media/js/markitup/sets.js:19 media/js/markitup/sets.js.py:20
+#: media/js/markitup/sets.js:21 media/js/markitup/sets.js.py:22
+#: media/js/markitup/sets.js:23 media/js/markitup/sets.js.py:24
+#: media/js/markitup/sets.js:65 media/js/markitup/sets.js.py:66
+#: media/js/markitup/sets.js:67 media/js/markitup/sets.js.py:68
+#: media/js/markitup/sets.js:69 media/js/markitup/sets.js.py:70
+msgid "Your title here..."
+msgstr "Вашето заглавие е тук..."
+
+#: media/js/markitup/sets.js:20 media/js/markitup/sets.js.py:66
+msgid "Second Level Heading"
+msgstr "Заглавие от второ ниво"
+
+#: media/js/markitup/sets.js:21 media/js/markitup/sets.js.py:67
+msgid "Heading 3"
+msgstr "Заглавие 3"
+
+#: media/js/markitup/sets.js:22 media/js/markitup/sets.js.py:68
+msgid "Heading 4"
+msgstr "Заглавие 4"
+
+#: media/js/markitup/sets.js:23 media/js/markitup/sets.js.py:69
+msgid "Heading 5"
+msgstr "Заглавие 5"
+
+#: media/js/markitup/sets.js:24 media/js/markitup/sets.js.py:70
+msgid "Heading 6"
+msgstr "Заглавие 6"
+
+#: media/js/markitup/sets.js:26 media/js/markitup/sets.js.py:73
+msgid "Bold"
+msgstr "Дебел шрифт"
+
+#: media/js/markitup/sets.js:27 media/js/markitup/sets.js.py:74
+msgid "Italic"
+msgstr "Наклонен шрифт"
+
+#: media/js/markitup/sets.js:29 media/js/markitup/sets.js.py:77
+msgid "Bulleted List"
+msgstr "Списък с водещи символи"
+
+#: media/js/markitup/sets.js:30 media/js/markitup/sets.js.py:78
+msgid "Numeric List"
+msgstr "Номериран списък"
+
+#: media/js/markitup/sets.js:34 media/js/markitup/sets.js.py:81
+msgid "Picture"
+msgstr "Картина"
+
+#: media/js/markitup/sets.js:35 media/js/markitup/sets.js.py:82
+msgid "Link"
+msgstr "Връзка"
+
+#: media/js/markitup/sets.js:37
+msgid "Quotes"
+msgstr "Цитати"
+
+#: media/js/markitup/sets.js:38
+msgid "Code Block / Code"
+msgstr "Блок код / Код"
+
+#: media/js/markitup/sets.js:40 media/js/markitup/sets.js.py:85
+msgid "Preview"
+msgstr "Предварителен преглед"
+
+#: media/js/markitup/sets.js:71
+msgid "Paragraph"
+msgstr "Параграф"
+
+#: media/js/markitup/sets.js:75
+msgid "Stroke through"
+msgstr "Задраскан"
+
+#: media/js/markitup/sets.js:79
+msgid "List element"
+msgstr "Елемент на списък"
+
+#: media/js/markitup/sets.js:82
+msgid "Your text to link..."
+msgstr "Вашият текст за връзка ..."
+
+#: media/js/markitup/sets.js:84
+msgid "Clean"
+msgstr "Изтрий"
+
+#: media/js/site/c_text_view_comments.js:19
+msgid "modern"
+msgstr "модерен"
+
+#: media/js/site/c_text_view_comments.js:19
+msgid "classic"
+msgstr "класически"
+
+#: media/js/site/c_text_view_comments.js:19
+msgid "code"
+msgstr "код"
 
 #: media/js/site/f_text_view_frame.js:182
 msgid "view all detached comments"
@@ -448,111 +550,15 @@ msgstr "Виж всички отстранени коментари"
 msgid "toggle advance interface"
 msgstr "Покажи / скрий напредналия интерфейс"
 
-#: media/js/site/f_text_view_frame.js:184
-msgid "print document with/without comments"
-msgstr "Напечатай документа с/без коментари"
-
-#: media/js/site/f_text_view_frame.js:185
-msgid "export document with/without comments"
-msgstr "Експортирай документа с/без коментари"
-
-#: media/js/site/f_text_view_frame.js:186
-msgid "toggle full screen view"
-msgstr "Преминете на цял екран"
-
 #: media/js/site/f_text_view_frame.js:187
 msgid "text feed"
 msgstr "захранване на текста"
-
-#: media/js/site/f_text_view_frame.js:188
-msgid "add a comment"
-msgstr "добавете коментар"
-
-#: media/js/site/f_text_view_frame.js:204
-msgid "filter:"
-msgstr "филтър:"
-
-#: media/js/site/f_text_view_frame.js:209
-msgid "browse by:"
-msgstr "Подреждане по:"
-
-#: media/js/site/f_text_view_frame.js:211
-msgid "location"
-msgstr "място"
-
-#: media/js/site/f_text_view_frame.js:212
-msgid "modification"
-msgstr "модификация"
 
 #: media/js/site/f_text_view_frame.js:329
 msgid "unthread discussions"
 msgstr "подравнете отговорите на коментарите на ляво, за да се открие текста"
 
-#: media/js/site/f_text_view_frame.js:332
-msgid "thread discussions"
-msgstr ""
-"подравнете отговорите към коментарите, за да се види нишката на дискусията"
-
-#: media/js/site/f_text_view_frame.js:366
-msgid "Text style"
-msgstr "Стил на текста"
-
-#: media/js/site/f_text_view_frame.js:411
-msgid "Animation duration"
-msgstr "Продължителност на анимацията "
-
-#: media/js/site/f_text_view_frame.js:420
-msgid "(0.001 to 1 second)"
-msgstr "(0.001 до 1 секунда)"
-
-#: media/js/site/f_text_view_frame.js:446
-msgid "preferences reset (will apply on next load)"
-msgstr "Предпочитания на инициализиране (прилагат се при зареждане на текста)"
-
-#: media/js/site/f_text_view_frame.js:452
-msgid "preferences saved (will apply on next load)"
-msgstr ""
-"Предпочитанията са запазени (ще бъдат приложени при зареждане на текста)"
-
-#: media/js/site/f_text_view_frame.js:556
-msgid "filter reset"
-msgstr "инициализиране на филтъра"
-
-#: media/js/site/f_text_view_frame.js:566
-msgid "filter applied"
-msgstr "филтърът е приложен"
-
-#: media/js/site/f_text_view_frame.js:572
-msgid "discussion"
-msgid_plural "discussions"
-msgstr[0] "дискусия"
-msgstr[1] "дискусии"
-
-#: media/js/site/f_text_view_frame.js:576
-msgid "comment"
-msgid_plural "comments"
-msgstr[0] "коментар"
-msgstr[1] "коментари"
-
-#: media/js/site/f_text_view_frame.js:601
-msgid "all"
-msgstr "всички"
-
-#: media/js/site/f_text_view_frame.js:619
-msgid "last 24 hours (%(nb_comments)s)"
-msgid_plural "last %(nb_days)s days (%(nb_comments)s)"
-msgstr[0] "последните 24 часа (%(nb_comments)s)"
-msgstr[1] "последните %(nb_days)s дена (%(nb_comments)s)"
-
-#: media/js/site/f_text_view_frame.js:733 media/js/site/text_edit.js:82
-msgid "No"
-msgstr "Не"
-
-#: media/js/site/f_text_view_frame.js:734 media/js/site/text_edit.js:85
-msgid "Yes"
-msgstr "Да"
-
-#: media/js/site/text_edit.js:7
+#: media/js/site/text_edit.js:11
 msgid ""
 "Should these comments be detached (i.e. kept with no scope) or removed from "
 "new version?"
@@ -560,31 +566,31 @@ msgstr ""
 "Тези коментари трябва ли да са откъснати (запазени без обхват) или да бъдат "
 "изтрити от новата версия? "
 
-#: media/js/site/text_edit.js:24 media/js/site/text_edit.js.py:41
+#: media/js/site/text_edit.js:28 media/js/site/text_edit.js.py:45
 msgid "%(nb_comments)s comment applies to text that was modified."
 msgid_plural "%(nb_comments)s comments apply to text that was modified."
 msgstr[0] "%(nb_comments)s е приложен към текста, който е променен."
 msgstr[1] "%(nb_comments)s са приложени към текста, който е променен."
 
-#: media/js/site/text_edit.js:45
+#: media/js/site/text_edit.js:49
 msgid "(We suggest you create a new version)"
 msgstr "(Ние ви предлагаме да създадете нова версия)"
 
-#: media/js/site/text_edit.js:63
+#: media/js/site/text_edit.js:67
 msgid "You chose not to create a new version all comments will be deleted"
 msgstr ""
 "Тъй като вие избрахте да не създадете нова версия, всички коментари ще бъдат "
 "изтрити"
 
-#: media/js/site/text_edit.js:65
+#: media/js/site/text_edit.js:69
 msgid "Do you want to continue?"
 msgstr "Искате ли да продължите?"
 
-#: media/js/site/text_edit.js:98
+#: media/js/site/text_edit.js:102
 msgid "Detach"
 msgstr "Отделете"
 
-#: media/js/site/text_edit.js:99
+#: media/js/site/text_edit.js:103
 msgid "Remove"
 msgstr "Махнете"
 

@@ -1,56 +1,59 @@
 # COMT es translation
 #
+# Simon Descarpentries <sid1@sopinspace.com>, 2011
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-11 15:06+0200\n"
+"POT-Creation-Date: 2011-08-05 12:58+0200\n"
 "PO-Revision-Date: 2010-02-24 01:37+0900\n"
 "Last-Translator: dev <dev@sopinspace.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: client.py:25
+#: client.py:29
 msgid ""
 "A selection is required. Select in the text the part your comment applies to."
 msgstr ""
 "Se necesita una selección. Seleccione el texto cuya parte desee comentar."
 
-#: client.py:134
+#: client.py:138
 msgid "name is required"
 msgstr "el nombre es obligatorio"
 
-#: client.py:137
+#: client.py:141
 msgid "email is required"
 msgstr "el email es obligatorio"
 
-#: client.py:139
+#: client.py:143
 msgid "invalid email"
 msgstr "dirección de correo electrónico no válida"
 
-#: client.py:141
+#: client.py:145
 msgid "title is required"
 msgstr "el título es obligatorio"
 
-#: client.py:143
+#: client.py:147
 msgid "content is required"
 msgstr "el contenido es obligatorio"
 
-#: client.py:158
+#: client.py:162
 msgid "comment removed"
 msgstr "comentario borrado"
 
-#: client.py:209 client.py:274
+#: client.py:213 client.py:278
 msgid "comment saved"
 msgstr "comentario guardado"
 
-#: client.py:276
+#: client.py:280
 msgid "comment saved, it is being held for moderation"
 msgstr "comentario guardado, se reserva para moderación"
 
-#: client.py:337
+#: client.py:341
 msgid "Tags input must be no longer than 250 characters."
 msgstr "El contenido de las etiquetas no debe exceder los 250 caracteres"
 
@@ -124,14 +127,19 @@ msgid "Invitation"
 msgstr "Invitación"
 
 #: models.py:756
+#, python-format
 msgid "Text %(link_to_text)s edited by %(creator)s"
 msgstr "Texto %(link_to_text)s editado por %(creator)s"
 
 #: models.py:757
+#, python-format
 msgid "Text %(link_to_text)s edited (new version created) by %(creator)s"
-msgstr "Texto %(link_to_text)s editado (se ha creado una nueva versión por %(creator)s)"
+msgstr ""
+"Texto %(link_to_text)s editado (se ha creado una nueva versión por "
+"%(creator)s)"
 
 #: models.py:758
+#, python-format
 msgid "Text %(link_to_text)s added by %(creator)s"
 msgstr "Texto %(link_to_text)s añadido por %(creator)s"
 
@@ -141,9 +149,12 @@ msgid "Text %(link_to_text)s removed"
 msgstr "Texto %(link_to_text)s eliminado"
 
 #: models.py:760
+#, python-format
 msgid ""
 "Comment %(link_to_comment)s added on text %(link_to_text)s by %(creator)s"
-msgstr "Comentario %(link_to_comment)s añadido al texto %(link_to_text)s por %(creator)s"
+msgstr ""
+"Comentario %(link_to_comment)s añadido al texto %(link_to_text)s por "
+"%(creator)s"
 
 #: models.py:761
 #, python-format
@@ -400,7 +411,8 @@ msgstr "Escribir un texto"
 
 #: templates/site/dashboard.html:48
 msgid "Write a text inside your browser or paste a content from your clipboard"
-msgstr "Escribir un texto dentro de tu navegador o pegar lo desde el portapapeles"
+msgstr ""
+"Escribir un texto dentro de tu navegador o pegar lo desde el portapapeles"
 
 #: templates/site/dashboard.html:49 templates/site/text_create_content.html:30
 #: templates/site/text_create_upload.html:4
@@ -414,8 +426,8 @@ msgid ""
 "Upload a document from your computer (Text document, Open Format document, "
 "Word document)"
 msgstr ""
-"Cargar un documento desde su ordenador (documentos Texto, OpenDocument format, " 
-"Word doc.)"
+"Cargar un documento desde su ordenador (documentos Texto, OpenDocument "
+"format, Word doc.)"
 
 #: templates/site/dashboard.html:50
 msgid "Invite user"
@@ -521,10 +533,11 @@ msgstr[0] "%(nb_comments)s Comentario"
 msgstr[1] "%(nb_comments)s Comentarios"
 
 #: templates/site/dashboard.html:202 templates/site/macros/text_meta.html:8
+#, python-format
 msgid "1 version"
 msgid_plural "%(versions_number)s versions"
-msgstr[0] "1 version"
-msgstr[1] "Versiones"
+msgstr[0] "1 versión"
+msgstr[1] "%(versions_number)s versiones"
 
 #: templates/site/dashboard.html:208 templates/site/text_list.html:223
 msgid "No texts yet"
@@ -594,6 +607,7 @@ msgid "created %(duration)s ago"
 msgstr "creado hace %(duration)s"
 
 #: templates/site/dashboard_bloc_recent_comments.html:24
+#, python-format
 msgid "by %(username)s"
 msgstr "por \"%(username)s\""
 
@@ -730,7 +744,8 @@ msgstr "Textos"
 
 #: templates/site/help.html:34
 msgid "co-ment 2 collaboration is based on assigning roles for users."
-msgstr "co-ment 2 colaboración es basada en la asignación de perfiles a los usarios."
+msgstr ""
+"co-ment 2 colaboración es basada en la asignación de perfiles a los usarios."
 
 #: templates/site/help.html:34 templates/site/help.html.py:45
 msgid "Click here for more details"
@@ -742,9 +757,9 @@ msgid ""
 "an overall management role, while others will have roles that are defined in "
 "relationship with texts or a given text."
 msgstr ""
-"El supuesto básico en el modelo de colaboración es que algunos usuarios se han hecho"
-"una función de gestión global, mientras que otros tienen funciones que se definen en"
-"la relación con los textos o un texto determinado."
+"El supuesto básico en el modelo de colaboración es que algunos usuarios se "
+"han hechouna función de gestión global, mientras que otros tienen funciones "
+"que se definen enla relación con los textos o un texto determinado."
 
 #: templates/site/help.html:40
 msgid "Moderation"
@@ -762,15 +777,16 @@ msgid ""
 "moderation permissions before a user (with at least Moderator role) approves "
 "them."
 msgstr ""
-"La moderación de comentarios es el proceso de edición / eliminación de los comentarios de un texto. "
-"El papel del moderador es la colección de los permisos necesarios para editar / eliminar "
-"un comentario enviado por los usuarios del espacio de trabajo. \n"
-"    Aunque no esta la predeterminada, puede exigir que las observaciones que se "
-"aprobada antes de convertirse en público deshabilitando el \"a posteriori moderación\" "
-"en la configuración de el texto. Si lo hace, los comentarios de los usuarios con un "
-"papel de Observador o Comentarista no será visible para los usuarios que no tienen "
-"permisos de moderación antes de que un usuario (con al menos el papel de Moderador) aprueba "
-"ellos. "
+"La moderación de comentarios es el proceso de edición / eliminación de los "
+"comentarios de un texto. El papel del moderador es la colección de los "
+"permisos necesarios para editar / eliminar un comentario enviado por los "
+"usuarios del espacio de trabajo. \n"
+"    Aunque no esta la predeterminada, puede exigir que las observaciones que "
+"se aprobada antes de convertirse en público deshabilitando el \"a posteriori "
+"moderación\" en la configuración de el texto. Si lo hace, los comentarios de "
+"los usuarios con un papel de Observador o Comentarista no será visible para "
+"los usuarios que no tienen permisos de moderación antes de que un usuario "
+"(con al menos el papel de Moderador) aprueba ellos. "
 
 #: templates/site/help.html:44
 msgid "States"
@@ -778,7 +794,8 @@ msgstr "Estatos"
 
 #: templates/site/help.html:45
 msgid "co-ment uses states to implement moderation policies."
-msgstr "co-ment utilisa estados para poner en práctica las políticas de moderación."
+msgstr ""
+"co-ment utilisa estados para poner en práctica las políticas de moderación."
 
 #: templates/site/help.html:45
 msgid ""
@@ -786,9 +803,10 @@ msgid ""
 "Moderators. Approved comments are visible to users with any role. The "
 "pending state exists only when a priori moderation is selected in settings."
 msgstr ""
-"No aprobados o pendientes comentarios son visibles sólo a Directores, Editores y"
-"Moderadores. Aprobado comentarios son visibles para los usuarios con cualquier papel. El"
-"pendiente estado sólo existe cuando una moderación a priori es seleccionado en la configuración."
+"No aprobados o pendientes comentarios son visibles sólo a Directores, "
+"Editores yModeradores. Aprobado comentarios son visibles para los usuarios "
+"con cualquier papel. Elpendiente estado sólo existe cuando una moderación a "
+"priori es seleccionado en la configuración."
 
 #: templates/site/help.html:48
 msgid ""
@@ -797,10 +815,11 @@ msgid ""
 "or decisions on future revisions. You can also use them to classify comments "
 "according to the issues or topics they address."
 msgstr ""
-"Creemos que un uso adecuado de las etiquetas es suficiente para poner en práctica una gran variedad"
-"de los flujos de trabajo para el procesamiento de los comentarios. Puede utilizar las etiquetas de señalización TODO"
-"o las decisiones sobre las futuras revisiones. También se pueden utilizar para clasificar a los comentarios"
-"de acuerdo a los asuntos o temas que tratan."
+"Creemos que un uso adecuado de las etiquetas es suficiente para poner en "
+"práctica una gran variedadde los flujos de trabajo para el procesamiento de "
+"los comentarios. Puede utilizar las etiquetas de señalización TODOo las "
+"decisiones sobre las futuras revisiones. También se pueden utilizar para "
+"clasificar a los comentariosde acuerdo a los asuntos o temas que tratan."
 
 #: templates/site/help.html:50
 msgid "Linking to a comment"
@@ -813,9 +832,9 @@ msgid ""
 "when you hover over the paragraph (&#182;) sign at the end of the comment "
 "title."
 msgstr ""
-"Usted puede necesitar de conectar un comentario a un otro. En este"
-"caso lo puede hacer copiando el permalink del comentario que se muestra"
-"cuando se pasa sobre el párrafo (&#182;) firme al final del título del comentario."
+"Usted puede necesitar de conectar un comentario a un otro. En estecaso lo "
+"puede hacer copiando el permalink del comentario que se muestracuando se "
+"pasa sobre el párrafo (&#182;) firme al final del título del comentario."
 
 #: templates/site/help.html:53
 msgid "Scope"
@@ -828,8 +847,8 @@ msgid ""
 "the comment."
 msgstr ""
 "El alcance de un comentario es la parte del texto al que se aplica. El "
-"alcance puede ser modificado por cualquiera que tenga un papel que permite modificar "
-"el comentari. "
+"alcance puede ser modificado por cualquiera que tenga un papel que permite "
+"modificar el comentari. "
 
 #: templates/site/help.html:56
 msgid "Keeping your comments across versions"
@@ -846,14 +865,15 @@ msgid ""
 "but are still visible when browsing, and you can give them a new scope) or "
 "simply removed from the new version."
 msgstr ""
-"Cuando se crea una nueva versión del texto, los comentarios están duplicados. En el caso "
-"la edición de texto no se modificó el alcance del comentario, se va a mantener "
-"\"como es\". Si el texto del alcance del comentario ha sido modificado "
-"una decisión tiene que ser hecho con respecto a la conservación de dichos comentarios en "
-"la nueva versión : se le dará una opción de mantenerlos en la nueva versión "
-"como \"independiente\" del texto (que no tienen un alcance en la nueva versión "
-"pero todavía son visibles cuando se buscan, y se les puede dar un nuevo ámbito) o "
-"simplemente se retira de la nueva versión."
+"Cuando se crea una nueva versión del texto, los comentarios están "
+"duplicados. En el caso la edición de texto no se modificó el alcance del "
+"comentario, se va a mantener \"como es\". Si el texto del alcance del "
+"comentario ha sido modificado una decisión tiene que ser hecho con respecto "
+"a la conservación de dichos comentarios en la nueva versión : se le dará una "
+"opción de mantenerlos en la nueva versión como \"independiente\" del texto "
+"(que no tienen un alcance en la nueva versión pero todavía son visibles "
+"cuando se buscan, y se les puede dar un nuevo ámbito) o simplemente se "
+"retira de la nueva versión."
 
 #: templates/site/help.html:63
 msgid "Email notification"
@@ -865,20 +885,21 @@ msgid ""
 "comment is added on a text or a text is edited and a new version gets "
 "created."
 msgstr ""
-"Las notificaciones por correo electrónico son una manera para los usuarios a ser informados por correo electrónico cuando un nuevo"
-"comentario se añade en un texto o un texto se edita y se obtiene una nueva versión."
+"Las notificaciones por correo electrónico son una manera para los usuarios a "
+"ser informados por correo electrónico cuando un nuevocomentario se añade en "
+"un texto o un texto se edita y se obtiene una nueva versión."
 
 #: templates/site/help.html:67
 msgid "Web feed definition on Wikipedia"
 msgstr "Web feed definición en la Wikipedia"
 
-#: template/site/help.html:67
+#: templates/site/help.html:67
 msgid ""
 "You can subscribe to the feed for a specific text or to a global feed for "
 "the full workspace."
 msgstr ""
-"Usted puede suscribirse a la fuente de un texto específico o a una fuente global de"
-"el espacio de trabajo completo."
+"Usted puede suscribirse a la fuente de un texto específico o a una fuente "
+"global deel espacio de trabajo completo."
 
 #: templates/site/help.html:69
 msgid "Public and private feeds"
@@ -892,9 +913,10 @@ msgid ""
 "really want them to know what's happening in it."
 msgstr ""
 "La alimentación pública incluye todos los eventos de acceso público en el "
-"área de trabajo o un texto específico. La alimentación incluye todos los eventos privados: no "
-"darlo a conocer a las personas que no están registrados en su área de trabajo a menos que usted "
-"realmente quiero que sepan lo que está pasando en ella. "
+"área de trabajo o un texto específico. La alimentación incluye todos los "
+"eventos privados: no darlo a conocer a las personas que no están registrados "
+"en su área de trabajo a menos que usted realmente quiero que sepan lo que "
+"está pasando en ella. "
 
 #: templates/site/help.html:72
 msgid "Text embedding"
@@ -906,15 +928,16 @@ msgid ""
 "able to add comments without leaving your website if the anonymous users' "
 "roles on the text allow it. For a proper test condition when embedding in "
 "your own site, in particular for experiencing links referencing comments in "
-"the same or different text, be sure your are not logged into your workspace "
+"the same or different text, be sure you are not logged into your workspace "
 "in another tab of your browser."
 msgstr ""
-"Se puede integrar el texto en una página de su propio sitio web. Los visitantes serán "
-"capaces de agregar comentarios sin moverse de su sitio web si el perfil de usuario anónimo "
-"le permite para este texto. Para una condición de prueba adecuado al incrustar en "
-"su propio sitio, en particular, para disfrutar de los enlaces de referencia en los comentarios "
-"el texto mismo o diferente, asegúrese de que no está conectado a su espacio de trabajo "
-"en otra pestaña del navegador."
+"Se puede integrar el texto en una página de su propio sitio web. Los "
+"visitantes serán capaces de agregar comentarios sin moverse de su sitio web "
+"si el perfil de usuario anónimo le permite para este texto. Para una "
+"condición de prueba adecuado al incrustar en su propio sitio, en particular, "
+"para los enlaces de referencia en los comentarios del texto "
+"asegúrese de que no está conectado a su espacio de trabajo en otra pestaña "
+"del navegador."
 
 #: templates/site/help.html:80
 msgid "Roles are predefined sets of permissions."
@@ -925,8 +948,9 @@ msgid ""
 "A text is visible to the public (non-logged-in visitors, aka anonymous "
 "users) only if anonymous users are given a role on the text."
 msgstr ""
-"Un texto es visible para el público (sin entrar en los visitantes, también conocido como usuarios "
-"anónimos) sólo si los usuarios anónimos se les da un papel en el texto."
+"Un texto es visible para el público (sin entrar en los visitantes, también "
+"conocido como usuarios anónimos) sólo si los usuarios anónimos se les da un "
+"papel en el texto."
 
 #: templates/site/help.html:82 templates/site/text_share.html:88
 msgid "Text role"
@@ -938,9 +962,11 @@ msgid ""
 "can be used to override a possibly existing workspace-level role or to give "
 "a user a role on a text (and not on every text in the workspace)."
 msgstr ""
-"Una de las funciones de texto es una función que se establece para un usuario específico en un texto específico. "
-"puede ser utilizado para anular un posible espacio de trabajo existentes a nivel de papel o de dar "
-"a un usuario un papel sobre un texto (y no en todos los textos en el espacio de trabajo)."
+"Una de las funciones de texto es una función que se establece para un "
+"usuario específico en un texto específico. puede ser utilizado para anular "
+"un posible espacio de trabajo existentes a nivel de papel o de dar a un "
+"usuario un papel sobre un texto (y no en todos los textos en el espacio de "
+"trabajo)."
 
 #: templates/site/help.html:84 views/site.py:185
 msgid "Role model"
@@ -954,11 +980,12 @@ msgid ""
 "specific roles making in this particular case possible for comments to be "
 "privately shared between a teacher and each student."
 msgstr ""
-"Un modelo de perfiles es establecer un papel útil en un caso de uso específico. Cuando se configura una "
-"servicio de co-ment, tiene que seleccionar un modelo de perfiles. El modelo por defecto "
-"anda con la mayoría de los casos. Un modelo de función especializada, como \"maestro\" incluye "
-"funciones específicas que en este caso es posible la formulación de observaciones "
-"privada compartida entre un profesor y cada alumno."
+"Un modelo de perfiles es establecer un papel útil en un caso de uso "
+"específico. Cuando se configura una servicio de co-ment, tiene que "
+"seleccionar un modelo de perfiles. El modelo por defecto anda con la mayoría "
+"de los casos. Un modelo de función especializada, como \"maestro\" incluye "
+"funciones específicas que en este caso es posible la formulación de "
+"observaciones privada compartida entre un profesor y cada alumno."
 
 #: templates/site/help.html:91
 msgid "Create or upload?"
@@ -972,11 +999,11 @@ msgid ""
 "text with HTML as format, and copy and paste the full Web page into the "
 "editor."
 msgstr ""
-"Hay tres maneras principales de producir un texto en co-ment. Si se comienza desde "
-"cero, crear el texto en formato Wiki. Si se parte de un documiento existente "
-"subir un archivo a un formato de rebajas. Si se parte de una página Web, crear una "
-"el texto con HTML como el formato, y copiar y pegar la página web completa en el "
-"editor."
+"Hay tres maneras principales de producir un texto en co-ment. Si se comienza "
+"desde cero, crear el texto en formato Wiki. Si se parte de un documiento "
+"existente subir un archivo a un formato de rebajas. Si se parte de una "
+"página Web, crear una el texto con HTML como el formato, y copiar y pegar la "
+"página web completa en el editor."
 
 #: templates/site/help.html:96
 msgid "Text formats"
@@ -987,8 +1014,8 @@ msgid ""
 "There are at this date 3 text formats: markdown (default/preferred format), "
 "HTML and RST."
 msgstr ""
-"Por el momento, hay tres formatos de texto : markdown (por defecto / formato preferido), "
-"HTML y RST."
+"Por el momento, hay tres formatos de texto : markdown (por defecto / formato "
+"preferido), HTML y RST."
 
 #: templates/site/help.html:101
 msgid "Markdown"
@@ -1000,9 +1027,9 @@ msgid ""
 "you use markdown for creating or importing texts. Our software and Web "
 "services use the pandoc extended version of markdown."
 msgstr ""
-"A menos que las necesidades de importación hacen preferible usar HTML, se recomienda"
-"utilizar markdown para la creación o la importación de textos. Nuestro software y Web"
-"servicios uso la versión extendida de Pandoc markdown."
+"A menos que las necesidades de importación hacen preferible usar HTML, se "
+"recomiendautilizar markdown para la creación o la importación de textos. "
+"Nuestro software y Webservicios uso la versión extendida de Pandoc markdown."
 
 #: templates/site/help.html:102
 msgid "Read more about this"
@@ -1118,15 +1145,16 @@ msgstr "Incorporar texto"
 
 #: templates/site/text_embed.html:26
 msgid "Copy this code into your site to display text with comments."
-msgstr "Copia este código en su sitio para mostrar el texto con sus comentarios."
+msgstr ""
+"Copia este código en su sitio para mostrar el texto con sus comentarios."
 
 #: templates/site/text_embed.html:26
 msgid ""
 "Users will also be able to add comments from your site depending on "
 "anonymous users' roles."
 msgstr ""
-"Los usuarios también serán capaces de añadir comentarios de su sitio en función del "
-"papel de los usuarios anónimos."
+"Los usuarios también serán capaces de añadir comentarios de su sitio en "
+"función del papel de los usuarios anónimos."
 
 #: templates/site/text_embed.html:36
 msgid "Warning:"
@@ -1175,8 +1203,8 @@ msgid ""
 "You will receive text notifications because you subscribed to notifications "
 "at the workspace level"
 msgstr ""
-"Usted recibirá las notificaciones de texto porque se ha suscrito a las notificaciones "
-"al nivel de área de trabajo"
+"Usted recibirá las notificaciones de texto porque se ha suscrito a las "
+"notificaciones al nivel de área de trabajo"
 
 #: templates/site/text_followup.html:64
 msgid "Subscribe to all text notifications"
@@ -1235,15 +1263,6 @@ msgstr "Diferencias con la versión anterior"
 msgid "Revert to this version"
 msgstr "Volver a esta versión"
 
-#: templates/site/text_history.html:122 templates/site/text_list.html:82
-#: templates/site/text_list.html.py:163
-msgid "Delete"
-msgstr "Borrar"
-
-#: templates/site/text_history.html:128
-msgid "Are you sure you want to delete this version?"
-msgstr "¿Está seguro/a de que desea borrar este texto?"
-
 #: templates/site/text_history_compare.html:30
 msgid "Previous modification"
 msgstr "Cambios anteriores"
@@ -1251,13 +1270,16 @@ msgstr "Cambios anteriores"
 #: templates/site/text_history_compare.html:31
 #: templates/site/text_history_compare.html:33
 #: templates/site/text_history_version.html:34
+#, python-format
 msgid "Version %(version_number)s"
 msgstr "versión %(version_number)s"
 
 #: templates/site/text_history_compare.html:32
+#, python-format
 msgid ""
 "Comparison between version #%(version_1_number)s and #%(version_2_number)s"
-msgstr "Diferencias entre las versiones #%(version_1_number)s y #%(version_2_number)s"
+msgstr ""
+"Diferencias entre las versiones #%(version_1_number)s y #%(version_2_number)s"
 
 #: templates/site/text_history_compare.html:34
 msgid "Next modification"
@@ -1281,6 +1303,7 @@ msgstr "Próxima versión"
 
 #: templates/site/text_history_version.html:45 views/texts.py:496
 #: views/texts.py:497
+#, python-format
 msgid "by %(author)s"
 msgstr "por %(author)s"
 
@@ -1297,6 +1320,10 @@ msgstr "Todo"
 #: templates/site/text_list.html:81 templates/site/user_list.html:72
 msgid "Bulk Actions"
 msgstr "Acciones masivas"
+
+#: templates/site/text_list.html:82 templates/site/text_list.html.py:163
+msgid "Delete"
+msgstr "Borrar"
 
 #: templates/site/text_list.html:85 templates/site/user_list.html:81
 msgid "Apply"
@@ -1404,8 +1431,9 @@ msgid "Workspace role"
 msgstr "Perfil del espacio de trabajo"
 
 #: templates/site/text_share.html:101
+#, python-format
 msgid "This role has been overriden on this text by a text role: %(rolename)s"
-msgstr "Este perfil ha sido invalidado por el perfil local: %( rolename)s"
+msgstr "Este perfil ha sido invalidado por este texto por el perfil local: %(rolename)s"
 
 #: templates/site/text_share.html:128 templates/site/user_edit.html:6
 #: templates/site/user_edit.html.py:24 templates/site/user_list.html:177
@@ -1511,8 +1539,8 @@ msgid ""
 "Those are non-registered users. Assign them a role to open your texts to "
 "simple visitors."
 msgstr ""
-"Esos son usuarios no registrados. Les asigne una función para abrir sus textos a"
-"los visitantes simple."
+"Esos son usuarios no registrados. Les asigne una función para abrir sus "
+"textos alos visitantes simple."
 
 #: templates/site/user_mass_add.html:26
 #: templates/site/user_mass_add_text.html:29
@@ -1550,9 +1578,10 @@ msgid ""
 "simple textual syntax. We recommend you use the 'markown' format unless you "
 "want to paste HTML (in which case you should use the 'html' format)."
 msgstr ""
-"Markdown (o RST) son formatos estructurado permitando un formato sencillo con "
-"sintaxis textual simple. Le recomendamos que utilice el \"markown\" formato a menos que "
-"quieres pegar el código HTML (en el cuadro que se debe utilizar el \"html\" formato)."
+"Markdown (o RST) son formatos estructurado permitando un formato sencillo "
+"con sintaxis textual simple. Le recomendamos que utilice el \"markown\" "
+"formato a menos que quieres pegar el código HTML (en el cuadro que se debe "
+"utilizar el \"html\" formato)."
 
 #: templates/site/macros/form_fields.html:14
 msgid ""
@@ -1562,11 +1591,11 @@ msgid ""
 "You can use the 'html' format if your text will not be edited or if you want "
 "to preserve complex formatting (tables, images, etc.)."
 msgstr ""
-"Markdown (o RST) que es un formato estructurado permite un formato sencillo con"
-"sintaxis textual simple. Le recomendamos que utilice \"markdown\" si el formato"
-"mayor de sus texto es el texto y/o si muchos se crean las revisiones del texto."
-"Usted puede usar el \"html\" formato si su texto no serán editados o si quieres"
-"conservar el formato complejas (tablas, imágenes, etc.)."
+"Markdown (o RST) que es un formato estructurado permite un formato sencillo "
+"consintaxis textual simple. Le recomendamos que utilice \"markdown\" si el "
+"formatomayor de sus texto es el texto y/o si muchos se crean las revisiones "
+"del texto.Usted puede usar el \"html\" formato si su texto no serán editados "
+"o si quieresconservar el formato complejas (tablas, imágenes, etc.)."
 
 #: templates/site/macros/main_tabs.html:11
 #, python-format
@@ -1613,10 +1642,11 @@ msgid ""
 "You have attempted to leave this page. Unsaved changes will be lost. Are you "
 "sure you want to exit this page?"
 msgstr ""
-"Ha intentado salir de esta página. Cambios no guardado se perderá. ¿Es usted"
-"seguro que desea salir de esta página?"
+"Ha intentado salir de esta página. Cambios no guardado se perderá. ¿Es "
+"ustedseguro que desea salir de esta página?"
 
 #: templates/site/macros/text_meta.html:6
+#, python-format
 msgid "last modified %(duration)s ago"
 msgstr "modificado hace %(duration)s"
 
@@ -1854,16 +1884,17 @@ msgid ""
 "Add stylesheets etc. Warning: this code will be added to the workspace code, "
 "make sure you know what you're doing before adding something here."
 msgstr ""
-"Añadir las hojas de estilo, etc. Advertencia : este código se añadirán al código de área de trabajo, "
-"asegúrese de saber lo que estás haciendo antes de agregar algo aquí."
+"Añadir las hojas de estilo, etc. Advertencia : este código se añadirán al "
+"código de área de trabajo, asegúrese de saber lo que estás haciendo antes de "
+"agregar algo aquí."
 
 #: views/site.py:253
 msgid ""
 "A link to reset your password has been sent to the profile email. Please "
 "check your email."
 msgstr ""
-"Un enlace para restablecer su contraseña ha sido-a sentir el perfil de correo electrónico. Por favor"
-"revise su correo electrónico."
+"Un enlace para restablecer su contraseña ha sido-a sentir el perfil de "
+"correo electrónico. Por favorrevise su correo electrónico."
 
 #: views/site.py:257 views/user.py:428
 msgid "Password changed"
@@ -1880,6 +1911,7 @@ msgid "Text %(text_title)s deleted"
 msgstr "El texto %(text_title)s ha sido borrado"
 
 #: views/texts.py:220
+#, python-format
 msgid "Text version %(text_version_title)s deleted"
 msgstr "La versión %(text_version_title)s ha sido borrado"
 
@@ -1916,8 +1948,10 @@ msgid "Email (optional)"
 msgstr "Email (opcional)"
 
 #: views/texts.py:776
+#, python-format
 msgid "A new version (copied from version %(version_title)s) has been created"
-msgstr "Se ha creado una nueva versión (copiada de la versión %(version_title)s)"
+msgstr ""
+"Se ha creado una nueva versión (copiada de la versión %(version_title)s)"
 
 #: views/texts.py:884 views/user.py:79 views/user.py:99
 #, python-format
@@ -2091,6 +2125,9 @@ msgstr ""
 "Se ha registrado. Por favor, compruebe que ha recibido el mensaje de "
 "confirmación en su correo electrónico."
 
+#~ msgid "Are you sure you want to delete this version?"
+#~ msgstr "¿Está seguro/a de que desea borrar este texto?"
+
 #~ msgid "About"
 #~ msgstr "Acerca de"
 
@@ -2135,8 +2172,8 @@ msgstr ""
 #, fuzzy
 #~ msgid "Version #%(version_number)s created on %(date)s"
 #~ msgstr ""
-#~ "La versión #%(version_number)s, titulada \"%(title)s\", y creada en %"
-#~ "(date)s:"
+#~ "La versión #%(version_number)s, titulada \"%(title)s\", y creada en "
+#~ "%(date)s:"
 
 #~ msgid "You've been invited to join the workspace %(workspace_name)s."
 #~ msgstr ""
@@ -2153,8 +2190,8 @@ msgstr ""
 #~ "If you'd like to unsubscribe from this notification, click the following "
 #~ "link: %(SITE_URL)s%(desactivate_notification_url)s."
 #~ msgstr ""
-#~ "Si desea dar de baja este aviso, haga clic en el siguiente enlace: %"
-#~ "(SITE_URL)s%(desactivate_notification_url)s."
+#~ "Si desea dar de baja este aviso, haga clic en el siguiente enlace: "
+#~ "%(SITE_URL)s%(desactivate_notification_url)s."
 
 #~ msgid "Contact from user: %(name)s / %(email)s"
 #~ msgstr "Contacto del usuario: %(name)s / %(email)s"
