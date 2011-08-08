@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-05 12:59+0200\n"
+"POT-Creation-Date: 2011-08-08 15:03+0200\n"
 "PO-Revision-Date: 2010-10-11 15:31+0100\n"
 "Last-Translator: dev <dev@sopinspace.com>\n"
 "Language-Team:  <en@li.org>\n"
@@ -716,6 +716,14 @@ msgstr "Présentation Générale"
 #: templates/site/help.html:18
 msgid "co-ment is a web based text annotation system."
 msgstr "co-ment est un système de commentaire de texte sur le web."
+
+#: templates/site/help.html:18
+msgid "COMT is the open source software behind it"
+msgstr "COMT est le logiciel libre derrière"
+
+#: templates/site/help.html:18
+msgid "See www.co-ment.com for more details"
+msgstr "Voir www.co-ment.com pour plus de détails"
 
 #: templates/site/help.html:20
 msgid "Glossary"

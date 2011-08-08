@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-05 12:58+0200\n"
+"POT-Creation-Date: 2011-08-08 15:03+0200\n"
 "PO-Revision-Date: 2010-10-21 13:50+0100\n"
 "Last-Translator: km@krot.org\n"
 "Language-Team: <no@li.org>\n"
@@ -705,6 +705,14 @@ msgstr "Presentasjon"
 #: templates/site/help.html:18
 msgid "co-ment is a web based text annotation system."
 msgstr "co-ment er et nettbasert system for å kommentere tekster."
+
+#: templates/site/help.html:18
+msgid "COMT is the open source software behind it"
+msgstr ""
+
+#: templates/site/help.html:18
+msgid "See www.co-ment.com for more details"
+msgstr ""
 
 #: templates/site/help.html:20
 msgid "Glossary"
