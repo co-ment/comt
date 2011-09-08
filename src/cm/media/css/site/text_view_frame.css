@@ -187,7 +187,7 @@ margin-right:5px;
   color:#030;
 }
 
-#add_comment_btn span:active {
+#add_comment_btn:active {
   position: relative;
   top: 3px;
   -webkit-box-shadow: inset 0px -3px 1px rgba(255, 255, 255, 1), inset 0 0px 3px rgba(0, 0, 0, 0.9);
