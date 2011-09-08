@@ -36,7 +36,7 @@
     <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/f_printDialog.js"></script>
     <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/site/f_text_view_frame.js"></script>
 {% else %}
-    <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/f_client-min.js?1315490105"></script> 
+    <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/f_client-min.js?1315492251"></script> 
 {% endif %}
     <style type="text/css">
         /*
@@ -60,10 +60,10 @@
 </head>
 <BODY>
 
-    <DIV id="add_comment_btn" class="initially_hidden" title="{% blocktrans %}add a comment{% endblocktrans %}"> 
+    <span style="display: inline-block" id="add_comment_btn" class="initially_hidden" title="{% blocktrans %}add a comment{% endblocktrans %}"> 
     <img style="vertical-align: middle;" src="{{ CM_MEDIA_PREFIX }}img/add_plus.png" alt="{% blocktrans %}add a comment{% endblocktrans %}"/>
     <span>{% blocktrans %}comment{% endblocktrans %}</span>
-    </DIV>
+    </span>
 	<!-- cf.http://layout.jquery-dev.net/download/example.html -->
 	<!-- TODO check height 600 ... -->
 	<DIV id="outer-north" class="ui-layout-north"> 

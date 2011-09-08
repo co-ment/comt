@@ -171,20 +171,26 @@ margin-right:5px;
   cursor:pointer;
   padding: 3px 5px;
   background-color: #fece46;
-  -moz-box-shadow: 2px 3px 3px #888;
-  -webkit-box-shadow: 2px 3px 3px #888;
-  box-shadow: 2px 3px 3px #888;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
   color:#050;
   font: bold 70% 'trebuchet ms',helvetica,sans-serif;
-  border: 1px solid;
-  border-color: #696 #363 #363 #696;
   filter:progid:DXImageTransform.Microsoft.Gradient
   (GradientType=0,StartColorStr='#ffffffff',EndColorStr='#ffeeddaa');
+  -webkit-box-shadow: inset 0px -3px 1px rgba(0, 0, 0, 0.45), 0px 2px 2px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: inset 0px -3px 1px rgba(0, 0, 0, 0.45), 0px 2px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0px -3px 1px rgba(0, 0, 0, 0.45), 0px 2px 2px rgba(0, 0, 0, 0.25);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }
 
 #add_comment_btn:hover {
   color:#030;
 }
 
+#add_comment_btn span:active {
+  position: relative;
+  top: 3px;
+  -webkit-box-shadow: inset 0px -3px 1px rgba(255, 255, 255, 1), inset 0 0px 3px rgba(0, 0, 0, 0.9);
+  -moz-box-shadow: inset 0px -3px 1px rgba(255, 255, 255, 1), inset 0 0px 3px rgba(0, 0, 0, 0.9);
+  box-shadow: inset 0px -3px 1px rgba(255, 255, 255, 1), inset 0 0px 3px rgba(0, 0, 0, 0.9);
+}
