@@ -34,6 +34,7 @@ var myDefaultInnerLayoutSettings = {
   north : {
     // size: 66, /* 66 for FF */
     size :88, /* 66 for FF */
+    spacing_open :8,
     spacing_closed :8,
     slidable :false,    
     resizable :false, /* important */
@@ -43,6 +44,8 @@ var myDefaultInnerLayoutSettings = {
     /* togglerContent_closed :"options", */
     togglerTip_closed :gettext("click to show options"),
     togglerTip_open :gettext("click to hide options"),
+    togglerContent_open :"&#9650;", // "▲"
+    togglerContent_closed :"&#9660;", // "▼"
     initClosed :false,
     paneSelector :".inner-north",
     onopen :"onInnerNorthPaneOpen",

@@ -35,7 +35,8 @@
         border-top: 1px solid #BBB; 
     } 
     .ui-layout-toggler .content { /* toggler-text */ 
-        font: 13px bold Verdana, Verdana, Arial, Helvetica, sans-serif;
+        font: 8px bold Verdana, Verdana, Arial, Helvetica, sans-serif;
+        margin-top: -1px;
     }
     .ui-layout-toggler:hover { /* mouse-over */ 
         background: #AAA; 
