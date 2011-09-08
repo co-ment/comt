@@ -2,7 +2,7 @@ gICommentForm = null ;
 
 instanciateICommentForm = function() {
   gICommentForm = {
-      'position':[CY.WidgetPositionExt.LC, CY.WidgetPositionExt.LC],
+      'position':[CY.WidgetPositionExt.TL, CY.WidgetPositionExt.TL],
       'formId':CY.guid(),
       'formTitleId':CY.guid(),
       'titleInputId':CY.guid(),
@@ -195,6 +195,8 @@ positionICommentForm = function () {
       pos = [CY.WidgetPositionExt.BL, CY.WidgetPositionExt.BL] ;
     
     overlay.set("align", {points:pos});
+    if (commentFormHeight <= windowHeight)
+      overlay.set("y", overlay.get("y") + 30);
     boundingBox.setX(boundingBox.getX() + gConf['iCommentLeftPadding']);
   }
 }
