@@ -482,7 +482,8 @@ Sync.prototype = {
     checkForOpenedDialog(null, function() {
       gShowingAllComments = true ;
       var allTopComments = CY.Array.map(gDb.comments, function(c){return c.id;}) ;
-      this.showComments(allTopComments, [0,0], true) ;
+      // GIB: go down the 'add comment' icon
+      this.showComments(allTopComments, [0,30], true) ;
     }, this, null) ;
   },
 
@@ -491,7 +492,8 @@ Sync.prototype = {
       gShowingAllComments = true ;
       var scopeRemovedComments = CY.Array.filter(gDb.comments, function(comment) { return (comment.start_wrapper == -1) ; }) ;
       var scopeRemovedCommentIds = CY.Array.map(scopeRemovedComments, function(c){return c.id;}) ;
-      this.showComments(scopeRemovedCommentIds, [0,0], true) ;
+      // GIB: go down the 'add comment' icon
+      this.showComments(scopeRemovedCommentIds, [0,30], true) ;
       
     }, this, null) ;
   },

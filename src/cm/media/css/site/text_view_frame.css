@@ -165,8 +165,24 @@ margin-right:5px;
  }
  
 #add_comment_btn {
-	position:absolute;
-	left:3px; 
-    z-index:999;
-    cursor:pointer;
+  position:absolute;
+  left:3px; 
+  z-index:999;
+  cursor:pointer;
+  padding: 3px 5px;
+  background-color: #fece46;
+  -moz-box-shadow: 2px 3px 3px #888;
+  -webkit-box-shadow: 2px 3px 3px #888;
+  box-shadow: 2px 3px 3px #888;
+  color:#050;
+  font: bold 70% 'trebuchet ms',helvetica,sans-serif;
+  border: 1px solid;
+  border-color: #696 #363 #363 #696;
+  filter:progid:DXImageTransform.Microsoft.Gradient
+  (GradientType=0,StartColorStr='#ffffffff',EndColorStr='#ffeeddaa');
 }
+
+#add_comment_btn:hover {
+  color:#030;
+}
+
