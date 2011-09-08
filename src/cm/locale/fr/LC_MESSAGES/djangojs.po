@@ -293,11 +293,11 @@ msgstr "chargement..."
 
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:43
 msgid "click to show options"
-msgstr "cliquer pour cacher les options"
+msgstr "cliquer pour voir les options"
 
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:44
 msgid "click to hide options"
-msgstr "cliquer pour voir les options"
+msgstr "cliquer pour cacher les options"
 
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:76
 msgid "Text"
