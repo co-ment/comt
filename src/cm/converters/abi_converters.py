@@ -186,8 +186,8 @@ class AbiFileConverter(object):
               img_res.append(os.path.join(outdir_name + '/' + THE_OUTFILE + '_files', image_name))
 
             # clean images paths
-            output = re.sub(r'<img(.+src=")outfile_files/([^"]+")', r'<img\1\2', output);
-            output = re.sub(r'<img(.+)style="width:[\d\.]+mm"', r'<img\1', output);
+            output = re.sub(r'<img(.+src=")outfile_files/([^"]+")', r'<img\1\2', output)
+            output = re.sub(r'<img(.+)style="width:[\d\.]+mm"', r'<img\1', output)
           return output,img_res
 
         finally:
