@@ -44,8 +44,12 @@ var myDefaultInnerLayoutSettings = {
     /* togglerContent_closed :"options", */
     togglerTip_closed :gettext("click to show options"),
     togglerTip_open :gettext("click to hide options"),
+    /*
     togglerContent_open :"&#9650;", // "▲"
     togglerContent_closed :"&#9660;", // "▼"
+    */
+    togglerContent_open :"<img alt='arrow up' src='" + sv_media_url + "img/arrow-up.png' />",
+    togglerContent_closed :"<img alt='arrow down' src='" + sv_media_url + "img/arrow-down.png' />",
     initClosed :false,
     paneSelector :".inner-north",
     onopen :"onInnerNorthPaneOpen",
