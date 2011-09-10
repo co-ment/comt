@@ -1348,6 +1348,10 @@ msgstr ""
 msgid "Text preferences"
 msgstr ""
 
+#: templates/site/text_view_frame.html:93
+msgid "Loading text…"
+msgstr ""
+
 #: templates/site/text_view_frame.html:104
 msgid "Which comments?"
 msgstr ""

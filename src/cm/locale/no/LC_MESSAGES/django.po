@@ -1373,6 +1373,10 @@ msgstr "Innstillinger"
 msgid "Text preferences"
 msgstr "Tekstinnstillinger"
 
+#: templates/site/text_view_frame.html:93
+msgid "Loading text…"
+msgstr "Laster tekst…"
+
 #: templates/site/text_view_frame.html:104
 msgid "Which comments?"
 msgstr "Hvilke merknader?"

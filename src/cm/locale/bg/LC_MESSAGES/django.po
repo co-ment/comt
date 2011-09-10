@@ -1388,6 +1388,10 @@ msgstr "Предпочитания"
 msgid "Text preferences"
 msgstr "Предпочитания за текста"
 
+#: templates/site/text_view_frame.html:93
+msgid "Loading text…"
+msgstr "Зареждане на текст…"
+
 #: templates/site/text_view_frame.html:104
 msgid "Which comments?"
 msgstr "Кой коментар?"

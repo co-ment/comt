@@ -1460,6 +1460,10 @@ msgstr "Preferencias"
 msgid "Text preferences"
 msgstr "Preferencias de texto"
 
+#: templates/site/text_view_frame.html:93
+msgid "Loading text…"
+msgstr "Cargando texto…"
+
 #: templates/site/text_view_frame.html:104
 msgid "Which comments?"
 msgstr "¿Qué comentarios?"
