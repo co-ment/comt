@@ -185,6 +185,7 @@ margin-right:5px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+  display: inline-block;
 }
 
 #add_comment_btn:hover {
@@ -198,3 +199,8 @@ margin-right:5px;
   -moz-box-shadow: inset 0px -3px 1px rgba(255, 255, 255, 1), inset 0 0px 3px rgba(0, 0, 0, 0.9);
   box-shadow: inset 0px -3px 1px rgba(255, 255, 255, 1), inset 0 0px 3px rgba(0, 0, 0, 0.9);
 }
+
+#add_comment_btn.initially_hidden {
+    display:none;
+}
+
