@@ -21,3 +21,19 @@
 #textcontainer.modern h1 {
     font-size:197%;
 }
+
+.voted {
+  color: #008000;
+}
+
+.rejected {
+  color: #ff0000;
+}
+
+.fallen {
+  color: #ff0000;
+}
+
+.withdrawn {
+  color: #ff0000;
+}

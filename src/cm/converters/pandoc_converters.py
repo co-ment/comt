@@ -209,6 +209,8 @@ def pandoc_pandoc(content, from_format, to_format, full=False, raw=False):
     if from_format==to_format=='html':
       # get body content
       stdoutdata = (content.encode('utf8'))
+      #stdoutdata = re.sub(r".*<body[^>]*>", '', stdoutdata)
+      #stdoutdata = re.sub(r"</body>.*", '', stdoutdata)
       # if for some reason, tidy has not guess the doctype, make xml.dom.minidom happy with HTML entities (&nbsp;)
       stdoutdata = re.sub(r"&nbsp;", '\xc2\xa0', stdoutdata)
       dom = parseString(stdoutdata)
