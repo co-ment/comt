@@ -43,8 +43,16 @@ getSelectionInfo  = function () {
         var leftToRight = (r2.compareBoundaryPoints(2, r1) == 1) ; // 2 is for END_TO_END
 //        CY.log("leftToRight : " + leftToRight) ;
         startNode = (leftToRight) ? userSelection.anchorNode.parentNode : userSelection.focusNode.parentNode ;  
+        // GIB: when selecting amath, we should go up in the dom to find the accurate start/end Nodes
+        if (startNode.nodeName == 'mi' || startNode.nodeName == 'mo') {
+          startNode = startNode.parentElement.parentElement.parentElement.parentElement;
+        }
         innerStartNode = (leftToRight) ? userSelection.anchorNode : userSelection.focusNode ;
         endNode = (leftToRight) ? userSelection.focusNode.parentNode : userSelection.anchorNode.parentNode;
+        // GIB: when selecting amath, we should go up in the dom to find the accurate start/end Nodes
+        if (endNode.nodeName == 'mi' || endNode.nodeName == 'mo') {
+          endNode = endNode.parentElement.parentElement.parentElement.parentElement;
+        }
         innerEndNode = (leftToRight) ? userSelection.focusNode : userSelection.anchorNode;
           
         startOffset = (leftToRight) ? userSelection.anchorOffset : userSelection.focusOffset;

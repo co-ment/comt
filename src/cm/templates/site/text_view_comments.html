@@ -7,7 +7,6 @@
     {% include "site/layout/req_yui.html" %}
     
 <link rel="stylesheet" type="text/css" href="{{ CM_MEDIA_PREFIX }}css/site/text_view_comments/text_view_comments.css">
-<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/lib/asciimathtml/ASCIIMathML.min.js"></script>
 </head>
 
 <body>
@@ -107,8 +106,10 @@ sv_media_url = "{{ CM_MEDIA_PREFIX|escapejs }}";
 
 <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/site/c_text_view_comments_to_frame.js"></script>
 <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/site/c_text_view_comments.js"></script> 
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/lib/asciimathtml/ASCIIMathML.js"></script>
 {% else %}
-<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_client-min.js?1318510367"></script> 
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_client-min.js?1327660353"></script> 
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/lib/asciimathtml/ASCIIMathML.min.js"></script>
 {% endif %}
 
 
