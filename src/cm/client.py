@@ -102,7 +102,9 @@ def read_comment_args(request):
     name = request.POST.get('name', None)
     email = request.POST.get('email', None)
     if name != None :
-        name = name.lower().strip()
+        # GIB: Is there any good reasons to transform the name into lower case?
+        #name = name.lower().strip()
+        name = name.strip()
     if email != None :
         email = email.lower().strip()
 
