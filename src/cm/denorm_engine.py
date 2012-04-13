@@ -21,9 +21,17 @@ def update_text_from_last_version(sender, **kwargs):
         pass
         #logging.warning('No text found for text_version: %i' %text_version.id)
         
+# GIB when deleting last revision, do not delete related text
+def delete_last_version (sender, instance, signal, *args, **kwargs):
+  if instance.id == instance.text.last_text_version_id:
+    previous = instance.get_previous_version()
+    if previous:
+      instance.text.last_text_version_id = previous.id
+      instance.text.save()
         
 def connect_all():
     # text updated by text_version
+    signals.pre_delete.connect(delete_last_version, sender=TextVersion)
     signals.post_save.connect(update_text_from_last_version, sender=TextVersion)
     signals.post_delete.connect(update_text_from_last_version, sender=TextVersion)
 

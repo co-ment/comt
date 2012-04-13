@@ -44,7 +44,7 @@ class Text(PermanentModel, AuthorModel):
     private_feed_key = models.CharField(max_length=20, db_index=True, unique=True, blank=True, null=True, default=None)
 
     # denormalized fields
-    last_text_version = models.ForeignKey("TextVersion", related_name='related_text', null=True, blank=True)
+    last_text_version = models.ForeignKey("TextVersion", related_name='related_text', null=True, blank=True, on_delete=models.SET_NULL)
     title = models.TextField()
 
     objects = TextManager()
@@ -84,6 +84,9 @@ class Text(PermanentModel, AuthorModel):
         if modif:
             self.save()
 
+        # GIB: there is no more version for this text => delete it
+        if real_last_text_version == None and last_text_version == None:
+          self.real_delete()
                 
     def get_title(self):
         return self.get_latest_version().title
