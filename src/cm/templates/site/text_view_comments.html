@@ -66,6 +66,7 @@ sv_comments = "{{ json_comments|escapejs }}";
 sv_filter_data = "{{ json_filter_datas|escapejs }}";
 sv_site_url = "{% if request.GET.prefix %}{{ request.GET.prefix }}{% else %}{{ SITE_URL|escapejs }}{% endif %}";
 sv_prefix = "{% if request.GET.prefix %}{{ request.GET.prefix }}{% endif %}";
+sv_delta = "{% if request.GET.delta %}{{ request.GET.delta }}{% endif %}";
 
 sv_client_url = "{% if request.GET.prefix %}{{ request.GET.prefix }}{% endif %}{% url text-client-exchange %}?{{ request.GET.urlencode }}" ;
 sv_text_view_show_comment_url = "{% if request.GET.prefix %}{{ request.GET.prefix }}{% endif %}{% url text-view-show-comment text.key '' %}";
@@ -108,7 +109,7 @@ sv_media_url = "{{ CM_MEDIA_PREFIX|escapejs }}";
 <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/site/c_text_view_comments.js"></script> 
 <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/lib/asciimathtml/ASCIIMathML.js"></script>
 {% else %}
-<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_client-min.js?1327660353"></script> 
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_client-min.js?1334584354"></script> 
 <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/lib/asciimathtml/ASCIIMathML.min.js"></script>
 {% endif %}
 

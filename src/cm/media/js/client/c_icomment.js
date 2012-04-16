@@ -339,7 +339,8 @@ IComment.prototype = {
       boundingBoxNode.query(".c-permalink").set("href",sv_site_url + comment.permalink) ;
     }
     else {
-      boundingBoxNode.query(".c-permalink").set("href", top.location.href + '?comment_id_key=' + comment.id_key) ;
+      comment_id_delta_prefix = sv_delta != '' ? Array(parseInt(sv_delta)+1).join(',') : '';
+      boundingBoxNode.query(".c-permalink").set("href", top.location.protocol + '//' + top.location.hostname + top.location.pathname + '?comment_id_key=' + comment_id_delta_prefix + comment.id_key) ;
     }
 
     // MODERATION
