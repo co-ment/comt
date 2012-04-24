@@ -16,8 +16,12 @@
 	{{ comment.title }}
 	<br />
 	{% blocktrans with comment.get_name as name and comment.created|local_date:tz as date %}by {{ name }} on {{ date }}{% endblocktrans %}
-	<br>
+	<br />
 	{{ comment.content }}
+  {% if comment.tags %}
+  <br />&nbsp;<br />
+    tags: {{ comment.tags }}
+  {% endif %}
 	</td>
 </tr>
 </table>
