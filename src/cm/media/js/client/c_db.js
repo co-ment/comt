@@ -452,13 +452,13 @@ Db.prototype = {
   // warning : tags are case sensitive
   filterByTag : function(tag, cWithTagIds, rWithTagIds) {
     // cf ", ".join... in client.py 
-    var re0 = new RegExp("^" + tag + "$", "g"); 
-    var re1 = new RegExp("^" + tag + ", ", "g");
-    var re2 = new RegExp(", " + tag + ", ", "g"); 
-    var re3 = new RegExp(", " + tag + "$", "g"); 
+    var re0 = new RegExp("^" + tag + "$", ''); 
+    var re1 = new RegExp("^" + tag + ", ", '');
+    var re2 = new RegExp(", " + tag + ", ", ''); 
+    var re3 = new RegExp(", " + tag + "$", ''); 
     for (var id in this.allCommentsByDbId) {
       var comment = this.allCommentsByDbId[id] ;
-      if (tag == "" || re0.exec(comment.tags) || re1.exec(comment.tags) != null || re2.exec(comment.tags) != null || re3.exec(comment.tags) != null) { // search only in the comment (not the comment scope) for now
+      if ((tag == "") || re0.exec(comment.tags) != null || re1.exec(comment.tags) != null || re2.exec(comment.tags) != null || re3.exec(comment.tags) != null) { // search only in the comment (not the comment scope) for now
         if (comment.reply_to_id == null) 
           cWithTagIds.push(comment.id);
         else 
