@@ -21,6 +21,8 @@ text_export_handler = Resource(handler=TextExportHandler, authentication=auth)
 
 comments_handler = Resource(handler=CommentsHandler, authentication=auth)
 
+convert_handler = Resource(handler=ConvertHandler, authentication=auth)
+
 client_handler = Resource(handler=ClientHandler, authentication=auth)
 
 jsi8n_handler = Resource(handler=JSI18NHandler, authentication=None)
@@ -48,6 +50,7 @@ urlpatterns = patterns('',
    url(r'^text/(?P<key>\w*)/edit/$', text_edit_handler),
    url(r'^text/(?P<key>\w*)/(?P<version_key>\w*)/$', textversion_handler),
    url(r'^comments/$', comments_handler),
+   url(r'^convert/$', convert_handler),
    url(r'^client/$', client_handler),
    url(r'^jsi18n/$', jsi8n_handler),
    url(r'^doc/$', documentation),

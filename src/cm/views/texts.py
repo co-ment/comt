@@ -790,9 +790,13 @@ def text_attach(request, key, attach_key):
     response = HttpResponse(content, mimetype)
     return response
 
+def notext_attach(request, attach_key):
+    attach = Attachment.objects.get(key=attach_key)
+    content = file(attach.data.path).read()
+    mimetype, _encoding = mimetypes.guess_type(attach.data.path)
+    response = HttpResponse(content, mimetype)
+    return response
     
-
-
 def fix_anon_in_formset(formset):
     # fix role choice in formset for anon (not all role are allowed)
     role_field = [f.fields['role'] for f in formset.forms if f.instance.user == None][0]

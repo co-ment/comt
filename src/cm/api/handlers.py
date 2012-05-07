@@ -1,7 +1,7 @@
 from piston.handler import AnonymousBaseHandler, BaseHandler
 from piston.utils import rc
 
-from cm.models import Text,TextVersion, Role, UserRole, Comment
+from cm.models import Text,TextVersion, Role, UserRole, Comment, Attachment
 from cm.views import get_keys_from_dict, get_textversion_by_keys_or_404, get_text_by_keys_or_404, get_textversion_by_keys_or_404, redirect
 from cm.security import get_texts_with_perm, has_perm, get_viewable_comments, \
     has_perm_on_text_api
@@ -134,6 +134,35 @@ class TextListHandler(BaseHandler):
         else:
             resp = rc.BAD_REQUEST
         return resp
+    
+from cm.converters import _convert_from_mimetype
+import os
+from django.core.urlresolvers import reverse
+
+class ConvertHandler(BaseHandler):    
+  type = "Text methods"
+  allowed_methods = ('POST', )    
+  title = "Convert a legacy file"    
+  desc = "Returns the HTLM file."
+  args = """<br />
+`file`: the file in legacy format<br />        
+    """ 
+
+  @staticmethod
+  def endpoint():
+    return URL_PREFIX + '/convert/'
+    
+  def create(self, request):
+    mime = request.POST.get('mime', None)
+    the_file = request.FILES['file'];
+    html, attachs = _convert_from_mimetype(the_file.read(), mime, 'html')
+    for attach_file in attachs:
+      attach_data = file(attach_file, 'rb').read()
+      filename = os.path.basename(attach_file)
+      attachment = Attachment.objects.create_attachment(filename=filename, data=attach_data, text_version=None)
+      attach_url = reverse('notext-attach', args=[attachment.key])
+      html = html.replace(filename, settings.SITE_URL + attach_url)
+    return {'html' : html}
 
 from cm.exception import UnauthorizedException
 from cm.views.texts import text_delete
@@ -202,10 +231,16 @@ class TextEditHandler(BaseHandler):
     
     
     def create(self, request, key):
+        prev_text = get_text_by_keys_or_404(key)
+        prev_text_version = prev_text.last_text_version
+        prev_comments = prev_text_version.get_comments()
+        prev_scope_removed = [c for c in prev_comments if c.is_scope_removed()]
         res = text_edit(request, key=key)
         text = get_text_by_keys_or_404(key)
         text_version = text.last_text_version
-        return {'version_key' : text_version.key , 'created': text_version.created}
+        comments = text_version.get_comments()
+        scope_removed = [c for c in comments if c.is_scope_removed()]
+        return {'version_key' : text_version.key , 'created': text_version.created, 'nb_deleted' : len(prev_comments) - len(comments), 'nb_scope_removed' : len(scope_removed) - len(prev_scope_removed)}
 
 
 class AnonymousTextFeedHandler(AnonymousBaseHandler):
@@ -452,7 +487,7 @@ class CommentsHandler(BaseHandler):
         if limit:
             query = query[:int(limit)]
         return query
-    
+
 from piston.doc import documentation_view
 
 from piston.handler import handler_tracker

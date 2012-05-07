@@ -77,6 +77,9 @@ urlpatterns += patterns('',
      url(r'^text/(?P<key>\w*)/history/$', text_history, name="text-history"),
      #url(r'^text/(?P<key>\w*)/diff/(?P<id_v1>\w*)/(?P<id_v2>\w*)/$', text_diff, name="text-diff"),
 #     url(r'^text/(?P<key>\w*)/version/(?P<id_version>\w*)/$', text_version, name="text-version"),
+
+     # detached attachements! (used for saving images when just converting to HTML, without creating a text)
+     url(r'^attach/(?P<attach_key>\w*)/$', notext_attach, name="notext-attach"),
      
      # main client frame
      url(r'^text/(?P<key>\w*)/comments_frame/$', text_view_frame, name="text-view-comments-frame"),
