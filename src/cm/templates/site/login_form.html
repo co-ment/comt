@@ -1,7 +1,7 @@
 {% load i18n %}
 <div id="login_container">
 
-<form id="login" enctype="multipart/form-data" class="wizard-form" action="." method="post">
+<form id="login" enctype="multipart/form-data" class="wizard-form" action="{% url login %}" method="post">
 
 <div class="underline_border">
 {% blocktrans with CONF.workspace_name as wname %}{{ wname }} Login{% endblocktrans %}
