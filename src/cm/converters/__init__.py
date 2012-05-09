@@ -22,6 +22,8 @@ def _convert_from_mimetype(input, mime_type, format):
     if mime_type in ['application/vnd.oasis.opendocument.text',
                      'application/msword',
                      'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                     'application/rtf',
+                     'text/rtf',
                      ]:
         
         from cm.cm_settings import USE_ABI
