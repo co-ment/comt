@@ -1,6 +1,6 @@
 COMT: Web-based text annotation
 Copyright (C) 2006-2010 Sopinspace, Society for Public Information Spaces, www.sopinspace.com
-Key developers: Renaud Bernard, Raphaël Badin, Gérald Sedrati-Dinet, Simon Descarpentries
+Key developers: Renaud Bernard, Raphaël Badin, Gérald Sédrati-Dinet, Simon Descarpentries
 Software license: GNU AGPLv3 or any later version
 Translation files license: CC-By
 
