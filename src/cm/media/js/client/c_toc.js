@@ -2,7 +2,6 @@ gToc = null ;
 
 instanciateToc = function() {
   gToc = {
-      'position':[CY.WidgetPositionExt.TL, CY.WidgetPositionExt.TL],
       'tocId':CY.guid(),
       'tocTitleId':CY.guid(),
       'closeBtnId':CY.guid(),
@@ -40,7 +39,7 @@ instanciateToc = function() {
     visible :false,
     headerContent :overlayHtml['headerContent'],
     bodyContent :overlayHtml['bodyContent'],
-    xy :[10,10],
+    xy :[3,30],
     width : width
   });
   overlay.get('contentBox').addClass("c-toc") ;
@@ -98,7 +97,6 @@ onTocShowAnimEnd = function() {
 showToc= function () {
   removeFormErrMsg(gToc['tocId']) ;
   gIComments.hide() ;
-  positionToc() ;
   gToc['overlay'].show();
 }
 
@@ -106,25 +104,6 @@ isTocVisible = function () {
   if (gToc != null)
     return gToc['overlay'].get('visible') ;
   return false ;
-}
-
-positionToc = function () {
-  if (gToc != null) { 
-    var overlay = gToc['overlay'] ;
-    var boundingBox = overlay.get('boundingBox') ;
-
-    var commentFormHeight = boundingBox.get('offsetHeight') ;
-    var windowHeight = boundingBox.get('winHeight') ;
-
-    var pos = gToc['position'] ;
-    if (commentFormHeight > windowHeight) // trying to have save comment visible ... :
-      pos = [CY.WidgetPositionExt.BL, CY.WidgetPositionExt.BL] ;
-    
-    overlay.set("align", {points:pos});
-    if (commentFormHeight <= windowHeight)
-      overlay.set("y", overlay.get("y") + 30);
-    boundingBox.setX(boundingBox.getX() + gConf['iCommentLeftPadding']);
-  }
 }
 
 function getElementsByTagNames(list,obj) {
