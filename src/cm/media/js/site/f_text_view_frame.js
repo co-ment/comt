@@ -20,12 +20,14 @@ var innerNorthPaneDefaults = {
 onInnerNorthPaneClose = function() {
   _setCookie('innerNorthPaneOpened', '0');
   $('#add_comment_btn').css('top', 63) ;
+  document.getElementById('text_view_comments').contentDocument.getElementById('the-toc').style.height = (parseInt(document.getElementById('text_view_comments').clientHeight) - 50).toString() + 'px';
   return true;
 }
 
 onInnerNorthPaneOpen = function() {
   _setCookie('innerNorthPaneOpened', '1');
   $('#add_comment_btn').css('top', 149) ;
+  document.getElementById('text_view_comments').contentDocument.getElementById('the-toc').style.height = (parseInt(document.getElementById('text_view_comments').clientHeight) - 50).toString() + 'px';
   return true;
 }
 

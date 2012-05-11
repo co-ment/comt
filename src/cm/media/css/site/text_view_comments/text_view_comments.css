@@ -24,7 +24,7 @@
 
 .c-toc {
   position: fixed;
-  max-height: 400px;
+  height: 400px;
   overflow: auto;
   padding-bottom: 5px;
   padding: 3px;

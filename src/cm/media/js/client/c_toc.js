@@ -17,7 +17,7 @@ instanciateToc = function() {
   if (toBeTOCced.length >= 2) {
     for (var i=0;i<toBeTOCced.length;i++) {
 	  	var tmp = document.createElement('a');
-		  tmp.innerHTML = toBeTOCced[i].innerHTML;
+		  tmp.innerHTML = toBeTOCced[i].innerHTML.replace(/<\/?a[^>]*>/g,'');
   		tmp.className = 'page indent' + toBeTOCced[i].nodeName;
 	  	content.appendChild(tmp);
 		  var headerId = toBeTOCced[i].id || 'link' + i;
@@ -43,6 +43,7 @@ instanciateToc = function() {
     width : width
   });
   overlay.get('contentBox').addClass("c-toc") ;
+  overlay.get('contentBox').set("id", "the-toc") ;
   
   // attach to DOM
   overlay.render('#leftcolumn');
