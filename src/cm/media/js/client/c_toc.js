@@ -5,25 +5,31 @@ instanciateToc = function() {
       'position':[CY.WidgetPositionExt.TL, CY.WidgetPositionExt.TL],
       'tocId':CY.guid(),
       'tocTitleId':CY.guid(),
-      'closeBtnId':CY.guid()
+      'closeBtnId':CY.guid(),
+      'empty': false
   } ;
   
   var overlayHtml = {};
   overlayHtml['headerContent'] = '<div id="' + gToc['tocId'] + '"><h3 id="' + gToc['tocTitleId'] + '"></h3>';
 
   var toBeTOCced = getElementsByTagNames('h2,h3,h4,h5,h6', document.getElementById('maincontainer'));
-  if (toBeTOCced.length < 2) return false;
   
   var content = document.createElement('div');
-  for (var i=0;i<toBeTOCced.length;i++) {
-		var tmp = document.createElement('a');
-		tmp.innerHTML = toBeTOCced[i].innerHTML;
-		tmp.className = 'page indent' + toBeTOCced[i].nodeName;
-		content.appendChild(tmp);
-		var headerId = toBeTOCced[i].id || 'link' + i;
-		tmp.href = '#' + headerId;
-		toBeTOCced[i].id = headerId;
-	}
+  if (toBeTOCced.length >= 2) {
+    for (var i=0;i<toBeTOCced.length;i++) {
+	  	var tmp = document.createElement('a');
+		  tmp.innerHTML = toBeTOCced[i].innerHTML;
+  		tmp.className = 'page indent' + toBeTOCced[i].nodeName;
+	  	content.appendChild(tmp);
+		  var headerId = toBeTOCced[i].id || 'link' + i;
+  		tmp.href = '#' + headerId;
+	  	toBeTOCced[i].id = headerId;
+    }
+  }
+  else {
+    content.innerHTML = '';
+    gToc['empty'] = true;
+  }
   overlayHtml['bodyContent'] = content.innerHTML;
   
   var width = gLayout.getTopICommentsWidth() ;

@@ -268,6 +268,9 @@ onDomReady = function(arg1) {
         parent.$("#c_fullscreen_btn").hide();
       }
 
+      if (gToc['empty'])
+        parent.$("#c_toc_btn").hide();
+
     },
     timeout :5
   }, {
