@@ -556,6 +556,10 @@ msgstr "Виж всички отстранени коментари"
 msgid "toggle advance interface"
 msgstr "Покажи / скрий напредналия интерфейс"
 
+#: media/js/site/f_text_view_frame.js:193
+msgid "toggle table of contents"
+msgstr "Покажи / скрий таблица на съдържанието"
+
 #: media/js/site/f_text_view_frame.js:187
 msgid "text feed"
 msgstr "захранване на текста"
@@ -599,6 +603,10 @@ msgstr "Отделете"
 #: media/js/site/text_edit.js:103
 msgid "Remove"
 msgstr "Махнете"
+
+#: media/js/client/c_toc.js:45
+msgid "Table of contents"
+msgstr "Таблица на съдържанието"
 
 #, fuzzy
 #~ msgid "&nbsp;reply"

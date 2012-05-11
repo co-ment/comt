@@ -21,3 +21,41 @@
 .initially_hidden, .displaynone {
     display:none;
 }
+
+.c-toc {
+  position: fixed;
+  max-height: 400px;
+  overflow: auto;
+  padding-bottom: 5px;
+  padding: 3px;
+}
+
+.c-toc h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  text-align: center;
+}
+
+.c-toc a {
+  display: list-item;
+  margin-left: 16px;
+  margin-top: 5px;
+}
+
+.c-toc a.indentH2 {
+  margin-left: 1em;
+}
+.c-toc a.indentH3 {
+  margin-left: 1.5em;
+}
+.c-toc a.indentH4 {
+  margin-left: 2em;
+}
+.c-toc a.indentH5 {
+  margin-left: 2.5em;
+}
+.c-toc a.indentH6 {
+  margin-left: 3em;
+}

@@ -361,6 +361,10 @@ msgstr "exportar documento com/sem comentários"
 msgid "toggle full screen view"
 msgstr "alternar tela cheia"
 
+#: media/js/site/f_text_view_frame.js:193
+msgid "toggle table of contents"
+msgstr "alternar a tabela de conteúdos"
+
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:188
 msgid "add a comment"
 msgstr "comentar"
@@ -603,6 +607,10 @@ msgstr "Pesquisar"
 #: media/js/site/text_edit.js:103
 msgid "Remove"
 msgstr ""
+
+#: media/js/client/c_toc.js:45
+msgid "Table of contents"
+msgstr "Tabela de conteúdos"
 
 #~ msgid "&nbsp;reply"
 #~ msgid_plural "&nbsp;replies"

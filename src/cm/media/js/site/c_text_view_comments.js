@@ -224,6 +224,7 @@ onDomReady = function(arg1) {
       if (sv_withComments) {
         instanciateICommentForm();
       }
+      instanciateToc();
     },
     timeout :5
   }, {

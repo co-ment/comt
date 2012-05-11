@@ -363,6 +363,10 @@ msgstr "eksporter dokument med/uten merknader"
 msgid "toggle full screen view"
 msgstr "slå på/av visning på full side"
 
+#: media/js/site/f_text_view_frame.js:193
+msgid "toggle table of contents"
+msgstr "slå på/av innholdsfortegnelsen"
+
 #: media/js/client/f_client-min.js:1 media/js/site/f_text_view_frame.js:188
 msgid "add a comment"
 msgstr "opprett merknad"
@@ -598,6 +602,10 @@ msgstr "Koble fra"
 #: media/js/site/text_edit.js:103
 msgid "Remove"
 msgstr "Fjern"
+
+#: media/js/client/c_toc.js:45
+msgid "Table of contents"
+msgstr "Innholdsfortegnelsen"
 
 #~ msgid "&nbsp;reply"
 #~ msgid_plural "&nbsp;replies"

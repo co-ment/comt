@@ -171,6 +171,7 @@ showICommentForm= function () {
       CY.get("#"+gICommentForm['emailInputId']).set('value', gPrefs.get('user','email')) ;
   }
   gIComments.hide() ;
+  hideToc();
   positionICommentForm() ;
   gICommentForm['overlay'].show() ;
   CY.get("#"+gICommentForm['titleInputId']).focus() ;

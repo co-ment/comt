@@ -427,6 +427,7 @@ Sync.prototype = {
       {fn:function() {
         gShowingAllComments = atDocumentTop ;     
         gIComments.hide() ; 
+        hideToc();
         var cs = CY.Array.map(commentDbIds, function(id) { return gDb.getComment(id) ; }) ;
         var comments = gDb.getThreads(cs) ;
         gIComments.fetch(comments) ;

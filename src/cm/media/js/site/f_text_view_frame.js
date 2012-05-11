@@ -190,6 +190,7 @@ fillTopToolbar = function() {
   var viewAll = gettext('view all comments') ;
   var viewScopeRemoved = gettext('view all detached comments') ;
   var advancedInterface = gettext('toggle advance interface') ;
+  var toggleToc = gettext('toggle table of contents') ;
   var print = gettext('print document with/without comments') ;
   var exportDoc = gettext('export document with/without comments') ;
   var fullscreen = gettext('toggle full screen view') ;
@@ -247,6 +248,9 @@ fillTopToolbar = function() {
       '</td>' +
       '<td width="20" align="left">' +
         '<a href="#" id="c_thread_unthread"><img id="c_thread_unthread_img"/></a>' +
+      '</td>' +
+      '<td width="20" align="left">' +
+        '<a href="#" id="c_toc_btn"><img title="'+ toggleToc +'" alt="'+ toggleToc +'" src="' + sv_media_url + '/img/document_index.png"/></a>' +
       '</td>' +
       '</tr>' +
       '</tbody>' +
@@ -352,6 +356,13 @@ fillTopToolbar = function() {
     frames['text_view_comments'].gSync.animateToTop() ;
   });
   
+  $("#c_toc_btn").click( function() {
+    if (frames['text_view_comments'].readyForAction()) {
+      frames['text_view_comments'].checkForOpenedDialog(null, function() {
+        frames['text_view_comments'].toggleTocFn() ;
+      }) ;
+    }
+  });
 }
 
 onSliderStop = function() {
