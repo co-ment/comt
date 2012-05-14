@@ -632,7 +632,7 @@ f_updateFilterData = function(newFilterData) {
   $("#filter_name").append($("<option name='c_f2_user_all' value=''>" + all + "</option>")) ;
   for (var  i=0, ilen=newFilterData['names'].length; i < ilen ; i++) {
     var item = newFilterData['names'][i] ;
-    $("#filter_name").append($("<option name='c_f2_user_"+ item.name +"' value='"+ item.name +"'>" + item.name +" ("+item.nb_comments+")</option>")) ;
+    $("#filter_name").append($("<option name='c_f2_user_"+ item.name +"' value='"+ item.name +"'>" + item.display +" ("+item.nb_comments+")</option>")) ;
   }
   
   $("#filter_name option[name="+selectedNameOption+"]").attr("selected", true);

@@ -57,6 +57,14 @@ msgstr "merknad lagret"
 msgid "comment saved, it is being held for moderation"
 msgstr "merknad lagret og holdes tilbake for godkjenning"
 
+#: client.py:314
+msgid "me"
+msgstr "meg"
+
+#: client.py:316
+msgid "author"
+msgstr "forfatter"
+
 #: client.py:341
 msgid "Tags input must be no longer than 250 characters."
 msgstr "Samlet lengde på etiketter kan ikke overstige 250 tegn."

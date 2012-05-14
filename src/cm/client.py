@@ -19,7 +19,7 @@ from cm.converters.pandoc_converters import pandoc_convert
 from cm.security import get_viewable_comments, list_viewable_comments, has_perm, has_perm_on_text, has_perm_on_comment, has_own_perm
 from cm.activity import register_activity
 from cm.utils.date import datetime_to_user_str, datetime_to_epoch
-from cm.cm_settings import AUTO_CONTRIB_REGISTER
+from cm.cm_settings import AUTO_CONTRIB_REGISTER, DECORATED_CREATORS
 from settings import CLIENT_DATE_FMT
 import re
 import time
@@ -299,8 +299,33 @@ def get_filter_datas(request, text_version, text):
     # authors
 #    names = list(Comment.objects.filter(text_version__text__key=key).filter(user__isnull=True).values('name').annotate(nb_comments=Count('id'))) #.order_by('name'))
     names = list(allowed_comments.filter(user__isnull=True).values('name').annotate(nb_comments=Count('id'))) #.order_by('name'))
-    names += list(User.objects.filter(Q(comment__text_version=text_version),Q(comment__deleted=False), Q(comment__id__in=allowed_ids)).extra(select={'name': "username"}).values('name').annotate(nb_comments=Count('id'))) #.order_by('username'))
-    names.sort(key = lambda obj:obj["name"])
+    if DECORATED_CREATORS:
+      names = list(allowed_comments.filter(user__isnull=False).values('name').annotate(nb_comments=Count('id'))) #.order_by('name'))
+      author = text_version.name
+    else:
+      names += list(User.objects.filter(Q(comment__text_version=text_version),Q(comment__deleted=False), Q(comment__id__in=allowed_ids)).extra(select={'name': "username"}).values('name').annotate(nb_comments=Count('id'))) #.order_by('username'))
+      author = User.objects.filter(id=text_version.user_id).values('username')[0]['username']
+    if request.GET.get('name', None):
+      me = request.GET.get('name', None)
+    else:
+      me = request.user.username
+    for name in names:
+      if name['name'] == me:
+        name['display'] = _(u'me') + ' (' + name['name'] + ')'
+      elif name['name'] == author:
+        name['display'] = _(u'author') + ' (' + name['name'] + ')'
+      else:
+        name['display'] = name['name']
+
+    def sort_with_author_or_me_first(x, y):
+      if x.startswith(_(u'me')) or x.startswith(_(u'author')):
+        return -1
+      if y.startswith(_(u'me')) or y.startswith(_(u'author')):
+        return 1
+      else:
+        return cmp(x, y)
+
+    names.sort(cmp = sort_with_author_or_me_first, key = lambda obj:obj["display"])
 
     # dates
     # TODO maybe optimize by comparing dates in python and saving these 'by day db requests'

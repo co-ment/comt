@@ -54,6 +54,14 @@ msgstr ""
 msgid "comment saved, it is being held for moderation"
 msgstr ""
 
+#: client.py:314
+msgid "me"
+msgstr ""
+
+#: client.py:316
+msgid "author"
+msgstr ""
+
 #: client.py:341
 msgid "Tags input must be no longer than 250 characters."
 msgstr ""

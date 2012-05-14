@@ -53,6 +53,14 @@ msgstr "comentario guardado"
 msgid "comment saved, it is being held for moderation"
 msgstr "comentario guardado, se reserva para moderación"
 
+#: client.py:314
+msgid "me"
+msgstr "me"
+
+#: client.py:316
+msgid "author"
+msgstr "autor"
+
 #: client.py:341
 msgid "Tags input must be no longer than 250 characters."
 msgstr "El contenido de las etiquetas no debe exceder los 250 caracteres"
