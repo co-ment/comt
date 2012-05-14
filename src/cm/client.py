@@ -304,7 +304,11 @@ def get_filter_datas(request, text_version, text):
       author = text_version.name
     else:
       names += list(User.objects.filter(Q(comment__text_version=text_version),Q(comment__deleted=False), Q(comment__id__in=allowed_ids)).extra(select={'name': "username"}).values('name').annotate(nb_comments=Count('id'))) #.order_by('username'))
-      author = User.objects.filter(id=text_version.user_id).values('username')[0]['username']
+      has_author = User.objects.filter(id=text_version.user_id).values('username')
+      if has_author:
+        author = has_author[0]['username']
+      else:
+        author = ''
     if request.GET.get('name', None):
       me = request.GET.get('name', None)
     else:
