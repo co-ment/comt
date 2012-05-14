@@ -71,7 +71,12 @@ instanciateToc = function() {
   gToc['animationShow'] = animationShow ; 
   animationShow.set('to', { opacity: 1});
   gToc['animationShow-handle'] = animationShow.on('end', onTocShowAnimEnd, gToc);
-  document.getElementsByClassName('c-toc')[0].style.width = width + 'px';
+  if (typeof document.getElementsByClassName!='function') {
+    document.querySelectorAll('.c-toc')[0].style.width = width + 'px';
+  }
+  else {
+    document.getElementsByClassName('c-toc')[0].style.width = width + 'px';
+  }
 }
 
 toggleTocFn = function() {
