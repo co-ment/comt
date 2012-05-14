@@ -132,7 +132,11 @@ padding:0;
 }
 
 #c_filter input[type="text"], #c_filter select{
-    width:150px;
+  width:100px;
+}
+
+#c_filter table {
+  font-size: 10px;
 }
 
 .ui-slider-horizontal {
