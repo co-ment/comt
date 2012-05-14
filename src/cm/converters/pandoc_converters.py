@@ -15,7 +15,7 @@ from xml.dom.minidom import parseString
 import re
 
 PANDOC_BIN = "pandoc"
-PANDOC_OPTIONS = " --sanitize-html --email-obfuscation=none "
+PANDOC_OPTIONS = " --email-obfuscation=none "
 PANDOC_OPTIONS_RAW = " -R --email-obfuscation=none "
 
 MARKDOWN2PDF_BIN = "markdown2pdf"
