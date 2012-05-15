@@ -483,6 +483,16 @@ Sync.prototype = {
     checkForOpenedDialog(null, function() {
       gShowingAllComments = true ;
       var allTopComments = CY.Array.map(gDb.comments, function(c){return c.id;}) ;
+      // Reorder if by scope.
+      if (parent.$("#browse_by").val() == 'scope') {
+        allTopComments.sort(function (a,b) {
+          if (gDb.ordered_comment_ids['scope'].indexOf(a) < gDb.ordered_comment_ids['scope'].indexOf(b))
+            return -1;
+          if (gDb.ordered_comment_ids['scope'].indexOf(a) > gDb.ordered_comment_ids['scope'].indexOf(b))
+            return 1
+          return 0
+		    });
+      }
       // GIB: go down the 'add comment' icon
       this.showComments(allTopComments, [0,30], true) ;
     }, this, null) ;
@@ -493,6 +503,16 @@ Sync.prototype = {
       gShowingAllComments = true ;
       var scopeRemovedComments = CY.Array.filter(gDb.comments, function(comment) { return (comment.start_wrapper == -1) ; }) ;
       var scopeRemovedCommentIds = CY.Array.map(scopeRemovedComments, function(c){return c.id;}) ;
+      // Reorder if by scope.
+      if (parent.$("#browse_by").val() == 'scope') {
+        scopeRemovedCommentIds.sort(function (a,b) {
+          if (gDb.ordered_comment_ids['scope'].indexOf(a) < gDb.ordered_comment_ids['scope'].indexOf(b))
+            return -1;
+          if (gDb.ordered_comment_ids['scope'].indexOf(a) > gDb.ordered_comment_ids['scope'].indexOf(b))
+            return 1
+          return 0
+		    });
+      }
       // GIB: go down the 'add comment' icon
       this.showComments(scopeRemovedCommentIds, [0,30], true) ;
       
