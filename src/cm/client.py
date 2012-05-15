@@ -314,12 +314,15 @@ def get_filter_datas(request, text_version, text):
     else:
       me = request.user.username
     for name in names:
-      if name['name'] == me:
-        name['display'] = _(u'me') + ' (' + name['name'] + ')'
-      elif name['name'] == author:
-        name['display'] = _(u'author') + ' (' + name['name'] + ')'
+      if name['name']:
+        if name['name'] == me:
+          name['display'] = _(u'me') + ' (' + name['name'] + ')'
+        elif name['name'] == author:
+          name['display'] = _(u'author') + ' (' + name['name'] + ')'
+        else:
+          name['display'] = name['name']
       else:
-        name['display'] = name['name']
+        name['display'] = ''
 
     def sort_with_author_or_me_first(x, y):
       if x and (x.startswith(_(u'me')) or x.startswith(_(u'author'))):
