@@ -243,6 +243,14 @@ msgstr "baixar arquivo LaTex (.tex)"
 msgid "download open document file (.odt)"
 msgstr "baixar aquivo ODT (.odt)"
 
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:11
+msgid "download microsoft word file (.doc)"
+msgstr "baixar arquivo microsoft word (.doc)"
+
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:12
+msgid "download microsoft word 2007 file (.docx)"
+msgstr "baixar arquivo microsoft word 2007 (.docx)"
+
 #: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:13
 msgid "Print text"
 msgstr "Imprimir texto"

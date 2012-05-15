@@ -7,7 +7,9 @@ gFormats = [{'actions':['print'], 'extension':'html', 'label': gettext('print fr
             {'actions':['print', 'export'], 'extension':'markdown', 'label': gettext('download markdown file (.mkd)')},
             {'actions':['print', 'export'], 'extension':'pdf', 'label': gettext('download portable object format file (.pdf)')},
             {'actions':['print', 'export'], 'extension':'latex', 'label': gettext('download latex file (.tex)')},
-            {'actions':['print', 'export'], 'extension':'odt', 'label': gettext('download open document file (.odt)')}] ;
+            {'actions':['print', 'export'], 'extension':'odt', 'label': gettext('download open document file (.odt)')},
+            {'actions':['print', 'export'], 'extension':'doc', 'label': gettext('download microsoft word file (.doc)')},
+            {'actions':['print', 'export'], 'extension':'docx', 'label': gettext('download microsoft word file (.docx)')}] ;
 
 
 gActions = {'print':{'dialogTitle':gettext('Print text'), 'chooseFormatLabel':gettext('How do you want to print?'), 'defaultMethod':'pdf', 'defaultWithColors':"no", 'defaultWhichComments':'all'}, 

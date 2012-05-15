@@ -22,15 +22,15 @@ TYPES_IN  = {'602': '602',       'abw': 'abw',       'aw': 'aw',
              'xml': 'xml',       'zabw': 'zabw'}
 
 TYPES_OUT = {'abw': 'abw',       'aw': 'aw',         'awt': 'awt',
-             'dbk': 'dbk',       'doc': 'doc',       'eml': 'eml',
-             'fo': 'fo',         'html': 'html',     'isc': 'isc',
-             'iscii': 'iscii',   'kwd': 'kwd',       'latex': 'latex',
-             'mht': 'mht',       'mif': 'mif',       'nroff': 'nroff',
-             'nws': 'nws',       'odt': 'odt',       'pdb': 'pdb',
-             'pdf': 'pdf',       'ps': 'ps',         'rtf': 'rtf',
-             'sxw': 'sxw',       'text': 'text',     'txt': 'txt',
-             'wml': 'wml',       'xml': 'xml',       'xml2ps': 'xml2ps',
-             'zabw': 'zabw'}
+             'dbk': 'dbk',       'doc': 'doc',       'docx': 'docx',
+             'eml': 'eml',       'fo': 'fo',         'html': 'html',
+             'isc': 'isc',       'iscii': 'iscii',   'kwd': 'kwd',
+             'latex': 'latex',   'mht': 'mht',       'mif': 'mif',
+             'nroff': 'nroff',   'nws': 'nws',       'odt': 'odt',
+             'pdb': 'pdb',       'pdf': 'pdf',       'ps': 'ps',
+             'rtf': 'rtf',       'sxw': 'sxw',       'text': 'text',
+             'txt': 'txt',       'wml': 'wml',       'xml': 'xml',
+             'xml2ps': 'xml2ps', 'zabw': 'zabw'}
 
 class AbiFileConverter(object):
     """This let's you convert between all filetypes supperted by the 

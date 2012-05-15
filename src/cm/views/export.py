@@ -15,6 +15,8 @@ EXPORT2_INFOS = {
 'pdf' :  {'mimetype': 'application/pdf', 'extension':'pdf'},
 'markdown' :  {'mimetype': 'text/plain', 'extension':'mkd'},
 'odt' :  {'mimetype': 'application/vnd.oasis.opendocument.text', 'extension':'odt'},
+'doc' :  {'mimetype': 'application/msword', 'extension':'doc'},
+'docx' :  {'mimetype': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'extension':'docx'},
 'latex' :{'mimetype': 'text/x-tex', 'extension':'tex'},
 'html' :{'mimetype': 'text/html', 'extension':'html'},
 # raw export
@@ -143,6 +145,8 @@ EXPORT_INFOS = {
 'pdf' :  [True , 'application/pdf' , 'pdf'],
 'markdown' :  [True , 'text/plain' , 'mkd'],
 'odt' :  [True , 'application/vnd.oasis.opendocument.text', 'odt'],
+'doc' :  [True , 'application/msword', 'odt'],
+'docx' :  [True , 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'docx'],
 'latex' :[True , 'text/x-tex', 'tex'],
 'html' :[True , 'text/html', 'html'],
 # raw export

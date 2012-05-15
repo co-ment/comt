@@ -235,7 +235,7 @@ msgstr "descargar archivo markdown (.mkd)"
 
 #: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:8
 msgid "download portable object format file (.pdf)"
-msgstr "Descargar archivo en formato PDF (.pdf)"
+msgstr "descargar archivo en formato PDF (.pdf)"
 
 #: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:9
 msgid "download latex file (.tex)"
@@ -244,6 +244,14 @@ msgstr "descargar archivo como fichero latex (.tex)"
 #: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:10
 msgid "download open document file (.odt)"
 msgstr "descargar archivo como documento de openoffice (.odt)"
+
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:11
+msgid "download microsoft word file (.doc)"
+msgstr "descargar archivo en formato microsoft word (.doc)"
+
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:12
+msgid "download microsoft word 2007 file (.docx)"
+msgstr "descargar archivo en formato microsoft word 2007 (.docx)"
 
 #: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:13
 msgid "Print text"

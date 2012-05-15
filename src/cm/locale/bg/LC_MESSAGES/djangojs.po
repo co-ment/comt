@@ -244,6 +244,14 @@ msgstr "изтегляне на latex фаил (.tex)"
 msgid "download open document file (.odt)"
 msgstr "Изтегляне на open файл (.odt)"
 
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:11
+msgid "download microsoft word file (.doc)"
+msgstr "Изтегляне на microsoft word файл (.doc)"
+
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:12
+msgid "download microsoft word 2007 file (.docx)"
+msgstr "Изтегляне на microsoft word 2007 файл (.docx)"
+
 #: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:13
 msgid "Print text"
 msgstr "Отпечатване на текстa"

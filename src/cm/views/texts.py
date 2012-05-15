@@ -341,7 +341,7 @@ def text_export(request, key, format, download, whichcomments, withcolor, admink
             use_pandoc = True
         elif format in ('pdf', 'odt') : 
             use_pandoc = (original_format == "markdown")
-        elif format in ('doc', 'html') :
+        elif format in ('docx', 'doc', 'html') :
             use_pandoc = False
 
     # correct attach path => real path

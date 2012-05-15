@@ -241,6 +241,14 @@ msgstr ""
 msgid "download open document file (.odt)"
 msgstr ""
 
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:11
+msgid "download microsoft word file (.doc)"
+msgstr ""
+
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:12
+msgid "download microsoft word 2007 file (.docx)"
+msgstr ""
+
 #: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:13
 msgid "Print text"
 msgstr ""
