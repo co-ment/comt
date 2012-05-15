@@ -322,9 +322,9 @@ def get_filter_datas(request, text_version, text):
         name['display'] = name['name']
 
     def sort_with_author_or_me_first(x, y):
-      if x.startswith(_(u'me')) or x.startswith(_(u'author')):
+      if x and (x.startswith(_(u'me')) or x.startswith(_(u'author'))):
         return -1
-      if y.startswith(_(u'me')) or y.startswith(_(u'author')):
+      if y and (y.startswith(_(u'me')) or y.startswith(_(u'author'))):
         return 1
       else:
         return cmp(x, y)
