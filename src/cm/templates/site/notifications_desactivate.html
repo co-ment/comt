@@ -13,7 +13,7 @@
 
 <div id="login_container">
 
-<form id="login" enctype="multipart/form-data" class="wizard-form" action="." method="post">
+<form id="login" enctype="multipart/form-data" class="wizard-form" action="." method="post">{% csrf_token %}
 
 <div class="underline_border">
 {{ title }}

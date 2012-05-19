@@ -12,7 +12,7 @@
 {% block content %}
 
 <h1>{% blocktrans %}Reset your password{% endblocktrans %}</h1>
-<form id="profile" enctype="multipart/form-data" class="wizard-form" action="." method="post">
+<form id="profile" enctype="multipart/form-data" class="wizard-form" action="." method="post">{% csrf_token %}
 <table class="wide_form">
     <tbody>
             {% include "site/macros/form_fields.html" %}

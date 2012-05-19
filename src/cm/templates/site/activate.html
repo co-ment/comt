@@ -9,7 +9,7 @@
 
 <h1>{% blocktrans %}Activate your account{% endblocktrans %}</h1>
 
-<form id="activate" enctype="multipart/form-data" class="wizard-form" action="." method="post">
+<form id="activate" enctype="multipart/form-data" class="wizard-form" action="." method="post">{% csrf_token %}
 <table class="wide_form">
     <tbody>
         {% for form in forms %}

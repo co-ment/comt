@@ -19,7 +19,7 @@
     <li><a href="{% url profile-pw %}">{% blocktrans %}Password{% endblocktrans %}</a></li>
 </ul>
 
-<form id="profile" enctype="multipart/form-data" class="wizard-form" action="." method="post">
+<form id="profile" enctype="multipart/form-data" class="wizard-form" action="." method="post">{% csrf_token %}
 <table class="wide_form">
     <tbody>
         {% for form in forms %}
