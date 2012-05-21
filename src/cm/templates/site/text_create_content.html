@@ -33,7 +33,7 @@ $(function() {
 
 {% autoescape off %} {{ document }} {% endautoescape %}
 
-<form id="text_create_content" enctype="multipart/form-data" class="wizard-form" action="." method="post">{% csrf_token %}
+<form id="text_create_content" enctype="multipart/form-data" class="wizard-form" action="." method="post">
 <table class="wide_form">
     <tbody>
     {% with 'create_content' as form_type %} 

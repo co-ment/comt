@@ -24,7 +24,7 @@ tb_conf['pre_edit_url'] = '{{ preedit_url }}{{ preedit_url|url_args }}{{ request
 </div>
 
 <div id="text_edit" class="tab-meta">
-<form id="edit_form" class="text-form wizard-form" action="." method="post">{% csrf_token %}
+<form id="edit_form" class="text-form wizard-form" action="." method="post">
     <table class="wide_form">
         <tbody>
             {% include "site/macros/form_fields.html" %}
