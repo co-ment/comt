@@ -100,7 +100,7 @@ class AbiFileConverter(object):
         type = TYPES_OUT.get(
             type or os.path.splitext(out_file)[1][1:], 'txt')
 
-        # do the coversion
+        # do the conversion
         self._perform_conversion(in_file, out_file, type)
 
         # return a byte string if no out_file is specified

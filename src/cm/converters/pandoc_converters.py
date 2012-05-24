@@ -13,24 +13,32 @@ import tidy
 from cm.utils.string_utils import to_unicode
 from xml.dom.minidom import parseString
 import re
+from distutils.version import LooseVersion
 
 PANDOC_BIN = "pandoc"
-PANDOC_OPTIONS = " --sanitize-html --email-obfuscation=none "
+import commands
+PANDOC_VERSION = commands.getstatusoutput(PANDOC_BIN + " -v|head -n 1|awk '{print $2;}'")[1]
+if LooseVersion(PANDOC_VERSION) < '1.8':
+  PANDOC_OPTIONS = " --sanitize-html --email-obfuscation=none "
+else:
+  PANDOC_OPTIONS = " --email-obfuscation=none "
+
 PANDOC_OPTIONS_RAW = " -R --email-obfuscation=none "
 
-MARKDOWN2PDF_BIN = "markdown2pdf"
+if LooseVersion(PANDOC_VERSION) < '1.9':
+  MARKDOWN2PDF_BIN = "markdown2pdf"
+else:
+  MARKDOWN2PDF_BIN = None
 
 # make sure binaries are available
 from cm.utils.system import bin_search
 bin_search(PANDOC_BIN)
-bin_search(MARKDOWN2PDF_BIN)
+if MARKDOWN2PDF_BIN:
+  bin_search(MARKDOWN2PDF_BIN)
 
 # pandoc capabilities
 INPUT_FORMATS = ['native', 'markdown', 'rst', 'html', 'latex']
-OUTPUT_FORMATS = ['native', 'html', 's5', 'docbook', 'opendocument', 'odt', 'latex', 'context', 'texinfo', 'man', 'markdown', 'rst', 'mediawiki', 'rtf']
-
-# add pdf output using markdown2pdf
-OUTPUT_FORMATS.append('pdf')
+OUTPUT_FORMATS = ['native', 'html', 's5', 'docbook', 'opendocument', 'odt', 'latex', 'context', 'texinfo', 'man', 'markdown', 'rst', 'mediawiki', 'rtf', 'pdf']
 
 # input formats
 CHOICES_INPUT_FORMATS = [(f, f) for f in ['markdown', 'rst', 'html']]
@@ -55,7 +63,7 @@ def pandoc_convert(content, from_format, to_format, full=False, raw=False):
             # tidy fails ... try pandoc anyway...
             content = to_unicode(content)
     # if to_format is pdf: use markdown2pdf
-    if to_format == 'pdf':        
+    if MARKDOWN2PDF_BIN and to_format == 'pdf':        
         if from_format != 'markdown':
             content = pandoc_convert(content, from_format, 'markdown', True)
         return pandoc_markdown2pdf(content)
@@ -191,7 +199,11 @@ def pandoc_pandoc(content, from_format, to_format, full=False, raw=False):
 
     # temp file
     input_file, input_temp_name = get_filetemp('w', 'input')
-    output_temp_fp, output_temp_name = get_filetemp('r', 'output')
+    # For some reason when pandoc > 1.9 converts to PDF, '-t' shouldn't be used but output file name extension has to be '.pdf'
+    if to_format != 'pdf':
+      output_temp_fp, output_temp_name = get_filetemp('r', 'output')
+    else:
+      output_temp_fp, output_temp_name = get_filetemp('r', 'output.pdf')
     output_temp_fp.close()
     
     error_temp_fp, error_temp_name = get_filetemp('w', 'err')
@@ -231,7 +243,8 @@ def pandoc_pandoc(content, from_format, to_format, full=False, raw=False):
     if full:
         cmd_args += ' -s '
     cmd_args += ' -f %s ' % from_format
-    cmd_args += ' -t %s ' % to_format
+    if to_format != 'pdf':
+      cmd_args += ' -t %s ' % to_format
     cmd_args += ' %s ' % input_temp_name
     cmd = PANDOC_BIN + ' ' + cmd_args
 
