@@ -57,6 +57,18 @@ def content_export2(request, content, title, content_format, format, use_pandoc,
             if USE_ABI:
               from cm.converters.abi_converters import AbiFileConverter
               converter = AbiFileConverter()
+
+              # replaces images url by their actual path
+              from django.conf import settings
+              site_url = settings.SITE_URL
+              import re
+              attach_re = r'/attach/(?P<attach_key>\w*)/'
+              attach_str = r'%s/attach/%s/'
+              for match in re.findall(attach_re, fix_content):
+                link = attach_str %(site_url, match)
+                attach = Attachment.objects.get(key=match)
+                fix_content = fix_content.replace(link, attach.data.path)
+
               export_content = converter.convert_from_html(fix_content, format)
             else:
               from cm.converters.oo_converters import convert_html as oo_convert                
