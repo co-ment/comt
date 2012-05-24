@@ -19,6 +19,7 @@ EXPORT2_INFOS = {
 'docx' :  {'mimetype': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'extension':'docx'},
 'latex' :{'mimetype': 'text/x-tex', 'extension':'tex'},
 'html' :{'mimetype': 'text/html', 'extension':'html'},
+'epub' :{'mimetype': 'application/epub+zip', 'extension':'epub'},
 # raw export
 'raw' : {'mimetype': 'text/plain', 'extension':'txt'}
 }
@@ -161,6 +162,7 @@ EXPORT_INFOS = {
 'docx' :  [True , 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'docx'],
 'latex' :[True , 'text/x-tex', 'tex'],
 'html' :[True , 'text/html', 'html'],
+'epub' :[True , 'application/epub+zip', 'epub'],
 # raw export
 'raw' : [True, 'text/plain', 'txt']
 }

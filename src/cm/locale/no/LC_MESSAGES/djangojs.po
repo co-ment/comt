@@ -255,6 +255,10 @@ msgid "download microsoft word 2007 file (.docx)"
 msgstr "last ned fil i microsoft word-format 2007 (.docx)"
 
 #: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:13
+msgid "download ebook (.epub)"
+msgstr "last ned fil i ebok (.epub)"
+
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:13
 msgid "Print text"
 msgstr "Skriv ut tekst"
 

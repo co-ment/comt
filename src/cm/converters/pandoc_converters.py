@@ -38,7 +38,7 @@ if MARKDOWN2PDF_BIN:
 
 # pandoc capabilities
 INPUT_FORMATS = ['native', 'markdown', 'rst', 'html', 'latex']
-OUTPUT_FORMATS = ['native', 'html', 's5', 'docbook', 'opendocument', 'odt', 'latex', 'context', 'texinfo', 'man', 'markdown', 'rst', 'mediawiki', 'rtf', 'pdf']
+OUTPUT_FORMATS = ['native', 'html', 's5', 'docbook', 'opendocument', 'odt', 'latex', 'context', 'texinfo', 'man', 'markdown', 'rst', 'mediawiki', 'rtf', 'pdf', 'epub']
 
 # input formats
 CHOICES_INPUT_FORMATS = [(f, f) for f in ['markdown', 'rst', 'html']]

@@ -254,6 +254,10 @@ msgid "download microsoft word 2007 file (.docx)"
 msgstr "descargar archivo en formato microsoft word 2007 (.docx)"
 
 #: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:13
+msgid "download ebook (.epub)"
+msgstr "descargar archivo en formato ebook (.epub)"
+
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:13
 msgid "Print text"
 msgstr "Imprimir texto"
 
