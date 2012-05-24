@@ -9,9 +9,12 @@ gFormats = [{'actions':['print'], 'extension':'html', 'label': gettext('print fr
             {'actions':['print', 'export'], 'extension':'latex', 'label': gettext('download latex file (.tex)')},
             {'actions':['print', 'export'], 'extension':'odt', 'label': gettext('download open document file (.odt)')},
             {'actions':['print', 'export'], 'extension':'doc', 'label': gettext('download microsoft word file (.doc)')},
-            {'actions':['print', 'export'], 'extension':'docx', 'label': gettext('download microsoft word 2007 file (.docx)')},
-            {'actions':['print', 'export'], 'extension':'epub', 'label': gettext('download ebook (.epub)')}] ;
+            {'actions':['print', 'export'], 'extension':'docx', 'label': gettext('download microsoft word 2007 file (.docx)')}];
 
+var pandoc_version_ary = sv_pandoc_version.split('.');
+if (parseInt(pandoc_version_ary[0]) > 1 || (parseInt(pandoc_version_ary[0]) == 1 && parseInt(pandoc_version_ary[1]) > 8)) {
+  gFormats.push({'actions':['print', 'export'], 'extension':'epub', 'label': gettext('download ebook (.epub)')});
+}
 
 gActions = {'print':{'dialogTitle':gettext('Print text'), 'chooseFormatLabel':gettext('How do you want to print?'), 'defaultMethod':'pdf', 'defaultWithColors':"no", 'defaultWhichComments':'all'}, 
       'export':{'dialogTitle':gettext('Export text'), 'chooseFormatLabel':gettext('Choose file format'), 'defaultMethod':'pdf', 'defaultWithColors':"no", 'defaultWhichComments':'all'}} ; 

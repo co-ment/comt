@@ -17,7 +17,8 @@
 <!-- TODO factorize with base.html for jquery etc... -->
 	<script type="text/javascript">
 	<!--
-	sv_media_url = "{{ CM_MEDIA_PREFIX|escapejs}}" ; 
+  sv_media_url = "{{ CM_MEDIA_PREFIX|escapejs}}" ; 
+  sv_pandoc_version = "{{ PANDOC_VERSION|escapejs}}" ;
 	-->
 	</script>
     <link type="text/css" href="{{ CM_MEDIA_PREFIX }}js/lib/jquery/css/smoothness/jquery-ui-1.7.2.custom.css" rel="stylesheet" />    
@@ -36,7 +37,7 @@
     <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/f_printDialog.js"></script>
     <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/site/f_text_view_frame.js"></script>
 {% else %}
-    <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/f_client-min.js?1337863306"></script> 
+    <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/f_client-min.js?1337867890"></script> 
 {% endif %}
     <style type="text/css">
         /*

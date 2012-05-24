@@ -1,6 +1,7 @@
 from django.conf import settings
 from cm.models import ApplicationConfiguration
 from cm.cm_settings import TRACKING_HTML
+from cm.converters.pandoc_converters import PANDOC_VERSION
 def static(request):
     """
     add static data to be used in templates
@@ -12,6 +13,7 @@ def static(request):
             'CONF': ApplicationConfiguration,
             'CM_MEDIA_PREFIX' : settings.CM_MEDIA_PREFIX,
             'TRACKING_HTML' : TRACKING_HTML,
+            'PANDOC_VERSION' : PANDOC_VERSION,
             }
 
 
