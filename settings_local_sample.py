@@ -52,3 +52,13 @@ SERVER_EMAIL = DEFAULT_FROM_EMAIL
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
 DEFAULT_TIME_ZONE = "Europe/Paris"
+
+# Do not use name/email of co-ment users but rather
+# those passed in the request.
+# Set this parameter to True when using co-ment from
+# a third-party CMS throuch co-ment API.
+DECORATED_CREATORS = False
+
+# Set to TRUE to use Abiword for convertion form and to legacy formats.
+# Set to False to use LibreOffice for convertion form and to legacy formats.
+USE_ABI = True
