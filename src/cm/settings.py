@@ -57,8 +57,8 @@ LOGIN_URL = '/login/'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.load_template_source',
-    'django.template.loaders.app_directories.load_template_source',
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.load_template_source',
 )
 
@@ -66,7 +66,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'cm.context_processors.static',
     'cm.context_processors.tz',
     'cm.context_processors.utils',    
-    'django.core.context_processors.auth',
+    'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.request',
     "django.core.context_processors.i18n",    
     "django.core.context_processors.media",    
@@ -116,6 +116,7 @@ AUTH_PROFILE_MODULE = 'cm.UserProfile'
 FILE_UPLOAD_HANDLERS = ("django.core.files.uploadhandler.TemporaryFileUploadHandler",)
 
 # comt settings
+PISTON_IGNORE_DUPE_MODELS = True
 
 # YUI version : set to js/lib/ version directory to be used  
 YUI_VERSION = 'yui3.0.0'
