@@ -603,7 +603,7 @@ class RegistrationManager(KeyManager):
     
         
     def create_inactive_user(self, email, send_invitation, **kwargs):
-        if 'postgresql' in settings.DATABASE_ENGINE:
+        if 'postgresql' in settings.DATABASES['default']['ENGINE']:
             #prevent concurrent access 
             cursor = connection.cursor()
             sql = "LOCK TABLE auth_user IN EXCLUSIVE MODE"
