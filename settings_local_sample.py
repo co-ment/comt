@@ -5,12 +5,16 @@ CLIENT_DEBUG = DEBUG
 YUI_DEBUG = DEBUG # use expanded yui version (i.e. not -min)
 YUI_DISTANT = False
 
-DATABASE_ENGINE = 'postgresql_psycopg2' # YOUR_SETTINGS          # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = 'db_name' # YOUR_SETTINGS           # Or path to database file if using sqlite3.
-DATABASE_USER = 'db_user' # YOUR_SETTINGS            # Not used with sqlite3.
-DATABASE_PASSWORD = 'db_pw' # YOUR_SETTINGS        # Not used with sqlite3.
-DATABASE_HOST = '' # YOUR_SETTINGS            # Set to empty string for localhost. Not used with sqlite3.
-DATABASE_PORT = '' # YOUR_SETTINGS            # Set to empty string for default. Not used with sqlite3.
+DATABASES = {
+  'default': {
+    'ENGINE': 'postgresql_psycopg2', # YOUR_SETTINGS # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+    'NAME': 'db_name',               # YOUR_SETTINGS # Or path to database file if using sqlite3.
+    'USER': 'db_user',               # YOUR_SETTINGS # Not used with sqlite3.
+    'PASSWORD': 'db_pw',             # YOUR_SETTINGS # Not used with sqlite3.
+    'HOST': '',                      # YOUR_SETTINGS # Set to empty string for localhost. Not used with sqlite3.
+    'PORT': '',                      # YOUR_SETTINGS # Set to empty string for default. Not used with sqlite3.
+   }
+}
 
 SITE_URL = "http://127.0.0.1:8000" # YOUR_SETTINGS
 
