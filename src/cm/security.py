@@ -13,6 +13,7 @@ import logging
 from cm.models import *
 from cm import cm_settings
 from cm.exception import UnauthorizedException
+from cm.cm_settings import DECORATED_CREATORS
 
 def get_request_user(request):
     if request and request.user and not request.user.is_anonymous():
@@ -99,7 +100,6 @@ def has_own_perm(request, perm_name, text, comment):
         return False
     
     actual_own_user = False
-    from cm.cm_settings import DECORATED_CREATORS
     if comment.user == request.user:
       if DECORATED_CREATORS:
         if request.GET.get('name', None) == comment.get_name():
@@ -157,13 +157,57 @@ def get_viewable_comments(request, comments, text, order_by=('created',)):
     if user and has_perm(request, 'can_view_unapproved_comment', text=text):
         return list(comments.order_by(*order_by))
     else:
+        # Fetch role_model to process specific behaviour for role_teacher model
+        from cm.models import ApplicationConfiguration
+        role_model = ApplicationConfiguration.get_key('workspace_role_model')
+
         if has_perm(request, 'can_view_approved_comment', text=text):
             visible_comments = comments.filter(state = 'approved').order_by(*order_by)
             # filter comments with a non visible (i.e. moderated) comment in the above thread 
             comments_thread_viewable = [c for c in visible_comments if c.is_thread_full_visible()]
+
+            # for role_teacher role model, do not show 'individual student' comments
+            if (role_model == 'teacher'):
+              unfiltered_comments = list(comments_thread_viewable)
+              for c in unfiltered_comments:
+                if c.user_id and c.user_id != 1:
+                  try:
+                    userrole = UserRole.objects.get(user=c.user, text=text)
+                  except:
+                    userrole = UserRole.objects.get(user=None, text=None)
+                  if userrole.role_id == None:
+                    role = c.user.get_profile().global_userrole().role
+                  else:
+                    role = userrole.role
+                  if role.name == 'Individual student':
+                    comments_thread_viewable.remove(c)
             return comments_thread_viewable 
         elif user and has_perm(request, 'can_view_comment_own', text=text):
-            visible_comments = comments.filter(user=user).order_by(*order_by)
+            if DECORATED_CREATORS:
+              visible_comments = comments.filter(name=request.GET.get('name', None)).order_by(*order_by)
+            else:
+              visible_comments = comments.filter(user=user).order_by(*order_by)
+
+            # for role_teacher role model, add 'teacher' comments
+            if (role_model == 'teacher'):
+              with_teachers = []
+              for u in list(User.objects.filter(userrole__role__name = 'Teacher')):
+                if DECORATED_CREATORS:
+                  with_teachers.append(u.username)
+                else:
+                  with_teachers.append(u.id)
+
+              # add admin and current user
+              admin =  User.objects.get(id=1)
+              if DECORATED_CREATORS:
+                with_teachers.append(admin.username)
+                with_teachers.append(request.GET.get('name', None))
+                visible_comments = comments.filter(name__in=with_teachers).order_by(*order_by)
+              else:
+                with_teachers.append(admin.id)
+                with_teachers.append(user.id)
+                visible_comments = comments.filter(user__id__in=with_teachers).order_by(*order_by)
+
             # filter comments with a non visible (i.e. moderated) comment in the above thread 
             comments_thread_viewable = [c for c in visible_comments if c.is_thread_full_visible(own_user=user)]
             return comments_thread_viewable                

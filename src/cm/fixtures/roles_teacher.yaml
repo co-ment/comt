@@ -14,9 +14,10 @@
   fields:
     name: "Student"
     description: "" 
-    permissions: [52, 11, 31, 33, 34]
+    permissions: [52, 11, 31, 33, 34, 38]
 # can_view_approved_comment 34    
 # can_delete_comment_own	33
+# can_edit_comment_own  38
 # can_create_comment		31
 # can_view_text				11
 # can_view_workspace		52                    
