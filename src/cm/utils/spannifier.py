@@ -35,6 +35,11 @@ def spannify(input):
             span_starts[i] = len(''.join(textNodes_content))
             textNodes_content.append(textNode.string)
     output = unicode(soup)
+    # Soup has introduced HTML entities, which should be expanded
+    output =re.sub(r"&quot;", '"', output)
+    output =re.sub(r"&amp;", '&', output)
+    output =re.sub(r"&gt;", '>', output)
+    output =re.sub(r"&lt;", '<', output)
          
     textualized = ''.join(textNodes_content)
     return output, textualized, span_starts

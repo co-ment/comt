@@ -355,11 +355,6 @@ def text_export(request, key, format, download, whichcomments, withcolor, admink
         html = pandoc_convert(original_content, original_format, 'html')
         wrapped_text_version, _ , _ = spannify(html)
         with_markers = True
-        # Tidy has introduced HTML entities, which should be expanded to keep correct offsets of comments.
-        wrapped_text_version =re.sub(r"&quot;", '"', wrapped_text_version)
-        wrapped_text_version =re.sub(r"&amp;", '&', wrapped_text_version)
-        wrapped_text_version =re.sub(r"&gt;", '>', wrapped_text_version)
-        wrapped_text_version =re.sub(r"&lt;", '<', wrapped_text_version)
         marked_content = insert_comment_markers(wrapped_text_version, comments, with_markers, with_color)
     
         viewable_comments = comments_thread(request, text_version, text) 
