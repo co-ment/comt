@@ -133,7 +133,7 @@ msgstr ""
 
 #: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:6
 msgid "Title:"
-msgstr ""
+msgstr "Subject:"
 
 #: media/js/client/c_client-min.js:1 media/js/client/c_interface_forms.js:7
 msgid "Content:"
