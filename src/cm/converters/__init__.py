@@ -21,7 +21,7 @@ def _convert_from_mimetype(input, mime_type, format):
     # OO/MS-Word
     if mime_type in ['application/vnd.oasis.opendocument.text',
                      'application/msword',
-                     'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                     'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
                      'application/rtf',
                      'text/rtf',
                      ]:
