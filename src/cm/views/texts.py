@@ -16,7 +16,7 @@ from cm.utils.comment_positioning import compute_new_comment_positions, \
     insert_comment_markers
 from cm.utils.spannifier import spannify
 from cm.views import get_keys_from_dict, get_textversion_by_keys_or_404, get_text_by_keys_or_404, redirect
-from cm.views.export import content_export2, content_export
+from cm.views.export import content_export2, content_export, xml_export
 from cm.views.user import AnonUserRoleForm, cm_login
 from difflib import unified_diff
 from django import forms
@@ -311,12 +311,16 @@ def from_html_links_to_abs_links(content):
 def text_export(request, key, format, download, whichcomments, withcolor, adminkey=None):
     text, admin = get_text_and_admin(key, adminkey)
     text_version = text.get_latest_version()
+
+    if format == 'xml':
+      return xml_export(request, text_version, whichcomments) 
+    
     original_content = text_version.content
     original_format = text_version.format # BD : html or markdown for  now ...
 
     download_response = download == "1"
     with_color = withcolor == "1"
-    
+
     comments = [] # whichcomments=="none"
     
     if whichcomments == "filtered" or whichcomments == "all":
@@ -341,7 +345,7 @@ def text_export(request, key, format, download, whichcomments, withcolor, admink
             use_pandoc = True
         elif format in ('pdf', 'odt') : 
             use_pandoc = (original_format == "markdown")
-        elif format in ('docx', 'doc', 'html') :
+        elif format in ('docx', 'doc', 'html', 'xml') :
             use_pandoc = False
 
     # correct attach path => real path

@@ -2,10 +2,13 @@ from django import forms
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response
+from django.template.loader import render_to_string
 from django.template import RequestContext
 from django.utils.translation import ugettext as _, ugettext_lazy
+from django.contrib.auth.models import User
 from cm.converters.pandoc_converters import pandoc_convert, do_tidy
 from cm.models import Text, TextVersion, Attachment, Comment
+from cm.security import get_viewable_comments
 import mimetypes
 import simplejson
 from cm.cm_settings import USE_ABI
@@ -20,8 +23,8 @@ EXPORT2_INFOS = {
 'latex' :{'mimetype': 'text/x-tex', 'extension':'tex'},
 'html' :{'mimetype': 'text/html', 'extension':'html'},
 'epub' :{'mimetype': 'application/epub+zip', 'extension':'epub'},
-# raw export
-'raw' : {'mimetype': 'text/plain', 'extension':'txt'}
+'raw' : {'mimetype': 'text/plain', 'extension':'txt'},
+'xml' : {'mimetype': 'text/xml', 'extension':'xml'},
 }
 def content_export2(request, content, title, content_format, format, use_pandoc, download_response):
     # TODO : formats must be imported from converters
@@ -229,3 +232,46 @@ def text_export(request, key, format):
 
 def text_feed(request, key):
     return ""
+
+def xml_export(request, text_version, whichcomments):
+  # Text version infos
+  template_dict = { 'title': text_version.title, 'date': text_version.modified, 'format': text_version.format, 'content': text_version.get_content(), 'tags': text_version.tags, }
+  
+  # Comments
+  comments = [] # whichcomments=="none"
+  if whichcomments == "filtered" or whichcomments == "all":
+    _comments = text_version.comment_set.all()
+    if whichcomments == "filtered" :
+      filteredIds = []
+      if request.method == 'POST' :
+        ll = request.POST.get('filteredIds',[]).split(",")
+        filteredIds = [ int(l) for l in ll if l]
+      _comments = text_version.comment_set.filter(id__in=filteredIds)
+    comments = get_viewable_comments(request, _comments, text_version, order_by=('start_wrapper','start_offset','end_wrapper','end_offset'))
+    # Add user name/email if missing comment name/email
+    for comment in comments:
+      users = User.objects.filter(id=comment.user_id)
+      if not(comment.name):
+        comment.name = users[0].username
+      if not(comment.email):
+        comment.email = users[0].email
+      
+    template_dict['comments'] = comments
+
+  # Author
+  users = User.objects.filter(id=text_version.user_id)
+  if text_version.name:
+    template_dict['name'] = text_version.name
+  else:
+    template_dict['name'] = users[0].username
+  if text_version.email:
+    template_dict['email'] = text_version.email
+  else:
+    template_dict['email'] = users[0].email
+
+  # Renders template
+  export_content = render_to_string('site/export.xml', template_dict, context_instance=RequestContext(request))
+
+  # Returns HTTP response
+  export_infos = EXPORT2_INFOS['xml']
+  return _response_download(export_content, text_version.title, export_infos['mimetype'], export_infos['extension']) ;

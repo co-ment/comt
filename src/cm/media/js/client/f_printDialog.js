@@ -4,16 +4,18 @@
 // extension : label 
 gFormats = [{'actions':['print'], 'extension':'html', 'label': gettext('print from the browser')},
             {'actions':['export'], 'extension':'html', 'label': gettext('download html file (.html)')},
-            {'actions':['print', 'export'], 'extension':'markdown', 'label': gettext('download markdown file (.mkd)')},
-            {'actions':['print', 'export'], 'extension':'pdf', 'label': gettext('download portable object format file (.pdf)')},
-            {'actions':['print', 'export'], 'extension':'latex', 'label': gettext('download latex file (.tex)')},
-            {'actions':['print', 'export'], 'extension':'odt', 'label': gettext('download open document file (.odt)')},
-            {'actions':['print', 'export'], 'extension':'doc', 'label': gettext('download microsoft word file (.doc)')},
-            {'actions':['print', 'export'], 'extension':'docx', 'label': gettext('download microsoft word 2007 file (.docx)')}];
+            {'actions':['export'], 'extension':'markdown', 'label': gettext('download markdown file (.mkd)')},
+            {'actions':['print'], 'extension':'pdf', 'label': gettext('print in PDF format')},
+            {'actions':['export'], 'extension':'pdf', 'label': gettext('download portable object format file (.pdf)')},
+            {'actions':['export'], 'extension':'latex', 'label': gettext('download latex file (.tex)')},
+            {'actions':['export'], 'extension':'odt', 'label': gettext('download open document file (.odt)')},
+            {'actions':['export'], 'extension':'doc', 'label': gettext('download microsoft word file (.doc)')},
+            {'actions':['export'], 'extension':'docx', 'label': gettext('download microsoft word 2007 file (.docx)')},
+            {'actions':['export'], 'extension':'xml', 'label': gettext('download XML file for re-import')}];
 
 var pandoc_version_ary = sv_pandoc_version.split('.');
 if (parseInt(pandoc_version_ary[0]) > 1 || (parseInt(pandoc_version_ary[0]) == 1 && parseInt(pandoc_version_ary[1]) > 8)) {
-  gFormats.push({'actions':['print', 'export'], 'extension':'epub', 'label': gettext('download ebook (.epub)')});
+  gFormats.push({'actions':['export'], 'extension':'epub', 'label': gettext('download ebook (.epub)')});
 }
 
 gActions = {'print':{'dialogTitle':gettext('Print text'), 'chooseFormatLabel':gettext('How do you want to print?'), 'defaultMethod':'pdf', 'defaultWithColors':"no", 'defaultWhichComments':'all'}, 

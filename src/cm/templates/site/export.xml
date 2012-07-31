@@ -1,0 +1,40 @@
+{% load com %}
+{% autoescape off %}
+<?xml version="1.0" encoding="UTF-8"?>
+<co_ment_text>
+  <title>{{ title }}</title>
+  <date>{{ date|date:"c" }}+{{ tz|leading_zeros:"2" }}</date>
+  <name>{{ name }}</name>
+  <email>{{ email }}</email>
+  <format>{{ format }}</format>
+  <content><![CDATA[{{ content }}]]></content>
+  {% if tags %}
+  <tags>{{ tags }}</tags>
+  {% endif %}
+  {% if comments %}
+  <comments>
+    {% for c in comments %}
+    <comment>
+      <id>{{ c.id }}</id>
+      {% if c.reply_to_id %}
+      <parent>{{ c.reply_to_id }}</parent>
+      {% endif %}
+      <title>{{ c.title }}</title>
+      <date>{{ c.modified|date:"c" }}+{{ tz|leading_zeros:"2" }}</date>
+      <name>{{ c.name }}</name>
+      <email>{{ c.email }}</email>
+      <format>{{ c.format }}</format>
+      <content>{{ c.content }}</content>
+      {% if c.tags %}
+      <tags>{{ c.tags }}</tags>
+      {% endif %}
+      <start_wrapper>{{ c.start_wrapper }}</start_wrapper>
+      <end_wrapper>{{ c.end_wrapper }}</end_wrapper>
+      <start_offset>{{ c.start_offset }}</start_offset>
+      <end_offset>{{ c.end_offset }}</end_offset>
+    </comment>
+    {% endfor %}
+  </comments>
+  {% endif %}
+</co_ment_text>
+{% endautoescape %}
