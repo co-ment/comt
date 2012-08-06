@@ -34,6 +34,7 @@ Requirements
 - python development headers
 - python setuptools
 - python pexpect
+- python cssutils
 - pandoc
 - abiword (or headless openoffice and python uno)
 - git
@@ -43,7 +44,7 @@ Requirements
 Installation (development install)
 ============
 1. Install python2.5+ and all required libraries
-	(ubuntu users : 'sudo apt-get install python python-magic python-setuptools python-uno libyaml-0-1 python-yaml python-dev git-core python-utidylib python-pexpect')
+	(ubuntu users : 'sudo apt-get install python python-magic python-setuptools python-uno libyaml-0-1 python-yaml python-dev git-core python-utidylib python-pexpect python-cssutils')
 2. Install pandoc
 	(ubuntu users : 'sudo apt-get install pandoc')
 3. Install abiword
@@ -137,6 +138,8 @@ Python libraries used (and license) / NOT shipped with the distribution
 - python-uno
 - python-utidylib
 - python-yaml
+- python-pexpect
+- python-cssutils
 
 Icons 
 -----

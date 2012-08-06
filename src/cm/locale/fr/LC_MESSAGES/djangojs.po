@@ -259,6 +259,10 @@ msgstr "télécharger un fichier microsoft word 2007 (.docx)"
 msgid "download ebook (.epub)"
 msgstr "télécharger un ebook (.epub)"
 
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:21
+msgid "download XML file for re-importing text and comments"
+msgstr "télécharger le fichier XML pour re-importer le texte et les commentaires"
+
 #: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:13
 msgid "Print text"
 msgstr "Impression du texte"

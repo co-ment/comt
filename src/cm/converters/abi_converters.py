@@ -270,7 +270,10 @@ class AbiFileConverter(object):
         Add an HTML header to an HTML body
         """
 
-        return """
+        if '<html' in body and '<body' in body:
+          full_html = body
+        else:
+          full_html = """
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -281,3 +284,24 @@ class AbiFileConverter(object):
 </html>
 """ %body
 
+        # Adds some style to fix Abiword default margins for paragraphs.
+        from BeautifulSoup import BeautifulSoup
+        import cssutils
+        soup = BeautifulSoup(full_html)
+        for p in soup.findAll(['p', 'div', 'ul', 'ol', 'dl']):
+          try:
+            css = p['style']
+            s = cssutils.parseStyle(css)
+            if s.getProperty('margin') == None:
+              if s.getProperty('margin-top') == None:
+                s.setProperty('margin-top', '10pt')
+              if s.getProperty('margin-bottom') == None:
+                s.setProperty('margin-bottom', '10pt')
+            p['style'] = s.cssText
+
+          except KeyError:
+            p['style'] = 'margin-top: 10pt; margin-bottom: 10pt;';
+
+        # for some reason having DOCTYPE declaration makes soup unhappy
+        output = re.sub(r'<!(<!DOCTYPE html[^>]*>)>', r'\1', unicode(soup))
+        return output

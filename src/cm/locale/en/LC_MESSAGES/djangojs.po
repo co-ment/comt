@@ -253,6 +253,10 @@ msgstr ""
 msgid "download ebook (.epub)"
 msgstr ""
 
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:21
+msgid "download XML file for re-importing text and comments"
+msgstr ""
+
 #: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:13
 msgid "Print text"
 msgstr ""

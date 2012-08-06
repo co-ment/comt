@@ -82,40 +82,6 @@ def compute_new_comment_positions(old_content, old_format, new_content, new_form
     return [c for c in commentList if c.valid], \
            [c for c in commentList if not c.valid]
 
-## no colors, just markers           
-#def insert_comment_markers_and_nocolors(htmlcontent, comments):
-#    
-#    parser = html5lib.HTMLParser(tree=treebuilders.getTreeBuilder("beautifulsoup"))
-#    html = parser.parse(htmlcontent.encode("utf8"), encoding="utf8")
-#    
-#    cpt = 1
-#    
-#    # key : node id, value : indexes of added markers
-#    # to remember index of inserted markers
-#    rememberMarkerOffsets = {}
-#    
-#    #O(n²) ?
-#    for comment in comments :
-#        for i in [0,1] :
-#            wrapper = comment.start_wrapper if i == 0 else comment.end_wrapper
-#            offset =  comment.start_offset if i == 0 else comment.end_offset
-#            marker = "[%d>"%cpt if i == 0 else "<%d]"%cpt
-#            marker_length = len(marker)
-#            content = html.find(id = "sv-%d"%wrapper).contents[0]
-##            import pdb;pdb.set_trace()
-#            smallerIndexes = rememberMarkerOffsets.get(wrapper, [])
-#            original_offset =  offset
-#            offset += marker_length * len([index for index in smallerIndexes if index <= offset])
-#        
-#            smallerIndexes.append(original_offset)
-#            rememberMarkerOffsets[wrapper] = smallerIndexes
-#        
-#            content.replaceWith(content[:offset]+marker+content[offset:])
-#                
-#        cpt = cpt + 1
-#    
-#    return unicode(html)
-
 def add_marker(text, color, start_ids, end_ids, with_markers, with_colors):
 # TODO
 # THESE 3 LINES ARE REALLY JUST FOR TESTING THIS IS COPIED FROM C-TEXT.CSS AND SHOULD BE DONE DIFFERENTLY
@@ -142,11 +108,8 @@ def add_marker(text, color, start_ids, end_ids, with_markers, with_colors):
 # comments are comments and replies :
 def insert_comment_markers(htmlcontent, comments, with_markers, with_colors) :
 
-#    parser = html5lib.HTMLParser(tree=treebuilders.getTreeBuilder("beautifulsoup"))
-#    html = parser.parse(htmlcontent.encode("utf8"), encoding="utf8")
     html = get_the_soup(htmlcontent) ;
     
-#    import pdb;pdb.set_trace()
     if comments :
         max_wrapper = max([comment.end_wrapper for comment in comments])
         min_wrapper = min([comment.start_wrapper for comment in comments])
@@ -158,12 +121,10 @@ def insert_comment_markers(htmlcontent, comments, with_markers, with_colors) :
         if comment.is_reply() :
             continue ;
         
-        #import pdb;pdb.set_trace()
         # start 
         wrapper_data = datas.get(comment.start_wrapper, {'start_color':0, 'offsets':{}})
         offset = wrapper_data.get('offsets').get(comment.start_offset, [[],[]])
         offset[0].append(cpt)
-        #offset[0].append(comment.id)
         wrapper_data['offsets'][comment.start_offset] = offset
         datas[comment.start_wrapper] = wrapper_data
             
@@ -171,7 +132,6 @@ def insert_comment_markers(htmlcontent, comments, with_markers, with_colors) :
         wrapper_data = datas.get(comment.end_wrapper, {'start_color':0, 'offsets':{}})
         offset = wrapper_data.get('offsets').get(comment.end_offset, [[],[]])
         offset[1].append(cpt)
-        #offset[1].append(comment.id)
         wrapper_data['offsets'][comment.end_offset] = offset
         datas[comment.end_wrapper] = wrapper_data
             
@@ -201,7 +161,6 @@ def insert_comment_markers(htmlcontent, comments, with_markers, with_colors) :
             start_ids = []
             end_ids = []
             
-#            for offset, nbs in offsets :
             for offset, ids in offsets :
                 
                 end_ids = ids[1]
@@ -222,30 +181,3 @@ def insert_comment_markers(htmlcontent, comments, with_markers, with_colors) :
         content.replaceWith(spans)
 
     return unicode(html)
-
-#def output_comment_line(comment) :
-#    ret = "<tr>"
-#    for i in range(comment.depth()) : 
-#        ret = ret + """<td width="1 em"></td>"""
-#    
-#    ret = ret + """<td width="1 em">[%d]</td><td>"""
-#    
-#
-#def output_comments(comments) :
-#
-#    max_depth = max([comment.depth() for comment in comments])
-#    top_comments = [comment for comment in comments if comment.reply_to_id == None]
-#    top_comment_cpt = 0
-#    html_comments = ""
-#    
-#    for top_comment in top_comments :
-#        html_comments = html_comments + """<table>"""
-#         
-#        html_comments = html_comments + "<table><tr>"
-#         
-#        html_comments = html_comments + "</table>" 
-#
-#        top_comment_cpt = top_comment_cpt + 1
-#    
-#    ret = "%s%s%s"%("""<div class="pagebreakhere">""", html_comments, """</div>""")
-#    return ret

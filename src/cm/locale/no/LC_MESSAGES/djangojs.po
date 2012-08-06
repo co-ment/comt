@@ -258,6 +258,10 @@ msgstr "last ned fil i microsoft word-format 2007 (.docx)"
 msgid "download ebook (.epub)"
 msgstr "last ned fil i ebok (.epub)"
 
+#: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:21
+msgid "download XML file for re-importing text and comments"
+msgstr "last ned XML-fil for re-importere tekst og kommentarer"
+
 #: media/js/client/f_client-min.js:1 media/js/client/f_printDialog.js:13
 msgid "Print text"
 msgstr "Skriv ut tekst"

@@ -11,12 +11,14 @@ gFormats = [{'actions':['print'], 'extension':'html', 'label': gettext('print fr
             {'actions':['export'], 'extension':'odt', 'label': gettext('download open document file (.odt)')},
             {'actions':['export'], 'extension':'doc', 'label': gettext('download microsoft word file (.doc)')},
             {'actions':['export'], 'extension':'docx', 'label': gettext('download microsoft word 2007 file (.docx)')},
-            {'actions':['export'], 'extension':'xml', 'label': gettext('download XML file for re-import')}];
+            ];
 
 var pandoc_version_ary = sv_pandoc_version.split('.');
 if (parseInt(pandoc_version_ary[0]) > 1 || (parseInt(pandoc_version_ary[0]) == 1 && parseInt(pandoc_version_ary[1]) > 8)) {
   gFormats.push({'actions':['export'], 'extension':'epub', 'label': gettext('download ebook (.epub)')});
 }
+
+gFormats.push({'actions':['export'], 'extension':'xml', 'label': gettext('download XML file for re-importing text and comments')});
 
 gActions = {'print':{'dialogTitle':gettext('Print text'), 'chooseFormatLabel':gettext('How do you want to print?'), 'defaultMethod':'pdf', 'defaultWithColors':"no", 'defaultWhichComments':'all'}, 
       'export':{'dialogTitle':gettext('Export text'), 'chooseFormatLabel':gettext('Choose file format'), 'defaultMethod':'pdf', 'defaultWithColors':"no", 'defaultWhichComments':'all'}} ; 
@@ -74,12 +76,15 @@ _populateWhichComments = function() {
 _manageMarkersColorsChoice = function() {
   var method = $("#p_method").val();
   var which = $("#p_comments").val();
+  var all = frames['text_view_comments'].gDb.getCommentsNb(true);
+  var currents = frames['text_view_comments'].gDb.getCommentsNb(false);
+  var nb_comments = (which == 'all') ? all : currents;
   
   var disableMarkersColorsChoice ;
   if (gCurrentAction == 'print') 
-    disableMarkersColorsChoice = ((which == 'none') || (method == 'markdown') || (method == 'html')) ;
+    disableMarkersColorsChoice = ((nb_comments == 0) || (which == 'none'));
   if (gCurrentAction == 'export') 
-    disableMarkersColorsChoice = ((which == 'none') || (method == 'markdown')) ;
+    disableMarkersColorsChoice = ((nb_comments == 0) || (which == 'none') || (method == 'markdown') || (method == 'latex') || (method == 'epub') || (method == 'odt') || (method == 'doc')) ;
   
   if (disableMarkersColorsChoice)
     $("#p_color").val('no');
@@ -114,7 +119,7 @@ _initPrintDialog = function() {
   $("#dialog_print_export").dialog({
     bgiframe: true,
     autoOpen: false,
-    width: 450,
+    width: 500,
 /*    height: 300,
     autoResize: false,*/    
     modal: true,

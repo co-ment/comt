@@ -16,7 +16,7 @@ from cm.utils.comment_positioning import compute_new_comment_positions, \
     insert_comment_markers
 from cm.utils.spannifier import spannify
 from cm.views import get_keys_from_dict, get_textversion_by_keys_or_404, get_text_by_keys_or_404, redirect
-from cm.views.export import content_export2, content_export, xml_export
+from cm.views.export import content_export2, xml_export
 from cm.views.user import AnonUserRoleForm, cm_login
 from difflib import unified_diff
 from django import forms
@@ -324,9 +324,6 @@ def text_export(request, key, format, download, whichcomments, withcolor, admink
     comments = [] # whichcomments=="none"
     
     if whichcomments == "filtered" or whichcomments == "all":
-        #comments = text_version.comment_set.filter(reply_to__isnull=True)# whichcomments=="all"
-        #comments = get_viewable_comments(request, text_version.comment_set.filter(reply_to__isnull=True), text, order_by=('start_wrapper','start_offset','end_wrapper','end_offset'))# whichcomments=="all"
-        
         _comments = text_version.comment_set.all()
         if whichcomments == "filtered" :
             filteredIds = []
@@ -338,36 +335,34 @@ def text_export(request, key, format, download, whichcomments, withcolor, admink
         comments = get_viewable_comments(request, _comments, text, order_by=('start_wrapper','start_offset','end_wrapper','end_offset'))# whichcomments=="all"
         
     # decide to use pandoc or not
-    if with_color :
-        use_pandoc = False  # pandoc wouldn't preserve comments scope background colors
-    else :
-        if format in ('markdown', 'latex', 'epub') : 
-            use_pandoc = True
-        elif format in ('pdf', 'odt') : 
-            use_pandoc = (original_format == "markdown")
-        elif format in ('docx', 'doc', 'html', 'xml') :
-            use_pandoc = False
+    if format in ('markdown', 'latex', 'epub') : 
+      use_pandoc = True
+    else:
+      use_pandoc = (original_format == 'markdown' or original_format == 'rst')
 
     # correct attach path => real path
-    if format in ('pdf','odt') :        
+    if format in ('pdf', 'odt', 'doc', 'docx') :        
         original_content = from_html_links_to_abs_links(original_content)
             
     if len(comments) == 0 : #want to bypass html conversion in this case
-        return content_export2(request, original_content, text_version.title, original_format, format, use_pandoc, download_response)
+      # Prepends title
+      if original_format == 'html':
+        original_content = "<h1>%s</h1>%s" %(text_version.title, original_content)
+      elif original_format == 'markdown':
+        original_content = "%s\n======\n%s" %(text_version.title, original_content)
+      elif original_format == 'rst':
+        underline = '=' * len(text_version.title)
+        original_content = "%s\n%s\n%s" %(text_version.title, underline, original_content)
+
+      return content_export2(request, original_content, text_version.title, original_format, format, use_pandoc, download_response)
     else : # case comments to be added  
-        #comments = comments.order_by('start_wrapper','start_offset','end_wrapper','end_offset')
         html = pandoc_convert(original_content, original_format, 'html')
         wrapped_text_version, _ , _ = spannify(html)
         with_markers = True
         marked_content = insert_comment_markers(wrapped_text_version, comments, with_markers, with_color)
-    
+        # Prepends title
+        marked_content = "<h1>%s</h1>%s" %(text_version.title, marked_content)
         viewable_comments = comments_thread(request, text_version, text) 
-    #        viewable_commentsnoreply = get_viewable_comments(request, commentsnoreply, text, order_by = ('start_wrapper','start_offset','end_wrapper','end_offset'))
-    #        viewable_comments = []
-    #        for cc in viewable_commentsnoreply :
-    #            viewable_comments += list_viewable_comments(request, [cc], text)
-            
-        # numerotation{  id --> numbered as a child}
         extended_comments = {}
         nb_children = {}
         for cc in viewable_comments :
@@ -384,84 +379,12 @@ def text_export(request, key, format, download, whichcomments, withcolor, admink
             if cc.is_reply() :
                 cc.num = "%s.%s"%(extended_comments[cc.reply_to_id].num, cc.num)
         
-    #        viewable_comments += list_viewable_comments(request, viewable_commentsnoreply, text)
         html_comments=render_to_string('site/macros/text_comments.html',{'comments':viewable_comments }, context_instance=RequestContext(request))
         
         content = "%s%s"%(marked_content, html_comments)
         content_format = "html" 
-        # impossible to satisfy because of color then no colors instead:
-        if with_color and format in ('markdown', 'tex') : #TODO : add S5
-            with_color = False  
         
         return content_export2(request, content, text_version.title, content_format, format, use_pandoc, download_response)
-
-def text_print(request, key, adminkey=None):
-    text, admin = get_text_and_admin(key, adminkey)
-    
-    text_version = text.get_latest_version()
-
-#    chosen default url behaviour is export all comments + bckcolor + pdf  
-    comments = Comment.objects.filter(text_version=text_version, reply_to__isnull=True)
-
-    with_markers = True
-    with_colors = True 
-    download_requested = True   
-    action = 'export' # client origine dialog
-    requested_format = 'pdf' # requested output format
-
-    if request.method == 'POST':
-        # colors or not ?
-        with_colors = (u'yes' == request.POST.get('p_color', u'no'))
-
-        # restrict comments to ones that should be exported / printed          
-        p_comments = request.POST.get('p_comments')
-        if p_comments == "filtered" or p_comments == "none" : 
-            filteredIds = [] # "none" case  
-            if p_comments == "filtered" : 
-                ll = request.POST.get('filteredIds').split(",")
-                filteredIds = [ int(l) for l in ll if l]
-  
-            comments = comments.filter(id__in=filteredIds)
-
-        # print or export ?
-        action = request.POST.get('print_export_action')
-        requested_format = request.POST.get('p_method')
-
-    comments = comments.order_by('start_wrapper','start_offset','end_wrapper','end_offset')
-
-    download_requested = (action == 'export') or (action == 'print' and requested_format != 'html')   
-
-    ori_format = text_version.format # BD : html or markdown for  now ...
-    src_format = ori_format # as expected by convert functions ...
-    src = text_version.content
-    
-    if len(comments) > 0 and (with_markers or with_colors) :
-        html = text_version.get_content()
-        wrapped_text_version, _ , _ = spannify(html)
-        marked_text_version = insert_comment_markers(wrapped_text_version, comments, with_markers, with_colors)
-
-        src_format = 'html'
-        src = marked_text_version
-        html_comments=render_to_string('site/macros/text_comments.html',{'comments':comments}, context_instance=RequestContext(request))
-        src += html_comments
-        
-    if download_requested :
-        use_pandoc = (requested_format == 'html' or requested_format == 'markdown')
-        return content_export(request, src, text_version.title, src_format, requested_format, use_pandoc)
-    else : # action == 'print' and requested_format == 'html' (no colors)
-        template_dict = {'text' : text,
-                       'text_version' : text_version,
-                       'title' : text_version.title, # TODO use it ...
-                       'comments': comments,
-                       'content' : marked_text_version,
-                       'client_date_fmt' : settings.CLIENT_DATE_FMT
-                       }
-        if admin:
-            template_dict['adminkey'] = text.adminkey   
-            template_dict['admin'] = True       
-        return render_to_response('site/text_print.html',
-                                  template_dict,
-                                  context_instance=RequestContext(request))
 
 @has_perm_on_text('can_view_text')
 def text_view_frame(request, key, version_key=None, adminkey=None):
