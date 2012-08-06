@@ -36,5 +36,15 @@
     {% endfor %}
   </comments>
   {% endif %}
+  {% if attachments %}
+  <attachments>
+    {% for a in attachments %}
+    <attachment>
+      <key>{{ a.key }}</key>
+      <data>{{ a.data }}</data>
+    </attachment>
+    {% endfor %}
+  </attachments>
+  {% endif %}
 </co_ment_text>
 {% endautoescape %}

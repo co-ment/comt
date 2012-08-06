@@ -41,6 +41,9 @@ import mimetypes
 import simplejson
 import sys
 import re
+import imghdr
+import base64
+from os.path import basename
 from django.db.models.sql.datastructures import EmptyResultSet
 
 def get_text_and_admin(key, adminkey, assert_admin = False):
@@ -294,20 +297,35 @@ def client_exchange(request):
     return ret 
 
 
-def from_html_links_to_abs_links(content):
-    """
-    Replaces (html) links to attachs with real file path on server
-    """
-    attach_re = r'/text/(?P<key>\w*)/attach/(?P<attach_key>\w*)/'
-    attach_str = r'/text/%s/attach/%s/'
-    for match in re.findall(attach_re, content):
-        link = attach_str %match
-        attach = Attachment.objects.get(key=match[1], text_version__text__key=match[0])                
+def from_html_links_to_inline_imgs(content, inline=True, full_path=True):
+  """
+  Replaces (html) links to attachs with embeded inline images
+  """
+  content = re.sub("%s" %settings.SITE_URL, '', content) # changes absolute urls to relative urls
+  attach_re = r'(?:/text/(?P<key>\w*))?/attach/(?P<attach_key>\w*)/'
+  attach_str_textversion = r'/text/%s/attach/%s/'
+  attach_str = r'/attach/%s/'
+  for match in re.findall(attach_re, content):
+    if match[0]:
+      link = attach_str_textversion %match
+    else:
+      link = attach_str %match[1]
+    
+    attach = Attachment.objects.get(key=match[1])                
+    if inline:
+      img_fmt = imghdr.what(attach.data.path)
+      img = open(attach.data.path, 'rb')
+      data = base64.b64encode(img.read())
+      img.close()
+      content = content.replace(link, 'data:image/'+img_fmt+';base64,'+data)
+    else:
+      if full_path:
         content = content.replace(link, attach.data.path)
-    return content
+      else:
+        img_fmt = imghdr.what(attach.data.path)
+        content = content.replace(link, match[1]+'.'+img_fmt)
+  return content
 
-#NOTE : some arguments like : withcolor = "yes" + format = "markdown" are incompatible
-#http://localhost:8000/text/text_key_1/export/pdf/1/all/1
 def text_export(request, key, format, download, whichcomments, withcolor, adminkey=None):
     text, admin = get_text_and_admin(key, adminkey)
     text_version = text.get_latest_version()
@@ -340,9 +358,18 @@ def text_export(request, key, format, download, whichcomments, withcolor, admink
     else:
       use_pandoc = (original_format == 'markdown' or original_format == 'rst')
 
-    # correct attach path => real path
-    if format in ('pdf', 'odt', 'doc', 'docx') :        
-        original_content = from_html_links_to_abs_links(original_content)
+    # attachments
+    # for html, inline images only when exporting
+    if format != 'html' or download_response :
+      # for epub, file paths
+      if format == 'epub':
+        original_content = from_html_links_to_inline_imgs(original_content, False)
+      # for latex, file name
+      elif format == 'latex':
+        original_content = from_html_links_to_inline_imgs(original_content, False, False)
+      # for everything else, inline b64 encoded
+      else:
+        original_content = from_html_links_to_inline_imgs(original_content)
             
     if len(comments) == 0 : #want to bypass html conversion in this case
       # Prepends title

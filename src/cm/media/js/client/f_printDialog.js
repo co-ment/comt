@@ -84,7 +84,12 @@ _manageMarkersColorsChoice = function() {
   if (gCurrentAction == 'print') 
     disableMarkersColorsChoice = ((nb_comments == 0) || (which == 'none'));
   if (gCurrentAction == 'export') 
-    disableMarkersColorsChoice = ((nb_comments == 0) || (which == 'none') || (method == 'markdown') || (method == 'latex') || (method == 'epub') || (method == 'odt') || (method == 'doc')) ;
+    // No colors for:
+    // 1. no comments
+    // 2. pandoc generated formats (markdown, latex, epub)
+    // 3. odt and doc, for some reasons abiword cannot export background-color for these formats
+    // 4. XML export (used for re-import)
+    disableMarkersColorsChoice = ((nb_comments == 0) || (which == 'none') || (method == 'markdown') || (method == 'latex') || (method == 'epub') || (method == 'odt') || (method == 'doc') || (method == 'xml')) ;
   
   if (disableMarkersColorsChoice)
     $("#p_color").val('no');

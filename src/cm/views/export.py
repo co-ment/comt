@@ -6,11 +6,15 @@ from django.template.loader import render_to_string
 from django.template import RequestContext
 from django.utils.translation import ugettext as _, ugettext_lazy
 from django.contrib.auth.models import User
+from django.conf import settings
 from cm.converters.pandoc_converters import pandoc_convert, do_tidy
 from cm.models import Text, TextVersion, Attachment, Comment
 from cm.security import get_viewable_comments
 import mimetypes
 import simplejson
+import imghdr
+import base64
+import re
 from cm.cm_settings import USE_ABI
 
 EXPORT2_INFOS = {
@@ -74,18 +78,6 @@ def content_export2(request, content, title, content_format, format, use_pandoc,
             if USE_ABI:
               from cm.converters.abi_converters import AbiFileConverter
               converter = AbiFileConverter()
-
-              # replaces images url by their actual path
-              from django.conf import settings
-              site_url = settings.SITE_URL
-              import re
-              attach_re = r'/attach/(?P<attach_key>\w*)/'
-              attach_str = r'%s/attach/%s/'
-              for match in re.findall(attach_re, fix_content):
-                link = attach_str %(site_url, match)
-                attach = Attachment.objects.get(key=match)
-                fix_content = fix_content.replace(link, attach.data.path)
-
               export_content = converter.convert_from_html(fix_content, format)
             else:
               from cm.converters.oo_converters import convert_html as oo_convert                
@@ -150,6 +142,23 @@ def xml_export(request, text_version, whichcomments):
     template_dict['email'] = text_version.email
   else:
     template_dict['email'] = users[0].email
+
+  # Attachments
+  attachments = []
+  template_dict['content'] = re.sub("%s" %settings.SITE_URL, '', template_dict['content']) # replaces absolute urls by relative urls
+  attach_re = r'(?:/text/(?P<key>\w*))?/attach/(?P<attach_key>\w*)/'
+  attach_str_textversion = r'/text/%s/attach/%s/'
+  attach_str = r'/attach/%s/'
+  for match in re.findall(attach_re, template_dict['content']):
+    if match[0]: # removes text_version, attachements do not need it
+      template_dict['content'] = template_dict['content'].replace(attach_str_textversion %match, attach_str %match[1])
+
+    attach = Attachment.objects.get(key=match[1])
+    img_fmt = imghdr.what(attach.data.path)
+    img = open(attach.data.path, 'rb')
+    attachments.append({'key': match[1], 'data': base64.b64encode(img.read())})
+    img.close()
+  template_dict['attachments'] = attachments
 
   # Renders template
   export_content = render_to_string('site/export.xml', template_dict, context_instance=RequestContext(request))
