@@ -302,7 +302,7 @@ def from_html_links_to_inline_imgs(content, inline=True, full_path=True):
   Replaces (html) links to attachs with embeded inline images
   """
   content = re.sub("%s" %settings.SITE_URL, '', content) # changes absolute urls to relative urls
-  attach_re = r'(?:/text/(?P<key>\w*))?/attach/(?P<attach_key>\w*)/'
+  attach_re = r'"(?:/text/(?P<key>\w*))?/attach/(?P<attach_key>\w*)/'
   attach_str_textversion = r'/text/%s/attach/%s/'
   attach_str = r'/attach/%s/'
   for match in re.findall(attach_re, content):

@@ -5,6 +5,7 @@ import re
 import pexpect
 
 from abi_error import AbiConverterError, AbiCommandError
+from cm.converters.pandoc_converters import do_tidy
 
 
 TYPES_IN  = {'602': '602',       'abw': 'abw',       'aw': 'aw',     
@@ -302,8 +303,4 @@ class AbiFileConverter(object):
           except KeyError:
             p['style'] = 'margin-top: 10pt; margin-bottom: 10pt;';
 
-        # for some reason having DOCTYPE declaration makes soup unhappy
-        output = re.sub(r'<!(<!DOCTYPE html[^>]*>)>', r'\1', unicode(soup))
-        # And for some reason, & is not converted to &amp; from time to time!
-        output = re.sub(r'&(?![A-Za-z]+[0-9]*;|#[0-9]+;|#x[0-9a-fA-F]+;)', r'&amp;', output)
-        return output
+        return do_tidy(unicode(soup))
