@@ -11,7 +11,7 @@ from tempfile import mkstemp
 import StringIO
 import tidy
 from cm.utils.string_utils import to_unicode
-from xml.dom.minidom import parseString
+from BeautifulSoup import BeautifulSoup
 import re
 from distutils.version import LooseVersion
 
@@ -221,22 +221,15 @@ def pandoc_pandoc(content, from_format, to_format, full=False, raw=False):
     if from_format==to_format=='html':
       # get body content
       stdoutdata = (content.encode('utf8'))
-      #stdoutdata = re.sub(r".*<body[^>]*>", '', stdoutdata)
-      #stdoutdata = re.sub(r"</body>.*", '', stdoutdata)
-      # if for some reason, tidy has not guess the doctype, make xml.dom.minidom happy with HTML entities (&nbsp;)
-      stdoutdata = re.sub(r"&nbsp;", '\xc2\xa0', stdoutdata)
-      dom = parseString(stdoutdata)
-      body = dom.getElementsByTagName("body")[0].toxml()
-      stdoutdata = body[body.find('>')+1:body.rfind('</')]
+      soup = BeautifulSoup(stdoutdata)
+      body = soup.body
+      stdoutdata = body.renderContents()
       # strip leading spaces
       stdoutdata = re.sub(r"^\s+", '', stdoutdata)
       # add new line before closing bracket
       stdoutdata = re.sub(r"(\/?)>", r"\n\1>", stdoutdata)
       # do not split closing tag with following opening tag
       stdoutdata = re.sub(r">\n<", r"><", stdoutdata)
-      # nest headers tags
-      #stdoutdata = re.sub(r'<h(\d) id="([^"]+)"\n>', r'<div id="\2"><h\1>', stdoutdata)
-      #stdoutdata = re.sub(r'<\/h(\d)\n>', r'</h\1></div>', stdoutdata)
       return stdoutdata
 
     cmd_args = ' %s -o %s ' %(p_options,output_temp_name) 
@@ -248,8 +241,6 @@ def pandoc_pandoc(content, from_format, to_format, full=False, raw=False):
     cmd_args += ' %s ' % input_temp_name
     cmd = PANDOC_BIN + ' ' + cmd_args
 
-    #from socommons.converters.new_conv import controlled_Popen 
-    #controlled_Popen(cmd, stderr=file(error_temp_name,'w'))
     fp_error = file(error_temp_name,'w')
     retcode = call(cmd, shell=True, stderr=fp_error)
     fp_error.close()
