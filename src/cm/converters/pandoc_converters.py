@@ -223,7 +223,8 @@ def pandoc_pandoc(content, from_format, to_format, full=False, raw=False):
       stdoutdata = (content.encode('utf8'))
       soup = BeautifulSoup(stdoutdata)
       body = soup.body
-      stdoutdata = body.renderContents()
+      if body:
+        stdoutdata = body.renderContents()
       # strip leading spaces
       stdoutdata = re.sub(r"^\s+", '', stdoutdata)
       # add new line before closing bracket
