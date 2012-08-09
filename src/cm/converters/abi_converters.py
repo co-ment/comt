@@ -304,4 +304,6 @@ class AbiFileConverter(object):
 
         # for some reason having DOCTYPE declaration makes soup unhappy
         output = re.sub(r'<!(<!DOCTYPE html[^>]*>)>', r'\1', unicode(soup))
+        # And for some reason, & is not converted to &amp; from time to time!
+        output = re.sub(r'&(?![A-Za-z]+[0-9]*;|#[0-9]+;|#x[0-9a-fA-F]+;)', r'&amp;', output)
         return output
