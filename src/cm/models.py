@@ -735,12 +735,13 @@ class Activity(models.Model):
     VIEWABLE_ACTIVITIES = {
                    'view_comments' : ['comment_created', 'comment_removed'],
                    'view_users' : ['user_created', 'user_activated', 'user_refused', 'user_enabled', 'user_approved', 'user_suspended'],
-                   'view_texts' : ['text_created', 'text_removed', 'text_edited', 'text_edited_new_version'],
+                   'view_texts' : ['text_created', 'text_imported', 'text_removed', 'text_edited', 'text_edited_new_version'],
                    }
     ACTIVITIES_TYPES = reduce(list.__add__, VIEWABLE_ACTIVITIES.values())
     
     IMGS = {
             'text_created' : u'page_add_small.png',
+            'text_imported' : u'sop_import_small.png',
             'text_removed' : u'page_delete_small.png',
             'text_edited'  : u'page_save_small.png',
             'text_edited_new_version' : u'page_save_small.png',
@@ -759,6 +760,7 @@ class Activity(models.Model):
          'text_edited' : ugettext_lazy(u'Text %(link_to_text)s edited by %(creator)s'),
          'text_edited_new_version' : ugettext_lazy(u'Text %(link_to_text)s edited (new version created) by %(creator)s'),
          'text_created' :  ugettext_lazy(u'Text %(link_to_text)s added by %(creator)s'),
+         'text_imported' :  ugettext_lazy(u'Text %(link_to_text)s imported by %(creator)s'),
          'text_removed' : ugettext_lazy(u'Text %(link_to_text)s removed'),
          'comment_created' : ugettext_lazy(u'Comment %(link_to_comment)s added on text %(link_to_text)s by %(creator)s'),
          'comment_removed' : ugettext_lazy(u'Comment %(link_to_comment)s removed from text %(link_to_text)s'),

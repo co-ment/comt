@@ -109,7 +109,7 @@ def _response_write(content):
 
 def xml_export(request, text_version, whichcomments):
   # Text version infos
-  template_dict = { 'title': text_version.title, 'date': text_version.modified, 'format': text_version.format, 'content': text_version.content, 'tags': text_version.tags, }
+  template_dict = { 'title': text_version.title, 'created': text_version.created, 'modified': text_version.modified, 'format': text_version.format, 'content': text_version.content, 'tags': text_version.tags, }
   
   # Comments
   comments = [] # whichcomments=="none"

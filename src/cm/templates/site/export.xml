@@ -3,7 +3,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <co_ment_text>
   <title>{{ title }}</title>
-  <date>{{ date|date:"c" }}+{{ tz|leading_zeros:"2" }}</date>
+  <created>{{ created|date:"c" }}+{{ tz|leading_zeros:"2" }}</created>
+  <modified>{{ modified|date:"c" }}+{{ tz|leading_zeros:"2" }}</modified>
   <name>{{ name }}</name>
   <email>{{ email }}</email>
   <format>{{ format }}</format>
@@ -20,11 +21,15 @@
       <parent>{{ c.reply_to_id }}</parent>
       {% endif %}
       <title>{{ c.title }}</title>
-      <date>{{ c.modified|date:"c" }}+{{ tz|leading_zeros:"2" }}</date>
+      <state>{{ c.state }}</state>
+      <deleted>{{ c.deleted }}</deleted>
+      <created>{{ c.created|date:"c" }}+{{ tz|leading_zeros:"2" }}</created>
+      <modified>{{ c.modified|date:"c" }}+{{ tz|leading_zeros:"2" }}</modified>
       <name>{{ c.name }}</name>
       <email>{{ c.email }}</email>
       <format>{{ c.format }}</format>
-      <content>{{ c.content }}</content>
+      <content><![CDATA[{{ c.content }}]]></content>
+      <content_html><![CDATA[{{ c.content_html }}]]></content_html>
       {% if c.tags %}
       <tags>{{ c.tags }}</tags>
       {% endif %}

@@ -1,11 +1,9 @@
 {% extends "site/layout/base_workspace.html" %}
 {% load i18n %}
 
-{% block title %}{% blocktrans %}Create a text{% endblocktrans %}{% endblock %}
+{% block title %}{% blocktrans %}Import a co-mented text{% endblocktrans %}{% endblock %}
 
 {% block main %}
-    {% include "site/macros/text_editor.html" %}
-    
 <script type="text/javascript">
 <!--
 tb_conf['current_tab'] = 'text';
@@ -25,39 +23,33 @@ $(function() {
 <ul class="sub_list">
     <li><a href="{% url text %}">{% blocktrans %}Text list{% endblocktrans %}</a></li>
     <li> / </li>
-    <li class="active_sub">{% blocktrans %}Create a text{% endblocktrans %}</li>
+    <li><a href="{% url text-create-content %}">{% blocktrans %}Create a text{% endblocktrans %}</a></li>
     <li> / </li>
     <li><a href="{% url text-create-upload %}">{% blocktrans %}Upload a text{% endblocktrans %}</a></li>
     <li> / </li>
-    <li><a href="{% url text-create-import %}">{% blocktrans %}Import a co-mented text{% endblocktrans %}</a></li>
+    <li class="active_sub">{% blocktrans %}Import a co-mented text{% endblocktrans %}</li>
 </ul>
 
-
-{% autoescape off %} {{ document }} {% endautoescape %}
-
-<form id="text_create_content" enctype="multipart/form-data" class="wizard-form" action="." method="post">
+<form id="text_create_import" enctype="multipart/form-data" class="wizard-form" action="." method="post">
 <table class="wide_form">
     <tbody>
-    {% with 'create_content' as form_type %} 
+    {% with 'import_content' as form_type %}     
 	    {% include "site/macros/form_fields.html" %}
-    {% endwith %}    
+    {% endwith %}    	        
     <tr>
         <td style="vertical-align: top; width: 20%; text-align:right;">
         </td>
         <td>
             <label></label>
-            <input id="save_button" name="save" type="submit" value="{% blocktrans %}Save{% endblocktrans %}"/>
+            <input name="save" type="submit" value="{% blocktrans %}Save{% endblocktrans %}"/>
             &nbsp;
             <input id="cancel_button" type="button" value="{% blocktrans %}Cancel{% endblocktrans %}"/>
+            
             <script type="text/javascript">
             <!--
             $(document).ready(function(){
                 $("#cancel_button").click(function () { 
-                    needToConfirm = false ;
                     window.location = "{% url index %}"; 
-                  });                
-                $("#save_button").click(function () { 
-                    needToConfirm = false ;
                   });                
             }) ;
             -->

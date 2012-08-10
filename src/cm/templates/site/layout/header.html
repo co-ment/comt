@@ -9,6 +9,7 @@
    {% if can_create_text %}    
  · <a title="{% blocktrans %}Create a text{% endblocktrans %}" href="{% url text-create-content %}">{% blocktrans %}Create a text{% endblocktrans %}</a>
  · <a title="{% blocktrans %}Upload a text{% endblocktrans %}" href="{% url text-create-upload %}">{% blocktrans %}Upload a text{% endblocktrans %}</a>
+ · <a title="{% blocktrans %}Import a co-mented text{% endblocktrans %}" href="{% url text-create-import %}">{% blocktrans %}Import a co-mented text{% endblocktrans %}</a>
    {% endif %}
 {% if user.is_authenticated %}
  · <a title="{% blocktrans %}Profile{% endblocktrans %}" href="{% url profile %}">{% blocktrans %}Profile{% endblocktrans %}</a>

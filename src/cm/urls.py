@@ -52,15 +52,13 @@ urlpatterns += patterns('',
      url(r'^text/(?P<key>\w*)/share/$', text_share, name="text-share"),
 
      # text create
-     url(r'^create/upload/$', text_create_upload, name="text-create-upload"),
      url(r'^create/content/$', text_create_content, name="text-create-content"),
-     
+     url(r'^create/upload/$', text_create_upload, name="text-create-upload"),
+     url(r'^create/import/$', text_create_import, name="text-create-import"),
 
      # text
      url(r'^text/(?P<key>\w*)/view/$', text_view, name="text-view"),
      url(r'^text/(?P<key>\w*)/view/\?comment_id_key=(?P<id>\w*)$', text_view, name="text-view-show-comment"), 
-     
-#     url(r'^text/(?P<key>\w*)/view/(?P<version_key>\w*)/$', text_view, name="text-view-version"),
      
      url(r'^text/(?P<key>\w*)/edit/$', text_edit, name="text-edit"),
      url(r'^text/(?P<key>\w*)/pre_edit/$', text_pre_edit, name="text-preedit"),
@@ -75,8 +73,6 @@ urlpatterns += patterns('',
      url(r'^text/(?P<key>\w*)/(?P<text_version_key>\w*)/delete/$', text_version_delete, name="text-version-delete"),        
      url(r'^text/(?P<key>\w*)/export/(?P<format>\w*)/(?P<download>\w*)/(?P<whichcomments>\w*)/(?P<withcolor>\w*)/$', text_export, name="text-export"),
      url(r'^text/(?P<key>\w*)/history/$', text_history, name="text-history"),
-     #url(r'^text/(?P<key>\w*)/diff/(?P<id_v1>\w*)/(?P<id_v2>\w*)/$', text_diff, name="text-diff"),
-#     url(r'^text/(?P<key>\w*)/version/(?P<id_version>\w*)/$', text_version, name="text-version"),
 
      # detached attachements! (used for saving images when just converting to HTML, without creating a text)
      url(r'^attach/(?P<attach_key>\w*)/$', notext_attach, name="notext-attach"),
