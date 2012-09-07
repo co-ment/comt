@@ -1,0 +1,2234 @@
+# Italian translation for COMT.
+# Copyright (C) 2012 Daniele Pizzolli
+# This file is distributed under the same license as the COMT package.
+# Daniele Pizzolli <dan@toel.it>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: COMT\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-09-04 21:17+0200\n"
+"PO-Revision-Date: 2012-09-04 21:20+0200\n"
+"Last-Translator: Daniele Pizzolli <dan@toel.it>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: italian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: client.py:29
+msgid ""
+"A selection is required. Select in the text the part your comment applies to."
+msgstr ""
+"È richiesta una selezione. Seleziona la parte di testo che vuoi commentare."
+
+#: client.py:140
+msgid "name is required"
+msgstr "Il nome è obbligatorio"
+
+#: client.py:143
+msgid "email is required"
+msgstr "L’email è obbligatoria"
+
+#: client.py:145
+msgid "invalid email"
+msgstr "L’email non è valida"
+
+#: client.py:147
+msgid "title is required"
+msgstr "Il titolo è obbligatorio"
+
+#: client.py:149
+msgid "content is required"
+msgstr "Il commento è obbligatorio"
+
+#: client.py:164
+msgid "comment removed"
+msgstr "Il commento è stato cancellato"
+
+#: client.py:215 client.py:280
+msgid "comment saved"
+msgstr "Il commento è stato salvato"
+
+#: client.py:282
+msgid "comment saved, it is being held for moderation"
+msgstr "Il commento è stato salvato e sarà vagliato dal moderatore"
+
+#: client.py:319 client.py:328 client.py:330
+msgid "me"
+msgstr "me"
+
+#: client.py:321 client.py:328 client.py:330
+msgid "author"
+msgstr "autore"
+
+#: client.py:375
+msgid "Tags input must be no longer than 250 characters."
+msgstr "Il tag non può essere più lungo di 250 caratteri."
+
+#: models.py:187 templates/site/text_history.html:79 views/create.py:30
+#: views/create.py:45 views/texts.py:584
+msgid "Title"
+msgstr "Titolo"
+
+#: models.py:188
+msgid "Format"
+msgstr "Formato"
+
+#: models.py:189 views/texts.py:679
+msgid "Content"
+msgstr "Contenuto"
+
+#: models.py:190 models.py:646 templates/site/help.html:47
+msgid "Tags"
+msgstr "Tag"
+
+#: models.py:192 templates/site/text_history.html:80 views/user.py:223
+msgid "Note"
+msgstr "Note"
+
+#: models.py:194
+msgid "Moderation a posteriori?"
+msgstr "Abilita moderazione a posteriori?"
+
+#: models.py:310
+msgid "Format:"
+msgstr "Formato:"
+
+#: models.py:548
+msgid "name"
+msgstr "nome"
+
+#: models.py:549
+msgid "description"
+msgstr "descrizione"
+
+#: models.py:640
+msgid "Allow contact"
+msgstr "Permetti di essere contattato"
+
+#: models.py:640
+msgid "Allow email messages from other users"
+msgstr "Permetti messaggi email da altri utenti"
+
+#: models.py:641
+msgid "Preferred language"
+msgstr "Lingua preferita"
+
+#: models.py:644
+msgid "Suspended access"
+msgstr "Accesso sospeso"
+
+#: models.py:668
+msgid "suspended"
+msgstr "sospeso"
+
+#: models.py:670
+msgid "waiting approval"
+msgstr "In attesa di approvazione"
+
+#: models.py:676
+msgid "pending"
+msgstr "in attesa"
+
+#: models.py:691
+msgid "Invitation"
+msgstr "Invito"
+
+#: models.py:759
+#, python-format
+msgid "Text %(link_to_text)s edited by %(creator)s"
+msgstr "Testo %(link_to_text)s modificato da %(creator)s"
+
+#: models.py:760
+#, python-format
+msgid "Text %(link_to_text)s edited (new version created) by %(creator)s"
+msgstr ""
+"Testo %(link_to_text)s modificato (con creazione di nuova versione) da "
+"%(creator)s"
+
+#: models.py:761
+#, python-format
+msgid "Text %(link_to_text)s added by %(creator)s"
+msgstr "Testo %(link_to_text)s aggiunto da %(creator)s"
+
+#: models.py:762
+#, python-format
+msgid "Text %(link_to_text)s removed"
+msgstr "Testo %(link_to_text)s cancellato"
+
+#: models.py:763
+msgid "Text %(link_to_text)s imported by %(creator)s"
+msgstr "Testo %(link_to_text)s importati da %(creator)s"
+
+#: models.py:763
+#, python-format
+msgid ""
+"Comment %(link_to_comment)s added on text %(link_to_text)s by %(creator)s"
+msgstr ""
+"Commento %(link_to_comment)s aggiunto al testo %(link_to_text)s da "
+"%(creator)s"
+
+#: models.py:764
+#, python-format
+msgid "Comment %(link_to_comment)s removed from text %(link_to_text)s"
+msgstr "Commento %(link_to_comment)s cancellato dal testo %(link_to_text)s"
+
+#: models.py:765
+#, python-format
+msgid "User %(username)s added"
+msgstr "Aggiunto utente %(username)s"
+
+#: models.py:766
+#, python-format
+msgid "User %(username)s access to workspace enabled"
+msgstr "Abilitato l’accesso allo spazio di lavoro per l’utente %(username)s"
+
+#: models.py:767
+#, python-format
+msgid "User %(username)s access to workspace refused"
+msgstr ""
+"L’accesso allo spazio di lavoro per l’utente %(username)s è stato rifiutato"
+
+#: models.py:768
+#, python-format
+msgid "User %(username)s access to workspace suspended"
+msgstr ""
+"L’accesso allo spazio di lavoro per l’utente %(username)s è stato sospeso"
+
+#: models.py:769
+#, python-format
+msgid "User %(username)s access to workspace activated"
+msgstr ""
+"L’accesso allo spazio di lavoro per l’utente %(username)s è stato attivato"
+
+#: models.py:770
+#, python-format
+msgid "User %(username)s has activated his account"
+msgstr "L’utente %(username)s ha attivato il suo account"
+
+#: models.py:819
+msgid "anonymous"
+msgstr "anonimo"
+
+#: models.py:826 models.py:834
+#, python-format
+msgid "by \"%(username)s\""
+msgstr "da \"%(username)s\""
+
+#: models.py:828
+#, python-format
+msgid "%(time_since)s ago"
+msgstr "da %(time_since)s"
+
+#: models_base.py:53
+msgid "Name:"
+msgstr "Nome:"
+
+#: models_base.py:54
+msgid "Email:"
+msgstr "Email:"
+
+#: notifications.py:60 templates/email/activity_notification.txt:1
+msgid "Notification:"
+msgstr "Notifica:"
+
+#: role_models.py:7
+msgid "Generic"
+msgstr "Generico"
+
+#: role_models.py:7
+msgid "Class (education)"
+msgstr "Classe (scolastico)"
+
+#: settings.py:105
+msgid "French"
+msgstr "Francese"
+
+#: settings.py:106
+msgid "English"
+msgstr "Inglese"
+
+#: settings.py:107
+msgid "Norwegian"
+msgstr "Norvegese"
+
+#: settings.py:108
+msgid "Brazilian Portuguese"
+msgstr "Portoghese brasiliano"
+
+#: settings.py:109
+msgid "Spanish"
+msgstr "Spagnolo"
+
+#: settings.py:110
+msgid "Bulgarian"
+msgstr "Bulgaro"
+
+#: settings.py:111
+msgid "Italian"
+msgstr "Italiano"
+
+#: static_i18n.py:6 static_i18n.py:11
+msgid "Observer"
+msgstr "Osservatore"
+
+#: static_i18n.py:7
+msgid "Manager"
+msgstr "Manager"
+
+#: static_i18n.py:8
+msgid "Editor"
+msgstr "Editor"
+
+#: static_i18n.py:9
+msgid "Moderator"
+msgstr "Moderatore"
+
+#: static_i18n.py:10
+msgid "Commentator"
+msgstr "Commentatore"
+
+#: static_i18n.py:12
+msgid "Participant"
+msgstr "Partecipante"
+
+#: static_i18n.py:15
+msgid "Can view text"
+msgstr "Può vedere il testo"
+
+#: static_i18n.py:16
+msgid "Can edit text"
+msgstr "Può modificare il testo"
+
+#: static_i18n.py:17
+msgid "Can create text"
+msgstr "Può creare il testo"
+
+#: static_i18n.py:18
+msgid "Can delete text"
+msgstr "Può cancellare il testo"
+
+#: static_i18n.py:19
+msgid "Can manage text"
+msgstr "Può gestire il testo"
+
+#: static_i18n.py:20
+msgid "Can create comment"
+msgstr "Può creare commenti"
+
+#: static_i18n.py:21
+msgid "Can delete comment"
+msgstr "Può cancellare commenti"
+
+#: static_i18n.py:22
+msgid "Can delete own comment"
+msgstr "Può cancellare i propri commenti"
+
+#: static_i18n.py:23
+msgid "Can view approved comment"
+msgstr "Può vedere i commenti approvati"
+
+#: static_i18n.py:24
+msgid "Can view own comment"
+msgstr "Può vedere i propri commenti"
+
+#: static_i18n.py:25
+msgid "Can view unapproved comment"
+msgstr "Può vedere i commenti non approvati"
+
+#: static_i18n.py:26
+msgid "Can edit comment"
+msgstr "Può modificare i commenti"
+
+#: static_i18n.py:27
+msgid "Can edit own comment"
+msgstr "Può modificare i propri commenti"
+
+#: static_i18n.py:28
+msgid "Can manage workspace"
+msgstr "Può gestire lo spazio di lavoro"
+
+#: static_i18n.py:29
+msgid "Can view workspace"
+msgstr "Può vedere lo spazio di lavoro"
+
+#: static_i18n.py:32
+msgid "Teacher"
+msgstr "Insegnante"
+
+#: static_i18n.py:33
+msgid "Student"
+msgstr "Studente"
+
+#: static_i18n.py:34
+msgid "Individual student"
+msgstr "Studente individuale"
+
+#: templates/404.html:4
+msgid "Page not found"
+msgstr "Pagina non trovata"
+
+#: templates/404.html:6
+msgid "The requested page could not be found."
+msgstr "La pagina richiesta non è stata trovata"
+
+#: templates/500.html:4
+msgid "Server Error"
+msgstr "Errore del server"
+
+#: templates/500.html:6
+msgid "An error has occurred."
+msgstr "C‘è stato un errore."
+
+#: templates/api_doc.html:6
+msgid "API Documentation"
+msgstr "Documentazione API"
+
+#: templates/email/activation_email.txt:2
+#, python-format
+msgid "You've been invited to join the workspace %(workspace_name)s."
+msgstr ""
+"Sei stato invitato a collaborare allo spazio di lavoro %(workspace_name)s."
+
+#: templates/email/activation_email.txt:3
+#: templates/email/invitation_email.txt:3
+msgid ""
+"Click the following link to complete your registration and access the "
+"workspace:"
+msgstr ""
+"Clicca il collegamento seguente per completare la tua registrazione ed "
+"accedere allo spazio di lavoro:"
+
+#: templates/email/base_email_notification.txt:2
+#, python-format
+msgid ""
+"If you'd like to unsubscribe from this notification, click the following "
+"link: %(SITE_URL)s%(desactivate_notification_url)s."
+msgstr ""
+"Se desideri non ricevere più questo tipo di notifica, clicca il seguente "
+"link: %(SITE_URL)s%(desactivate_notification_url)s.\""
+
+#: templates/email/forgot_pw.txt:2
+msgid "You're receiving this e-mail because you requested a password reset"
+msgstr ""
+"Questa email ti è stata spedita perché hai richiesto la reimpostazione della "
+"password"
+
+#: templates/email/forgot_pw.txt:3
+#, python-format
+msgid "for your user account at %(site_name)s"
+msgstr "per il tuo utente su %(site_name)s"
+
+#: templates/email/forgot_pw.txt:5
+msgid "Please go to the following page and choose a new password:"
+msgstr "Per cortesia vai alla pagina seguente e scegli una nuova password:"
+
+#: templates/email/forgot_pw.txt:9
+msgid "Your username, in case you've forgotten:"
+msgstr "Il tuo nome utente, in caso l’avessi dimenticato:"
+
+#: templates/email/site_contact_email.txt:4
+#, python-format
+msgid "Contact from user: %(name)s / %(email)s"
+msgstr "Contatto dall’utente %(name)s / %(email)s"
+
+#: templates/email/text_created.txt:4
+#, python-format
+msgid "Your text \"%(title)s\" has been created."
+msgstr "Il testo \"%(title)s\" è stato creato."
+
+#: templates/email/text_created.txt:6
+msgid "To publish it click on the following link:"
+msgstr "Per pubblicarlo clicca sul seguente link:"
+
+#: templates/site/activate.html:10 templates/site/user_activate.html:10
+#: views/user.py:330
+msgid "Activate your account"
+msgstr "Attiva il tuo account"
+
+#: templates/site/activate.html:23
+msgid "Activate"
+msgstr "Attiva"
+
+#: templates/site/contact.html:6 templates/site/layout/footer.html:7
+#: templates/site/macros/user_actions.html:20
+msgid "Contact"
+msgstr "Contatto"
+
+#: templates/site/contact.html:24 templates/site/user_contact.html:50
+msgid "Send"
+msgstr "Spedisci"
+
+#: templates/site/contact.html:26
+#: templates/site/notifications_desactivate.html:32
+#: templates/site/settings.html:29 templates/site/settings_design.html:29
+#: templates/site/text_create_content.html:49
+#: templates/site/text_create_upload.html:44 templates/site/user_add.html:34
+#: templates/site/user_add_text.html:37 templates/site/user_contact.html:52
+#: templates/site/user_edit.html:29 templates/site/user_mass_add.html:34
+#: templates/site/user_mass_add_text.html:38
+msgid "Cancel"
+msgstr "Annulla"
+
+#: templates/site/dashboard.html:12 templates/site/macros/main_tabs.html:10
+msgid "Dashboard"
+msgstr "Cruscotto"
+
+#: templates/site/dashboard.html:43
+msgid "Actions"
+msgstr "Azioni"
+
+#: templates/site/dashboard.html:48 templates/site/text_create_content.html:4
+#: templates/site/text_create_content.html:28
+#: templates/site/text_create_upload.html:26 templates/site/text_list.html:40
+#: templates/site/layout/header.html:10
+msgid "Create a text"
+msgstr "Crea un testo"
+
+#: templates/site/dashboard.html:48
+msgid "Write a text inside your browser or paste a content from your clipboard"
+msgstr ""
+"Scrivi un testo dentro il tuo browser o copia e incolla il contenuto "
+"desiderato"
+
+#: templates/site/dashboard.html:49 templates/site/text_create_content.html:30
+#: templates/site/text_create_upload.html:4
+#: templates/site/text_create_upload.html:28 templates/site/text_list.html:42
+#: templates/site/layout/header.html:11
+msgid "Upload a text"
+msgstr "Carica un testo"
+
+#: templates/site/dashboard.html:49
+msgid ""
+"Upload a document from your computer (Text document, Open Format document, "
+"Word document)"
+msgstr ""
+"Carica un documento dal tuo computer (documento di testo, documento in "
+"formato Open Format, documento in formato Word)"
+
+#: templates/site/dashboard.html:50
+#: templates/site/text_create_import.html:4
+#: templates/site/text_create_import.html:30
+#: templates/site/text_create_content.html:32
+#: templates/site/text_create_upload.html:30
+#: templates/site/text_list.html:44
+#: templates/site/layout/header.html:12
+msgid "Import a co-mented text"
+msgstr "Importi un testo fatto co-menti"
+ 
+#: templates/site/dashboard.html:50
+msgid "Import a text, possibly with comments and attachments, which has been previously exported in XML format from co-ment interface"
+msgstr "Importi un testo, possibilmente con commenti e gli affetti che prima sono stati esportati in XML configuri dall'interfaccia di co-ment"
+
+#: templates/site/dashboard.html:50
+msgid "Invite user"
+msgstr "Invita un utente"
+
+#: templates/site/dashboard.html:51
+msgid "Edit your profile"
+msgstr "Modifica il tuo profilo"
+
+#: templates/site/dashboard.html:52
+msgid "View text list"
+msgstr "Mostra la lista di testi"
+
+#: templates/site/dashboard.html:53
+msgid "Configure workspace"
+msgstr "Configura lo spazio di lavoro"
+
+#: templates/site/dashboard.html:64
+msgid "Moderation queue"
+msgstr "Coda di moderazione"
+
+#: templates/site/dashboard.html:76
+#, python-format
+msgid "user %(user)s awaits approval"
+msgstr "L’utente %(user)s attende l’approvazione"
+
+#: templates/site/dashboard.html:80 templates/site/dashboard.html.py:126
+msgid "approve"
+msgstr "approva"
+
+#: templates/site/dashboard.html:80 templates/site/dashboard.html.py:126
+msgid "refuse"
+msgstr "rifiuta"
+
+#: templates/site/dashboard.html:80
+msgid "membership"
+msgstr "appartenenza"
+
+#: templates/site/dashboard.html:85
+#: templates/site/macros/user_moderation.html:8
+msgid ""
+"Are you sure you want to approve this user's membership to the workspace?"
+msgstr ""
+"Sei sicuro di voler approvare l’appartenenza di questo utente allo spazio di "
+"lavoro?"
+
+#: templates/site/dashboard.html:94
+#: templates/site/macros/user_moderation.html:17
+msgid ""
+"Are you sure you want to refuse this user's membership to the workspace?"
+msgstr ""
+"Sei sicuro di rifiutare l’appartenenza di questo utente allo spazio di "
+"lavoro?"
+
+#: templates/site/dashboard.html:106
+#, python-format
+msgid "registered %(duration)s ago"
+msgstr "registrato da %(duration)s"
+
+#: templates/site/dashboard.html:120 templates/site/dashboard.html.py:126
+#: templates/site/text_view_frame.html:72
+msgid "comment"
+msgstr "commento"
+
+#: templates/site/dashboard.html:121
+#, python-format
+msgid "by %(cuser)s on text"
+msgstr "da %(cuser)s sul testo"
+
+#: templates/site/dashboard.html:121
+msgid "awaits approval"
+msgstr "attende approvazione"
+
+#: templates/site/dashboard.html:127
+msgid "view in context"
+msgstr "mostra nel contesto"
+
+#: templates/site/dashboard.html:132
+msgid "Are you sure you want to approve this comment?"
+msgstr "Sei sicuro di voler approvare questo commento?"
+
+#: templates/site/dashboard.html:149
+msgid "Are you sure you want to refuse this comment?"
+msgstr "Sei sicuro di voler rifiutare questo commento?"
+
+#: templates/site/dashboard.html:168 templates/site/dashboard.html.py:203
+#, python-format
+msgid "modified %(duration)s ago"
+msgstr "modificato da %(duration)s"
+
+#: templates/site/dashboard.html:186
+msgid "Recent texts"
+msgstr "Testi recenti"
+
+#: templates/site/dashboard.html:186 templates/site/macros/paginator.html:9
+msgid "all"
+msgstr "tutti"
+
+#: templates/site/dashboard.html:201
+#, python-format
+msgid "%(nb_comments)s comment"
+msgid_plural "%(nb_comments)s comments"
+msgstr[0] "%(nb_comments)s commento"
+msgstr[1] "%(nb_comments)s commenti"
+
+#: templates/site/dashboard.html:202 templates/site/macros/text_meta.html:8
+#, python-format
+msgid "1 version"
+msgid_plural "%(versions_number)s versions"
+msgstr[0] "versione 1"
+msgstr[1] "versione %(versions_number)s"
+
+#: templates/site/dashboard.html:208 templates/site/text_list.html:223
+msgid "No texts yet"
+msgstr "Non è ancora presente nessun testo"
+
+#: templates/site/dashboard.html:227
+msgid "Workspace activity"
+msgstr "Attività nello spazio di lavoro"
+
+#: templates/site/dashboard.html:228
+msgid "month"
+msgstr "mese"
+
+#: templates/site/dashboard.html:228
+msgid "week"
+msgstr "settimana"
+
+#: templates/site/dashboard.html:228
+msgid "24 hours"
+msgstr "24 ore"
+
+#: templates/site/dashboard.html:234
+msgid "Access"
+msgstr "Accesso"
+
+#: templates/site/dashboard.html:235 templates/site/dashboard.html.py:246
+#: templates/site/text_list.html:208 templates/site/user_list.html:158
+#: templates/site/user_list.html.py:188
+msgid "Loading..."
+msgstr "Caricamento..."
+
+#: templates/site/dashboard.html:245
+msgid "Commenting"
+msgstr "Commentando"
+
+#: templates/site/dashboard.html:264
+msgid "Activities"
+msgstr "Attività"
+
+#: templates/site/dashboard.html:267
+msgid "texts"
+msgstr "testi"
+
+#: templates/site/dashboard.html:268
+msgid "comments"
+msgstr "commenti"
+
+#: templates/site/dashboard.html:270
+msgid "users"
+msgstr "utenti"
+
+#: templates/site/dashboard.html:310
+msgid "No activities"
+msgstr "Nessuna attività"
+
+#: templates/site/dashboard_bloc_recent_comments.html:9
+msgid "Recent comments"
+msgstr "Commenti recenti"
+
+#: templates/site/dashboard_bloc_recent_comments.html:20
+msgid "on text"
+msgstr "sul testo"
+
+#: templates/site/dashboard_bloc_recent_comments.html:23
+#, python-format
+msgid "created %(duration)s ago"
+msgstr "creato da %(duration)s"
+
+#: templates/site/dashboard_bloc_recent_comments.html:24
+#, python-format
+msgid "by %(username)s"
+msgstr "da %(username)s"
+
+#: templates/site/dashboard_bloc_recent_comments.html:29
+msgid "No comments yet"
+msgstr "Non è ancora presente nessun commento"
+
+#: templates/site/followup.html:7 templates/site/macros/main_tabs.html:16
+#: templates/site/macros/text_tabs.html:22
+msgid "Followup"
+msgstr "Proseguimento"
+
+#: templates/site/followup.html:20 templates/site/help.html:66
+#: templates/site/text_followup.html:22
+msgid "Feeds"
+msgstr "Feed"
+
+#: templates/site/followup.html:22 templates/site/text_followup.html:24
+msgid "Public feed"
+msgstr "Feed pubblico"
+
+#: templates/site/followup.html:22 templates/site/followup.html.py:35
+#: templates/site/help.html:6 templates/site/help.html.py:14
+#: templates/site/text_embed.html:27 templates/site/layout/footer.html:11
+#: templates/site/macros/form_fields.html:20
+msgid "Help"
+msgstr "Aiuto"
+
+#: templates/site/followup.html:25
+msgid "Public feed for workspace"
+msgstr "Feed pubblico dello spazio di lavoro"
+
+#: templates/site/followup.html:29
+msgid "This is the public feed for the workspace."
+msgstr "Questo è il feed pubblico dello spazio di lavoro"
+
+#: templates/site/followup.html:35 templates/site/text_followup.html:37
+msgid "Private feed"
+msgstr "Feed privato"
+
+#: templates/site/followup.html:39
+msgid "Private feed for workspace"
+msgstr "Feed privato dello spazio di lavoro"
+
+#: templates/site/followup.html:43
+msgid ""
+"This is the private feed for the workspace. Don't share this address with "
+"others unless you want them to see all activities on the workspace."
+msgstr ""
+"Questo è il feed privato dello spazio di lavoro. Non condividere questo "
+"indirizzo con altri se non vuoi espressamente che loro vedano tutte le "
+"attività nello spazio di lavoro."
+
+#: templates/site/followup.html:45 templates/site/text_followup.html:47
+msgid "Reset private feed url"
+msgstr "Reimposta l’indirizzo del feed privato"
+
+#: templates/site/followup.html:49 templates/site/text_followup.html:51
+msgid "Activate private feed"
+msgstr "Attiva il feed privato"
+
+#: templates/site/followup.html:51
+msgid "The private feed for this workspace is not yet activated."
+msgstr ""
+"Il feed privato di questo spazio di lavoro non è ancora stato attivato."
+
+#: templates/site/followup.html:55 templates/site/text_followup.html:58
+msgid "Email notifications"
+msgstr "Notifiche via email"
+
+#: templates/site/followup.html:58
+msgid "Subscribe to workspace notifications"
+msgstr "Iscriviti alle notifiche del workspace"
+
+#: templates/site/followup.html:62
+msgid ""
+"Subscribe to all replies notifications in discussions where you have "
+"participated"
+msgstr ""
+"Ricevi tutte le notifiche delle risposte a tutte le discussioni alle quali "
+"hai partecipato"
+
+#: templates/site/forgot_pw.html:6 templates/site/forgot_pw.html.py:14
+#: templates/site/forgot_pw.html:27
+msgid "Reset my password"
+msgstr "Reimposta la password"
+
+#: templates/site/forgot_pw.html:35
+msgid "This link is invalid."
+msgstr "Questo link non è valido"
+
+#: templates/site/forgot_pw.html:40 templates/site/login_form.html:21
+msgid "Forgot password?"
+msgstr "Dimenticato la password?"
+
+#: templates/site/help.html:16
+msgid "General Presentation"
+msgstr "Presentazione generale"
+
+#: templates/site/help.html:18
+msgid "co-ment is a web based text annotation system."
+msgstr "co-ment è un sistema di annotazione di testi basato sul web"
+
+#: templates/site/help.html:20
+msgid "Glossary"
+msgstr "Glossario"
+
+#: templates/site/help.html:22
+msgid "Contents"
+msgstr "Contenuti"
+
+#: templates/site/help.html:24 templates/site/help.html.py:30
+#: templates/site/help.html:33
+msgid "Collaboration"
+msgstr "Collaborazione"
+
+#: templates/site/help.html:25 templates/site/help.html.py:37
+msgid "Comments"
+msgstr "Commenti"
+
+#: templates/site/help.html:26 templates/site/help.html.py:60
+msgid "Notification and feeds"
+msgstr "Notifiche e feed"
+
+#: templates/site/help.html:27 templates/site/help.html.py:77
+#: templates/site/help.html:79
+msgid "Roles"
+msgstr "Ruoli"
+
+#: templates/site/help.html:28 templates/site/help.html.py:88
+#: templates/site/text_list.html:12
+msgid "Texts"
+msgstr "Testi"
+
+#: templates/site/help.html:34
+msgid "co-ment 2 collaboration is based on assigning roles for users."
+msgstr ""
+"la collaborazione usando co-ment si basa sull’assegnazione di ruoli agli "
+"utenti"
+
+#: templates/site/help.html:34 templates/site/help.html.py:45
+msgid "Click here for more details"
+msgstr "Clicca qui per maggiori dettagli"
+
+#: templates/site/help.html:34
+msgid ""
+"The basic assumption in the collaboration model is that some users will have "
+"an overall management role, while others will have roles that are defined in "
+"relationship with texts or a given text."
+msgstr ""
+"L’assunzione di base, per il modello collaborativo è che alcuni utenti "
+"avranno soprattutto un ruolo di gestione, mentre altri avranno ruoli "
+"definiti nella relazione con i testi o con un testo dato."
+
+#: templates/site/help.html:40
+msgid "Moderation"
+msgstr "Moderazione"
+
+#: templates/site/help.html:41
+msgid ""
+"Comment moderation is the process of editing/removing comments from a text. "
+"The moderator role is the collection of permissions required to edit/remove "
+"a comment submitted by users of the workspace.\n"
+"    Although this is not the default, you can require comments to be "
+"approved before becoming public by unticking the \"a posteriori moderation\" "
+"box in the settings for the text. If you do so, comments from users with an "
+"Observer or Commentator role won't be visible to users who do not have "
+"moderation permissions before a user (with at least Moderator role) approves "
+"them."
+msgstr ""
+"La moderazione dei commenti è il processo di modifica o rimozione dei "
+"commenti da un testo. Il ruolo di moderatore è una collezione di permessi "
+"per modificare e rimuovere i commenti spediti dagli utenti dello spazio di "
+"lavoro.\n"
+"    Anche se questo non è il comportamento predefinito, puoi anche "
+"richiedere che i commenti siano approvati prima di diventare pubblici "
+"deselezionando il box \"moderazione a posteriori\" nelle impostazioni del "
+"testo. Se farai così, il commento di un utente con un ruolo di osservatore o "
+"commentatore, prima che un utente con i permessi adeguati (almeno di "
+"moderatore) non lo approvi, non sarà visibile agli utenti che non hanno i "
+"permessi di moderazione. "
+
+#: templates/site/help.html:44
+msgid "States"
+msgstr "Stati"
+
+#: templates/site/help.html:45
+msgid "co-ment uses states to implement moderation policies."
+msgstr "co-ment usa degli stati per implementare le regole di moderazione"
+
+#: templates/site/help.html:45
+msgid ""
+"Unapproved or pending comments are visible only to Managers, Editors and "
+"Moderators. Approved comments are visible to users with any role. The "
+"pending state exists only when a priori moderation is selected in settings."
+msgstr ""
+"I commenti non approvati o in attesa sono visibili solo ai gestori, editori "
+"e moderatori. I commenti approvati saranno visibili a tutti gli utenti. Lo "
+"stato in attesa esiste sono quando nelle impostazioni è selezionata la "
+"moderazione a priori."
+
+#: templates/site/help.html:48
+msgid ""
+"We believe that an adequate use of tags is sufficient to implement a variety "
+"of workflows for processing comments. You can use tags for signalling TODOs "
+"or decisions on future revisions. You can also use them to classify comments "
+"according to the issues or topics they address."
+msgstr ""
+"Crediamo che un uso adeguato dei tag sia sufficiente per implementare una "
+"varietà di flussi di lavoro per processare i commenti. Puoi usare i tag per "
+"segnalare cose da fare, o decisioni su revisioni future. Puoi anche usarli "
+"per classificare commenti, in accordo con i problemi o gli argomenti che "
+"toccano."
+
+#: templates/site/help.html:50
+msgid "Linking to a comment"
+msgstr "Collegamenti ai commenti"
+
+#: templates/site/help.html:51
+msgid ""
+"You may find yourself needing to link to a comment from another one. In such "
+"case you can do so by copying your target comment's permalink that shows up "
+"when you hover over the paragraph (&#182;) sign at the end of the comment "
+"title."
+msgstr ""
+"Puoi trovarti nella necessità di collegare un commento ad un altro. In "
+"questo caso puoi copiare il link permanente del commento che vedi comparire "
+"mentre con il mouse passi sopra al segno di paragrafo (&#182;) alla fine del "
+"titolo del commento."
+
+#: templates/site/help.html:53
+msgid "Scope"
+msgstr "Portata"
+
+#: templates/site/help.html:54
+msgid ""
+"The scope of the comment is the part of the text to which it applies. A "
+"comment's scope can be modified by anyone who has a role allowing to modify "
+"the comment."
+msgstr ""
+"Il commento è valido per la parte di testo al quale è applicato. La parte di "
+"testo al quale è applicato può essere modificata da chiunque abbia un ruolo "
+"che permetta di modificare il commento."
+
+#: templates/site/help.html:56
+msgid "Keeping your comments across versions"
+msgstr "Mantieni i commenti fra le versioni"
+
+#: templates/site/help.html:57
+msgid ""
+"When you create a new version of the text, comments are duplicated. In case "
+"the text edition did not change the scope of the comment, it will be kept "
+"\"as is\". If the text of the comment scope has been modified then a "
+"decision has to be made regarding the conservation of such comments in the "
+"new version: you'll be given a choice of either keep them in the new version "
+"as \"detached\" from the text (they do not have a scope in the new version's "
+"but are still visible when browsing, and you can give them a new scope) or "
+"simply removed from the new version."
+msgstr "Quanto crei una nuova versione del testo, i commenti sono duplicati. Nel caso che le modifiche del testo non cambino la portata del commento, il commento rimarrà com’è. Se il testo nella portata del commento è stato modificato, ci sarà da prendere una decisione riguardo al commento: potrai scegliere se tenere il commento come \"staccato\" dal testo (e non avrà portata nel nuovo testo ma rimarrà visibile e potrai dargli una nuova portata) o semplicemente se rimuoverlo."
+
+#: templates/site/help.html:63
+msgid "Email notification"
+msgstr "Notifiche via email"
+
+#: templates/site/help.html:64
+msgid ""
+"Email notifications are a way for users to be informed by email when a new "
+"comment is added on a text or a text is edited and a new version gets "
+"created."
+msgstr ""
+"La notifica email è un modo per gli utenti di tenersi informati via email "
+"quando un nuovo commento è stato aggiunto al testo o un testo è stato "
+"modificato e ne viene creata una nuova versione."
+
+#: templates/site/help.html:67
+msgid "Web feed definition on Wikipedia"
+msgstr "Definizione di web feed su Wikipedia"
+
+#: templates/site/help.html:67
+msgid ""
+"You can subscribe to the feed for a specific text or to a global feed for "
+"the full workspace."
+msgstr ""
+"Puoi iscriverti al feed di un testo specifico o al feed globale di tutto lo "
+"spazio di lavoro"
+
+#: templates/site/help.html:69
+msgid "Public and private feeds"
+msgstr "Feed pubblici e privati"
+
+#: templates/site/help.html:70
+msgid ""
+"The public feed includes all the events publically accessible on the "
+"workspace or a specific text. The private feed includes all events: do not "
+"publicize it to people who are not registered in your workspace unless you "
+"really want them to know what's happening in it."
+msgstr ""
+"Il feed pubblico include tutti gli eventi accessibili pubblicamente in uno "
+"spazio di lavoro o di un testo specifico. Il feed privato include tutti gli "
+"eventi, non pubblicizzare a persone che non sono registrate l’indirizzo "
+"privato del feed, a meno che tu non vuoi far realmente sapere a loro quello "
+"che sta accadendo."
+
+#: templates/site/help.html:72
+msgid "Text embedding"
+msgstr "Incastona il testo (embedding)"
+
+#: templates/site/help.html:73
+msgid ""
+"You can embed your text into a page of your own website. Visitors will be "
+"able to add comments without leaving your website if the anonymous users' "
+"roles on the text allow it. For a proper test condition when embedding in "
+"your own site, in particular for experiencing links referencing comments in "
+"the same or different text, be sure you are not logged into your workspace "
+"in another tab of your browser."
+msgstr ""
+"Puoi incastonare (embed) il tuo testo dentro ad una pagina del tuo sito web. "
+"I visitatori potranno aggiungere commenti senza lasciare il tuo sito se il "
+"ruolo di utente anonimo lo permette. Per un test corretto di un testo "
+"incastonato, fai attenzione a non essere collegato in uno spazio di lavoro "
+"in un altro tab del browser."
+
+#: templates/site/help.html:80
+msgid "Roles are predefined sets of permissions."
+msgstr "I ruoli sono un insieme predefinito di permessi"
+
+#: templates/site/help.html:81
+msgid ""
+"A text is visible to the public (non-logged-in visitors, aka anonymous "
+"users) only if anonymous users are given a role on the text."
+msgstr ""
+"Un testo è visibile al pubblico (visitatori non \n"
+"collegati o anonimi) solo se gli utenti anonimi hanno un ruolo rispetto al "
+"testo."
+
+#: templates/site/help.html:82 templates/site/text_share.html:88
+msgid "Text role"
+msgstr "Ruolo applicato al testo"
+
+#: templates/site/help.html:83
+msgid ""
+"A text role is a role that is set for a specific user on a specific text. It "
+"can be used to override a possibly existing workspace-level role or to give "
+"a user a role on a text (and not on every text in the workspace)."
+msgstr ""
+"Un ruolo per il testo è un ruolo che è impostato per un utente specifico su "
+"un testo specifico. Può essere usato per scavalcare una eventuale ruolo "
+"esistente a livello di spazio di lavoro o per dare ad un utente un ruolo su "
+"un testo (e non su ogni testo presente nello spazio di lavoro)."
+
+#: templates/site/help.html:84 views/site.py:185
+msgid "Role model"
+msgstr "Modello del ruolo"
+
+#: templates/site/help.html:85
+msgid ""
+"A role model is a role set useful in a specific use case. When you set up a "
+"co-ment service, you have to select a role model. The default model "
+"addresses most cases. A specialized role model such as \"teacher\" includes "
+"specific roles making in this particular case possible for comments to be "
+"privately shared between a teacher and each student."
+msgstr ""
+"Un ruolo modello è un ruolo utile in casi specifici. Quando configuri un "
+"servizio co-ment, devi scegliere un ruolo modello. Il modello predefinito "
+"funziona per per la maggior parte dei casi. Un modello di ruolo "
+"specializzato, come per esempio \"insegnante\" include regole specifiche; in "
+"questo caso particolare è possibile che i commenti siano condivisi "
+"privatamente fra un insegnate e ogni studente."
+
+#: templates/site/help.html:91
+msgid "Create or upload?"
+msgstr "Crea o carica?"
+
+#: templates/site/help.html:92
+msgid ""
+"There are 3 main ways to produce a text in co-ment. If you start from "
+"scratch, create your text in markdown format. If you start from an existing "
+"file upload it to a markdown format. If you start from a Web page, create a "
+"text with HTML as format, and copy and paste the full Web page into the "
+"editor."
+msgstr ""
+"Ci sono tre modi principali per produrre un testo in co-ment. Se inizi da "
+"zero, crea il testo il formato markdown. Se inizi da un file, caricalo in "
+"formato markdown. Se inizi da una pagina web, crea un testo con fomato HTML "
+"e copia e incolla il testo della pagina web nell’editor."
+
+#: templates/site/help.html:96
+msgid "Text formats"
+msgstr "Formati del testo"
+
+#: templates/site/help.html:97
+msgid ""
+"There are at this date 3 text formats: markdown (default/preferred format), "
+"HTML and RST."
+msgstr ""
+"Attualmente sono supportati 3 formati di testo: markdown (formato "
+"predefinito e preferito), HTML e RST."
+
+#: templates/site/help.html:101
+msgid "Markdown"
+msgstr "Markdown"
+
+#: templates/site/help.html:102
+msgid ""
+"Unless some import needs make it preferable to use HTML, we recommend that "
+"you use markdown for creating or importing texts. Our software and Web "
+"services use the pandoc extended version of markdown."
+msgstr ""
+"A meno che si preferisca usare il formato HTML, raccomandiamo di usare il "
+"formato markdown per importare testi. Il nostro software e altri servizi "
+"usano la versione di markdown estesa da pandoc."
+
+#: templates/site/help.html:102
+msgid "Read more about this"
+msgstr "Maggiori informazioni"
+
+#: templates/site/login.html:8 templates/site/login_form.html:19
+#: templates/site/layout/header.html:17
+msgid "Login"
+msgstr "Login"
+
+#: templates/site/login_form.html:7
+#, python-format
+msgid "%(wname)s Login"
+msgstr "%(wname)s Login"
+
+#: templates/site/login_form.html:20 templates/site/register.html:8
+#: templates/site/layout/header.html:18
+msgid "Register"
+msgstr "Registrati"
+
+#: templates/site/non_authenticated_index.html:10
+#: templates/site/layout/header.html:8
+msgid "Home"
+msgstr "Home"
+
+#: templates/site/non_authenticated_index.html:20
+#, python-format
+msgid "One public text"
+msgid_plural "%(counter)s public texts"
+msgstr[0] "Un testo pubblico"
+msgstr[1] "%(counter)s testi pubblici"
+
+#: templates/site/notifications_desactivate.html:8
+msgid "Deactivate notification"
+msgstr "Disattiva le notifiche"
+
+#: templates/site/notifications_desactivate.html:31
+msgid "Deactivate"
+msgstr "Disattiva"
+
+#: templates/site/profile.html:6 templates/site/profile.html.py:14
+#: templates/site/profile_pw.html:6 templates/site/profile_pw.html.py:14
+#, python-format
+msgid "Your profile (%(username)s)"
+msgstr "Il tuo profilo (%(username)s)"
+
+#: templates/site/profile.html:17 templates/site/profile_pw.html:17
+#: templates/site/layout/header.html:14
+msgid "Profile"
+msgstr "Profilo"
+
+#: templates/site/profile.html:19 templates/site/profile_pw.html:19
+msgid "Password"
+msgstr "Password"
+
+#: templates/site/profile.html:33 templates/site/profile_pw.html:33
+#: templates/site/text_create_content.html:47
+#: templates/site/text_create_upload.html:42 templates/site/text_edit.html:37
+#: templates/site/text_settings.html:23 templates/site/text_share.html:153
+#: templates/site/user_activate.html:27 templates/site/user_list.html:210
+#: templates/site/layout/base_workspace_form.html:32
+msgid "Save"
+msgstr "Salva"
+
+#: templates/site/register.html:19
+#, python-format
+msgid "%(wname)s Registration"
+msgstr "%(wname)s Registrazione"
+
+#: templates/site/reset_pw.html:6 templates/site/reset_pw.html.py:14
+#: templates/site/reset_pw.html:24
+msgid "Reset your password"
+msgstr "Reimposta la tua password"
+
+#: templates/site/settings.html:5 templates/site/settings_design.html:5
+#: templates/site/text_list.html:183 templates/site/macros/main_tabs.html:14
+#: templates/site/macros/text_tabs.html:19
+msgid "Settings"
+msgstr "Impostazioni"
+
+#: templates/site/settings.html:21 templates/site/settings_design.html:21
+msgid "General"
+msgstr "Generali"
+
+#: templates/site/settings.html:23 templates/site/settings_design.html:23
+msgid "Appearance"
+msgstr "Apparenze"
+
+#: templates/site/settings.html:38 templates/site/settings_design.html:40
+msgid ""
+"Are you sure you want to change the role model? All roles (except managers) "
+"will be resetted!"
+msgstr ""
+"Sei sicuro di voler cambiare il modello di ruoli? Tutti i ruoli (eccetto i "
+"gestori) saranno reimpostati!"
+
+#: templates/site/settings_design.html:31
+msgid "Delete logo"
+msgstr "Cancella logo"
+
+#: templates/site/text_create_content.html:26
+#: templates/site/text_create_upload.html:24 templates/site/text_list.html:37
+msgid "Text list"
+msgstr "Lista del testo"
+
+#: templates/site/text_embed.html:7
+msgid "Text notifications"
+msgstr "Notifiche del testo"
+
+#: templates/site/text_embed.html:25
+msgid "Embed text"
+msgstr "Testo incastonato (embed)"
+
+#: templates/site/text_embed.html:26
+msgid "Copy this code into your site to display text with comments."
+msgstr ""
+"Copia questo codice dentro il tuo sito per mostrare il testo con i commenti."
+
+#: templates/site/text_embed.html:26
+msgid ""
+"Users will also be able to add comments from your site depending on "
+"anonymous users' roles."
+msgstr ""
+"Gli utenti potranno aggiungere commenti dal tuo sito a seconda dei ruoli "
+"dell’utente anonimo."
+
+#: templates/site/text_embed.html:36
+msgid "Warning:"
+msgstr "Attenzione:"
+
+#: templates/site/text_embed.html:36
+msgid ""
+"You won't successfully embed the text before you give anonymous users a role "
+"allowing them to view the text."
+msgstr ""
+"Non sarà possibile incastonare (embed) il testo prima di aver dato al testo "
+"il ruolo anonimo, per poter mostrare il testo."
+
+#: templates/site/text_followup.html:7
+msgid "Text followup"
+msgstr "Proseguimento del testo"
+
+#: templates/site/text_followup.html:27
+#, python-format
+msgid "Public feed for text %(title)s"
+msgstr "Feed pubblico per il testo %(title)s"
+
+#: templates/site/text_followup.html:31
+msgid "This is the public feed for the text."
+msgstr "Questo è il feed pubblico per il testo."
+
+#: templates/site/text_followup.html:41
+msgid "Private feed for text "
+msgstr "Feed privato per il testo "
+
+#: templates/site/text_followup.html:45
+msgid ""
+"This is the private feed for the text. Don't share this address with others "
+"unless you want them to see all activities on this text."
+msgstr ""
+"Questo è il feed privato di questo testo. Non condividere questo indirizzo "
+"con altri se non vuoi espressamente che loro vedano tutte le attività su "
+"questo testo."
+
+#: templates/site/text_followup.html:53
+msgid "The private feed for this text is not yet activated."
+msgstr "Il feed privato per questo testo non è ancora stato attivato."
+
+#: templates/site/text_followup.html:61
+msgid ""
+"You will receive text notifications because you subscribed to notifications "
+"at the workspace level"
+msgstr ""
+"Riceverai le notifiche sul testo perché ti sei iscritto alle notifiche a "
+"livello di spazio di lavoro."
+
+#: templates/site/text_followup.html:64
+msgid "Subscribe to all text notifications"
+msgstr "Ricevi tutte le notifiche del testo"
+
+#: templates/site/text_history.html:56
+#: templates/site/text_history_compare.html:28
+#: templates/site/text_history_version.html:28
+msgid "Version list"
+msgstr "Lista delle versioni"
+
+#: templates/site/text_history.html:59
+msgid "Compare last two versions"
+msgstr "Compara le ultime due versioni"
+
+#: templates/site/text_history.html:61
+#: templates/site/text_history_compare.html:37
+#: templates/site/text_history_version.html:38
+msgid "Most recent version"
+msgstr "Versioni più recenti"
+
+#: templates/site/text_history.html:67
+msgid "Compare selected versions"
+msgstr "Compara le versioni selezionate"
+
+#: templates/site/text_history.html:77
+msgid "Version"
+msgstr "Versione"
+
+#: templates/site/text_history.html:78
+msgid "Selection"
+msgstr "Selezione"
+
+#: templates/site/text_history.html:81 templates/site/text_list.html:139
+msgid "Author"
+msgstr "Autore"
+
+#: templates/site/text_history.html:82
+msgid "Created"
+msgstr "Creato"
+
+#: templates/site/text_history.html:83 templates/site/text_list.html:141
+msgid "# comments"
+msgstr "# commenti"
+
+#: templates/site/text_history.html:105 templates/site/text_list.html:161
+msgid "View"
+msgstr "Vedi"
+
+#: templates/site/text_history.html:106
+#: templates/site/text_history_version.html:32
+msgid "Compare with previous version"
+msgstr "Compara con la versione precedente"
+
+#: templates/site/text_history.html:108
+msgid "Revert to this version"
+msgstr "Riporta a questa versione"
+
+#: templates/site/text_history.html:122 templates/site/text_list.html:82
+#: templates/site/text_list.html.py:163
+msgid "Delete"
+msgstr "Cancella"
+
+#: templates/site/text_history.html:128
+msgid "Are you sure you want to delete this version?"
+msgstr "Sei sicuro di voler cancellare questa versione del testo?"
+
+#: templates/site/text_history_compare.html:30
+msgid "Previous modification"
+msgstr "Modifiche precedenti"
+
+#: templates/site/text_history_compare.html:31
+#: templates/site/text_history_compare.html:33
+#: templates/site/text_history_version.html:34
+#, python-format
+msgid "Version %(version_number)s"
+msgstr "Versione %(version_number)s"
+
+#: templates/site/text_history_compare.html:32
+#, python-format
+msgid ""
+"Comparison between version #%(version_1_number)s and #%(version_2_number)s"
+msgstr ""
+"Comparazione fra la versione #%(version_1_number)s e la versione #"
+"%(version_2_number)s"
+
+#: templates/site/text_history_compare.html:34
+msgid "Next modification"
+msgstr "Prossima modifica"
+
+#: templates/site/text_history_compare.html:44
+msgid "No differences"
+msgstr "Nessuna differenza"
+
+#: templates/site/text_history_version.html:31
+msgid "Previous version"
+msgstr "Versione precedente"
+
+#: templates/site/text_history_version.html:36
+msgid "Compare with next version"
+msgstr "Compara con la versione successiva"
+
+#: templates/site/text_history_version.html:37
+msgid "Next version"
+msgstr "Versione successiva"
+
+#: templates/site/text_history_version.html:45 views/texts.py:450
+#: views/texts.py:451
+#, python-format
+msgid "by %(author)s"
+msgstr "da %(author)s"
+
+#: templates/site/text_list.html:51 templates/site/text_share.html:40
+#: templates/site/user_list.html:45
+msgid "Filter by tag:"
+msgstr "Filtra per tag:"
+
+#: templates/site/text_list.html:53 templates/site/text_share.html:42
+#: templates/site/user_list.html:47
+msgid "All"
+msgstr "Tutto"
+
+#: templates/site/text_list.html:81 templates/site/user_list.html:72
+msgid "Bulk Actions"
+msgstr "Azioni massive"
+
+#: templates/site/text_list.html:85 templates/site/user_list.html:81
+msgid "Apply"
+msgstr "Applica"
+
+#: templates/site/text_list.html:106 templates/site/user_list.html:102
+msgid "Are you sure?"
+msgstr "Sei sicuro?"
+
+#: templates/site/text_list.html:138 templates/site/macros/text_tabs.html:10
+msgid "Text"
+msgstr "Testo"
+
+#: templates/site/text_list.html:140
+msgid "Modified"
+msgstr "Modificato"
+
+#: templates/site/text_list.html:142 templates/site/user_list.html:136
+msgid "Last week activity"
+msgstr "Attività dell’ultima settimana"
+
+#: templates/site/text_list.html:158
+#: templates/site/macros/user_actions.html:13
+msgid "tags:"
+msgstr "tag:"
+
+#: templates/site/text_list.html:158
+#: templates/site/macros/user_actions.html:13
+#, python-format
+msgid "Filter by tag: %(tag_name)s"
+msgstr "Filtro per tag: %(tag_name)s"
+
+#: templates/site/text_list.html:162 templates/site/macros/text_tabs.html:12
+#: templates/site/macros/user_actions.html:19
+msgid "Edit"
+msgstr "Modifica"
+
+#: templates/site/text_list.html:169
+msgid "Are you sure you want to delete this text?"
+msgstr "Sei sicuro di voler cancellare questo testo?"
+
+#: templates/site/text_list.html:182
+msgid "Users"
+msgstr "Utenti"
+
+#: templates/site/text_list.html:200
+msgid "Edit user"
+msgstr "Modifica utente"
+
+#: templates/site/text_share.html:27 templates/site/user_add.html:20
+#: templates/site/user_add_text.html:23 templates/site/user_edit.html:20
+#: templates/site/user_mass_add.html:20
+#: templates/site/user_mass_add_text.html:23
+msgid "Users' list"
+msgstr "Lista degli utenti"
+
+#: templates/site/text_share.html:29 templates/site/user_add.html:6
+#: templates/site/user_add.html.py:22 templates/site/user_add_text.html:6
+#: templates/site/user_add_text.html:25 templates/site/user_contact.html:22
+#: templates/site/user_edit.html:22 templates/site/user_list.html:34
+#: templates/site/user_mass_add.html:22
+#: templates/site/user_mass_add_text.html:6
+#: templates/site/user_mass_add_text.html:25
+msgid "Add a new user"
+msgstr "Aggiungi un nuovo utente"
+
+#: templates/site/text_share.html:31 templates/site/user_add.html:24
+#: templates/site/user_add_text.html:27 templates/site/user_contact.html:24
+#: templates/site/user_list.html:36 templates/site/user_mass_add.html:6
+#: templates/site/user_mass_add.html:24
+#: templates/site/user_mass_add_text.html:27
+msgid "Add users in bulk"
+msgstr "Aggiungi nuovi utenti in massa"
+
+#: templates/site/text_share.html:35 templates/site/user_contact.html:20
+#: templates/site/user_list.html:7 templates/site/user_list.html.py:32
+#: templates/site/user_list.html:40 templates/site/user_list.html.py:116
+msgid "People' list"
+msgstr "Lista di persona"
+
+#: templates/site/text_share.html:38 templates/site/user_list.html:43
+msgid "Hide suspended users"
+msgstr "Nascondi gli utenti sospesi"
+
+#: templates/site/text_share.html:38 templates/site/user_list.html:43
+msgid "Display suspended users"
+msgstr "Mostra gli utenti sospesi"
+
+#: templates/site/text_share.html:86 templates/site/user_list.html:132
+msgid "User"
+msgstr "Utente"
+
+#: templates/site/text_share.html:87
+msgid ""
+"The 'Workspace role' is the global role that applies to every text, you can "
+"give a user a particular role on this text using the 'text role' column on "
+"the right"
+msgstr ""
+"Il ruolo dello spazio di lavoro è il ruolo globale che si applica ad ogni "
+"testo, puoi dare ai singoli utenti su questo testo usando la colonna 'Ruolo "
+"applicato al testo' a destra"
+
+#: templates/site/text_share.html:87
+msgid "Workspace role"
+msgstr "Ruoli dello spazio di lavoro"
+
+#: templates/site/text_share.html:101
+#, python-format
+msgid "This role has been overriden on this text by a text role: %(rolename)s"
+msgstr ""
+"Questo ruolo è stato scavalcato su questo testo dal ruolo: %(rolename)s"
+
+#: templates/site/text_share.html:128 templates/site/user_edit.html:6
+#: templates/site/user_edit.html.py:24 templates/site/user_list.html:177
+msgid "Edit anonymous users"
+msgstr "Modifica utenti anonimi"
+
+#: templates/site/text_share.html:128 templates/site/user_list.html:177
+msgid "Anonymous users"
+msgstr "Utenti anonimi"
+
+#: templates/site/text_view_frame.html:70
+#: templates/site/text_view_frame.html:71
+msgid "add a comment"
+msgstr "aggiungi un commento"
+
+#: templates/site/text_view_frame.html:82
+msgid "Filter comments"
+msgstr "Filtra commenti"
+
+#: templates/site/text_view_frame.html:83
+msgid "Preferences"
+msgstr "Preferenze"
+
+#: templates/site/text_view_frame.html:84
+msgid "Text preferences"
+msgstr "Preferenze sul testo"
+
+#: templates/site/text_view_frame.html:94
+msgid "Loading text…"
+msgstr "Caricamento testo…"
+
+#: templates/site/text_view_frame.html:115
+msgid "Which comments?"
+msgstr "Quali commenti?"
+
+#: templates/site/text_view_frame.html:123
+msgid "How should comments' scope be shown in text?"
+msgstr "Come dovrebbe essere mostrata l’estensione del commento nel testo?"
+
+#: templates/site/unauthorized.html:5
+msgid "Unauthorized"
+msgstr "Non autorizzato"
+
+#: templates/site/user_add.html:26
+msgid ""
+"The user will receive an email invitation to join the workspace.\n"
+"You can customize the email sent by using the 'Note' field bellow."
+msgstr ""
+"L’utente riceverà un invito via email per collegarsi allo spazio di lavoro.\n"
+"Puoi personalizzare l’email spedita usando il campo 'Note' sottostante."
+
+#: templates/site/user_add_text.html:29
+msgid "The user will receive an email invitation to join the workspace."
+msgstr ""
+"L’utente riceverà un invito via email per collegarsi allo spazio di lavoro."
+
+#: templates/site/user_add_text.html:30 templates/site/user_mass_add.html:27
+#: templates/site/user_mass_add_text.html:30
+msgid "You can customize the email sent by using the 'Note' field bellow."
+msgstr ""
+"Puoi personalizzare l’email da spedire usando il campo 'Note' sottostante."
+
+#: templates/site/user_contact.html:6
+msgid "Contact user"
+msgstr "Contatta l’utente"
+
+#: templates/site/user_contact.html:26
+#, python-format
+msgid "Contact user %(username)s"
+msgstr "Contatta l’utente %(username)s"
+
+#: templates/site/user_edit.html:6 templates/site/user_edit.html.py:24
+#, python-format
+msgid "Edit user %(username)s"
+msgstr "Modifica utente %(username)s"
+
+#: templates/site/user_list.html:73 templates/site/macros/user_actions.html:28
+msgid "Suspend access"
+msgstr "Sospendi accesso"
+
+#: templates/site/user_list.html:74 templates/site/macros/user_actions.html:23
+msgid "Enable access"
+msgstr "Abilita accesso"
+
+#: templates/site/user_list.html:76
+#, python-format
+msgid "Change role to %(role_name)s"
+msgstr "Cambia ruolo in %(role_name)s"
+
+#: templates/site/user_list.html:133 views/user.py:283
+msgid "Email"
+msgstr "Email"
+
+#: templates/site/user_list.html:134
+msgid "Date joined"
+msgstr "Data di affiliazione"
+
+#: templates/site/user_list.html:135
+msgid "Role"
+msgstr "Ruolo"
+
+#: templates/site/user_list.html:177
+msgid ""
+"Those are non-registered users. Assign them a role to open your texts to "
+"simple visitors."
+msgstr ""
+"Questi sono utenti non registrati. Assegna a loro un ruolo per aprire i "
+"testi ai semplici visitatori."
+
+#: templates/site/user_mass_add.html:26
+#: templates/site/user_mass_add_text.html:29
+msgid "The users will receive an email invitation to join the workspace."
+msgstr ""
+"Gli utenti riceveranno un invito via email per collegarsi allo spazio di "
+"lavoro."
+
+#: templates/site/layout/base_text.html:16
+#: templates/site/layout/base_workspace.html:20
+msgid "back to workspace"
+msgstr "torna allo spazio di lavoro"
+
+#: templates/site/layout/base_workspace.html:30
+#, python-format
+msgid "%(nb_texts)s text"
+msgid_plural "%(nb_texts)s texts"
+msgstr[0] "%(nb_texts)s testo"
+msgstr[1] "%(nb_texts)s testi"
+
+#: templates/site/layout/base_workspace.html:30
+#, python-format
+msgid "%(nb_users)s user"
+msgid_plural "%(nb_users)s users"
+msgstr[0] "%(nb_users)s utente"
+msgstr[1] "%(nb_users)s utenti"
+
+#: templates/site/layout/header.html:15
+msgid "Logout"
+msgstr "Logout"
+
+#: templates/site/macros/form_fields.html:11
+msgid ""
+"Markdown (or rst) is a structured format which permit simple formatting with "
+"simple textual syntax. We recommend you use the 'markown' format unless you "
+"want to paste HTML (in which case you should use the 'html' format)."
+msgstr ""
+"Markdown (o rst) è un formato strutturato che permette una semplice "
+"formattazione con una semplice sintassi testuale. Noi raccomandiamo di usare "
+"il formato 'markdown' a meno che tu non voglia copiare HTML (nel tal caso "
+"dovresti usare il formato 'html')."
+
+#: templates/site/macros/form_fields.html:14
+msgid ""
+"Markdown (or rst) is a structured format which permit simple formatting with "
+"simple textual syntax. We recommend you use the 'markdown' format if your "
+"text is mostly text and/or if you will create many revisions of your text. "
+"You can use the 'html' format if your text will not be edited or if you want "
+"to preserve complex formatting (tables, images, etc.)."
+msgstr ""
+"Markdown (o rst) è un formato strutturato che permette una semplice "
+"formattazione con una semplice sintassi testuale. Noi raccomandiamo di usare "
+"il formato 'markdown' se il tuo documento è soprattuto di testo e/o se "
+"prevedi di creare molte revisioni del testo. Puoi usare il formato 'html' se "
+"il tuo testo non sarà modificato o se vuoi preservare un’impaginazione "
+"complessa (tabelle, immagini, etc.)."
+
+#: templates/site/macros/main_tabs.html:11
+#, python-format
+msgid "Texts (%(nb_texts)s)"
+msgstr "Testi (%(nb_texts)s)"
+
+#: templates/site/macros/main_tabs.html:13
+#, python-format
+msgid "People  (%(nb_users)s)"
+msgstr "Persone (%(nb_users)s)"
+
+#: templates/site/macros/paginator.html:5
+msgid "Previous page"
+msgstr "Pagina precedente"
+
+#: templates/site/macros/paginator.html:6
+#, python-format
+msgid "%(sindex)s-%(eindex)s of %(pcount)s"
+msgstr "%(sindex)s-%(eindex)s di %(pcount)s"
+
+#: templates/site/macros/paginator.html:7
+msgid "Next page"
+msgstr "Pagina successiva"
+
+#: templates/site/macros/paginator.html:9
+msgid "View all"
+msgstr "Vedi tutto"
+
+#: templates/site/macros/paginator.html:11
+msgid "paginate"
+msgstr "paginazione"
+
+#: templates/site/macros/text_actions.html:12
+msgid "Share"
+msgstr "condividi"
+
+#: templates/site/macros/text_comments.html:16
+#, python-format
+msgid "by %(name)s on %(date)s"
+msgstr "da %(name)s il %(date)s"
+
+#: templates/site/macros/text_editor.html:66
+msgid ""
+"You have attempted to leave this page. Unsaved changes will be lost. Are you "
+"sure you want to exit this page?"
+msgstr ""
+"Stai provando a lasciare la pagina. I cambiamenti non salvati saranno persi. "
+"Sei sicuro di voler lasciare la pagina?"
+
+#: templates/site/macros/text_meta.html:6
+#, python-format
+msgid "last modified %(duration)s ago"
+msgstr "ultima modifica %(duration)s fa"
+
+#: templates/site/macros/text_tabs.html:15
+msgid "People"
+msgstr "Persone"
+
+#: templates/site/macros/text_tabs.html:17
+msgid "Versions"
+msgstr "Versioni"
+
+#: templates/site/macros/text_tabs.html:24
+msgid "Embed"
+msgstr "Incastonato (embed)"
+
+#: templates/site/macros/user_actions.html:6
+#: templates/site/macros/user_actions.html:17
+msgid "Your profile"
+msgstr "Il tuo profilo"
+
+#: templates/site/macros/user_actions.html:8
+#, python-format
+msgid "Edit user %(userprint)s"
+msgstr "Modifica utente %(userprint)s"
+
+#: templates/site/macros/user_actions.html:29
+msgid "(Re-)send invitation"
+msgstr "(Ri-)spedisci invito"
+
+#: templates/site/macros/user_actions.html:38
+msgid "Are you sure you want to suspend this user's access to the workspace?"
+msgstr ""
+"Sei sicuro di voler sospendere l’accesso allo spazio di lavoro per questo "
+"utente?"
+
+#: templates/site/macros/user_actions.html:47
+msgid "Are you sure you want to enable this user's access to the workspace?"
+msgstr ""
+"Sei sicuro di voler abilitare l’accesso allo spazio di lavoro per questo "
+"utente?"
+
+#: templates/site/macros/user_actions.html:56
+msgid "Are you sure you want to send this user an invitation to the workspace?"
+msgstr ""
+"Sei sicuro di voler spedire un invito per lo spazio di lavoro a questo "
+"utente?"
+
+#: templates/site/macros/user_moderation.html:3
+msgid "Approve"
+msgstr "Approva"
+
+#: templatetags/com.py:146
+msgid "F j, Y \\a\\t g:i a"
+msgstr "F j, Y \\a\\t g:i a"
+
+#: utils/date.py:6
+msgid "%Y-%m-%d %H:%M"
+msgstr "%Y-%m-%d %H:%M"
+
+#: utils/diff.py:53
+msgid "unknown"
+msgstr "sconosciuto"
+
+#: views/create.py:26
+msgid "Upload file (optional)"
+msgstr "Carica file (opzionale)"
+
+#: views/create.py:27
+msgid ""
+"Upload a file from your computer instead of using the direct input above"
+msgstr ""
+"Carica un file dal tuo computer invece di usare l’immissione diretta sopra"
+
+#: views/create.py:38
+msgid "You should specify a file to upload."
+msgstr "Dovresti specificare un file da caricare."
+
+#: views/create.py:49
+msgid "Upload XML file"
+msgstr "Carica l'archivio di XML"
+
+#: views/create.py:50
+msgid "Upload a previously exported XML file from your computer"
+msgstr "Carica un archivio di XML prima esportato dal Suo computer"
+
+#: views/create.py:65
+msgid "The imported file should be an XML file generated by co-ment when exporting a text and comments."
+msgstr "L'archivio importato dovrebbe essere un archivio di XML generato da co-ment quando esportando un testo e commenti."
+
+#: views/create.py:71
+msgid "No co_ment_text node found in XML."
+msgstr "Nessun nodo di co_ment_text trovato in XML."
+ 
+#: views/create.py:76
+msgid "No %(tag)s node found in XML."
+msgstr "Nessun nodo di %(tag)s trovato in XML."
+
+#: views/create.py:46
+msgid "The title of your text"
+msgstr "Il titolo del tuo testo"
+
+#: views/create.py:71 views/create.py:108
+#, python-format
+msgid "Text \"%(text_title)s\" has been created"
+msgstr "Il testo \"%(text_title)s\" è stato creato"
+
+#: views/create.py:244
+msgid "Text \"%(text_title)s\" has been imported"
+msgstr "Testo \"%(text_title)s\" è stato importato"
+
+#: views/feeds.py:25
+#, python-format
+msgid "%(workspace_name)s's public feed"
+msgstr "feed pubblico di %(workspace_name)s"
+
+#: views/feeds.py:26
+#, python-format
+msgid "Workspace %(workspace_name)s public activity feed"
+msgstr "Feed pubblico delle attività dello spazio di lavoro %(workspace_name)s"
+
+#: views/feeds.py:36
+#, python-format
+msgid "%(workspace_name)s's private feed"
+msgstr "feed privato dello spazio di lavoro %(workspace_name)s"
+
+#: views/feeds.py:37
+#, python-format
+msgid "Workspace %(workspace_name)s private feed"
+msgstr "Feed privato dello spazio di lavoro %(workspace_name)s"
+
+#: views/feeds.py:72
+#, python-format
+msgid "Text %(text_title)s's public feed"
+msgstr "Feed pubblico del testo %(text_title)s"
+
+#: views/feeds.py:73
+#, python-format
+msgid "Public activity feed for text %(text_title)s"
+msgstr "Feed pubblico delle attività del testo %(text_title)s"
+
+#: views/feeds.py:84
+#, python-format
+msgid "Text %(text_title)s's private feed"
+msgstr "Feed privato del testo %(text_title)s"
+
+#: views/feeds.py:85
+#, python-format
+msgid "Private activity feed for text %(text_title)s"
+msgstr "Feed privato delle attività del testo %(text_title)s"
+
+#: views/followup.py:31 views/followup.py:80
+msgid "Private feed activated."
+msgstr "Attivato il feed privato"
+
+#: views/followup.py:34
+msgid "Private feed reseted."
+msgstr "Reinizializzato il feed privato"
+
+#: views/followup.py:52
+msgid "This notification has already been deactivated."
+msgstr "Questa notifica è già stata attivata."
+
+#: views/followup.py:58
+msgid "Notification deactivated."
+msgstr "Notifica disattivata."
+
+#: views/followup.py:62
+msgid "Deactivate notification?"
+msgstr "Disattivare la notifica?"
+
+#: views/followup.py:84
+msgid "Private notifications feed reseted."
+msgstr "Reimpostato feed privato di notifica."
+
+#: views/site.py:82 views/texts.py:134 views/user.py:545
+msgid "You're logged in!"
+msgstr "Ti sei collegato!"
+
+#: views/site.py:100
+msgid "Your name"
+msgstr "Il tuo nome"
+
+#: views/site.py:102
+msgid "Your email address"
+msgstr "Il tuo indirizzo email"
+
+#: views/site.py:105
+msgid "Subject of the message"
+msgstr "Oggetto del messaggio"
+
+#: views/site.py:106
+msgid "Body of the message"
+msgstr "Corpo del messaggio"
+
+#: views/site.py:108
+msgid "Send me a copy of the email"
+msgstr "Spedisci anche a me una copia dell’email"
+
+#: views/site.py:134
+msgid "Copy of message:"
+msgstr "Copia del messaggio:"
+
+#: views/site.py:136
+msgid "Email sent. We will get back to you as quickly as possible."
+msgstr "Email spedita. Ci faremmo sentire il più velocemente possibile."
+
+#: views/site.py:165
+msgid "Workspace name"
+msgstr "Nome dello spazio di lavoro"
+
+#: views/site.py:170
+msgid "Workspace tagline"
+msgstr "Tag dello spazio di lavoro"
+
+#: views/site.py:175
+msgid "Workspace registration"
+msgstr "Registrazione allo spazio di lavoro"
+
+#: views/site.py:176
+msgid ""
+"Can users register themselves into the workspace? (if not, only invitations "
+"by managers can create new users)"
+msgstr ""
+"Gli utenti da soli possono registrarsi allo spazio di lavoro? (se no, solo i "
+"gestori potranno creare nuovi utente attraverso gli inviti)"
+
+#: views/site.py:180
+msgid "Workspace registration moderation"
+msgstr "Approvazione delle registrazioni allo spazio di lavoro"
+
+#: views/site.py:181
+msgid ""
+"Should new users be moderated (registration will require manager's approval)?"
+msgstr ""
+"I nuovi utenti devono essere soggetti al processo di approvazione (la "
+"registrazione richiederà il processo di approvazione)?"
+
+#: views/site.py:186
+msgid "Change the roles available in the workspace"
+msgstr "Cambia i ruoli disponibili nello spazio di lavoro"
+
+#: views/site.py:201 views/site.py:207 views/site.py:235 views/site.py:244
+msgid "Settings saved"
+msgstr "Impostazioni salvate"
+
+#: views/site.py:215
+msgid "Workspace logo"
+msgstr "Logo dello spazio di lavoro"
+
+#: views/site.py:217
+msgid "Workspace html code"
+msgstr "Codice HTML dello spazio di lavoro"
+
+#: views/site.py:218
+msgid ""
+"Add stylesheets etc. Warning: this code will be added to the workspace code, "
+"make sure you know what you're doing before adding something here."
+msgstr ""
+"Aggiungi fogli di stile etc. Attenzione: questi codici saranno aggiunti allo "
+"spazio di lavoro, accertati di sapere quello che fai prima di aggiungere "
+"qualcosa qui."
+
+#: views/site.py:253
+msgid ""
+"A link to reset your password has been sent to the profile email. Please "
+"check your email."
+msgstr ""
+"Un link per la reimpostazione della password è stato inviato all’indirizzo "
+"email del profilo. Per cortesia controlla la tua email."
+
+#: views/site.py:257 views/user.py:428
+msgid "Password changed"
+msgstr "Password cambiata"
+
+#: views/texts.py:167
+#, python-format
+msgid "%(nb_texts)i text(s) deleted"
+msgstr "%(nb_texts)i testo/i cancellato/i"
+
+#: views/texts.py:212
+#, python-format
+msgid "Text %(text_title)s deleted"
+msgstr "Testo %(text_title)s cancellato"
+
+#: views/texts.py:223
+#, python-format
+msgid "Text version %(text_version_title)s deleted"
+msgstr "Versione del testo %(text_version_title)s cancellata"
+
+#: views/texts.py:588
+msgid "Note (optional)"
+msgstr "Nota (opzionale)"
+
+#: views/texts.py:592
+msgid "Add a note to explain the modifications made to the text"
+msgstr "Aggiungi una nota per spiegare le modifiche fatte al testo"
+
+#: views/texts.py:602
+msgid "New version (optional)"
+msgstr "Nuova versione (opzionale)"
+
+#: views/texts.py:605
+msgid "Create a new version of this text (recommended)"
+msgstr "Crea una nuova versione di questo testo (raccomandato)"
+
+#: views/texts.py:608
+msgid "Keep comments (optional)"
+msgstr "Tieni i commenti (opzionale)"
+
+#: views/texts.py:611
+msgid "Keep comments (if not affected by the edit)"
+msgstr "Tieni i commenti (se non interessati dalle modifiche)"
+
+#: views/texts.py:677
+msgid "Name (optional)"
+msgstr "Nome (opzionale)"
+
+#: views/texts.py:678
+msgid "Email (optional)"
+msgstr "Email (opzionale)"
+
+#: views/texts.py:730
+#, python-format
+msgid "A new version (copied from version %(version_title)s) has been created"
+msgstr ""
+"Una nuova versione (copiata dalla versione %(version_title)s) è stata creata"
+
+#: views/texts.py:842 views/user.py:79 views/user.py:99
+#, python-format
+msgid "%(count)i user(s) role modified"
+msgstr "modificati %(count)i ruoli utenti"
+
+#: views/texts.py:900
+msgid "Text settings updated"
+msgstr "Aggiornato impostazioni del testo"
+
+#: views/user.py:61
+#, python-format
+msgid "%(count)i User's access suspended"
+msgstr "sospesi %(count)i account utente"
+
+#: views/user.py:68
+#, python-format
+msgid "%(count)i User's access enabled"
+msgstr "Abilitati %(count)i accessi agli utenti"
+
+#: views/user.py:140
+msgid "E-mail address"
+msgstr "Indirizzo email"
+
+#: views/user.py:160
+msgid "This user is already a member."
+msgstr "Questo utente è già membro."
+
+#: views/user.py:163
+msgid "Emails"
+msgstr "Email"
+
+#: views/user.py:164
+msgid "Add multiples emails one per line (or separated by \",\" or \";\")"
+msgstr "Aggiungi email multiple, una per linea (o separate da \",\" or \";\")"
+
+#: views/user.py:181
+msgid "Workspace level role"
+msgstr "Ruolo a livello di spazio di lavoro"
+
+#: views/user.py:182
+msgid ""
+"This role will apply to every text in the workspace. To share only a (few) "
+"texts with this user, you can leave this blank and delegate roles on texts "
+"once the user is created."
+msgstr ""
+"Questa regola sarà applicata a tutti i testi nello spazio di lavoro. Per "
+"condividere solo alcuni testi con questo utente, puoi lasciare questo non "
+"attivo e una volta che è stato creato l’utente, usare le regole sui testi"
+
+#: views/user.py:198
+msgid "Text level role"
+msgstr "Ruolo a livello di testo"
+
+#: views/user.py:199
+msgid "This role will apply only to this text."
+msgstr "Questo ruolo si applica solo a questo testo."
+
+#: views/user.py:224
+msgid "Optional text to add to invitation email"
+msgstr "Testo opzionale da aggiungere all’invito via email"
+
+#: views/user.py:259
+#, python-format
+msgid "%(nb_users)d user added"
+msgid_plural "%(nb_users)d users added"
+msgstr[0] "aggiunto %(nb_users)d utente "
+msgstr[1] "aggiunto %(nb_users)d utenti"
+
+#: views/user.py:277
+msgid "Add user"
+msgid_plural "Add users"
+msgstr[0] "Aggiungi utente"
+msgstr[1] "Aggiungi utenti"
+
+#: views/user.py:299
+msgid "This username is already in use. Please supply a different username."
+msgstr ""
+"Questo nome utente è già usato. Per cortesia introduci un nome differente."
+
+#: views/user.py:320 views/user.py:336
+msgid "Your account has been activated. You're now logged-in."
+msgstr "Il tuo account è stato attivato. Ora sei collegato."
+
+#: views/user.py:331
+msgid "activate account"
+msgstr "Attiva account"
+
+#: views/user.py:361
+#, python-format
+msgid "User's access %(prof)s has been suspended."
+msgstr "L‘accesso all’utente %(prof)s è stato sospeso."
+
+#: views/user.py:367
+#, python-format
+msgid "User's access %(prof)s has been refused."
+msgstr "L’accesso all’utente %(prof)s è stato rifiutato."
+
+#: views/user.py:379
+#, python-format
+msgid "User's access %(prof)s has been restored."
+msgstr "L‘accesso all’utente %(prof)s è stato riabilitato."
+
+#: views/user.py:383
+#, python-format
+msgid "User's access %(prof)s has been approved."
+msgstr "L’accesso per utente %(prof)s è stato approvato."
+
+#: views/user.py:393
+#, python-format
+msgid "A new invitation has been sent to user %(prof)s."
+msgstr "È stato inviato un nuovo invito all’utente %(prof)s."
+
+#: views/user.py:410
+msgid "Profile updated"
+msgstr "Profilo aggiornato"
+
+#: views/user.py:456
+msgid "Anonymous user role modified."
+msgstr "Modificato ruolo utente anonimo"
+
+#: views/user.py:478
+msgid "User modified"
+msgstr "Modificato utente"
+
+#: views/user.py:493
+msgid "Subject"
+msgstr "Oggetto"
+
+#: views/user.py:494
+msgid "Subject of the email"
+msgstr "Oggetto dell’email"
+
+#: views/user.py:497
+msgid "Body"
+msgstr "Corpo"
+
+#: views/user.py:498
+msgid "Body of the email"
+msgstr "Corpo dell’email"
+
+#: views/user.py:518
+msgid "Email sent."
+msgstr "Email spedita."
+
+#: views/user.py:539
+msgid "This account is suspended, contact the workspace administrator."
+msgstr ""
+"Questo account è sospeso, contatta l’amministratore dello spazio di lavoro."
+
+#: views/user.py:574
+msgid "You've been logged out."
+msgstr "Sei stato scollegato."
+
+#: views/user.py:590
+msgid ""
+"You've been registered, you will receive a confirmation mail once a "
+"moderator has approved your membership."
+msgstr ""
+"Sei registrato, riceverai un messaggio email di conferma una volta che il "
+"moderatore avrà approvato la tua ammissione."
+
+#: views/user.py:593
+msgid ""
+"You've been registered, please check your email for the confirm message."
+msgstr ""
+"Sei registrato, per cortesia controlla la tua casella di posta elettronica "
+"per il messaggio di conferma."
