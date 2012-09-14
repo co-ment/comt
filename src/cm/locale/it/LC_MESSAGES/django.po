@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-04 21:17+0200\n"
-"PO-Revision-Date: 2012-09-04 21:20+0200\n"
+"POT-Creation-Date: 2012-09-10 22:52+0200\n"
+"PO-Revision-Date: 2012-09-10 22:49+0200\n"
 "Last-Translator: Daniele Pizzolli <dan@toel.it>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: italian\n"
@@ -66,8 +66,8 @@ msgstr "autore"
 msgid "Tags input must be no longer than 250 characters."
 msgstr "Il tag non può essere più lungo di 250 caratteri."
 
-#: models.py:187 templates/site/text_history.html:79 views/create.py:30
-#: views/create.py:45 views/texts.py:584
+#: models.py:187 templates/site/text_history.html:79 views/create.py:34
+#: views/create.py:84 views/texts.py:584
 msgid "Title"
 msgstr "Titolo"
 
@@ -135,33 +135,34 @@ msgstr "in attesa"
 msgid "Invitation"
 msgstr "Invito"
 
-#: models.py:759
+#: models.py:760
 #, python-format
 msgid "Text %(link_to_text)s edited by %(creator)s"
 msgstr "Testo %(link_to_text)s modificato da %(creator)s"
 
-#: models.py:760
+#: models.py:761
 #, python-format
 msgid "Text %(link_to_text)s edited (new version created) by %(creator)s"
 msgstr ""
 "Testo %(link_to_text)s modificato (con creazione di nuova versione) da "
 "%(creator)s"
 
-#: models.py:761
+#: models.py:762
 #, python-format
 msgid "Text %(link_to_text)s added by %(creator)s"
 msgstr "Testo %(link_to_text)s aggiunto da %(creator)s"
 
-#: models.py:762
+#: models.py:763
+#, python-format
+msgid "Text %(link_to_text)s imported by %(creator)s"
+msgstr "Testo %(link_to_text)s importato da %(creator)s"
+
+#: models.py:764
 #, python-format
 msgid "Text %(link_to_text)s removed"
 msgstr "Testo %(link_to_text)s cancellato"
 
-#: models.py:763
-msgid "Text %(link_to_text)s imported by %(creator)s"
-msgstr "Testo %(link_to_text)s importati da %(creator)s"
-
-#: models.py:763
+#: models.py:765
 #, python-format
 msgid ""
 "Comment %(link_to_comment)s added on text %(link_to_text)s by %(creator)s"
@@ -169,54 +170,54 @@ msgstr ""
 "Commento %(link_to_comment)s aggiunto al testo %(link_to_text)s da "
 "%(creator)s"
 
-#: models.py:764
+#: models.py:766
 #, python-format
 msgid "Comment %(link_to_comment)s removed from text %(link_to_text)s"
 msgstr "Commento %(link_to_comment)s cancellato dal testo %(link_to_text)s"
 
-#: models.py:765
+#: models.py:767
 #, python-format
 msgid "User %(username)s added"
 msgstr "Aggiunto utente %(username)s"
 
-#: models.py:766
+#: models.py:768
 #, python-format
 msgid "User %(username)s access to workspace enabled"
 msgstr "Abilitato l’accesso allo spazio di lavoro per l’utente %(username)s"
 
-#: models.py:767
+#: models.py:769
 #, python-format
 msgid "User %(username)s access to workspace refused"
 msgstr ""
 "L’accesso allo spazio di lavoro per l’utente %(username)s è stato rifiutato"
 
-#: models.py:768
+#: models.py:770
 #, python-format
 msgid "User %(username)s access to workspace suspended"
 msgstr ""
 "L’accesso allo spazio di lavoro per l’utente %(username)s è stato sospeso"
 
-#: models.py:769
+#: models.py:771
 #, python-format
 msgid "User %(username)s access to workspace activated"
 msgstr ""
 "L’accesso allo spazio di lavoro per l’utente %(username)s è stato attivato"
 
-#: models.py:770
+#: models.py:772
 #, python-format
 msgid "User %(username)s has activated his account"
 msgstr "L’utente %(username)s ha attivato il suo account"
 
-#: models.py:819
+#: models.py:821
 msgid "anonymous"
 msgstr "anonimo"
 
-#: models.py:826 models.py:834
+#: models.py:828 models.py:836
 #, python-format
 msgid "by \"%(username)s\""
 msgstr "da \"%(username)s\""
 
-#: models.py:828
+#: models.py:830
 #, python-format
 msgid "%(time_since)s ago"
 msgstr "da %(time_since)s"
@@ -463,8 +464,9 @@ msgstr "Spedisci"
 #: templates/site/contact.html:26
 #: templates/site/notifications_desactivate.html:32
 #: templates/site/settings.html:29 templates/site/settings_design.html:29
-#: templates/site/text_create_content.html:49
-#: templates/site/text_create_upload.html:44 templates/site/user_add.html:34
+#: templates/site/text_create_content.html:51
+#: templates/site/text_create_import.html:46
+#: templates/site/text_create_upload.html:46 templates/site/user_add.html:34
 #: templates/site/user_add_text.html:37 templates/site/user_contact.html:52
 #: templates/site/user_edit.html:29 templates/site/user_mass_add.html:34
 #: templates/site/user_mass_add_text.html:38
@@ -481,6 +483,7 @@ msgstr "Azioni"
 
 #: templates/site/dashboard.html:48 templates/site/text_create_content.html:4
 #: templates/site/text_create_content.html:28
+#: templates/site/text_create_import.html:26
 #: templates/site/text_create_upload.html:26 templates/site/text_list.html:40
 #: templates/site/layout/header.html:10
 msgid "Create a text"
@@ -493,6 +496,7 @@ msgstr ""
 "desiderato"
 
 #: templates/site/dashboard.html:49 templates/site/text_create_content.html:30
+#: templates/site/text_create_import.html:28
 #: templates/site/text_create_upload.html:4
 #: templates/site/text_create_upload.html:28 templates/site/text_list.html:42
 #: templates/site/layout/header.html:11
@@ -507,58 +511,60 @@ msgstr ""
 "Carica un documento dal tuo computer (documento di testo, documento in "
 "formato Open Format, documento in formato Word)"
 
-#: templates/site/dashboard.html:50
+#: templates/site/dashboard.html:50 templates/site/text_create_content.html:32
 #: templates/site/text_create_import.html:4
 #: templates/site/text_create_import.html:30
-#: templates/site/text_create_content.html:32
-#: templates/site/text_create_upload.html:30
-#: templates/site/text_list.html:44
+#: templates/site/text_create_upload.html:30 templates/site/text_list.html:44
 #: templates/site/layout/header.html:12
 msgid "Import a co-mented text"
-msgstr "Importi un testo fatto co-menti"
- 
-#: templates/site/dashboard.html:50
-msgid "Import a text, possibly with comments and attachments, which has been previously exported in XML format from co-ment interface"
-msgstr "Importi un testo, possibilmente con commenti e gli affetti che prima sono stati esportati in XML configuri dall'interfaccia di co-ment"
+msgstr "Importa un testo elaborato con co-ment"
 
 #: templates/site/dashboard.html:50
+msgid ""
+"Import a text, possibly with comments and attachments, which has been "
+"previously exported in XML format from co-ment interface"
+msgstr ""
+"Importa un testo, possibilmente con i commenti e gli allegati che prima sono "
+"stati esportati in formato XML dall'interfaccia di co-ment"
+
+#: templates/site/dashboard.html:51
 msgid "Invite user"
 msgstr "Invita un utente"
 
-#: templates/site/dashboard.html:51
+#: templates/site/dashboard.html:52
 msgid "Edit your profile"
 msgstr "Modifica il tuo profilo"
 
-#: templates/site/dashboard.html:52
+#: templates/site/dashboard.html:53
 msgid "View text list"
 msgstr "Mostra la lista di testi"
 
-#: templates/site/dashboard.html:53
+#: templates/site/dashboard.html:54
 msgid "Configure workspace"
 msgstr "Configura lo spazio di lavoro"
 
-#: templates/site/dashboard.html:64
+#: templates/site/dashboard.html:65
 msgid "Moderation queue"
 msgstr "Coda di moderazione"
 
-#: templates/site/dashboard.html:76
+#: templates/site/dashboard.html:77
 #, python-format
 msgid "user %(user)s awaits approval"
 msgstr "L’utente %(user)s attende l’approvazione"
 
-#: templates/site/dashboard.html:80 templates/site/dashboard.html.py:126
+#: templates/site/dashboard.html:81 templates/site/dashboard.html.py:127
 msgid "approve"
 msgstr "approva"
 
-#: templates/site/dashboard.html:80 templates/site/dashboard.html.py:126
+#: templates/site/dashboard.html:81 templates/site/dashboard.html.py:127
 msgid "refuse"
 msgstr "rifiuta"
 
-#: templates/site/dashboard.html:80
+#: templates/site/dashboard.html:81
 msgid "membership"
 msgstr "appartenenza"
 
-#: templates/site/dashboard.html:85
+#: templates/site/dashboard.html:86
 #: templates/site/macros/user_moderation.html:8
 msgid ""
 "Are you sure you want to approve this user's membership to the workspace?"
@@ -566,7 +572,7 @@ msgstr ""
 "Sei sicuro di voler approvare l’appartenenza di questo utente allo spazio di "
 "lavoro?"
 
-#: templates/site/dashboard.html:94
+#: templates/site/dashboard.html:95
 #: templates/site/macros/user_moderation.html:17
 msgid ""
 "Are you sure you want to refuse this user's membership to the workspace?"
@@ -574,115 +580,115 @@ msgstr ""
 "Sei sicuro di rifiutare l’appartenenza di questo utente allo spazio di "
 "lavoro?"
 
-#: templates/site/dashboard.html:106
+#: templates/site/dashboard.html:107
 #, python-format
 msgid "registered %(duration)s ago"
 msgstr "registrato da %(duration)s"
 
-#: templates/site/dashboard.html:120 templates/site/dashboard.html.py:126
+#: templates/site/dashboard.html:121 templates/site/dashboard.html.py:127
 #: templates/site/text_view_frame.html:72
 msgid "comment"
 msgstr "commento"
 
-#: templates/site/dashboard.html:121
+#: templates/site/dashboard.html:122
 #, python-format
 msgid "by %(cuser)s on text"
 msgstr "da %(cuser)s sul testo"
 
-#: templates/site/dashboard.html:121
+#: templates/site/dashboard.html:122
 msgid "awaits approval"
 msgstr "attende approvazione"
 
-#: templates/site/dashboard.html:127
+#: templates/site/dashboard.html:128
 msgid "view in context"
 msgstr "mostra nel contesto"
 
-#: templates/site/dashboard.html:132
+#: templates/site/dashboard.html:133
 msgid "Are you sure you want to approve this comment?"
 msgstr "Sei sicuro di voler approvare questo commento?"
 
-#: templates/site/dashboard.html:149
+#: templates/site/dashboard.html:150
 msgid "Are you sure you want to refuse this comment?"
 msgstr "Sei sicuro di voler rifiutare questo commento?"
 
-#: templates/site/dashboard.html:168 templates/site/dashboard.html.py:203
+#: templates/site/dashboard.html:169 templates/site/dashboard.html.py:204
 #, python-format
 msgid "modified %(duration)s ago"
 msgstr "modificato da %(duration)s"
 
-#: templates/site/dashboard.html:186
+#: templates/site/dashboard.html:187
 msgid "Recent texts"
 msgstr "Testi recenti"
 
-#: templates/site/dashboard.html:186 templates/site/macros/paginator.html:9
+#: templates/site/dashboard.html:187 templates/site/macros/paginator.html:9
 msgid "all"
 msgstr "tutti"
 
-#: templates/site/dashboard.html:201
+#: templates/site/dashboard.html:202
 #, python-format
 msgid "%(nb_comments)s comment"
 msgid_plural "%(nb_comments)s comments"
 msgstr[0] "%(nb_comments)s commento"
 msgstr[1] "%(nb_comments)s commenti"
 
-#: templates/site/dashboard.html:202 templates/site/macros/text_meta.html:8
+#: templates/site/dashboard.html:203 templates/site/macros/text_meta.html:8
 #, python-format
 msgid "1 version"
 msgid_plural "%(versions_number)s versions"
 msgstr[0] "versione 1"
 msgstr[1] "versione %(versions_number)s"
 
-#: templates/site/dashboard.html:208 templates/site/text_list.html:223
+#: templates/site/dashboard.html:209 templates/site/text_list.html:225
 msgid "No texts yet"
 msgstr "Non è ancora presente nessun testo"
 
-#: templates/site/dashboard.html:227
+#: templates/site/dashboard.html:228
 msgid "Workspace activity"
 msgstr "Attività nello spazio di lavoro"
 
-#: templates/site/dashboard.html:228
+#: templates/site/dashboard.html:229
 msgid "month"
 msgstr "mese"
 
-#: templates/site/dashboard.html:228
+#: templates/site/dashboard.html:229
 msgid "week"
 msgstr "settimana"
 
-#: templates/site/dashboard.html:228
+#: templates/site/dashboard.html:229
 msgid "24 hours"
 msgstr "24 ore"
 
-#: templates/site/dashboard.html:234
+#: templates/site/dashboard.html:235
 msgid "Access"
 msgstr "Accesso"
 
-#: templates/site/dashboard.html:235 templates/site/dashboard.html.py:246
-#: templates/site/text_list.html:208 templates/site/user_list.html:158
+#: templates/site/dashboard.html:236 templates/site/dashboard.html.py:247
+#: templates/site/text_list.html:210 templates/site/user_list.html:158
 #: templates/site/user_list.html.py:188
 msgid "Loading..."
 msgstr "Caricamento..."
 
-#: templates/site/dashboard.html:245
+#: templates/site/dashboard.html:246
 msgid "Commenting"
 msgstr "Commentando"
 
-#: templates/site/dashboard.html:264
+#: templates/site/dashboard.html:265
 msgid "Activities"
 msgstr "Attività"
 
-#: templates/site/dashboard.html:267
+#: templates/site/dashboard.html:268
 msgid "texts"
 msgstr "testi"
 
-#: templates/site/dashboard.html:268
+#: templates/site/dashboard.html:269
 msgid "comments"
 msgstr "commenti"
 
-#: templates/site/dashboard.html:270
+#: templates/site/dashboard.html:271
 msgid "users"
 msgstr "utenti"
 
-#: templates/site/dashboard.html:310
+#: templates/site/dashboard.html:311
 msgid "No activities"
 msgstr "Nessuna attività"
 
@@ -959,7 +965,14 @@ msgid ""
 "as \"detached\" from the text (they do not have a scope in the new version's "
 "but are still visible when browsing, and you can give them a new scope) or "
 "simply removed from the new version."
-msgstr "Quanto crei una nuova versione del testo, i commenti sono duplicati. Nel caso che le modifiche del testo non cambino la portata del commento, il commento rimarrà com’è. Se il testo nella portata del commento è stato modificato, ci sarà da prendere una decisione riguardo al commento: potrai scegliere se tenere il commento come \"staccato\" dal testo (e non avrà portata nel nuovo testo ma rimarrà visibile e potrai dargli una nuova portata) o semplicemente se rimuoverlo."
+msgstr ""
+"Quanto crei una nuova versione del testo, i commenti sono duplicati. Nel "
+"caso che le modifiche del testo non cambino la portata del commento, il "
+"commento rimarrà com’è. Se il testo nella portata del commento è stato "
+"modificato, ci sarà da prendere una decisione riguardo al commento: potrai "
+"scegliere se tenere il commento come \"staccato\" dal testo (e non avrà "
+"portata nel nuovo testo ma rimarrà visibile e potrai dargli una nuova "
+"portata) o semplicemente se rimuoverlo."
 
 #: templates/site/help.html:63
 msgid "Email notification"
@@ -1118,7 +1131,7 @@ msgid "Read more about this"
 msgstr "Maggiori informazioni"
 
 #: templates/site/login.html:8 templates/site/login_form.html:19
-#: templates/site/layout/header.html:17
+#: templates/site/layout/header.html:18
 msgid "Login"
 msgstr "Login"
 
@@ -1128,7 +1141,7 @@ msgid "%(wname)s Login"
 msgstr "%(wname)s Login"
 
 #: templates/site/login_form.html:20 templates/site/register.html:8
-#: templates/site/layout/header.html:18
+#: templates/site/layout/header.html:19
 msgid "Register"
 msgstr "Registrati"
 
@@ -1159,7 +1172,7 @@ msgid "Your profile (%(username)s)"
 msgstr "Il tuo profilo (%(username)s)"
 
 #: templates/site/profile.html:17 templates/site/profile_pw.html:17
-#: templates/site/layout/header.html:14
+#: templates/site/layout/header.html:15
 msgid "Profile"
 msgstr "Profilo"
 
@@ -1168,8 +1181,9 @@ msgid "Password"
 msgstr "Password"
 
 #: templates/site/profile.html:33 templates/site/profile_pw.html:33
-#: templates/site/text_create_content.html:47
-#: templates/site/text_create_upload.html:42 templates/site/text_edit.html:37
+#: templates/site/text_create_content.html:49
+#: templates/site/text_create_import.html:44
+#: templates/site/text_create_upload.html:44 templates/site/text_edit.html:37
 #: templates/site/text_settings.html:23 templates/site/text_share.html:153
 #: templates/site/user_activate.html:27 templates/site/user_list.html:210
 #: templates/site/layout/base_workspace_form.html:32
@@ -1187,7 +1201,7 @@ msgid "Reset your password"
 msgstr "Reimposta la tua password"
 
 #: templates/site/settings.html:5 templates/site/settings_design.html:5
-#: templates/site/text_list.html:183 templates/site/macros/main_tabs.html:14
+#: templates/site/text_list.html:185 templates/site/macros/main_tabs.html:14
 #: templates/site/macros/text_tabs.html:19
 msgid "Settings"
 msgstr "Impostazioni"
@@ -1213,6 +1227,7 @@ msgid "Delete logo"
 msgstr "Cancella logo"
 
 #: templates/site/text_create_content.html:26
+#: templates/site/text_create_import.html:24
 #: templates/site/text_create_upload.html:24 templates/site/text_list.html:37
 msgid "Text list"
 msgstr "Lista del testo"
@@ -1320,7 +1335,7 @@ msgstr "Versione"
 msgid "Selection"
 msgstr "Selezione"
 
-#: templates/site/text_history.html:81 templates/site/text_list.html:139
+#: templates/site/text_history.html:81 templates/site/text_list.html:141
 msgid "Author"
 msgstr "Autore"
 
@@ -1328,11 +1343,11 @@ msgstr "Autore"
 msgid "Created"
 msgstr "Creato"
 
-#: templates/site/text_history.html:83 templates/site/text_list.html:141
+#: templates/site/text_history.html:83 templates/site/text_list.html:143
 msgid "# comments"
 msgstr "# commenti"
 
-#: templates/site/text_history.html:105 templates/site/text_list.html:161
+#: templates/site/text_history.html:105 templates/site/text_list.html:163
 msgid "View"
 msgstr "Vedi"
 
@@ -1345,8 +1360,8 @@ msgstr "Compara con la versione precedente"
 msgid "Revert to this version"
 msgstr "Riporta a questa versione"
 
-#: templates/site/text_history.html:122 templates/site/text_list.html:82
-#: templates/site/text_list.html.py:163
+#: templates/site/text_history.html:122 templates/site/text_list.html:84
+#: templates/site/text_list.html.py:165
 msgid "Delete"
 msgstr "Cancella"
 
@@ -1399,65 +1414,65 @@ msgstr "Versione successiva"
 msgid "by %(author)s"
 msgstr "da %(author)s"
 
-#: templates/site/text_list.html:51 templates/site/text_share.html:40
+#: templates/site/text_list.html:53 templates/site/text_share.html:40
 #: templates/site/user_list.html:45
 msgid "Filter by tag:"
 msgstr "Filtra per tag:"
 
-#: templates/site/text_list.html:53 templates/site/text_share.html:42
+#: templates/site/text_list.html:55 templates/site/text_share.html:42
 #: templates/site/user_list.html:47
 msgid "All"
 msgstr "Tutto"
 
-#: templates/site/text_list.html:81 templates/site/user_list.html:72
+#: templates/site/text_list.html:83 templates/site/user_list.html:72
 msgid "Bulk Actions"
 msgstr "Azioni massive"
 
-#: templates/site/text_list.html:85 templates/site/user_list.html:81
+#: templates/site/text_list.html:87 templates/site/user_list.html:81
 msgid "Apply"
 msgstr "Applica"
 
-#: templates/site/text_list.html:106 templates/site/user_list.html:102
+#: templates/site/text_list.html:108 templates/site/user_list.html:102
 msgid "Are you sure?"
 msgstr "Sei sicuro?"
 
-#: templates/site/text_list.html:138 templates/site/macros/text_tabs.html:10
+#: templates/site/text_list.html:140 templates/site/macros/text_tabs.html:10
 msgid "Text"
 msgstr "Testo"
 
-#: templates/site/text_list.html:140
+#: templates/site/text_list.html:142
 msgid "Modified"
 msgstr "Modificato"
 
-#: templates/site/text_list.html:142 templates/site/user_list.html:136
+#: templates/site/text_list.html:144 templates/site/user_list.html:136
 msgid "Last week activity"
 msgstr "Attività dell’ultima settimana"
 
-#: templates/site/text_list.html:158
+#: templates/site/text_list.html:160
 #: templates/site/macros/user_actions.html:13
 msgid "tags:"
 msgstr "tag:"
 
-#: templates/site/text_list.html:158
+#: templates/site/text_list.html:160
 #: templates/site/macros/user_actions.html:13
 #, python-format
 msgid "Filter by tag: %(tag_name)s"
 msgstr "Filtro per tag: %(tag_name)s"
 
-#: templates/site/text_list.html:162 templates/site/macros/text_tabs.html:12
+#: templates/site/text_list.html:164 templates/site/macros/text_tabs.html:12
 #: templates/site/macros/user_actions.html:19
 msgid "Edit"
 msgstr "Modifica"
 
-#: templates/site/text_list.html:169
+#: templates/site/text_list.html:171
 msgid "Are you sure you want to delete this text?"
 msgstr "Sei sicuro di voler cancellare questo testo?"
 
-#: templates/site/text_list.html:182
+#: templates/site/text_list.html:184
 msgid "Users"
 msgstr "Utenti"
 
-#: templates/site/text_list.html:200
+#: templates/site/text_list.html:202
 msgid "Edit user"
 msgstr "Modifica utente"
 
@@ -1658,7 +1673,7 @@ msgid_plural "%(nb_users)s users"
 msgstr[0] "%(nb_users)s utente"
 msgstr[1] "%(nb_users)s utenti"
 
-#: templates/site/layout/header.html:15
+#: templates/site/layout/header.html:16
 msgid "Logout"
 msgstr "Logout"
 
@@ -1801,50 +1816,56 @@ msgstr "%Y-%m-%d %H:%M"
 msgid "unknown"
 msgstr "sconosciuto"
 
-#: views/create.py:26
+#: views/create.py:30
 msgid "Upload file (optional)"
 msgstr "Carica file (opzionale)"
 
-#: views/create.py:27
+#: views/create.py:31
 msgid ""
 "Upload a file from your computer instead of using the direct input above"
 msgstr ""
 "Carica un file dal tuo computer invece di usare l’immissione diretta sopra"
 
-#: views/create.py:38
+#: views/create.py:42 views/create.py:59
 msgid "You should specify a file to upload."
 msgstr "Dovresti specificare un file da caricare."
 
 #: views/create.py:49
 msgid "Upload XML file"
-msgstr "Carica l'archivio di XML"
+msgstr "Carica un file XML"
 
 #: views/create.py:50
 msgid "Upload a previously exported XML file from your computer"
-msgstr "Carica un archivio di XML prima esportato dal Suo computer"
+msgstr "Carica un file in formato XML precedentemente esportato da co-ment"
 
 #: views/create.py:65
-msgid "The imported file should be an XML file generated by co-ment when exporting a text and comments."
-msgstr "L'archivio importato dovrebbe essere un archivio di XML generato da co-ment quando esportando un testo e commenti."
+msgid ""
+"The imported file should be an XML file generated by co-ment when exporting "
+"a text and comments."
+msgstr ""
+"Il file da importare dovrebbe essere un file XML generato da co-ment "
+"esportando un testo con commenti."
 
 #: views/create.py:71
 msgid "No co_ment_text node found in XML."
 msgstr "Nessun nodo di co_ment_text trovato in XML."
- 
+
 #: views/create.py:76
+#, python-format
 msgid "No %(tag)s node found in XML."
 msgstr "Nessun nodo di %(tag)s trovato in XML."
 
-#: views/create.py:46
+#: views/create.py:85
 msgid "The title of your text"
 msgstr "Il titolo del tuo testo"
 
-#: views/create.py:71 views/create.py:108
+#: views/create.py:109 views/create.py:144
 #, python-format
 msgid "Text \"%(text_title)s\" has been created"
-msgstr "Il testo \"%(text_title)s\" è stato creato"
+msgstr "È stato creato il testo \"%(text_title)s\""
 
 #: views/create.py:244
+#, python-format
 msgid "Text \"%(text_title)s\" has been imported"
 msgstr "Testo \"%(text_title)s\" è stato importato"
 
