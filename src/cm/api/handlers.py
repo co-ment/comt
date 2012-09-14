@@ -7,7 +7,7 @@ from cm.security import get_texts_with_perm, has_perm, get_viewable_comments, \
     has_perm_on_text_api
 from cm.security import get_viewable_comments
 from cm.utils.embed import embed_html
-from cm.views.create import CreateTextContentForm, create_text
+from cm.views.create import CreateTextContentForm, create_text, CreateTextImportForm, _text_create_import
 from cm.views.texts import client_exchange, text_view_frame, text_view_comments, text_export
 from cm.views.feeds import text_feed
 from piston.utils import validate
@@ -209,7 +209,7 @@ class TextPreEditHandler(BaseHandler):
         return text_pre_edit(request, key=key)
 
 from cm.views.texts import text_edit
-    
+
 class TextEditHandler(BaseHandler):
     allowed_methods = ('POST', )    
     type = "Text methods"
@@ -429,6 +429,25 @@ class TextExportHandler(BaseHandler):
     @has_perm_on_text_api('can_view_text')
     def create(self, request, key, format, download, whichcomments, withcolor):
         return text_export(request, key, format, download, whichcomments, withcolor, adminkey=None)
+
+class ImportHandler(BaseHandler):
+    allowed_methods = ('POST', )    
+    type = "Text methods"
+    title = "Import text and comments"
+    desc = "Import a previously exported text, along with comments and attachments in XML format."
+    args = """<br />
+`xml`: Previously exported XML file of text, comments and attachments<br />
+    """ 
+    
+    @staticmethod
+    def endpoint():
+        return URL_PREFIX + '/import/'
+    
+    
+    def create(self, request):
+      text, res = _text_create_import(request, CreateTextImportForm)
+      text_version = text.last_text_version
+      return {'key' : text.key , 'version_key' : text.last_text_version.key, 'html': text_version.content}
 
 class AnonymousCommentsHandler(AnonymousBaseHandler):
     allowed_methods = ('GET',)    

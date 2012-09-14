@@ -18,6 +18,7 @@ tv_revert_handler = Resource(handler=TextVersionRevertHandler, authentication=au
 tv_delete_handler = Resource(handler=TextVersionDeleteHandler, authentication=auth)
 
 text_export_handler = Resource(handler=TextExportHandler, authentication=auth)
+import_handler = Resource(handler=ImportHandler, authentication=auth)
 
 comments_handler = Resource(handler=CommentsHandler, authentication=auth)
 
@@ -43,6 +44,7 @@ urlpatterns = patterns('',
    url(r'^text/(?P<key>\w*)/comments/(?P<version_key>\w*)/$', comment_handler),
    
    url(r'^text/(?P<key>\w*)/export/(?P<format>\w*)/(?P<download>\w*)/(?P<whichcomments>\w*)/(?P<withcolor>\w*)/$', text_export_handler),
+   url(r'^import/$', import_handler),
 
    url(r'^text/(?P<key>\w*)/feed/$', text_feed_handler),
    url(r'^text/(?P<key>\w*)/delete/$', text_delete_handler),
