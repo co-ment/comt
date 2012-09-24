@@ -11,7 +11,7 @@ def is_real_text_node(textNode):
     return not textNode.findParent('style') 
 
 def get_the_soup(input):
-    return BeautifulSoup(input, convertEntities=["xml", "html"])
+    return BeautifulSoup(input, convertEntities=BeautifulSoup.ALL_ENTITIES)
      
 from cm.utils.cache import memoize, dj_memoize
 @dj_memoize
