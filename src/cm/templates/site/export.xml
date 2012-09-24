@@ -1,10 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
 {% load com %}
 {% autoescape off %}
-<?xml version="1.0" encoding="UTF-8"?>
 <co_ment_text>
   <title>{{ title }}</title>
-  <created>{{ created|date:"c" }}+{{ tz|leading_zeros:"2" }}</created>
-  <modified>{{ modified|date:"c" }}+{{ tz|leading_zeros:"2" }}</modified>
+  <created>{{ created|date:"c" }}{{ tz|leading_zeros:"2" }}</created>
+  <modified>{{ modified|date:"c" }}{{ tz|leading_zeros:"2" }}</modified>
   <name>{{ name }}</name>
   <email>{{ email }}</email>
   <format>{{ format }}</format>
@@ -23,8 +23,8 @@
       <title>{{ c.title }}</title>
       <state>{{ c.state }}</state>
       <deleted>{{ c.deleted }}</deleted>
-      <created>{{ c.created|date:"c" }}+{{ tz|leading_zeros:"2" }}</created>
-      <modified>{{ c.modified|date:"c" }}+{{ tz|leading_zeros:"2" }}</modified>
+      <created>{{ c.created|date:"c" }}{{ tz|leading_zeros:"2" }}</created>
+      <modified>{{ c.modified|date:"c" }}{{ tz|leading_zeros:"2" }}</modified>
       <name>{{ c.name }}</name>
       <email>{{ c.email }}</email>
       <format>{{ c.format }}</format>
