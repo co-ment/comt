@@ -17,7 +17,7 @@ instanciateToc = function() {
   if (toBeTOCced.length >= 2) {
     for (var i=0;i<toBeTOCced.length;i++) {
 	  	var tmp = document.createElement('a');
-		  tmp.innerHTML = toBeTOCced[i].innerHTML.replace(/<\/?a[^>]*>/g,'');
+		  tmp.innerHTML = toBeTOCced[i].innerHTML.replace(/<\/?a[^>]*>/ig,'');
   		tmp.className = 'page indent' + toBeTOCced[i].nodeName;
 	  	content.appendChild(tmp);
 		  var headerId = toBeTOCced[i].id || 'link' + i;
