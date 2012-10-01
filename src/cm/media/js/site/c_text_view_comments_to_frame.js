@@ -49,7 +49,7 @@ c_setCommentsColWidth = function(val) {
   //toc
   //For some reasons: gToc['overlay'].get('boundingBox').setStyle('width', iCommentWidth + 'px');
   // does not work when the div.c-toc has a fixed position.
-  document.getElementsByClassName('c-toc')[0].style.width = iCommentWidth + 'px';
+  document.getElementById('the-toc').style.width = iCommentWidth + 'px';
   
   if (gNewReply) 
     changeFormFieldsWidth(gNewReply['ids']['formId'], iCommentWidth) ; 
