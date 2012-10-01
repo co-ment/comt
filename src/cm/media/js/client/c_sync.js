@@ -1,4 +1,13 @@
 gShowingAllComments = false ;
+// indexOf method of Array is unknown by stupid IE.
+if (!Array.prototype.indexOf) {
+  Array.prototype.indexOf = function(obj, start) {
+    for (var i = (start || 0), j = this.length; i < j; i++) {
+      if (this[i] === obj) { return i; }
+    }
+    return -1;
+  }
+}
 // YUI : queue, overlay
 Sync = function() {
   // this queue handles both animations and io requests
