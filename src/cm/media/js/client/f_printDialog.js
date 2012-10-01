@@ -10,7 +10,7 @@ gFormats = [{'actions':['print'], 'extension':'html', 'label': gettext('print fr
             {'actions':['export'], 'extension':'latex', 'label': gettext('download latex file (.tex)')},
             {'actions':['export'], 'extension':'odt', 'label': gettext('download open document file (.odt)')},
             {'actions':['export'], 'extension':'doc', 'label': gettext('download microsoft word file (.doc)')},
-            {'actions':['export'], 'extension':'docx', 'label': gettext('download microsoft word 2007 file (.docx)')},
+            {'actions':['export'], 'extension':'docx', 'label': gettext('download microsoft word 2007 file (.docx)')}
             ];
 
 var pandoc_version_ary = sv_pandoc_version.split('.');
