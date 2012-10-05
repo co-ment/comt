@@ -192,19 +192,15 @@ def get_viewable_comments(request, comments, text, order_by=('created',)):
             if (role_model == 'teacher'):
               with_teachers = []
               for u in list(User.objects.filter(userrole__role__name = 'Teacher')):
-                if DECORATED_CREATORS:
-                  with_teachers.append(u.username)
-                else:
-                  with_teachers.append(u.id)
+                with_teachers.append(u.id)
 
               # add admin and current user
               admin =  User.objects.get(id=1)
+              with_teachers.append(admin.id)
               if DECORATED_CREATORS:
-                with_teachers.append(admin.username)
-                with_teachers.append(request.GET.get('name', None))
-                visible_comments = comments.filter(name__in=with_teachers).order_by(*order_by)
+                myself = request.GET.get('name', None)
+                visible_comments = comments.filter(Q(user__id__in=with_teachers) | Q(name=myself)).order_by(*order_by)
               else:
-                with_teachers.append(admin.id)
                 with_teachers.append(user.id)
                 visible_comments = comments.filter(user__id__in=with_teachers).order_by(*order_by)
 
