@@ -59,7 +59,7 @@ class AuthorModel(models.Model):
     def get_name(self):
         from cm.cm_settings import DECORATED_CREATORS
         
-        if self.user and not DECORATED_CREATORS:
+        if self.user and (not DECORATED_CREATORS or self.name == None):
             return self.user.username
         else:
             return self.name
@@ -67,7 +67,7 @@ class AuthorModel(models.Model):
     def get_email(self):
         from cm.cm_settings import DECORATED_CREATORS
         
-        if self.user and not DECORATED_CREATORS:
+        if self.user and (not DECORATED_CREATORS or self.email == None):
             return self.user.email
         else:
             return self.email
