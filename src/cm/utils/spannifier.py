@@ -8,6 +8,8 @@ def get_text_nodes(soup):
     return soup(text=lambda text:not isinstance(text, Comment))
 
 def is_real_text_node(textNode):
+    if textNode.string == "\n":
+      return False
     return not textNode.findParent('style') 
 
 def get_the_soup(input):
