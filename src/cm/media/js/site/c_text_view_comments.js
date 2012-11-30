@@ -17,7 +17,7 @@ gConf = {'iCommentLeftPadding':4,
 
 //available text styles in c-text-styles.css
 //classname(key) : will be added to #textcontainer, name(value) : the name to display in style dropdown choice"
-gTextStyles = {'text-modern-style':gettext('modern'), 'text-classic-style':gettext('classic'), 'text-code-style':gettext('code')};
+gTextStyles = {'modern':gettext('modern'), 'classic':gettext('classic'), 'code':gettext('code')};
 
 YUI( {
   base :sv_media_url + "/js/lib/yui/" + c_yui_base + "/build/",
