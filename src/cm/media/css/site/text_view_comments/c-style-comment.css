@@ -56,7 +56,6 @@
 	-x-system-font:none;
 	background-color:#111111;
 	color:#FFFFFF;
-	font-family:arial,helvetica,sans-serif;
 /*	font-size:11px;*/
 	font-size-adjust:none;
 	font-stretch:normal;
@@ -150,4 +149,21 @@ a.c-state-approved {
 
 span.c-content p { 
     margin-bottom:0em;
+}
+
+@import url("fonts.css");
+
+.icomment-header .c-header-title {
+  font: bold 13px/16px 'PT Sans', Verdana, sans-serif;
+}
+
+.icomment-header .c-infos,
+.icomment-header .c-state-actions,
+.icomment-header .c-state-actions,
+.icomment-header .c-tags {
+  font: 11px/13px 'PT Sans', Verdana, sans-serif;
+}
+
+.icomment-body {
+  font: 13px/18px 'PT Sans', Verdana, sans-serif;
 }

@@ -19,3 +19,24 @@ class CmMiddleware(object):
                 redirect_url = reverse('unauthorized')
                 return HttpResponseRedirect(redirect_url)
         raise
+
+    """
+        This middleware allows cross-domain XHR using the html5 postMessage API.
+    """
+    def process_request(self, request):
+
+        if 'HTTP_ACCESS_CONTROL_REQUEST_METHOD' in request.META:
+            response = http.HttpResponse()
+            response['Access-Control-Allow-Origin']  = '*' 
+            return response
+
+        return None
+
+    def process_response(self, request, response):
+        # Avoid unnecessary work
+        if response.has_header('Access-Control-Allow-Origin'):
+            return response
+
+        response['Access-Control-Allow-Origin']  = '*' 
+
+        return response

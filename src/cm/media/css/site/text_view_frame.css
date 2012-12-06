@@ -1,6 +1,9 @@
     /**
      *  Basic Layout Theme
      */
+
+@import url("text_view_comments/fonts.css");
+
 .ui-layout-pane { /* all 'panes' */
     background: #FFF; 
 /*    border:     1px solid #BBB;*/
@@ -35,7 +38,7 @@
         border-top: 1px solid #BBB; 
     } 
     .ui-layout-toggler .content { /* toggler-text */ 
-        font: 8px bold Verdana, Verdana, Arial, Helvetica, sans-serif;
+        font: 8px bold "Droid Sans", Verdana, Arial, Helvetica, sans-serif;
         margin-top: -4px;
     }
     .ui-layout-toggler .content-closed { /* toggler-text arrow up */ 
@@ -180,7 +183,7 @@ margin-right:5px;
   padding: 3px 5px;
   background-color: #fece46;
   color:#050;
-  font: bold 70% 'trebuchet ms',helvetica,sans-serif;
+  font: bold 70% "Droid Sans", 'trebuchet ms',helvetica,sans-serif;
   filter:progid:DXImageTransform.Microsoft.Gradient
   (GradientType=0,StartColorStr='#ffffffff',EndColorStr='#ffeeddaa');
   -webkit-box-shadow: inset 0px -3px 1px rgba(0, 0, 0, 0.45), 0px 2px 2px rgba(0, 0, 0, 0.25);
@@ -208,3 +211,16 @@ margin-right:5px;
     display:none;
 }
 
+#outer-north {
+  font: 13px "Droid Sans", Verdana, sans-serif;
+}
+
+#header-nobck {
+  font: 13px "Droid Sans", Verdana, sans-serif;
+}
+
+#c_filter,
+#c_filter .ui-widget select,
+#c_filter .ui-widget button {
+  font: 12px "Droid Sans", Verdana, sans-serif;
+}

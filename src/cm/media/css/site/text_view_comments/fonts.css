@@ -1,0 +1,165 @@
+@font-face {
+  font-family: Lora;
+  font-weight: normal;
+  font-style: normal;
+  src: url('Lora-Regular.eot');
+  src: local('Lora'),
+       local('Lora Regular'),
+       local('Lora-Regular'),
+       url('Lora-Regular.eot?#iefix') format('embedded-opentype'),
+       url('Lora-Regular.woff') format('woff'),
+       url('Lora-Regular.ttf') format('truetype'),
+       url('Lora-Regular.svg#LoraRegular') format('svg');
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-weight: normal;
+  font-style: italic;
+  src: url('Lora-Italic.eot');
+  src: local('Lora Italic'),
+       local('Lora-Italic'),
+       url('Lora-Italic.eot?#iefix') format('embedded-opentype'),
+       url('Lora-Italic.woff') format('woff'),
+       url('Lora-Italic.ttf') format('truetype'),
+       url('Lora-Italic.svg#LoraItalic') format('svg');
+}
+
+@font-face {
+  font-family: Lora;
+  font-weight: bold;
+  font-style: normal;
+  src: url('Lora-Bold.eot');
+  src: local('Lora Bold'),
+       local('Lora-Bold'),
+       url('Lora-Bold.eot?#iefix') format('embedded-opentype'),
+       url('Lora-Bold.woff') format('woff'),
+       url('Lora-Bold.ttf') format('truetype'),
+       url('Lora-Bold.svg#LoraBold') format('svg');
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-weight: bold;
+  font-style: italic;
+  src: url('Lora-BoldItalic.eot');
+  src: local('Lora BoldItalic'),
+       local('Lora-BoldItalic'),
+       url('Lora-BoldItalic.eot?#iefix') format('embedded-opentype'),
+       url('Lora-BoldItalic.woff') format('woff'),
+       url('Lora-BoldItalic.ttf') format('truetype'),
+       url('Lora-BoldItalic.svg#LoraBoldItalic') format('svg');
+}
+
+@font-face {
+  font-family: 'PT Sans';
+  font-weight: normal;
+  font-style: normal;
+  src: url('PT_Sans-Regular.eot');
+  src: local('PTSans'),
+       local('PT Sans'),
+       local('PT-Sans'),
+       local('PTSans Regular'),
+       local('PT Sans Regular'),
+       local('PT-Sans-Regular'),
+       local('PTSans-Regular'),
+       local('PT Sans-Regular'),
+       local('PT-Sans-Regular'),
+       url('PT_Sans-Regular.eot?#iefix') format('embedded-opentype'),
+       url('PT_Sans-Regular.woff') format('woff'),
+       url('PT_Sans-Regular.ttf') format('truetype'),
+       url('PT_Sans-Regular.svg#PTSansRegular') format('svg');
+}
+
+@font-face {
+  font-family: 'PT Sans';
+  font-weight: normal;
+  font-style: italic;
+  src: url('PT_Sans-Italic.eot');
+  src: local('PTSans Italic'),
+       local('PT Sans Italic'),
+       local('PT-Sans Italic'),
+       local('PTSans-Italic'),
+       local('PT Sans-Italic'),
+       local('PT-Sans-Italic'),
+       url('PT_Sans-Italic.eot?#iefix') format('embedded-opentype'),
+       url('PT_Sans-Italic.woff') format('woff'),
+       url('PT_Sans-Italic.ttf') format('truetype'),
+       url('PT_Sans-Italic.svg#PTSansItalic') format('svg');
+}
+
+@font-face {
+  font-family: 'PT Sans';
+  font-weight: bold;
+  font-style: normal;
+  src: url('PT_Sans-Bold.eot');
+  src: local('PTSans Bold'),
+       local('PT Sans Bold'),
+       local('PT-Sans Bold'),
+       local('PTSans-Bold'),
+       local('PT Sans-Bold'),
+       local('PT-Sans-Bold'),
+       url('PT_Sans-Bold.eot?#iefix') format('embedded-opentype'),
+       url('PT_Sans-Bold.woff') format('woff'),
+       url('PT_Sans-Bold.ttf') format('truetype'),
+       url('PT_Sans-Bold.svg#PTSansBold') format('svg');
+}
+
+@font-face {
+  font-family: 'PT Sans';
+  font-weight: bold;
+  font-style: italic;
+  src: url('PT_Sans-BoldItalic.eot');
+  src: local('PTSans BoldItalic'),
+       local('PT Sans BoldItalic'),
+       local('PT-Sans BoldItalic'),
+       local('PTSans-BoldItalic'),
+       local('PT Sans-BoldItalic'),
+       local('PT-Sans-BoldItalic'),
+       url('PT_Sans-BoldItalic.eot?#iefix') format('embedded-opentype'),
+       url('PT_Sans-BoldItalic.woff') format('woff'),
+       url('PT_Sans-BoldItalic.ttf') format('truetype'),
+       url('PT_Sans-BoldItalic.svg#PTSansBoldItalic') format('svg');
+}
+
+@font-face {
+  font-family: 'Droid Sans';
+  font-weight: normal;
+  font-style: normal;
+  src: url('Droid_Sans-Regular.eot');
+  src: local('Droid'),
+       local('DroidSans'),
+       local('Droid Sans'),
+       local('Droid-Sans'),
+       local('Droid Regular'),
+       local('DroidSans Regular'),
+       local('Droid Sans Regular'),
+       local('Droid-Sans Regular'),
+       local('Droid-Regular'),
+       local('DroidSans-Regular'),
+       local('Droid Sans-Regular'),
+       local('Droid-Sans-Regular'),
+       url('Droid_Sans-Regular.eot?#iefix') format('embedded-opentype'),
+       url('Droid_Sans-Regular.woff') format('woff'),
+       url('Droid_Sans-Regular.ttf') format('truetype'),
+       url('Droid_Sans-Regular.svg#DroidSansRegular') format('svg');
+}
+
+@font-face {
+  font-family: 'Droid Sans';
+  font-weight: bold;
+  font-style: normal;
+  src: url('Droid_Sans-Bold.eot');
+  src: local('Droid Bold'),
+       local('DroidSans Bold'),
+       local('Droid Sans Bold'),
+       local('Droid-Sans Bold'),
+       local('Droid-Bold'),
+       local('DroidSans-Bold'),
+       local('Droid Sans-Bold'),
+       local('Droid-Sans-Bold'),
+       url('Droid_Sans-Bold.eot?#iefix') format('embedded-opentype'),
+       url('Droid_Sans-Bold.woff') format('woff'),
+       url('Droid_Sans-Bold.ttf') format('truetype'),
+       url('Droid_Sans-Bold.svg#DroidSansBold') format('svg');
+}

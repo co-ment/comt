@@ -1,27 +1,42 @@
-#textcontainer.classic {
-  font-family: "New Century Schoolbook",serif; 
+@import url("fonts.css");
+
+#textcontainer {
+  font-size: 14px;
+  line-height: 20px;
+}
+  
+#textcontainer.modern {
+  font-family: Lora, Georgia, serif;
 }
   
 #textcontainer.code {
   font-family: courier; 
 }
   
-#textcontainer.modern {
-  font-family: arial,helvetica,clean,sans-serif; 
+#textcontainer h1 {
+  font-size: 22px; 
+  line-height: 24px;
+}
+
+#textcontainer h2 {
+  font-size: 16px; 
+  line-height: 18px;
+}
+
+#textcontainer h3 {
+  font-size:14px; 
+  line-height: 16px;
+}
+
+#textcontainer.modern h1,
+#textcontainer.modern h2,
+#textcontainer.modern h3,
+#textcontainer.modern h4,
+#textcontainer.modern h5,
+#textcontainer.modern h6 {
+  font-family: 'PT Sans', Verdana, sans-serif;
 }
   
-#textcontainer.classic h1 {
-    font-size:197%; 
-}
-
-#textcontainer.code h1 {
-    font-size:197%;
-}
-
-#textcontainer.modern h1 {
-    font-size:197%;
-}
-
 .voted {
   color: #008000;
 }

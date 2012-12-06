@@ -847,3 +847,17 @@ a.tag {
 .title_first {
 	margin-top: 0em;
 }
+
+@import url("site/text_view_comments/fonts.css");
+
+h1.main_title_text {
+  font: 34px/36px 'PT Sans', Verdana, sans-serif;
+}
+
+#header {
+  font: 12px "Droid Sans", Verdana, sans-serif;
+}
+
+#text-tabs {
+  font: 16px "Droid Sans", Verdana, sans-serif;
+}
