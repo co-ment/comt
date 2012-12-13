@@ -1,12 +1,14 @@
 /* see font size http://developer.yahoo.com/yui/fonts/ */
+@import url("site/text_view_comments/fonts.css");
+
 body {
 	margin: 0;
 	padding: 0;
-	font-family: "Lucida Grande","Lucida Sans Unicode",Verdana,Verdana,Arial,sans-serif;
+	font-family: "Droid Sans", Verdana, sans-serif;
 }
 
 h1, h2, h3 {
-	font-family: Georgia, "Bitstream Vera Serif", "Times New Roman", serif;
+	font-family: 'PT Sans', Verdana, sans-serif;
 }
 
 h1 {
@@ -295,7 +297,7 @@ input[type="submit"], input[type="button"] {
 	border-style: solid;
 	border-width: 1px;
 	color: #FFFFFF;
-	font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+	font-family: "Droid Sans", Verdana, sans-serif;
 	font-size: 11px;
 	padding: 2px 15px 3px;
 }
@@ -313,7 +315,7 @@ label, .label {
 
 input[type="text"],input[type="password"],textarea {
 	border: 1px solid #96D8A8;
-	font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+	font-family: "Droid Sans", Verdana, sans-serif;
 	font-size: 11px;
 	padding: 3px;
 	width: 450px;
@@ -400,8 +402,8 @@ UIMediaButton_Container {
 	float: right;
 }
 
-.copy_link {
-	font-family: monospace;
+.copy_link, input.copy_link {
+	font: 9px monospace;
 }
 
 table th,table td {
@@ -848,16 +850,16 @@ a.tag {
 	margin-top: 0em;
 }
 
-@import url("site/text_view_comments/fonts.css");
-
-h1.main_title_text {
+h1.main_title_text, h1.main_title {
   font: 34px/36px 'PT Sans', Verdana, sans-serif;
 }
 
-#header {
+#header, .dash_table, .footer, .metadata, #text, select {
   font: 12px "Droid Sans", Verdana, sans-serif;
 }
 
-#text-tabs {
+#text-tabs, #main-tabs {
   font: 16px "Droid Sans", Verdana, sans-serif;
 }
+
+

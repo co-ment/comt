@@ -219,8 +219,8 @@ margin-right:5px;
   font: 13px "Droid Sans", Verdana, sans-serif;
 }
 
-#c_filter,
-#c_filter .ui-widget select,
-#c_filter .ui-widget button {
+#c_filter, #c_filter select, #c_filter input, #c_filter button,
+#c_preferences, #c_preferences select, #c_preferences input, #c_preferences button,
+#c_text_preferences, #c_text_preferences select, #c_text_preferences input, #c_text_preferences button {
   font: 12px "Droid Sans", Verdana, sans-serif;
 }

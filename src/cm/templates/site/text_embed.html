@@ -27,7 +27,7 @@ tb_conf['current_tab'] = 'embed';
 (<a title="{% blocktrans %}Help{% endblocktrans %}" target="_blank" href="{% url help %}#embed">?</a>)
 <br/>
 <br/>
-<input style="width:100%;background-color:#DDDDDD;" value="{{ embed_code }}" type="text" readonly="true"></input>
+<input class="copy_link" style="width:100%;background-color:#DDDDDD;" value="{{ embed_code }}" type="text" readonly="true"></input>
 </textarea>
 
 {% if not anonymous_can_view_text %}

@@ -1,6 +1,8 @@
+@import url("site/text_view_comments/fonts.css");
+
 input.btn {
   color:#050;
-  font: bold 84% 'trebuchet ms',helvetica,sans-serif;
+  font: bold 84% "Droid Sans", Verdana, sans-serif;
   background-color:#fed;
   border: 1px solid;
   border-color: #696 #363 #363 #696;
