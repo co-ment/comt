@@ -1903,6 +1903,16 @@ msgstr "Запазете коментарите (по избор)"
 msgid "Keep comments (if not affected by the edit)"
 msgstr "Запазете коментарите  (ако не са засегнати от редактирането)"
 
+#: views/texts.py:614
+#, fuzzy
+msgid "Detach comments (optional)"
+msgstr "Откъснете коментарите (по избор)"
+
+#: views/texts.py:617
+#, fuzzy
+msgid "If some comments were attached to a chunck of text that is modified, check this option to keep these comments with no scope. Leave this option unchecked if you want that such comments be deleted. This option is ignored if the previous 'Keep comment' option is unchecked."
+msgstr "Ако някои коментари бяха прикрепени на chunck на текст, който се променя, проверете тази опция, за да се запазят тези коментари няма възможност. Оставете тази опция без отметка, ако искате, че такива коментари се заличават. Тази опция се игнорира, ако предишния 'Запазете коментарите' опция не е маркирана."
+
 #: views/texts.py:723
 msgid "Name (optional)"
 msgstr "Име (по избор)"

@@ -1892,6 +1892,16 @@ msgstr "Manter comentários (opcional)"
 msgid "Keep comments (if not affected by the edit)"
 msgstr "Manter comentários (se não afetados pela edição)"
 
+#: views/texts.py:614
+#, fuzzy
+msgid "Detach comments (optional)"
+msgstr "Retire comentários (opcional)"
+
+#: views/texts.py:617
+#, fuzzy
+msgid "If some comments were attached to a chunck of text that is modified, check this option to keep these comments with no scope. Leave this option unchecked if you want that such comments be deleted. This option is ignored if the previous 'Keep comment' option is unchecked."
+msgstr "Se alguns comentários foram anexados a um chunck de texto que é modificado, marque esta opção para manter esses comentários sem escopo. Deixe essa opção desmarcada se desejar que esses comentários sejam excluídos. Esta opção é ignorada se o anterior 'Manter comentários' opção está desmarcada."
+
 #: views/texts.py:723
 msgid "Name (optional)"
 msgstr "Nome (opcional)"

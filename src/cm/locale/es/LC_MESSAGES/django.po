@@ -1989,9 +1989,19 @@ msgstr "Crear una nueva versión de este texto (recomendado)"
 msgid "Keep comments (optional)"
 msgstr "Mantener los comentarios (opcional)"
 
-#: views/texts.py:657
+#: views/texts.py:617
 msgid "Keep comments (if not affected by the edit)"
 msgstr "Mantener los comentarios (si no son afectados por la edición)"
+
+#: views/texts.py:614
+#, fuzzy
+msgid "Detach comments (optional)"
+msgstr "Separe los comentarios (opcional)"
+
+#: views/texts.py:657
+#, fuzzy
+msgid "If some comments were attached to a chunck of text that is modified, check this option to keep these comments with no scope. Leave this option unchecked if you want that such comments be deleted. This option is ignored if the previous 'Keep comment' option is unchecked."
+msgstr "Si algunos comentarios se adjunta a un chunck de texto que se modifica, marque esta opción para mantener estos comentarios sin alcance. Deje esta opción sin marcar si desea que esos comentarios serán eliminados. Esta opción se ignora si el anterior 'Mantener los comentarios' opción no está seleccionada."
 
 #: views/texts.py:723
 msgid "Name (optional)"
