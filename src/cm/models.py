@@ -152,7 +152,6 @@ CHOICES_INPUT_FORMATS = getattr(settings, 'CHOICES_INPUT_FORMATS', CHOICES_INPUT
 class TextVersionManager(KeyManager):
 
     def duplicate(self, text_version, duplicate_comments=True):
-        #import pdb;pdb.set_trace()
         old_comment_set = set(text_version.comment_set.all())
         text_version.id = None
         
@@ -199,34 +198,7 @@ class TextVersion(AuthorModel, KeyModel):
     
     def get_content(self, format='html'):
         return pandoc_convert(self.content, self.format, format)
-#    def _get_comments(self, user = None, filter_reply = 0):        
-#        """
-#        get comments viewable by this user (user = None or user = AnonymousUser => everyone)
-#        filter_reply = 0: comments and replies
-#                       1: comments
-#                       2: replies
-#        """        
-#        from cm.security import has_perm_on_text # should stay here to avoid circular dependencies
-#        
-#        if has_perm(user, 'can_view_unapproved_comment', self.text):
-#            comments = self.comment_set.all()
-#        elif has_perm(user, 'can_view_approved_comment', self.text):
-#            comments = self.comment_set.filter(visible=True)
-#        elif has_perm(user, 'can_view_comment_own', self.text):
-#            comments = self.comment_set.filter(user=user)
-#        else:
-#            return Comment.objects.none() # empty queryset
-#        if filter_reply:
-#            comments = comments.filter)
-#        return comments
-#
-#    def get_comments_as_json(self, user = None):
-#        return simplejson.dumps(self._get_comments(user, filter_reply=0))
-#
-#    def get_comments_and_replies(self, user = None):
-#        return (self.get_comments(user),
-#                self.get_replies(user))
-#
+
     def get_comments(self):
         "Warning: data access without security"
         return self.comment_set.filter(reply_to=None, deleted=False)
@@ -245,9 +217,6 @@ class TextVersion(AuthorModel, KeyModel):
         elif self.content != new_content or new_format != self.format:
             comments = self.get_comments() ;
             tomodify_comments, toremove_comments = compute_new_comment_positions(self.content, self.format, new_content, new_format, comments)
-            #print "tomodify_comments"
-            #print tomodify_comments
-            #print "toremove_comments",len(toremove_comments)
             [comment.save(keep_dates=True) for comment in tomodify_comments]
             if cancel_modified_scopes :
                 [comment.remove_scope() for comment in toremove_comments]
@@ -383,7 +352,6 @@ from cm.role_models import change_role_model
 class ConfigurationManager(models.Manager):
     def set_workspace_name(self, workspace_name):
         if workspace_name:
-            #self.set_key('workspace_name', _(u"%(workspace_name)s's workspace") %{'workspace_name':workspace_name})
             self.set_key('workspace_name', workspace_name)
 
     def get_key(self, key, default_value=None):
@@ -547,7 +515,6 @@ class Role(models.Model):
     """
     name = models.CharField(ugettext_lazy('name'), max_length=50, unique=True)
     description = models.TextField(ugettext_lazy('description'))
-    #order = models.IntegerField(unique=True)
     permissions = models.ManyToManyField(Permission, related_name="roles")
 
     global_scope = models.BooleanField('global scope', default=False) # applies to global scope only
@@ -702,18 +669,11 @@ class UserProfile(KeyModel):
         
 from django.db.models import signals
 
-#def create_profile(sender, **kwargs):
-#    created = kwargs['created']
-#    if created:
-#        user = kwargs['instance']
-#        UserProfile.objects.create(user = user)
-
 def delete_profile(sender, **kwargs):
     user_profile = kwargs['instance']
     user = user_profile.user
     user.delete()
     
-#signals.post_save.connect(create_profile, sender=User)
 signals.post_delete.connect(delete_profile, sender=UserProfile)
 
 class ActivityManager(models.Manager):
