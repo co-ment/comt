@@ -1781,13 +1781,27 @@ msgid "Workspace logo"
 msgstr ""
 
 #: views/site.py:217
-msgid "Workspace html code"
+msgid "Custom css rules"
 msgstr ""
 
 #: views/site.py:218
-msgid ""
-"Add stylesheets etc. Warning: this code will be added to the workspace code, "
-"make sure you know what you're doing before adding something here."
+msgid "Add stylesheet rules in CSS format (do not include <code>&lt;style&gt;</code> HTML tags). Warning: this code will be added to all content, make sure you know what you're doing before adding something here."
+msgstr ""
+
+#: views/site.py:223
+msgid "Custom font"
+msgstr ""
+
+#: views/site.py:225
+msgid "Custom alternative font family to 'modern', 'classic' and 'code' that visitors can chose for the body of co-ment texts. Enter a coma separated list of font families. Font family names including space characters should be enclosed in double quotes. Eg. "
+msgstr ""
+
+#: views/site.py:229
+msgid "Custom font for titles"
+msgstr ""
+
+#: views/site.py:231
+msgid "Custom alternative font family to 'modern', 'classic' and 'code' that visitors can chose for titles (h1 to h6) of co-ment texts. Enter a coma separated list of font families. Font family names including space characters should be enclosed in double quotes. Eg. "
 msgstr ""
 
 #: views/site.py:253

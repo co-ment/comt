@@ -1842,17 +1842,34 @@ msgid "Workspace logo"
 msgstr "Лого на работното място"
 
 #: views/site.py:217
-msgid "Workspace html code"
-msgstr "Код html на работното място"
+#, fuzzy
+msgid "Custom css rules"
+msgstr "Избор CSS правила"
 
 #: views/site.py:218
-msgid ""
-"Add stylesheets etc. Warning: this code will be added to the workspace code, "
-"make sure you know what you're doing before adding something here."
-msgstr ""
-"Добавете лист за стилове и др, Предупреждение: този код ще бъде добавен към "
-"кода на работното място, уверете се, че познавате рисковете преди да "
-"добавите нещо тук,"
+#, fuzzy
+msgid "Add stylesheet rules in CSS format (do not include <code>&lt;style&gt;</code> HTML tags). Warning: this code will be added to all content, make sure you know what you're doing before adding something here."
+msgstr "Добави стилови правила във формат на CSS (не включва <code>&lt;style&gt;</code> HTML тагове). Внимание: този код ще бъде добавен към цялото съдържание, уверете се, че знаеш какво правиш, преди да се прибави нещо тук."
+
+#: views/site.py:223
+#, fuzzy
+msgid "Custom font"
+msgstr "По поръчка на шрифта"
+
+#: views/site.py:225
+#, fuzzy
+msgid "Custom alternative font family to 'modern', 'classic' and 'code' that visitors can chose for the body of co-ment texts. Enter a coma separated list of font families. Font family names including space characters should be enclosed in double quotes. Eg. "
+msgstr "Индивидуално алтернатива шрифт семейство 'модерни', 'класически' и 'код', че посетителите могат да избират за тялото на сътрудничество на текстове. Въведете кома списък, разделен на шрифта семейства. Имена на семейство шрифтове, включително космически герои трябва да бъде затворен в двойни кавички. Напр. "
+
+#: views/site.py:229
+#, fuzzy
+msgid "Custom font for titles"
+msgstr "Персонализиран шрифт за титли"
+
+#: views/site.py:231
+#, fuzzy
+msgid "Custom alternative font family to 'modern', 'classic' and 'code' that visitors can chose for titles (h1 to h6) of co-ment texts. Enter a coma separated list of font families. Font family names including space characters should be enclosed in double quotes. Eg. "
+msgstr "Custom семейството алтернатива шрифт за 'модерни', 'класически' и 'код', че посетителите могат да избират за заглавия (h1 до h6) за съвместно текстове. Въведете кома списък, разделен на шрифта семейства. Имена на семейство шрифтове, включително космически герои трябва да бъде затворен в двойни кавички. Напр. "
 
 #: views/site.py:253
 msgid ""

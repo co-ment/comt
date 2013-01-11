@@ -570,6 +570,11 @@ msgstr "classico"
 msgid "code"
 msgstr "codice"
 
+#: media/js/site/c_text_view_comments.js:21
+#, fuzzy
+msgid "custom"
+msgstr "su misura"
+
 #: media/js/site/f_text_view_frame.js:194
 msgid "toggle advance interface"
 msgstr "abilita/disabilita interfaccia avanzata"

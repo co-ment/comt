@@ -571,6 +571,10 @@ msgstr "classique"
 msgid "code"
 msgstr "code"
 
+#: media/js/site/c_text_view_comments.js:21
+msgid "custom"
+msgstr "personnalisé"
+
 #: media/js/site/f_text_view_frame.js:182
 msgid "view all detached comments"
 msgstr "voir tous les commentaires détachés"

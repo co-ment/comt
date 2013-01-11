@@ -151,8 +151,6 @@ span.c-content p {
     margin-bottom:0em;
 }
 
-@import url("fonts.css");
-
 .icomment-header .c-header-title {
   font: bold 13px/16px 'PT Sans', Verdana, sans-serif;
 }

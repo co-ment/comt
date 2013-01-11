@@ -568,6 +568,11 @@ msgstr "klassisk"
 msgid "code"
 msgstr "kode"
 
+#: media/js/site/c_text_view_comments.js:21
+#, fuzzy
+msgid "custom"
+msgstr "tilpasset"
+
 #: media/js/site/f_text_view_frame.js:182
 msgid "view all detached comments"
 msgstr "se alle frakoblede merknader"

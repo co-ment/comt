@@ -1,5 +1,4 @@
-@import url("fonts.css");
-
+/* Syles for font alternatives */
 #textcontainer {
   font-size: 14px;
   line-height: 20px;
@@ -8,7 +7,11 @@
 #textcontainer.modern {
   font-family: Lora, Georgia, serif;
 }
-  
+ 
+#textcontainer.classic {
+  font-family: arial, helvetica, clean, sans-serif;
+}
+ 
 #textcontainer.code {
   font-family: courier; 
 }
@@ -36,50 +39,17 @@
 #textcontainer.modern h6 {
   font-family: 'PT Sans', Verdana, sans-serif;
 }
-  
-.voted {
-  color: #008000;
-}
 
-.rejected {
-  color: #ff0000;
-}
-
-.fallen {
-  color: #ff0000;
-}
-
-.withdrawn {
-  color: #ff0000;
-}
-
-div.frame {
-  border: 1px solid #000;
-  padding: 5px;
-}
-
-div.frame .title {
-  font-weight: bold;
-  text-align: center;
-}
-
-/* Add empty space before footnotes and a black line on top. */
-.footnotes {
+/* Styles for footnotes using Drupal module 'footnotes' */
+#textcontainer .footnotes {
   clear: both;
   margin-top: 4em;
   margin-bottom: 2em;
   border-top: 1px solid #000000;
-}
-
-/* Make footnotes appear in a smaller font */
-.footnotes {
   font-size: 0.9em;
 }
 
-/* 
-  Make the footnote a supertext^1
-*/
-.see-footnote {
+#textcontainer .see-footnote {
   vertical-align: top;
   position: relative;
   top: -0.25em;
@@ -87,51 +57,39 @@ div.frame .title {
   text-decoration: none;
 }
 
-/* Hide the bullet of the UL list of footnotes*/
-
-ul.footnotes {
+#textcontainer ul.footnotes {
   list-style-type: none;
   margin-left: 0;
   padding-left: 0;
 }
-ul.footnotes li {
+
+#textcontainer ul.footnotes li {
   margin-left: 2.5em;
   list-style-type: none;
-  background: none; /* Garland theme sets a bullet via background image, this must be unset! See bug 861634 */
+  background: none;
 }
 
-
-/* Move the footnote number outside of the margin for footnote text (hanging indent) */
-ul.footnotes {
-  /* This is apparently very needed for the "position: absolute;" below to work correctly*/
+#textcontainer ul.footnotes {
   position: relative; 
 }
-.footnotes .footnote-label {
+
+#textcontainer .footnotes .footnote-label {
   position: absolute;
   left: 0px;
   z-index: 2;
   text-decoration: none;
 }
 
-/* Highlight the target footnote (or ref number, if a backlink was used) when user clicks a footnote. */
-.see-footnote:target,
+#textcontainer .see-footnote:target,
 .footnotes .footnote:target {
   background-color: #eeeeee;
 }
-.see-footnote:target {
+
+#textcontainer .see-footnote:target {
   border: solid 1px #aaaaaa;
 }
 
-
-/* Note: This CSS has a minor bug on all versions of IE in that the footnote numbers 
-are aligned with the absolute bottom of their space, thus being a couple of pixels 
-lower than their corresponding line of text. IE5.5 has a serious bug in that the numbers 
-are not shifted left at all, thus being garbled together with the start of their text. */
-
-/* 
-  Make the multiple backlinks a supertext^1
-*/
-.footnotes .footnote-multi {
+#textcontainer .footnotes .footnote-multi {
   vertical-align: top;
   position: relative;
   top: -0.25em;

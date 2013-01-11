@@ -43,6 +43,7 @@ import sys
 import re
 import imghdr
 import base64
+import cssutils
 from os.path import basename
 from django.db.models.sql.datastructures import EmptyResultSet
 
@@ -253,6 +254,15 @@ def text_view_comments(request, key, version_key=None, adminkey=None):
                                }
     template_dict['json_comments'] = jsonize(comments, request)
     template_dict['json_filter_datas'] = jsonize(filter_datas, request)
+    from cm.models import ApplicationConfiguration
+    custom_css_str = ApplicationConfiguration.get_key('custom_css')
+    custom_css = cssutils.parseString(custom_css_str)
+    for css_rule in custom_css:
+      if css_rule.type == css_rule.STYLE_RULE and css_rule.wellformed:
+        css_rule.selectorText = "#textcontainer %s" %css_rule.selectorText
+    template_dict['custom_css'] = custom_css.cssText
+    template_dict['custom_font'] = ApplicationConfiguration.get_key('custom_font')
+    template_dict['custom_titles_font'] = ApplicationConfiguration.get_key('custom_titles_font')
     return render_to_response('site/text_view_comments.html',
                               template_dict,
                               context_instance=RequestContext(request))

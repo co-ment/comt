@@ -566,6 +566,11 @@ msgstr "clássico"
 msgid "code"
 msgstr "código"
 
+#: media/js/site/c_text_view_comments.js:21
+#, fuzzy
+msgid "custom"
+msgstr "personalizado"
+
 #: media/js/site/f_text_view_frame.js:182
 #, fuzzy
 msgid "view all detached comments"

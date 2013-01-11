@@ -2,8 +2,6 @@
      *  Basic Layout Theme
      */
 
-@import url("text_view_comments/fonts.css");
-
 .ui-layout-pane { /* all 'panes' */
     background: #FFF; 
 /*    border:     1px solid #BBB;*/

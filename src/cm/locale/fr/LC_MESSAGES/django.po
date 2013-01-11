@@ -1938,16 +1938,28 @@ msgid "Workspace logo"
 msgstr "Logo de l'espace de travail"
 
 #: views/site.py:217
-msgid "Workspace html code"
-msgstr "Code html de l'espace de travail"
+msgid "Custom css rules"
+msgstr "Règles CSS personalisées"
 
 #: views/site.py:218
-msgid ""
-"Add stylesheets etc. Warning: this code will be added to the workspace code, "
-"make sure you know what you're doing before adding something here."
-msgstr ""
-"Ajouter des feuilles de style etc.. Attention : ce code sera ajouté à celui "
-"de l'espace de travail, à manipuler avec prudence."
+msgid "Add stylesheet rules in CSS format (do not include <code>&lt;style&gt;</code> HTML tags). Warning: this code will be added to all content, make sure you know what you're doing before adding something here."
+msgstr "Ajouter des règles de feuilles de style au format CSS (ne pas include de balises HTML <code>&lt;style&gt;</code). Attention : ce code sera ajouté à tous les contents, à manipuler avec prudence."
+
+#: views/site.py:223
+msgid "Custom font"
+msgstr "Police de caractères personalisée"
+
+#: views/site.py:225
+msgid "Custom alternative font family to 'modern', 'classic' and 'code' that visitors can chose for the body of co-ment texts. Enter a coma separated list of font families. Font family names including space characters should be enclosed in double quotes. Eg. "
+msgstr "Une police de caractères personalisée alternative à 'moderne', 'classique' et 'code', que les visiteurs peuvent sélectionner pour le corps des textes co-ment. Saisissez une liste de familles de polices de caractères séparées par des virgules. Les noms de famille de police de caractères contenant des espaces doivent être entre guillemets. Ex. "
+
+#: views/site.py:229
+msgid "Custom font for titles"
+msgstr "Police de caractères personalisée pour les titres"
+
+#: views/site.py:231
+msgid "Custom alternative font family to 'modern', 'classic' and 'code' that visitors can chose for titles (h1 to h6) of co-ment texts. Enter a coma separated list of font families. Font family names including space characters should be enclosed in double quotes. Eg. "
+msgstr "Une police de caractères personalisée alternative à 'moderne', 'classique' et 'code', que les visiteurs peuvent sélectionner pour les titres (h1 à h6) des textes co-ment. Saisissez une liste de familles de polices de caractères séparées par des virgules. Les noms de famille de police de caractères contenant des espaces doivent être entre guillemets. Ex. "
 
 #: views/site.py:253
 msgid ""

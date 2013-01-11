@@ -21,6 +21,7 @@
     </script>
      -->
   
+    <link rel="stylesheet" type="text/css" href="{{ CM_MEDIA_PREFIX }}css/site/text_view_comments/fonts.css">
     <link type="text/css" href="{{ CM_MEDIA_PREFIX }}js/lib/jquery/css/smoothness/jquery-ui-1.7.2.custom.css" rel="stylesheet" />    
     <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/lib/jquery/js/jquery-1.3.2.min.js"></script>
     <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/lib/jquery/js/jquery-ui-1.7.2.custom.min.js"></script>
@@ -44,12 +45,6 @@
       -->
       </script>
   
-    {% if CONF.workspace_code %}
-    	{% autoescape off %}
-    	{{ CONF.workspace_code }}
-    	{% endautoescape %}
-    {% endif %}
-    	
     {% block head_base %}
     {% endblock %}
     {% block head %}

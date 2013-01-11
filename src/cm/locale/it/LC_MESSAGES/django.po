@@ -2009,17 +2009,34 @@ msgid "Workspace logo"
 msgstr "Logo dello spazio di lavoro"
 
 #: views/site.py:217
-msgid "Workspace html code"
-msgstr "Codice HTML dello spazio di lavoro"
+#, fuzzy
+msgid "Custom css rules"
+msgstr "CSS personalizzato regole"
 
 #: views/site.py:218
-msgid ""
-"Add stylesheets etc. Warning: this code will be added to the workspace code, "
-"make sure you know what you're doing before adding something here."
-msgstr ""
-"Aggiungi fogli di stile etc. Attenzione: questi codici saranno aggiunti allo "
-"spazio di lavoro, accertati di sapere quello che fai prima di aggiungere "
-"qualcosa qui."
+#, fuzzy
+msgid "Add stylesheet rules in CSS format (do not include <code>&lt;style&gt;</code> HTML tags). Warning: this code will be added to all content, make sure you know what you're doing before adding something here."
+msgstr "Aggiungere regole di stile in formato CSS (non includono <code>&lt;style&gt;</code> tag HTML). Attenzione: questo codice viene aggiunto a tutti i contenuti, assicuratevi di sapere cosa si sta facendo prima di aggiungere qualcosa qui."
+
+#: views/site.py:223
+#, fuzzy
+msgid "Custom font"
+msgstr "Tipo di carattere personalizzato"
+
+#: views/site.py:225
+#, fuzzy
+msgid "Custom alternative font family to 'modern', 'classic' and 'code' that visitors can chose for the body of co-ment texts. Enter a coma separated list of font families. Font family names including space characters should be enclosed in double quotes. Eg. "
+msgstr "Misura alternativa alla famiglia di font 'moderno', 'classico' e 'codice' che i visitatori possono scegliere per il corpo di co-mento testi. Inserire un elenco separato di coma famiglie di font. I cognomi font inclusi i caratteri di spazio deve essere racchiuso tra virgolette. Eg. "
+
+#: views/site.py:229
+#, fuzzy
+msgid "Custom font for titles"
+msgstr "Tipo di carattere personalizzato per i titoli"
+
+#: views/site.py:231
+#, fuzzy
+msgid "Custom alternative font family to 'modern', 'classic' and 'code' that visitors can chose for titles (h1 to h6) of co-ment texts. Enter a coma separated list of font families. Font family names including space characters should be enclosed in double quotes. Eg. "
+msgstr "Misura alternativa alla famiglia di font 'moderno', 'codice' 'classico' e che i visitatori possono scegliere per i titoli (h1 a h6) di co-mento testi. Inserire un elenco separato di coma famiglie di font. I cognomi font inclusi i caratteri di spazio deve essere racchiuso tra virgolette. Eg. "
 
 #: views/site.py:253
 msgid ""
