@@ -1161,18 +1161,28 @@ msgid "Version list"
 msgstr "Versões"
 
 #: templates/site/text_history.html:59
+#, fuzzy
 msgid "Compare last two versions"
-msgstr ""
+msgstr "Comparar duas últimas versões"
 
 #: templates/site/text_history.html:61
 #: templates/site/text_history_compare.html:37
 #: templates/site/text_history_version.html:38
+#, fuzzy
 msgid "Most recent version"
-msgstr ""
+msgstr "Versão mais recente"
+
+#: templates/site/text_history.html:63
+#: templates/site/text_history_compare.html:30
+#: templates/site/text_history_version.html:31
+#, fuzzy
+msgid "Last version"
+msgstr "Versão original"
 
 #: templates/site/text_history.html:67
+#, fuzzy
 msgid "Compare selected versions"
-msgstr ""
+msgstr "Compare as versões seleccionadas"
 
 #: templates/site/text_history.html:77
 #, fuzzy
@@ -1189,8 +1199,9 @@ msgid "Author"
 msgstr "Autor"
 
 #: templates/site/text_history.html:82
+#, fuzzy
 msgid "Created"
-msgstr ""
+msgstr "Criado"
 
 #: templates/site/text_history.html:83 templates/site/text_list.html:141
 #, fuzzy
@@ -1203,8 +1214,9 @@ msgstr "Ver"
 
 #: templates/site/text_history.html:106
 #: templates/site/text_history_version.html:32
+#, fuzzy
 msgid "Compare with previous version"
-msgstr ""
+msgstr "Comparar com versão anterior"
 
 #: templates/site/text_history.html:108
 #, fuzzy

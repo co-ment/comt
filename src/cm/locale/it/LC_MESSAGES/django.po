@@ -1323,6 +1323,13 @@ msgstr "Compara le ultime due versioni"
 msgid "Most recent version"
 msgstr "Versioni più recenti"
 
+#: templates/site/text_history.html:63
+#: templates/site/text_history_compare.html:30
+#: templates/site/text_history_version.html:31
+#, fuzzy
+msgid "Last version"
+msgstr "Versione originale"
+
 #: templates/site/text_history.html:67
 msgid "Compare selected versions"
 msgstr "Compara le versioni selezionate"

@@ -1262,6 +1262,12 @@ msgstr "Comparer les deux dernières versions"
 msgid "Most recent version"
 msgstr "Version la plus récente"
 
+#: templates/site/text_history.html:63
+#: templates/site/text_history_compare.html:30
+#: templates/site/text_history_version.html:31
+msgid "Original version"
+msgstr "Version originale"
+
 #: templates/site/text_history.html:67
 msgid "Compare selected versions"
 msgstr "Comparer les versions selectionnées"

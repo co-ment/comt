@@ -1166,6 +1166,13 @@ msgstr "Sammenlikn siste to versjoner"
 msgid "Most recent version"
 msgstr "Nyeste versjon"
 
+#: templates/site/text_history.html:63
+#: templates/site/text_history_compare.html:30
+#: templates/site/text_history_version.html:31
+#, fuzzy
+msgid "Last version"
+msgstr "Original versjon"
+
 #: templates/site/text_history.html:67
 msgid "Compare selected versions"
 msgstr "Sammenlikn valgte versjoner"

@@ -28,13 +28,18 @@ $(function() {
     <li><a href="{% url text-history text.key %}">{% blocktrans %}Version list{% endblocktrans %}</a></li>
     <li>&nbsp;/</li>
     {% if text_version.get_previous_version %}
-    <li>&nbsp;<a href="{% url text-history-version text.key text_version.get_previous_version.key %}" title="{% blocktrans %}Previous version{% endblocktrans %}" >&laquo;{{ text_version.get_previous_version.get_version_number }}</a></li>
+    <li>&nbsp;<a href="{% url text-history-version text.key first_version.key %}" title="{% blocktrans %}Original version{% endblocktrans %}">&laquo;&laquo;{{ first_version.get_version_number }}</a></li>    
     <li>&nbsp;<a href="{% url text-history-compare text.key text_version.get_previous_version.key text_version.key %}"><img style="vertical-align: text-bottom;" title="{% blocktrans %}Compare with previous version{% endblocktrans %}" alt="title="{% blocktrans %}Compare with previous version{% endblocktrans %}"  src="{{ CM_MEDIA_PREFIX }}img/plus-minus-left.gif"></img></a></li>
+    {% ifnotequal text_version.get_previous_version.key first_version.key %}
+    <li>&nbsp;<a href="{% url text-history-version text.key text_version.get_previous_version.key %}" title="{% blocktrans %}Previous version{% endblocktrans %}" >&laquo;{{ text_version.get_previous_version.get_version_number }}</a></li>
+    {% endifnotequal %}
     {% endif %}
     <li class="active_sub">{% blocktrans with text_version.get_version_number as version_number %}Version {{ version_number }}{% endblocktrans %}</li>
     {% if text_version.get_next_version %}
-    <li>&nbsp;<a href="{% url text-history-compare text.key text_version.key text_version.get_next_version.key %}"><img style="vertical-align: text-bottom;" title="{% blocktrans %}Compare with next version{% endblocktrans %}" alt="{% blocktrans %}Compare with next version{% endblocktrans %}" src="{{ CM_MEDIA_PREFIX }}img/plus-minus-right.gif"></img></a></li>
+    {% ifnotequal text_version.get_next_version.key text.last_text_version.key %}
     <li>&nbsp;<a href="{% url text-history-version text.key text_version.get_next_version.key %}" title="{% blocktrans %}Next version{% endblocktrans %}" >{{ text_version.get_next_version.get_version_number }}&raquo;</a></li>
+    {% endifnotequal %}
+    <li>&nbsp;<a href="{% url text-history-compare text.key text_version.key text_version.get_next_version.key %}"><img style="vertical-align: text-bottom;" title="{% blocktrans %}Compare with next version{% endblocktrans %}" alt="{% blocktrans %}Compare with next version{% endblocktrans %}" src="{{ CM_MEDIA_PREFIX }}img/plus-minus-right.gif"></img></a></li>
     <li>&nbsp;<a href="{% url text-history-version text.key text.last_text_version.key %}" title="{% blocktrans %}Most recent version{% endblocktrans %}">{{ text.last_text_version.get_version_number }}&raquo;&raquo;</a></li>    
     {% endif %}
 </ul>

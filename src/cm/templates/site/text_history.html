@@ -59,6 +59,8 @@ function hide_show(elem, name, hide, up, plus) {
     <li><a href="{% url text-history-compare text.key last_last_version.key last_version.key %}">{% blocktrans %}Compare last two versions{% endblocktrans %}</a></li>
     <li> / </li>
     <li><a href="{% url text-history-version text.key text.last_text_version.key %}">{% blocktrans %}Most recent version{% endblocktrans %}</a></li>
+    <li> / </li>
+    <li><a href="{% url text-history-version text.key first_version.key %}">{% blocktrans %}Original version{% endblocktrans %}</a></li>
     {% endif %}
 </ul>
 

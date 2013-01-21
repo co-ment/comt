@@ -443,9 +443,12 @@ def text_view_frame(request, key, version_key=None, adminkey=None):
 def text_history_version(request, key, version_key):
     text = get_text_by_keys_or_404(key)
     text_version = get_textversion_by_keys_or_404(version_key, key=key)
+    text_versions = text.get_versions()
+    first_version = text_versions[len(text_versions) - 1]
     template_dict = {'text' : text,
                      'text_version' : text_version,
                      'embed_code' : embed_html(key, 'id="text_view_frame" name="text_view_frame"', version_key),
+                     'first_version':first_version,
                       }
     return render_to_response('site/text_history_version.html',
                               template_dict,
@@ -470,12 +473,15 @@ def text_history_compare(request, key, v1_version_key, v2_version_key, mode=''):
         dif = diff_match_patch2()
         content = dif.diff_prettyHtml_one_way(dif.diff_main(v1.get_content(), v2.get_content()), mode='ins_del')
 
+    text_versions = text.get_versions()
+    first_version = text_versions[len(text_versions) - 1]
     template_dict = {
                      'text' : text,
                      'v1': v1,
                      'v2': v2,
                      'content' : content.strip(),
                      'empty' : '<table class="diff"><tbody></tbody></table>'==content,
+                     'first_version':first_version,
                      }
     return render_to_response('site/text_history_compare.html',
                               template_dict,
@@ -495,7 +501,8 @@ def text_history(request, key):
     paginate_by = get_int(request.GET,'paginate',TEXT_PAGINATION)
 
     last_last_version = text_versions[1] if len(text_versions)>1 else None 
-    context = {'text':text, 'last_version':text.last_text_version, 'last_last_version':last_last_version}
+    first_version = text_versions[len(text_versions) - 1]
+    context = {'text':text, 'last_version':text.last_text_version, 'last_last_version':last_last_version, 'first_version':first_version}
     return object_list(request, text_versions,
                        template_name = 'site/text_history.html',
                        paginate_by = paginate_by,
