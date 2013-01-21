@@ -214,6 +214,9 @@ fillTopToolbar = function() {
       '<tr>' + 
       '<td>' +
         '<span id="c_filter_results" >' +
+          '<span id="c_browse_indx_scope">-</span>' +
+          '<span id="c_browse_indx_modif_thread" style="display: none;">-</span>' +
+          '/' +
         '<b>&nbsp;<span id="c_f_res_nb_dis"></span></b>&nbsp;<span id="c_f_res_nb_dis_txt"></span>' +
         '<span id="c_f_res_details">&nbsp;(' + gettext('filter:') + '&nbsp;<span id="c_f_res_nb_com"></span>/<span id="c_f_res_nb_tot_com"></span>&nbsp;<span id="c_f_res_nb_com_txt"></span>&nbsp;<span id="c_f_res_nb_rep"></span>/<span id="c_f_res_nb_tot_rep"></span><span id="c_f_res_nb_rep_txt"></span>)</span>' +
         '</span>' +
@@ -221,39 +224,30 @@ fillTopToolbar = function() {
       '<td>' +
       '<span id="browse_section">' +
       ', ' + gettext('browse by:') + ' ' + 
-        '<select id="browse_by">' + 
+        '<select id="browse_by" style="margin-right: 7px;">' + 
         '<option value="scope">' + gettext('location') + '</option>' +
         '<option value="modif_thread">' + gettext('modification') + '</option>' +
         '</select>' + 
       '</span>' +
       '</td>' + 
-      '<td width="40" align="right">' + 
+      '<td style="width: 40px; text-align: right;">' + 
         '<a href="#" id="c_browse_first"><img title="'+ viewFirst +'" alt="'+ viewFirst +'" src="' + sv_media_url + '/img/control_fastbackward_blue.png"/></a>' +
-        '<a href="#" id="c_browse_prev"><img title="'+ viewPrev +'" alt="'+ viewPrev +'" src="' + sv_media_url + '/img/control_playback_blue.png"/></a>' +
+        '<a href="#" id="c_browse_prev"><img title="'+ viewPrev +'" alt="'+ viewPrev +'" src="' + sv_media_url + '/img/control_playback_blue.png" style="margin-right: 3px;"/></a>' +
       '</td>' +
-      '<td width="50" align="center">' +
-          '<span id="c_browse_indx_scope">-</span>' +
-          '<span id="c_browse_indx_modif_thread" style="display: none;">-</span>' +
-          '/' +
-          '<span id="c_browse_indx_total"></span>' + 
-      '</td>' +
-      '<td width="40" align="left">' +
+      '<td style="width: 44px; text-align: left; border-right: 1px dotted #b1b1b1;">' +
         '<a href="#" id="c_browse_next"><img title="'+ viewNext +'" alt="'+ viewNext +'" src="' + sv_media_url + '/img/control_play_blue.png"/></a>' +
         '<a href="#" id="c_browse_last"><img title="'+ viewLast +'" alt="'+ viewLast +'" src="' + sv_media_url + '/img/control_fastforward_blue.png"/></a>' +
       '</td>' +
-      '<td width="20" align="left">' +
-      '<a href="#" id="c_browse_all"><img title="'+ viewAll +'" alt="'+ viewAll +'" src="' + sv_media_url + '/img/view_all.png"/></a>' +
+      '<td style="width: 20px; text-align: left;">' +
+      '<a href="#" id="c_browse_all"><img title="'+ viewAll +'" alt="'+ viewAll +'" src="' + sv_media_url + '/img/view_all.png" style="margin-left: 11px; margin-right: 8px;" /></a>' +
       '</td>' +
-      '<td width="20" align="left">' +
-      '<a href="#" id="c_browse_scope_removed"><img title="'+ viewScopeRemoved +'" alt="'+ viewScopeRemoved +'" src="' + sv_media_url + '/img/view_scope_removed2.png"/></a>' +
+      '<td style="width: 20px; text-align: left;">' +
+      '<a href="#" id="c_browse_scope_removed"><img title="'+ viewScopeRemoved +'" alt="'+ viewScopeRemoved +'" src="' + sv_media_url + '/img/view_scope_removed2.png" style="margin-top: -8px; margin-right: 3px;" /></a>' +
       '</td>' +
-      '<td width="20" align="left">' +
-        '<a href="#" id="c_advanced_btn"><img title="'+ advancedInterface +'" alt="'+ advancedInterface +'" src="' + sv_media_url + '/img/application_split.png"/></a>' +
+      '<td style="width: 20px; text-align: left;">' +
+        '<a href="#" id="c_thread_unthread"><img id="c_thread_unthread_img" style="margin-right: 8px;"/></a>' +
       '</td>' +
-      '<td width="20" align="left">' +
-        '<a href="#" id="c_thread_unthread"><img id="c_thread_unthread_img"/></a>' +
-      '</td>' +
-      '<td width="20" align="left">' +
+      '<td style="width: 20px; text-align: left;">' +
         '<a href="#" id="c_toc_btn"><img title="'+ toggleToc +'" alt="'+ toggleToc +'" src="' + sv_media_url + '/img/document_index.png"/></a>' +
       '</td>' +
       '</tr>' +
@@ -603,9 +597,6 @@ f_updateFilterCountResult = function(nbDiscussions, nbComments, nbReplies, nbAll
   $("#c_f_res_nb_rep").html(nbReplies) ; 
   $("#c_f_res_nb_tot_rep").html(nbAllReplies) ; 
   $("#c_f_res_nb_rep_txt").html('&nbsp;' + ngettext('reply', 'replies', nbReplies)) ;
-
-  // update browser infos
-  $("#c_browse_indx_total").html(nbDiscussions) ; 
   
   //console.info('nbDiscussions + typeof nbDiscussions +nbComments + typeof nbComments) ;
   $("#c_filter_results").show() ; 
