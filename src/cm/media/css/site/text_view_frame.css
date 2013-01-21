@@ -37,10 +37,6 @@
     } 
     .ui-layout-toggler .content { /* toggler-text */ 
         font: 8px bold "Droid Sans", Verdana, Arial, Helvetica, sans-serif;
-        margin-top: -4px;
-    }
-    .ui-layout-toggler .content-closed { /* toggler-text arrow up */ 
-        margin-top: -5px;
     }
     .ui-layout-toggler:hover { /* mouse-over */ 
         background: #AAA; 
