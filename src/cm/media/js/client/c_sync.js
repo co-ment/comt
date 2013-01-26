@@ -160,7 +160,7 @@ Sync.prototype = {
   
           gDb.upd(comment) ;
   
-          var shouldReset = gLayout.isInFrame() && !parent.f_isFrameFilterFieldsInit() ;
+          var shouldReset = gLayout.isInFrame() && parent.f_isFrameFilterFieldsInit() ;
           if (shouldReset)
             parent.resetFilter() ;
           else { // ASSUMING filter is in init state ! (because when not // TODO $$$$$$$$$$$ this isn't true anymore .... when passing filter arguments in url !!
