@@ -75,7 +75,7 @@ def fix_content(buffer):
 processing = 0
 
 # timeout : kill oo
-PROCESSING_TIMEOUT = 20.0
+PROCESSING_TIMEOUT = 120.0
 
 def oo_process_controller(code):
     """
@@ -84,7 +84,7 @@ def oo_process_controller(code):
     global processing
     logging.info('oo_process_controller')
     if processing == code:
-        logging.error('--> oo_process_controller : killing !')
+        logging.error('--> oo_process_controller timeout %s: killing !' %PROCESSING_TIMEOUT)
         kill_oo()        
 
 def kill_oo():
