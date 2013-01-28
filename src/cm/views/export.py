@@ -81,8 +81,9 @@ def content_export2(request, content, title, content_format, format, use_pandoc,
               try:
                 export_content = converter.convert_from_html(fix_content, format)
               except:
-                from cm.converters.oo_converters import combine_css_body                
-                fix_content = combine_css_body(content, '')
+                if content_format == 'html':
+                  from cm.converters.oo_converters import combine_css_body                
+                  fix_content = combine_css_body(content, '')
                 from cm.converters.oo_converters import convert_html as oo_convert                
                 export_content = oo_convert(fix_content, format)
             else:
