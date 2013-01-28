@@ -449,15 +449,11 @@ Sync.prototype = {
             gIComments.activate(commentDbIds[0]) ;
             var scopeStart = CY.get(".c-id-"+commentDbIds[0]) ;
             if (scopeStart && !scopeStart.inViewportRegion()) { // scopeStart could be null when comment has no scope
-              // Since scrollIntoView scroll the embed iframe *and* the parent window
-              // save the position of the toolbar
-              if (parent)
-                window_pos = parent.document.getElementById('outer-north').scrollTop
               scopeStart.scrollIntoView(true) ;
               // Since scrollIntoView scroll the embed ifram *and* the parent window
               // restore the position of the toolbar
-              if (window_pos)
-                parent.document.getElementById('outer-north').scrollTop(window_pos) ;
+              if (parent)
+                parent.document.getElementById('outer-north').scrollIntoView(true) ;
             }
           }
         }
