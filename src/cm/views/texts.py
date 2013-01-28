@@ -401,7 +401,7 @@ def text_export(request, key, format, download, whichcomments, withcolor, admink
         marked_content = insert_comment_markers(wrapped_text_version, comments, with_markers, with_color)
         # Prepends title
         marked_content = "<h1>%s</h1>%s" %(text_version.title, marked_content)
-        viewable_comments = comments_thread(request, text_version, text) 
+        viewable_comments = [x for x in comments_thread(request, text_version, text) if x in comments]
         extended_comments = {}
         nb_children = {}
         for cc in viewable_comments :
