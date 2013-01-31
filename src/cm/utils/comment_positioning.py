@@ -65,7 +65,6 @@ def compute_new_comment_positions(old_content, old_format, new_content, new_form
     for cc in commentList:        
         if cc.valid:
             for id in xrange(len(span_starts_new.keys())):
-                if (span_starts_new.get(id)):
                 start = span_starts_new.get(id, 0)
                 end = span_starts_new.get(id+1, sys.maxint)
 
