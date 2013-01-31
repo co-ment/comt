@@ -65,8 +65,10 @@ def compute_new_comment_positions(old_content, old_format, new_content, new_form
     for cc in commentList:        
         if cc.valid:
             for id in xrange(len(span_starts_new.keys())):
-                start = span_starts_new.get(id)
+                if (span_starts_new.get(id)):
+                start = span_starts_new.get(id, 0)
                 end = span_starts_new.get(id+1, sys.maxint)
+                if (not(start) and cc.computed_start_offset >= start and cc.computed_start_offset < end):
 
                 # adjust start                
                 if cc.computed_start_offset >= start and cc.computed_start_offset < end:
