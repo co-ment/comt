@@ -195,7 +195,9 @@ def _text_create_import(request, createForm):
       # Process comments.
       if soup.co_ment_text.comments:
         comments_ids_map = {}
-        for imported_comment in soup.co_ment_text.comments.findAll('comment'):
+        all_comments = soup.co_ment_text.comments.findAll('comment')
+        # Sort by id in order to have parent processed before reply_to
+        for imported_comment in sorted(all_comments, key=lambda cid: cid.id.renderContents()):
           # Creates each comment.
           comment = Comment.objects.create(
               text_version=text.get_latest_version(),
