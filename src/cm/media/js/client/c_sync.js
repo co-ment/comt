@@ -225,7 +225,8 @@ Sync.prototype = {
   },
   
   saveComment : function(formId) {
-    this._saveComment("addComment", formId) ;
+    if (readyForAction())
+      this._saveComment("addComment", formId) ;
   },
   
   removeComment : function(iComment) {
