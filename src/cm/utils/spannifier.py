@@ -7,8 +7,8 @@ from BeautifulSoup import BeautifulSoup, Comment
 def get_text_nodes(soup):
     return soup(text=lambda text:not isinstance(text, Comment))
 
-def is_real_text_node(textNode):
-    if textNode.string == "\n":
+def is_real_text_node(textNode, nolinefeed=True):
+    if nolinefeed and textNode.string == "\n":
       return False
     return not textNode.findParent('style') 
 
@@ -17,7 +17,7 @@ def get_the_soup(input):
      
 from cm.utils.cache import memoize, dj_memoize
 @dj_memoize
-def spannify(input):
+def spannify(input, nolinefeed=True):
     """ 
     wrap textNodes in spans 
     """
@@ -32,7 +32,7 @@ def spannify(input):
     span_starts = {}
     for i in xrange(len(textNodes)):
         textNode = textNodes[i]
-        if is_real_text_node(textNode) :
+        if is_real_text_node(textNode, nolinefeed) :
             textNode.replaceWith('<span id="sv_' + str(i) + '" class="c-s"><span id="sv-' + str(i) + '" class="c-count-0 c-c">' + textNode.string + '</span></span>')
             span_starts[i] = len(''.join(textNodes_content))
             textNodes_content.append(textNode.string)

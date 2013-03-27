@@ -16,8 +16,8 @@ def compute_new_comment_positions(old_content, old_format, new_content, new_form
     previousVersionContent = pandoc_convert(old_content, old_format, 'html')
     newVersionContent = pandoc_convert(new_content, new_format, 'html')
 
-    _, previous_char_list, span_starts_previous = spannify(previousVersionContent)
-    _, new_char_list, span_starts_new = spannify(newVersionContent)
+    _, previous_char_list, span_starts_previous = spannify(previousVersionContent, False)
+    _, new_char_list, span_starts_new = spannify(newVersionContent, False)
     
     sm = SequenceMatcher(None, previous_char_list, new_char_list)
     
