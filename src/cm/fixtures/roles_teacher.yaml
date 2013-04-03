@@ -27,7 +27,8 @@
   fields:
     name: "Individual student"
     description: "" 
-    permissions: [52, 11, 31, 33, 35]
+    permissions: [52, 11, 31, 33, 35, 38]
+# can_edit_comment_own  38
 # can_delete_comment_own	33
 # can_view_comment_own		35
 # can_create_comment		31
