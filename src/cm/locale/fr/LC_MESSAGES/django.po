@@ -2282,7 +2282,7 @@ msgstr "Intitulé pour la cinquième catégorie de commentaires"
 
 #: models.py:266 models.py:267 models.py:268 models.py:269 models.py:270 views/site.py:192 views/site.py:198 views/site.py:204 views/site.py:210 views/site.py:216
 msgid "Paragraphs including at least one comment of this category will have a vertical bar with this color: "
-msgstr "Paragraphes dont au moins un commentaire de cette catégorie auront une barre verticale avec cette couleur : "
+msgstr "Les paragraphes comprenant au moins un commentaire de cette catégorie auront une barre verticale avec cette couleur : "
 
 #: models.py:266 models.py:267 models.py:268 models.py:269 models.py:270
 msgid "Leave blank to use the value configured for the workspace."
