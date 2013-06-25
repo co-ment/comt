@@ -26,6 +26,9 @@ import pickle
 from django.db import connection
 from datetime import datetime
 
+DEFAULT_INPUT_FORMAT = getattr(settings, 'DEFAULT_INPUT_FORMAT', DEFAULT_INPUT_FORMAT_PANDOC)
+CHOICES_INPUT_FORMATS = getattr(settings, 'CHOICES_INPUT_FORMATS', CHOICES_INPUT_FORMATS_PANDOC)
+
 class TextManager(Manager):
     def create_text(self, title, format, content, note, name, email, tags, user=None, state='approved', **kwargs):
         content = on_content_receive(content, format)
@@ -145,115 +148,6 @@ class Text(PermanentModel, AuthorModel):
         
     def __unicode__(self):
         return self.title    
-
-DEFAULT_INPUT_FORMAT = getattr(settings, 'DEFAULT_INPUT_FORMAT', DEFAULT_INPUT_FORMAT_PANDOC)
-CHOICES_INPUT_FORMATS = getattr(settings, 'CHOICES_INPUT_FORMATS', CHOICES_INPUT_FORMATS_PANDOC)
-
-class TextVersionManager(KeyManager):
-
-    def duplicate(self, text_version, duplicate_comments=True):
-        old_comment_set = set(text_version.comment_set.all())
-        text_version.id = None
-        
-        # generate new key
-        text_version.key = self._gen_key()
-        text_version.adminkey = self._gen_adminkey()
-        
-        text_version.save()
-        
-        duplicate_text_version = text_version
-        
-        if duplicate_comments:
-            old_comment_map = {}
-            while len(old_comment_set):
-                for c in old_comment_set:
-                    if not c.reply_to or c.reply_to.id in old_comment_map:
-                        old_id = c.id
-                        old_comment_set.remove(c)
-                        reply_to = None
-                        if c.reply_to:                            
-                            reply_to = old_comment_map[c.reply_to.id]  
-                        c2 = Comment.objects.duplicate(c, duplicate_text_version, reply_to, keep_dates=True)
-                        old_comment_map[old_id] = c2
-                        break
-                 
-        return duplicate_text_version
-        
-class TextVersion(AuthorModel, KeyModel):
-    modified = models.DateTimeField(auto_now=True)
-    created = models.DateTimeField(auto_now_add=True)
-
-    title = models.TextField(ugettext_lazy("Title"))
-    format = models.CharField(ugettext_lazy("Format"), max_length=20, blank=False, default=DEFAULT_INPUT_FORMAT, choices=CHOICES_INPUT_FORMATS)
-    content = models.TextField(ugettext_lazy("Content"))
-    tags = TagField(ugettext_lazy("Tags"), max_length=1000)
-
-    note = models.CharField(ugettext_lazy("Note"), max_length=100, null=True, blank=True)
-
-    mod_posteriori = models.BooleanField(ugettext_lazy('Moderation a posteriori?'), default=True)
-
-    from django.utils.safestring import mark_safe
-
-    category_1 = models.CharField(ugettext_lazy("Label for the first category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #1523f4">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace.") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), max_length=20, null=True, blank=True, default=ApplicationConfiguration['workspace_category_1'])
-    category_2 = models.CharField(ugettext_lazy("Label for the second category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #f4154f">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace. ") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), max_length=20, null=True, blank=True, default=ApplicationConfiguration['workspace_category_2'])
-    category_3 = models.CharField(ugettext_lazy("Label for the third category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #09ff09">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace. ") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), max_length=20, null=True, blank=True, default=ApplicationConfiguration['workspace_category_3'])
-    category_4 = models.CharField(ugettext_lazy("Label for the fourth category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #bc39cf">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace. ") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), max_length=20, null=True, blank=True, default=ApplicationConfiguration['workspace_category_4'])
-    category_5 = models.CharField(ugettext_lazy("Label for the fifth category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #ffbd08">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace. ") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), max_length=20, null=True, blank=True, default=ApplicationConfiguration['workspace_category_5'])
-
-    text = models.ForeignKey("Text")
-
-    objects = TextVersionManager()
-    
-    def get_content(self, format='html'):
-        return pandoc_convert(self.content, self.format, format)
-
-    def get_comments(self):
-        "Warning: data access without security"
-        return self.comment_set.filter(reply_to=None, deleted=False)
-
-    def get_replies(self):
-        "Warning: data access without security"
-        return self.comment_set.filter(~Q(reply_to == None), Q(deleted=False))
-    
-    def __unicode__(self):
-        return '<%d> %s' % (self.id, self.title)    
-
-    def edit(self, new_title, new_format, new_content, new_tags=None, new_note=None, keep_comments=True, cancel_modified_scopes=True):
-        new_content = on_content_receive(new_content, new_format) 
-        if not keep_comments :
-            self.comment_set.all().delete()
-        elif self.content != new_content or new_format != self.format:
-            comments = self.get_comments() ;
-            tomodify_comments, toremove_comments = compute_new_comment_positions(self.content, self.format, new_content, new_format, comments)
-            [comment.save(keep_dates=True) for comment in tomodify_comments]
-            if cancel_modified_scopes :
-                [comment.remove_scope() for comment in toremove_comments]
-            else :
-                [comment.delete() for comment in toremove_comments]
-                
-        self.title = new_title
-        if new_tags:
-            self.tags = new_tags
-        if new_note:
-            self.note = new_note
-        self.content = new_content
-        self.format = new_format
-        self.save()
-
-    def get_next_version(self):        
-        other_versions = TextVersion.objects.filter(text__exact=self.text).order_by('created').filter(created__gt=self.created)
-        return other_versions[0] if other_versions else None 
-        if other_versions:
-            return 
-        else:
-            return None
-
-    def get_previous_version(self):
-        other_versions = TextVersion.objects.filter(text__exact=self.text).order_by('-created').filter(created__lt=self.created)
-        return other_versions[0] if other_versions else None
-
-    def get_version_number(self):
-        return TextVersion.objects.filter(text__exact=self.text).order_by('created').filter(created__lte=self.created).count()
 
 class CommentManager(Manager):
     
@@ -418,6 +312,112 @@ class Configuration(models.Model):
         return '%s: %s' % (self.key, self.value)    
     
 ApplicationConfiguration = Configuration.objects     
+
+class TextVersionManager(KeyManager):
+
+    def duplicate(self, text_version, duplicate_comments=True):
+        old_comment_set = set(text_version.comment_set.all())
+        text_version.id = None
+        
+        # generate new key
+        text_version.key = self._gen_key()
+        text_version.adminkey = self._gen_adminkey()
+        
+        text_version.save()
+        
+        duplicate_text_version = text_version
+        
+        if duplicate_comments:
+            old_comment_map = {}
+            while len(old_comment_set):
+                for c in old_comment_set:
+                    if not c.reply_to or c.reply_to.id in old_comment_map:
+                        old_id = c.id
+                        old_comment_set.remove(c)
+                        reply_to = None
+                        if c.reply_to:                            
+                            reply_to = old_comment_map[c.reply_to.id]  
+                        c2 = Comment.objects.duplicate(c, duplicate_text_version, reply_to, keep_dates=True)
+                        old_comment_map[old_id] = c2
+                        break
+                 
+        return duplicate_text_version
+        
+class TextVersion(AuthorModel, KeyModel):
+    modified = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    title = models.TextField(ugettext_lazy("Title"))
+    format = models.CharField(ugettext_lazy("Format"), max_length=20, blank=False, default=DEFAULT_INPUT_FORMAT, choices=CHOICES_INPUT_FORMATS)
+    content = models.TextField(ugettext_lazy("Content"))
+    tags = TagField(ugettext_lazy("Tags"), max_length=1000)
+
+    note = models.CharField(ugettext_lazy("Note"), max_length=100, null=True, blank=True)
+
+    mod_posteriori = models.BooleanField(ugettext_lazy('Moderation a posteriori?'), default=True)
+
+    from django.utils.safestring import mark_safe
+
+    category_1 = models.CharField(ugettext_lazy("Label for the first category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #1523f4">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace.") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), max_length=20, null=True, blank=True, default=ApplicationConfiguration['workspace_category_1'])
+    category_2 = models.CharField(ugettext_lazy("Label for the second category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #f4154f">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace. ") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), max_length=20, null=True, blank=True, default=ApplicationConfiguration['workspace_category_2'])
+    category_3 = models.CharField(ugettext_lazy("Label for the third category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #09ff09">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace. ") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), max_length=20, null=True, blank=True, default=ApplicationConfiguration['workspace_category_3'])
+    category_4 = models.CharField(ugettext_lazy("Label for the fourth category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #bc39cf">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace. ") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), max_length=20, null=True, blank=True, default=ApplicationConfiguration['workspace_category_4'])
+    category_5 = models.CharField(ugettext_lazy("Label for the fifth category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #ffbd08">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace. ") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), max_length=20, null=True, blank=True, default=ApplicationConfiguration['workspace_category_5'])
+
+    text = models.ForeignKey("Text")
+
+    objects = TextVersionManager()
+    
+    def get_content(self, format='html'):
+        return pandoc_convert(self.content, self.format, format)
+
+    def get_comments(self):
+        "Warning: data access without security"
+        return self.comment_set.filter(reply_to=None, deleted=False)
+
+    def get_replies(self):
+        "Warning: data access without security"
+        return self.comment_set.filter(~Q(reply_to == None), Q(deleted=False))
+    
+    def __unicode__(self):
+        return '<%d> %s' % (self.id, self.title)    
+
+    def edit(self, new_title, new_format, new_content, new_tags=None, new_note=None, keep_comments=True, cancel_modified_scopes=True):
+        new_content = on_content_receive(new_content, new_format) 
+        if not keep_comments :
+            self.comment_set.all().delete()
+        elif self.content != new_content or new_format != self.format:
+            comments = self.get_comments() ;
+            tomodify_comments, toremove_comments = compute_new_comment_positions(self.content, self.format, new_content, new_format, comments)
+            [comment.save(keep_dates=True) for comment in tomodify_comments]
+            if cancel_modified_scopes :
+                [comment.remove_scope() for comment in toremove_comments]
+            else :
+                [comment.delete() for comment in toremove_comments]
+                
+        self.title = new_title
+        if new_tags:
+            self.tags = new_tags
+        if new_note:
+            self.note = new_note
+        self.content = new_content
+        self.format = new_format
+        self.save()
+
+    def get_next_version(self):        
+        other_versions = TextVersion.objects.filter(text__exact=self.text).order_by('created').filter(created__gt=self.created)
+        return other_versions[0] if other_versions else None 
+        if other_versions:
+            return 
+        else:
+            return None
+
+    def get_previous_version(self):
+        other_versions = TextVersion.objects.filter(text__exact=self.text).order_by('-created').filter(created__lt=self.created)
+        return other_versions[0] if other_versions else None
+
+    def get_version_number(self):
+        return TextVersion.objects.filter(text__exact=self.text).order_by('created').filter(created__lte=self.created).count()
 
 class AttachmentManager(KeyManager):
     def create_attachment(self, text_version, filename, data):
