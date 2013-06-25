@@ -677,7 +677,9 @@ f_updateFilterData = function(newFilterData) {
     $("#filter_cat").append($("<option name='c_f2_cat_all' value=''>" + all + "</option>")) ;
     for (var  i=0, ilen=newFilterData['categories'].length; i < ilen ; i++) {
       var item = newFilterData['categories'][i] ;
-      $("#filter_cat").append($("<option name='c_f2_cat_"+ item.cat +"' value='"+ gettext(item.cat) +"'>" + categories[item.cat] +" ("+item.nb_comments+")</option>")) ;
+      if (categories[item.cat] != null) {
+        $("#filter_cat").append($("<option name='c_f2_cat_"+ item.cat +"' value='"+ gettext(item.cat) +"'>" + categories[item.cat] +" ("+item.nb_comments+")</option>")) ;
+      }
     }
     $("#filter_cat option[name="+selectedCatOption+"]").attr("selected", true);
   }
