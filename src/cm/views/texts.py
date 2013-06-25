@@ -248,7 +248,7 @@ def text_view_comments(request, key, version_key=None, adminkey=None):
     from cm.models import ApplicationConfiguration
     categories = {}
     for i in range(1, 6):
-      if text_version.__dict__['category_' + str(i)] != None and text_version.__dict__['category_' + str(i)].lower() != 'none':
+      if text_version.__dict__['category_' + str(i)] == None or text_version.__dict__['category_' + str(i)].lower() != 'none':
         if text_version.__dict__['category_' + str(i)] != None and text_version.__dict__['category_' + str(i)] != '':
           categories[i] = text_version.__dict__['category_' + str(i)]
         else:
