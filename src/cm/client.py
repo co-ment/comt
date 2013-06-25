@@ -75,6 +75,7 @@ class RequestComplexEncoder(simplejson.JSONEncoder):
                    'content':comment.content, 
                    'content_html':comment.content_html, 
                    'tags': ', '.join(parse_tag_input(comment.tags)), 
+                   'category': comment.category,
                    'format': comment.format, 
                    'start_wrapper' : comment.start_wrapper, 
                    'end_wrapper' : comment.end_wrapper,
@@ -113,6 +114,8 @@ def read_comment_args(request):
     
     tags = request.POST['tags']
 
+    category = request.POST.get('category', 0);
+
     reply_to_id = request.POST.get('reply_to_id', None)
     
     format = request.POST['format'] 
@@ -131,7 +134,7 @@ def read_comment_args(request):
     if end_offset :
         end_offset = int(end_offset.strip())
     
-    return name, email, title, content, tags, reply_to_id, format, start_wrapper, end_wrapper, start_offset, end_offset
+    return name, email, title, content, tags, category, reply_to_id, format, start_wrapper, end_wrapper, start_offset, end_offset
 
 def validate_comment_args(name, email, title, content, tags):
     errors = {}
@@ -176,7 +179,7 @@ def edit_comment(request, key, comment_key):
     if not change_state : # moderation action
         change_scope = request.POST.get('change_scope', None)
     
-        name, email, title, content, tags, reply_to_id, format, start_wrapper, end_wrapper, start_offset, end_offset = read_comment_args(request)
+        name, email, title, content, tags, category, reply_to_id, format, start_wrapper, end_wrapper, start_offset, end_offset = read_comment_args(request)
     
         errors = validate_comment_args(name, email, title, content, tags)
          
@@ -202,6 +205,7 @@ def edit_comment(request, key, comment_key):
             comment.content = content
             comment.content_html = content_html
             comment.tags = tags
+            comment.category = category
 
             if change_scope :
                 comment.start_wrapper = start_wrapper
@@ -237,7 +241,7 @@ def add_comment(request, key, version_key):
 #    if self.request.user.is_anonymous() : # accessing via an admin url ?
 #    and comment.user == self.request.user
     user = None if request.user.is_anonymous() else request.user 
-    name, email, title, content, tags, reply_to_id, format, start_wrapper, end_wrapper, start_offset, end_offset = read_comment_args(request)
+    name, email, title, content, tags, category, reply_to_id, format, start_wrapper, end_wrapper, start_offset, end_offset = read_comment_args(request)
     errors = {} 
     errors = validate_comment_args(name, email, title, content, tags)
 
@@ -261,7 +265,7 @@ def add_comment(request, key, version_key):
         text_version = TextVersion.objects.get(key=version_key)
         
         comment_state = 'approved' if text_version.mod_posteriori else 'pending'
-        comment = Comment.objects.create(state=comment_state, text_version=text_version, user=user, name=name, email=email, title=title, content=content, content_html=content_html, tags = tags, start_wrapper = start_wrapper, end_wrapper = end_wrapper, start_offset = start_offset, end_offset = end_offset, reply_to=reply_to)
+        comment = Comment.objects.create(state=comment_state, text_version=text_version, user=user, name=name, email=email, title=title, content=content, content_html=content_html, tags = tags, category = category, start_wrapper = start_wrapper, end_wrapper = end_wrapper, start_offset = start_offset, end_offset = end_offset, reply_to=reply_to)
         
         ask_for_notification = True
         if user : 
@@ -347,12 +351,17 @@ def get_filter_datas(request, text_version, text):
     comment_ids = [c.id for c in allowed_comments]
     tags = list(Tag.objects.filter(items__content_type = ContentType.objects.get_for_model(Comment),items__object_id__in=comment_ids).values("name").annotate(nb_comments=Count('id')).distinct().order_by('name'))
 
+    # categories
+    categories = []
+    for category in [0, 1, 2, 3, 4, 5] :
+        categories.append({'cat' : category, 'nb_comments':allowed_comments.filter(category = category).count()})
+    
     # states
     states = []
     for state in comment_states :
         states.append({'state' : state, 'nb_comments':allowed_comments.filter(state = state).count()})
     
-    return {'names':names, 'dates':dates, 'tags':tags, 'states':states}
+    return {'names':names, 'dates':dates, 'tags':tags, 'categories':categories, 'states':states}
 
 #def get_ordered_ids(text_version_id):
 #    comments_and_replies = Comment.objects.filter(text_version__id=text_version_id)

@@ -634,3 +634,18 @@ msgstr "Таблица на съдържанието"
 #~ msgid_plural "&nbsp;replies"
 #~ msgstr[0] "отговор"
 #~ msgstr[1] "отговор"
+
+#: media/js/client/c_icomment.js:330
+#, fuzzy
+msgid "category"
+msgstr "категория"
+
+#: media/js/client/c_interface_form.js:52
+#, fuzzy
+msgid "Category:"
+msgstr "Категория:"
+
+#: media/js/site/f_text_view_frame.js:123
+#, fuzzy
+msgid "Categories"
+msgstr "Категории"

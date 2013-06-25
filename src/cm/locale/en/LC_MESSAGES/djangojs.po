@@ -618,3 +618,15 @@ msgstr ""
 #: media/js/client/c_toc.js:45
 msgid "Table of contents"
 msgstr ""
+
+#: media/js/client/c_icomment.js:330
+msgid "category"
+msgstr ""
+
+#: media/js/client/c_interface_form.js:52
+msgid "Category:"
+msgstr ""
+
+#: media/js/site/f_text_view_frame.js:123
+msgid "Categories"
+msgstr ""

@@ -8,6 +8,7 @@ instanciateICommentForm = function() {
       'titleInputId':CY.guid(),
       'contentInputId':CY.guid(),
       'tagsInputId':CY.guid(),
+      'categoryInputId':CY.guid(),
       'formatInputId':CY.guid(),
       'startWrapperInputId':CY.guid(),
       'endWrapperInputId':CY.guid(),

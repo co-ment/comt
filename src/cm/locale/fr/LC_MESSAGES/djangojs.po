@@ -639,3 +639,15 @@ msgstr "Table des matières"
 #~ msgid_plural "&nbsp;replies"
 #~ msgstr[0] "&nbsp;réponse"
 #~ msgstr[1] "&nbsp;réponses"
+
+#: media/js/client/c_icomment.js:330
+msgid "category"
+msgstr "catégorie"
+
+#: media/js/client/c_interface_form.js:52
+msgid "Category:"
+msgstr "Catégorie :"
+
+#: media/js/site/f_text_view_frame.js:123
+msgid "Categories"
+msgstr "Catégories"

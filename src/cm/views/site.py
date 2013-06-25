@@ -188,9 +188,39 @@ class SettingsForm(BaseSettingsForm):
                                              required=False,
                                              )
 
+    workspace_category_1 = forms.CharField(label=ugettext_lazy("Label for the first category of comments"),
+                                        help_text=mark_safe(ugettext_lazy("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #1523f4">&nbsp;</span>'),
+                                        widget=forms.TextInput,
+                                        required=False,
+                                        max_length=20,
+                                        )
+    workspace_category_2 = forms.CharField(label=ugettext_lazy("Label for the second category of comments"),
+                                        help_text=mark_safe(ugettext_lazy("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #f4154f">&nbsp;</span>'),
+                                        widget=forms.TextInput,
+                                        required=False,
+                                        max_length=20,
+                                        )
+    workspace_category_3 = forms.CharField(label=ugettext_lazy("Label for the third category of comments"),
+                                        help_text=mark_safe(ugettext_lazy("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #09ff09">&nbsp;</span>'),
+                                        widget=forms.TextInput,
+                                        required=False,
+                                        max_length=20,
+                                        )
+    workspace_category_4 = forms.CharField(label=ugettext_lazy("Label for the fourth category of comments"),
+                                        help_text=mark_safe(ugettext_lazy("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #bc39cf">&nbsp;</span>'),
+                                        widget=forms.TextInput,
+                                        required=False,
+                                        max_length=20,
+                                        )
+    workspace_category_5 = forms.CharField(label=ugettext_lazy("Label for the fifth category of comments"),
+                                        help_text=mark_safe(ugettext_lazy("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #ffbd08">&nbsp;</span>'),
+                                        widget=forms.TextInput,
+                                        required=False,
+                                        max_length=20,
+                                        )
 
     # fields to save in the Configuration objects
-    conf_fields = ['workspace_name', 'workspace_tagline', 'workspace_registration', 'workspace_registration_moderation', 'workspace_role_model']
+    conf_fields = ['workspace_name', 'workspace_tagline', 'workspace_registration', 'workspace_registration_moderation', 'workspace_role_model', 'workspace_category_1', 'workspace_category_2', 'workspace_category_3', 'workspace_category_4', 'workspace_category_5']
 
 
 @has_global_perm('can_manage_workspace')

@@ -26,6 +26,75 @@ import pickle
 from django.db import connection
 from datetime import datetime
 
+# default conf values
+DEFAULT_CONF = {
+                'workspace_name' : 'Workspace',
+                'site_url' : settings.SITE_URL,
+                'email_from' : settings.DEFAULT_FROM_EMAIL,
+                }
+
+from cm.role_models import change_role_model
+
+class ConfigurationManager(models.Manager):
+    def set_workspace_name(self, workspace_name):
+        if workspace_name:
+            self.set_key('workspace_name', workspace_name)
+
+    def get_key(self, key, default_value=None):
+        try:
+            return self.get(key=key).value
+        except Configuration.DoesNotExist:
+            return DEFAULT_CONF.get(key, default_value)
+
+    def del_key(self, key):
+        try:
+            self.get(key=key).delete()
+        except Configuration.DoesNotExist:
+            return None
+        
+    def set_key(self, key, value):
+        conf, created = self.get_or_create(key=key)
+        if created or conf.value != value:
+            conf.value = value
+            conf.save()
+            if key == 'workspace_role_model':
+                change_role_model(value)
+
+    def __getitem__(self, key):
+        if not key.startswith('f_'):
+            return self.get_key(key, None)
+        else:
+            return getattr(self,key)()
+    
+    def f_get_logo_url(self):
+        key = self.get_key('workspace_logo_file_key', None)
+        if key:
+            attach = Attachment.objects.get(key=key)
+            return attach.data.url
+        else:
+            return None 
+    
+import base64
+
+class Configuration(models.Model):
+    key = models.TextField(blank=False) # , unique=True cannot be added: creates error on mysql (?)
+    raw_value = models.TextField(blank=False)
+    
+    def get_value(self):
+        return pickle.loads(base64.b64decode(self.raw_value.encode('utf8')))
+        
+    def set_value(self, value):        
+        self.raw_value = base64.b64encode(pickle.dumps(value, 0)).encode('utf8')
+                
+    value = property(get_value, set_value)
+                
+    objects = ConfigurationManager()
+    
+    def __unicode__(self):
+        return '%s: %s' % (self.key, self.value)    
+    
+ApplicationConfiguration = Configuration.objects     
+
 class TextManager(Manager):
     def create_text(self, title, format, content, note, name, email, tags, user=None, state='approved', **kwargs):
         content = on_content_receive(content, format)
@@ -192,6 +261,14 @@ class TextVersion(AuthorModel, KeyModel):
 
     mod_posteriori = models.BooleanField(ugettext_lazy('Moderation a posteriori?'), default=True)
 
+    from django.utils.safestring import mark_safe
+
+    category_1 = models.CharField(ugettext_lazy("Label for the first category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #1523f4">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace.") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), max_length=20, null=True, blank=True, default=ApplicationConfiguration['workspace_category_1'])
+    category_2 = models.CharField(ugettext_lazy("Label for the second category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #f4154f">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace. ") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), max_length=20, null=True, blank=True, default=ApplicationConfiguration['workspace_category_2'])
+    category_3 = models.CharField(ugettext_lazy("Label for the third category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #09ff09">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace. ") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), max_length=20, null=True, blank=True, default=ApplicationConfiguration['workspace_category_3'])
+    category_4 = models.CharField(ugettext_lazy("Label for the fourth category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #bc39cf">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace. ") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), max_length=20, null=True, blank=True, default=ApplicationConfiguration['workspace_category_4'])
+    category_5 = models.CharField(ugettext_lazy("Label for the fifth category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #ffbd08">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace. ") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), max_length=20, null=True, blank=True, default=ApplicationConfiguration['workspace_category_5'])
+
     text = models.ForeignKey("Text")
 
     objects = TextVersionManager()
@@ -279,6 +356,8 @@ class Comment(PermanentModel, AuthorModel):
     format = models.CharField(_("Format:"), max_length=20, blank=False, default=DEFAULT_INPUT_FORMAT, choices=CHOICES_INPUT_FORMATS)
 
     tags = TagField()
+
+    category = models.PositiveSmallIntegerField(default=0)
         
     start_wrapper = models.IntegerField(null=True, blank=True)
     end_wrapper = models.IntegerField(null=True, blank=True)
@@ -340,75 +419,6 @@ class Comment(PermanentModel, AuthorModel):
         
 # http://docs.djangoproject.com/en/dev/topics/files/#topics-files
 
-# default conf values
-DEFAULT_CONF = {
-                'workspace_name' : 'Workspace',
-                'site_url' : settings.SITE_URL,
-                'email_from' : settings.DEFAULT_FROM_EMAIL,
-                }
-
-from cm.role_models import change_role_model
-
-class ConfigurationManager(models.Manager):
-    def set_workspace_name(self, workspace_name):
-        if workspace_name:
-            self.set_key('workspace_name', workspace_name)
-
-    def get_key(self, key, default_value=None):
-        try:
-            return self.get(key=key).value
-        except Configuration.DoesNotExist:
-            return DEFAULT_CONF.get(key, default_value)
-
-    def del_key(self, key):
-        try:
-            self.get(key=key).delete()
-        except Configuration.DoesNotExist:
-            return None
-        
-    def set_key(self, key, value):
-        conf, created = self.get_or_create(key=key)
-        if created or conf.value != value:
-            conf.value = value
-            conf.save()
-            if key == 'workspace_role_model':
-                change_role_model(value)
-
-    def __getitem__(self, key):
-        if not key.startswith('f_'):
-            return self.get_key(key, None)
-        else:
-            return getattr(self,key)()
-    
-    def f_get_logo_url(self):
-        key = self.get_key('workspace_logo_file_key', None)
-        if key:
-            attach = Attachment.objects.get(key=key)
-            return attach.data.url
-        else:
-            return None 
-    
-import base64
-
-class Configuration(models.Model):
-    key = models.TextField(blank=False) # , unique=True cannot be added: creates error on mysql (?)
-    raw_value = models.TextField(blank=False)
-    
-    def get_value(self):
-        return pickle.loads(base64.b64decode(self.raw_value.encode('utf8')))
-        
-    def set_value(self, value):        
-        self.raw_value = base64.b64encode(pickle.dumps(value, 0)).encode('utf8')
-                
-    value = property(get_value, set_value)
-                
-    objects = ConfigurationManager()
-    
-    def __unicode__(self):
-        return '%s: %s' % (self.key, self.value)    
-    
-ApplicationConfiguration = Configuration.objects     
-
 class AttachmentManager(KeyManager):
     def create_attachment(self, text_version, filename, data):
         attach = self.create(text_version=text_version)
@@ -418,7 +428,7 @@ class AttachmentManager(KeyManager):
     
 class Attachment(KeyModel):
     data = models.FileField(upload_to="attachments/%Y/%m/%d/", max_length=1000)
-    text_version = models.ForeignKey(TextVersion, null=True)
+    text_version = models.ForeignKey(TextVersion, null=True, blank=True, default=None)
 
     objects = AttachmentManager()
     

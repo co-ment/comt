@@ -653,3 +653,18 @@ msgstr "Tabela de conteúdos"
 #~ msgstr[1] ""
 #~ "%(nb_comments)s os comentários serão removidos porque o texto a que eles "
 #~ "se referem foi alterado"
+
+#: media/js/client/c_icomment.js:330
+#, fuzzy
+msgid "category"
+msgstr "categoria"
+
+#: media/js/client/c_interface_form.js:52
+#, fuzzy
+msgid "Category:"
+msgstr "Categoria:"
+
+#: media/js/site/f_text_view_frame.js:123
+#, fuzzy
+msgid "Categories"
+msgstr "Categorias"

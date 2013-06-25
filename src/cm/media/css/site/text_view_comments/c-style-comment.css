@@ -28,7 +28,7 @@
     font-weight: bold;
 }
 
-.c-infos, .c-tags-infos, .c-state-actions,.c-iactions {
+.c-infos, .c-tags-infos, .c-cat, .c-state-actions,.c-iactions {
     font-size: 77%;
     color: #565656;
 }
@@ -158,8 +158,29 @@ span.c-content p {
 .icomment-header .c-infos,
 .icomment-header .c-state-actions,
 .icomment-header .c-state-actions,
-.icomment-header .c-tags {
+.icomment-header .c-tags,
+.icomment-header .c-cat-val {
   font: 11px/13px 'PT Sans', Verdana, sans-serif;
+}
+
+.icomment-header .c-cat-val.c-cat-1 {
+  color: #1523f4;
+}
+
+.icomment-header .c-cat-val.c-cat-2 {
+  color: #f4154f;
+}
+
+.icomment-header .c-cat-val.c-cat-3 {
+  color: #09ff09;
+}
+
+.icomment-header .c-cat-val.c-cat-4 {
+  color: #bc39cf;
+}
+
+.icomment-header .c-cat-val.c-cat-5 {
+  color: #ffbd08;
 }
 
 .icomment-body {

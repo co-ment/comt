@@ -1,4 +1,4 @@
-from south.management.commands.migrate import  Command
+from south.management.commands.migrate import  Command, list_migrations
 from south.db import DEFAULT_DB_ALIAS
 from south import migration
 import sys

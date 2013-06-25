@@ -376,6 +376,13 @@ Db.prototype = {
       filterTag = filterData['tag'] ;
     this.filterByTag(filterTag, cWithTagIds, rWithTagIds) ;
     
+    var cWithCatIds = [] ;
+    var rWithCatIds = [] ;
+    var filterCat = "" ;
+    if ('cat' in filterData)
+      filterCat = filterData['cat'] ;
+    this.filterByCat(filterCat, cWithCatIds, rWithCatIds) ;
+    
     var cWithStateIds = [] ;
     var rWithStateIds = [] ;
     var filterState = "" ;
@@ -389,14 +396,14 @@ Db.prototype = {
     // find intersections
     for (var i = 0, ilen = cWithNameIds.length ; i < ilen ; i++) {
       var id = cWithNameIds[i] ;
-      if ((CY.Array.indexOf(cAfterDateIds, id) != -1) && (CY.Array.indexOf(cWithTextIds,id) != -1) && (CY.Array.indexOf(cWithTagIds,id) != -1) && (CY.Array.indexOf(cWithStateIds,id) != -1)) {
+      if ((CY.Array.indexOf(cAfterDateIds, id) != -1) && (CY.Array.indexOf(cWithTextIds,id) != -1) && (CY.Array.indexOf(cWithTagIds,id) != -1) && (CY.Array.indexOf(cWithCatIds,id) != -1) && (CY.Array.indexOf(cWithStateIds,id) != -1)) {
         commentIds.push(id) ; 
       }
     }
     
     for (var i = 0, ilen = rWithNameIds.length ; i < ilen ; i++) {
       var id = rWithNameIds[i] ;
-      if ((CY.Array.indexOf(rAfterDateIds,id) != -1) && (CY.Array.indexOf(rWithTextIds,id) != -1) && (CY.Array.indexOf(rWithTagIds,id) != -1) && (CY.Array.indexOf(rWithStateIds,id) != -1)) {
+      if ((CY.Array.indexOf(rAfterDateIds,id) != -1) && (CY.Array.indexOf(rWithTextIds,id) != -1) && (CY.Array.indexOf(rWithTagIds,id) != -1) && (CY.Array.indexOf(rWithCatIds,id) != -1) && (CY.Array.indexOf(rWithStateIds,id) != -1)) {
         replyIds.push(id) ; 
       }
     }
@@ -463,6 +470,22 @@ Db.prototype = {
           cWithTagIds.push(comment.id);
         else 
           rWithTagIds.push(comment.id) ;
+      }
+    }
+  },
+
+  filterByCat : function(cat, cWithCatIds, rWithCatIds) {
+    for (var id in this.allCommentsByDbId) {
+      var comment = this.allCommentsByDbId[id] ;
+      if (cat == "" || comment.category == cat) { 
+        if (comment.reply_to_id == null) {
+          cWithCatIds.push(comment.id);
+          if (comment.replies.length) {
+            for (var reply in comment.replies) {
+              rWithCatIds.push(comment.replies[reply].id) ;
+            }
+          }
+        }
       }
     }
   },

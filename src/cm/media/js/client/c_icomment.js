@@ -326,6 +326,17 @@ IComment.prototype = {
     if (comment.tags == "")
       newTagNode.addClass('displaynone') ;
 
+    // CATEGORY
+    var newCatNode = CY.Node.create('<div class="c-cat">' + gettext("category") + ':&nbsp;<span class="c-cat-val c-cat-' + comment.category + '">' + categories[comment.category] + '</span></div>') ;
+    var prevCatNode = boundingBoxNode.query(".c-cat") ;
+    if (prevCatNode == null) 
+      boundingBoxNode.query('.icomment-header').appendChild(newCatNode) ;
+    else 
+      prevCatNode.get('parentNode').replaceChild(newCatNode, prevCatNode) ;
+    // NO CATEGORY ?
+    if (comment.category == 0) 
+      newCatNode.addClass('displaynone') ;
+
     // CONTENT
     var newContentNode = CY.Node.create('<span class="c-content">' + comment.content_html + '</span>') ;
     var prevContentNode = boundingBoxNode.query(".c-content") ;

@@ -644,3 +644,18 @@ msgstr "Tabla de contenidos"
 
 #~ msgid "Use padding to show discussion threads"
 #~ msgstr "Usar espacios en blanco para separar los diferentes hilos de debate"
+
+#: media/js/client/c_icomment.js:330
+#, fuzzy
+msgid "category"
+msgstr "categoría"
+
+#: media/js/client/c_interface_form.js:52
+#, fuzzy
+msgid "Category:"
+msgstr "Categoría:"
+
+#: media/js/site/f_text_view_frame.js:123
+#, fuzzy
+msgid "Categories"
+msgstr "Categorías"

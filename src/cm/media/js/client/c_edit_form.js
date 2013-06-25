@@ -14,6 +14,7 @@ showEditForm = function(iCommentHost) {
           'titleInputId':CY.guid(),
           'contentInputId':CY.guid(),
           'tagsInputId':CY.guid(),
+          'categoryInputId':CY.guid(),
           'formatInputId':CY.guid(),
           'startWrapperInputId':CY.guid(),
           'endWrapperInputId':CY.guid(),
@@ -56,8 +57,13 @@ showEditForm = function(iCommentHost) {
   CY.get("#"+gEdit['ids']['keyId']).set('value', comment.key) ;
 
   CY.get("#"+gEdit['ids']['changeScopeInputId']+" input").set('checked', false) ;
-  if (comment.reply_to_id != null) 
+  // Edit scope and category just for the first comment in a thread
+  // => hides these inputs for a reply.
+  if (comment.reply_to_id != null) {
     CY.get("#"+gEdit['ids']['changeScopeInputId']).addClass('displaynone')
+    CY.get("#"+gEdit['ids']['categoryInputId']).addClass('displaynone')
+    CY.get("#"+gEdit['ids']['categoryInputId']).ancestor().addClass('displaynone')
+  }
   changeScopeFormClick() ; // to adapt
 
   CY.get("#"+gEdit['ids']['nameInputId']).set('value', comment.name) ; 
@@ -72,6 +78,8 @@ showEditForm = function(iCommentHost) {
   CY.get("#"+gEdit['ids']['titleInputId']).set('value', comment['title']) ;
   CY.get("#"+gEdit['ids']['contentInputId']).set('value', comment['content']) ;
   CY.get("#"+gEdit['ids']['tagsInputId']).set('value', comment['tags']) ;
+  if ( CY.get("#"+gEdit['ids']['categoryInputId']))
+    CY.get("#"+gEdit['ids']['categoryInputId']).set('value', comment['category']) ;
   
   CY.get("#"+gEdit['ids']['formatInputId']).set('value',gConf['defaultCommentFormat']) ;// for now ...
   

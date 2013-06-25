@@ -2,6 +2,7 @@
 #textcontainer {
   font-size: 14px;
   line-height: 20px;
+  padding-left: 30px;
 }
   
 #textcontainer.modern {
@@ -94,4 +95,128 @@
   position: relative;
   top: -0.25em;
   font-size: 0.75em;
+}
+
+.cat1 {
+  box-shadow: -12px 0 0 0 white, -14px 0 0 0 #1523f4;
+}
+
+.cat2 {
+  box-shadow: -15px 0 0 0 white, -17px 0 0 0 #f4154f;
+}
+
+.cat3 {
+  box-shadow: -18px 0 0 0 white, -20px 0 0 0 #09ff09;
+}
+
+.cat4 {
+  box-shadow: -21px 0 0 0 white, -23px 0 0 0 #bc39cf;
+}
+
+.cat5 {
+  box-shadow: -24px 0 0 0 white, -26px 0 0 0 #ffbd08;
+}
+
+.cat1.cat2 {
+  box-shadow: -12px 0 0 0 white, -14px 0 0 0 #1523f4, -15px 0 0 0 white, -17px 0 0 0 #f4154f;
+}
+
+.cat1.cat3 {
+  box-shadow: -12px 0 0 0 white, -14px 0 0 0 #1523f4, -18px 0 0 0 white, -20px 0 0 0 #09ff09;
+}
+
+.cat1.cat4 {
+  box-shadow: -12px 0 0 0 white, -14px 0 0 0 #1523f4, -21px 0 0 0 white, -23px 0 0 0 #bc39cf;
+}
+
+.cat1.cat5 {
+  box-shadow: -12px 0 0 0 white, -14px 0 0 0 #1523f4, -24px 0 0 0 white, -26px 0 0 0 #ffbd08;
+}
+
+.cat2.cat3 {
+  box-shadow: -15px 0 0 0 white, -17px 0 0 0 #f4154f, -18px 0 0 0 white, -20px 0 0 0 #09ff09;
+}
+
+.cat2.cat4 {
+  box-shadow: -15px 0 0 0 white, -17px 0 0 0 #f4154f, -21px 0 0 0 white, -23px 0 0 0 #bc39cf;
+}
+
+.cat2.cat5 {
+  box-shadow: -15px 0 0 0 white, -17px 0 0 0 #f4154f, -24px 0 0 0 white, -26px 0 0 0 #ffbd08;
+}
+
+.cat3.cat4 {
+  box-shadow: -18px 0 0 0 white, -20px 0 0 0 #09ff09, -21px 0 0 0 white, -23px 0 0 0 #bc39cf;
+}
+
+.cat3.cat5 {
+  box-shadow: -18px 0 0 0 white, -20px 0 0 0 #09ff09, -24px 0 0 0 white, -26px 0 0 0 #ffbd08;
+}
+
+.cat4.cat5 {
+  box-shadow: -21px 0 0 0 white, -23px 0 0 0 #bc39cf, -24px 0 0 0 white, -26px 0 0 0 #ffbd08;
+}
+
+.cat1.cat2.cat3 {
+  box-shadow: -12px 0 0 0 white, -14px 0 0 0 #1523f4, -15px 0 0 0 white, -17px 0 0 0 #f4154f, -18px 0 0 0 white, -20px 0 0 0 #09ff09;
+}
+
+.cat1.cat2.cat4 {
+  box-shadow: -12px 0 0 0 white, -14px 0 0 0 #1523f4, -15px 0 0 0 white, -17px 0 0 0 #f4154f, -21px 0 0 0 white, -23px 0 0 0 #bc39cf;
+}
+
+.cat1.cat2.cat5 {
+  box-shadow: -12px 0 0 0 white, -14px 0 0 0 #1523f4, -15px 0 0 0 white, -17px 0 0 0 #f4154f, -24px 0 0 0 white, -26px 0 0 0 #ffbd08;
+}
+
+.cat1.cat3.cat4 {
+  box-shadow: -12px 0 0 0 white, -14px 0 0 0 #1523f4, -18px 0 0 0 white, -20px 0 0 0 #09ff09, -21px 0 0 0 white, -23px 0 0 0 #bc39cf;
+}
+
+.cat1.cat3.cat5 {
+  box-shadow: -12px 0 0 0 white, -14px 0 0 0 #1523f4, -18px 0 0 0 white, -20px 0 0 0 #09ff09, -24px 0 0 0 white, -26px 0 0 0 #ffbd08;
+}
+
+.cat1.cat4.cat5 {
+  box-shadow: -12px 0 0 0 white, -14px 0 0 0 #1523f4, -21px 0 0 0 white, -23px 0 0 0 #bc39cf, -24px 0 0 0 white, -26px 0 0 0 #ffbd08;
+}
+
+.cat2.cat3.cat4 {
+  box-shadow: -15px 0 0 0 white, -17px 0 0 0 #f4154f, -18px 0 0 0 white, -20px 0 0 0 #09ff09, -21px 0 0 0 white, -23px 0 0 0 #bc39cf;
+}
+
+.cat2.cat3.cat5 {
+  box-shadow: -15px 0 0 0 white, -17px 0 0 0 #f4154f, -18px 0 0 0 white, -20px 0 0 0 #09ff09, -24px 0 0 0 white, -26px 0 0 0 #ffbd08;
+}
+
+.cat2.cat4.cat5 {
+  box-shadow: -15px 0 0 0 white, -17px 0 0 0 #f4154f, -21px 0 0 0 white, -23px 0 0 0 #bc39cf, -24px 0 0 0 white, -26px 0 0 0 #ffbd08;
+}
+
+.cat3.cat4.cat5 {
+  box-shadow: -18px 0 0 0 white, -20px 0 0 0 #09ff09, -21px 0 0 0 white, -23px 0 0 0 #bc39cf, -24px 0 0 0 white, -26px 0 0 0 #ffbd08;
+}
+
+.cat1.cat2.cat3.cat4 {
+  box-shadow: -12px 0 0 0 white, -14px 0 0 0 #1523f4, -15px 0 0 0 white, -17px 0 0 0 #f4154f, -18px 0 0 0 white, -20px 0 0 0 #09ff09, -21px 0 0 0 white, -23px 0 0 0 #bc39cf;
+}
+
+.cat1.cat2.cat3.cat5 {
+  box-shadow: -12px 0 0 0 white, -14px 0 0 0 #1523f4, -15px 0 0 0 white, -17px 0 0 0 #f4154f, -18px 0 0 0 white, -20px 0 0 0 #09ff09, -24px 0 0 0 white, -26px 0 0 0 #ffbd08;
+}
+
+.cat1.cat2.cat4.cat5 {
+  box-shadow: -12px 0 0 0 white, -14px 0 0 0 #1523f4, -15px 0 0 0 white, -17px 0 0 0 #f4154f, -21px 0 0 0 white, -23px 0 0 0 #bc39cf, -24px 0 0 0 white, -26px 0 0 0 #ffbd08;
+}
+
+.cat1.cat3.cat4.cat5 {
+  box-shadow: -12px 0 0 0 white, -14px 0 0 0 #1523f4, -18px 0 0 0 white, -20px 0 0 0 #09ff09, -21px 0 0 0 white, -23px 0 0 0 #bc39cf, -24px 0 0 0 white, -26px 0 0 0 #ffbd08;
+}
+
+.cat2.cat3.cat4.cat5 {
+  box-shadow: -15px 0 0 0 white, -17px 0 0 0 #f4154f, -18px 0 0 0 white, -20px 0 0 0 #09ff09, -21px 0 0 0 white, -23px 0 0 0 #bc39cf, -24px 0 0 0 white, -26px 0 0 0 #ffbd08;
+}
+
+.cat1.cat2.cat3.cat4.cat5 {
+  box-shadow: -12px 0 0 0 white, -14px 0 0 0 #1523f4, -15px 0 0 0 white, -17px 0 0 0 #f4154f, -18px 0 0 0 white, -20px 0 0 0 #09ff09, -21px 0 0 0 white, -23px 0 0 0 #bc39cf, -24px 0 0 0 white, -26px 0 0 0 #ffbd08;
 }

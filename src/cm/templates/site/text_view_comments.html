@@ -80,6 +80,7 @@ sv_client_date_fmt = "{{ client_date_fmt.js_parse }}"; //"%Y-%m-%dT%H:%M:%S" ;
 sv_key = "{{ text.key|escapejs }}";
 sv_version_key = "{{ text_version.key|escapejs }}";
 sv_format = "{{ text_version.format }}";
+sv_categories = "{{ categories|escapejs }}";
 
 sv_withComments = true ; // TODO will bug when false (!)
 c_yui_base = "{{ YUI_VERSION  }}" ;
@@ -119,7 +120,7 @@ sv_media_url = "{{ CM_MEDIA_PREFIX|escapejs }}";
 <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/site/c_text_view_comments.js"></script> 
 <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/lib/asciimathtml/ASCIIMathML.js"></script>
 {% else %}
-<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_client-min.js?1363624120"></script> 
+<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/client/c_client-min.js?1372154044"></script> 
 <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/lib/asciimathtml/ASCIIMathML.min.js"></script>
 {% endif %}
 

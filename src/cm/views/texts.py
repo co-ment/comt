@@ -244,17 +244,31 @@ def text_view_comments(request, key, version_key=None, adminkey=None):
     
     get_params = simplejson.dumps(request.GET)
     wrapped_text_version, _ , _ = spannify(text_version.get_content())
-    template_dict = {'text' : text,
-                               'text_version' : text_version,
-                               'title' : text_version.title, # TODO use it ...
-                               'get_params' : get_params,
-                               'content' : wrapped_text_version,
-                               'client_date_fmt' : settings.CLIENT_DATE_FMT,
-                               'read_only' : read_only,
-                               }
+
+    from cm.models import ApplicationConfiguration
+    categories = {}
+    for i in range(1, 6):
+      if text_version.__dict__['category_' + str(i)].lower() != 'none':
+        if text_version.__dict__['category_' + str(i)] != None and text_version.__dict__['category_' + str(i)] != '':
+          categories[i] = text_version.__dict__['category_' + str(i)]
+        else:
+          if ApplicationConfiguration.get_key('workspace_category_' + str(i)) != None and ApplicationConfiguration.get_key('workspace_category_' + str(i)) != '':
+            categories[i] = ApplicationConfiguration.get_key('workspace_category_' + str(i))
+
+    template_dict = {
+        'text' : text,
+        'text_version' : text_version,
+        'title' : text_version.title, # TODO use it ...
+        'get_params' : get_params,
+        'content' : wrapped_text_version,
+        'client_date_fmt' : settings.CLIENT_DATE_FMT,
+        'read_only' : read_only,
+    }
     template_dict['json_comments'] = jsonize(comments, request)
     template_dict['json_filter_datas'] = jsonize(filter_datas, request)
-    from cm.models import ApplicationConfiguration
+    if categories:
+      categories[0] = 'none'
+    template_dict['categories'] = jsonize(categories, request)
     custom_css_str = ApplicationConfiguration.get_key('custom_css')
     if custom_css_str:
       custom_css = cssutils.parseString(custom_css_str)
@@ -433,6 +447,7 @@ def text_view_frame(request, key, version_key=None, adminkey=None):
         text_version = get_textversion_by_keys_or_404(version_key, adminkey, key)
     else :
         text_version = text.get_latest_version()
+    from cm.models import ApplicationConfiguration
     template_dict = {'text' : text, 'text_version' : text_version}
     return render_to_response('site/text_view_frame.html',
                               template_dict,
@@ -911,7 +926,7 @@ class SettingsTextForm(ModelForm):
     
     class Meta:
         model = TextVersion
-        fields = ('mod_posteriori',)
+        fields = ('mod_posteriori', 'category_1', 'category_2', 'category_3', 'category_4', 'category_5')
 
 @has_perm_on_text('can_manage_text')
 def text_settings(request, key):
@@ -924,7 +939,7 @@ def text_settings(request, key):
         if form.is_valid():
             form.save()
             display_message(request, _(u'Text settings updated'))                            
-            return redirect(request, 'text-view', args=[text.key])
+            return redirect(request, 'text-settings', args=[text.key])
     else:
         form = SettingsTextForm(instance = text_version)
 

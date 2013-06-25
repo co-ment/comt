@@ -118,6 +118,14 @@ fillFilterTab = function() {
           '<td>' +
             '<select id="filter_state"></select>' +
           '</td>' +
+          '<td>&nbsp;</td>' +
+          '<td style="text-align:right;"><span id="filter_cat_label">' +
+          gettext('Categories') +
+          '</span></td>' +
+          '<td>&nbsp;</td>' +
+          '<td>' +
+            '<select id="filter_cat"></select>' +
+          '</td>' +
         '</tr>' +
         '<tr>' +
           '<td style="text-align:right;">' +
@@ -141,7 +149,7 @@ fillFilterTab = function() {
   
   $("#c_filter input[type='text']").add("#c_filter select").addClass('c_filter_field') ;
 
-  $("#filter_name").add("#filter_date").add("#filter_tag").add("#filter_state").change(function() {
+  $("#filter_name").add("#filter_date").add("#filter_tag").add("#filter_cat").add("#filter_state").change(function() {
     if (frames['text_view_comments'].readyForAction()) {
       var elt = $(this) ;
       frames['text_view_comments'].checkForOpenedDialog(null, function() {
@@ -546,8 +554,9 @@ f_getFrameFilterData = function () {
   var date_str = $('#filter_date').val(); ; 
   var text = $('#filter_text').val(); ; 
   var tag = $('#filter_tag').val(); ; 
+  var cat = $('#filter_cat').val(); ; 
   var state = $('#filter_state').val(); ; 
-  return {'name':name, 'date':date_str, 'text':text, 'tag':tag, 'state':state} ;
+  return {'name':name, 'date':date_str, 'text':text, 'tag':tag, 'cat':cat, 'state':state} ;
 }
 
 f_setFilterValue = function (obj) {
@@ -657,6 +666,25 @@ f_updateFilterData = function(newFilterData) {
     $("#filter_tag").append($("<option name='c_f2_tag_"+ item.name +"' value='"+ item.name +"'>" + item.name +" ("+item.nb_comments+")</option>")) ;
   }
   $("#filter_tag option[name="+selectedTagOption+"]").attr("selected", true);
+  
+  // categories
+  var selectedCatOption = $("#filter_cat option:selected").attr("cat") ;
+
+  $("#filter_cat option").remove() ;
+  
+  categories = frames['text_view_comments'].CY.JSON.parse(frames['text_view_comments'].sv_categories);
+  if (categories.hasOwnProperty('0')) {
+    $("#filter_cat").append($("<option name='c_f2_cat_all' value=''>" + all + "</option>")) ;
+    for (var  i=0, ilen=newFilterData['categories'].length; i < ilen ; i++) {
+      var item = newFilterData['categories'][i] ;
+      $("#filter_cat").append($("<option name='c_f2_cat_"+ item.cat +"' value='"+ gettext(item.cat) +"'>" + categories[item.cat] +" ("+item.nb_comments+")</option>")) ;
+    }
+    $("#filter_cat option[name="+selectedCatOption+"]").attr("selected", true);
+  }
+  else {
+    $("#filter_cat").remove()
+    $("#filter_cat_label").remove()
+  }
   
   // states
   var selectedStateOption = $("#filter_state option:selected").attr("state") ;

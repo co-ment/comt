@@ -648,3 +648,18 @@ msgstr "Innholdsfortegnelsen"
 #~ msgstr[1] ""
 #~ "%(nb_comments)s merknader vil bli slettet, fordi teksten som de er "
 #~ "knyttet til har blitt endret."
+
+#: media/js/client/c_icomment.js:330
+#, fuzzy
+msgid "category"
+msgstr "kategori"
+
+#: media/js/client/c_interface_form.js:52
+#, fuzzy
+msgid "Category:"
+msgstr "Kategori:"
+
+#: media/js/site/f_text_view_frame.js:123
+#, fuzzy
+msgid "Categories"
+msgstr "Kategorier"

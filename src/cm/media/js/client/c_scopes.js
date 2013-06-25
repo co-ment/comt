@@ -266,12 +266,22 @@ _bruteContains = function(element, needle) {
 //elt is supposed to be c-c classed
 _addIdClass = function (elt, commentId) {
   CY.DOM.addClass(elt, 'c-id-' + commentId) ;
+  var block_elt = _findParentBlockElt(elt);
+  if (block_elt != null) {
+    _unpaintCategories(block_elt);
+    _repaintCategories(elt, block_elt);
+  }
   _updateCommentCounter(elt) ;
 } ;
 
 //elt is supposed to be c-c classed
 _removeIdClass = function (elt, commentId) {
   CY.DOM.removeClass(elt, 'c-id-' + commentId) ;
+  var block_elt = _findParentBlockElt(elt);
+  if (block_elt != null) {
+    _unpaintCategories(block_elt);
+    _repaintCategories(elt, block_elt, commentId);
+  }
   _updateCommentCounter(elt) ;
 } ;
 
@@ -280,7 +290,50 @@ _removeIdClasses = function (elt) {
   var re = _cgetRegExp('(?:^|\\s+)c-id-(?:\\d+)', 'g');
   elt['className'] = elt['className'].replace(re, " ") ;
   _updateCommentCounter(elt) ;
+  var block_elt = _findParentBlockElt(elt);
+  if (block_elt != null) {
+    _unpaintCategories(block_elt);
+  }
 } ;
+
+// Finds the closest parent of an element which is a block.
+_findParentBlockElt = function(elt) {
+  var block_elt = elt;
+  var block_elt_style = block_elt.currentStyle || window.getComputedStyle(block_elt, ""); 
+  var block_elt_display = block_elt_style.display;
+  while (block_elt != null && block_elt_display != 'block') {
+    block_elt = block_elt.parentElement;
+    block_elt_style = block_elt.currentStyle || window.getComputedStyle(block_elt, ""); 
+    block_elt_display = block_elt_style.display;
+  }
+  return block_elt;
+};
+
+// Removes all vertical bars from a block element.
+_unpaintCategories = function(block_elt) {
+  CY.DOM.removeClass(block_elt, 'cat1');
+  CY.DOM.removeClass(block_elt, 'cat2');
+  CY.DOM.removeClass(block_elt, 'cat3');
+  CY.DOM.removeClass(block_elt, 'cat4');
+  CY.DOM.removeClass(block_elt, 'cat5');
+}
+
+// Paints all vertical bars of a block element but the one for commentId if not null.
+_repaintCategories = function(elt, block_elt, commentId) {
+  // Loop through all comments in this wrapper id
+  var wrapper_id = parseInt(getWrapperAncestor(elt).id.substr(3));
+  var len = gDb.comments.length;
+  for (var i=0; i<len; i++) {
+    if (i in gDb.comments) {
+      var comment = gDb.comments[i];
+      if ((commentId == null || comment.id != commentId) && comment.start_wrapper <= wrapper_id && comment.end_wrapper >= wrapper_id) {
+        if (comment.category) {
+          CY.DOM.addClass(block_elt, 'cat' + comment.category);
+        }
+      }
+    }
+  }
+}
 
 _recAddComment = function (elt, commentId) {
   if (CY.DOM.hasClass(elt, 'c-c')) {

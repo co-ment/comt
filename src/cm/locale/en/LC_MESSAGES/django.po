@@ -2038,3 +2038,35 @@ msgstr ""
 msgid ""
 "You've been registered, please check your email for the confirm message."
 msgstr ""
+
+#: models.py:266 views/site.py:191
+msgid "Label for the first category of comments"
+msgstr ""
+
+#: models.py:267 views/site.py:197
+msgid "Label for the second category of comments"
+msgstr ""
+
+#: models.py:268 views/site.py:203
+msgid "Label for the third category of comments"
+msgstr ""
+
+#: models.py:269 views/site.py:209
+msgid "Label for the fourth category of comments"
+msgstr ""
+
+#: models.py:270 views/site.py:215
+msgid "Label for the fifth category of comments"
+msgstr ""
+
+#: models.py:266 models.py:267 models.py:268 models.py:269 models.py:270 views/site.py:192 views/site.py:198 views/site.py:204 views/site.py:210 views/site.py:216
+msgid "Paragraphs including at least one comment of this category will have a vertical bar with this color: "
+msgstr ""
+
+#: models.py:266 models.py:267 models.py:268 models.py:269 models.py:270
+msgid "Leave blank to use the value configured for the workspace."
+msgstr ""
+
+#: models.py:266 models.py:267 models.py:268 models.py:269 models.py:270
+msgid "To disable this category for this text whatever the configuration for the workspace, enter: "
+msgstr ""

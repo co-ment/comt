@@ -41,7 +41,20 @@ getHtml = function(ids) {
   if ('emailInputId' in ids)
     html = html + gFormHtml['emailInput'].replace('###', ids['emailInputId']) ;
   
-  html = html + gFormHtml['titleInput'].replace('###', ids['titleInputId']) + gFormHtml['contentInput'].replace('###', ids['contentInputId']) + gFormHtml['tagsInput'].replace('###', ids['tagsInputId']);
+  html = html + gFormHtml['titleInput'].replace('###', ids['titleInputId']) + gFormHtml['contentInput'].replace('###', ids['contentInputId']);
+
+  categories = CY.JSON.parse(sv_categories);
+  if (categories.hasOwnProperty('0')) {
+    category_options = '';
+    for (c in categories) {
+      category_options += '<option value="' + c + '">' + categories[c] + '</option>';
+    }
+    gFormHtml['categoryInput'] = gettext("Category:") + '&nbsp;<select id="###" name="category" class="n_category comment_input" style="padding:1px;" type="text">' + category_options + '</select>';
+    html = html + '<span class="n_category_input">' + gFormHtml['categoryInput'].replace('###', ids['categoryInputId']) + '<br /></span>';
+  }
+
+  html = html + gFormHtml['tagsInput'].replace('###', ids['tagsInputId']);
+
   html = html + gFormHtml['hidden'].replace('###', ids['formatInputId']).replace('???', 'format') ;
   html = html + gFormHtml['hidden'].replace('###', ids['startWrapperInputId']).replace('???', 'start_wrapper') ;
   html = html + gFormHtml['hidden'].replace('###', ids['endWrapperInputId']).replace('???', 'end_wrapper') ;

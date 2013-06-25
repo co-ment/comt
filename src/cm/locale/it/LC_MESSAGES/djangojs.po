@@ -632,3 +632,18 @@ msgstr "Stacca"
 #: media/js/site/text_edit.js:103
 msgid "Remove"
 msgstr "Cancella"
+
+#: media/js/client/c_icomment.js:330
+#, fuzzy
+msgid "category"
+msgstr "categoria"
+
+#: media/js/client/c_interface_form.js:52
+#, fuzzy
+msgid "Category:"
+msgstr "Categoria:"
+
+#: media/js/site/f_text_view_frame.js:123
+#, fuzzy
+msgid "Categories"
+msgstr "Categorie"
