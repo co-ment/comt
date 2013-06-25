@@ -311,8 +311,6 @@ class Configuration(models.Model):
     def __unicode__(self):
         return '%s: %s' % (self.key, self.value)    
     
-ApplicationConfiguration = Configuration.objects     
-
 class TextVersionManager(KeyManager):
 
     def duplicate(self, text_version, duplicate_comments=True):
@@ -358,11 +356,11 @@ class TextVersion(AuthorModel, KeyModel):
 
     from django.utils.safestring import mark_safe
 
-    category_1 = models.CharField(ugettext_lazy("Label for the first category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #1523f4">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace.") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), max_length=20, null=True, blank=True, default=ApplicationConfiguration['workspace_category_1'])
-    category_2 = models.CharField(ugettext_lazy("Label for the second category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #f4154f">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace. ") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), max_length=20, null=True, blank=True, default=ApplicationConfiguration['workspace_category_2'])
-    category_3 = models.CharField(ugettext_lazy("Label for the third category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #09ff09">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace. ") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), max_length=20, null=True, blank=True, default=ApplicationConfiguration['workspace_category_3'])
-    category_4 = models.CharField(ugettext_lazy("Label for the fourth category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #bc39cf">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace. ") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), max_length=20, null=True, blank=True, default=ApplicationConfiguration['workspace_category_4'])
-    category_5 = models.CharField(ugettext_lazy("Label for the fifth category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #ffbd08">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace. ") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), max_length=20, null=True, blank=True, default=ApplicationConfiguration['workspace_category_5'])
+    category_1 = models.CharField(ugettext_lazy("Label for the first category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #1523f4">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace.") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), max_length=20, null=True, blank=True)
+    category_2 = models.CharField(ugettext_lazy("Label for the second category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #f4154f">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace. ") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), max_length=20, null=True, blank=True)
+    category_3 = models.CharField(ugettext_lazy("Label for the third category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #09ff09">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace. ") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), max_length=20, null=True, blank=True)
+    category_4 = models.CharField(ugettext_lazy("Label for the fourth category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #bc39cf">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace. ") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), max_length=20, null=True, blank=True)
+    category_5 = models.CharField(ugettext_lazy("Label for the fifth category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #ffbd08">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace. ") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), max_length=20, null=True, blank=True)
 
     text = models.ForeignKey("Text")
 
@@ -605,6 +603,8 @@ class RegistrationManager(KeyManager):
         else:
             return user_with_email
         
+
+ApplicationConfiguration = Configuration.objects     
 
 from cm.utils.mail import send_mail
 
