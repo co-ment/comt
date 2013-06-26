@@ -417,6 +417,8 @@ class Configuration(models.Model):
     def __unicode__(self):
         return '%s: %s' % (self.key, self.value)    
     
+ApplicationConfiguration = Configuration.objects     
+
 class AttachmentManager(KeyManager):
     def create_attachment(self, text_version, filename, data):
         attach = self.create(text_version=text_version)
@@ -603,8 +605,6 @@ class RegistrationManager(KeyManager):
         else:
             return user_with_email
         
-
-ApplicationConfiguration = Configuration.objects     
 
 from cm.utils.mail import send_mail
 
