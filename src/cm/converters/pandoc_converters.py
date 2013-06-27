@@ -221,7 +221,7 @@ def pandoc_pandoc(content, from_format, to_format, full=False, raw=False):
     if from_format==to_format=='html':
       # get body content
       stdoutdata = (content.encode('utf8'))
-      soup = BeautifulSoup(stdoutdata)
+      soup = BeautifulSoup(stdoutdata, fromEncoding='UTF-8')
       body = soup.body
       if body:
         stdoutdata = body.renderContents()
