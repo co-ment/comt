@@ -85,9 +85,9 @@ def compute_new_comment_positions(old_content, old_format, new_content, new_form
 def add_marker(text, color, start_ids, end_ids, with_markers, with_colors):
 # TODO
 # THESE 3 LINES ARE REALLY JUST FOR TESTING THIS IS COPIED FROM C-TEXT.CSS AND SHOULD BE DONE DIFFERENTLY
-    BCKCOLORS = ['#FFF', '#FFF39A', '#FFDB9A', '#FFC39A', '#FFAB9A', '#FF879A', '#FF7B9A', '#FF6272']
-    for i in range(30) :
-        BCKCOLORS.append('#FF6272')
+    BCKCOLORS = ['#ffffff', '#ffffa8', '#fff6a1', '#ffeb99', '#ffde91', '#ffd08a', '#ffc182', '#ffaf7a', '#ff9d73', '#ff896b', '#ff7363', '#ff5c5c']
+    for i in range(14) :
+        BCKCOLORS.append('#ff5c5c')
 
     ret = text 
     

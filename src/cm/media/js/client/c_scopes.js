@@ -25,7 +25,7 @@ paintCommentScope = function(comment) {
       }
     }
   }
-} ;
+};
 
 getCommentIdsFromClasses = function (elt) {
   var commentIds = [] ;
@@ -36,7 +36,7 @@ getCommentIdsFromClasses = function (elt) {
     }
   }
   return commentIds ;
-} ;
+};
 
 renderComment = function (selection, commentId) {
   var startOffset = selection['start']['offset'] ;
@@ -53,7 +53,7 @@ renderComment = function (selection, commentId) {
       markWholeNodesAsComments(startElt, endElt, commentId) ;
       markEndsAsComments(startElt, startOffset, endElt, endOffset, commentId) ;
   }
-} ;
+};
 
 markWholeNodesAsComments = function (startElt, endElt, commentId) {
     var commonAncestor = _findCommonAncestor(startElt, endElt) ;
@@ -62,15 +62,15 @@ markWholeNodesAsComments = function (startElt, endElt, commentId) {
     _dynSpanToAnc(endElt, commonAncestor, commentId, true) ;
 
     _dynSpanInBetween(commonAncestor, startElt, endElt, commentId) ;
-} ;
+};
 
 _setTextNodeContent = function(txtNodeParent, contentString) {
     CY.DOM.setText(txtNodeParent, contentString);
-} ;
+};
 
 _getTextNodeContent = function(txtNodeParent) {
     return CY.DOM.getText(txtNodeParent);
-} ;
+};
 
 markEndsAsComments = function(startElt, startOffset, endElt, endOffset, commentId) {
   
@@ -175,7 +175,7 @@ markEndsAsComments = function(startElt, startOffset, endElt, endOffset, commentI
         }
       }
     }
-} ;
+};
 
 // WARNING (200891108): had to use YUI cloneNode instead of the native cloneNode
 // (because of the _yuid that is cloned under IE, cf tests made in textYUIcloneNode.html)
@@ -188,7 +188,7 @@ _yuiCloneNode = function (srcElt) {
   var ret = CY.Node.getDOMNode(CY.get('#'+srcElt.id).cloneNode(true)) ;
   ret.id = CY.guid();
   return ret ;
-} ;
+};
 
 // will wrap textNodes into c-c spans going up the DOM tree from elt to ancestor
 // textNodes impacted here will be those that are :
@@ -219,7 +219,7 @@ _dynSpanToAnc = function (elt, ancestor, commentId, prev) {
       _recAddComment(c, commentId) ;
     }
   } ;
-} ;
+};
 
 // between elt1 and elt2 (which are excluded)
 _dynSpanInBetween = function (anc, elt1, elt2, commentId) {
@@ -250,7 +250,7 @@ _dynSpanInBetween = function (anc, elt1, elt2, commentId) {
       }
     }
   }
-} ;
+};
 
 // (copied from YUI dom-base)
 _bruteContains = function(element, needle) {
@@ -261,7 +261,7 @@ _bruteContains = function(element, needle) {
         needle = needle.parentNode;
     }
     return false;
-},
+};
 
 //elt is supposed to be c-c classed
 _addIdClass = function (elt, commentId) {
@@ -272,7 +272,7 @@ _addIdClass = function (elt, commentId) {
     _repaintCategories(elt, block_elt);
   }
   _updateCommentCounter(elt) ;
-} ;
+};
 
 //elt is supposed to be c-c classed
 _removeIdClass = function (elt, commentId) {
@@ -283,7 +283,7 @@ _removeIdClass = function (elt, commentId) {
     _repaintCategories(elt, block_elt, commentId);
   }
   _updateCommentCounter(elt) ;
-} ;
+};
 
 //elt is supposed to be c-c classed
 _removeIdClasses = function (elt) {
@@ -294,7 +294,7 @@ _removeIdClasses = function (elt) {
   if (block_elt != null) {
     _unpaintCategories(block_elt);
   }
-} ;
+};
 
 // Finds the closest parent of an element which is a block.
 _findParentBlockElt = function(elt) {
@@ -316,7 +316,7 @@ _unpaintCategories = function(block_elt) {
   CY.DOM.removeClass(block_elt, 'cat3');
   CY.DOM.removeClass(block_elt, 'cat4');
   CY.DOM.removeClass(block_elt, 'cat5');
-}
+};
 
 // Paints all vertical bars of a block element but the one for commentId if not null.
 _repaintCategories = function(elt, block_elt, commentId) {
@@ -333,7 +333,7 @@ _repaintCategories = function(elt, block_elt, commentId) {
       }
     }
   }
-}
+};
 
 _recAddComment = function (elt, commentId) {
   if (CY.DOM.hasClass(elt, 'c-c')) {
@@ -346,7 +346,7 @@ _recAddComment = function (elt, commentId) {
       c = c.nextSibling ;
         }
     }
-} ;
+};
 
 // might be expensive ... (? maybe should use contains when available, instead
 // of custom _bruteContains)
@@ -360,9 +360,9 @@ _findCommonAncestor = function (elt1, elt2) {
     }
     return e ;
   }
-} ;
+};
 
-_cregexCache = {} ;
+_cregexCache = {};
 // inspired (copied) from dom-base-debug in yui
 _cgetRegExp = function(str, flags) {
     flags = flags || '';
@@ -370,14 +370,14 @@ _cgetRegExp = function(str, flags) {
         _cregexCache[str + flags] = new RegExp(str, flags);
     }
     return _cregexCache[str + flags];
-} ;
+};
 
 //c-c should be classed with a c-count-x where x is a number for color graduation
 //c-c should be classed with many c-id-xid where xid is the comment db id of comment that apply to it
 _updateCommentCounter = function (elt) {
   var re = _cgetRegExp('(?:^|\\s+)c-id-(?:\\d+)', 'g');
   var matches = elt['className'].match(re);
-  var countIds = (matches == null) ? 0 : matches.length ;
+  var countIds = (matches == null) ? 0 : gDb.getThreads(CY.Array.map(matches, function(item) {return gDb.getComment(parseInt(item.replace(/\D/g, '')));})).length
   
   re = _cgetRegExp('(?:^|\\s+)c-count-(?:\\d+)', 'g');
   elt['className'] = elt['className'].replace(re, " ") ;
@@ -389,7 +389,7 @@ _updateCommentCounter = function (elt) {
       CY.DOM.addClass(elt, 'c-count-25') ;
     }
   }
-} ;
+};
 
 _convertSelectionFromCCToCS = function (sel) {
   var offset = sel['offset'] ;
@@ -402,7 +402,7 @@ _convertSelectionFromCCToCS = function (sel) {
   }
   
   return  {'elt':elt, 'offset':offset} ;
-} ;
+};
 
 _convertSelectionFromCSToCC = function (sel) {
   var ret = {'elt':null, 'offset':-1} ;
@@ -421,7 +421,7 @@ _convertSelectionFromCSToCC = function (sel) {
     ccElt = ccElt.nextSibling ; // will be a c-c !!
   }
   return ret ;
-} ;
+};
 
 
 /*******************************************************************************/
@@ -476,7 +476,7 @@ unpaintCommentScope = function(comment) {
   for (var i = 0, ilen = toBeRemovedElts.length ; i < ilen ; i++)  {
     toBeRemovedElts[i].parentNode.removeChild(toBeRemovedElts[i]) ;
   }
-} ;
+};
 
 // not related to the unpaintCommentScope function (faster)
 unpaintAllComments = function() {
@@ -503,17 +503,16 @@ unpaintAllComments = function() {
     toBeRemovedElts[i].parentNode.removeChild(toBeRemovedElts[i]) ;
   }
 
-} ;
+};
 
 showScope = function(commentDbId) {
   var s = CY.all('.c-id-' + commentDbId); 
   if (s != null)
     s.addClass('c-scope') ;
-} ;
+};
 
 hideScopeAnyway = function() {
   var s = CY.all('.c-scope'); 
   if (s != null)
     s.removeClass('c-scope') ;
-}
-
+};

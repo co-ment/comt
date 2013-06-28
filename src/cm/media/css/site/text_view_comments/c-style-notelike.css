@@ -1,11 +1,11 @@
 /* OVERRIDE */
 .c-comment {
-    border:1px solid  #FCFC6B;
-    background-color:#FFFFBD;
+    border:1px solid #FCFC6B;
+    background-color: #FFFFBD;
 }
 
 .c-comment .yui-widget-hd {
-    background-color:#FCFC6B;
+    background-color: #FCFC6B;
 }
 
 .c-comment a.c-close, .c-comment a.c-show-scope  {
