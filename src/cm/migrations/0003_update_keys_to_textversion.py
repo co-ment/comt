@@ -8,9 +8,9 @@ class Migration:
     def forwards(self, orm):
         "Write your forwards migration here"
         
-        for tv in TextVersion.objects.all():
-            tv.key = TextVersion.objects._gen_key()
-            tv.adminkey = TextVersion.objects._gen_adminkey()
+        for tv in orm.TextVersion.objects.all():
+            tv.key = orm.TextVersion.objects._gen_key()
+            tv.adminkey = orm.TextVersion.objects._gen_adminkey()
             tv.save()
     
         

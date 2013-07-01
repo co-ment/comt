@@ -58,7 +58,6 @@ class Migration:
             ('end_wrapper', orm['cm.Comment:end_wrapper']),
             ('start_offset', orm['cm.Comment:start_offset']),
             ('end_offset', orm['cm.Comment:end_offset']),
-            ('category', orm['cm.Comment:category']),
         ))
         db.send_create_signal('cm', ['Comment'])
         
@@ -135,11 +134,6 @@ class Migration:
             ('note', orm['cm.TextVersion:note']),
             ('mod_posteriori', orm['cm.TextVersion:mod_posteriori']),
             ('text', orm['cm.TextVersion:text']),
-            ('category_1', orm['cm.TextVersion:category_1']),
-            ('category_2', orm['cm.TextVersion:category_2']),
-            ('category_3', orm['cm.TextVersion:category_3']),
-            ('category_4', orm['cm.TextVersion:category_4']),
-            ('category_5', orm['cm.TextVersion:category_5']),
         ))
         db.send_create_signal('cm', ['TextVersion'])
         
@@ -272,7 +266,6 @@ class Migration:
         },
         'cm.comment': {
             'adminkey': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '20', 'db_index': 'True'}),
-            'category': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '0'}),
             'content': ('django.db.models.fields.TextField', [], {}),
             'content_html': ('django.db.models.fields.TextField', [], {}),
             'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
@@ -344,11 +337,6 @@ class Migration:
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True', 'blank': 'True'})
         },
         'cm.textversion': {
-            'category_1': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True', 'blank': 'True'}),
-            'category_2': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True', 'blank': 'True'}),
-            'category_3': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True', 'blank': 'True'}),
-            'category_4': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True', 'blank': 'True'}),
-            'category_5': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True', 'blank': 'True'}),
             'content': ('django.db.models.fields.TextField', [], {}),
             'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'email': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
