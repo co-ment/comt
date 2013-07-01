@@ -37,6 +37,18 @@ SECRET_KEY = 'random_text_qs57Dd_-dqsdqd' # YOUR_SETTINGS
 
 MEDIA_URL = '/site_media/'
 
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.admin',
+    'cm',
+#    'django_extensions',
+    'tagging',
+    'south',
+)
+
 CM_MEDIA_PREFIX = '/cmmedia/'
 
 ADMIN_MEDIA_PREFIX = '/media/'
