@@ -9,6 +9,8 @@ from django.utils.http import urlquote
 from django.db.models import Q
 from piston.utils import rc
 import logging
+from django.core.cache import cache
+from hashlib import sha1
 
 from cm.models import *
 from cm import cm_settings
@@ -39,12 +41,20 @@ def has_perm(request, perm_name, text=None):
     assert Permission.objects.get(codename=perm_name)
     
     user = get_request_user(request)
+    myself = request.GET.get('name', None)
+    key = sha1(str((settings.SITE_URL, 'has_perm', (user, myself, text, perm_name)))).hexdigest()
+    val = cache.get(key)
+    if val != None:
+      return val
 
     if user and user.is_staff:
+        cache.set(key, True)
         return True
     
     if not text:
-        return UserRole.objects.filter(user=user, text=None).filter(Q(role__permissions__codename__exact=perm_name)).count() != 0
+        ret = UserRole.objects.filter(user=user, text=None).filter(Q(role__permissions__codename__exact=perm_name)).count() != 0
+        cache.set(key, ret)
+        return ret
     else:
         # local role only ADDS permissions:
         # either a global or a local role with appropriate permissions
@@ -52,12 +62,16 @@ def has_perm(request, perm_name, text=None):
 
         # local role OVERRIDES global role:
         if UserRole.objects.filter(Q(user=user),Q(text=text),~Q(role=None)): # if non void local role
-            return UserRole.objects.filter(user=user).filter(text=text).filter(Q(role__permissions__codename__exact=perm_name)).count() != 0
+            ret = UserRole.objects.filter(user=user).filter(text=text).filter(Q(role__permissions__codename__exact=perm_name)).count() != 0
+            cache.set(key, ret)
+            return ret
         else:
             # local role for anon users
             # OR global role for anon users
             # OR global role for this user
-            return UserRole.objects.filter(Q(user=user) | Q(user=None)).filter(Q(text=None) | Q(text=text)).filter(Q(role__permissions__codename__exact=perm_name)).count() != 0            
+            ret = UserRole.objects.filter(Q(user=user) | Q(user=None)).filter(Q(text=None) | Q(text=text)).filter(Q(role__permissions__codename__exact=perm_name)).count() != 0            
+            cache.set(key, ret)
+            return ret
             #return UserRole.objects.filter(user=user).filter(text=None).filter(Q(role__permissions__codename__exact=perm_name)).count() != 0
         
 def has_own_perm(request, perm_name, text, comment):
@@ -73,6 +87,12 @@ def has_own_perm(request, perm_name, text, comment):
     
     # make sure perm exist
     assert Permission.objects.get(codename=perm_name)
+
+    myself = request.GET.get('name', None)
+    key = sha1(str((settings.SITE_URL, 'has_own_perm', (user, myself, text, comment, perm_name)))).hexdigest()
+    val = cache.get(key)
+    if val != None:
+      return val
     
     # 2 special cases for comment own edition:
     
@@ -85,6 +105,7 @@ def has_own_perm(request, perm_name, text, comment):
        perm_name == 'can_edit_comment_own' and \
        text.last_text_version.mod_posteriori == False and \
        not has_perm(request, 'can_manage_text', text=text):
+        cache.set(key, False)
         return False
     
     # 2       
@@ -97,6 +118,7 @@ def has_own_perm(request, perm_name, text, comment):
        text.last_text_version.mod_posteriori == True and \
        comment.comment_set.count() != 0 and \
        not has_perm(request, 'can_manage_text', text=text):
+        cache.set(key, False)
         return False
     
     actual_own_user = False
@@ -106,7 +128,9 @@ def has_own_perm(request, perm_name, text, comment):
           actual_own_user = True
       else:
         actual_own_user = True
-    return (actual_own_user and has_perm(request, perm_name, text=text)) 
+    ret = (actual_own_user and has_perm(request, perm_name, text=text)) 
+    cache.set(key, ret)
+    return ret
         
 def is_authenticated(request):
     # We customize this to be able to monkey patch it if needed
@@ -120,8 +144,15 @@ def get_texts_with_perm(request, perm_name):
 
     user = get_request_user(request)
     
+    key = sha1(str((settings.SITE_URL, 'get_texts_with_perm', (user, perm_name)))).hexdigest()
+    val = cache.get(key)
+    if val != None:
+      return val
+
     if user and user.is_staff:
-        return Text.objects.all()
+        ret = Text.objects.all()
+        cache.set(key, ret)
+        return ret
     
     # local role only ADDS permissions:
     ## global perm
@@ -145,7 +176,9 @@ def get_texts_with_perm(request, perm_name):
         texts_without_local_role_with_perm = []
     
     ids = set([t.id for t in texts_with_local_role_with_perm]).union(set([t.id for t in texts_without_local_role_with_perm]))
-    return Text.objects.filter(id__in=ids)
+    ret = Text.objects.filter(id__in=ids)
+    cache.set(key, ret)
+    return ret
     
 def get_viewable_comments(request, comments, text, order_by=('created',)):
     """
@@ -153,9 +186,16 @@ def get_viewable_comments(request, comments, text, order_by=('created',)):
     comments: queryset
     """
     user = get_request_user(request)
+    myself = request.GET.get('name', None)
+    key = sha1(str((settings.SITE_URL, 'get_viewable_comments', (user, myself, text, comments)))).hexdigest()
+    val = cache.get(key)
+    if val != None:
+      return val
         
     if user and has_perm(request, 'can_view_unapproved_comment', text=text):
-        return list(comments.order_by(*order_by))
+        ret = list(comments.order_by(*order_by))
+        cache.set(key, ret)
+        return ret
     else:
         # Fetch role_model to process specific behaviour for role_teacher model
         from cm.models import ApplicationConfiguration
@@ -181,10 +221,11 @@ def get_viewable_comments(request, comments, text, order_by=('created',)):
                     role = userrole.role
                   if role.name == 'Individual student':
                     comments_thread_viewable.remove(c)
+            cache.set(key, comments_thread_viewable)
             return comments_thread_viewable 
         elif user and has_perm(request, 'can_view_comment_own', text=text):
             if DECORATED_CREATORS:
-              visible_comments = comments.filter(name=request.GET.get('name', None)).order_by(*order_by)
+              visible_comments = comments.filter(name=myself).order_by(*order_by)
             else:
               visible_comments = comments.filter(user=user).order_by(*order_by)
 
@@ -198,7 +239,6 @@ def get_viewable_comments(request, comments, text, order_by=('created',)):
               admin =  User.objects.get(id=1)
               with_teachers.append(admin.id)
               if DECORATED_CREATORS:
-                myself = request.GET.get('name', None)
                 visible_comments = comments.filter(Q(user__id__in=with_teachers) | Q(name=myself)).order_by(*order_by)
               else:
                 with_teachers.append(user.id)
@@ -206,8 +246,10 @@ def get_viewable_comments(request, comments, text, order_by=('created',)):
 
             # filter comments with a non visible (i.e. moderated) comment in the above thread 
             comments_thread_viewable = [c for c in visible_comments if c.is_thread_full_visible(own_user=user)]
+            cache.set(key, comments_thread_viewable)
             return comments_thread_viewable                
         else:
+            cache.set(key, [])
             return []
     
 def get_viewable_activities(request=None, act_types={}, text=None):
