@@ -41,7 +41,10 @@ def has_perm(request, perm_name, text=None):
     assert Permission.objects.get(codename=perm_name)
     
     user = get_request_user(request)
-    myself = request.GET.get('name', None)
+    try:
+      myself = request.GET.get('name', None)
+    except AttributeError:
+      myself = None
     key = sha1(str((settings.SITE_URL, 'has_perm', (user, myself, text, perm_name)))).hexdigest()
     val = cache.get(key)
     if val != None:
@@ -88,7 +91,10 @@ def has_own_perm(request, perm_name, text, comment):
     # make sure perm exist
     assert Permission.objects.get(codename=perm_name)
 
-    myself = request.GET.get('name', None)
+    try:
+      myself = request.GET.get('name', None)
+    except AttributeError:
+      myself = None
     key = sha1(str((settings.SITE_URL, 'has_own_perm', (user, myself, text, comment, perm_name)))).hexdigest()
     val = cache.get(key)
     if val != None:
@@ -124,7 +130,7 @@ def has_own_perm(request, perm_name, text, comment):
     actual_own_user = False
     if comment.user == request.user:
       if DECORATED_CREATORS:
-        if request.GET.get('name', None) == comment.get_name():
+        if myself == comment.get_name():
           actual_own_user = True
       else:
         actual_own_user = True
@@ -186,7 +192,10 @@ def get_viewable_comments(request, comments, text, order_by=('created',)):
     comments: queryset
     """
     user = get_request_user(request)
-    myself = request.GET.get('name', None)
+    try:
+      myself = request.GET.get('name', None)
+    except AttributeError:
+      myself = None
     key = sha1(str((settings.SITE_URL, 'get_viewable_comments', (user, myself, text, comments)))).hexdigest()
     val = cache.get(key)
     if val != None:
