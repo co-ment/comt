@@ -48,7 +48,7 @@ instanciateToc = function() {
   // attach to DOM
   overlay.render('#leftcolumn');
   
-  CY.get("#"+gToc['tocTitleId']).set('innerHTML', gettext('Table of contents')) ;
+  CY.one("#"+gToc['tocTitleId']).set('innerHTML', gettext('Table of contents')) ;
   
   gToc['overlay'] = overlay ;
   

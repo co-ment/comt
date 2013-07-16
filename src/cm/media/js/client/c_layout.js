@@ -50,8 +50,8 @@ Layout.prototype = {
   },
   
   setLeftColumnWidth : function (colWidth) {
-    CY.get('#contentcolumn').setStyle('marginLeft', colWidth + 'px');
-    CY.get('#leftcolumn').setStyle('width', colWidth + 'px');
+    CY.one('#contentcolumn').setStyle('marginLeft', colWidth + 'px');
+    CY.one('#leftcolumn').setStyle('width', colWidth + 'px');
   },
   parentInterfaceUnfreeze : function() {
     if (this.isInFrame())

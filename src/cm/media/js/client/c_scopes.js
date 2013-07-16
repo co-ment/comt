@@ -185,7 +185,7 @@ markEndsAsComments = function(startElt, startOffset, endElt, endOffset, commentI
 // was replaced with :
 // afterStartElt = _yuiCloneNode(startElt) ;
 _yuiCloneNode = function (srcElt) {
-  var ret = CY.Node.getDOMNode(CY.get('#'+srcElt.id).cloneNode(true)) ;
+  var ret = CY.Node.getDOMNode(CY.one('#'+srcElt.id).cloneNode(true)) ;
   ret.id = CY.guid();
   return ret ;
 };

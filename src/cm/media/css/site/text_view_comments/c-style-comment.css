@@ -5,7 +5,7 @@
 /*    font-size: 85%; */
 }
 
-.c-comment .yui-widget-hd, .c-comment .yui-widget-bd, .c-comment .yui-widget-ft,.c-newcomment .yui-widget-hd, .c-newcomment .yui-widget-bd, .c-newcomment .yui-widget-ft {
+.c-comment .yui3-widget-hd, .c-comment .yui3-widget-bd, .c-comment .yui3-widget-ft,.c-newcomment .yui3-widget-hd, .c-newcomment .yui3-widget-bd, .c-newcomment .yui3-widget-ft {
     text-align: left;
     padding: 2px;
 }
@@ -77,7 +77,7 @@ a.c-action {
     text-decoration: none;
 }
 
-.yui-widget-bd .c-ireplyactions {
+.yui3-widget-bd .c-ireplyactions {
     overflow: hidden;
     margin-right:3px;
     float:right;
@@ -120,7 +120,7 @@ input[type="text"], input[type="password"], textarea {
     border: 1px solid #C1C1C1;
 }
 
-.c-comment .yui-widget-bd {
+.c-comment .yui3-widget-bd {
     padding-bottom: 20px;
 }
 
@@ -129,7 +129,7 @@ input[type="text"], input[type="password"], textarea {
     border:1px solid  #BFD6FF;
 }
 
-.c-focus-comment .c-comment .yui-widget-hd {
+.c-focus-comment .c-comment .yui3-widget-hd {
     background-color:#BFD6FF;
 }
 
