@@ -218,11 +218,11 @@ margin-right:5px;
 }
 
 #header-nobck {
-  font: 13px "Droid Sans", Verdana, sans-serif;
+  font: 11px "Droid Sans", Verdana, sans-serif;
 }
 
 #c_filter, #c_filter select, #c_filter input, #c_filter button,
 #c_preferences, #c_preferences select, #c_preferences input, #c_preferences button,
 #c_text_preferences, #c_text_preferences select, #c_text_preferences input, #c_text_preferences button {
-  font: 12px "Droid Sans", Verdana, sans-serif;
+  font: 10px "Droid Sans", Verdana, sans-serif;
 }
