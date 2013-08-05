@@ -118,14 +118,6 @@ fillFilterTab = function() {
           '<td>' +
             '<select id="filter_state"></select>' +
           '</td>' +
-          '<td>&nbsp;</td>' +
-          '<td style="text-align:right;"><span id="filter_cat_label">' +
-          gettext('Categories') +
-          '</span></td>' +
-          '<td>&nbsp;</td>' +
-          '<td>' +
-            '<select id="filter_cat"></select>' +
-          '</td>' +
         '</tr>' +
         '<tr>' +
           '<td style="text-align:right;">' +
@@ -142,6 +134,14 @@ fillFilterTab = function() {
           '<td>&nbsp;</td>' +
           '<td>' +
             '<select id="filter_tag"></select>' +
+          '</td>' +
+        '<tr>' +
+          '<td style="text-align:right;"><span id="filter_cat_label">' +
+          gettext('Categories') +
+          '</span></td>' +
+          '<td>&nbsp;</td>' +
+          '<td>' +
+            '<select id="filter_cat"></select>' +
           '</td>' +
         '</tr>' +
       '</table>';
