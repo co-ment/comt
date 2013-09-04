@@ -477,7 +477,7 @@ Db.prototype = {
   filterByCat : function(cat, cWithCatIds, rWithCatIds) {
     for (var id in this.allCommentsByDbId) {
       var comment = this.allCommentsByDbId[id] ;
-      if (cat == "" || comment.category == cat) { 
+      if (cat == undefined || cat == "" || comment.category == cat) { 
         if (comment.reply_to_id == null) {
           cWithCatIds.push(comment.id);
           if (comment.replies.length) {
