@@ -1,6 +1,8 @@
 from south.management.commands.migrate import  Command, list_migrations
 from south.db import DEFAULT_DB_ALIAS
 from south import migration
+from south.migration import Migrations
+from south.exceptions import NoMigrations
 import sys
 
 ### RBA+GIB: prevent uno custom __import__ from messing with south import machinery (to discover south enabled dj apps)
