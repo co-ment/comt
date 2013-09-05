@@ -42,7 +42,7 @@ def new_handle(self, app=None, target=None, skip=False, merge=False, backwards=F
         
     # Do we need to show the list of migrations?
     if show_list and apps:
-        list_migrations(apps, database)
+        list_migrations(apps, database, **options)
         
     if not show_list:
             
