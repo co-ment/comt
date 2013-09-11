@@ -407,9 +407,9 @@ fillTextPreferencesTab = function() {
     var wish = $('#c_textpref_style').val() ;
     for (var key in styles) {
       if (key == wish)
-        frames['text_view_comments'].CY.one("#textcontainer").addClass(key) ;
+        frames['text_view_comments'].CY.get("#textcontainer").addClass(key) ;
       else 
-        frames['text_view_comments'].CY.one("#textcontainer").removeClass(key) ;
+        frames['text_view_comments'].CY.get("#textcontainer").removeClass(key) ;
     }
   };
   

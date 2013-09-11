@@ -387,9 +387,9 @@ Sync.prototype = {
       var topAncestorComment = path[path.length - 1] ;
       var topY = 0 ;
       if (comment['start_wrapper'] != -1) 
-        topY = CY.one(".c-id-"+topAncestorComment.id).getY() ;
+        topY = CY.get(".c-id-"+topAncestorComment.id).getY() ;
       else 
-        topY = CY.one('document').get('scrollTop') ;
+        topY = CY.get('document').get('scrollTop') ;
       
       this._showComments([topAncestorComment.id], topY, false) ;
       // optim when browsing comments with no reply     
@@ -401,9 +401,9 @@ Sync.prototype = {
     if (topComment != null) {
       var topY = 0 ;
       if (topComment['start_wrapper'] != -1) 
-        topY = CY.one(".c-id-"+topComment.id).getY() ;
+        topY = CY.get(".c-id-"+topComment.id).getY() ;
       else 
-        topY = CY.one('document').get('scrollTop') ;
+        topY = CY.get('document').get('scrollTop') ;
       
       this._showComments([topComment.id], topY, false) ;
       // optim when browsing comments with no reply     
@@ -444,11 +444,11 @@ Sync.prototype = {
   
         if (commentDbIds.length > 0) {
           if (atDocumentTop) {
-            CY.one('document').set('scrollTop', 0) ; 
+            CY.get('document').set('scrollTop', 0) ; 
           }
           else {
             gIComments.activate(commentDbIds[0]) ;
-            var scopeStart = CY.one(".c-id-"+commentDbIds[0]) ;
+            var scopeStart = CY.get(".c-id-"+commentDbIds[0]) ;
             if (scopeStart && !scopeStart.inViewportRegion()) { // scopeStart could be null when comment has no scope
               scopeStart.scrollIntoView(true) ;
               // Since scrollIntoView scroll the embed ifram *and* the parent window

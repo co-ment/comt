@@ -48,40 +48,40 @@ showEditForm = function(iCommentHost) {
   gEditICommentHost['overlay'].setStdModContent(CY.WidgetStdMod.BODY,CY.Node.create(editBody),CY.WidgetStdMod.AFTER);
   
 // FORM TITLE   
-  CY.one("#"+gEdit['ids']['formTitleId']).set('innerHTML', gettext("Edit comment")) ;
+  CY.get("#"+gEdit['ids']['formTitleId']).set('innerHTML', gettext("Edit comment")) ;
 
 // FETCH FORM VALUES FROM COMMENT
   
   var comment = gDb.getComment(gEditICommentHost.commentId) ;
-  CY.one("#"+gEdit['ids']['editCommentId']).set('value', comment.id) ;
-  CY.one("#"+gEdit['ids']['keyId']).set('value', comment.key) ;
+  CY.get("#"+gEdit['ids']['editCommentId']).set('value', comment.id) ;
+  CY.get("#"+gEdit['ids']['keyId']).set('value', comment.key) ;
 
-  CY.one("#"+gEdit['ids']['changeScopeInputId']+" input").set('checked', false) ;
+  CY.get("#"+gEdit['ids']['changeScopeInputId']+" input").set('checked', false) ;
   // Edit scope and category just for the first comment in a thread
   // => hides these inputs for a reply.
   if (comment.reply_to_id != null) {
-    CY.one("#"+gEdit['ids']['changeScopeInputId']).addClass('displaynone')
-    CY.one("#"+gEdit['ids']['categoryInputId']).addClass('displaynone')
-    CY.one("#"+gEdit['ids']['categoryInputId']).ancestor().addClass('displaynone')
+    CY.get("#"+gEdit['ids']['changeScopeInputId']).addClass('displaynone')
+    CY.get("#"+gEdit['ids']['categoryInputId']).addClass('displaynone')
+    CY.get("#"+gEdit['ids']['categoryInputId']).ancestor().addClass('displaynone')
   }
   changeScopeFormClick() ; // to adapt
 
-  CY.one("#"+gEdit['ids']['nameInputId']).set('value', comment.name) ; 
-  CY.one("#"+gEdit['ids']['emailInputId']).set('value', comment.email) ; 
+  CY.get("#"+gEdit['ids']['nameInputId']).set('value', comment.name) ; 
+  CY.get("#"+gEdit['ids']['emailInputId']).set('value', comment.email) ; 
 
   if (comment.logged_author) {
-    CY.one("#"+gEdit['ids']['nameInputId']).setAttribute("disabled", true); 
-    CY.one("#"+gEdit['ids']['emailInputId']).setAttribute("disabled", true);
+    CY.get("#"+gEdit['ids']['nameInputId']).setAttribute("disabled", true); 
+    CY.get("#"+gEdit['ids']['emailInputId']).setAttribute("disabled", true);
   }
   
 // FORM VALUES
-  CY.one("#"+gEdit['ids']['titleInputId']).set('value', comment['title']) ;
-  CY.one("#"+gEdit['ids']['contentInputId']).set('value', comment['content']) ;
-  CY.one("#"+gEdit['ids']['tagsInputId']).set('value', comment['tags']) ;
-  if ( CY.one("#"+gEdit['ids']['categoryInputId']))
-    CY.one("#"+gEdit['ids']['categoryInputId']).set('value', comment['category']) ;
+  CY.get("#"+gEdit['ids']['titleInputId']).set('value', comment['title']) ;
+  CY.get("#"+gEdit['ids']['contentInputId']).set('value', comment['content']) ;
+  CY.get("#"+gEdit['ids']['tagsInputId']).set('value', comment['tags']) ;
+  if ( CY.get("#"+gEdit['ids']['categoryInputId']))
+    CY.get("#"+gEdit['ids']['categoryInputId']).set('value', comment['category']) ;
   
-  CY.one("#"+gEdit['ids']['formatInputId']).set('value',gConf['defaultCommentFormat']) ;// for now ...
+  CY.get("#"+gEdit['ids']['formatInputId']).set('value',gConf['defaultCommentFormat']) ;// for now ...
   
 // WIDTH  
   var width = gLayout.getTopICommentsWidth() ;
@@ -105,14 +105,14 @@ onChangeScopeClick = function() {
   if (readyForAction())
     gSync.changeScopeFormClick() ;
   else {// (onChangeScopeClick triggers an animation : checking for readyForAction does not prevent the checkbox change ...)
-    var chckCtrl = CY.one("#"+gEdit['ids']['changeScopeInputId']+" input") ;
+    var chckCtrl = CY.get("#"+gEdit['ids']['changeScopeInputId']+" input") ;
     var chck = chckCtrl.get('checked') ;
     chckCtrl.set('checked', !chck) ; // set it back 
   }
 }
 changeScopeFormClick = function() {
-  var node = CY.one("#"+gEdit['ids']['currentSelId']) ;
-  if (CY.one("#"+gEdit['ids']['changeScopeInputId']+" input").get('checked'))
+  var node = CY.get("#"+gEdit['ids']['currentSelId']) ;
+  if (CY.get("#"+gEdit['ids']['changeScopeInputId']+" input").get('checked'))
     node.removeClass('displaynone') ;
   else
     node.addClass('displaynone') ;
@@ -128,9 +128,9 @@ cancelEditForm = function() {
     }
 
 // REMOVE EDIT FORM NODES FROM ICOMMENT OVERLAY
-    var node = gEditICommentHost['overlay'].get('contentBox').one(".icomment-edit-body") ;
+    var node = gEditICommentHost['overlay'].get('contentBox').query(".icomment-edit-body") ;
     node.get('parentNode').removeChild(node) ;
-    node = gEditICommentHost['overlay'].get('contentBox').one(".icomment-edit-header") ;
+    node = gEditICommentHost['overlay'].get('contentBox').query(".icomment-edit-header") ;
     node.get('parentNode').removeChild(node) ;
 
 // SHOW ICOMMENT OVERLAY

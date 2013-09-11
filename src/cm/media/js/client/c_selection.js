@@ -69,7 +69,7 @@ getSelectionInfo  = function () {
           var ind = parseInt(csStartAncestor.id.substring('sv_'.length)) ;
           while(r3.toString().length < range.toString().length) {
               ind++ ;
-              var node = CY.one("#sv_"+ind) ;
+              var node = CY.get("#sv_"+ind) ;
               if (node) {
                 next = CY.Node.getDOMNode(node) ;
                 r3.setEndAfter(next) ;
@@ -91,7 +91,7 @@ getSelectionInfo  = function () {
           var ind = parseInt(csEndAncestor.id.substring('sv_'.length)) ;
           while(r3.toString().length < range.toString().length) {
               ind-- ;
-              var node = CY.one("#sv_"+ind) ;
+              var node = CY.get("#sv_"+ind) ;
               if (node) {
                 prev = CY.Node.getDOMNode(node) ;
                 r3.setStartBefore(prev) ;
@@ -108,7 +108,7 @@ getSelectionInfo  = function () {
           // gather nodes with id sv_xxxx as candidates for start ancestor
           var startNodeInds = [] ;
           for (var ind = 0 ;  ; ind++) {
-            var svNode = CY.one("#sv_"+ind) ;
+            var svNode = CY.get("#sv_"+ind) ;
             if (svNode == null) {
               break;
             }
@@ -123,7 +123,7 @@ getSelectionInfo  = function () {
           // gather nodes with id sv_xxxx as candidates for end ancestor
           var endNodeInds = [] ;
           for (var ind = 0 ;  ; ind++) {
-            var svNode = CY.one("#sv_"+ind) ;
+            var svNode = CY.get("#sv_"+ind) ;
             if (svNode == null) {
               break;
             }
@@ -140,7 +140,7 @@ getSelectionInfo  = function () {
             for (var j = 0 ; j < endNodeInds.length ; j++) {
               var r4 = document.createRange() ;
               
-              var s = CY.Node.getDOMNode(CY.one("#sv_"+startNodeInds[i])) ; var e = CY.Node.getDOMNode(CY.one("#sv_"+endNodeInds[j])) ;
+              var s = CY.Node.getDOMNode(CY.get("#sv_"+startNodeInds[i])) ; var e = CY.Node.getDOMNode(CY.get("#sv_"+endNodeInds[j])) ;
               
               r4.setStartBefore(s) ; r4.setEndAfter(CY.Node.getDOMNode(e)) ;
               

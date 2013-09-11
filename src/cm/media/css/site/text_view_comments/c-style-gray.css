@@ -1,11 +1,11 @@
 /* YUI OVERLAY */
 /* Overlay Look/Feel */
-.yui3-overlay-content {
+.yui-overlay-content {
     border:1px solid #C1C1C1 ;
     background-color:#F7F7F7 ;
 }
 
-.yui3-overlay-content .yui3-widget-hd {
+.yui-overlay-content .yui-widget-hd {
     background-color:#ECECEC ;
 }
 

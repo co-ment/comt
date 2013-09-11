@@ -2,7 +2,7 @@ gICommentForm = null ;
 
 instanciateICommentForm = function() {
   gICommentForm = {
-      'position':[CY.WidgetPositionAlign.TL, CY.WidgetPositionAlign.TL],
+      'position':[CY.WidgetPositionExt.TL, CY.WidgetPositionExt.TL],
       'formId':CY.guid(),
       'formTitleId':CY.guid(),
       'titleInputId':CY.guid(),
@@ -47,12 +47,12 @@ instanciateICommentForm = function() {
   overlay.render('#leftcolumn');
   
   if (!sv_loggedIn) {
-    CY.one("#"+gICommentForm['nameInputId']).set('value',gPrefs.get("user","name")) ;
-    CY.one("#"+gICommentForm['emailInputId']).set('value',gPrefs.get("user","email")) ;
+    CY.get("#"+gICommentForm['nameInputId']).set('value',gPrefs.get("user","name")) ;
+    CY.get("#"+gICommentForm['emailInputId']).set('value',gPrefs.get("user","email")) ;
   }
     
-  CY.one("#"+gICommentForm['formTitleId']).set('innerHTML', gettext('New comment')) ;
-  CY.one("#"+gICommentForm['formatInputId']).set('value',gConf['defaultCommentFormat']) ;
+  CY.get("#"+gICommentForm['formTitleId']).set('innerHTML', gettext('New comment')) ;
+  CY.get("#"+gICommentForm['formatInputId']).set('value',gConf['defaultCommentFormat']) ;
   
   CY.on("click", onSubmitICommentFormClick, "#"+gICommentForm['addBtnId']);
   CY.on("click", onCancelICommentFormClick, "#"+gICommentForm['cancelBtnId']);
@@ -84,15 +84,15 @@ instanciateICommentForm = function() {
 }
 
 cleanICommentForm = function() {
-  CY.one("#"+gICommentForm['currentSelIdI']).set('innerHTML', gNoSelectionYet) ;
+  CY.get("#"+gICommentForm['currentSelIdI']).set('innerHTML', gNoSelectionYet) ;
 
     var hostNode = gICommentForm['overlay'].getStdModNode(CY.WidgetStdMod.BODY) ;
-    hostNode.all(".comment_input").set('value', "") ;
+    hostNode.queryAll(".comment_input").set('value', "") ;
   
-  CY.one("#"+gICommentForm['formatInputId']).set('value',gConf['defaultCommentFormat']) ;// for now ...
+  CY.get("#"+gICommentForm['formatInputId']).set('value',gConf['defaultCommentFormat']) ;// for now ...
   
   if (!sv_loggedIn) {
-    hostNode.all(".user_input").set('value', "") ;
+    hostNode.queryAll(".user_input").set('value', "") ;
   }
 }
 
@@ -108,10 +108,10 @@ onICommentFormShowAnimEnd = function() {
 
 onSubmitICommentFormClick = function() {
   if (!sv_loggedIn) {
-    var name = CY.one("#"+gICommentForm['nameInputId']).get('value') ;
+    var name = CY.get("#"+gICommentForm['nameInputId']).get('value') ;
     gPrefs.persist("user", "name", name) ;  
   
-    var email = CY.one("#"+gICommentForm['emailInputId']).get('value') ;
+    var email = CY.get("#"+gICommentForm['emailInputId']).get('value') ;
     gPrefs.persist("user", "email", email) ;
   }
   gSync.saveComment(gICommentForm['formId']) ;
@@ -123,20 +123,20 @@ onCancelICommentFormClick = function() {
 
 // record selection info in hidden form fields
 _updateICommentFormSelection = function(ids, displayedText, csStartSelection, csEndSelection) {
-  var node = CY.Node.one('#'+ids['currentSelIdI']) ;
+  var node = CY.Node.get('#'+ids['currentSelIdI']) ;
   if (node != null)
     node.set('innerHTML', displayedText) ;
   
-    node = CY.one('#'+ids['startWrapperInputId']) ;
+    node = CY.get('#'+ids['startWrapperInputId']) ;
   if (node != null)
     node.set('value', csStartSelection['elt'].id.substring("sv_".length)) ;
-    node = CY.one('#'+ids['startOffsetInputId']) ;
+    node = CY.get('#'+ids['startOffsetInputId']) ;
   if (node != null)
     node.set('value', csStartSelection['offset']) ;
-    node = CY.one('#'+ids['endWrapperInputId']) ;
+    node = CY.get('#'+ids['endWrapperInputId']) ;
   if (node != null)
     node.set('value', csEndSelection['elt'].id.substring("sv_".length)) ;
-    node = CY.one('#'+ids['endOffsetInputId']) ;
+    node = CY.get('#'+ids['endOffsetInputId']) ;
   if (node != null)
     node.set('value', csEndSelection['offset']) ;
 }
@@ -166,16 +166,16 @@ updateICommentFormSelection = function(selection) {
 showICommentForm= function () {
   removeFormErrMsg(gICommentForm['formId']) ;
   if (!sv_loggedIn) {
-    if (CY.one("#"+gICommentForm['nameInputId']).get('value') == '') 
-      CY.one("#"+gICommentForm['nameInputId']).set('value', gPrefs.get('user','name')) ;
-    if (CY.one("#"+gICommentForm['emailInputId']).get('value') == '') 
-      CY.one("#"+gICommentForm['emailInputId']).set('value', gPrefs.get('user','email')) ;
+    if (CY.get("#"+gICommentForm['nameInputId']).get('value') == '') 
+      CY.get("#"+gICommentForm['nameInputId']).set('value', gPrefs.get('user','name')) ;
+    if (CY.get("#"+gICommentForm['emailInputId']).get('value') == '') 
+      CY.get("#"+gICommentForm['emailInputId']).set('value', gPrefs.get('user','email')) ;
   }
   gIComments.hide() ;
   hideToc();
   positionICommentForm() ;
   gICommentForm['overlay'].show() ;
-  CY.one("#"+gICommentForm['titleInputId']).focus() ;
+  CY.get("#"+gICommentForm['titleInputId']).focus() ;
 }
 
 isICommentFormVisible = function () {
@@ -194,7 +194,7 @@ positionICommentForm = function () {
 
     var pos = gICommentForm['position'] ;
     if (commentFormHeight > windowHeight) // trying to have save comment visible ... :
-      pos = [CY.WidgetPositionAlign.BL, CY.WidgetPositionAlign.BL] ;
+      pos = [CY.WidgetPositionExt.BL, CY.WidgetPositionExt.BL] ;
     
     overlay.set("align", {points:pos});
     if (commentFormHeight <= windowHeight)

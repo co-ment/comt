@@ -53,29 +53,29 @@ instanciateNewReplyForm = function(iCommentToAppendTo) {
   var newReplyTitle = (gNewReply['val']['title'] == "" || gNewReply['val']['title'].substring(0, REPLYPREF.length) == REPLYPREF) ? REPLYPREF + comment['title'] : gNewReply['val']['title'] ;
 
   if (!sv_loggedIn) {
-    replyNode.one('.n_name').set('value', gNewReply['val']['name']) ;
-    replyNode.one('.n_email').set('value', gNewReply['val']['email']) ;
+    replyNode.query('.n_name').set('value', gNewReply['val']['name']) ;
+    replyNode.query('.n_email').set('value', gNewReply['val']['email']) ;
   }
-  replyNode.one('.n_title').set('value', newReplyTitle) ;
-  replyNode.one('.n_content').set('value', gNewReply['val']['content']) ;
-  replyNode.one('.n_tags').set('value', gNewReply['val']['tags']) ;
+  replyNode.query('.n_title').set('value', newReplyTitle) ;
+  replyNode.query('.n_content').set('value', gNewReply['val']['content']) ;
+  replyNode.query('.n_tags').set('value', gNewReply['val']['tags']) ;
   
-  replyNode.one('#'+gNewReply['ids']['parentCommentId']).set('value', iCommentToAppendTo['commentId']) ;
-  replyNode.one('#'+gNewReply['ids']['formatInputId']).set('value', gConf['defaultCommentFormat']) ;
+  replyNode.query('#'+gNewReply['ids']['parentCommentId']).set('value', iCommentToAppendTo['commentId']) ;
+  replyNode.query('#'+gNewReply['ids']['formatInputId']).set('value', gConf['defaultCommentFormat']) ;
            
-  gNewReplyHost['overlay'].get('contentBox').one(".c-reply").addClass('displaynone') ;
+  gNewReplyHost['overlay'].get('contentBox').query(".c-reply").addClass('displaynone') ;
 
   gNewReply['handlers']['addBtnId'] = CY.on("click", onAddNewReplyClick, "#"+gNewReply['ids']['addBtnId']);
   gNewReply['handlers']['cancelBtnId'] = CY.on("click", onCancelNewReplyClick, "#"+gNewReply['ids']['cancelBtnId']);
   
   var width = gLayout.getTopICommentsWidth() ;
   changeFormFieldsWidth(gNewReply['ids']['formId'], width) ;
-  CY.one("#"+gNewReply['ids']['contentInputId']).focus();
+  CY.get("#"+gNewReply['ids']['contentInputId']).focus();
 }
 cleanNewReplyForm = function() {
   if (gNewReplyHost != null) {
     var replyNode = gNewReplyHost['overlay'].getStdModNode(CY.WidgetStdMod.FOOTER) ;
-    replyNode.all('.comment_input').set('value','') ;
+    replyNode.queryAll('.comment_input').set('value','') ;
   }
 }
 cancelNewReplyForm = function() {
@@ -89,16 +89,16 @@ cancelNewReplyForm = function() {
       }
     }
 
-    gNewReplyHost['overlay'].get('contentBox').one(".c-reply").removeClass('displaynone') ;
+    gNewReplyHost['overlay'].get('contentBox').query(".c-reply").removeClass('displaynone') ;
     
     var footer = gNewReplyHost['overlay'].getStdModNode(CY.WidgetStdMod.FOOTER) ;
     if (!sv_loggedIn) {
-      gNewReply['val']['name'] = footer.one('.n_name').get('value') ;
-      gNewReply['val']['email'] = footer.one('.n_email').get('value') ;
+      gNewReply['val']['name'] = footer.query('.n_name').get('value') ;
+      gNewReply['val']['email'] = footer.query('.n_email').get('value') ;
     }
-    gNewReply['val']['title'] = footer.one('.n_title').get('value') ;
-    gNewReply['val']['content'] = footer.one('.n_content').get('value') ;
-    gNewReply['val']['tags'] = footer.one('.n_tags').get('value') ;
+    gNewReply['val']['title'] = footer.query('.n_title').get('value') ;
+    gNewReply['val']['content'] = footer.query('.n_content').get('value') ;
+    gNewReply['val']['tags'] = footer.query('.n_tags').get('value') ;
     
     footer.set('innerHTML', '') ;
     
@@ -108,10 +108,10 @@ cancelNewReplyForm = function() {
 // event triggered
 onAddNewReplyClick = function() {
   if (!sv_loggedIn) {
-    var name = CY.one("#"+gNewReply['ids']['nameInputId']).get('value') ;
+    var name = CY.get("#"+gNewReply['ids']['nameInputId']).get('value') ;
     gPrefs.persist("user", "name", name) ;  
   
-    var email = CY.one("#"+gNewReply['ids']['emailInputId']).get('value') ;
+    var email = CY.get("#"+gNewReply['ids']['emailInputId']).get('value') ;
     gPrefs.persist("user", "email", email) ;
   }
   
