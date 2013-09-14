@@ -6,6 +6,7 @@ from cm.utils.spannifier import spannify
 from cm.converters.pandoc_converters import pandoc_convert
 import logging
 from cm.utils.spannifier import get_the_soup
+import re
 
 import html5lib
 from html5lib import treebuilders
@@ -180,4 +181,10 @@ def insert_comment_markers(htmlcontent, comments, with_markers, with_colors) :
 
         content.replaceWith(spans)
 
-    return unicode(html)
+    output = unicode(html)
+    # Soup has introduced HTML entities, which should be expanded
+    output =re.sub(r"&quot;", '"', output)
+    output =re.sub(r"&amp;", '&', output)
+    output =re.sub(r"&gt;", '>', output)
+    output =re.sub(r"&lt;", '<', output)
+    return unicode(output)
