@@ -27,7 +27,7 @@ onInnerNorthPaneClose = function() {
 
 onInnerNorthPaneOpen = function() {
   _setCookie('innerNorthPaneOpened', '1');
-  $('#add_comment_btn').css('top', 149) ;
+  $('#add_comment_btn').css('top', 159) ;
   if (document.getElementById('text_view_comments').contentDocument != null)
     document.getElementById('text_view_comments').contentDocument.getElementById('the-toc').style.height = (parseInt(document.getElementById('text_view_comments').clientHeight) - 50).toString() + 'px';
   return true;
@@ -37,7 +37,7 @@ onInnerNorthPaneOpen = function() {
 var myDefaultInnerLayoutSettings = {
   north : {
     // size: 66, /* 66 for FF */
-    size :88, /* 66 for FF */
+    size :98, /* 66 for FF */
     spacing_open :8,
     spacing_closed :8,
     slidable :false,    
