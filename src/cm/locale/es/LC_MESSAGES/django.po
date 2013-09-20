@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: COMT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-05 12:58+0200\n"
+"POT-Creation-Date: 2011-08-08 15:02+0200\n"
 "PO-Revision-Date: 2010-02-24 01:37+0900\n"
 "Last-Translator: dev <dev@sopinspace.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -737,6 +737,14 @@ msgstr "Presentación general"
 msgid "co-ment is a web based text annotation system."
 msgstr "co-ment es un web basado sistema de anotación de texto."
 
+#: templates/site/help.html:18
+msgid "COMT is the open source software behind it"
+msgstr "COMT es el software libre detrás"
+
+#: templates/site/help.html:18
+msgid "See www.co-ment.com for more details"
+msgstr "Ver www.co-ment.com para más detalles"
+
 #: templates/site/help.html:20
 msgid "Glossary"
 msgstr "Glossario"
@@ -961,9 +969,8 @@ msgstr ""
 "visitantes serán capaces de agregar comentarios sin moverse de su sitio web "
 "si el perfil de usuario anónimo le permite para este texto. Para una "
 "condición de prueba adecuado al incrustar en su propio sitio, en particular, "
-"para los enlaces de referencia en los comentarios del texto "
-"asegúrese de que no está conectado a su espacio de trabajo en otra pestaña "
-"del navegador."
+"para los enlaces de referencia en los comentarios del texto asegúrese de que "
+"no está conectado a su espacio de trabajo en otra pestaña del navegador."
 
 #: templates/site/help.html:80
 msgid "Roles are predefined sets of permissions."
@@ -1466,7 +1473,9 @@ msgstr "Perfil del espacio de trabajo"
 #: templates/site/text_share.html:101
 #, python-format
 msgid "This role has been overriden on this text by a text role: %(rolename)s"
-msgstr "Este perfil ha sido invalidado por este texto por el perfil local: %(rolename)s"
+msgstr ""
+"Este perfil ha sido invalidado por este texto por el perfil local: "
+"%(rolename)s"
 
 #: templates/site/text_share.html:128 templates/site/user_edit.html:6
 #: templates/site/user_edit.html.py:24 templates/site/user_list.html:177
