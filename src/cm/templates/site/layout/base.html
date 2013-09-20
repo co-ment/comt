@@ -4,85 +4,71 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>
-         {% block title %}{% endblock %} - {{ CONF.workspace_name }}
+		 {% block title %}{% endblock %} - {{ CONF.workspace_name }}
 	</title>
 
 	<meta name="robots" content="index,follow" />
-    <meta http-equiv="content-language" content="{{ LANGUAGE_CODE }}" />
-    <meta name="description" content="{{ CONF.workspace_name }}" />
-    <script type="text/javascript" src="{% url django.views.i18n.javascript_catalog %}"></script>
-      
-    <!-- 
-    TODO: add conf to be able to get jquery from google
-    <script src="http://www.google.com/jsapi"></script>
-    <script>     
-    google.load("jquery", "1.3.1");
-    google.load("jqueryui", "1.5.3");
-    </script>
-     -->
+	<meta http-equiv="content-language" content="{{ LANGUAGE_CODE }}" />
+	<meta name="description" content="{{ CONF.workspace_name }}" />
+	<script type="text/javascript" src="{% url django.views.i18n.javascript_catalog %}"></script>
+	  
+	<link rel="stylesheet" type="text/css" href="{{ CM_MEDIA_PREFIX }}css/site/text_view_comments/fonts.css">
+
+	{% include "site/layout/req_jquery.html" %}
+
+	<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/site/layout/base.js"></script>
+	<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/lib/jquery.sparkline/jquery.sparkline.min-2.1.2.js"></script>
+
+	<script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/lib/tipsy/src/javascripts/jquery.tipsy.js"></script>
+	<link type="text/css" href="{{ CM_MEDIA_PREFIX }}js/lib/tipsy/src/stylesheets/tipsy.css" rel="stylesheet" />	
+	  <script type="text/javascript">
+	  <!--
+	  $(function() {
+		  $('.tip').tipsy();
+	  }) ;
+	  -->	   
+	  </script>
   
-    <link rel="stylesheet" type="text/css" href="{{ CM_MEDIA_PREFIX }}css/site/text_view_comments/fonts.css">
-    <link type="text/css" href="{{ CM_MEDIA_PREFIX }}js/lib/jquery/css/smoothness/jquery-ui-1.7.2.custom.css" rel="stylesheet" />    
-    <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/lib/jquery/js/jquery-1.3.2.min.js"></script>
-    <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/lib/jquery/js/jquery-ui-1.7.2.custom.min.js"></script>
-    <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/lib/jquery/js/cookie/jquery.cookie.js"></script>
-    <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/site/layout/base.js"></script>
-    <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/lib/jquery.sparkline/jquery.sparkline.min.js"></script>
-
-    <script type="text/javascript" src="{{ CM_MEDIA_PREFIX }}js/lib/tipsy/src/javascripts/jquery.tipsy.js"></script>
-    <link type="text/css" href="{{ CM_MEDIA_PREFIX }}js/lib/tipsy/src/stylesheets/tipsy.css" rel="stylesheet" />    
-      <script type="text/javascript">
-      <!--
-      $(function() {
-          $('.tip').tipsy();
-      }) ;
-      -->      
-      </script>
+	  <script type="text/javascript">
+	  <!--
+	  var tb_conf =  {}; 
+	  -->
+	  </script>
   
-      <script type="text/javascript">
-      <!--
-      var tb_conf =  {}; 
-      -->
-      </script>
-  
-    {% block head_base %}
-    {% endblock %}
-    {% block head %}
-    {% endblock %}
+	{% block head_base %}
+	{% endblock %}
+	{% block head %}
+	{% endblock %}
 
-    {% include "site/layout/req_yui.html" %}
-    
-    <link rel="stylesheet" type="text/css" href="{{ CM_MEDIA_PREFIX }}css/base.css" />   
-    <link rel="shortcut icon" href="{{ CM_MEDIA_PREFIX }}favicon.ico" />
+	{% include "site/layout/req_yui.html" %}
+	
+	<link rel="stylesheet" type="text/css" href="{{ CM_MEDIA_PREFIX }}css/base.css" />	 
+	<link rel="shortcut icon" href="{{ CM_MEDIA_PREFIX }}favicon.ico" />
 
-    {% include "site/macros/timezone.html" %}
-
-    {# create a custom header_custom.html to add code to every page #}
-    {% include "header_custom.html" %}
+	{% include "site/macros/timezone.html" %}
 
 </head>
 	<body class="yui-base">
-        <div id="header">
-            <div class="wrapper">
-            	{% block breadcrumbs %}{% endblock %}
-                {% include "site/layout/header.html" %}
-            </div>
-        </div>
-        
-            {% include "site/layout/control.html" %}
-            {%  include "site/layout/message.html" %}
+		<div id="header">
+			<div class="wrapper">
+				{% block breadcrumbs %}{% endblock %}
+				{% include "site/layout/header.html" %}
+			</div>
+		</div>
+		
+			{%	include "site/layout/message.html" %}
 
-        <div class="wrapper">                    
-            <div id="content">        
-                {% block content %}
-                {% endblock %}        
-            </div>
-        
-            <div id="footer">
-            {% include "site/layout/footer.html" %}
-            </div>
-        
-         </div>                     
-         {% include "site/tracking.html" %}
-	</body>       
+		<div class="wrapper">					 
+			<div id="content">		  
+				{% block content %}
+				{% endblock %}		  
+			</div>
+		
+			<div id="footer">
+			{% include "site/layout/footer.html" %}
+			</div>
+		
+		 </div>						
+		 {% include "site/tracking.html" %}
+	</body>		  
 </html>

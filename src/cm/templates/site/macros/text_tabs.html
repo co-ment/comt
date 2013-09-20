@@ -6,23 +6,23 @@
 {% get_local_text_perm request text can_manage_text as can_manage_text %}
 
 <div id="text-tabs">
-    <ul>
-        <li><a id="view_tab_link" class="cust_behav" href="#autoexpand_text_view_frame_container">{% blocktrans %}Text{% endblocktrans %}</a></li>
-        {% if can_edit_text %}
-        <li><a id="edit_tab_link" class="cust_behav" href="#text_edit">{% blocktrans %}Edit{% endblocktrans %}</a></li>
-        {% endif %}
-        {% if can_manage_text %}
-        <li><a id="share_tab_link" class="cust_behav" href="#text_share">{% blocktrans %}People{% endblocktrans %}</a></li>
-        {% endif %}
-        <li><a id="history_tab_link" class="cust_behav" href="#text_history">{% blocktrans %}Versions{% endblocktrans %} ({{ text.get_versions_number }})</a></li>
-        {% if can_manage_text %}
-        <li><a id="settings_tab_link" class="cust_behav" href="#text_settings">{% blocktrans %}Settings{% endblocktrans %}</a></li>
-        {% endif %}
-        {% if user.is_authenticated %}
-        <li><a id="followup_tab_link" class="cust_behav" href="#followup_settings">{% blocktrans %}Followup{% endblocktrans %}</a></li>
-        {% endif %}
-        <li><a id="embed_tab_link" class="cust_behav" href="#text_embed">{% blocktrans %}Embed{% endblocktrans %}</a></li>
-    </ul> 
+	<ul>
+		<li><a id="view_tab_link" class="cust_behav" href="#autoexpand_text_view_frame_container">{% blocktrans %}Text{% endblocktrans %}</a></li>
+		{% if can_edit_text %}
+		<li><a id="edit_tab_link" class="cust_behav" href="#text_edit">{% blocktrans %}Edit{% endblocktrans %}</a></li>
+		{% endif %}
+		{% if can_manage_text %}
+		<li><a id="share_tab_link" class="cust_behav" href="#text_share">{% blocktrans %}People{% endblocktrans %}</a></li>
+		{% endif %}
+		<li><a id="history_tab_link" class="cust_behav" href="#text_history">{% blocktrans %}Versions{% endblocktrans %} ({{ text.get_versions_number }})</a></li>
+		{% if can_manage_text %}
+		<li><a id="settings_tab_link" class="cust_behav" href="#text_settings">{% blocktrans %}Settings{% endblocktrans %}</a></li>
+		{% endif %}
+		{% if user.is_authenticated %}
+		<li><a id="followup_tab_link" class="cust_behav" href="#followup_settings">{% blocktrans %}Followup{% endblocktrans %}</a></li>
+		{% endif %}
+		<li><a id="embed_tab_link" class="cust_behav" href="#text_embed">{% blocktrans %}Embed{% endblocktrans %}</a></li>
+	</ul> 
 </div>
 
 <script type="text/javascript">
@@ -47,69 +47,68 @@ tb_conf['embed-view-url'] = "{% url text-embed text.key %}";
 
 renderTabs = function (current_tab) {
 
-    var delta = -1;
-    var tab_index = 0;
-    
+	var delta = -1;
+	var tab_index = 0;
+	
 	delta = delta + 1;
-    if (current_tab == 'view') {
-        tab_index = delta;
-    }    
+	if (current_tab == 'view') {
+		tab_index = delta;
+	}	 
 
-    {% if can_edit_text %}
+	{% if can_edit_text %}
 	delta = delta + 1;
-    if (current_tab == 'edit') {
-        tab_index = delta;
-    }
-    {% endif %}    
+	if (current_tab == 'edit') {
+		tab_index = delta;
+	}
+	{% endif %}    
 
-    {% if can_manage_text %}
+	{% if can_manage_text %}
 	delta = delta + 1;
-    if (current_tab == 'share') {
-        tab_index = delta;
-    }
-    {% endif %}
+	if (current_tab == 'share') {
+		tab_index = delta;
+	}
+	{% endif %}
 	delta = delta + 1;
-    if (current_tab == 'history') {
-        tab_index = delta;
-    }    
-    
-    {% if can_manage_text %}
+	if (current_tab == 'history') {
+		tab_index = delta;
+	}	 
+	
+	{% if can_manage_text %}
 	delta = delta + 1;
-    if (current_tab == 'settings') {
-        tab_index = delta;
-    }
-    {% endif %}
-    {% if user.is_authenticated %}    
+	if (current_tab == 'settings') {
+		tab_index = delta;
+	}
+	{% endif %}
+	{% if user.is_authenticated %}	  
 	delta = delta + 1;
-    if (current_tab == 'followup') {
-        tab_index = delta;
-    }
-    {% endif %}
+	if (current_tab == 'followup') {
+		tab_index = delta;
+	}
+	{% endif %}
 	delta = delta + 1;
-    if (current_tab == 'embed') {
-        tab_index = delta;
-    }
+	if (current_tab == 'embed') {
+		tab_index = delta;
+	}
 
-    $("#text-tabs").tabs({ ajaxOptions: { async: false }, selected: tab_index}) ;
-    
-    $('.cust_behav').click(function() {
-        window.location = this.href;
-    });
-    
-    $("#view_tab_link").attr("href", tb_conf['text-view-url']) ;
-    $("#edit_tab_link").attr("href", tb_conf['edit-view-url']) ;
-    $("#share_tab_link").attr("href", tb_conf['share-view-url']) ;
-    $("#history_tab_link").attr("href", tb_conf['history-view-url']) ;
-    $("#settings_tab_link").attr("href", tb_conf['settings-view-url']) ;
-    $("#followup_tab_link").attr("href", tb_conf['followup-view-url']) ;
-    $("#embed_tab_link").attr("href", tb_conf['embed-view-url']) ;
+	$("#text-tabs").tabs({ ajaxOptions: { async: false }, active: tab_index});
+	$("#text-tabs").on( "tabsbeforeactivate", function( event, ui ) {
+		window.location = ui.newTab.children ().first ().attr ('href');
+	} );
 
-    $("#text-tabs").trigger("tabs_ready");
+	$("#view_tab_link").attr("href", tb_conf['text-view-url']) ;
+	$("#edit_tab_link").attr("href", tb_conf['edit-view-url']) ;
+	$("#share_tab_link").attr("href", tb_conf['share-view-url']) ;
+	$("#history_tab_link").attr("href", tb_conf['history-view-url']) ;
+	$("#settings_tab_link").attr("href", tb_conf['settings-view-url']) ;
+	$("#followup_tab_link").attr("href", tb_conf['followup-view-url']) ;
+	$("#embed_tab_link").attr("href", tb_conf['embed-view-url']) ;
+
+	$("#text-tabs").trigger("tabs_ready");
 
 } ; 
 
 $(document).ready(function(){
-    renderTabs(tb_conf['current_tab']);
+	renderTabs(tb_conf['current_tab']);
 }) ;
 -->
 </script>

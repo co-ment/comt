@@ -57,11 +57,10 @@ renderTabs = function (current_tab) {
     }            
     {% endif %}
     	
-    $("#main-tabs").tabs({ ajaxOptions: { async: false }, selected: tab_index}) ;
-
-    $('.cust_behav').click(function() {
-        window.location = this.href;
-    });
+    $("#main-tabs").tabs({ ajaxOptions: { async: false }, active: tab_index});
+	$("#main-tabs").on( "tabsbeforeactivate", function( event, ui ) {
+		window.location = ui.newTab.children ().first ().attr ('href');
+	} );
 
     $("#dashboard_link").attr("href", tb_conf['dashboard-url']) ;
     $("#text_link").attr("href", tb_conf['text-url']) ;

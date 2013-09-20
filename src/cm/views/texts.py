@@ -201,7 +201,7 @@ def text_view(request, key, adminkey=None):
     text = get_text_by_keys_or_404(key)
     register_activity(request, "text_view", text=text)    
     text_version = text.get_latest_version()
-    embed_code = embed_html(key, 'id="text_view_frame" name="text_view_frame" onload="if (window.iframe_onload) iframe_onload();"', None, request.META.get('QUERY_STRING'))
+    embed_code = embed_html(key, 'id="text_view_frame" name="text_view_frame"', None, request.META.get('QUERY_STRING'))
     template_dict = { 'embed_code':embed_code, 'text' : text, 'text_version' : text_version, 'title' : text_version.title}
     return render_to_response('site/text_view.html', template_dict, context_instance=RequestContext(request))
 

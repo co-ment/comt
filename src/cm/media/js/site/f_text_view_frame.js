@@ -519,8 +519,8 @@ _initTabs = function() {
 
   var selectedTab = $.cookie('selectedTab');
   selectedTab = (selectedTab === null) ? innerNorthPaneDefaults['selectedTab'] : parseInt(selectedTab);
-  $(".inner-north").tabs('select', selectedTab);
-  $(".inner-north").bind('tabsselect', function(event, ui) {
+  $(".inner-north").tabs('option', 'active', selectedTab);
+  $(".inner-north").bind('tabsactivate', function(event, ui) {
     // // Objects available in the function context:
       // ui.tab // anchor element of the selected (clicked) tab
       // ui.panel // element, that contains the selected/clicked tab
