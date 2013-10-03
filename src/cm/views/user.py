@@ -202,22 +202,21 @@ class UserRoleTextForm(ModelForm):
 class UserProfileForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('allow_contact', 'preferred_language', 'is_suspended', 'tags')
+        fields = ('allow_contact', 'is_suspended', 'tags')
 
 class MyUserProfileForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('allow_contact', 'preferred_language', 'tags')
+        fields = ('allow_contact', 'tags')
 
 class UserProfileAddForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('preferred_language', 'tags')
+        fields = ('tags',)
         
 class UserProfileRegisterForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('preferred_language', )        
 
 class UserAddForm(forms.Form):
     note = forms.CharField(label=ugettext_lazy(u'Note'),
@@ -265,7 +264,7 @@ def user_add(request, key=None, mass=False):
     else:
         userform = UserForm() if not mass else MassUserForm()
         userroleform = UserRoleForm() if not(key) else None
-        userprofileform = UserProfileAddForm({'preferred_language' : request.LANGUAGE_CODE})
+        userprofileform = UserProfileAddForm()
         noteform = UserAddForm()
         localroleform = UserRoleTextForm(prefix="local") if key else None
     
@@ -595,6 +594,6 @@ def register(request):
             return HttpResponseRedirect(reverse('index'))
     else:    
         userform = UserForm()
-        userprofileaddform = UserProfileRegisterForm({'preferred_language' : request.LANGUAGE_CODE})
+        userprofileaddform = UserProfileRegisterForm()
     
     return render_to_response('site/register.html', {'forms':[userform, userprofileaddform]}, context_instance=RequestContext(request))
