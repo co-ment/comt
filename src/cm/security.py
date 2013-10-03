@@ -391,6 +391,45 @@ def has_perm_on_comment(perm_name):
 
         return _check_local_perm
     return _dec        
-    
 
+def has_global_perm_or_perm_on_text(global_perm_name, perm_name, must_be_logged_in=False, redirect_field_name=REDIRECT_FIELD_NAME, api=False):
+  def _dec(view_func):
+    def _check_global_or_local_perm(request, *args, **kwargs):
+      if must_be_logged_in and not is_authenticated(request):
+        if not api:
+          raise UnauthorizedException('Should be logged in')
+        else:
+          return rc.FORBIDDEN
 
+      if has_perm(request, global_perm_name, text=None): 
+        return view_func(request, *args, **kwargs)
+            
+      if cm_settings.NO_SECURITY:
+        return view_func(request, *args, **kwargs)
+
+      if 'key' in kwargs: 
+        text = get_object_or_404(Text, key=kwargs['key'])                
+      else:
+        raise Exception('no security check possible')
+                
+      # in api, the view has an object as first parameter, request is args[0]
+      if not api:                
+        req = request
+      else:                    
+        req = args[0]     
+
+      if has_perm(req, perm_name, text=text): 
+        return view_func(request, *args, **kwargs)
+            
+      if not api:
+        raise UnauthorizedException('No perm %s' % perm_name)
+      else:
+        return rc.FORBIDDEN
+
+      raise UnauthorizedException('No global perm %s nor local perm %s' %(global_perm_name, perm_name))
+
+    _check_global_or_local_perm.__doc__ = view_func.__doc__
+    _check_global_or_local_perm.__dict__ = view_func.__dict__
+
+    return _check_global_or_local_perm
+  return _dec
