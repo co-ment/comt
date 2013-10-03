@@ -202,12 +202,12 @@ class UserRoleTextForm(ModelForm):
 class UserProfileForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('allow_contact', 'is_suspended', 'tags')
+        fields = ('is_suspended', 'tags')
 
 class MyUserProfileForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('allow_contact', 'tags')
+        fields = ('tags',)
 
 class UserProfileAddForm(ModelForm):
     class Meta:
