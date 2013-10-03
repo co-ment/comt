@@ -13,7 +13,7 @@
 {% nb_users as nb_users %}
 <h1 class="main_title">
 {% if CONF.f_get_logo_url %}
-<div><img src="{{ CONF.f_get_logo_url }}"></img></div>
+<div><a title="{% blocktrans %}back to workspace{% endblocktrans %}" class="title" href="{% url index %}"><img src="{{ CONF.f_get_logo_url }}" alt="logo" /></a></div>
 {% endif %}
 
 {% if CONF.workspace_name %}

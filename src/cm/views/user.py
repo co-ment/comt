@@ -20,7 +20,7 @@ from cm.models import ApplicationConfiguration
 from django.views.generic.list_detail import object_list
 from django.contrib.auth.decorators import login_required
 from cm.views import get_keys_from_dict
-from cm.security import has_global_perm
+from cm.security import has_global_perm, has_global_perm_or_perm_on_text
 from cm.exception import UnauthorizedException
 from cm.cm_settings import SHOW_EMAILS_IN_ADMIN
 from tagging.models import Tag
@@ -202,22 +202,21 @@ class UserRoleTextForm(ModelForm):
 class UserProfileForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('allow_contact', 'preferred_language', 'is_suspended', 'tags')
+        fields = ('is_suspended', 'tags')
 
 class MyUserProfileForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('allow_contact', 'preferred_language', 'tags')
+        fields = ('tags',)
 
 class UserProfileAddForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('preferred_language', 'tags')
+        fields = ('tags',)
         
 class UserProfileRegisterForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('preferred_language', )        
 
 class UserAddForm(forms.Form):
     note = forms.CharField(label=ugettext_lazy(u'Note'),
@@ -228,20 +227,20 @@ class UserAddForm(forms.Form):
 
 SEPARATORS_RE = re.compile('[;,\n]+')
 
-@has_global_perm('can_manage_workspace')
+@has_global_perm_or_perm_on_text('can_manage_workspace', 'can_manage_text')
 def user_mass_add(request, key=None):
     return user_add(request, key=key, mass=True)
 
-@has_global_perm('can_manage_workspace')
+@has_global_perm_or_perm_on_text('can_manage_workspace', 'can_manage_text')
 def user_add(request, key=None, mass=False):
     text = get_text_by_keys_or_404(key) if key else None
     if request.method == 'POST':
         userform = UserForm(request.POST) if not mass else MassUserForm(request.POST)
-        userroleform = UserRoleForm(request.POST)
+        userroleform = UserRoleForm(request.POST) if not(key) else None
         noteform = UserAddForm(request.POST)
         userprofileform = UserProfileAddForm(request.POST)
         localroleform = UserRoleTextForm(request.POST, prefix="local") if key else None
-        if userform.is_valid() and userroleform.is_valid() and noteform.is_valid() and userprofileform.is_valid() and (not localroleform or localroleform.is_valid()):
+        if userform.is_valid() and (not userroleform or userroleform.is_valid()) and noteform.is_valid() and userprofileform.is_valid() and (not localroleform or localroleform.is_valid()):
             data = userform.cleaned_data
             data.update(userprofileform.cleaned_data)
             data.update(noteform.cleaned_data)
@@ -251,9 +250,10 @@ def user_add(request, key=None, mass=False):
             for email in [s.strip() for s in SEPARATORS_RE.split(emails)]:
                 if email and not User.objects.filter(email__iexact=email) and email not in email_created:
                     user = UserProfile.objects.create_inactive_user(email, True, **data)
-                    userrole = UserRole.objects.create(user=user, role=userroleform.cleaned_data['role'], text=None)
                     if key:
                         localuserrole = UserRole.objects.create(user=user, role=localroleform.cleaned_data['role'], text=text)
+                    else:
+                        userrole = UserRole.objects.create(user=user, role=userroleform.cleaned_data['role'], text=None)
                     email_created.add(email)
                     register_activity(request, "user_created", user=user)
             display_message(request, ungettext(u'%(nb_users)d user added', u'%(nb_users)d users added', len(email_created)) % {'nb_users': len(email_created)})
@@ -263,8 +263,8 @@ def user_add(request, key=None, mass=False):
                 return HttpResponseRedirect(reverse('user'))
     else:
         userform = UserForm() if not mass else MassUserForm()
-        userroleform = UserRoleForm()
-        userprofileform = UserProfileAddForm({'preferred_language' : request.LANGUAGE_CODE})
+        userroleform = UserRoleForm() if not(key) else None
+        userprofileform = UserProfileAddForm()
         noteform = UserAddForm()
         localroleform = UserRoleTextForm(prefix="local") if key else None
     
@@ -594,6 +594,6 @@ def register(request):
             return HttpResponseRedirect(reverse('index'))
     else:    
         userform = UserForm()
-        userprofileaddform = UserProfileRegisterForm({'preferred_language' : request.LANGUAGE_CODE})
+        userprofileaddform = UserProfileRegisterForm()
     
     return render_to_response('site/register.html', {'forms':[userform, userprofileaddform]}, context_instance=RequestContext(request))

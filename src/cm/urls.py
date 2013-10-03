@@ -141,13 +141,15 @@ urlpatterns += patterns('',
 
 if settings.DEBUG:
      urlpatterns += patterns('',
-     (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
-
-     (r'^cmmedia/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'src/cm/media/'}),
-     (r'^robots.txt$', 'django.views.static.serve', {'document_root': 'src/cm/media/', 'path':'robots.txt'}),
-     (r'^favicon.ico$', 'django.views.static.serve', {'document_root': 'src/cm/media/', 'path':'favicon.ico'}),
-     
-)
+       (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+       (r'^cmmedia/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'src/cm/media/'}),
+       (r'^robots.txt$', 'django.views.static.serve', {'document_root': 'src/cm/media/', 'path':'robots.txt'}),
+       (r'^favicon.ico$', 'django.views.static.serve', {'document_root': 'src/cm/media/', 'path':'favicon.ico'}),
+     )
+else:
+     urlpatterns += patterns('',
+       (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+     )
      
 js_info_dict = {
     'packages': ('cm', ),

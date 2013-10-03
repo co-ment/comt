@@ -20,7 +20,10 @@
 {% block content %}
 
 {%  include "site/macros/text_actions.html" %}
-<h1 class="main_title_text"><a class="title" href="{% url text-view text.key %}">{{ text.get_title }}</a></h1>
+<h1 class="main_title_text">
+  {% if CONF.f_get_logo_url %}<div><a title="{% blocktrans %}back to workspace{% endblocktrans %}" alt="logo" class="title" href="{% url index %}"><img src="{{ CONF.f_get_logo_url }}" alt="logo" /></a></div>{% endif %}
+  <a class="title" href="{% url text-view text.key %}">{{ text.get_title }}</a>
+</h1>
 
 {% include "site/macros/text_meta.html" %}   
 {% include "site/macros/text_tabs.html" %}   
