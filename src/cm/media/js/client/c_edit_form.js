@@ -61,8 +61,10 @@ showEditForm = function(iCommentHost) {
   // => hides these inputs for a reply.
   if (comment.reply_to_id != null) {
     CY.get("#"+gEdit['ids']['changeScopeInputId']).addClass('displaynone')
-    CY.get("#"+gEdit['ids']['categoryInputId']).addClass('displaynone')
-    CY.get("#"+gEdit['ids']['categoryInputId']).ancestor().addClass('displaynone')
+    if (CY.get("#"+gEdit['ids']['categoryInputId'])) {
+      CY.get("#"+gEdit['ids']['categoryInputId']).addClass('displaynone')
+      CY.get("#"+gEdit['ids']['categoryInputId']).ancestor().addClass('displaynone')
+    }
   }
   changeScopeFormClick() ; // to adapt
 
