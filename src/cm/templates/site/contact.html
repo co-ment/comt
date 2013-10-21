@@ -11,6 +11,15 @@
 
 {% block content %}
 
+<h1 class="main_title">
+{% if CONF.f_get_logo_url %}
+<div><a title="{% blocktrans %}back to workspace{% endblocktrans %}" alt="logo" class="title" href="{% url index %}"><img src="{{ CONF.f_get_logo_url }}" /></a></div>
+{% endif %}
+
+{% if CONF.workspace_name %}
+<a title="{% blocktrans %}back to workspace{% endblocktrans %}" class="title" href="{% url index %}">{{ CONF.workspace_name }}</a>
+{% endif %}
+</h1>
 <h1>Contact</h1>
 <form id="profile" enctype="multipart/form-data" class="wizard-form" action="." method="post">
 <table class="wide_form">
