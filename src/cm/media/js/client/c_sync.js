@@ -16,6 +16,14 @@ Sync = function() {
   this._iPreventClick = false ; // oh really ?
 }
 
+// Are we on Safari mobile ?
+var safari_mobile = /iPhone|iPod|iPad/.test(navigator.userAgent);
+// If so, we must scroll the jQuery UI pane created for Safari mobile instead of the whole document
+var the_scrolling_part = safari_mobile ? '#maincontainer' : 'document' ;
+
+// "Add comment" height and margin, to offset comments' display
+var add_comment_offset = 30; // px
+
 Sync.prototype = {
   init : function (iComment) {
   this._q = new CY.AsyncQueue() ;
@@ -389,12 +397,14 @@ Sync.prototype = {
       if (comment['start_wrapper'] != -1) 
         topY = CY.get(".c-id-"+topAncestorComment.id).getY() ;
       else 
-        topY = CY.get('document').get('scrollTop') ;
-      
+        topY = CY.get(the_scrolling_part).get('scrollTop') ;
+     
       this._showComments([topAncestorComment.id], topY, false) ;
       // optim when browsing comments with no reply     
       if (topAncestorComment.replies.length > 0)
-        this._animateTo(topY) ;
+	    // SID: let topY param be null to force Y acquisition from comment that
+	    // may have previously been set by showComments
+        this._animateTo() ;
     }
   },
   _showFocusSingleComment : function(topComment, focusComment, reply) {
@@ -403,7 +413,7 @@ Sync.prototype = {
       if (topComment['start_wrapper'] != -1) 
         topY = CY.get(".c-id-"+topComment.id).getY() ;
       else 
-        topY = CY.get('document').get('scrollTop') ;
+        topY = CY.get(the_scrolling_part).get('scrollTop') ;
       
       this._showComments([topComment.id], topY, false) ;
       // optim when browsing comments with no reply     
@@ -444,23 +454,35 @@ Sync.prototype = {
   
         if (commentDbIds.length > 0) {
           if (atDocumentTop) {
-            CY.get('document').set('scrollTop', 0) ; 
+            CY.get(the_scrolling_part).set('scrollTop', 0) ; 
           }
           else {
             gIComments.activate(commentDbIds[0]) ;
             var scopeStart = CY.get(".c-id-"+commentDbIds[0]) ;
-            if (scopeStart && !scopeStart.inViewportRegion()) { // scopeStart could be null when comment has no scope
+
+			// scopeStart could be null when comment has no scope
+			if (scopeStart && !scopeStart.inViewportRegion()) {
               scopeStart.scrollIntoView(true) ;
+
               // Since scrollIntoView scroll the embed ifram *and* the parent window
               // restore the position of the toolbar
               if (parent)
                 parent.document.getElementById('outer-north').scrollIntoView(true) ;
+
+			  // SID: As we scroll via jQuery UI pane while on Safari mobile, we should base comment
+			  // position on the result of previous scrollIntoView on the pane, so relatively to that
+			  // new top.
+			  // On other cases, it's the right place to add an offset on comment tops in order to
+			  // avoid them to display under the "Add comment" button.
+			  if (safari_mobile)
+				  topY = add_comment_offset;
+			  else
+				  topY += add_comment_offset;
             }
           }
         }
-        
+
         gIComments.setPosition([gConf['iCommentLeftPadding'], topY]) ;
-  
         gIComments.show() ;
       }}) ;
   },
@@ -509,7 +531,7 @@ Sync.prototype = {
 		    });
       }
       // GIB: go down the 'add comment' icon
-      this.showComments(allTopComments, [0,30], true) ;
+      this.showComments(allTopComments, [0, add_comment_offset], true);
     }, this, null) ;
   },
 
@@ -529,7 +551,7 @@ Sync.prototype = {
 		    });
       }
       // GIB: go down the 'add comment' icon
-      this.showComments(scopeRemovedCommentIds, [0,30], true) ;
+      this.showComments(scopeRemovedCommentIds, [0, add_comment_offset], true);
       
     }, this, null) ;
   },
@@ -538,7 +560,9 @@ Sync.prototype = {
     checkForOpenedDialog(null, function() {
       this._q.add({fn:CY.bind(this.setPreventClickOn, this)}) ;
       this._showComments(commentDbIds, mouseXY[1], atDocumentTop) ;
-      this._animateTo(mouseXY[1]) ;
+	  // SID: let topY param be null to force Y acquisition from comment that
+	  // may have previously been set by showComments
+      this._animateTo() ;
       this._q.add({fn:CY.bind(this.setPreventClickOff, this)}) ;
       this._q.run();
     }, this, null) ;

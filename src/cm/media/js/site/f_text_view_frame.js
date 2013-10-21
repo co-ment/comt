@@ -2,7 +2,7 @@ var gResetOtherFieldsOnFilterFieldChange = true;
 
 var myDefaultOuterLayoutSettings = {
   center : {
-    paneSelector :".outer-center"
+    paneSelector : '#outer-center'
   },
   north : {
     size :50,//30,
@@ -45,13 +45,8 @@ var myDefaultInnerLayoutSettings = {
     togglerLength_closed :"100%",
     togglerLength_open :"100%",
     togglerAlign_closed :"center",
-    /* togglerContent_closed :"options", */
     togglerTip_closed :gettext("click to show options"),
     togglerTip_open :gettext("click to hide options"),
-    /*
-    togglerContent_open :"&#9650;", // "▲"
-    togglerContent_closed :"&#9660;", // "▼"
-    */
     togglerContent_open :"<img alt='arrow up' src='" + sv_media_url + "img/arrow-up.png' />",
     togglerContent_closed :"<img alt='arrow down' src='" + sv_media_url + "img/arrow-down.png' />",
     initClosed :false,
@@ -69,7 +64,7 @@ layoutFrames = function() {
       : (innerNorthPaneOpened == "0");
 
   outerLayout = $('body').layout(myDefaultOuterLayoutSettings);
-  innerLayout = $('div.outer-center').layout(myDefaultInnerLayoutSettings);
+  innerLayout = $('#outer-center').layout(myDefaultInnerLayoutSettings);
   
   // to trigger add_comment_btn positioning
   if (myDefaultInnerLayoutSettings.north.initClosed)
