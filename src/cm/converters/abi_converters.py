@@ -102,7 +102,11 @@ class AbiFileConverter(object):
             type or os.path.splitext(out_file)[1][1:], 'txt')
 
         # do the conversion
-        self._perform_conversion(in_file, out_file, type)
+        try:
+          self._perform_conversion(in_file, out_file, type)
+        except:
+          raise
+
 
         # return a byte string if no out_file is specified
         if return_bytes:
@@ -126,9 +130,14 @@ class AbiFileConverter(object):
         self.child.sendline(cmd)
 
         # Check for errors
-        i = self.child.expect(['OK', pexpect.TIMEOUT])
-        if i != 0:
+        i = 1
+
+        try:
+          i = self.child.expect(['OK', pexpect.TIMEOUT])
+          if i != 0:
             raise AbiCommandError('Error performing AbiCommand: %s' %cmd)
+        except:
+          raise
 
     def convert_to_html(self, input):
         """ 
@@ -174,7 +183,10 @@ class AbiFileConverter(object):
           os.chmod(outdir_name, 0777) # read / write
 
           # Do the job
-          self.convert_file(infile_name, outfile_name, 'html')
+          try:
+            self.convert_file(infile_name, outfile_name, 'html')
+          except:
+            raise
 
           out_f = open(outfile_name,'r')
           output = out_f.read()
@@ -191,6 +203,9 @@ class AbiFileConverter(object):
             output = re.sub(r'<img(.+)style="width:[\d\.]+mm"', r'<img\1', output)
           return output,img_res
 
+        except Exception as inst:
+          pass
+
         finally:
           try:
             if out_f:
@@ -199,6 +214,8 @@ class AbiFileConverter(object):
                 infile.close()
           except:
             pass
+          if inst:
+            raise inst
 
     def convert_from_html(self, input, format):
         """ 
