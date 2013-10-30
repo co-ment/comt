@@ -26,11 +26,12 @@ hasWrapperAncestor = function(elt) {
 
 // when selection starts/ends in/on a non textual element (<hr/> for example) we very often have anchorNode/focusNode == body elt
 // TODO adapt this body case by considering offset ( cf. http://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html)
+
 getSelectionInfo  = function () {
   var startNode = null, endNode = null, startOffset = 0, endOffset = 0, text = '' ;
   
   if (window.getSelection) { // everything else than IE
-    var userSelection = window.getSelection();
+    var userSelection = safari_mobile ? storedSelection : window.getSelection ();
 
     if (userSelection.rangeCount > 0) {
       var range = userSelection.getRangeAt(0) ;
@@ -166,7 +167,7 @@ getSelectionInfo  = function () {
       else 
         return null ;
     }
-    else 
+    else
       return null ;
     
   }

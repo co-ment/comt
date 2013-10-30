@@ -164,6 +164,10 @@ onTextMouseUp = function(e) {
   }
 } ;
 
+// safari_mobile defined in media/js/client/c_sync.js
+if (safari_mobile)
+	onSelectionChange = onTextMouseUp;
+
 gLastScrollTime = null ;
 checkForAlignement = function () {
   var now = (new Date()).getTime() ;

@@ -17,7 +17,9 @@ Sync = function() {
 }
 
 // Are we on Safari mobile ?
-var safari_mobile = /iPhone|iPod|iPad/.test(navigator.userAgent);
+// made global to be used in templates/site/text_view_comments.html
+// and in media/js/site/c_text_view_comments.js
+safari_mobile = /iPhone|iPod|iPad/.test(navigator.userAgent);
 // If so, we must scroll the jQuery UI pane created for Safari mobile instead of the whole document
 var the_scrolling_part = safari_mobile ? '#maincontainer' : 'document' ;
 

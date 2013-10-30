@@ -47,8 +47,9 @@
 <!--
 
 // Using jQuery UI-Layout to allow scrolling in Safari mobile
-if (/iPhone|iPod|iPad/.test(navigator.userAgent)) {
-	jQuery(document).ready (function () {
+jQuery(document).ready (function () {
+	// safari_mobile is defined in media/js/client/c_sync.js
+	if (safari_mobile) {
 		jQuery('body').layout ({
 			center: {
 			    paneSelector : '#maincontainer',
@@ -57,9 +58,44 @@ if (/iPhone|iPod|iPad/.test(navigator.userAgent)) {
 		});
 		jQuery('#maincontainer').css ({
 			height: '100%',
+			width: '99%'
 		});
-	});
-}
+
+		/**
+		 * cloneSelection
+		 * s		: Selection object
+		 * return	: a deep copy of a given Selection, co-ment usefull functions are recreated
+		 */
+		function cloneSelection (s) {
+			var c = jQuery.extend (true, {}, s);
+			// var c = JSON.parse(JSON.stringify(s)); // alternative
+			c.ranges = [];
+
+			for (var j = 0; j < s.rangeCount; j++) {
+				c.ranges [j] = s.getRangeAt (j);
+			}
+
+			c.getRangeAt = function (j) { return this.ranges [j]; };
+			c.toString = function () { return this.ranges[0].toString (); };
+			return c;
+		}
+
+		var emptySelection = { rangeCount: 0 };
+		// intended global variable used in media/js/client/c_selection.js
+		storedSelection = emptySelection;
+
+		document.addEventListener("selectionchange", function() {
+			var c = cloneSelection(window.getSelection());
+			var c_txt = c.toString ();
+
+			if (c_txt && c_txt != '') {
+				storedSelection = c;
+			} else {
+				setTimeout (function () { storedSelection = emptySelection; }, 500);
+			}
+		}, false);
+	}
+});
 
 // GLOBALS from server
 sv_user_permissions = [];
