@@ -16,7 +16,7 @@ Sync = function() {
   this._iPreventClick = false ; // oh really ?
 }
 
-// Are we on Safari mobile ?
+// SID: Are we on Safari mobile ?
 // made global to be used in templates/site/text_view_comments.html
 // and in media/js/site/c_text_view_comments.js
 safari_mobile = /iPhone|iPod|iPad/.test(navigator.userAgent);

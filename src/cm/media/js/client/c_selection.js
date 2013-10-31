@@ -31,6 +31,7 @@ getSelectionInfo  = function () {
   var startNode = null, endNode = null, startOffset = 0, endOffset = 0, text = '' ;
   
   if (window.getSelection) { // everything else than IE
+	// SID: if on safari_mobile get the previous meaningfull selection from a global variable set in text_view_comments.html
     var userSelection = safari_mobile ? storedSelection : window.getSelection ();
 
     if (userSelection.rangeCount > 0) {
