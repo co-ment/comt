@@ -75,6 +75,6 @@ DEFAULT_TIME_ZONE = "Europe/Paris"
 # a third-party CMS throuch co-ment API.
 DECORATED_CREATORS = False
 
-# Set to TRUE to use Abiword for convertion form and to legacy formats.
-# Set to False to use LibreOffice for convertion form and to legacy formats.
+# Set to TRUE to use Abiword for convertion from and to legacy formats.
+# Set to False to use LibreOffice for convertion from and to legacy formats.
 USE_ABI = True
