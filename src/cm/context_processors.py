@@ -9,6 +9,7 @@ def static(request):
     return {
             'SITE_URL' : settings.SITE_URL,
             'CLIENT_DEBUG' : settings.CLIENT_DEBUG,
+            'DISABLE_TRACKING' : settings.DISABLE_TRACKING,
             'YUI_VERSION' : settings.YUI_VERSION,
             'CONF': ApplicationConfiguration,
             'CM_MEDIA_PREFIX' : settings.CM_MEDIA_PREFIX,

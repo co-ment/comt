@@ -1,3 +1,7 @@
+{% if DISABLE_TRACKING %}
+
+{% else %}
+
 {% autoescape off %}{{ TRACKING_HTML }}{% endautoescape %}
 
 <!-- Piwik -->
@@ -12,5 +16,4 @@ piwikTracker.enableLinkTracking();
 } catch( err ) {}
 </script><noscript><p><img src="https://stats.co-ment.com/piwik.php?idsite=17" style="border:0" alt=""/></p></noscript>
 <!-- End Piwik Tag -->
-
-
+{% endif %}

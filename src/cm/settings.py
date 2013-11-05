@@ -2,6 +2,10 @@ DEBUG = False
 CLIENT_DEBUG = DEBUG
 TEMPLATE_DEBUG = DEBUG
 
+# Set to True if you don't want to appear in Sopinspace Piwik statistics
+DISABLE_TRACKING = DEBUG
+
+
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
 )
