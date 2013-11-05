@@ -6,14 +6,14 @@ YUI_DEBUG = DEBUG # use expanded yui version (i.e. not -min)
 YUI_DISTANT = False
 
 DATABASES = {
-  'default': {
-    'ENGINE': 'postgresql_psycopg2', # YOUR_SETTINGS # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-    'NAME': 'db_name',               # YOUR_SETTINGS # Or path to database file if using sqlite3.
-    'USER': 'db_user',               # YOUR_SETTINGS # Not used with sqlite3.
-    'PASSWORD': 'db_pw',             # YOUR_SETTINGS # Not used with sqlite3.
-    'HOST': '',                      # YOUR_SETTINGS # Set to empty string for localhost. Not used with sqlite3.
-    'PORT': '',                      # YOUR_SETTINGS # Set to empty string for default. Not used with sqlite3.
-   }
+	'default': {
+		'ENGINE':	'django.db.backend.<engine>',	# YOUR_SETTINGS # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+		'NAME':		'<db_name>',	# YOUR_SETTINGS # Or path to database file if using sqlite3.
+		'USER':		'<db_user>',	# YOUR_SETTINGS # Not used with sqlite3.
+		'PASSWORD':	'<db_pw>',		# YOUR_SETTINGS # Not used with sqlite3.
+		'HOST':		'<localhost>',	# YOUR_SETTINGS # Set to empty string for localhost. Not used with sqlite3.
+		'PORT':		'<5433>',		# YOUR_SETTINGS # Set to empty string for default. Not used with sqlite3.
+	}
 }
 
 SITE_URL = "http://127.0.0.1:8000" # YOUR_SETTINGS
@@ -38,15 +38,15 @@ SECRET_KEY = 'random_text_qs57Dd_-dqsdqd' # YOUR_SETTINGS
 MEDIA_URL = '/site_media/'
 
 INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.admin',
-    'cm',
-#    'django_extensions',
-    'tagging',
-    'south',
+	'django.contrib.auth',
+	'django.contrib.contenttypes',
+	'django.contrib.sessions',
+	'django.contrib.sites',
+	'django.contrib.admin',
+	'cm',
+#	 'django_extensions',
+	'tagging',
+	'south',
 )
 
 CM_MEDIA_PREFIX = '/cmmedia/'
@@ -54,7 +54,7 @@ CM_MEDIA_PREFIX = '/cmmedia/'
 ADMIN_MEDIA_PREFIX = '/media/'
 
 ADMINS = (
-    ('Comt admin', CONTACT_DEST),
+	('Comt admin', CONTACT_DEST),
 )
 
 MANAGERS = ADMINS
