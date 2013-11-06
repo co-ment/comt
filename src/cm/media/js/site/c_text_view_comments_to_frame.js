@@ -42,6 +42,8 @@ c_setCommentsColWidth = function(val) {
   // icomments
   gIComments.setWidth(iCommentWidth) ;  
 
+  iCommentWidth += gLayout.iCommentsRequiredThreadPadding (); // SID: use max available space as there is no indentation on that box
+
   //forms
   gICommentForm['overlay'].get('boundingBox').setStyle('width', iCommentWidth + 'px') ;
   changeFormFieldsWidth(gICommentForm['formId'], iCommentWidth) ;

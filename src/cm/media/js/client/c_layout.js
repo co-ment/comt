@@ -43,9 +43,13 @@ Layout.prototype = {
   getTopICommentsWidth : function() {
     return this.getTopICommentsWidthFromWidth(this.sliderValToPx(gPrefs.get('layout','comments_col_width'))) ;
   },
-  
+
+  iCommentsRequiredThreadPadding : function () {
+	  return 2 * gConf['iCommentThreadPadding']; // PhA said : a threaded discussion with a depth of 2 still shoudn't hide the text 20100317
+  },
+
   getTopICommentsWidthFromWidth : function(val) {
-    var ret = val - ( 2 * gConf['iCommentThreadPadding']) ; // PhA said : a threaded discussion with a depth of 2 still shoudn't hide the text 20100317
+    var ret = val - this.iCommentsRequiredThreadPadding ();
     return ret - 7;
   },
   

@@ -31,7 +31,8 @@ instanciateToc = function() {
   }
   overlayHtml['bodyContent'] = content.innerHTML;
   
-  var width = gLayout.getTopICommentsWidth() ;
+  var width = gLayout.getTopICommentsWidth();
+  width += gLayout.iCommentsRequiredThreadPadding (); // SID: use max available space as there is no indentation on that box
   
   var overlay = new CY.Overlay( {
     zIndex :3,

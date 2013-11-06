@@ -31,6 +31,7 @@ instanciateICommentForm = function() {
   var overlayHtml = getHtml(gICommentForm) ;
   
   var width = gLayout.getTopICommentsWidth() ;
+  width += gLayout.iCommentsRequiredThreadPadding (); // SID: use max available space as there is no indentation on that box
   
   var overlay = new CY.Overlay( {
     zIndex :3,
