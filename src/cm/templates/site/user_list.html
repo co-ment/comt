@@ -84,10 +84,10 @@ $(function() {
 <!--
 function check_activate_apply() {
     if (($("input[name^=check-]:checked").length > 0) && ($("#bulk_actions").val() != -1)) {
-        $('#apply').removeAttr('disabled');
+        $('#apply').prop('disabled',false);
     }
     else {
-        $('#apply').attr('disabled','disabled');
+        $('#apply').prop('disabled',true);
     }   
 };
 
@@ -121,8 +121,8 @@ $(function() {
             <!--
             $(function() {
                 $("#all_check").click(function () {
-                	checked = $("#all_check").attr('checked'); 
-                	$(".user_check").attr('checked', checked);
+                	checked = $("#all_check").prop('checked'); 
+                	$(".user_check").prop('checked', checked);
                 	check_activate_apply();
                   });                            
             }) ;
@@ -202,7 +202,7 @@ $(function() {
 <!--
 $(function() {
     $('select[name^=user-role-]').change(function(){
-    	$('#save').removeAttr('disabled');
+    	$('#save').prop('disabled', false);
     });
 }) ;
 --> 

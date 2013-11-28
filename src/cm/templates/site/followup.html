@@ -66,13 +66,13 @@ tb_conf['current_tab'] = 'followup';
 
     $(function() {
         adapt_own_check_visibility = function() {
-            if ($("#workspace_notify_check").attr('checked'))
+            if ($("#workspace_notify_check").is(':checked'))
                 $("#own_notify_check_container").hide() ;
             else
                 $("#own_notify_check_container").show() ;
         } ;
         $(".check").click(function(){
-            checked = $(this).attr('checked');
+            checked = $(this).is(':checked');
             id = $(this).attr('id') ;
             post_data = {'notif_id': id} ;
             post_data[id] = checked ; 

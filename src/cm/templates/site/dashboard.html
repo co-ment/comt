@@ -276,13 +276,13 @@ $("#comment-refuse-{{ comment.key }}").click(function(){
         <!--
         $(function() {
             $("#view_texts").click(function(){                
-                window.location = ($(this).attr('checked'))? '?{% newparams 'view_texts' '1' %}' : '?{% newparams 'view_texts' '0' %}' ;
+                window.location = ($(this).prop('checked'))? '?{% newparams 'view_texts' '1' %}' : '?{% newparams 'view_texts' '0' %}' ;
             });
             $("#view_comments").click(function(){                
-                window.location = ($(this).attr('checked'))? '?{% newparams 'view_comments' '1' %}' : '?{% newparams 'view_comments' '0' %}' ;
+                window.location = ($(this).prop('checked'))? '?{% newparams 'view_comments' '1' %}' : '?{% newparams 'view_comments' '0' %}' ;
             });
             $("#view_users").click(function(){                
-                window.location = ($(this).attr('checked'))? '?{% newparams 'view_users' '1' %}' : '?{% newparams 'view_users' '0' %}' ;
+                window.location = ($(this).prop('checked'))? '?{% newparams 'view_users' '1' %}' : '?{% newparams 'view_users' '0' %}' ;
             });
         }) ;
         --> 

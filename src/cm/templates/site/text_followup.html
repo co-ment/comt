@@ -68,7 +68,7 @@ tb_conf['current_tab'] = 'followup';
 	<!--
     $(function() {
         $(".check").click(function(){
-            checked = $(this).attr('checked');
+            checked = $(this).prop('checked');
             id = $(this).attr('id') ;
             post_data = {'notif_id': id} ;
             post_data[id] = checked ; 

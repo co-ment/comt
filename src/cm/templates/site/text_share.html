@@ -75,8 +75,8 @@ $(function() {
             <!--
             $(function() {
                 $("#all_check").click(function () {
-                	checked = $("#all_check").attr('checked'); 
-                	$(".user_check").attr('checked', checked);
+                	checked = $("#all_check").prop('checked'); 
+                	$(".user_check").prop('checked', checked);
                 	check_activate_apply();
                   });                            
             }) ;
@@ -145,7 +145,7 @@ $(function() {
 <!--
 $(function() {
     $('select[name^=user-role-]').change(function(){
-    	$('#save').removeAttr('disabled');
+    	$('#save').prop('disabled',false);
     });
 }) ;
 --> 

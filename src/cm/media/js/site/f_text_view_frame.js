@@ -276,7 +276,7 @@ fillTopToolbar = function() {
   var first_browse_by_val = $.cookie('browse_by');
   first_browse_by_val = (first_browse_by_val == null) ? "location" : first_browse_by_val ;
   _setCookie('browse_by', $('#browse_by').val());
-  $("#browse_by option[value="+ first_browse_by_val +"]").attr("selected", true);
+  $("#browse_by option[value="+ first_browse_by_val +"]").prop("selected", true);
   showBrowseIndx() ;
   
   $("#browse_by").change(function() {
@@ -630,7 +630,7 @@ f_updateFilterData = function(newFilterData) {
     $("#filter_name").append($("<option name='c_f2_user_"+ item.name +"' value='"+ item.name +"'>" + item.display +" ("+item.nb_comments+")</option>")) ;
   }
   
-  $("#filter_name option[name="+selectedNameOption+"]").attr("selected", true);
+  $("#filter_name option[name="+selectedNameOption+"]").prop("selected", true);
   
   // dates
   var selectedDateOption = $("#filter_date option:selected").attr("name") ;
@@ -646,7 +646,7 @@ f_updateFilterData = function(newFilterData) {
     $("#filter_date").append($("<option name='c_f_date_"+ item.nb_day +"' value='"+ item.nb_day_date +"'>" + ccc + "</option>")) ;
   }
   
-  $("#filter_date option[name="+selectedDateOption+"]").attr("selected", true);
+  $("#filter_date option[name="+selectedDateOption+"]").prop("selected", true);
   
   // text : nothing to do
   
@@ -660,7 +660,7 @@ f_updateFilterData = function(newFilterData) {
     var item = newFilterData['tags'][i] ;
     $("#filter_tag").append($("<option name='c_f2_tag_"+ item.name +"' value='"+ item.name +"'>" + item.name +" ("+item.nb_comments+")</option>")) ;
   }
-  $("#filter_tag option[name="+selectedTagOption+"]").attr("selected", true);
+  $("#filter_tag option[name="+selectedTagOption+"]").prop("selected", true);
   
   // categories
   var selectedCatOption = $("#filter_cat option:selected").attr("cat") ;
@@ -676,7 +676,7 @@ f_updateFilterData = function(newFilterData) {
         $("#filter_cat").append($("<option name='c_f2_cat_"+ item.cat +"' value='"+ gettext(item.cat) +"'>" + categories[item.cat] +" ("+item.nb_comments+")</option>")) ;
       }
     }
-    $("#filter_cat option[name="+selectedCatOption+"]").attr("selected", true);
+    $("#filter_cat option[name="+selectedCatOption+"]").prop("selected", true);
   }
   else {
     $("#filter_cat").remove()
@@ -693,7 +693,7 @@ f_updateFilterData = function(newFilterData) {
     var item = newFilterData['states'][i] ;
     $("#filter_state").append($("<option name='c_f2_state_"+ item.state +"' value='"+ item.state +"'>" + gettext(item.state) +" ("+item.nb_comments+")</option>")) ;
   }
-  $("#filter_state option[name="+selectedStateOption+"]").attr("selected", true);
+  $("#filter_state option[name="+selectedStateOption+"]").prop("selected", true);
 } ;
 
 f_interfaceUnfreeze = function() {
@@ -703,7 +703,7 @@ f_interfaceUnfreeze = function() {
   }
 
   $(".inner-north select").add(".inner-north input").add("#outer-north select").add("#outer-north input").each( function() {
-    $(this).attr("disabled", false);
+    $(this).prop("disabled", false);
   });
 
   $("#c_slider").slider('enable') ;
@@ -717,7 +717,7 @@ f_interfaceFreeze = function() {
   }
 
   $(".inner-north select").add(".inner-north input").add("#outer-north select").add("#outer-north input").each( function() {
-    $(this).attr("disabled", true);
+    $(this).prop("disabled", true);
   });
   
   $("#c_slider").slider('disable') ;

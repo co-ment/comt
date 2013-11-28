@@ -32,12 +32,12 @@ tb_conf['current_tab'] = 'settings';
 
     
     $(document).ready(function(){
-        old_state = $("#id_workspace_role_model").attr('value');
+        old_state = $("#id_workspace_role_model").val();
         
         $("#id_workspace_role_model").change(function (e) { 
             question = "{% blocktrans %}Are you sure you want to change the role model? All roles (except managers) will be resetted!{% endblocktrans %}";
             if (!confirm(question)) {
-            	$("#id_workspace_role_model").attr('value',old_state);
+            	$("#id_workspace_role_model").val(old_state);
             }
           });
         

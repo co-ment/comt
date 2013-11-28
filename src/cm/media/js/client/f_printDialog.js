@@ -94,7 +94,7 @@ _manageMarkersColorsChoice = function() {
   if (disableMarkersColorsChoice)
     $("#p_color").val('no');
 
-  $("#p_color").attr("disabled", disableMarkersColorsChoice);
+  $("#p_color").prop("disabled", disableMarkersColorsChoice);
   
 } ;
 

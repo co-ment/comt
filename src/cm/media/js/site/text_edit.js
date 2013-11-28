@@ -1,6 +1,6 @@
 function check_save(){
-  var newVersion = $('#id_new_version').attr('checked') ;
-  var commentsKept = $('#id_keep_comments').attr('checked') ;
+  var newVersion = $('#id_new_version').prop('checked') ;
+  var commentsKept = $('#id_keep_comments').prop('checked') ;
 
   if (commentsKept) {
     submit_edit_form();
