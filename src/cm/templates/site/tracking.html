@@ -6,14 +6,30 @@
 
 <!-- Piwik -->
 <script type="text/javascript">
-var pkBaseURL = (("https:" == document.location.protocol) ? "https://stats.co-ment.com/" : "http://piwik.sopinspace.net/");
-document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
-</script><script type="text/javascript">
-try {
-var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 17);
-piwikTracker.trackPageView();
-piwikTracker.enableLinkTracking();
-} catch( err ) {}
-</script><noscript><p><img src="https://stats.co-ment.com/piwik.php?idsite=17" style="border:0" alt=""/></p></noscript>
-<!-- End Piwik Tag -->
+  var _paq = _paq || [];
+  _paq.push(["trackPageView"]);
+  _paq.push(["enableLinkTracking"]);
+
+  _paq.push([function() {
+    function getOriginalVisitorCookieTimeout() {
+      var now = new Date(),
+        nowts = Math.round(now.getTime() / 1000),
+        visitorInfo = this.getVisitorInfo();
+      var createTs = parseInt(visitorInfo[2]);
+      var cookieTimeout = 33696000; // 13 mois en secondes
+      var originalTimeout = createTs + cookieTimeout - nowTs;
+      return originalTimeout;
+    }
+    this.setVisitorCookieTimeout(getOriginalVisitorCookieTimeout());
+  }]);
+
+  (function() {
+    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://piwik.sopinspace.net/";
+    _paq.push(["setTrackerUrl", u+"piwik.php"]);
+    _paq.push(["setSiteId", "17"]);
+    var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+    g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Piwik Code -->
 {% endif %}
