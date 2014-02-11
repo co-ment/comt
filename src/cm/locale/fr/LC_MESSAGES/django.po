@@ -2299,3 +2299,8 @@ msgstr "Laissez vide pour utiliser la valeur configurée pour l'espace de travai
 #: models.py:266 models.py:267 models.py:268 models.py:269 models.py:270
 msgid "To disable this category for this text whatever the configuration for the workspace, enter: "
 msgstr "Pour désactiver cette catégorie pour ce texte quelle que soit la configuration de l'espace de travail, entrez : "
+
+#: /header.html:8
+#, fuzzy
+msgid "Privacy policy"
+msgstr "Vie privée"

@@ -2374,3 +2374,8 @@ msgstr "Déjelo en blanco para utilizar el valor configurado para el espacio de 
 #, fuzzy
 msgid "To disable this category for this text whatever the configuration for the workspace, enter: "
 msgstr "Para desactivar esta categoría para este texto sea cual sea la configuración del espacio de trabajo, escriba: "
+
+#: /header.html:8
+#, fuzzy
+msgid "Privacy policy"
+msgstr "Política de confidencialidad"

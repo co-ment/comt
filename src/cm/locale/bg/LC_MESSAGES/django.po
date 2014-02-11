@@ -2209,3 +2209,8 @@ msgstr "Оставете празно, за да използвате стойн
 #, fuzzy
 msgid "To disable this category for this text whatever the configuration for the workspace, enter: "
 msgstr "За да деактивирате тази категория за този текст, независимо от конфигурацията на работната област, въведете: "
+
+#: /header.html:8
+#, fuzzy
+msgid "Privacy policy"
+msgstr "политика за поверителност"

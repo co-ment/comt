@@ -6,21 +6,22 @@
 
 <!-- Piwik -->
 <script type="text/javascript">
+<!--
   var _paq = _paq || [];
   _paq.push(["trackPageView"]);
   _paq.push(["enableLinkTracking"]);
 
   _paq.push([function() {
-    function getOriginalVisitorCookieTimeout() {
+    function getOriginalVisitorCookieTimeout(obj) {
       var now = new Date(),
-        nowts = Math.round(now.getTime() / 1000),
-        visitorInfo = this.getVisitorInfo();
+        nowTs = Math.round(now.getTime() / 1000),
+        visitorInfo = obj.getVisitorInfo();
       var createTs = parseInt(visitorInfo[2]);
       var cookieTimeout = 33696000; // 13 mois en secondes
       var originalTimeout = createTs + cookieTimeout - nowTs;
       return originalTimeout;
     }
-    this.setVisitorCookieTimeout(getOriginalVisitorCookieTimeout());
+    this.setVisitorCookieTimeout(getOriginalVisitorCookieTimeout(this));
   }]);
 
   (function() {
@@ -30,6 +31,13 @@
     var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
     g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
   })();
-</script>
 <!-- End Piwik Code -->
+$(document).ready(function() {
+  $('#hide-piwik-cookies-optout').click(function() {
+    $('#piwik-cookies-optout iframe').slideToggle("fast");
+  });
+});
+-->
+</script>
+<div id="piwik-cookies-optout"><iframe frameborder="no" width="900px" height="120px" src="http://piwik.sopinspace.net/index.php?module=CoreAdminHome&action=optOut&language={{ LANGUAGE_CODE }}"></iframe></div>
 {% endif %}
