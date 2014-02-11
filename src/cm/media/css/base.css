@@ -863,6 +863,10 @@ h1.main_title_text, h1.main_title {
   font: 16px "Droid Sans", Verdana, sans-serif;
 }
 
+#hide-piwik-cookies-optout {
+  cursor: help;
+}
+
 #piwik-cookies-optout {
   position: fixed;
   left: 25%;
