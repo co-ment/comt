@@ -2327,3 +2327,8 @@ msgstr "Lasciare vuoto per utilizzare il valore configurato per l'area di lavoro
 #, fuzzy
 msgid "To disable this category for this text whatever the configuration for the workspace, enter: "
 msgstr "Per disabilitare questa categoria per questo testo qualunque sia la configurazione per l'area di lavoro, digitare: "
+
+#: /header.html:8
+#, fuzzy
+msgid "Privacy policy"
+msgstr "Politica della privacy"

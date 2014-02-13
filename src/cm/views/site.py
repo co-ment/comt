@@ -21,6 +21,7 @@ from django.utils.translation import get_language, ugettext as _, ugettext_lazy
 from django.views.generic.list_detail import object_list
 from django.contrib.auth.models import User
 from cm.models import Text, TextVersion, Attachment, Comment, Configuration, Activity
+from django.core.cache import cache
 
 ACTIVITY_PAGINATION = 10
 RECENT_TEXT_NB = 5
@@ -79,6 +80,7 @@ def dashboard(request):
                 user = form.get_user()
                 user.backend = 'django.contrib.auth.backends.ModelBackend'
                 cm_login(request, user)
+                cache.clear()
                 display_message(request, _(u"You're logged in!"))
                 return HttpResponseRedirect(reverse('index'))
         else:

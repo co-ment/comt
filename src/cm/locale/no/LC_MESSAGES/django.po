@@ -2188,3 +2188,8 @@ msgstr "La stå tomt for å bruke verdien konfigurert for arbeidsområdet."
 #, fuzzy
 msgid "To disable this category for this text whatever the configuration for the workspace, enter: "
 msgstr "For å deaktivere denne kategorien for denne teksten uansett konfigurasjon for arbeidsområdet, skriver du: "
+
+#: /header.html:8
+#, fuzzy
+msgid "Privacy policy"
+msgstr "Personvern"

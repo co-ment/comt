@@ -4,6 +4,9 @@
 
 <div id="header_controls">
 
+{% if not DISABLE_TRACKING %}
+   <a id="hide-piwik-cookies-optout">{% blocktrans %}Privacy policy{% endblocktrans %} ▼ </a> ·
+{% endif %}
 {% if user.is_authenticated %}<b>{{ user.username }}</b> ·{% endif %} 
    <a title="{% blocktrans %}Home{% endblocktrans %}" href="{% url index %}">{% blocktrans %}Home{% endblocktrans %}</a>
    {% if can_create_text %}    

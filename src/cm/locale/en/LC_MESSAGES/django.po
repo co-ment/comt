@@ -2078,3 +2078,8 @@ msgstr ""
 #: models.py:266 models.py:267 models.py:268 models.py:269 models.py:270
 msgid "To disable this category for this text whatever the configuration for the workspace, enter: "
 msgstr ""
+
+#: /header.html:8
+#, fuzzy
+msgid "Privacy policy"
+msgstr ""
