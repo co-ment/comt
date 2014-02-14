@@ -1,6 +1,5 @@
 
 define ("WORKSPACE_URL", 'http://192.168.2.61:8000/');
-define ("WORKSPACE_NAME", 'Workspace');
 define ("USER_ADMIN", 'siltaar');
 define ("PASS_ADMIN", 'oaueoaue');
 

@@ -1,12 +1,23 @@
 
 // console.log ('args '+args);
 
+// try to login
+
+// create texts and co-ments
+// collect newly created URLs
+
+// unlog
+
+// check that public texts still work while unlogged
+
+// check that non public texts are unavailable
+
 describe ('comt', function () {
 
 	this.timeout(150000);
 
-	describe ('connexion', function () {
-		it ('should load login page', dsl(function () {
+	describe ('login page', function () {
+		it ('should load', dsl(function () {
 			// here we are in Karma page
 			browser.navigateTo ('/');
 
@@ -17,14 +28,29 @@ describe ('comt', function () {
 			});*/
 
 			expect (element ('title').text ()).toBeDefined ();
-			expect (element ('title').text ()).toMatch (/Home - Workspace/);
+			expect (element ('title').text ()).toMatch (/Home/);
 
-			// it should have a header
+		}));
+		it ('should have 2 links in #header_controls', dsl(function () {
+			expect (element ('#header_controls a').count ()).toBe (2);
+		}));
+		it ('should have a Home link in #header_controls', dsl(function () {
+			expect (element ('#header_controls a[href="/"]').val ()).toBeDefined ();
+			// to display the tested value :
+			//element ('#header_controls a[href="/"]').text ( function (txt) { console.log (txt); });
+			// returns defined ? "" : undefined;
+		}));
+		it ('should have a Login link in #header_controls', dsl(function () {
+			expect (element ('#header_controls a[href="/login/"]').val ()).toBeDefined ();
+		}));
+		it ('should not have a XXX link in #header_controls', dsl(function () {
+			expect (element ('#header_controls a[href="/xxx/"]').val ()).not ().toBeDefined ();
+		}));
 				// with visible homepage and login links
 			// it should have a title
 				// with workspace name in it… ?
 			// it may have public texts
-				// how many max ?
+				// 0-5
 				// do we announce the right number of texts ?
 			// it should have a login form
 				// with labels
@@ -37,7 +63,6 @@ describe ('comt', function () {
 			// we should try the links
 			// we should try urls as not logged to check the access avoidance
 
-		}));
 		it ('should log in', dsl(function () {
 			browser.navigateTo ('/');
 			input ('#id_username').enter ('siltaar');
@@ -45,7 +70,7 @@ describe ('comt', function () {
 			element ('#login input[type=submit]').click ();
 			browser.waitForPageLoad ()
 			browser.navigateTo ('/');
-			expect (element ('title').text ()).toMatch (/Dashboard\n - Workspace/m);
+			expect (element ('title').text ()).toMatch (/Dashboard/m);
 
 		}));
 	});
