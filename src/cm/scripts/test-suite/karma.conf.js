@@ -26,10 +26,6 @@ module.exports = function(config) {
 		proxies: {
 			'/': w.WORKSPACE_URL
 		},
-		client: {
-			args:[w.WORKSPACE_NAME, w.USER_ADMIN, w.PASS_ADMIN], 
-			// captureConsole: false
-		},
 		// test results reporter to use : 'dots', 'progress', 'junit', 'growl', 'coverage'
 		reporters: ['progress'],
 		// web server port
