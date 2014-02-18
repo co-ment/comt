@@ -26,6 +26,12 @@ module.exports = function(config) {
 		proxies: {
 			'/': w.WORKSPACE_URL
 		},
+		client: {
+			mocha: {
+				ui: 'tdd'
+			},
+			w: w // SID: exports the variable in the test execution browser window
+		},
 		// test results reporter to use : 'dots', 'progress', 'junit', 'growl', 'coverage'
 		reporters: ['progress'],
 		// web server port
