@@ -217,6 +217,7 @@ class UserProfileAddForm(ModelForm):
 class UserProfileRegisterForm(ModelForm):
     class Meta:
         model = UserProfile
+        fields = ()
 
 class UserAddForm(forms.Form):
     note = forms.CharField(label=ugettext_lazy(u'Note'),
