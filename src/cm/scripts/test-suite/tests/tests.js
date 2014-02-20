@@ -23,26 +23,20 @@ suite ('comt', function () {
 	suite ('contact page', function () {
 		test_page_loading ('/contact/', 'Contact');
 		test_unlogged_header ();
-
-		test ('has a contact form', dsl(function () {
-			expect (elt ('#profile[action="."]').val ()).toBeDefined ();
-		}));
-
-		test_form_field ('id_name', 'text', 'Your name', true);
+		test_val ('form#profile[action="."]'); // the form exists
+		test_count ('form#profile .label', 5); // it has no more than 5 labels (may be no more fields)
+		test_form_field ('id_name', 'text', 'Your name', true); // the field id_name is…
 		test_form_field ('id_email', 'text', 'Your email address', true);
 		test_form_field ('id_title', 'text', 'Subject of the message', true);
 		test_form_field ('id_body', 'textarea', 'Body of the message', true);
 		test_form_field ('id_copy', 'checkbox', 'Send me a copy of the email', false);
-
-		test ('has some submit and cancel buttons', dsl(function () {
-			expect (elt ('#profile input[type=submit]').val ()).toBe ('Send');
-			expect (elt ('input#cancel_button[type=button]').val ()).toBe ('Cancel');
-		}));
-
+		test_val ('#profile input[type=submit]','Send'); // test that a the .val() of the element is
+		test_val ('input#cancel_button[type=button]', 'Cancel');
 		test_unlogged_footer ();
-
-		// To avoid bugging in loading the 2nd page
-		test ('just get back to /', dsl(function () {
+		test ('to check that toBeDefined test still works', dsl(function () {
+			expect (elt ('#header_controls a[href="/xxx/"]').val ()).not ().toBeDefined ();
+		}));
+		test ('get back to / to avoid bugging next page load', dsl(function () {
 			browser.navigateTo ('/');
 		}));
 	});
@@ -56,38 +50,24 @@ suite ('comt', function () {
 	suite ('reset password page', function () {
 		test_page_loading ('/password_reset/', 'Reset my password');
 		test_unlogged_header ();
-
-		test ('has a contact form', dsl(function () {
-			expect (elt ('#profile[action="."]').val ()).toBeDefined ();
-		}));
-
+		test_val ('form#profile[action="."]');
+		test_count ('form#profile .label', 1);
 		test_form_field ('id_email', 'text', 'E-mail', true);
-
-		test ('has a submit button', dsl(function () {
-			expect (elt ('#profile input[type=submit]').val ()).toBe ('Reset my password');
-		}));
-
+		test_val ('#profile input[type=submit]', 'Reset my password');
 		test_unlogged_footer ();
 	});
 
 	suite ('login page', function () {
 		test_page_loading ('/', 'Home');
 		test_unlogged_header ();
-
-		test ('has a #login form', dsl(function () {
-			expect (elt ('#login[action="/login/"]').val ()).toBeDefined ();
-		}));
-
+		test_val ('form#login[action="/login/"]');
+		test_count ('form#login[action="/login/"] .label', 2);
 		test_form_field ('id_username', 'text', 'Username', true);
 		test_form_field ('id_password', 'password', 'Password', true);
-
-		test ('has a login button and reset password links', dsl(function () {
-			expect (elt ('#login input[type=submit]').val ()).toBe ('Login');
-			expect (elt ('#login a[href="/password_reset/"]').text ()).toBe ('Forgot password?');
-		}));
-
+		test_val ('form#login input[type=submit]', 'Login');
+		test_text ('form#login a[href="/password_reset/"]', 'Forgot password?');
 		test_unlogged_footer ();
-
+		// test_i18n ();
 		test ('logs an admin in', dsl(function () {
 			input ('#id_username').enter (w.USER_ADMIN);
 			input ('#id_password').enter (w.PASS_ADMIN);
@@ -101,74 +81,129 @@ suite ('comt', function () {
 
 	suite ('admin dashboard', function () {
 		// Should starts with :
-		test_page_loading ('/', 'Dashboard');
+		// test_page_loading ('/', 'Dashboard');
 		// But its the last thing we did in the previous test
 		test_logged_header (w.USER_ADMIN);
+		test_default_tabs ();
+		test_count ('table.dash_table', 5);
+		test_text ('table.dash_table th:eq(0)', 'Actions', 0);
+		test_text ('table.dash_table th:eq(1)', 'Recent texts (all)', 2);
+		test_text ('table.dash_table th:eq(2)', 'Recent comments', 1);
+		test_match ('table.dash_table th:eq(3)', /^Workspace activity\n\s+\(month\/week\/24 hours\)$/m);
+		test_text ('table.dash_table th:eq(4) span.em', 'Activities', 4);
 		test_unlogged_footer ();
 	});
 });
+
+function test_default_tabs () {
+	test_count ('#main-tabs a', 5);
+	test_text ('#main-tabs li:nth-of-type(1) a[href="/"]', 'Dashboard');
+	test_match ('#main-tabs li:nth-of-type(2) a[href="/text/"]', /^Texts \(\d+\) $/);
+	test_match ('#main-tabs li:nth-of-type(3) a[href="/user/"]', /^People  \(\d+\)$/);
+	test_text ('#main-tabs li:nth-of-type(4) a[href="/settings/"]', 'Settings');
+	test_text ('#main-tabs li:nth-of-type(5) a[href="/followup/"]', 'Followup');
+}
+
+function test_logged_header (username) {
+	test_text	('#header_controls b', username)
+	test_count	('#header_controls a', 6);
+	test_text	('#header_controls a:nth-of-type(1)[href="/"]',					'Home');
+	test_text	('#header_controls a:nth-of-type(2)[href="/create/content/"]',	'Create a text');
+	test_text	('#header_controls a:nth-of-type(3)[href="/create/upload/"]',	'Upload a text');
+	test_text	('#header_controls a:nth-of-type(4)[href="/create/import/"]',	'Import a co-mented text');
+	test_text	('#header_controls a:nth-of-type(5)[href="/profile/"]',			'Profile');
+	test_text	('#header_controls a:nth-of-type(6)[href="/logout/"]',			'Logout');
+}
+
+function test_unlogged_header () {
+	test_count	('#header_controls a', 2);
+	test_text	('#header_controls a[href="/"]', 'Home');
+	test_text	('#header_controls a[href="/login/"]', 'Login');
+}
+
+function test_unlogged_footer (url) {
+	test_count	('#footer a', 9);
+	test_text	('#footer a:nth-of-type(1)[href="/contact/"]', 'Contact');
+	test_match	('#footer #comentlink[href="http://www.co-ment.com"]', /Powered by/m);
+	test_text	('#footer a:nth-of-type(3)[href="/help/"]', 'Help');
+	test_text	('#footer a:nth-of-type(4)[href="/i18n/setlang/fr/"]', 'Français');
+	test_text	('#footer a:nth-of-type(5)[href="/i18n/setlang/no/"]', 'Norsk');
+	test_text	('#footer a:nth-of-type(6)[href="/i18n/setlang/pt_BR/"]', 'Português Brasileiro');
+	test_text	('#footer a:nth-of-type(7)[href="/i18n/setlang/es/"]', 'Español');
+	test_text	('#footer a:nth-of-type(8)[href="/i18n/setlang/bg/"]', 'Български');
+	test_text	('#footer a:nth-of-type(9)[href="/i18n/setlang/it/"]', 'Italiano');
+}
+
+function test_i18n () {
+	test ('can change lang to french', dsl(function () {
+		element ('#footer a[href="/i18n/setlang/fr/"]').click ();
+//		browser.waitForPageLoad ();
+//		browser.navigateTo ('/');
+//		browser.reload ();
+		expect (elt ('#footer a[href="/help/"]').text ()).toBe ('Aide');
+		element ('#footer a[href="/i18n/setlang/en/"]').click ();
+//		browser.waitForPageLoad ();
+//		browser.navigateTo ('/');
+	}));
+}
 
 function test_page_loading (url, title) {
 	test ('loads', dsl(function () {
 		// here we are in Karma page
 		browser.navigateTo (url);
 		expect (element ('title').text ()).toMatch (new RegExp (title,'m'));
-		element ('title').text (function (page_title) { // The same test with more vanilla javascript
+		// The same test agin vaniller javascript
+		element ('title').text (function (page_title) {
 			// here we got a value from the test iframe
+			// to display the tested value : console.log (page_title);
 			if (!(new RegExp (title, 'm').test (page_title))) throw 'got page '+page_title+' instead';
 		});
 	}));
 }
 
-function test_logged_header (username) {
-	test ('has 6 links in #header_controls', dsl(function () {
-		expect (elt ('#header_controls a').count ()).toBe (6);
-	}));
-	test ('displays current connected user name', dsl(function () {
-		expect (elt ('#header_controls b').text ()).toBe (username);
-	}));
-	test ('has links', dsl(function () {
-		expect (elt ('#header_controls a:nth-of-type(1)[href="/"]').text ()).toBe ('Home');
-		expect (elt ('#header_controls a:nth-of-type(2)[href="/create/content/"]').text ()).toBe ('Create a text');
-		expect (elt ('#header_controls a:nth-of-type(3)[href="/create/upload/"]').text ()).toBe ('Upload a text');
-		expect (elt ('#header_controls a:nth-of-type(4)[href="/create/import/"]').text ()).toBe ('Import a co-mented text');
-		expect (elt ('#header_controls a:nth-of-type(5)[href="/profile/"]').text ()).toBe ('Profile');
-		expect (elt ('#header_controls a:nth-of-type(6)[href="/logout/"]').text ()).toBe ('Logout');
+/** Test if the selected DOM element is defined or has a given value : .val()
+ *  s : CSS selector
+ *  e : expected value, if omited, test existence
+ */
+function test_val (s, e) {
+	e = typeof e == 'undefined' ? '' : e; // .val() returns defined ? '' : undefined; // if no value
+	test (s+' is '+e, dsl(function () {
+		expect (elt (s).val ()).toBe (e);
 	}));
 }
 
-function test_unlogged_header () {
-	test ('has 2 links', dsl(function () {
-		expect (elt ('#header_controls a').count ()).toBe (2);
-		expect (elt ('#header_controls a[href="/"]').val ()).toBeDefined ();
-		// to display the tested value :
-		//elt ('#header_controls a[href="/"]').text ( function (txt) { console.log (txt); });
-		// test returns defined ? "" : undefined;
-		expect (elt ('#header_controls a[href="/"]').text ()).toBe ('Home');
-		expect (elt ('#header_controls a[href="/login/"]').text ()).toBe ('Login');
-		expect (elt ('#header_controls a[href="/xxx/"]').val ()).not ().toBeDefined ();
+/** Test if the selected DOM element has the given text : .text()
+ *  s : CSS selector
+ *  e : expected value
+ */
+function test_text (s, e) {
+	test (s+' has text '+e, dsl(function () {
+		expect (elt (s).text ()).toBe (e);
 	}));
 }
 
-function test_unlogged_footer (url) {
-	test ('has >= 9 links in #footer', dsl(function () {
-		expect (elt ('#footer a').count ()).toBeGreaterThan (8);
-		expect (elt ('#footer a[href="/contact/"]').text ()).toBe ('Contact');
-		expect (elt ('#footer #comentlink[href="http://www.co-ment.com"]').text ()).toMatch (/Powered by/m);
-		expect (elt ('#footer a[href="/help/"]').text ()).toBe ('Help');
+/** Test if the selected DOM element .text() value match the given regexp
+ *  s : CSS selector
+ *  r : regexp to match
+ */
+function test_match (s, r) {
+	test (s+' text match '+r, dsl(function () {
+		expect (elt (s).text ()).toMatch (r);
 	}));
-/*	test ('can change lang to french', dsl(function () {
-		element ('#footer a[href="/i18n/setlang/fr/"]').click ();
-//		browser.waitForPageLoad ();
-//		browser.navigateTo ('/');
-		expect (elt ('#footer a[href="/help/"]').text ()).toBe ('Aide');
-		element ('#footer a[href="/i18n/setlang/en/"]').click ();
-//		browser.waitForPageLoad ();
-//		browser.navigateTo ('/');
-	}));*/
 }
 
-/* Test Django form field presence */
+/** Count selector occurences
+ *  s : CSS selector
+ *  e : expected count
+ */
+function test_count (s, e) {
+	test (s+' count is '+e, dsl(function () {
+		expect (elt (s).count ()).toBe (e);
+	}));
+}
+
+/** Test Django form field presence
+ */
 function test_form_field (id, type, label, mandatory) {
 	test ('has a '+label+' field', dsl(function () {
 		var s = type == 'textarea' ? 'textarea#'+id : 'input#'+id+'[type='+type+']';
@@ -180,6 +215,9 @@ function test_form_field (id, type, label, mandatory) {
 	}));
 }
 
-function elt (selector) {
-	return element (selector + ':visible');
+/** Ensure the given element is visible
+ *  s : CSS selector of the DOM element to check
+ */
+function elt (s) {
+	return element (s + ':visible');
 }
