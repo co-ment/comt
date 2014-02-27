@@ -25,11 +25,11 @@ suite ('comt', function () {
 		test_unlogged_header ();
 		test_val ('form#profile[action="."]'); // the form exists
 		test_count ('form#profile .label', 5); // it has no more than 5 labels (may be no more fields)
-		test_form_field ('id_name', 'text', 'Your name', true); // the field id_name is…
-		test_form_field ('id_email', 'text', 'Your email address', true);
-		test_form_field ('id_title', 'text', 'Subject of the message', true);
-		test_form_field ('id_body', 'textarea', 'Body of the message', true);
-		test_form_field ('id_copy', 'checkbox', 'Send me a copy of the email', false);
+		test_form_field ('profile', 'id_name', 'text', 0, 'Your name', true); // the field id_name is…
+		test_form_field ('profile', 'id_email', 'text', 1, 'Your email address', true);
+		test_form_field ('profile', 'id_title', 'text', 2, 'Subject of the message', true);
+		test_form_field ('profile', 'id_body', 'textarea', 3, 'Body of the message', true);
+		test_form_field ('profile', 'id_copy', 'checkbox', 4, 'Send me a copy of the email', false);
 		test_val ('#profile input[type=submit]','Send'); // test that a the .val() of the element is
 		test_val ('input#cancel_button[type=button]', 'Cancel');
 		test_unlogged_footer ();
@@ -52,7 +52,7 @@ suite ('comt', function () {
 		test_unlogged_header ();
 		test_val ('form#profile[action="."]');
 		test_count ('form#profile .label', 1);
-		test_form_field ('id_email', 'text', 'E-mail', true);
+		test_form_field ('profile', 'id_email', 'text', 1, 'E-mail', true);
 		test_val ('#profile input[type=submit]', 'Reset my password');
 		test_unlogged_footer ();
 	});
@@ -62,8 +62,8 @@ suite ('comt', function () {
 		test_unlogged_header ();
 		test_val ('form#login[action="/login/"]');
 		test_count ('form#login[action="/login/"] .label', 2);
-		test_form_field ('id_username', 'text', 'Username', true);
-		test_form_field ('id_password', 'password', 'Password', true);
+		test_form_field ('login', 'id_username', 'text', 0, 'Username', true);
+		test_form_field ('login', 'id_password', 'password', 1, 'Password', true);
 		test_val ('form#login input[type=submit]', 'Login');
 		test_text ('form#login a[href="/password_reset/"]', 'Forgot password?');
 		test_unlogged_footer ();
@@ -85,23 +85,51 @@ suite ('comt', function () {
 		// But its the last thing we did in the previous test
 		test_logged_header (w.USER_ADMIN);
 		test_default_tabs ();
-		test_count ('table.dash_table', 5);
-		test_text ('table.dash_table th:eq(0)', 'Actions', 0);
-		test_text ('table.dash_table th:eq(1)', 'Recent texts (all)', 2);
-		test_text ('table.dash_table th:eq(2)', 'Recent comments', 1);
-		test_match ('table.dash_table th:eq(3)', /^Workspace activity\n\s+\(month\/week\/24 hours\)$/m);
-		test_text ('table.dash_table th:eq(4) span.em', 'Activities', 4);
+		test_count	('table.dash_table', 5);
+		test_text	('table.dash_table th:eq(0)', 'Actions');
+		test_match	('table.dash_table:eq(0) a:eq(0)[href="/create/content/"]', /\sCreate a text/);
+		test_text	('table.dash_table:eq(0) a:eq(1).tip[href="#"]', ' ');
+		test_match	('table.dash_table:eq(0) a:eq(2)[href="/create/upload/"]', /\sUpload a text/);
+		test_text	('table.dash_table:eq(0) a:eq(3).tip[href="#"]', ' ');
+		test_match	('table.dash_table:eq(0) a:eq(4)[href="/create/import/"]', /\sImport a co-mented text/);
+		test_text	('table.dash_table:eq(0) a:eq(5).tip[href="#"]', ' ');
+		test_match	('table.dash_table:eq(0) a:eq(6)[href="/user/add/"]', /\sInvite user/);
+		test_match	('table.dash_table:eq(0) a:eq(7)[href="/profile/"]', /\sEdit your profile/);
+		test_match	('table.dash_table:eq(0) a:eq(8)[href="/text/"]', /\sView text list/);
+		test_match	('table.dash_table:eq(0) a:eq(9)[href="/settings/"]', /\sConfigure workspace/);
+		test_text	('table.dash_table th:eq(1)', 'Recent texts (all)');
+		test_text	('table.dash_table:eq(1) a:eq(0)[href="/text/"]', 'all');
+		test_text	('table.dash_table th:eq(2)', 'Recent comments');
+		test_match	('table.dash_table th:eq(3)', /^Workspace activity\n\s+\(month\/week\/24 hours\)$/m);
+		test_text	('table.dash_table:eq(3) a:eq(0)[href="?span=month"]', 'month');
+		test_text	('table.dash_table:eq(3) a:eq(1)[href="?span=day"]', '24 hours');
+		test_text	('table.dash_table th:eq(4) span.em', 'Activities');
 		test_unlogged_footer ();
+	});
+
+	suite ('followup', function () {
+		test_page_loading ('/followup/', 'Followup');
+		test_text	('#followup a:eq(0)[href="/help/#public_private_feed"]', '?');
+		test_match	('#followup a:eq(1)[href$="/feed/"]', new RegExp (w.WORKSPACE_URL+'feed/', 'm'));
+		test_text	('#followup a:eq(2)[href="/help/#public_private_feed"]', '?');
+		test_count	('form#followup_form[action="."] input', 3);
+		test_val	('form#followup_form input[type=submit]', '(Activate private feed|Reset private feed url)');
+		test_val	('form#followup_form input#workspace_notify_check[type=checkbox]', 'on');
+		test_val	('form#followup_form input#own_notify_check[type=checkbox]', 'on');
+	
+		// tester qu'une fois cliqué, le bouton à le nvo label, et qu'une adresse est disponible
+		// tester que si on reclique l'adresse est changée
+
 	});
 });
 
 function test_default_tabs () {
-	test_count ('#main-tabs a', 5);
-	test_text ('#main-tabs li:nth-of-type(1) a[href="/"]', 'Dashboard');
-	test_match ('#main-tabs li:nth-of-type(2) a[href="/text/"]', /^Texts \(\d+\) $/);
-	test_match ('#main-tabs li:nth-of-type(3) a[href="/user/"]', /^People  \(\d+\)$/);
-	test_text ('#main-tabs li:nth-of-type(4) a[href="/settings/"]', 'Settings');
-	test_text ('#main-tabs li:nth-of-type(5) a[href="/followup/"]', 'Followup');
+	test_count	('#main-tabs a', 5);
+	test_text	('#main-tabs li:nth-of-type(1) a[href="/"]', 'Dashboard');
+	test_match	('#main-tabs li:nth-of-type(2) a[href="/text/"]', /^Texts \(\d+\) $/);
+	test_match	('#main-tabs li:nth-of-type(3) a[href="/user/"]', /^People  \(\d+\)$/);
+	test_text	('#main-tabs li:nth-of-type(4) a[href="/settings/"]', 'Settings');
+	test_text	('#main-tabs li:nth-of-type(5) a[href="/followup/"]', 'Followup');
 }
 
 function test_logged_header (username) {
@@ -168,7 +196,7 @@ function test_page_loading (url, title) {
 function test_val (s, e) {
 	e = typeof e == 'undefined' ? '' : e; // .val() returns defined ? '' : undefined; // if no value
 	test (s+' is '+e, dsl(function () {
-		expect (elt (s).val ()).toBe (e);
+		expect (elt (s).val ()).toMatch (new RegExp (e, 'm'));
 	}));
 }
 
@@ -204,14 +232,15 @@ function test_count (s, e) {
 
 /** Test Django form field presence
  */
-function test_form_field (id, type, label, mandatory) {
-	test ('has a '+label+' field', dsl(function () {
-		var s = type == 'textarea' ? 'textarea#'+id : 'input#'+id+'[type='+type+']';
+function test_form_field (form_id, field_id, type, position, label, mandatory) {
+	test ('has a '+label+' form field', dsl(function () {
+		var s = type == 'textarea' ? 'textarea#'+field_id : 'input#'+field_id+'[type='+type+']';
 		expect (elt (s).val ()).toBeDefined ();
-		expect (elt ('label[for='+id+']').text ()).toBe (label);
+		expect (elt ('#'+form_id+' :input:eq('+position+')#'+field_id).val ()).toBeDefined ();
+		expect (elt ('label[for='+field_id+']').text ()).toBe (label);
 
 		if (mandatory)
-			expect (elt ('label[for='+id+'] + span.required_star').val ()).toBeDefined ();
+			expect (elt ('label[for='+field_id+'] + span.required_star').val ()).toBeDefined ();
 	}));
 }
 
