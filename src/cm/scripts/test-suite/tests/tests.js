@@ -14,13 +14,22 @@
 // Is the workspace name correctly displayed ? 
 // Are the public texts displayed in the login page ?
 
-var w = __karma__.config.w;
+var w = __karma__.config.w,
+	z = {};
 const non_visible = false;
-var text_nb = 0;
-var user_nb = 0;
-var pub_text_nb = 0;
-var workspace_name = '';
-var workspace_tagline = '';
+const t = {
+	'#id_workspace_name':	'Test workspace name',
+	'#id_workspace_tagline':	'Test workspace tagline',
+	'#id_workspace_registration':		'on',		// registration
+	'#id_workspace_registration_moderation':	'on',		// registration moderation
+	'#id_workspace_role_model':	'generic',
+	'#id_workspace_category_1':	'ws_cat_1',
+	'#id_workspace_category_2':	'ws_cat_2',
+	'#id_workspace_category_3':	'ws_cat_3',
+	'#id_workspace_category_4':	'ws_cat_4',
+	'#id_workspace_category_5':	'ws_cat_5'
+};
+
 
 suite ('comt', function () {
 
@@ -94,8 +103,8 @@ suite ('comt', function () {
 			element ('span.metadata:eq(0)').text (function (metadata) {
 				var r = metadata.match (/(\d+) texts, (\d+) users/);
 				if (r.length != 3) throw 'expected 3 matches got '+r.length;
-				text_nb = r[1];
-				user_nb = r[2];
+				z.text_nb = r[1];
+				z.user_nb = r[2];
 			});
 		}));
 		test_default_tabs ();
@@ -122,9 +131,9 @@ suite ('comt', function () {
 	});
 
 	suite ('texts list', function () {
-		test_page_loading ('/text/', 'Texts');
-		test_logged_header (w.USER_ADMIN);
-		test_default_tabs ();
+		test_page_loading	('/text/', 'Texts');
+		test_logged_header	(w.USER_ADMIN);
+		test_default_tabs	();
 		test_count	('#text ul.sub_list:eq(0) a', 3);
 		test_text	('#text ul.sub_list:eq(0) a:eq(0)[href="/create/content/"]', 'Create a text');
 		test_text	('#text ul.sub_list:eq(0) a:eq(1)[href="/create/upload/"]', 'Upload a text');
@@ -134,7 +143,7 @@ suite ('comt', function () {
 		test_text	('select#tag_selected option:eq(0)[selected][value="0"]', '- All -', non_visible);
 		test		('#texts_form input count', dsl (function () {
 			elt ('form#texts_form[action="."] :input').count (function (c) {
-				var n = 3 + text_nb % 10;
+				var n = 3 + z.text_nb % 10;
 				if (c != n) throw 'expected computed '+n+' to equal got '+c;
 			});
 		}));
@@ -142,7 +151,7 @@ suite ('comt', function () {
 			elt ('span#paginator').text (function (t) {
 				var r = t.match (/\s\d+-\d+ of (\d+)\s/m);
 				if (r.length != 2) throw 'expected 2 matches got '+r.length;
-				if (r[1] != text_nb) throw 'expected paginator total ('+r[1]+') to be '+text_nb;
+				if (r[1] != z.text_nb) throw 'expected paginator total ('+r[1]+') to be '+z.text_nb;
 			});
 		}));
 		// TOTEST : pagination
@@ -160,10 +169,111 @@ suite ('comt', function () {
 		test_unlogged_footer ();
 	});
 
+    suite ('people list', function () {
+        test_page_loading	('/user/', 'People');
+        test_logged_header	(w.USER_ADMIN);
+        test_default_tabs	();
+        test_count  ('#user ul.sub_list:eq(0) a', 2);
+        test_text   ('#user ul.sub_list:eq(0) a:eq(0)[href="/user/add/"]', 'Add a new user');
+        test_text   ('#user ul.sub_list:eq(0) a:eq(1)[href="/user/mass-add/"]', 'Add users in bulk');
+        // TOTEST : filter by tag
+        test_count  ('form#filter_form[action="."] :input', 1);
+		test_text	('#filter_form a[href="?display=1"]', 'Display suspended users');
+        test_text   ('select#tag_selected option:eq(0)[selected][value="0"]', '- All -', non_visible);
+        test        ('#user_form input count', dsl (function () {
+            elt ('form#user_form[action="."] :input').count (function (c) {
+                var n = 6 + (z.user_nb % 10) * 2;
+                if (c != n) throw 'expected computed '+n+' to equal got '+c;
+            });
+        }));
+        test        ('#paginator "of #" value', dsl (function () {
+            elt ('span#paginator').text (function (t) {
+                var r = t.match (/\s\d+-\d+ of (\d+)\s/m);
+                if (r.length != 2) throw 'expected 2 matches got '+r.length;
+                if (r[1] != z.user_nb) throw 'expected paginator total ('+r[1]+') to be '+z.user_nb;
+            });
+        }));
+        // TOTEST : pagination
+        // TOTEST : Bulk Actions -> Apply does enable
+        test_text   ('select#bulk_actions option:eq(0)[selected][value="-1"]', '- Bulk Actions -', non_visible);
+        test_text   ('select#bulk_actions option:eq(1)[value="disable"]', 'Suspend access', non_visible);
+        test_text   ('select#bulk_actions option:eq(2)[value="enable"]', 'Enable access', non_visible);
+        test_text   ('select#bulk_actions option:eq(3)[value="role_1"]', 'Change role to Manager', non_visible);
+        test_text   ('select#bulk_actions option:eq(4)[value="role_2"]', 'Change role to Editor', non_visible);
+        test_text   ('select#bulk_actions option:eq(5)[value="role_3"]', 'Change role to Moderator', non_visible);
+        test_text   ('select#bulk_actions option:eq(6)[value="role_4"]', 'Change role to Commentator', non_visible);
+        test_text   ('select#bulk_actions option:eq(7)[value="role_5"]', 'Change role to Observer', non_visible);
+        test_val    ('form#user_form input#apply[type=button][disabled]', 'Apply');
+        test_count  ('table.large_table:eq(1) th', 6);
+        test_val    ('table.large_table:eq(1) th:eq(0) input#all_check[type="checkbox"]', 'on');
+        test_text   ('table.large_table:eq(1) th:eq(1) a[href="?order=user__username"]', 'User');
+        test_text   ('table.large_table:eq(1) th:eq(2) a[href="?order=user__email"]', 'Email');
+        test_text   ('table.large_table:eq(1) th:eq(3) a[href="?order=-user__date_joined"]', 'Date joined');
+        test_text   ('table.large_table:eq(1) th:eq(4) a[href="?order=role__name"]', 'Role');
+        test_text   ('table.large_table:eq(1) th:eq(5)', 'Last week activity');
+		test_text	('table.large_table:eq(1) tr:last a[href="/user/-/edit/"]', 'Anonymous users');
+		test_text	('table.large_table:eq(1) a.main_object_title[href="/profile/"]', w.USER_ADMIN);
+		test_text	('table.large_table:eq(1) div.hidden-user-actions a[href="/profile/"]', 'Your profile');
+        test_unlogged_footer ();
+    });
+
+	suite ('settings conformity', function () {
+        test_page_loading	('/settings/', 'Settings');
+		test_logged_header	(w.USER_ADMIN);
+		test_default_tabs	();
+        test_count  ('#settings ul.sub_list:eq(0) a', 1);
+        test_text   ('#settings ul.sub_list:eq(0) a:eq(0)[href="/settings/design/"]', 'Appearance');
+        test_count  ('#settings form[action="."]:eq(0) :input', 12);
+		test_form_field ('settings', 'id_workspace_name', 'text', 0, 'Workspace name');
+		test_form_field ('settings', 'id_workspace_tagline', 'text', 1, 'Workspace tagline');
+		test_form_field ('settings', 'id_workspace_registration', 'checkbox', 2, 'Workspace registration');
+		test_form_field ('settings', 'id_workspace_registration_moderation', 'checkbox', 3, 'Workspace registration moderation');
+		test_form_field ('settings', 'id_workspace_role_model', 'select', 4, 'Role model');
+        test_text   ('select#id_workspace_role_model option:eq(0)[selected][value="generic"]', 'Generic', non_visible);
+        test_text   ('select#id_workspace_role_model option:eq(1)[value="teacher"]', 'Class (education)', non_visible);
+		test_form_field ('settings', 'id_workspace_category_1', 'text', 5, 'Label for the first category of comments');
+		test_form_field ('settings', 'id_workspace_category_2', 'text', 6, 'Label for the second category of comments');
+		test_form_field ('settings', 'id_workspace_category_3', 'text', 7, 'Label for the third category of comments');
+		test_form_field ('settings', 'id_workspace_category_4', 'text', 8, 'Label for the fourth category of comments');
+		test_form_field ('settings', 'id_workspace_category_5', 'text', 9, 'Label for the fifth category of comments');
+		test_val	('#settings :input:eq(10)[type=submit]', 'Save');
+		test_val	('#settings :input:eq(11)#cancel_button[type=button]', 'Cancel');
+		test_unlogged_footer ();
+    });
+
+	suite ('settings reading', function () {
+		test_readz_field ('#id_workspace_name');
+		test_readz_field ('#id_workspace_tagline');
+		test_readz_field ('#id_workspace_registration');
+		test_readz_field ('#id_workspace_registration_moderation');
+		test_readz_field ('#id_workspace_role_model');
+		test_readz_field ('#id_workspace_category_1');
+		test_readz_field ('#id_workspace_category_2');
+		test_readz_field ('#id_workspace_category_3');
+		test_readz_field ('#id_workspace_category_4');
+		test_readz_field ('#id_workspace_category_5');
+/*		test ('display z', dsl(function () {
+			elt ('#main-tabs').text (function (t) {
+				console.log ('z '+JSON.stringify(z));
+			});
+		}));*/
+    });
+
+	suite ('settings restoration', function () {
+		test_fill_settings (t);
+		test_val ('#id_workspace_name', t['#id_workspace_name']);
+		test ('Save test settings ', dsl (function () {
+			elt ('#settings input[type="submit"]').click ();
+			browser.waitForPageLoad ();
+		}));
+        test_page_loading	('/settings/', 'Settings');
+		test_text ('#content h1.main_title a[href="/"]', t['#id_workspace_name']);
+    });
+
 	suite ('followup', function () {
-		test_logged_header (w.USER_ADMIN);
-		test_default_tabs ();
-		test_page_loading ('/followup/', 'Followup');
+		test_page_loading	('/followup/', 'Followup');
+		test_logged_header	(w.USER_ADMIN);
+		test_default_tabs	();
 		test_text	('#followup a:eq(0)[href="/help/#public_private_feed"]', '?');
 		test_match	('#followup a:eq(1)[href$="/feed/"]', new RegExp (w.WORKSPACE_URL+'feed/', 'm'));
 		test_text	('#followup a:eq(2)[href="/help/#public_private_feed"]', '?');
@@ -177,6 +287,17 @@ suite ('comt', function () {
 
 		test_unlogged_footer ();
 	});
+
+	suite ('settings restoration', function () {
+        test_page_loading	('/settings/', 'Settings');
+		test_fill_settings (z);
+		test ('Restore settings ', dsl (function () {
+			elt ('#settings input[type="submit"]').click ();
+			browser.waitForPageLoad ();
+		}));
+		// next instruction must be a page loading
+    });
+
 });
 
 function test_default_tabs () {
@@ -190,12 +311,12 @@ function test_default_tabs () {
 		elt ('#main-tabs a[href="/text/"]').text (function (t) {
 			var r = t.match (/^Texts \((\d+)\) $/);
 			if (r.length != 2) throw 'for Texts expected 2 matches got '+r.length;
-			if (text_nb != r[1]) throw 'expected tab text nb ('+r[1]+') to be '+text_nb;
+			if (z.text_nb != r[1]) throw 'expected tab text nb ('+r[1]+') to be '+z.text_nb;
 		});
 		elt ('#main-tabs a[href="/user/"]').text (function (t) {
 			var r = t.match (/^People  \((\d+)\)$/);
 			if (r.length != 2) throw 'for People expected 2 matches got '+r.length;
-			if (user_nb != r[1]) throw 'expected tab people nb ('+r[1]+') to be '+user_nb;
+			if (z.user_nb != r[1]) throw 'expected tab people nb ('+r[1]+') to be '+z.user_nb;
 		});
 	}));
 }
@@ -304,7 +425,13 @@ function test_count (s, e) {
  */
 function test_form_field (form_id, field_id, type, position, label, mandatory) {
 	test ('has a '+label+' form field', dsl(function () {
-		var s = type == 'textarea' ? 'textarea#'+field_id : 'input#'+field_id+'[type='+type+']';
+		var s = '';
+		switch (type) {
+			case 'textarea':s = 'textarea#'+field_id; break;
+			case 'select':	s = 'select#'+field_id; break;
+			default:		s = 'input#'+field_id+'[type="'+type+'"]';
+		}
+//		var s = type == 'textarea' ? 'textarea#'+field_id : 'input#'+field_id+'[type='+type+']';
 		expect (elt (s).val ()).toBeDefined ();
 		expect (elt ('#'+form_id+' :input:eq('+position+')#'+field_id).val ()).toBeDefined ();
 		expect (elt ('label[for='+field_id+']').text ()).toBe (label);
@@ -312,6 +439,33 @@ function test_form_field (form_id, field_id, type, position, label, mandatory) {
 		if (mandatory)
 			expect (elt ('label[for='+field_id+'] + span.required_star').val ()).toBeDefined ();
 	}));
+}
+
+function test_readz_field (field_id) {
+	test ('get '+field_id, dsl(function () {
+		element (field_id).val (function (v) {
+			z[field_id] = v;
+		});
+	}));
+}
+
+function test_fill_field (field_id, stored) {
+	test ('set '+field_id, dsl(function () {
+		input (field_id).enter (stored[field_id]);
+	}));
+}
+
+function test_fill_settings (s) {
+	test_fill_field ('#id_workspace_name', s);
+	test_fill_field ('#id_workspace_tagline', s);
+	test_fill_field ('#id_workspace_registration', s);
+	test_fill_field ('#id_workspace_registration_moderation', s);
+	test_fill_field ('#id_workspace_role_model', s);
+	test_fill_field ('#id_workspace_category_1', s);
+	test_fill_field ('#id_workspace_category_2', s);
+	test_fill_field ('#id_workspace_category_3', s);
+	test_fill_field ('#id_workspace_category_4', s);
+	test_fill_field ('#id_workspace_category_5', s);
 }
 
 /** Ensure the given element is visible
