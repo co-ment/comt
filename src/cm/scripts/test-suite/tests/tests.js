@@ -1,22 +1,17 @@
 
-// try to login
+// " Vim settings
+// set tabstop=4          " number of spaces in a tab
+// set softtabstop=4      " as above
+// set shiftwidth=4       " as above
 
-// create texts and co-ments
-// collect newly created URLs
-
-// Get workspace name, public texts…
-
-// unlog
 
 // check that public texts still work while unlogged
 // check that non public texts are unavailable
-
-// Is the workspace name correctly displayed ? 
 // Are the public texts displayed in the login page ?
 
 var w = __karma__.config.w,
 	z = {};
-const non_visible = false;
+const non_visible = false, no_tagline = false;
 const t = {
 	'#id_workspace_name':	'Test workspace name',
 	'#id_workspace_tagline':	'Test workspace tagline',
@@ -27,7 +22,10 @@ const t = {
 	'#id_workspace_category_2':	'ws_cat_2',
 	'#id_workspace_category_3':	'ws_cat_3',
 	'#id_workspace_category_4':	'ws_cat_4',
-	'#id_workspace_category_5':	'ws_cat_5'
+	'#id_workspace_category_5':	'ws_cat_5',
+	'#id_custom_css': ".voted {\n  color: #008000;\n}\n\n.rejected, .fallen, .withdrawn {\n  color: #ff0000;\n}\n\ndiv.frame {\n  border: 1px solid #000;\n  padding: 5px;\n}\n\ndiv.frame .title {\n  font-weight: bold;\n  text-align: center; font-color:purple; \n}",
+	'#id_custom_font': 'Ubuntu',
+	'#id_custom_titles_font': 'Ubuntu Monospaced',
 };
 
 
@@ -35,7 +33,7 @@ suite ('comt', function () {
 
 	this.timeout(150000);
 
-	suite ('contact page', function () {
+	suite ('contact page conformity', function () {
 		test_page_loading ('/contact/', 'Contact');
 		test_unlogged_header ();
 		test_val	('form#profile[action="."]'); // the form exists
@@ -56,13 +54,13 @@ suite ('comt', function () {
 		}));
 	});
 
-	suite ('help page', function () {
+	suite ('help page conformity', function () {
 		test_page_loading ('/help/', 'Help');
 		test_unlogged_header ();
 		test_unlogged_footer ();
 	});
 
-	suite ('reset password page', function () {
+	suite ('reset password page conformity', function () {
 		test_page_loading ('/password_reset/', 'Reset my password');
 		test_unlogged_header ();
 		test_val	('form#profile[action="."]');
@@ -72,7 +70,7 @@ suite ('comt', function () {
 		test_unlogged_footer ();
 	});
 
-	suite ('login page', function () {
+	suite ('login page conformity', function () {
 		test_page_loading ('/', 'Home');
 		test_unlogged_header ();
 		test_val	('form#login[action="/login/"]');
@@ -94,10 +92,49 @@ suite ('comt', function () {
 		}));
 	});
 
-	suite ('admin dashboard', function () {
-		// Should starts with :
-		// test_page_loading ('/', 'Dashboard');
-		// But its the last thing we did in the previous test
+	suite ('reading settings', function () {
+        test_page_loading	('/settings/', 'Settings');
+		test_readz_field	('#id_workspace_name');
+		test_readz_field	('#id_workspace_tagline');
+		test_readz_field	('#id_workspace_registration');
+		test_readz_field	('#id_workspace_registration_moderation');
+		test_readz_field	('#id_workspace_role_model');
+		test_readz_field	('#id_workspace_category_1');
+		test_readz_field	('#id_workspace_category_2');
+		test_readz_field	('#id_workspace_category_3');
+		test_readz_field	('#id_workspace_category_4');
+		test_readz_field	('#id_workspace_category_5');
+		test_page_loading	('/settings/design/', 'Settings');
+		test_readz_field	('#id_custom_css');
+		test_readz_field	('#id_custom_font');
+		test_readz_field	('#id_custom_titles_font');
+		/*test ('display z', dsl(function () {
+			elt ('#main-tabs').text (function (t) {
+				console.log ('z '+JSON.stringify(z));
+			});
+		}));*/
+    });
+
+	suite ('setting settings to test values', function () {
+		test_page_loading ('/settings/', 'Settings');
+		test_fill_settings (t);
+		test_val ('#id_workspace_name', t['#id_workspace_name']);
+		test ('Save test settings ', dsl (function () {
+			elt ('#settings input[type="submit"]').click ();
+			browser.waitForPageLoad ();
+		}));
+        test_page_loading	('/settings/', 'Settings');
+		test_text ('#content h1.main_title a[href="/"]', t['#id_workspace_name']);
+		test_page_loading	('/settings/design/', 'Settings');
+		test_fill_design (t);
+		test ('Save test design settings ', dsl (function () {
+			elt ('#settings input[type="submit"]').click ();
+			browser.waitForPageLoad ();
+		}));
+    });
+
+	suite ('admin dashboard page conformity', function () {
+		test_page_loading ('/', 'Dashboard\n - '+t['#id_workspace_name']);
 		test_logged_header (w.USER_ADMIN);
 		test ('get text and user nb', dsl(function () {
 			element ('span.metadata:eq(0)').text (function (metadata) {
@@ -130,8 +167,8 @@ suite ('comt', function () {
 		test_unlogged_footer ();
 	});
 
-	suite ('texts list', function () {
-		test_page_loading	('/text/', 'Texts');
+	suite ('texts list page conformity', function () {
+		test_page_loading	('/text/', 'Texts\n - '+t['#id_workspace_name']);
 		test_logged_header	(w.USER_ADMIN);
 		test_default_tabs	();
 		test_count	('#text ul.sub_list:eq(0) a', 3);
@@ -169,8 +206,95 @@ suite ('comt', function () {
 		test_unlogged_footer ();
 	});
 
-    suite ('people list', function () {
-        test_page_loading	('/user/', 'People');
+	suite ('create a text page conformity', function () {
+        test_page_loading	('/create/content/', 'Create a text - '+t['#id_workspace_name']);
+		test_logged_header	(w.USER_ADMIN);
+		test_default_tabs	();
+        test_count  ('#text ul.sub_list:eq(0) a', 3);
+        test_text   ('#text ul.sub_list:eq(0) a:eq(0)[href="/text/"]', 'Text list');
+        test_text   ('#text ul.sub_list:eq(0) a:eq(1)[href="/create/upload/"]', 'Upload a text');
+        test_text   ('#text ul.sub_list:eq(0) a:eq(2)[href="/create/import/"]', 'Import a co-mented text');
+        test_count  ('#text form[action="."]:eq(0) :input', 6);
+		test_form_field ('text', 'id_title',		'text', 0, 'Title', true);
+		test_form_field ('text', 'id_format',		'select', 1, 'Format', true);
+		test_form_field ('text', 'id_content',		'textarea', 2, 'Content', true);
+		test_form_field ('text', 'id_tags',			'text', 3, 'Tags');
+		test_val	('#text :input:eq(4)[type=submit]', 'Save');
+		test_val	('#text :input:eq(5)#cancel_button[type=button]', 'Cancel');
+		test_count	('select#id_format option', 3);
+        test_text   ('select#id_format option:eq(0)[value="markdown"][selected]', 'markdown', non_visible);
+        test_text   ('select#id_format option:eq(1)[value="rst"]', 'rst', non_visible);
+        test_text   ('select#id_format option:eq(2)[value="html"]', 'html', non_visible);
+		test_count	('#markItUpId_content li', 20);
+        test_unlogged_footer ();
+    });
+
+	suite ('upload text page conformity', function () {
+        test_page_loading	('/create/upload/', 'Upload a text - '+t['#id_workspace_name']);
+		test_logged_header	(w.USER_ADMIN);
+		test_default_tabs	();
+        test_count  ('#text ul.sub_list:eq(0) a', 3);
+        test_text   ('#text ul.sub_list:eq(0) a:eq(0)[href="/text/"]', 'Text list');
+        test_text   ('#text ul.sub_list:eq(0) a:eq(1)[href="/create/content/"]', 'Create a text');
+        test_text   ('#text ul.sub_list:eq(0) a:eq(2)[href="/create/import/"]', 'Import a co-mented text');
+        test_count  ('#text form[action="."]:eq(0) :input', 6);
+		test_form_field ('text', 'id_title',		'text', 0, 'Title');
+		test_form_field ('text', 'id_format',		'select', 1, 'Format', true);
+		test_form_field ('text', 'id_tags',			'text', 2, 'Tags');
+		test_form_field ('text', 'id_file',			'file', 3, 'Upload file (optional)');
+		test_val	('#text :input:eq(4)[type=submit]', 'Save');
+		test_val	('#text :input:eq(5)#cancel_button[type=button]', 'Cancel');
+		test_count	('select#id_format option', 3);
+        test_text   ('select#id_format option:eq(0)[value="markdown"][selected]', 'markdown', non_visible);
+        test_text   ('select#id_format option:eq(1)[value="rst"]', 'rst', non_visible);
+        test_text   ('select#id_format option:eq(2)[value="html"]', 'html', non_visible);
+        test_unlogged_footer ();
+    });
+
+	suite ('import a co-mented text page conformity', function () {
+        test_page_loading	('/create/import/', 'Import a co-mented text - '+t['#id_workspace_name']);
+		test_logged_header	(w.USER_ADMIN);
+		test_default_tabs	();
+        test_count  ('#text ul.sub_list:eq(0) a', 3);
+        test_text   ('#text ul.sub_list:eq(0) a:eq(0)[href="/text/"]', 'Text list');
+        test_text   ('#text ul.sub_list:eq(0) a:eq(1)[href="/create/content/"]', 'Create a text');
+        test_text   ('#text ul.sub_list:eq(0) a:eq(2)[href="/create/upload/"]', 'Upload a text');
+        test_count  ('#text form[action="."]:eq(0) :input', 3);
+		test_form_field ('text', 'id_file',	'file', 0, 'Upload XML file', true);
+		test_val	('#text :input:eq(1)[type=submit]', 'Save');
+		test_val	('#text :input:eq(2)#cancel_button[type=button]', 'Cancel');
+        test_unlogged_footer ();
+    });
+
+	suite ('edit profile page conformity', function () {
+        test_page_loading	('/profile/', 'Your profile [(]'+w.USER_ADMIN+'[)]\n - '+t['#id_workspace_name']);
+		test_logged_header	(w.USER_ADMIN, no_tagline);
+        test_count  ('#content ul.sub_list:eq(0) a', 1);
+        test_text   ('#content ul.sub_list:eq(0) a:eq(0)[href="/profile-pw/"]', 'Password');
+        test_count  ('form#profile[action="."]:eq(0) :input', 5);
+		test_form_field ('profile', 'id_email',		'text', 0, 'E-mail address', true);
+		test_form_field ('profile', 'id_first_name','text', 1, 'First name');
+		test_form_field ('profile', 'id_last_name',	'text', 2, 'Last name');
+		test_form_field ('profile', 'id_tags',		'text', 3, 'Tags');
+		test_val	('#profile :input:eq(4)[type=submit]', 'Save');
+        test_unlogged_footer ();
+    });
+
+	suite ('edit password page conformity', function () {
+        test_page_loading	('/profile-pw/', 'Your profile [(]'+w.USER_ADMIN+'[)]\n - '+t['#id_workspace_name']);
+		test_logged_header	(w.USER_ADMIN, no_tagline);
+        test_count  ('#content ul.sub_list:eq(0) a', 1);
+        test_text   ('#content ul.sub_list:eq(0) a:eq(0)[href="/profile/"]', 'Profile');
+        test_count  ('form#profile[action="."]:eq(0) :input', 4);
+		test_form_field ('profile', 'id_old_password',	'password', 0, 'Old password', true);
+		test_form_field ('profile', 'id_new_password1', 'password', 1, 'New password', true);
+		test_form_field ('profile', 'id_new_password2',	'password', 2, 'New password confirmation', true);
+		test_val	('#profile :input:eq(3)[type=submit]', 'Save');
+        test_unlogged_footer ();
+    });
+
+    suite ('people list page conformity', function () {
+        test_page_loading	('/user/', 'People\' list\n - '+t['#id_workspace_name']);
         test_logged_header	(w.USER_ADMIN);
         test_default_tabs	();
         test_count  ('#user ul.sub_list:eq(0) a', 2);
@@ -180,19 +304,6 @@ suite ('comt', function () {
         test_count  ('form#filter_form[action="."] :input', 1);
 		test_text	('#filter_form a[href="?display=1"]', 'Display suspended users');
         test_text   ('select#tag_selected option:eq(0)[selected][value="0"]', '- All -', non_visible);
-        test        ('#user_form input count', dsl (function () {
-            elt ('form#user_form[action="."] :input').count (function (c) {
-                var n = 6 + (z.user_nb % 10) * 2;
-                if (c != n) throw 'expected computed '+n+' to equal got '+c;
-            });
-        }));
-        test        ('#paginator "of #" value', dsl (function () {
-            elt ('span#paginator').text (function (t) {
-                var r = t.match (/\s\d+-\d+ of (\d+)\s/m);
-                if (r.length != 2) throw 'expected 2 matches got '+r.length;
-                if (r[1] != z.user_nb) throw 'expected paginator total ('+r[1]+') to be '+z.user_nb;
-            });
-        }));
         // TOTEST : pagination
         // TOTEST : Bulk Actions -> Apply does enable
         test_text   ('select#bulk_actions option:eq(0)[selected][value="-1"]', '- Bulk Actions -', non_visible);
@@ -217,8 +328,77 @@ suite ('comt', function () {
         test_unlogged_footer ();
     });
 
-	suite ('settings conformity', function () {
-        test_page_loading	('/settings/', 'Settings');
+	suite ('check user number', function () {
+        test_page_loading	('/user/?display=1', 'People\' list\n - '+t['#id_workspace_name']);
+        test        ('#user_form input count', dsl (function () {
+            elt ('form#user_form[action="."] :input').count (function (c) {
+                var n = 6 + (z.user_nb % 10) * 2;
+                if (c != n) throw 'expected computed '+n+' to equal got '+c;
+            });
+        }));
+        test        ('#paginator "of #" value', dsl (function () {
+            elt ('span#paginator').text (function (t) {
+                var r = t.match (/\s\d+-\d+ of (\d+)\s/m);
+                if (r.length != 2) throw 'expected 2 matches got '+r.length;
+                if (r[1] != z.user_nb) throw 'expected paginator total ('+r[1]+') to be '+z.user_nb;
+            });
+        }));
+    });
+
+	suite ('add a user page conformity', function () {
+        test_page_loading	('/user/add/', 'Add a new user\n - '+t['#id_workspace_name']);
+		test_logged_header	(w.USER_ADMIN);
+		test_default_tabs	();
+        test_count  ('#user ul.sub_list:eq(0) a', 2);
+        test_text   ('#user ul.sub_list:eq(0) a:eq(0)[href="/user/"]', 'Users\' list');
+        test_text   ('#user ul.sub_list:eq(0) a:eq(1)[href="/user/mass-add/"]', 'Add users in bulk');
+        test_count  ('#user form[action="."]:eq(0) :input', 8);
+		test_form_field ('user', 'id_email',		'text', 0, 'E-mail address', true);
+		test_form_field ('user', 'id_first_name',	'text', 1, 'First name');
+		test_form_field ('user', 'id_last_name',	'text', 2, 'Last name');
+		test_form_field ('user', 'id_tags',			'text', 3, 'Tags');
+		test_form_field ('user', 'id_role',			'select', 4, 'Workspace level role');
+		test_form_field ('user', 'id_note',			'textarea', 5, 'Note');
+		test_count	('select#id_role option', 6);
+        test_text   ('select#id_role option:eq(0)[value][selected]', '---------', non_visible);
+        test_text   ('select#id_role option:eq(1)[value="1"]', 'Manager', non_visible);
+        test_text   ('select#id_role option:eq(2)[value="2"]', 'Editor', non_visible);
+        test_text   ('select#id_role option:eq(3)[value="3"]', 'Moderator', non_visible);
+        test_text   ('select#id_role option:eq(4)[value="4"]', 'Commentator', non_visible);
+        test_text   ('select#id_role option:eq(5)[value="5"]', 'Observer', non_visible);
+		test_val	('#user :input:eq(6)[type=submit]', 'Add user');
+		test_val	('#user :input:eq(7)#cancel_button[type=button]', 'Cancel');
+        test_unlogged_footer ();
+		// TOTEST add user (pending)
+    });
+
+	suite ('add users in bulk page conformity', function () {
+        test_page_loading	('/user/mass-add/', 'Add users in bulk\n - '+t['#id_workspace_name']);
+		test_logged_header	(w.USER_ADMIN);
+		test_default_tabs	();
+        test_count  ('#user ul.sub_list:eq(0) a', 2);
+        test_text   ('#user ul.sub_list:eq(0) a:eq(0)[href="/user/"]', 'Users\' list');
+        test_text   ('#user ul.sub_list:eq(0) a:eq(1)[href="/user/add/"]', 'Add a new user');
+        test_count  ('#user form[action="."]:eq(0) :input', 6);
+		test_form_field ('user', 'id_email',		'textarea', 0, 'Emails', true);
+		test_form_field ('user', 'id_tags',			'text',		1, 'Tags');
+		test_form_field ('user', 'id_role',			'select',	2, 'Workspace level role');
+		test_form_field ('user', 'id_note',			'textarea', 3, 'Note');
+		test_count	('select#id_role option', 6);
+        test_text   ('select#id_role option:eq(0)[value][selected]', '---------', non_visible);
+        test_text   ('select#id_role option:eq(1)[value="1"]', 'Manager', non_visible);
+        test_text   ('select#id_role option:eq(2)[value="2"]', 'Editor', non_visible);
+        test_text   ('select#id_role option:eq(3)[value="3"]', 'Moderator', non_visible);
+        test_text   ('select#id_role option:eq(4)[value="4"]', 'Commentator', non_visible);
+        test_text   ('select#id_role option:eq(5)[value="5"]', 'Observer', non_visible);
+		test_val	('#user :input:eq(4)[type=submit]', 'Add users');
+		test_val	('#user :input:eq(5)#cancel_button[type=button]', 'Cancel');
+		// X TOTEST add users (pending) -> can't be deleted
+        test_unlogged_footer ();
+    });
+
+	suite ('settings page conformity', function () {
+        test_page_loading	('/settings/', 'Settings - '+t['#id_workspace_name']);
 		test_logged_header	(w.USER_ADMIN);
 		test_default_tabs	();
         test_count  ('#settings ul.sub_list:eq(0) a', 1);
@@ -238,40 +418,30 @@ suite ('comt', function () {
 		test_form_field ('settings', 'id_workspace_category_5', 'text', 9, 'Label for the fifth category of comments');
 		test_val	('#settings :input:eq(10)[type=submit]', 'Save');
 		test_val	('#settings :input:eq(11)#cancel_button[type=button]', 'Cancel');
+		// TOTEST Workspace registration
 		test_unlogged_footer ();
     });
 
-	suite ('settings reading', function () {
-		test_readz_field ('#id_workspace_name');
-		test_readz_field ('#id_workspace_tagline');
-		test_readz_field ('#id_workspace_registration');
-		test_readz_field ('#id_workspace_registration_moderation');
-		test_readz_field ('#id_workspace_role_model');
-		test_readz_field ('#id_workspace_category_1');
-		test_readz_field ('#id_workspace_category_2');
-		test_readz_field ('#id_workspace_category_3');
-		test_readz_field ('#id_workspace_category_4');
-		test_readz_field ('#id_workspace_category_5');
-/*		test ('display z', dsl(function () {
-			elt ('#main-tabs').text (function (t) {
-				console.log ('z '+JSON.stringify(z));
-			});
-		}));*/
+	suite ('settings design page conformity', function () {
+        test_page_loading	('/settings/design/', 'Settings - '+t['#id_workspace_name']);
+		test_logged_header	(w.USER_ADMIN);
+		test_default_tabs	();
+        test_count  ('#settings ul.sub_list:eq(0) a', 1);
+        test_text   ('#settings ul.sub_list:eq(0) a:eq(0)[href="/settings/"]', 'General');
+        test_count  ('#settings form[action="."]:eq(0) :input', 7);
+		test_form_field ('settings', 'id_workspace_logo_file', 'file', 0, 'Workspace logo');
+		test_form_field ('settings', 'id_custom_css', 'textarea', 1, 'Custom CSS rules');
+		test_form_field ('settings', 'id_custom_font', 'text', 2, 'Custom font');
+		test_form_field ('settings', 'id_custom_titles_font', 'text', 3, 'Custom font for titles');
+		test_val	('#settings :input:eq(4)[type=submit]', 'Save');
+		test_val	('#settings :input:eq(5)#cancel_button[type=button]', 'Cancel');
+		test_val	('#settings :input:eq(6)#delete_logo_button[type=submit]', 'Delete logo');
+		// TOTEST custom CSS, font, font for titles like the rest of the settings
+		test_unlogged_footer ();
     });
 
-	suite ('settings restoration', function () {
-		test_fill_settings (t);
-		test_val ('#id_workspace_name', t['#id_workspace_name']);
-		test ('Save test settings ', dsl (function () {
-			elt ('#settings input[type="submit"]').click ();
-			browser.waitForPageLoad ();
-		}));
-        test_page_loading	('/settings/', 'Settings');
-		test_text ('#content h1.main_title a[href="/"]', t['#id_workspace_name']);
-    });
-
-	suite ('followup', function () {
-		test_page_loading	('/followup/', 'Followup');
+	suite ('followup page conformity', function () {
+		test_page_loading	('/followup/', 'Followup\n - '+t['#id_workspace_name']);
 		test_logged_header	(w.USER_ADMIN);
 		test_default_tabs	();
 		test_text	('#followup a:eq(0)[href="/help/#public_private_feed"]', '?');
@@ -295,7 +465,14 @@ suite ('comt', function () {
 			elt ('#settings input[type="submit"]').click ();
 			browser.waitForPageLoad ();
 		}));
+		test_page_loading ('/settings/design/', 'Settings');
+		test_fill_design (z);
+		test ('Restore design settings ', dsl (function () {
+			elt ('#settings input[type="submit"]').click ();
+			browser.waitForPageLoad ();
+		}));
 		// next instruction must be a page loading
+        // test_page_loading	('/settings/', 'Settings');
     });
 
 });
@@ -321,7 +498,9 @@ function test_default_tabs () {
 	}));
 }
 
-function test_logged_header (username) {
+function test_logged_header (username, is_tagline) {
+	is_tagline = typeof is_tagline == 'undefined' ? true : is_tagline;
+
 	test_text	('#header_controls b', username)
 	test_count	('#header_controls a', 6);
 	test_text	('#header_controls a:nth-of-type(1)[href="/"]',					'Home');
@@ -330,6 +509,11 @@ function test_logged_header (username) {
 	test_text	('#header_controls a:nth-of-type(4)[href="/create/import/"]',	'Import a co-mented text');
 	test_text	('#header_controls a:nth-of-type(5)[href="/profile/"]',			'Profile');
 	test_text	('#header_controls a:nth-of-type(6)[href="/logout/"]',			'Logout');
+	test_text	('#content h1.main_title a[href="/"]',							t['#id_workspace_name']);
+
+	if (is_tagline) {
+		test_match	('#content h1.main_title  + div', new RegExp (t['#id_workspace_tagline'], 'm'));
+	}
 }
 
 function test_unlogged_header () {
@@ -466,6 +650,12 @@ function test_fill_settings (s) {
 	test_fill_field ('#id_workspace_category_3', s);
 	test_fill_field ('#id_workspace_category_4', s);
 	test_fill_field ('#id_workspace_category_5', s);
+}
+
+function test_fill_design (s) {
+	test_fill_field ('#id_custom_css', s);
+	test_fill_field ('#id_custom_font', s);
+	test_fill_field ('#id_custom_titles_font', s);
 }
 
 /** Ensure the given element is visible
