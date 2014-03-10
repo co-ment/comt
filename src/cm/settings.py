@@ -125,9 +125,7 @@ FILE_UPLOAD_HANDLERS = ("django.core.files.uploadhandler.TemporaryFileUploadHand
 PISTON_IGNORE_DUPE_MODELS = True
 
 # YUI version : set to js/lib/ version directory to be used  
-YUI_VERSION = 'yui_3.10.3'
-#YUI_VERSION = 'yui3.0.0'
-
+YUI_VERSION = 'yui3-3.15.0'
 
 # base timezone used for client
 DEFAULT_TIME_ZONE = TIME_ZONE 

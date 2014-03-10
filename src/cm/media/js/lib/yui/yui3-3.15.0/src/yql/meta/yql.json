@@ -1,0 +1,32 @@
+{
+    "yql": {
+        "requires": [ "oop" ],
+        "plugins": {
+            "yql-jsonp": {
+                "condition": {
+                    "trigger": "yql",
+                    "test": "jsonp.js",
+                    "when": "after"
+                },
+                "requires": [
+                    "jsonp",
+                    "jsonp-url"
+                ]
+            },
+            "yql-winjs": {
+                "condition": {
+                    "trigger": "yql",
+                    "ua": "winjs",
+                    "when": "after"
+                }
+            },
+            "yql-nodejs": {
+                "condition": {
+                    "trigger": "yql",
+                    "ua": "nodejs",
+                    "when": "after"
+                }
+            }
+        }
+    }
+}
