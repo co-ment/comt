@@ -75,19 +75,19 @@ IComment = function() {
     });   
 
   // CY.on won't work 
-  this.overlay.get('contentBox').query(".c-close").on("click", this.onCloseCommentClick, this);
-  this.overlay.get('contentBox').query(".c-moderate").on("click", this.onModerateCommentClick, this);
-  this.overlay.get('contentBox').query(".c-state-pending").on("click", this.onPendingCommentClick, this);
-  this.overlay.get('contentBox').query(".c-state-approved").on("click", this.onApprovedCommentClick, this);
-  this.overlay.get('contentBox').query(".c-state-unapproved").on("click", this.onUnapprovedCommentClick, this);
-  this.overlay.get('contentBox').query(".c-state-cancel").on("click", this.onCancelStateChangeClick, this);
-  this.overlay.get('contentBox').query(".c-edit").on("click", this.onEditCommentClick, this);
-  this.overlay.get('contentBox').query(".c-delete").on("click", this.onDeleteCommentClick, this);
-  this.overlay.get('contentBox').query(".c-reply").on("click", this.onReplyCommentClick, this);
-  this.overlay.get('contentBox').query(".c-readreplies").on("click", this.onReadRepliesCommentClick, this);
+  this.overlay.get('contentBox').one(".c-close").on("click", this.onCloseCommentClick, this);
+  this.overlay.get('contentBox').one(".c-moderate").on("click", this.onModerateCommentClick, this);
+  this.overlay.get('contentBox').one(".c-state-pending").on("click", this.onPendingCommentClick, this);
+  this.overlay.get('contentBox').one(".c-state-approved").on("click", this.onApprovedCommentClick, this);
+  this.overlay.get('contentBox').one(".c-state-unapproved").on("click", this.onUnapprovedCommentClick, this);
+  this.overlay.get('contentBox').one(".c-state-cancel").on("click", this.onCancelStateChangeClick, this);
+  this.overlay.get('contentBox').one(".c-edit").on("click", this.onEditCommentClick, this);
+  this.overlay.get('contentBox').one(".c-delete").on("click", this.onDeleteCommentClick, this);
+  this.overlay.get('contentBox').one(".c-reply").on("click", this.onReplyCommentClick, this);
+  this.overlay.get('contentBox').one(".c-readreplies").on("click", this.onReadRepliesCommentClick, this);
 
-  this.overlay.get('contentBox').query(".icomment-header").on("mouseenter", this.onMouseEnterHeader, this);
-  this.overlay.get('contentBox').query(".icomment-header").on("mouseleave", this.onMouseLeaveHeader, this);
+  this.overlay.get('contentBox').one(".icomment-header").on("mouseenter", this.onMouseEnterHeader, this);
+  this.overlay.get('contentBox').one(".icomment-header").on("mouseleave", this.onMouseLeaveHeader, this);
   
   this.overlay.get('contentBox').on("click", this.onCommentClick, this);
 }
@@ -105,8 +105,8 @@ IComment.prototype = {
   onModerateCommentClick : function (e) {
     e.halt() ; // prevent click triggered on content box
     if (readyForAction() && this.isVisible()) {
-      this.overlay.get('contentBox').query(".c-iactions").addClass("displaynone") ;
-      this.overlay.get('contentBox').query(".c-state-actions").removeClass("displaynone") ;
+      this.overlay.get('contentBox').one(".c-iactions").addClass("displaynone") ;
+      this.overlay.get('contentBox').one(".c-state-actions").removeClass("displaynone") ;
     }
   },
   onPendingCommentClick : function (e) {
@@ -130,8 +130,8 @@ IComment.prototype = {
   onCancelStateChangeClick : function (e) {
     e.halt() ; // prevent click triggered on content box
     if (readyForAction() && this.isVisible()) {
-      this.overlay.get('contentBox').query(".c-iactions").removeClass("displaynone") ;
-      this.overlay.get('contentBox').query(".c-state-actions").addClass("displaynone") ;
+      this.overlay.get('contentBox').one(".c-iactions").removeClass("displaynone") ;
+      this.overlay.get('contentBox').one(".c-state-actions").addClass("displaynone") ;
     }
   },
   onDeleteCommentClick : function (e) {
@@ -199,13 +199,13 @@ IComment.prototype = {
   
   onMouseEnterHeader : function () {
     if (readyForAction() && this.isVisible()) {
-      this.overlay.get('contentBox').query(".c-permalink").removeClass('displaynone');
+      this.overlay.get('contentBox').one(".c-permalink").removeClass('displaynone');
     }
   },
   
   onMouseLeaveHeader : function () {
     if (readyForAction() && this.isVisible()) {
-      this.overlay.get('contentBox').query(".c-permalink").addClass('displaynone');
+      this.overlay.get('contentBox').one(".c-permalink").addClass('displaynone');
     }
   },  
   
@@ -239,12 +239,12 @@ IComment.prototype = {
     }
   },
   hideContent:function() {
-    this.overlay.get('contentBox').query(".icomment-header").addClass('displaynone') ;
-    this.overlay.get('contentBox').query(".icomment-body").addClass('displaynone') ;
+    this.overlay.get('contentBox').one(".icomment-header").addClass('displaynone') ;
+    this.overlay.get('contentBox').one(".icomment-body").addClass('displaynone') ;
   },
   showContent:function() {
-    this.overlay.get('contentBox').query(".icomment-header").removeClass('displaynone') ;
-    this.overlay.get('contentBox').query(".icomment-body").removeClass('displaynone') ;
+    this.overlay.get('contentBox').one(".icomment-header").removeClass('displaynone') ;
+    this.overlay.get('contentBox').one(".icomment-body").removeClass('displaynone') ;
   },
   isVisible:function() {
     return this.overlay.get('visible') ;
@@ -254,13 +254,13 @@ IComment.prototype = {
     return this.overlay.show() ;
   },
   showReadRepliesLnk:function() {
-    this.overlay.get('contentBox').query(".c-readreplies").removeClass('displaynone') ;
+    this.overlay.get('contentBox').one(".c-readreplies").removeClass('displaynone') ;
   },
   hideReadRepliesLnk:function() {
-    this.overlay.get('contentBox').query(".c-readreplies").addClass('displaynone') ;
+    this.overlay.get('contentBox').one(".c-readreplies").addClass('displaynone') ;
   },
   changeModeration:function(comment) {
-    var moderationLnk = this.overlay.get('contentBox').query(".c-moderate") ;
+    var moderationLnk = this.overlay.get('contentBox').one(".c-moderate") ;
     moderationLnk.set("innerHTML", gettext(comment.state)) ;
     
     moderationLnk.removeClass("c-state-approved") ;
@@ -268,8 +268,8 @@ IComment.prototype = {
     moderationLnk.removeClass("c-state-unapproved") ;
     moderationLnk.addClass("c-state-" + comment.state) ;
 
-    this.overlay.get('contentBox').query(".c-iactions").removeClass("displaynone") ;
-    this.overlay.get('contentBox').query(".c-state-actions").addClass("displaynone") ;
+    this.overlay.get('contentBox').one(".c-iactions").removeClass("displaynone") ;
+    this.overlay.get('contentBox').one(".c-state-actions").addClass("displaynone") ;
   },
   isfetched : function() {
     return (this.commentId != null) ;
@@ -309,17 +309,17 @@ IComment.prototype = {
     var newTitleContent = '<span class="c-header"><div class="c-header-title">' + comment.title + permalink + '</div><div class="c-infos">' + infos + '</div></span>' ;
     
     var newTitleNode = CY.Node.create(newTitleContent) ;
-    var prevTitleNode = boundingBoxNode.query(".c-header") ;
+    var prevTitleNode = boundingBoxNode.one(".c-header") ;
     if (prevTitleNode == null) // first time, no title yet
-      boundingBoxNode.query('.icomment-header').insertBefore(newTitleNode, boundingBoxNode.query('.c-iactions')) ;
+      boundingBoxNode.one('.icomment-header').insertBefore(newTitleNode, boundingBoxNode.one('.c-iactions')) ;
     else 
       prevTitleNode.get('parentNode').replaceChild(newTitleNode, prevTitleNode) ;
 
     // TAG
     var newTagNode = CY.Node.create('<div class="c-tags"><span class="c-tags-infos">' + 'tags:' + '</span>' + comment.tags + '</div>') ;
-    var prevTagNode = boundingBoxNode.query(".c-tags") ;
+    var prevTagNode = boundingBoxNode.one(".c-tags") ;
     if (prevTagNode == null) 
-      boundingBoxNode.query('.icomment-header').appendChild(newTagNode) ;
+      boundingBoxNode.one('.icomment-header').appendChild(newTagNode) ;
     else 
       prevTagNode.get('parentNode').replaceChild(newTagNode, prevTagNode) ;
     // NO TAG ?
@@ -328,9 +328,9 @@ IComment.prototype = {
 
     // CATEGORY
     var newCatNode = CY.Node.create('<div class="c-cat">' + gettext("category") + ':&nbsp;<span class="c-cat-val c-cat-' + comment.category + '">' + categories[comment.category] + '</span></div>') ;
-    var prevCatNode = boundingBoxNode.query(".c-cat") ;
+    var prevCatNode = boundingBoxNode.one(".c-cat") ;
     if (prevCatNode == null) 
-      boundingBoxNode.query('.icomment-header').appendChild(newCatNode) ;
+      boundingBoxNode.one('.icomment-header').appendChild(newCatNode) ;
     else 
       prevCatNode.get('parentNode').replaceChild(newCatNode, prevCatNode) ;
     // NO CATEGORY ?
@@ -339,19 +339,19 @@ IComment.prototype = {
 
     // CONTENT
     var newContentNode = CY.Node.create('<span class="c-content">' + comment.content_html + '</span>') ;
-    var prevContentNode = boundingBoxNode.query(".c-content") ;
+    var prevContentNode = boundingBoxNode.one(".c-content") ;
     if (prevContentNode == null) 
-      boundingBoxNode.query('.icomment-body').appendChild(newContentNode) ;
+      boundingBoxNode.one('.icomment-body').appendChild(newContentNode) ;
     else 
       prevContentNode.get('parentNode').replaceChild(newContentNode, prevContentNode) ;
 
     // PERMALINK
     if (sv_prefix=="") {
-      boundingBoxNode.query(".c-permalink").set("href",sv_site_url + comment.permalink) ;
+      boundingBoxNode.one(".c-permalink").set("href",sv_site_url + comment.permalink) ;
     }
     else {
       comment_id_delta_prefix = sv_delta != '' ? Array(parseInt(sv_delta)+1).join(',') : '';
-      boundingBoxNode.query(".c-permalink").set("href", top.location.protocol + '//' + top.location.hostname + top.location.pathname + '?comment_id_key=' + comment_id_delta_prefix + comment.id_key) ;
+      boundingBoxNode.one(".c-permalink").set("href", top.location.protocol + '//' + top.location.hostname + top.location.pathname + '?comment_id_key=' + comment_id_delta_prefix + comment.id_key) ;
     }
 
     // MODERATION
@@ -365,10 +365,10 @@ IComment.prototype = {
     
  */   
     // open links in new window :
-    var links = boundingBoxNode.queryAll(".c-content a") ;
+    var links = boundingBoxNode.all(".c-content a") ;
     if (links != null)
       links.setAttribute( "target" , "_blank" ) ;
-    links = boundingBoxNode.queryAll(".c-header-title a") ;
+    links = boundingBoxNode.all(".c-header-title a") ;
     if (links != null)
       links.setAttribute( "target" , "_blank" ) ;
     
@@ -377,7 +377,7 @@ IComment.prototype = {
 
   permAdapt : function(comment) {
     // this comment permissions 
-    var delLnk = this.overlay.get('contentBox').query(".c-delete") ; 
+    var delLnk = this.overlay.get('contentBox').one(".c-delete") ; 
     if (delLnk) { // there will be a server side check anyway
       if (!comment.can_delete)
         delLnk.addClass('displaynone') ;
@@ -385,7 +385,7 @@ IComment.prototype = {
         delLnk.removeClass('displaynone') ;
     }
 
-    var editLnk = this.overlay.get('contentBox').query(".c-edit") ; 
+    var editLnk = this.overlay.get('contentBox').one(".c-edit") ; 
     if (editLnk) {  
       if (!comment.can_edit) 
         editLnk.addClass('displaynone') ;
@@ -393,7 +393,7 @@ IComment.prototype = {
         editLnk.removeClass('displaynone') ;
     }
     
-    var replyLnk = this.overlay.get('contentBox').query(".c-reply") ;
+    var replyLnk = this.overlay.get('contentBox').one(".c-reply") ;
     if (replyLnk) {
       if (!hasPerm("can_create_comment"))
         replyLnk.addClass('displaynone') ;
@@ -401,7 +401,7 @@ IComment.prototype = {
         replyLnk.removeClass('displaynone') ;
     }
 
-    var moderateLnk = this.overlay.get('contentBox').query(".c-moderate") ; 
+    var moderateLnk = this.overlay.get('contentBox').one(".c-moderate") ; 
     if (moderateLnk) {  
       if (!comment.can_moderate)  
         moderateLnk.addClass('displaynone') ;
@@ -410,8 +410,8 @@ IComment.prototype = {
     }
   },
   setThreadPad : function(pad) { // TODO review ...
-    this.overlay.get('contentBox').query('.yui-widget-hd').setStyle('paddingLeft', pad + 'px') ;
-    this.overlay.get('contentBox').query('.yui-widget-bd').setStyle('paddingLeft', pad + 'px') ;
+    this.overlay.get('contentBox').one('.yui-widget-hd').setStyle('paddingLeft', pad + 'px') ;
+    this.overlay.get('contentBox').one('.yui-widget-bd').setStyle('paddingLeft', pad + 'px') ;
     
   },
   setPosition : function(xy) {

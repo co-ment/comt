@@ -30,7 +30,6 @@ YUI( {
   // filter :'raw',
   timeout :10000
 }).use(
-      "text-modern-style",
     "cookie",
     "json",
     "overlay",
@@ -114,7 +113,7 @@ onTextMouseUp = function(e) {
     if (selection != null) {
       updateICommentFormSelection(selection) ;
       if (gEditICommentHost != null) {
-        var modifyScope = CY.get("#"+gEdit['ids']['changeScopeInputId']+" input").get('checked') ;
+        var modifyScope = CY.one("#"+gEdit['ids']['changeScopeInputId']+" input").get('checked') ;
         if (modifyScope) {
           gEditICommentHost.scrollIntoView() ;
         }
@@ -241,8 +240,8 @@ onDomReady = function(arg1) {
 
       gGETValues = CY.JSON.parse(sv_get_params);
       
-      CY.get('#maincontainer').setStyle('display', 'block');
-      CY.get('#textcontainer').setStyle('display', 'block');
+      CY.one('#maincontainer').setStyle('display', 'block');
+      CY.one('#textcontainer').setStyle('display', 'block');
       
       var val = (sv_withComments) ? gPrefs.get('layout','comments_col_width') : 0 ; 
       var colWidth = sliderValToPx(val) ;

@@ -397,9 +397,9 @@ Sync.prototype = {
       var topAncestorComment = path[path.length - 1] ;
       var topY = 0 ;
       if (comment['start_wrapper'] != -1) 
-        topY = CY.get(".c-id-"+topAncestorComment.id).getY() ;
+        topY = CY.one(".c-id-"+topAncestorComment.id).getY() ;
       else 
-        topY = CY.get(the_scrolling_part).get('scrollTop') ;
+        topY = CY.one(the_scrolling_part).get('scrollTop') ;
      
       this._showComments([topAncestorComment.id], topY, false) ;
       // optim when browsing comments with no reply     
@@ -413,9 +413,9 @@ Sync.prototype = {
     if (topComment != null) {
       var topY = 0 ;
       if (topComment['start_wrapper'] != -1) 
-        topY = CY.get(".c-id-"+topComment.id).getY() ;
+        topY = CY.one(".c-id-"+topComment.id).getY() ;
       else 
-        topY = CY.get(the_scrolling_part).get('scrollTop') ;
+        topY = CY.one(the_scrolling_part).get('scrollTop') ;
       
       this._showComments([topComment.id], topY, false) ;
       // optim when browsing comments with no reply     
@@ -456,11 +456,11 @@ Sync.prototype = {
   
         if (commentDbIds.length > 0) {
           if (atDocumentTop) {
-            CY.get(the_scrolling_part).set('scrollTop', 0) ; 
+            CY.one(the_scrolling_part).set('scrollTop', 0) ; 
           }
           else {
             gIComments.activate(commentDbIds[0]) ;
-            var scopeStart = CY.get(".c-id-"+commentDbIds[0]) ;
+            var scopeStart = CY.one(".c-id-"+commentDbIds[0]) ;
 
 			// scopeStart could be null when comment has no scope
 			if (scopeStart && !scopeStart.inViewportRegion()) {

@@ -185,7 +185,7 @@ markEndsAsComments = function(startElt, startOffset, endElt, endOffset, commentI
 // was replaced with :
 // afterStartElt = _yuiCloneNode(startElt) ;
 _yuiCloneNode = function (srcElt) {
-  var ret = CY.Node.getDOMNode(CY.get('#'+srcElt.id).cloneNode(true)) ;
+  var ret = CY.Node.getDOMNode(CY.one('#'+srcElt.id).cloneNode(true)) ;
   ret.id = CY.guid();
   return ret ;
 };
@@ -462,7 +462,7 @@ unpaintCommentScope = function(comment) {
           var nIds = getCommentIdsFromClasses(nElt) ; 
           quicksort(nIds) ;
           if (areSortedArraysEqual(cIds, nIds)) {
-            cElt.firstChild.data = cElt.firstChild.data + nElt.firstChild.data; 
+            cElt.firstChild.setData(cElt.firstChild.getData() + nElt.firstChild.getData()); 
             toBeRemovedElts.push(nElt) ;
           }
         }
