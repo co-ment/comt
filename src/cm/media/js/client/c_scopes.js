@@ -462,7 +462,7 @@ unpaintCommentScope = function(comment) {
           var nIds = getCommentIdsFromClasses(nElt) ; 
           quicksort(nIds) ;
           if (areSortedArraysEqual(cIds, nIds)) {
-            cElt.firstChild.setData(cElt.firstChild.getData() + nElt.firstChild.getData()); 
+            cElt.firstChild.data = cElt.firstChild.data + nElt.firstChild.data; 
             toBeRemovedElts.push(nElt) ;
           }
         }
