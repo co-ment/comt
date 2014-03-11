@@ -25,12 +25,14 @@ from tagging.fields import TagField
 import pickle
 from django.db import connection
 from datetime import datetime
+from django.core.cache import cache
 
 class TextManager(Manager):
     def create_text(self, title, format, content, note, name, email, tags, user=None, state='approved', **kwargs):
         content = on_content_receive(content, format)
         text = self.create(name=name, email=email, user=user, state=state)
         text_version = TextVersion.objects.create(title=title, format=format, content=content, text=text, note=note, name=name, email=email, tags=tags, user=user)
+        cache.clear()
         return text
     
     def create_new_version(self, text, title, format, content, note, name, email, tags, user=None, **kwargs):

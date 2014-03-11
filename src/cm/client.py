@@ -24,6 +24,7 @@ from settings import CLIENT_DATE_FMT
 import re
 import time
 import operator
+from django.core.cache import cache
 
 
 selection_place_error_msg = _(u'A selection is required. Select in the text the part your comment applies to.')
@@ -166,6 +167,7 @@ def remove_comment(request, key, comment_key):
         comment.delete()
         ret['msg'] = _(u'comment removed')
         register_activity(request, "comment_removed", text=text, comment=comment)
+        cache.clear()
     except ObjectDoesNotExist: 
         pass
     return ret ;
@@ -288,6 +290,7 @@ def add_comment(request, key, version_key):
         if AUTO_CONTRIB_REGISTER:
             Notification.objects.set_notification(text=text, type='own', active=True, email_or_user=user or email)            
         register_activity(request, "comment_created", text, comment)
+        cache.clear()
     return ret
 
 #we need to call comments_thread from here this function will be very expensive 

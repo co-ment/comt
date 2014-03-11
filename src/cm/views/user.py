@@ -326,6 +326,7 @@ def user_activate(request, key):
                 userform = UserValidateForm(instance=user)
                 pwform = SetPasswordForm(user)
             
+            cache.clear()
             return render_to_response('site/activate.html', {
                                                                   'forms' : [userform, pwform],
                                                                   'title': _(u'Activate your account'),
@@ -367,6 +368,7 @@ def user_suspend(request, key):
             profile.user.save()
             display_message(request, _(u"User's access %(prof)s has been refused.") % {'prof':profile.simple_print()})
             register_activity(request, "user_refused", user=profile.user)                
+        cache.clear()
         return HttpResponse('') # no redirect because this is called by js
     raise UnauthorizedException('')
     

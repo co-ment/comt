@@ -46,6 +46,7 @@ import base64
 import cssutils
 from os.path import basename
 from django.db.models.sql.datastructures import EmptyResultSet
+from django.core.cache import cache
 
 def get_text_and_admin(key, adminkey, assert_admin = False):
     """
@@ -213,6 +214,7 @@ def text_delete(request, key):
     display_message(request, _(u'Text %(text_title)s deleted') %{'text_title':text.title})
     register_activity(request, "text_removed", text=text)    
     text.delete()
+    cache.clear()
     return HttpResponse('') # no redirect because this is called by js
 
 @has_perm_on_text('can_delete_text')
