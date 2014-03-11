@@ -2,6 +2,7 @@
 from django.test import TestCase
 from BeautifulSoup import BeautifulSoup
 from cm.models import *
+from django.core.cache import cache
 
 # python manage.py test 
 #       
@@ -20,6 +21,7 @@ def create_comment(start_wrapper=0, end_wrapper=0, start_offset=0, end_offset=0,
                            reply_to=reply_to,
                            state=state,
                            user=user)
+    cache.clear()
     return co
     
 

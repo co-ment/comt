@@ -31,7 +31,7 @@ def _save_activity(sender, **kwargs):
         originator_user = request.user
     
     if STORE_ACTIVITY_IP:
-        ip = request.META['REMOTE_ADDR']
+        ip = request.META.get('REMOTE_ADDR', '0.0.0.0')
     else:
         ip = None
     

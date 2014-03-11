@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.test.client import Client
 from django.core import management
-
+from django.core.cache import cache
 
 from cm.models import *
 from cm.security import *
@@ -12,7 +12,7 @@ class FalseRequest(object):
         self.user = user
 
 class SecurityTest(TestCase):
-    fixtures = ['roles_generic','test_content']
+    fixtures = ['initial_data', 'roles_generic','test_content']
     
     def test_access_rights(self):
         # anon user sees no text
@@ -53,6 +53,7 @@ class SecurityTest(TestCase):
         c2.save()
         c3.state = 'approved'
         c3.save()
+        cache.clear()
 
         self.assertFalse(has_own_perm(FalseRequest(user3), "can_edit_comment" + "_own", text2, c3),'CANNOT edit own comment (there is a reply)')
         self.assertTrue(has_own_perm(FalseRequest(user2), "can_edit_comment" + "_own", text2, c2),"CAN edit own comment (is moderator)")

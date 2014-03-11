@@ -7,7 +7,7 @@ from cm.models import *
 from cm.models_utils import *
 
 class NotificationTest(TestCase):
-    fixtures = ['roles_generic','test_content']
+    fixtures = ['initial_data', 'roles_generic','test_content']
     
     def setUp(self):
         pass

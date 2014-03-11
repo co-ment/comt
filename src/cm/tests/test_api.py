@@ -22,7 +22,7 @@ class FalseRequest(object):
         self.user = user
 
 class APITest(TestCase):
-    fixtures = ['roles_generic', 'test_content', ]
+    fixtures = ['initial_data','roles_generic', 'test_content', ]
     
     def test_text_get(self):
         """
