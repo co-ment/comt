@@ -23,9 +23,9 @@ const t = {
 	'#id_workspace_category_3':	'ws_cat_3',
 	'#id_workspace_category_4':	'ws_cat_4',
 	'#id_workspace_category_5':	'ws_cat_5',
-	'#id_custom_css': ".voted {\n  color: #008000;\n}\n\n.rejected, .fallen, .withdrawn {\n  color: #ff0000;\n}\n\ndiv.frame {\n  border: 1px solid #000;\n  padding: 5px;\n}\n\ndiv.frame .title {\n  font-weight: bold;\n  text-align: center; font-color:purple; \n}",
-	'#id_custom_font': 'Ubuntu',
-	'#id_custom_titles_font': 'Ubuntu Monospaced',
+	'#id_custom_css': "h2 {  font-family: Test_Sopinspace !important; }",
+	'#id_custom_font': 'Test_Sopinspace_custom_font',
+	'#id_custom_titles_font': 'Test_Sopinspace_custom_titles_font',
 };
 
 
@@ -60,6 +60,21 @@ suite ('comt', function () {
 		test_unlogged_footer ();
 	});
 
+	suite ('contact page mandatory field test', function () {
+		test_page_loading ('/contact/', 'Contact');
+
+		test ('submit empty fields', dsl(function () {
+			elt ('#profile input[type="submit"]').click ();
+			browser.waitForPageLoad ();
+		}));
+		test_count ('div.help_text span.error-text', 4);
+		test_form_field ('profile div.error', 'id_name', 'text', 0, 'Your name', true); // the field id_name is…
+		test_form_field ('profile div.error', 'id_email', 'text', 1, 'Your email address', true);
+		test_form_field ('profile div.error', 'id_title', 'text', 2, 'Subject of the message', true);
+		test_form_field ('profile div.error', 'id_body', 'textarea', 3, 'Body of the message', true);
+		test_form_field ('profile', 'id_copy', 'checkbox', 4, 'Send me a copy of the email', false);
+	});
+
 	suite ('reset password page conformity', function () {
 		test_page_loading ('/password_reset/', 'Reset my password');
 		test_unlogged_header ();
@@ -68,6 +83,14 @@ suite ('comt', function () {
 		test_form_field ('profile', 'id_email', 'text', 1, 'E-mail', true);
 		test_val	('#profile input[type=submit]', 'Reset my password');
 		test_unlogged_footer ();
+
+		test ('submit empty fields', dsl(function () {
+			elt ('#profile input[type="submit"]').click ();
+			browser.waitForPageLoad ();
+		}));
+
+		test_count ('div.help_text span.error-text', 1);
+		test_form_field ('profile div.error', 'id_email', 'text', 0, 'E-mail', true);
 	});
 
 	suite ('login page conformity', function () {
@@ -77,11 +100,22 @@ suite ('comt', function () {
 		test_count	('form#login[action="/login/"] :input', 3);
 		test_form_field ('login', 'id_username', 'text', 0, 'Username', true);
 		test_form_field ('login', 'id_password', 'password', 1, 'Password', true);
-		test_val ('form#login input[type=submit]', 'Login');
+		test_val	('form#login input[type=submit]', 'Login');
 		test_text	('form#login a[href="/password_reset/"]', 'Forgot password?');
 		test_unlogged_footer ();
 		// test_i18n ();
-		test		('logs an admin in', dsl(function () {
+
+		test ('get back to / to avoid bugging next page load', dsl(function () {
+			browser.navigateTo ('/');
+		}));
+		test_page_loading ('/login/', 'Login');
+		test ('submit empty fields', dsl(function () {
+			elt ('#login input[type="submit"]').click ();
+			browser.waitForPageLoad ();
+		}));
+		test_form_field ('login div.error', 'id_username', 'text', 0, 'Username', true);
+		test_form_field ('login div.error', 'id_password', 'password', 1, 'Password', true);
+		test ('logs an admin in', dsl(function () {
 			input ('#id_username').enter (w.USER_ADMIN);
 			input ('#id_password').enter (w.PASS_ADMIN);
 			elt ('#login input[type=submit]').click ();
@@ -215,17 +249,25 @@ suite ('comt', function () {
         test_text   ('#text ul.sub_list:eq(0) a:eq(1)[href="/create/upload/"]', 'Upload a text');
         test_text   ('#text ul.sub_list:eq(0) a:eq(2)[href="/create/import/"]', 'Import a co-mented text');
         test_count  ('#text form[action="."]:eq(0) :input', 6);
-		test_form_field ('text', 'id_title',		'text', 0, 'Title', true);
-		test_form_field ('text', 'id_format',		'select', 1, 'Format', true);
-		test_form_field ('text', 'id_content',		'textarea', 2, 'Content', true);
-		test_form_field ('text', 'id_tags',			'text', 3, 'Tags');
+		test_form_field ('text', 'id_title',	'text', 0, 'Title', true);
+		test_form_field ('text', 'id_format',	'select', 1, 'Format', true);
+		test_form_field ('text', 'id_content',	'textarea', 2, 'Content', true);
+		test_form_field ('text', 'id_tags',		'text', 3, 'Tags');
 		test_val	('#text :input:eq(4)[type=submit]', 'Save');
 		test_val	('#text :input:eq(5)#cancel_button[type=button]', 'Cancel');
 		test_count	('select#id_format option', 3);
         test_text   ('select#id_format option:eq(0)[value="markdown"][selected]', 'markdown', non_visible);
         test_text   ('select#id_format option:eq(1)[value="rst"]', 'rst', non_visible);
         test_text   ('select#id_format option:eq(2)[value="html"]', 'html', non_visible);
-		test_count	('#markItUpId_content li', 20);
+		test_count	('#markItUpId_content li', 20); // How many buttons are in the WYSIWYG editor toolbar ?
+		test ('submit empty fields', dsl(function () {
+			elt ('#text input[type="submit"]').click ();
+			browser.waitForPageLoad ();
+		}));
+		test_count ('div.help_text span.error-text', 2);
+		test_form_field ('text div.error', 'id_title',		'text', 0, 'Title', true);
+		test_form_field ('text div.error', 'id_content',	'textarea', 2, 'Content', true);
+
         test_unlogged_footer ();
     });
 
@@ -238,10 +280,10 @@ suite ('comt', function () {
         test_text   ('#text ul.sub_list:eq(0) a:eq(1)[href="/create/content/"]', 'Create a text');
         test_text   ('#text ul.sub_list:eq(0) a:eq(2)[href="/create/import/"]', 'Import a co-mented text');
         test_count  ('#text form[action="."]:eq(0) :input', 6);
-		test_form_field ('text', 'id_title',		'text', 0, 'Title');
-		test_form_field ('text', 'id_format',		'select', 1, 'Format', true);
-		test_form_field ('text', 'id_tags',			'text', 2, 'Tags');
-		test_form_field ('text', 'id_file',			'file', 3, 'Upload file (optional)');
+		test_form_field ('text', 'id_title',	'text', 0, 'Title');
+		test_form_field ('text', 'id_format',	'select', 1, 'Format', true);
+		test_form_field ('text', 'id_tags',		'text', 2, 'Tags');
+		test_form_field ('text', 'id_file',		'file', 3, 'Upload file (optional)');
 		test_val	('#text :input:eq(4)[type=submit]', 'Save');
 		test_val	('#text :input:eq(5)#cancel_button[type=button]', 'Cancel');
 		test_count	('select#id_format option', 3);
@@ -300,7 +342,7 @@ suite ('comt', function () {
         test_count  ('#user ul.sub_list:eq(0) a', 2);
         test_text   ('#user ul.sub_list:eq(0) a:eq(0)[href="/user/add/"]', 'Add a new user');
         test_text   ('#user ul.sub_list:eq(0) a:eq(1)[href="/user/mass-add/"]', 'Add users in bulk');
-        // TOTEST : filter by tag
+        // TOTEST : filter by tag -> commentator user should be tagged commentator
         test_count  ('form#filter_form[action="."] :input', 1);
 		test_text	('#filter_form a[href="?display=1"]', 'Display suspended users');
         test_text   ('select#tag_selected option:eq(0)[selected][value="0"]', '- All -', non_visible);
@@ -325,6 +367,7 @@ suite ('comt', function () {
 		test_text	('table.large_table:eq(1) tr:last a[href="/user/-/edit/"]', 'Anonymous users');
 		test_text	('table.large_table:eq(1) a.main_object_title[href="/profile/"]', w.USER_ADMIN);
 		test_text	('table.large_table:eq(1) div.hidden-user-actions a[href="/profile/"]', 'Your profile');
+		// TOTEST presence of commentator and editor user
         test_unlogged_footer ();
     });
 
@@ -369,7 +412,7 @@ suite ('comt', function () {
 		test_val	('#user :input:eq(6)[type=submit]', 'Add user');
 		test_val	('#user :input:eq(7)#cancel_button[type=button]', 'Cancel');
         test_unlogged_footer ();
-		// TOTEST add user (pending)
+		// X TOTEST add user (pending)
     });
 
 	suite ('add users in bulk page conformity', function () {
@@ -418,7 +461,7 @@ suite ('comt', function () {
 		test_form_field ('settings', 'id_workspace_category_5', 'text', 9, 'Label for the fifth category of comments');
 		test_val	('#settings :input:eq(10)[type=submit]', 'Save');
 		test_val	('#settings :input:eq(11)#cancel_button[type=button]', 'Cancel');
-		// TOTEST Workspace registration
+		// TOTEST Workspace registration feature (with newly accessible page)
 		test_unlogged_footer ();
     });
 
@@ -436,7 +479,6 @@ suite ('comt', function () {
 		test_val	('#settings :input:eq(4)[type=submit]', 'Save');
 		test_val	('#settings :input:eq(5)#cancel_button[type=button]', 'Cancel');
 		test_val	('#settings :input:eq(6)#delete_logo_button[type=submit]', 'Delete logo');
-		// TOTEST custom CSS, font, font for titles like the rest of the settings
 		test_unlogged_footer ();
     });
 
@@ -452,11 +494,22 @@ suite ('comt', function () {
 		test_val	('form#followup_form input#workspace_notify_check[type=checkbox]', 'on');
 		test_val	('form#followup_form input#own_notify_check[type=checkbox]', 'on');
 	
-		// tester qu'une fois cliqué, le bouton à le nvo label, et qu'une adresse est disponible
-		// tester que si on reclique l'adresse est changée
+		// X TOTEST qu'une fois cliqué, le bouton a le nvo label, et qu'une adresse est disponible
+		// X TOTEST que si on reclique l'adresse est changée
 
 		test_unlogged_footer ();
 	});
+
+	// Tester les créations de textes
+	// Tester les champs obligatoires
+	// Tester les liens masqués des textes listés si bien créés
+	// Tester suppression de text
+	// Tester bulk actions sur les textes
+
+	// tester l'affichage d'un texte
+	// tester que : #textcontainer.custom h1 font: Test_Sopinspace_custom_titles_font
+	// tester que si Text preferences -> custom -> #textcontainer.custom font: Test_Sopinspace_custom_font
+	// #textcontainer #add_comment_btn span -> #textcontainer font-family: Test_Sopinspace
 
 	suite ('settings restoration', function () {
         test_page_loading	('/settings/', 'Settings');
@@ -533,6 +586,39 @@ function test_unlogged_footer (url) {
 	test_text	('#footer a:nth-of-type(7)[href="/i18n/setlang/es/"]',		'Español');
 	test_text	('#footer a:nth-of-type(8)[href="/i18n/setlang/bg/"]',		'Български');
 	test_text	('#footer a:nth-of-type(9)[href="/i18n/setlang/it/"]',		'Italiano');
+}
+
+function test_readz_field (field_id) {
+	test ('get '+field_id, dsl(function () {
+		element (field_id).val (function (v) {
+			z[field_id] = v;
+		});
+	}));
+}
+
+function test_fill_field (field_id, stored) {
+	test ('set '+field_id, dsl(function () {
+		input (field_id).enter (stored[field_id]);
+	}));
+}
+
+function test_fill_settings (s) {
+	test_fill_field ('#id_workspace_name', s);
+	test_fill_field ('#id_workspace_tagline', s);
+	test_fill_field ('#id_workspace_registration', s);
+	test_fill_field ('#id_workspace_registration_moderation', s);
+	test_fill_field ('#id_workspace_role_model', s);
+	test_fill_field ('#id_workspace_category_1', s);
+	test_fill_field ('#id_workspace_category_2', s);
+	test_fill_field ('#id_workspace_category_3', s);
+	test_fill_field ('#id_workspace_category_4', s);
+	test_fill_field ('#id_workspace_category_5', s);
+}
+
+function test_fill_design (s) {
+	test_fill_field ('#id_custom_css', s);
+	test_fill_field ('#id_custom_font', s);
+	test_fill_field ('#id_custom_titles_font', s);
 }
 
 function test_i18n () {
@@ -623,39 +709,6 @@ function test_form_field (form_id, field_id, type, position, label, mandatory) {
 		if (mandatory)
 			expect (elt ('label[for='+field_id+'] + span.required_star').val ()).toBeDefined ();
 	}));
-}
-
-function test_readz_field (field_id) {
-	test ('get '+field_id, dsl(function () {
-		element (field_id).val (function (v) {
-			z[field_id] = v;
-		});
-	}));
-}
-
-function test_fill_field (field_id, stored) {
-	test ('set '+field_id, dsl(function () {
-		input (field_id).enter (stored[field_id]);
-	}));
-}
-
-function test_fill_settings (s) {
-	test_fill_field ('#id_workspace_name', s);
-	test_fill_field ('#id_workspace_tagline', s);
-	test_fill_field ('#id_workspace_registration', s);
-	test_fill_field ('#id_workspace_registration_moderation', s);
-	test_fill_field ('#id_workspace_role_model', s);
-	test_fill_field ('#id_workspace_category_1', s);
-	test_fill_field ('#id_workspace_category_2', s);
-	test_fill_field ('#id_workspace_category_3', s);
-	test_fill_field ('#id_workspace_category_4', s);
-	test_fill_field ('#id_workspace_category_5', s);
-}
-
-function test_fill_design (s) {
-	test_fill_field ('#id_custom_css', s);
-	test_fill_field ('#id_custom_font', s);
-	test_fill_field ('#id_custom_titles_font', s);
 }
 
 /** Ensure the given element is visible

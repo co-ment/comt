@@ -26,9 +26,7 @@ cd comt/
 Starting the test-suite :
 -------------------------
 cd comt/src/cm/scripts
+cp workspace.info.js.example workspace.info.js
 vi workspace.info.js	# Customize tested workspace settings
-./test-suite.sh
-
-So you can run the test-suite multiple times using only `karma start` after the
-first run.
+./start-test-suite.sh
 
