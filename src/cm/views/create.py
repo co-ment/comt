@@ -26,8 +26,8 @@ import re
 from base64 import b64decode
 
 class CreateTextUploadForm(ModelForm):
-    file = forms.FileField(required=False,
-                           label=ugettext_lazy("Upload file (optional)"),
+    file = forms.FileField(required=True,
+                           label=ugettext_lazy("Upload file"),
                            help_text=ugettext_lazy("Upload a file from your computer instead of using the direct input above"),)
 
     title = forms.CharField(required=False,

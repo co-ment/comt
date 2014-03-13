@@ -149,7 +149,7 @@ suite ('comt', function () {
 		}));*/
     });
 
-	suite ('setting settings to test values', function () {
+	suite ('setting settings to test-values', function () {
 		test_page_loading ('/settings/', 'Settings');
 		test_fill_settings (t);
 		test_val ('#id_workspace_name', t['#id_workspace_name']);
@@ -260,15 +260,15 @@ suite ('comt', function () {
         test_text   ('select#id_format option:eq(1)[value="rst"]', 'rst', non_visible);
         test_text   ('select#id_format option:eq(2)[value="html"]', 'html', non_visible);
 		test_count	('#markItUpId_content li', 20); // How many buttons are in the WYSIWYG editor toolbar ?
+        test_unlogged_footer ();
+
 		test ('submit empty fields', dsl(function () {
 			elt ('#text input[type="submit"]').click ();
 			browser.waitForPageLoad ();
 		}));
 		test_count ('div.help_text span.error-text', 2);
 		test_form_field ('text div.error', 'id_title',		'text', 0, 'Title', true);
-		test_form_field ('text div.error', 'id_content',	'textarea', 2, 'Content', true);
-
-        test_unlogged_footer ();
+		test_form_field ('text div.error', 'id_content',	'textarea', 1, 'Content', true);
     });
 
 	suite ('upload text page conformity', function () {
@@ -283,7 +283,7 @@ suite ('comt', function () {
 		test_form_field ('text', 'id_title',	'text', 0, 'Title');
 		test_form_field ('text', 'id_format',	'select', 1, 'Format', true);
 		test_form_field ('text', 'id_tags',		'text', 2, 'Tags');
-		test_form_field ('text', 'id_file',		'file', 3, 'Upload file (optional)');
+		test_form_field ('text', 'id_file',		'file', 3, 'Upload file');
 		test_val	('#text :input:eq(4)[type=submit]', 'Save');
 		test_val	('#text :input:eq(5)#cancel_button[type=button]', 'Cancel');
 		test_count	('select#id_format option', 3);
@@ -291,6 +291,14 @@ suite ('comt', function () {
         test_text   ('select#id_format option:eq(1)[value="rst"]', 'rst', non_visible);
         test_text   ('select#id_format option:eq(2)[value="html"]', 'html', non_visible);
         test_unlogged_footer ();
+
+		test ('submit empty fields', dsl(function () {
+			elt ('#text input[type="submit"]').click ();
+			browser.waitForPageLoad ();
+		}));
+		test_count ('div.help_text span.error-text', 1);
+		test_form_field ('text div.error', 'id_file',		'file', 0, 'Upload file');
+		test_match	('#text div.help_text:eq(3) span.error-text:eq(0)', /You should specify a file to upload/m);
     });
 
 	suite ('import a co-mented text page conformity', function () {
@@ -306,6 +314,14 @@ suite ('comt', function () {
 		test_val	('#text :input:eq(1)[type=submit]', 'Save');
 		test_val	('#text :input:eq(2)#cancel_button[type=button]', 'Cancel');
         test_unlogged_footer ();
+
+		test ('submit empty fields', dsl(function () {
+			elt ('#text input[type="submit"]').click ();
+			browser.waitForPageLoad ();
+		}));
+		test_count	('div.help_text span.error-text', 1);
+		test_form_field ('text div.error', 'id_file',		'file', 0, 'Upload XML file', true);
+		test_match	('#text div.help_text:eq(0) span.error-text:eq(0)', /You should specify a file to upload/m);
     });
 
 	suite ('edit profile page conformity', function () {
@@ -412,6 +428,14 @@ suite ('comt', function () {
 		test_val	('#user :input:eq(6)[type=submit]', 'Add user');
 		test_val	('#user :input:eq(7)#cancel_button[type=button]', 'Cancel');
         test_unlogged_footer ();
+
+		test ('submit empty fields', dsl(function () {
+			elt ('#user input[type="submit"]').click ();
+			browser.waitForPageLoad ();
+		}));
+		test_count	('div.help_text span.error-text', 1);
+		test_form_field ('user div.error', 'id_email', 'text', 0, 'E-mail address', true);
+		test_match	('#user div.help_text:eq(0) span.error-text:eq(0)', /This field is required/m);
 		// X TOTEST add user (pending)
     });
 
@@ -438,6 +462,14 @@ suite ('comt', function () {
 		test_val	('#user :input:eq(5)#cancel_button[type=button]', 'Cancel');
 		// X TOTEST add users (pending) -> can't be deleted
         test_unlogged_footer ();
+
+		test ('submit empty fields', dsl(function () {
+			elt ('#user input[type="submit"]').click ();
+			browser.waitForPageLoad ();
+		}));
+		test_count	('div.help_text span.error-text', 1);
+		test_form_field ('user div.error', 'id_email', 'textarea', 0, 'Emails', true);
+		test_match	('#user div.help_text:eq(0) span.error-text:eq(0)', /This field is required/m);
     });
 
 	suite ('settings page conformity', function () {
@@ -500,8 +532,9 @@ suite ('comt', function () {
 		test_unlogged_footer ();
 	});
 
-	// Tester les créations de textes
+	// vérifier les valeurs de settings sauvées
 	// Tester les champs obligatoires
+	// Tester les créations de textes
 	// Tester les liens masqués des textes listés si bien créés
 	// Tester suppression de text
 	// Tester bulk actions sur les textes
@@ -696,12 +729,13 @@ function test_count (s, e) {
 function test_form_field (form_id, field_id, type, position, label, mandatory) {
 	test ('has a '+label+' form field', dsl(function () {
 		var s = '';
+
 		switch (type) {
 			case 'textarea':s = 'textarea#'+field_id; break;
 			case 'select':	s = 'select#'+field_id; break;
 			default:		s = 'input#'+field_id+'[type="'+type+'"]';
 		}
-//		var s = type == 'textarea' ? 'textarea#'+field_id : 'input#'+field_id+'[type='+type+']';
+
 		expect (elt (s).val ()).toBeDefined ();
 		expect (elt ('#'+form_id+' :input:eq('+position+')#'+field_id).val ()).toBeDefined ();
 		expect (elt ('label[for='+field_id+']').text ()).toBe (label);

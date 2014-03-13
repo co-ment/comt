@@ -1,6 +1,7 @@
 // Karma configuration
 // Generated on Wed Jan 29 2014 15:32:16 GMT+0100 (CET)
 
+
 // SID: get WORKSPACE_URL configuration from one single file to customize
 var w = require ('./workspace.info.js');
 
@@ -17,7 +18,7 @@ module.exports = function(config) {
 		// - Firefox	; Safari	(only Mac; run `npm install karma-safari-launcher` first)
 		// - Chrome		; ChromeCanary ; Opera (run `npm install karma-opera-launcher` first)
 		// - PhantomJS	; IE		(only Windows; run `npm install karma-ie-launcher` first)
-		browsers: ['Chrome'],
+		browsers: w.BROWSERS,
 		// frameworks to use. SID: choosen mocha, added karma-e2e-dsl (end-to-end testing)
 		frameworks: ['mocha', 'karma-e2e-dsl'],
 		// SID: Karma will start and run somewhere else than '/', to allow proxying '/'
