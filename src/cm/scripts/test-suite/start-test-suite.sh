@@ -16,6 +16,14 @@ if [[ -z "$FIREFOX_BIN" && $OSTYPE =~ ^darwin ]]; then
     export FIREFOX_BIN="$FIREFOX_BIN_BASE/Contents/MacOS/firefox"
 fi
 
+export SAFARI_BIN=`which safari`
+if [[ -z "$SAFARI_BIN" && $OSTYPE =~ ^darwin ]]; then
+    SAFARI_BIN_BASE=`mdfind "kMDItemCFBundleIdentifier == 'com.apple.Safari'"`
+    export SAFARI_BIN="$SAFARI_BIN_BASE/Contents/MacOS/safari"
+fi
+
+
+
 if [ -x ./node_modules/.bin/karma ]; then
    KARMA=./node_modules/.bin/karma
 else
