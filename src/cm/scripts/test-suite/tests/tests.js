@@ -182,11 +182,11 @@ suite ('comt', function () {
 		test_count	('table.dash_table', 5);
 		test_text	('table.dash_table th:eq(0)', 'Actions');
 		test_match	('table.dash_table:eq(0) a:eq(0)[href="/create/content/"]', /\sCreate a text/);
-		test_text	('table.dash_table:eq(0) a:eq(1).tip[href="#"]', ' ');
+		test_text	('table.dash_table:eq(0) a:eq(1).tip[href="#"]', '\xa0');
 		test_match	('table.dash_table:eq(0) a:eq(2)[href="/create/upload/"]', /\sUpload a text/);
-		test_text	('table.dash_table:eq(0) a:eq(3).tip[href="#"]', ' ');
+		test_text	('table.dash_table:eq(0) a:eq(3).tip[href="#"]', '\xa0');
 		test_match	('table.dash_table:eq(0) a:eq(4)[href="/create/import/"]', /\sImport a co-mented text/);
-		test_text	('table.dash_table:eq(0) a:eq(5).tip[href="#"]', ' ');
+		test_text	('table.dash_table:eq(0) a:eq(5).tip[href="#"]', '\xa0');
 		test_match	('table.dash_table:eq(0) a:eq(6)[href="/user/add/"]', /\sInvite user/);
 		test_match	('table.dash_table:eq(0) a:eq(7)[href="/profile/"]', /\sEdit your profile/);
 		test_match	('table.dash_table:eq(0) a:eq(8)[href="/text/"]', /\sView text list/);
