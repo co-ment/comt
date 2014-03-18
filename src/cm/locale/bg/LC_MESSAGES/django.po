@@ -1670,8 +1670,8 @@ msgid "unknown"
 msgstr "неизвестен"
 
 #: views/create.py:26
-msgid "Upload file (optional)"
-msgstr "Качи файл (по избор)"
+msgid "Upload file"
+msgstr "Качи файл"
 
 #: views/create.py:27
 msgid ""

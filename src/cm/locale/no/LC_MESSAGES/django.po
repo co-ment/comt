@@ -1642,7 +1642,7 @@ msgid "unknown"
 msgstr "ukjent"
 
 #: views/create.py:26
-msgid "Upload file (optional)"
+msgid "Upload file"
 msgstr "Last opp fil"
 
 #: views/create.py:27

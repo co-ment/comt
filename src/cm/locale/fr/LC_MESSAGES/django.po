@@ -1764,8 +1764,8 @@ msgid "unknown"
 msgstr "inconnu"
 
 #: views/create.py:26
-msgid "Upload file (optional)"
-msgstr "Charger un fichier (optionnel)"
+msgid "Upload file"
+msgstr "Charger un fichier"
 
 #: views/create.py:27
 msgid ""
