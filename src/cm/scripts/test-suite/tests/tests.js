@@ -609,16 +609,17 @@ function test_unlogged_header () {
 }
 
 function test_unlogged_footer (url) {
-	test_count	('#footer a', 9);
+	test_count	('#footer a', 10);
 	test_text	('#footer a:nth-of-type(1)[href="/contact/"]',				'Contact');
 	test_match	('#footer #comentlink[href="http://www.co-ment.com"]',		/Powered by/m);
 	test_text	('#footer a:nth-of-type(3)[href="/help/"]',					'Help');
 	test_text	('#footer a:nth-of-type(4)[href="/i18n/setlang/fr/"]',		'Français');
-	test_text	('#footer a:nth-of-type(5)[href="/i18n/setlang/no/"]',		'Norsk');
-	test_text	('#footer a:nth-of-type(6)[href="/i18n/setlang/pt_BR/"]',	'Português Brasileiro');
-	test_text	('#footer a:nth-of-type(7)[href="/i18n/setlang/es/"]',		'Español');
-	test_text	('#footer a:nth-of-type(8)[href="/i18n/setlang/bg/"]',		'Български');
-	test_text	('#footer a:nth-of-type(9)[href="/i18n/setlang/it/"]',		'Italiano');
+	test_text	('#footer a:nth-of-type(5)[href="/i18n/setlang/es/"]',		'Español');
+	test_text	('#footer a:nth-of-type(6)[href="/i18n/setlang/it/"]',		'Italiano');
+	test_text	('#footer a:nth-of-type(7)[href="/i18n/setlang/de/"]',		'Deutsch');
+	test_text	('#footer a:nth-of-type(8)[href="/i18n/setlang/pt_BR/"]',	'Português Brasileiro');
+	test_text	('#footer a:nth-of-type(9)[href="/i18n/setlang/nb/"]',		'Norsk');
+	test_text	('#footer a:nth-of-type(10)[href="/i18n/setlang/bg/"]',		'Български');
 }
 
 function test_readz_field (field_id) {

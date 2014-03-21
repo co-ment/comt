@@ -1,4 +1,4 @@
-DEBUG = False
+DEBUG = True
 CLIENT_DEBUG = DEBUG
 TEMPLATE_DEBUG = DEBUG
 
@@ -7,7 +7,7 @@ DISABLE_TRACKING = DEBUG
 
 
 ADMINS = (
-    # ('Your Name', 'your_email@domain.com'),
+	# ('Your Name', 'your_email@domain.com'),
 )
 
 MANAGERS = ADMINS
@@ -61,30 +61,30 @@ LOGIN_URL = '/login/'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.load_template_source',
+	'django.template.loaders.filesystem.Loader',
+	'django.template.loaders.app_directories.Loader',
+#	  'django.template.loaders.eggs.load_template_source',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'cm.context_processors.static',
-    'cm.context_processors.tz',
-    'cm.context_processors.utils',    
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.request',
-    "django.core.context_processors.i18n",    
-    "django.core.context_processors.media",    
-    'djangoflash.context_processors.flash',
+	'cm.context_processors.static',
+	'cm.context_processors.tz',
+	'cm.context_processors.utils',	  
+	'django.contrib.auth.context_processors.auth',
+	'django.core.context_processors.request',
+	"django.core.context_processors.i18n",	  
+	"django.core.context_processors.media",    
+	'djangoflash.context_processors.flash',
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.middleware.gzip.GZipMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',        
-    'djangoflash.middleware.FlashMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'cm.middleware.CmMiddleware',
+	'django.middleware.gzip.GZipMiddleware',
+	'django.middleware.common.CommonMiddleware',
+	'django.contrib.sessions.middleware.SessionMiddleware',
+	'django.middleware.locale.LocaleMiddleware',		
+	'djangoflash.middleware.FlashMiddleware',
+	'django.contrib.auth.middleware.AuthenticationMiddleware',
+	'cm.middleware.CmMiddleware',
 )
 
 ROOT_URLCONF = 'urls'
@@ -93,28 +93,58 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.admin',
-    'cm',
-    'tagging',
-    'django_extensions', # http://code.google.com/p/django-command-extensions/
-    'south',    
+	'django.contrib.auth',
+	'django.contrib.contenttypes',
+	'django.contrib.sessions',
+	'django.contrib.sites',
+	'django.contrib.admin',
+	'cm',
+	'tagging',
+	'django_extensions', # http://code.google.com/p/django-command-extensions/
+	'south',	
 )
 
 _ = lambda s: s
 
 LANGUAGES = (
-    ('fr', _(u'French')),
-    ('en', _(u'English')),
-    ('no', _('Norwegian')),
-    ('pt_BR', _('Brazilian Portuguese')),
-    ('es', _('Spanish')),
-    ('bg', _('Bulgarian')),
-    ('it', _('Italian')),
+	('fr', _(u'French')),
+	('en', _(u'English')),
+	('es', _('Spanish')),
+	('it', _('Italian')),
+	('de', _('German')),
+	('pt_BR', _('Brazilian Portuguese')),
+	('nb', _('Norwegian')),
+	('bg', _('Bulgarian')),
 )
+
+LOGGING = {
+	'version': 1,
+	'disable_existing_loggers': True,
+	'formatters': {
+		'verbose': {
+			'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+		},
+		'simple': {
+			'format': '%(levelname)s %(message)s'
+		},
+	},
+	'filters': {
+	},
+	'handlers': {
+		'console':{
+			'level': 'DEBUG',
+			'class': 'logging.StreamHandler',
+			'formatter': 'verbose'
+		}
+	},
+	'loggers': {
+		'django': {
+			'handlers': ['console'],
+			'propagate': True,
+			'level': 'WARNING',
+		}
+	}
+}
 
 AUTH_PROFILE_MODULE = 'cm.UserProfile'
 
@@ -133,6 +163,6 @@ DEFAULT_TIME_ZONE = TIME_ZONE
 CACHE_BACKEND = 'locmem:///?timeout=3600&max_entries=400'
 
 try:
-    from settings_local import *
+	from settings_local import *
 except ImportError:
-    pass
+	pass
