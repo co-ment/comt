@@ -7,8 +7,10 @@
 Prerequisite :
 --------------
 You should have a running comt installation, made from a "comt" hg snapshot.
+You gave your database user the right to create databases.
 You should have Firefox and/or Chrome navigators installed. You'll be able to
-run the tests against more brothers configuring them in the karma.conf.js file.
+run the tests against more brothers configuring them in the workspace.info.js
+file.
 
 
 Installation :
@@ -17,10 +19,11 @@ apt-get install npm
 sudo ln /usr/bin/nodejs /usr/bin/node	# /usr/share/doc/nodejs/README.Debian
 sudo npm install -g karma karma-mocha karma-e2e-dsl	# goes here /usr/local/lib/node_modules/
 
+
 Starting comt :
 ---------------
 cd comt/
-./bin/django runserver localhost:8000 --settings=settings
+./bin/django testserver localhost:8001 --noinput initial_data roles_generic test_content
 
 
 Starting the test-suite :

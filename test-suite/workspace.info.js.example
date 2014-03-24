@@ -1,7 +1,7 @@
 
 define ("BROWSERS", ['Chrome']);
 
-define ("WORKSPACE_URL", '<workspace-url>'); // Under http://IP_ADDRESS:PORT_NUM/ format
+define ("WORKSPACE_URL", '<workspace-url>'); // In http://IP_ADDRESS:PORT_NUM/ format
 define ("USER_ADMIN", '<admin-login>');
 define ("PASS_ADMIN", '<admin-password>');
 

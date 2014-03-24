@@ -1,0 +1,372 @@
+- fields: {bcc: '', body: '
+
+
+      You''ve been invited to join the workspace Workspace.
+
+      Click the following link to complete your registration and access the workspace:
+
+
+      http://172.16.1.2//user/ZFejcKbK6Jz/activate/
+
+      --
+
+      Workspace
+
+      http://172.16.1.2/
+
+
+      ', created: !!timestamp '2014-03-09 14:40:10.221782', from_email: me@example.com,
+    message: 'Content-Type: text/plain; charset="utf-8"
+
+      MIME-Version: 1.0
+
+      Content-Transfer-Encoding: quoted-printable
+
+      Subject: [comt] Invitation
+
+      From: me@example.com
+
+      To: user-edit@example.com
+
+      Date: Sun, 09 Mar 2014 13:40:10 -0000
+
+      Message-ID: <20140309134010.6531.16377@vagrant.vm>
+
+
+
+
+      You''ve been invited to join the workspace Workspace.
+
+      Click the following link to complete your registration and access the works=
+
+      pace:
+
+
+      http://172.16.1.2//user/ZFejcKbK6Jz/activate/
+
+      --
+
+      Workspace
+
+      http://172.16.1.2/
+
+
+      ', subject: '[comt] Invitation', to: user-edit@example.com}
+  model: cm.email
+  pk: 1
+- fields: {bcc: '', body: '
+
+
+      You''ve been invited to join the workspace Workspace.
+
+      Click the following link to complete your registration and access the workspace:
+
+
+      http://172.16.1.2//user/FIi2Txhmj8n/activate/
+
+      --
+
+      Workspace
+
+      http://172.16.1.2/
+
+
+      ', created: !!timestamp '2014-03-09 14:40:10.466353', from_email: me@example.com,
+    message: 'Content-Type: text/plain; charset="utf-8"
+
+      MIME-Version: 1.0
+
+      Content-Transfer-Encoding: quoted-printable
+
+      Subject: [comt] Invitation
+
+      From: me@example.com
+
+      To: user-com@example.com
+
+      Date: Sun, 09 Mar 2014 13:40:10 -0000
+
+      Message-ID: <20140309134010.6531.70524@vagrant.vm>
+
+
+
+
+      You''ve been invited to join the workspace Workspace.
+
+      Click the following link to complete your registration and access the works=
+
+      pace:
+
+
+      http://172.16.1.2//user/FIi2Txhmj8n/activate/
+
+      --
+
+      Workspace
+
+      http://172.16.1.2/
+
+
+      ', subject: '[comt] Invitation', to: user-com@example.com}
+  model: cm.email
+  pk: 2
+- fields: {bcc: '', body: '
+
+
+      You''ve been invited to join the workspace Workspace.
+
+      Click the following link to complete your registration and access the workspace:
+
+
+      http://172.16.1.2//user/D4mEX8ggLl6/activate/
+
+      --
+
+      Workspace
+
+      http://172.16.1.2/
+
+
+      ', created: !!timestamp '2014-03-09 14:40:10.553388', from_email: me@example.com,
+    message: 'Content-Type: text/plain; charset="utf-8"
+
+      MIME-Version: 1.0
+
+      Content-Transfer-Encoding: quoted-printable
+
+      Subject: [comt] Invitation
+
+      From: me@example.com
+
+      To: user-observ@example.com
+
+      Date: Sun, 09 Mar 2014 13:40:10 -0000
+
+      Message-ID: <20140309134010.6531.9295@vagrant.vm>
+
+
+
+
+      You''ve been invited to join the workspace Workspace.
+
+      Click the following link to complete your registration and access the works=
+
+      pace:
+
+
+      http://172.16.1.2//user/D4mEX8ggLl6/activate/
+
+      --
+
+      Workspace
+
+      http://172.16.1.2/
+
+
+      ', subject: '[comt] Invitation', to: user-observ@example.com}
+  model: cm.email
+  pk: 3
+- fields: {role: null, text: null, user: 1}
+  model: cm.userrole
+  pk: 1
+- fields: {role: null, text: null, user: null}
+  model: cm.userrole
+  pk: 2
+- fields: {role: 4, text: null, user: 3}
+  model: cm.userrole
+  pk: 4
+- fields: {role: 2, text: null, user: 2}
+  model: cm.userrole
+  pk: 3
+- fields: {role: 5, text: null, user: 4}
+  model: cm.userrole
+  pk: 5
+- fields:
+    anon: false
+    description: ''
+    global_scope: false
+    name: Manager
+    permissions:
+    - [can_create_comment, auth, permission]
+    - [can_create_text, auth, permission]
+    - [can_delete_comment, auth, permission]
+    - [can_delete_text, auth, permission]
+    - [can_edit_comment, auth, permission]
+    - [can_edit_comment_own, auth, permission]
+    - [can_edit_text, auth, permission]
+    - [can_manage_text, auth, permission]
+    - [can_manage_workspace, auth, permission]
+    - [can_view_approved_comment, auth, permission]
+    - [can_view_text, auth, permission]
+    - [can_view_unapproved_comment, auth, permission]
+    - [can_view_workspace, auth, permission]
+  model: cm.role
+  pk: 1
+- fields:
+    anon: false
+    description: ''
+    global_scope: false
+    name: Editor
+    permissions:
+    - [can_create_comment, auth, permission]
+    - [can_create_text, auth, permission]
+    - [can_delete_comment, auth, permission]
+    - [can_delete_text, auth, permission]
+    - [can_edit_comment, auth, permission]
+    - [can_edit_comment_own, auth, permission]
+    - [can_edit_text, auth, permission]
+    - [can_view_approved_comment, auth, permission]
+    - [can_view_text, auth, permission]
+    - [can_view_unapproved_comment, auth, permission]
+    - [can_view_workspace, auth, permission]
+  model: cm.role
+  pk: 2
+- fields:
+    anon: false
+    description: ''
+    global_scope: false
+    name: Moderator
+    permissions:
+    - [can_create_comment, auth, permission]
+    - [can_delete_comment, auth, permission]
+    - [can_edit_comment, auth, permission]
+    - [can_edit_comment_own, auth, permission]
+    - [can_view_approved_comment, auth, permission]
+    - [can_view_text, auth, permission]
+    - [can_view_unapproved_comment, auth, permission]
+    - [can_view_workspace, auth, permission]
+  model: cm.role
+  pk: 3
+- fields:
+    anon: true
+    description: ''
+    global_scope: false
+    name: Commentator
+    permissions:
+    - [can_create_comment, auth, permission]
+    - [can_delete_comment_own, auth, permission]
+    - [can_edit_comment_own, auth, permission]
+    - [can_view_approved_comment, auth, permission]
+    - [can_view_text, auth, permission]
+    - [can_view_workspace, auth, permission]
+  model: cm.role
+  pk: 4
+- fields:
+    anon: true
+    description: ''
+    global_scope: false
+    name: Observer
+    permissions:
+    - [can_view_approved_comment, auth, permission]
+    - [can_view_text, auth, permission]
+    - [can_view_workspace, auth, permission]
+  model: cm.role
+  pk: 5
+- fields: {adminkey: Nh3JW2XlHuh, allow_contact: true, created: !!timestamp '2014-03-09
+      14:31:20.046862', is_email_error: false, is_suspended: false, is_temp: false,
+    key: LwBZ7cHJJiH, modified: !!timestamp '2014-03-09 14:31:20.046828', preferred_language: en,
+    tags: '', user: 1}
+  model: cm.userprofile
+  pk: 1
+- fields: {adminkey: ZFejcKbK6Jz, allow_contact: true, created: !!timestamp '2014-03-09
+      14:40:10.170598', is_email_error: false, is_suspended: false, is_temp: false,
+    key: kTXakgKTeSA, modified: !!timestamp '2014-03-09 14:40:10.179872', preferred_language: en,
+    tags: '', user: 2}
+  model: cm.userprofile
+  pk: 2
+- fields: {adminkey: FIi2Txhmj8n, allow_contact: true, created: !!timestamp '2014-03-09
+      14:40:10.431145', is_email_error: false, is_suspended: false, is_temp: false,
+    key: 3sh3WZqNzXs, modified: !!timestamp '2014-03-09 14:40:10.451764', preferred_language: en,
+    tags: '', user: 3}
+  model: cm.userprofile
+  pk: 3
+- fields: {adminkey: D4mEX8ggLl6, allow_contact: true, created: !!timestamp '2014-03-09
+      14:40:10.510804', is_email_error: false, is_suspended: false, is_temp: false,
+    key: q9WLLDvaR4U, modified: !!timestamp '2014-03-09 14:40:10.529488', preferred_language: en,
+    tags: '', user: 4}
+  model: cm.userprofile
+  pk: 4
+- fields: {comment: null, created: !!timestamp '2014-03-09 14:40:10.411506', ip: 127.0.0.1,
+    originator_user: 1, text: null, text_version: null, type: user_created, user: 2}
+  model: cm.activity
+  pk: 1
+- fields: {comment: null, created: !!timestamp '2014-03-09 14:40:10.495868', ip: 127.0.0.1,
+    originator_user: 1, text: null, text_version: null, type: user_created, user: 3}
+  model: cm.activity
+  pk: 2
+- fields: {comment: null, created: !!timestamp '2014-03-09 14:40:10.605856', ip: 127.0.0.1,
+    originator_user: 1, text: null, text_version: null, type: user_created, user: 4}
+  model: cm.activity
+  pk: 3
+- fields: {comment: null, created: !!timestamp '2014-03-09 15:28:33.969806', ip: 127.0.0.1,
+    originator_user: 2, text: null, text_version: null, type: user_activated, user: 2}
+  model: cm.activity
+  pk: 4
+- fields: {comment: null, created: !!timestamp '2014-03-09 21:47:31.032761', ip: 127.0.0.1,
+    originator_user: 3, text: null, text_version: null, type: user_activated, user: 3}
+  model: cm.activity
+  pk: 5
+- fields: {comment: null, created: !!timestamp '2014-03-09 21:48:56.495739', ip: 127.0.0.1,
+    originator_user: 4, text: null, text_version: null, type: user_activated, user: 4}
+  model: cm.activity
+  pk: 6
+- fields:
+    date_joined: 2014-03-08 15:12:44.112501
+    email: admin@mail.com
+    first_name: ''
+    groups: []
+    is_active: true
+    is_staff: true
+    is_superuser: true
+    last_login: 2014-03-09 14:31:20.062015
+    last_name: ''
+    password: sha1$46d5d$f808afd06c731b7b4cf97919165183b497a620df
+    user_permissions: []
+    username: admin
+  model: auth.user
+  pk: 1
+- fields:
+    date_joined: 2014-03-09 14:40:10.165655
+    email: user-edit@example.com
+    first_name: Edit
+    groups: []
+    is_active: true
+    is_staff: false
+    is_superuser: false
+    last_login: 2014-03-09 21:45:49.613035
+    last_name: User
+    password: sha1$9e514$feb09c455f7c440f587675251b9a3daced561547
+    user_permissions: []
+    username: user-edit
+  model: auth.user
+  pk: 2
+- fields:
+    date_joined: 2014-03-09 14:40:10.426754
+    email: user-com@example.com
+    first_name: Com
+    groups: []
+    is_active: true
+    is_staff: false
+    is_superuser: false
+    last_login: 2014-03-09 21:47:31.027912
+    last_name: User
+    password: sha1$5504c$55eb5e3692d903c74a28589d9861fc0e2c7af7b3
+    user_permissions: []
+    username: user-com
+  model: auth.user
+  pk: 3
+- fields:
+    date_joined: 2014-03-09 14:40:10.501372
+    email: user-observ@example.com
+    first_name: Observ
+    groups: []
+    is_active: true
+    is_staff: false
+    is_superuser: false
+    last_login: 2014-03-09 21:48:56.491761
+    last_name: User
+    password: sha1$25ec8$f73bf7f6a0bba01d05b0df89aebed759713e7151
+    user_permissions: []
+    username: user-observ
+  model: auth.user
+  pk: 4
