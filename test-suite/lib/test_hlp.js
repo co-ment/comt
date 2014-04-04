@@ -138,7 +138,7 @@ exports.debug = function () {
 }
 
 /**
- * Have the browser waiting
+ * Have the browser waiting while you inspect what's going on
  */
 exports.pause = function () {
 	test ('pause', dsl(function () {

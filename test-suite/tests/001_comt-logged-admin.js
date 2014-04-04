@@ -8,6 +8,11 @@ var k = __karma__.config,
 	test_ = JSON.parse (k.t, new Function (['k','v'], k.r)), // revive helper functions sent from Karma
 	t = {'text_nb': 0, 'user_nb': 4};
 
+var long_text = '';
+
+for (var i = 20; i--;)
+	long_text += 'Contenu du troisième texte.<br/>Sur <b>plusieurs</b> lignes<br/>';
+
 const non_visible = false,
 	no_tagline = false,
 	c = {
@@ -40,7 +45,7 @@ const non_visible = false,
 		{
 			'#id_title':	'Text Three Sopinspace-Test éléguant',
 			'#id_format':	'html',
-			'#id_content':	'Contenu du troisième texte.<br/>Sur <b>plusieurs</b> lignes<br/>',
+			'#id_content':	long_text,
 			'#id_tags':		'test_text, Text Troisième'
 		}
 	]
@@ -185,28 +190,9 @@ suite ('comt logged admin', function () {
 	});
 
 	suite ('create texts', function () {
-/*	'texts':	[
-		{
-			'#id_title':	'Text One Sopinspace-Test éléguant',
-			'#id_format':	'markdown',
-			'#id_content':	'Contenu du premier texte.\nSur plusieurs lignes\nPour tester un cas réaliste',
-			'#id_tags':		'test_.text, Text Premier'
-		},*/
-		test_.page_loading	('/create/content/', 'Create a text - '+c['#id_workspace_name']);
-		test ('test creation', dsl(function () {
-			dropdownlist ('#id_format').option (c['texts'][0]['#id_format']);
-		}));
-		test_.fill_field ('#id_title', c['texts'][0]);
-		test_.fill_field ('#id_content', c['texts'][0]);
-		test_.fill_field ('#id_tags', c['texts'][0]);
-		test_.val ('#id_title', 'Text One Sopinspace-Test éléguant');
-		//test_.pause ();
-		//test_.submit ('#save_button');
-		//t.text_nb++;
+		for (var i=3; i--;)
+			create_text (i);
 	});
-	// insert here text creation
-	// create successively : a markdown text, a html and a rst one
-	// with tags
 
 	// check that public texts still work while unlogged
 	// check that non public texts are unavailable
@@ -222,7 +208,7 @@ suite ('comt logged admin', function () {
 	// tester que si Text preferences -> custom -> #textcontainer.custom font: Test_Sopinspace_custom_font
 	// #textcontainer #add_comment_btn span -> #textcontainer font-family: Test_Sopinspace
 
-	suite.skip ('texts list page conformity', function () {
+	suite ('texts list page conformity', function () {
 		test_.page_loading	('/text/', 'Texts\n - '+c['#id_workspace_name']);
 		test_logged_header	(k.w.USER_ADMIN);
 		test_default_tabs	(t.text_nb, t.user_nb);
@@ -488,4 +474,20 @@ function test_fill_design (s) {
 	test_.fill_field ('#id_custom_css', s);
 	test_.fill_field ('#id_custom_font', s);
 	test_.fill_field ('#id_custom_titles_font', s);
+}
+
+function create_text (i) {
+	test_.page_loading	('/create/content/', 'Create a text - '+c['#id_workspace_name']);
+	test ('test creation', dsl(function () {
+		dropdownlist ('#id_format').option (c['texts'][i]['#id_format']);
+	}));
+
+	test_.fill_field ('#id_title', c['texts'][i]);
+	test ('fill content', dsl(function (){
+		test_.elt ('#id_content').val (c['texts'][i]['#id_content']);
+	}));
+
+	test_.fill_field ('#id_tags', c['texts'][i]);
+	test_.submit ('#save_button');
+	t.text_nb++;
 }
