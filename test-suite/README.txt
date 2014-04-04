@@ -23,7 +23,7 @@ sudo npm install -g karma karma-mocha karma-e2e-dsl	# goes here /usr/local/lib/n
 Starting comt :
 ---------------
 cd comt/
-./bin/django testserver localhost:8001 --noinput initial_data roles_generic test_content
+./bin/django testserver localhost:8000 --noinput initial_data roles_generic test_content
 
 
 Starting the test-suite :
