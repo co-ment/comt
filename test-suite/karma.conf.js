@@ -3,8 +3,7 @@
 
 
 // SID: get WORKSPACE_URL configuration from one single file to customize
-var w = require ('./workspace.info.js'),
-	t = require ('./lib/test_hlp.js');
+var w = require ('./workspace.info.js');
 
 module.exports = function(config) {
 	config.set({
@@ -13,8 +12,7 @@ module.exports = function(config) {
 			{pattern: 'tests/**/*.js', included: true}
 		],
 		// list of files to exclude
-		exclude: [
-		],
+		exclude: [ ],
 		// Start these browsers, currently available:
 		// - Firefox	; Safari	(only Mac; run `npm install karma-safari-launcher` first)
 		// - Chrome		; ChromeCanary ; Opera (run `npm install karma-opera-launcher` first)
@@ -32,12 +30,7 @@ module.exports = function(config) {
 			mocha: {
 				ui: 'tdd'
 			},
-			w: w, // SID: exports the variable in the test execution browser window
-			// SID: we can't pass living functions to testing (mocha) browser environment
-			// so we convert them to string, and send also a string body of a reviving function
-			// closures are lost in the process, that's ok.
-			t: JSON.stringify (t, function (k, v) { return typeof v === 'function' ? v.toString () : v }),
-			r: t.reviveFunc
+			w: w // SID: exports the variable in the test execution browser window
 		},
 		// test results reporter to use : 'dots', 'progress', 'junit', 'growl', 'coverage'
 		reporters: ['progress'],
@@ -48,7 +41,7 @@ module.exports = function(config) {
 		// level of logging : config.LOG_DISABLE || _ERROR || _WARN || _INFO || _DEBUG
 		logLevel: config.LOG_INFO,
 		// If browser does not capture in given timeout [ms], kill it
-		captureTimeout: 9999,
+		captureTimeout: 20000,
 		// enable / disable watching file and executing tests whenever any file changes
 		autoWatch: false,
 		// Continuous Integration mode : if true, it capture browsers, run tests and exit

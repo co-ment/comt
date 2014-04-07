@@ -3,7 +3,7 @@
 // https://github.com/winsonwq/karma-e2e-dsl
 
 
-exports.page_loading = function (url, title) {
+function test_page_loading (url, title) {
 	test (url+' loads', dsl(function () {
 		// here we are in Karma page
 		browser.navigateTo (url);
@@ -21,11 +21,11 @@ exports.page_loading = function (url, title) {
  *	c : lang code
  *	l : help label
  */
-exports.i18n = function (c, l) {
+function test_i18n (c, l) {
 	test ('to '+c, dsl(function () {
 		element ('#footer a[href="/i18n/setlang/'+c+'/"]').click ();
 		browser.navigateTo ('/');
-		expect (test_.elt ('#footer a[href="/help/"]').text ()).toMatch (new RegExp (l, 'm'));
+		expect (elt ('#footer a[href="/help/"]').text ()).toMatch (new RegExp (l, 'm'));
 	}));
 }
 
@@ -33,15 +33,15 @@ exports.i18n = function (c, l) {
  *	s : CSS selector
  *	e : expected value, if omited, test existence
  */
-exports.val = function (s, e) {
+function test_val (s, e) {
 	e = typeof e == 'undefined' ? '' : e; // .val() returns defined ? '' : undefined; // if no value
 	test (s+' is '+e, dsl(function () {
-		expect (test_.elt (s).val ()).toMatch (new RegExp (e, 'm'));
+		expect (elt (s).val ()).toMatch (new RegExp (e, 'm'));
 	}));
 }
 
-exports.exist = function (s) {
-	test_.val (s);
+function test_exist (s) {
+	test_val (s);
 }
 
 /** Test if the selected DOM element has the given text : .text()
@@ -49,10 +49,10 @@ exports.exist = function (s) {
  *	e : expected value
  *	v : should we test a visible value ?
  */
-exports.text = function (s, e, v) {
+function test_text (s, e, v) {
 	v = typeof v == 'undefined' ? true : v;
 	test (s+' has text '+e, dsl(function () {
-		expect (test_.elt (s, v).text ()).toBe (e);
+		expect (elt (s, v).text ()).toBe (e);
 	}));
 }
 
@@ -60,9 +60,9 @@ exports.text = function (s, e, v) {
  *	s : CSS selector
  *	r : regexp to match
  */
-exports.match = function (s, r) {
+function test_match (s, r) {
 	test (s+' text match '+r, dsl(function () {
-		expect (test_.elt (s).text ()).toMatch (r);
+		expect (elt (s).text ()).toMatch (r);
 	}));
 }
 
@@ -70,15 +70,15 @@ exports.match = function (s, r) {
  *	s : CSS selector
  *	e : expected count
  */
-exports.count = function (s, e) {
+function test_count (s, e) {
 	test (s+' count is '+e, dsl(function () {
-		expect (test_.elt (s).count ()).toBe (e);
+		expect (elt (s).count ()).toBe (e);
 	}));
 }
 
 /** Test Django form field presence
  */
-exports.field = function (form_id, field_id, type, position, label, mandatory) {
+function test_field (form_id, field_id, type, position, label, mandatory) {
 	test ('has a '+label+' form field', dsl(function () {
 		var s = '';
 
@@ -88,12 +88,12 @@ exports.field = function (form_id, field_id, type, position, label, mandatory) {
 			default:		s = 'input#'+field_id+'[type="'+type+'"]';
 		}
 
-		expect (test_.elt (s).val ()).toBeDefined ();
-		expect (test_.elt ('#'+form_id+' :input:eq('+position+')#'+field_id).val ()).toBeDefined ();
-		expect (test_.elt ('label[for='+field_id+']').text ()).toBe (label);
+		expect (elt (s).val ()).toBeDefined ();
+		expect (elt ('#'+form_id+' :input:eq('+position+')#'+field_id).val ()).toBeDefined ();
+		expect (elt ('label[for='+field_id+']').text ()).toBe (label);
 
 		if (mandatory)
-			expect (test_.elt ('label[for='+field_id+'] + span.required_star').val ()).toBeDefined ();
+			expect (elt ('label[for='+field_id+'] + span.required_star').val ()).toBeDefined ();
 	}));
 }
 
@@ -102,19 +102,29 @@ exports.field = function (form_id, field_id, type, position, label, mandatory) {
  * s : form field id
  * v : array containing the value to use
  */
-exports.fill_field = function (s, v) {
+function test_fill_field (s, v) {
 	test ('set '+s, dsl(function () {
 		input (s).enter (v[s]);
 	}));
 }
 
 /**
+ * Click somewhere
+ * s : selector of the item to click on
+ */
+function test_click (s) {
+    test ('click '+s, dsl(function () {
+        elt (s).click ();
+    }));
+}
+
+/**
  * Submit a form
  * s : selector of the submit button
  */
-exports.submit = function (s) {
+function test_submit (s) {
 	test ('submit '+s, dsl(function () {
-		test_.elt (s).click ();
+		elt (s).click ();
 		browser.waitForPageLoad ();
 	}));
 }
@@ -122,25 +132,16 @@ exports.submit = function (s) {
 /**
  * Fails a test
  */
-exports.fail = function () {
+function test_fail () {
 	test ('must fail', dsl(function () {
 		throw 'have been programmed to fail now';
 	}));
 }
 
 /**
- * Inbrowser debugger statement
- */
-exports.debug = function () {
-	test ('debugger', dsl(function (){
-		debugger; // not seen to work
-	}));
-}
-
-/**
  * Have the browser waiting while you inspect what's going on
  */
-exports.pause = function () {
+function test_pause () {
 	test ('pause', dsl(function () {
 		browser.pause ();
 	}));
@@ -149,7 +150,7 @@ exports.pause = function () {
 /**
  * Start back the testcases
  */
-exports.resume = function () {
+function test_resume () {
 	test ('resume', dsl(function (){
 		browser.resume ();
 	}));
@@ -159,28 +160,7 @@ exports.resume = function () {
  *	s : CSS selector of the DOM element to check
  *	v : should the element being visible
  */
-exports.elt = function (s, v) {
+function elt (s, v) {
 	return element (s + (v ? ':visible' : ''));
 }
 
-/** Revive functions after a JSON.stringify which prevented their disappearence
- * k : key in the object to revive functions in
- * v : value
- * 
- * We keep only the string of the body part in order to use it to define a new function in tests files
- * /!\ do NEVER minify this code ! /!\
- *
- */
-exports.reviveFunc = multilineString (function (k, v) {
-/*!	if (v && typeof v === 'string' && v.substr (0, 8) == 'function') { 
-		var a = v.indexOf ('{') + 1, // start function body 
-		b = v.lastIndexOf ('}'),	
-		c = v.indexOf ('(') + 1,	 // start args 
-		d = v.indexOf (')');		
-		return new Function (v.substring (c, d), v.substring (a, b)); 
-	}
-
-	return v;*/
-});
-
-function multilineString (f) { return f.toString().replace(/^[^\/]+\/\*!?/, '').replace(/\*\/[^\/]+$/, ''); }
