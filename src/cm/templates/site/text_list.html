@@ -157,7 +157,7 @@ $(function() {
                 <a class="main_object_title" href="{% url text-view text.key %}">{{ text.title }}</a>
                 
 				{% tags_for_object text.last_text_version as tag_list %}
-				{% if tag_list %}<div class="tag_list>">{% blocktrans %}tags:{% endblocktrans %}&nbsp;{% for tag in tag_list %}<a class="tag" title="{% blocktrans with tag.name as tag_name %}Filter by tag: {{ tag_name }}{% endblocktrans %}" href="?{% newparams 'tag_selected' tag.name %}"">{{ tag.name }}</a>&nbsp;{% endfor %}</div>{% endif %}
+				{% if tag_list %}<div class="tag_list>">{% blocktrans %}tags:{% endblocktrans %}&nbsp;{% for tag in tag_list %}<a class="tag" title="{% blocktrans with tag.name as tag_name %}Filter by tag: {{ tag_name }}{% endblocktrans %}" href="?{% newparams 'tag_selected' tag.name %}">{{ tag.name }}</a>&nbsp;{% endfor %}</div>{% endif %}
                 
                 <div class="hidden-text-actions text-actions-{{ text.key }}">
                     <a href="{% url text-view text.key %}">{% blocktrans %}View{% endblocktrans %}</a> 
