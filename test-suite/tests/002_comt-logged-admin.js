@@ -124,10 +124,10 @@ suite ('comt logged admin', function () {
 		test_text	('#text ul.sub_list:eq(0) a:eq(1)[href="/create/upload/"]', 'Upload a text');
 		test_text	('#text ul.sub_list:eq(0) a:eq(2)[href="/create/import/"]', 'Import a co-mented text');
 		test_count	('#text form[action="."]:eq(0) :input', 6);
-		test_field ('text', 'id_title',	'text', 0, 'Title', true);
-		test_field ('text', 'id_format',	'select', 1, 'Format', true);
-		test_field ('text', 'id_content',	'textarea', 2, 'Content', true);
-		test_field ('text', 'id_tags',		'text', 3, 'Tags');
+		test_field	('text', 'id_title',	'text', 0, 'Title', true);
+		test_field	('text', 'id_format',	'select', 1, 'Format', true);
+		test_field	('text', 'id_content',	'textarea', 2, 'Content', true);
+		test_field	('text', 'id_tags',		'text', 3, 'Tags');
 		test_val	('#text :input:eq(4)[type=submit]', 'Save');
 		test_val	('#text :input:eq(5)#cancel_button[type=button]', 'Cancel');
 		test_count	('select#id_format option', 3);
@@ -138,8 +138,8 @@ suite ('comt logged admin', function () {
 		test_unlogged_footer ();
 		test_submit('#text input[type="submit"]');
 		test_count ('div.help_text span.error-text', 2);
-		test_field ('text div.error', 'id_title',		'text', 0, 'Title', true);
-		test_field ('text div.error', 'id_content',	'textarea', 1, 'Content', true);
+		test_field	('text div.error', 'id_title',		'text', 0, 'Title', true);
+		test_field	('text div.error', 'id_content',	'textarea', 1, 'Content', true);
 	});
 
 	suite ('upload text page conformity', function () {
@@ -151,10 +151,10 @@ suite ('comt logged admin', function () {
 		test_text	('#text ul.sub_list:eq(0) a:eq(1)[href="/create/content/"]', 'Create a text');
 		test_text	('#text ul.sub_list:eq(0) a:eq(2)[href="/create/import/"]', 'Import a co-mented text');
 		test_count	('#text form[action="."]:eq(0) :input', 6);
-		test_field ('text', 'id_title',	'text', 0, 'Title');
-		test_field ('text', 'id_format',	'select', 1, 'Format', true);
-		test_field ('text', 'id_tags',		'text', 2, 'Tags');
-		test_field ('text', 'id_file',		'file', 3, 'Upload file');
+		test_field	('text', 'id_title',	'text', 0, 'Title');
+		test_field	('text', 'id_format',	'select', 1, 'Format', true);
+		test_field	('text', 'id_tags',		'text', 2, 'Tags');
+		test_field	('text', 'id_file',		'file', 3, 'Upload file');
 		test_val	('#text :input:eq(4)[type=submit]', 'Save');
 		test_val	('#text :input:eq(5)#cancel_button[type=button]', 'Cancel');
 		test_count	('select#id_format option', 3);
@@ -164,7 +164,7 @@ suite ('comt logged admin', function () {
 		test_unlogged_footer ();
 		test_submit('#text input[type="submit"]');
 		test_count ('div.help_text span.error-text', 1);
-		test_field ('text div.error', 'id_file',		'file', 0, 'Upload file');
+		test_field	('text div.error', 'id_file',		'file', 0, 'Upload file');
 		test_match	('#text div.help_text:eq(3) span.error-text:eq(0)', /You should specify a file to upload/m);
 	});
 
@@ -177,13 +177,13 @@ suite ('comt logged admin', function () {
 		test_text	('#text ul.sub_list:eq(0) a:eq(1)[href="/create/content/"]', 'Create a text');
 		test_text	('#text ul.sub_list:eq(0) a:eq(2)[href="/create/upload/"]', 'Upload a text');
 		test_count	('#text form[action="."]:eq(0) :input', 3);
-		test_field ('text', 'id_file',	'file', 0, 'Upload XML file', true);
+		test_field	('text', 'id_file',	'file', 0, 'Upload XML file', true);
 		test_val	('#text :input:eq(1)[type=submit]', 'Save');
 		test_val	('#text :input:eq(2)#cancel_button[type=button]', 'Cancel');
 		test_unlogged_footer ();
 		test_submit('#text input[type="submit"]');
 		test_count	('div.help_text span.error-text', 1);
-		test_field ('text div.error', 'id_file',		'file', 0, 'Upload XML file', true);
+		test_field	('text div.error', 'id_file',		'file', 0, 'Upload XML file', true);
 		test_match	('#text div.help_text:eq(0) span.error-text:eq(0)', /You should specify a file to upload/m);
 	});
 
@@ -217,23 +217,44 @@ suite ('comt logged admin', function () {
 		test_text	('#text ul.sub_list:eq(0) a:eq(2)[href="/create/import/"]', 'Import a co-mented text');
 		test_count	('form#filter_form[action="."] :input', 1);
 		test_text	('select#tag_selected option:eq(0)[selected][value="0"]', '- All -', non_visible);
+		test_page_loading ('/text/?tag_selected=Text+Troisième', 'Texts\n - '+c['#id_workspace_name']);
+		test_count	('#texts_form :input', 4 + 3);
+		test_match	('#paginator', /\s1-4 of 4\s/m);
+
+		for (var i=4; i--;) {
+			test_text	('a.main_object_title:eq('+i+')', c.texts[2]['#id_title']);
+			test_match	('.tag_list:eq('+i+')', /tags: test_text Text Troisième /);
+			test_text	('.tag_list:eq('+i+') a:eq(0)[href="?tag_selected=test_text"]', 'test_text');
+			test_text	('.tag_list:eq('+i+') a:eq(1)[href="?tag_selected=Text+Troisi%C3%A8me"]','Text Troisième');
+			test_text	('#text .hidden-text-actions:eq('+i+') a:eq(0)[href^="/text/"][href$="/view/"]', 'View');
+			test_text	('#text .hidden-text-actions:eq('+i+') a:eq(1)[href^="/text/"][href$="/edit/"]', 'Edit');
+			test_text	('#text .hidden-text-actions:eq('+i+') a:eq(2)[href$="#"][id*=delete]', 'Delete');
+			test_text	('#text .hidden-text-actions:eq('+i+') a:eq(3)[href^="/text/"][href$="/share/"]', 'Users');
+			test_text	('#text .hidden-text-actions:eq('+i+') a:eq(4)[href^="/text/"][href$="/settings/"]', 'Settings');
+			test_text	('#text a[title="Edit user"][href^="/user/"][href$="/edit/"]:eq('+i+')', 'admin');
+			test_text	('#text table[summary="text list"] tr:eq('+(i+1)+') td:eq(4)', '0');
+		}
+
+		test_page_loading ('/text/', 'Texts\n - '+c['#id_workspace_name']);
 		test_count	('#texts_form :input', (t.text_nb < 10 ? t.text_nb : 10) + 3);
-		test_match	('#paginator', new RegExp ('\\s\\d+-\\d+ of '+t.text_nb+'\\s','m'));
+		test_match	('#paginator', new RegExp ('\\s1-10 of '+t.text_nb+'\\s','m'));
 		test_text	('#paginator a:eq(0)[href="?page=2"]', '»');
 		test_text	('#paginator a:eq(1)[href="?paginate=0"]', 'all');
 		test_click	('#paginator a:eq(0)[href="?page=2"]');
+		test_match	('#paginator', new RegExp ('\\s11-12 of '+t.text_nb+'\\s','m'));
 		test_count	('#texts_form :input', t.text_nb % 10 + 3);
 		test_click	('#paginator a:eq(0)[href="?page=1"]');
+		test_match	('#paginator', new RegExp ('\\s1-10 of '+t.text_nb+'\\s','m'));
 		test_count	('#texts_form :input', (t.text_nb < 10 ? t.text_nb : 10) + 3);
 		test_click	('#paginator a:eq(1)[href="?paginate=0&page=1"]');
+		test_match	('#paginator', /\s\(paginate\)\s/m);
 		test_count	('#texts_form :input', t.text_nb + 3);
 		test_click	('#paginator a:eq(0)[href="?paginate=&page=1"]');
 		test_count	('#texts_form :input', (t.text_nb < 10 ? t.text_nb : 10) + 3);
+		test_match	('#paginator', new RegExp ('\\s1-10 of '+t.text_nb+'\\s','m'));
 
-
-		// TOTEST : pagination
-		// TOTEST : filter by tag
 		// TOTEST : Bulk Actions -> Apply does enable
+		// TOTEST : unitary delete 
 		test_page_loading	('/text/', 'Texts\n - '+c['#id_workspace_name']);
 		test_text	('select#bulk_actions option:eq(0)[selected][value="-1"]', 'Bulk Actions', non_visible);
 		test_text	('select#bulk_actions option:eq(1)[value="delete"]', 'Delete', non_visible);
@@ -254,10 +275,10 @@ suite ('comt logged admin', function () {
 		test_count	('#content ul.sub_list:eq(0) a', 1);
 		test_text	('#content ul.sub_list:eq(0) a:eq(0)[href="/profile-pw/"]', 'Password');
 		test_count	('form#profile[action="."]:eq(0) :input', 5);
-		test_field ('profile', 'id_email',		'text', 0, 'E-mail address', true);
-		test_field ('profile', 'id_first_name','text', 1, 'First name');
-		test_field ('profile', 'id_last_name',	'text', 2, 'Last name');
-		test_field ('profile', 'id_tags',		'text', 3, 'Tags');
+		test_field	('profile', 'id_email',		'text', 0, 'E-mail address', true);
+		test_field	('profile', 'id_first_name','text', 1, 'First name');
+		test_field	('profile', 'id_last_name',	'text', 2, 'Last name');
+		test_field	('profile', 'id_tags',		'text', 3, 'Tags');
 		test_val	('#profile :input:eq(4)[type=submit]', 'Save');
 		test_unlogged_footer ();
 	});
@@ -268,9 +289,9 @@ suite ('comt logged admin', function () {
 		test_count	('#content ul.sub_list:eq(0) a', 1);
 		test_text	('#content ul.sub_list:eq(0) a:eq(0)[href="/profile/"]', 'Profile');
 		test_count	('form#profile[action="."]:eq(0) :input', 4);
-		test_field ('profile', 'id_old_password',	'password', 0, 'Old password', true);
-		test_field ('profile', 'id_new_password1', 'password', 1, 'New password', true);
-		test_field ('profile', 'id_new_password2',	'password', 2, 'New password confirmation', true);
+		test_field	('profile', 'id_old_password',	'password', 0, 'Old password', true);
+		test_field	('profile', 'id_new_password1', 'password', 1, 'New password', true);
+		test_field	('profile', 'id_new_password2',	'password', 2, 'New password confirmation', true);
 		test_val	('#profile :input:eq(3)[type=submit]', 'Save');
 		test_unlogged_footer ();
 	});
@@ -326,12 +347,12 @@ suite ('comt logged admin', function () {
 		test_text	('#user ul.sub_list:eq(0) a:eq(0)[href="/user/"]', 'Users\' list');
 		test_text	('#user ul.sub_list:eq(0) a:eq(1)[href="/user/mass-add/"]', 'Add users in bulk');
 		test_count	('#user form[action="."]:eq(0) :input', 8);
-		test_field ('user', 'id_email',		'text', 0, 'E-mail address', true);
-		test_field ('user', 'id_first_name',	'text', 1, 'First name');
-		test_field ('user', 'id_last_name',	'text', 2, 'Last name');
-		test_field ('user', 'id_tags',			'text', 3, 'Tags');
-		test_field ('user', 'id_role',			'select', 4, 'Workspace level role');
-		test_field ('user', 'id_note',			'textarea', 5, 'Note');
+		test_field	('user', 'id_email',		'text', 0, 'E-mail address', true);
+		test_field	('user', 'id_first_name',	'text', 1, 'First name');
+		test_field	('user', 'id_last_name',	'text', 2, 'Last name');
+		test_field	('user', 'id_tags',			'text', 3, 'Tags');
+		test_field	('user', 'id_role',			'select', 4, 'Workspace level role');
+		test_field	('user', 'id_note',			'textarea', 5, 'Note');
 		test_count	('select#id_role option', 6);
 		test_text	('select#id_role option:eq(0)[value][selected]', '---------', non_visible);
 		test_text	('select#id_role option:eq(1)[value="1"]', 'Manager', non_visible);
@@ -344,7 +365,7 @@ suite ('comt logged admin', function () {
 		test_unlogged_footer ();
 		test_submit('#user input[type="submit"]');
 		test_count	('div.help_text span.error-text', 1);
-		test_field ('user div.error', 'id_email', 'text', 0, 'E-mail address', true);
+		test_field	('user div.error', 'id_email', 'text', 0, 'E-mail address', true);
 		test_match	('#user div.help_text:eq(0) span.error-text:eq(0)', /This field is required/m);
 		// X TOTEST add user (pending)
 	});
@@ -357,10 +378,10 @@ suite ('comt logged admin', function () {
 		test_text	('#user ul.sub_list:eq(0) a:eq(0)[href="/user/"]', 'Users\' list');
 		test_text	('#user ul.sub_list:eq(0) a:eq(1)[href="/user/add/"]', 'Add a new user');
 		test_count	('#user form[action="."]:eq(0) :input', 6);
-		test_field ('user', 'id_email',		'textarea', 0, 'Emails', true);
-		test_field ('user', 'id_tags',			'text',		1, 'Tags');
-		test_field ('user', 'id_role',			'select',	2, 'Workspace level role');
-		test_field ('user', 'id_note',			'textarea', 3, 'Note');
+		test_field	('user', 'id_email',		'textarea', 0, 'Emails', true);
+		test_field	('user', 'id_tags',			'text',		1, 'Tags');
+		test_field	('user', 'id_role',			'select',	2, 'Workspace level role');
+		test_field	('user', 'id_note',			'textarea', 3, 'Note');
 		test_count	('select#id_role option', 6);
 		test_text	('select#id_role option:eq(0)[value][selected]', '---------', non_visible);
 		test_text	('select#id_role option:eq(1)[value="1"]', 'Manager', non_visible);
@@ -374,7 +395,7 @@ suite ('comt logged admin', function () {
 		test_unlogged_footer ();
 		test_submit('#user input[type="submit"]');
 		test_count	('div.help_text span.error-text', 1);
-		test_field ('user div.error', 'id_email', 'textarea', 0, 'Emails', true);
+		test_field	('user div.error', 'id_email', 'textarea', 0, 'Emails', true);
 		test_match	('#user div.help_text:eq(0) span.error-text:eq(0)', /This field is required/m);
 	});
 
@@ -385,18 +406,18 @@ suite ('comt logged admin', function () {
 		test_count	('#settings ul.sub_list:eq(0) a', 1);
 		test_text	('#settings ul.sub_list:eq(0) a:eq(0)[href="/settings/design/"]', 'Appearance');
 		test_count	('#settings form[action="."]:eq(0) :input', 12);
-		test_field ('settings', 'id_workspace_name', 'text', 0, 'Workspace name');
-		test_field ('settings', 'id_workspace_tagline', 'text', 1, 'Workspace tagline');
-		test_field ('settings', 'id_workspace_registration', 'checkbox', 2, 'Workspace registration');
-		test_field ('settings', 'id_workspace_registration_moderation', 'checkbox', 3, 'Workspace registration moderation');
-		test_field ('settings', 'id_workspace_role_model', 'select', 4, 'Role model');
+		test_field	('settings', 'id_workspace_name', 'text', 0, 'Workspace name');
+		test_field	('settings', 'id_workspace_tagline', 'text', 1, 'Workspace tagline');
+		test_field	('settings', 'id_workspace_registration', 'checkbox', 2, 'Workspace registration');
+		test_field	('settings', 'id_workspace_registration_moderation', 'checkbox', 3, 'Workspace registration moderation');
+		test_field	('settings', 'id_workspace_role_model', 'select', 4, 'Role model');
 		test_text	('select#id_workspace_role_model option:eq(0)[selected][value="generic"]', 'Generic', non_visible);
 		test_text	('select#id_workspace_role_model option:eq(1)[value="teacher"]', 'Class (education)', non_visible);
-		test_field ('settings', 'id_workspace_category_1', 'text', 5, 'Label for the first category of comments');
-		test_field ('settings', 'id_workspace_category_2', 'text', 6, 'Label for the second category of comments');
-		test_field ('settings', 'id_workspace_category_3', 'text', 7, 'Label for the third category of comments');
-		test_field ('settings', 'id_workspace_category_4', 'text', 8, 'Label for the fourth category of comments');
-		test_field ('settings', 'id_workspace_category_5', 'text', 9, 'Label for the fifth category of comments');
+		test_field	('settings', 'id_workspace_category_1', 'text', 5, 'Label for the first category of comments');
+		test_field	('settings', 'id_workspace_category_2', 'text', 6, 'Label for the second category of comments');
+		test_field	('settings', 'id_workspace_category_3', 'text', 7, 'Label for the third category of comments');
+		test_field	('settings', 'id_workspace_category_4', 'text', 8, 'Label for the fourth category of comments');
+		test_field	('settings', 'id_workspace_category_5', 'text', 9, 'Label for the fifth category of comments');
 		test_val	('#settings :input:eq(10)[type=submit]', 'Save');
 		test_val	('#settings :input:eq(11)#cancel_button[type=button]', 'Cancel');
 		// TOTEST Workspace registration feature (with newly accessible page)
@@ -410,10 +431,10 @@ suite ('comt logged admin', function () {
 		test_count	('#settings ul.sub_list:eq(0) a', 1);
 		test_text	('#settings ul.sub_list:eq(0) a:eq(0)[href="/settings/"]', 'General');
 		test_count	('#settings form[action="."]:eq(0) :input', 7);
-		test_field ('settings', 'id_workspace_logo_file', 'file', 0, 'Workspace logo');
-		test_field ('settings', 'id_custom_css', 'textarea', 1, 'Custom CSS rules');
-		test_field ('settings', 'id_custom_font', 'text', 2, 'Custom font');
-		test_field ('settings', 'id_custom_titles_font', 'text', 3, 'Custom font for titles');
+		test_field	('settings', 'id_workspace_logo_file', 'file', 0, 'Workspace logo');
+		test_field	('settings', 'id_custom_css', 'textarea', 1, 'Custom CSS rules');
+		test_field	('settings', 'id_custom_font', 'text', 2, 'Custom font');
+		test_field	('settings', 'id_custom_titles_font', 'text', 3, 'Custom font for titles');
 		test_val	('#settings :input:eq(4)[type=submit]', 'Save');
 		test_val	('#settings :input:eq(5)#cancel_button[type=button]', 'Cancel');
 		test_val	('#settings :input:eq(6)#delete_logo_button[type=submit]', 'Delete logo');

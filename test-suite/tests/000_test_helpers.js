@@ -111,10 +111,11 @@ function test_fill_field (s, v) {
 /**
  * Click somewhere
  * s : selector of the item to click on
+ * v : is the element visible or not
  */
-function test_click (s) {
+function test_click (s, v) {
     test ('click '+s, dsl(function () {
-        elt (s).click ();
+        elt (s, v).click ();
     }));
 }
 
@@ -126,6 +127,15 @@ function test_submit (s) {
 	test ('submit '+s, dsl(function () {
 		elt (s).click ();
 		browser.waitForPageLoad ();
+	}));
+}
+
+/**
+ * Reload a page
+ */
+function test_reload () {
+	test ('reload current page', dsl(function () {
+		browser.reload ();
 	}));
 }
 
