@@ -17,7 +17,8 @@ Installation :
 --------------
 apt-get install npm
 sudo ln /usr/bin/nodejs /usr/bin/node	# /usr/share/doc/nodejs/README.Debian
-sudo npm install -g karma karma-mocha karma-e2e-dsl	# goes here /usr/local/lib/node_modules/
+sudo npm install -g karma karma-mocha	# install things in /usr/local/lib/node_modules/
+sudo npm install -g git://github.com/Siltaar/karma-e2e-dsl # to get the improved karma-e2e-dsl
 
 
 Starting comt :

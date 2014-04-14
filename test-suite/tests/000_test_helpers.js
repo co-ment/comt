@@ -29,7 +29,17 @@ function test_i18n (c, l) {
 	}));
 }
 
-/** Test if the selected DOM element is defined or has a given value : .val()
+/** Test if the selected DOM element .text() value match the given regexp
+ *	s : CSS selector
+ *	r : regexp to match
+ */
+function test_match (s, r) {
+	test (s+' text match '+r, dsl(function () {
+		expect (elt (s).text ()).toMatch (r);
+	}));
+}
+
+/** Test if the selected DOM element has a given value : .val()
  *	s : CSS selector
  *	e : expected value, if omited, test existence
  */
@@ -40,6 +50,9 @@ function test_val (s, e) {
 	}));
 }
 
+/**
+ *
+ */
 function test_exist (s) {
 	test_val (s);
 }
@@ -53,16 +66,6 @@ function test_text (s, e, v) {
 	v = typeof v == 'undefined' ? true : v;
 	test (s+' has text '+e, dsl(function () {
 		expect (elt (s, v).text ()).toBe (e);
-	}));
-}
-
-/** Test if the selected DOM element .text() value match the given regexp
- *	s : CSS selector
- *	r : regexp to match
- */
-function test_match (s, r) {
-	test (s+' text match '+r, dsl(function () {
-		expect (elt (s).text ()).toMatch (r);
 	}));
 }
 
@@ -109,26 +112,31 @@ function test_fill_field (s, v) {
 }
 
 /**
- * Click somewhere
+ * Click on something
  * s : selector of the item to click on
+ * w : should we wait for a page to load in the browser after the click
  * v : is the element visible or not
  */
-function test_click (s, v) {
-    test ('click '+s, dsl(function () {
-        elt (s, v).click ();
-    }));
+function test_click (s, w, v) {
+	var t = 'click '+ w ? 'to submit form ' : '';
+	test (t+s, dsl(function () {
+		elt (s, v).click ();
+		if (w)
+			browser.waitForPageLoad ();
+	}));
 }
 
 /**
- * Submit a form
- * s : selector of the submit button
+ * Send submit event to the given form
+ * s : selector of the form to submit
  */
 function test_submit (s) {
-	test ('submit '+s, dsl(function () {
-		elt (s).click ();
+	test ('send submit event to '+s, dsl(function () {
+		elt (s).submit ();
 		browser.waitForPageLoad ();
 	}));
 }
+
 
 /**
  * Reload a page

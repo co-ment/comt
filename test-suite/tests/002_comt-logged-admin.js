@@ -11,8 +11,9 @@ var w = __karma__.config.w,
 for (var i = 20; i--;)
 	long_text += 'Contenu du troisième texte.<br/>Sur <b>plusieurs</b> lignes<br/>';
 
-const non_visible = false,
+const hidden = false,
 	no_tagline = false,
+	wait_page_load = true,
 	c = {
 	'#id_workspace_name':	'Test workspace name',
 	'#id_workspace_tagline':	'Test workspace tagline',
@@ -51,7 +52,7 @@ const non_visible = false,
 
 suite ('comt logged admin', function () {
 
-	this.timeout(20000);
+	this.timeout(200000);
 
 	suite ('logs as an admin', function () {
 		test ('logs an admin in', dsl(function () {
@@ -68,13 +69,13 @@ suite ('comt logged admin', function () {
 	suite ('setting settings to test-values', function () {
 		test_page_loading ('/settings/', 'Settings');
 		test_fill_settings (c);
-		test_val ('#id_workspace_name', c['#id_workspace_name']);
-		test_submit ('#settings input[type="submit"]');
+		test_val	('#id_workspace_name', c['#id_workspace_name']);
+		test_click	('#settings input[type="submit"]', wait_page_load);
 		test_page_loading	('/settings/', 'Settings');
-		test_text ('#content h1.main_title a[href="/"]', c['#id_workspace_name']);
+		test_text	('#content h1.main_title a[href="/"]', c['#id_workspace_name']);
 		test_page_loading	('/settings/design/', 'Settings');
 		test_fill_design (c);
-		test_submit ('#settings input[type="submit"]');
+		test_click	('#settings input[type="submit"]', wait_page_load);
 	});
 
 	suite ('admin dashboard page conformity', function () {
@@ -131,13 +132,13 @@ suite ('comt logged admin', function () {
 		test_val	('#text :input:eq(4)[type=submit]', 'Save');
 		test_val	('#text :input:eq(5)#cancel_button[type=button]', 'Cancel');
 		test_count	('select#id_format option', 3);
-		test_text	('select#id_format option:eq(0)[value="markdown"][selected]', 'markdown', non_visible);
-		test_text	('select#id_format option:eq(1)[value="rst"]', 'rst', non_visible);
-		test_text	('select#id_format option:eq(2)[value="html"]', 'html', non_visible);
+		test_text	('select#id_format option:eq(0)[value="markdown"][selected]', 'markdown', hidden);
+		test_text	('select#id_format option:eq(1)[value="rst"]', 'rst', hidden);
+		test_text	('select#id_format option:eq(2)[value="html"]', 'html', hidden);
 		test_count	('.markdown #markItUpId_content li', 20); // How many buttons in the WYSIWYG editor toolbar ?
 		test_unlogged_footer ();
-		test_submit('#text input[type="submit"]');
-		test_count ('div.help_text span.error-text', 2);
+		test_click	('#text input[type="submit"]', wait_page_load);
+		test_count	('div.help_text span.error-text', 2);
 		test_field	('text div.error', 'id_title',		'text', 0, 'Title', true);
 		test_field	('text div.error', 'id_content',	'textarea', 1, 'Content', true);
 	});
@@ -158,12 +159,12 @@ suite ('comt logged admin', function () {
 		test_val	('#text :input:eq(4)[type=submit]', 'Save');
 		test_val	('#text :input:eq(5)#cancel_button[type=button]', 'Cancel');
 		test_count	('select#id_format option', 3);
-		test_text	('select#id_format option:eq(0)[value="markdown"][selected]', 'markdown', non_visible);
-		test_text	('select#id_format option:eq(1)[value="rst"]', 'rst', non_visible);
-		test_text	('select#id_format option:eq(2)[value="html"]', 'html', non_visible);
+		test_text	('select#id_format option:eq(0)[value="markdown"][selected]', 'markdown', hidden);
+		test_text	('select#id_format option:eq(1)[value="rst"]', 'rst', hidden);
+		test_text	('select#id_format option:eq(2)[value="html"]', 'html', hidden);
 		test_unlogged_footer ();
-		test_submit('#text input[type="submit"]');
-		test_count ('div.help_text span.error-text', 1);
+		test_click	('#text input[type="submit"]', wait_page_load);
+		test_count	('div.help_text span.error-text', 1);
 		test_field	('text div.error', 'id_file',		'file', 0, 'Upload file');
 		test_match	('#text div.help_text:eq(3) span.error-text:eq(0)', /You should specify a file to upload/m);
 	});
@@ -181,7 +182,7 @@ suite ('comt logged admin', function () {
 		test_val	('#text :input:eq(1)[type=submit]', 'Save');
 		test_val	('#text :input:eq(2)#cancel_button[type=button]', 'Cancel');
 		test_unlogged_footer ();
-		test_submit('#text input[type="submit"]');
+		test_click	('#text input[type="submit"]', wait_page_load);
 		test_count	('div.help_text span.error-text', 1);
 		test_field	('text div.error', 'id_file',		'file', 0, 'Upload XML file', true);
 		test_match	('#text div.help_text:eq(0) span.error-text:eq(0)', /You should specify a file to upload/m);
@@ -207,7 +208,7 @@ suite ('comt logged admin', function () {
 	// tester que si Text preferences -> custom -> #textcontainer.custom font: Test_Sopinspace_custom_font
 	// #textcontainer #add_comment_btn span -> #textcontainer font-family: Test_Sopinspace
 
-	suite.skip ('texts list page conformity', function () {
+	suite ('texts list page conformity', function () {
 		test_page_loading	('/text/', 'Texts\n - '+c['#id_workspace_name']);
 		test_logged_header	(w.USER_ADMIN);
 		test_default_tabs	(t.text_nb, t.user_nb);
@@ -216,7 +217,7 @@ suite ('comt logged admin', function () {
 		test_text	('#text ul.sub_list:eq(0) a:eq(1)[href="/create/upload/"]', 'Upload a text');
 		test_text	('#text ul.sub_list:eq(0) a:eq(2)[href="/create/import/"]', 'Import a co-mented text');
 		test_count	('form#filter_form[action="."] :input', 1);
-		test_text	('select#tag_selected option:eq(0)[selected][value="0"]', '- All -', non_visible);
+		test_text	('select#tag_selected option:eq(0)[selected][value="0"]', '- All -', hidden);
 		test_page_loading ('/text/?tag_selected=Text+Troisième', 'Texts\n - '+c['#id_workspace_name']);
 		test_count	('#texts_form :input', 4 + 3);
 		test_match	('#paginator', /\s1-4 of 4\s/m);
@@ -253,8 +254,8 @@ suite ('comt logged admin', function () {
 		test_count	('#texts_form :input', (t.text_nb < 10 ? t.text_nb : 10) + 3);
 		test_match	('#paginator', new RegExp ('\\s1-10 of '+t.text_nb+'\\s','m'));
 		test_page_loading	('/text/', 'Texts\n - '+c['#id_workspace_name']);
-		test_text	('select#bulk_actions option:eq(0)[selected][value="-1"]', 'Bulk Actions', non_visible);
-		test_text	('select#bulk_actions option:eq(1)[value="delete"]', 'Delete', non_visible);
+		test_text	('select#bulk_actions option:eq(0)[selected][value="-1"]', 'Bulk Actions', hidden);
+		test_text	('select#bulk_actions option:eq(1)[value="delete"]', 'Delete', hidden);
 		test_val	('form#texts_form input#apply[type=button][disabled]', 'Apply');
 		test_count	('table.large_table:eq(1) th', 6);
 		test_val	('table.large_table:eq(1) th:eq(0) input#all_check[type="checkbox"]', 'on');
@@ -268,10 +269,10 @@ suite ('comt logged admin', function () {
 		test_click	('#all_check');
 		test_count	('form#texts_form input:checked', t.text_nb % 10 + 1);
 		test_val	('form#texts_form input#apply[type=button]:not([disabled])', 'Apply');
-//		test_click	('#texts_form #apply');
-		test		('submit #texts_form without confirm dialog', dsl(function(){form("#texts_form").submit();}));
+		// test_click	('#texts_form #apply'); // can't click on the confirm dialog
+		test_submit	('#texts_form');
 		test_page_loading ('/text/', 'Texts\n - '+c['#id_workspace_name']);
-//		t.text_nb -= 2;
+		t.text_nb -= 2;
 		test_count	('form#texts_form :input', t.text_nb + 3);
 		test_match	('#paginator', new RegExp ('\\s1-10 of '+t.text_nb+'\\s','m'));
 		// TOTEST : unitary delete 
@@ -280,7 +281,7 @@ suite ('comt logged admin', function () {
 	});
 
 	suite ('edit profile page conformity', function () {
-		test_page_loading	('/profile/', 'Your profile [(]'+w.USER_ADMIN+'[)]\n - '+c['#id_workspace_name']);
+		test_page_loading	('/profile/', 'Your profile \\('+w.USER_ADMIN+'\\)\n - '+c['#id_workspace_name']);
 		test_logged_header	(w.USER_ADMIN, no_tagline);
 		test_count	('#content ul.sub_list:eq(0) a', 1);
 		test_text	('#content ul.sub_list:eq(0) a:eq(0)[href="/profile-pw/"]', 'Password');
@@ -316,18 +317,18 @@ suite ('comt logged admin', function () {
 		// TOTEST : filter by tag -> commentator user should be tagged commentator (to change in fixture)
 		test_count	('form#filter_form[action="."] :input', 1);
 		test_text	('#filter_form a[href="?display=1"]', 'Display suspended users');
-		test_text	('select#tag_selected option:eq(0)[selected][value="0"]', '- All -', non_visible);
+		test_text	('select#tag_selected option:eq(0)[selected][value="0"]', '- All -', hidden);
 		// TOTEST : pagination
 		// TOTEST : Bulk Actions -> Apply does enable
 		// TOTEST display suspended users
-		test_text	('select#bulk_actions option:eq(0)[selected][value="-1"]', '- Bulk Actions -', non_visible);
-		test_text	('select#bulk_actions option:eq(1)[value="disable"]', 'Suspend access', non_visible);
-		test_text	('select#bulk_actions option:eq(2)[value="enable"]', 'Enable access', non_visible);
-		test_text	('select#bulk_actions option:eq(3)[value="role_1"]', 'Change role to Manager', non_visible);
-		test_text	('select#bulk_actions option:eq(4)[value="role_2"]', 'Change role to Editor', non_visible);
-		test_text	('select#bulk_actions option:eq(5)[value="role_3"]', 'Change role to Moderator', non_visible);
-		test_text	('select#bulk_actions option:eq(6)[value="role_4"]', 'Change role to Commentator', non_visible);
-		test_text	('select#bulk_actions option:eq(7)[value="role_5"]', 'Change role to Observer', non_visible);
+		test_text	('select#bulk_actions option:eq(0)[selected][value="-1"]', '- Bulk Actions -', hidden);
+		test_text	('select#bulk_actions option:eq(1)[value="disable"]', 'Suspend access', hidden);
+		test_text	('select#bulk_actions option:eq(2)[value="enable"]', 'Enable access', hidden);
+		test_text	('select#bulk_actions option:eq(3)[value="role_1"]', 'Change role to Manager', hidden);
+		test_text	('select#bulk_actions option:eq(4)[value="role_2"]', 'Change role to Editor', hidden);
+		test_text	('select#bulk_actions option:eq(5)[value="role_3"]', 'Change role to Moderator', hidden);
+		test_text	('select#bulk_actions option:eq(6)[value="role_4"]', 'Change role to Commentator', hidden);
+		test_text	('select#bulk_actions option:eq(7)[value="role_5"]', 'Change role to Observer', hidden);
 		test_val	('form#user_form input#apply[type=button][disabled]', 'Apply');
 		test_count	('table.large_table:eq(1) th', 6);
 		test_val	('table.large_table:eq(1) th:eq(0) input#all_check[type="checkbox"]', 'on');
@@ -364,16 +365,16 @@ suite ('comt logged admin', function () {
 		test_field	('user', 'id_role',			'select', 4, 'Workspace level role');
 		test_field	('user', 'id_note',			'textarea', 5, 'Note');
 		test_count	('select#id_role option', 6);
-		test_text	('select#id_role option:eq(0)[value][selected]', '---------', non_visible);
-		test_text	('select#id_role option:eq(1)[value="1"]', 'Manager', non_visible);
-		test_text	('select#id_role option:eq(2)[value="2"]', 'Editor', non_visible);
-		test_text	('select#id_role option:eq(3)[value="3"]', 'Moderator', non_visible);
-		test_text	('select#id_role option:eq(4)[value="4"]', 'Commentator', non_visible);
-		test_text	('select#id_role option:eq(5)[value="5"]', 'Observer', non_visible);
+		test_text	('select#id_role option:eq(0)[value][selected]', '---------', hidden);
+		test_text	('select#id_role option:eq(1)[value="1"]', 'Manager', hidden);
+		test_text	('select#id_role option:eq(2)[value="2"]', 'Editor', hidden);
+		test_text	('select#id_role option:eq(3)[value="3"]', 'Moderator', hidden);
+		test_text	('select#id_role option:eq(4)[value="4"]', 'Commentator', hidden);
+		test_text	('select#id_role option:eq(5)[value="5"]', 'Observer', hidden);
 		test_val	('#user :input:eq(6)[type=submit]', 'Add user');
 		test_val	('#user :input:eq(7)#cancel_button[type=button]', 'Cancel');
 		test_unlogged_footer ();
-		test_submit('#user input[type="submit"]');
+		test_click	('#user input[type="submit"]', wait_page_load);
 		test_count	('div.help_text span.error-text', 1);
 		test_field	('user div.error', 'id_email', 'text', 0, 'E-mail address', true);
 		test_match	('#user div.help_text:eq(0) span.error-text:eq(0)', /This field is required/m);
@@ -393,17 +394,17 @@ suite ('comt logged admin', function () {
 		test_field	('user', 'id_role',			'select',	2, 'Workspace level role');
 		test_field	('user', 'id_note',			'textarea', 3, 'Note');
 		test_count	('select#id_role option', 6);
-		test_text	('select#id_role option:eq(0)[value][selected]', '---------', non_visible);
-		test_text	('select#id_role option:eq(1)[value="1"]', 'Manager', non_visible);
-		test_text	('select#id_role option:eq(2)[value="2"]', 'Editor', non_visible);
-		test_text	('select#id_role option:eq(3)[value="3"]', 'Moderator', non_visible);
-		test_text	('select#id_role option:eq(4)[value="4"]', 'Commentator', non_visible);
-		test_text	('select#id_role option:eq(5)[value="5"]', 'Observer', non_visible);
+		test_text	('select#id_role option:eq(0)[value][selected]', '---------', hidden);
+		test_text	('select#id_role option:eq(1)[value="1"]', 'Manager', hidden);
+		test_text	('select#id_role option:eq(2)[value="2"]', 'Editor', hidden);
+		test_text	('select#id_role option:eq(3)[value="3"]', 'Moderator', hidden);
+		test_text	('select#id_role option:eq(4)[value="4"]', 'Commentator', hidden);
+		test_text	('select#id_role option:eq(5)[value="5"]', 'Observer', hidden);
 		test_val	('#user :input:eq(4)[type=submit]', 'Add users');
 		test_val	('#user :input:eq(5)#cancel_button[type=button]', 'Cancel');
 		// X TOTEST add users (pending) -> can't be deleted
 		test_unlogged_footer ();
-		test_submit('#user input[type="submit"]');
+		test_click	('#user input[type="submit"]', wait_page_load);
 		test_count	('div.help_text span.error-text', 1);
 		test_field	('user div.error', 'id_email', 'textarea', 0, 'Emails', true);
 		test_match	('#user div.help_text:eq(0) span.error-text:eq(0)', /This field is required/m);
@@ -421,8 +422,8 @@ suite ('comt logged admin', function () {
 		test_field	('settings', 'id_workspace_registration', 'checkbox', 2, 'Workspace registration');
 		test_field	('settings', 'id_workspace_registration_moderation', 'checkbox', 3, 'Workspace registration moderation');
 		test_field	('settings', 'id_workspace_role_model', 'select', 4, 'Role model');
-		test_text	('select#id_workspace_role_model option:eq(0)[selected][value="generic"]', 'Generic', non_visible);
-		test_text	('select#id_workspace_role_model option:eq(1)[value="teacher"]', 'Class (education)', non_visible);
+		test_text	('select#id_workspace_role_model option:eq(0)[selected][value="generic"]', 'Generic', hidden);
+		test_text	('select#id_workspace_role_model option:eq(1)[value="teacher"]', 'Class (education)', hidden);
 		test_field	('settings', 'id_workspace_category_1', 'text', 5, 'Label for the first category of comments');
 		test_field	('settings', 'id_workspace_category_2', 'text', 6, 'Label for the second category of comments');
 		test_field	('settings', 'id_workspace_category_3', 'text', 7, 'Label for the third category of comments');
@@ -531,6 +532,6 @@ function create_text (i) {
 	}));
 
 	test_fill_field ('#id_tags', c['texts'][i]);
-	test_submit ('#save_button');
+	test_click	 ('#save_button', wait_page_load);
 	t.text_nb++;
 }
