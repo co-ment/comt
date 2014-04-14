@@ -4,7 +4,7 @@
 // set softtabstop=4	  " as above
 // set shiftwidth=4		  " as above
 
-suite.skip ('comt unlogged prelude', function () {
+suite ('comt unlogged prelude', function () {
 
 	this.timeout(20000);
 
@@ -22,7 +22,7 @@ suite.skip ('comt unlogged prelude', function () {
 		test_val	('input#cancel_button[type=button]', 'Cancel');
 		test_unlogged_footer ();
 		test		('to check that toBeDefined test still works', dsl(function () {
-			expect (test_elt ('#header_controls a[href="/xxx/"]').val ()).not ().toBeDefined ();
+			expect (elt ('#header_controls a[href="/xxx/"]').val ()).not ().toBeDefined ();
 		}));
 		test ('get back to / to avoid bugging next page load', dsl(function () { browser.navigateTo ('/'); }));
 	});

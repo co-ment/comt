@@ -5,7 +5,7 @@
 // set shiftwidth=4		  " as above
 
 var w = __karma__.config.w,
-	t = {'text_nb': 12, 'user_nb': 4},
+	t = {'text_nb': 0, 'user_nb': 4},
 	long_text = '';
 
 for (var i = 20; i--;)
@@ -103,7 +103,7 @@ suite ('comt logged admin', function () {
 		test_unlogged_footer ();
 	});
 
-	suite.skip ('empty texts list page conformity', function () {
+	suite ('empty texts list page conformity', function () {
 		test_page_loading	('/text/', 'Texts\n - '+c['#id_workspace_name']);
 		test_logged_header	(w.USER_ADMIN);
 		test_default_tabs	(t.text_nb, t.user_nb);
@@ -187,10 +187,10 @@ suite ('comt logged admin', function () {
 		test_match	('#text div.help_text:eq(0) span.error-text:eq(0)', /You should specify a file to upload/m);
 	});
 
-	suite.skip ('create texts', function () {
-/*		for (var j=4; j--;)
+	suite ('create texts', function () {
+		for (var j=4; j--;)
 			for (var i=3; i--;)
-				 create_text (i);*/
+				 create_text (i);
 	});
 
 	// check that public texts still worwhile unlogged
@@ -207,7 +207,7 @@ suite ('comt logged admin', function () {
 	// tester que si Text preferences -> custom -> #textcontainer.custom font: Test_Sopinspace_custom_font
 	// #textcontainer #add_comment_btn span -> #textcontainer font-family: Test_Sopinspace
 
-	suite ('texts list page conformity', function () {
+	suite.skip ('texts list page conformity', function () {
 		test_page_loading	('/text/', 'Texts\n - '+c['#id_workspace_name']);
 		test_logged_header	(w.USER_ADMIN);
 		test_default_tabs	(t.text_nb, t.user_nb);
@@ -252,9 +252,6 @@ suite ('comt logged admin', function () {
 		test_click	('#paginator a:eq(0)[href="?paginate=&page=1"]');
 		test_count	('#texts_form :input', (t.text_nb < 10 ? t.text_nb : 10) + 3);
 		test_match	('#paginator', new RegExp ('\\s1-10 of '+t.text_nb+'\\s','m'));
-
-		// TOTEST : Bulk Actions -> Apply does enable
-		// TOTEST : unitary delete 
 		test_page_loading	('/text/', 'Texts\n - '+c['#id_workspace_name']);
 		test_text	('select#bulk_actions option:eq(0)[selected][value="-1"]', 'Bulk Actions', non_visible);
 		test_text	('select#bulk_actions option:eq(1)[value="delete"]', 'Delete', non_visible);
@@ -266,6 +263,19 @@ suite ('comt logged admin', function () {
 		test_text	('table.large_table:eq(1) th:eq(3) a[href="?order=-modified"]', 'Modified');
 		test_text	('table.large_table:eq(1) th:eq(4)', '# comments');
 		test_text	('table.large_table:eq(1) th:eq(5)', 'Last week activity');
+		test_page_loading ('/text/?page=2', 'Texts\n - '+c['#id_workspace_name']);
+		test		('choose bulk action Delete', dsl(function () { input ('#bulk_actions').option ('delete'); }));
+		test_click	('#all_check');
+		test_count	('form#texts_form input:checked', t.text_nb % 10 + 1);
+		test_val	('form#texts_form input#apply[type=button]:not([disabled])', 'Apply');
+//		test_click	('#texts_form #apply');
+		test		('submit #texts_form without confirm dialog', dsl(function(){form("#texts_form").submit();}));
+		test_page_loading ('/text/', 'Texts\n - '+c['#id_workspace_name']);
+//		t.text_nb -= 2;
+		test_count	('form#texts_form :input', t.text_nb + 3);
+		test_match	('#paginator', new RegExp ('\\s1-10 of '+t.text_nb+'\\s','m'));
+		// TOTEST : unitary delete 
+
 		test_unlogged_footer ();
 	});
 
