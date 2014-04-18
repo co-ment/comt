@@ -3,7 +3,7 @@
 
 
 // SID: get WORKSPACE_URL configuration from one single file to customize
-var w = require ('./workspace.info.js');
+var W = require ('./workspace.info.js');
 
 module.exports = function(config) {
 	config.set({
@@ -17,20 +17,20 @@ module.exports = function(config) {
 		// - Firefox	; Safari	(only Mac; run `npm install karma-safari-launcher` first)
 		// - Chrome		; ChromeCanary ; Opera (run `npm install karma-opera-launcher` first)
 		// - PhantomJS	; IE		(only Windows; run `npm install karma-ie-launcher` first)
-		browsers: w.BROWSERS,
+		browsers: W.BROWSERS,
 		// frameworks to use. SID: choosen mocha, added karma-e2e-dsl (end-to-end testing)
 		frameworks: ['mocha', 'karma-e2e-dsl'],
 		// SID: Karma will start and run somewhere else than '/', to allow proxying '/'
 		urlRoot: '/karma/',
 		// SID: directive added on karma-e2e-dsl purpose. Map of path-proxy pairs.
 		proxies: {
-			'/': w.WORKSPACE_URL
+			'/': W.WORKSPACE_URL
 		},
 		client: {
 			mocha: {
 				ui: 'tdd'
 			},
-			w: w // SID: exports the variable in the test execution browser window
+			W: W // SID: exports the variable in the test execution browser window
 		},
 		// test results reporter to use : 'dots', 'progress', 'junit', 'growl', 'coverage'
 		reporters: ['progress'],

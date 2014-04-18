@@ -4,60 +4,30 @@
 // set softtabstop=4	  " as above
 // set shiftwidth=4		  " as above
 
-var w = __karma__.config.w,
-	t = {'text_nb': 0, 'user_nb': 4};
-
-const hidden = false,
-	no_tagline = false,
-	wait_page_load = true,
-	c = {
-	'#id_workspace_name':	'Test workspace name',
-	'#id_workspace_tagline':	'Test workspace tagline',
-	'#id_workspace_registration':			'on',	// registration
-	'#id_workspace_registration_moderation':'on',	// registration moderation
-	'#id_workspace_role_model':	'generic',
-	'#id_workspace_category_1':	'ws_cat_1',
-	'#id_workspace_category_2':	'ws_cat_2',
-	'#id_workspace_category_3':	'ws_cat_3',
-	'#id_workspace_category_4':	'ws_cat_4',
-	'#id_workspace_category_5':	'ws_cat_5',
-	'#id_custom_css': "h2 {  font-family: Test_Sopinspace !important; }",
-	'#id_custom_font': 'Test_Sopinspace_custom_font',
-	'#id_custom_titles_font': 'Test_Sopinspace_custom_titles_font'
-};
-
 suite ('comt logged admin', function () {
 
 	this.timeout(20000);
 
 	suite ('logs as an admin', function () {
-		test ('with '+w.USER_ADMIN+' - '+w.PASS_ADMIN, dsl(function () {
-			browser.navigateTo ('/');
-			input ('#id_username').enter (w.USER_ADMIN);
-			input ('#id_password').enter (w.PASS_ADMIN);
-			elt ('#login input[type=submit]').click ();
-			browser.waitForPageLoad (); // Must be done here in this test() block
-			browser.navigateTo ('/');
-			expect (element ('title').text ()).toMatch (/Dashboard/m);
-		}));
+		test_comt_login (C.W.USER_ADMIN, C.W.PASS_ADMIN);
 	});
 
 	suite ('setting settings to test-values', function () {
 		test_page_loading ('/settings/', 'Settings');
-		test_fill_settings (c);
-		test_val	('#id_workspace_name', c['#id_workspace_name']);
-		test_click	('#settings input[type="submit"]', wait_page_load);
+		test_comt_fill_settings (C);
+		test_val	('#id_workspace_name', C['#id_workspace_name']);
+		test_click	('#settings input[type="submit"]', C.WAIT_PAGE_LOAD);
 		test_page_loading	('/settings/', 'Settings');
-		test_text	('#content h1.main_title a[href="/"]', c['#id_workspace_name']);
+		test_text	('#content h1.main_title a[href="/"]', C['#id_workspace_name']);
 		test_page_loading	('/settings/design/', 'Settings');
-		test_fill_design (c);
-		test_click	('#settings input[type="submit"]', wait_page_load);
+		test_comt_fill_design (C);
+		test_click	('#settings input[type="submit"]', C.WAIT_PAGE_LOAD);
 	});
 
 	suite ('admin dashboard page conformity', function () {
-		test_page_loading ('/', 'Dashboard\n - '+c['#id_workspace_name']);
-		test_logged_header (w.USER_ADMIN);
-		test_default_tabs (t.text_nb, t.user_nb);
+		test_page_loading ('/', 'Dashboard\n - '+C['#id_workspace_name']);
+		test_comt_logged_header (C.W.USER_ADMIN);
+		test_comt_default_tabs (test_comt.text_nb, test_comt.user_nb);
 		test_count	('table.dash_table', 5);
 		test_text	('table.dash_table th:eq(0)', 'Actions');
 		test_match	('table.dash_table:eq(0) a:eq(0)[href="/create/content/"]', /\sCreate a text/);
@@ -77,13 +47,13 @@ suite ('comt logged admin', function () {
 		test_text	('table.dash_table:eq(3) a:eq(0)[href="?span=month"]', 'month');
 		test_text	('table.dash_table:eq(3) a:eq(1)[href="?span=day"]', '24 hours');
 		test_text	('table.dash_table th:eq(4) span.em', 'Activities');
-		test_unlogged_footer ();
+		test_comt_unlogged_footer ();
 	});
 
 	suite ('create a text page conformity', function () {
-		test_page_loading	('/create/content/', 'Create a text - '+c['#id_workspace_name']);
-		test_logged_header	(w.USER_ADMIN);
-		test_default_tabs	(t.text_nb, t.user_nb);
+		test_page_loading	('/create/content/', 'Create a text - '+C['#id_workspace_name']);
+		test_comt_logged_header	(C.W.USER_ADMIN);
+		test_comt_default_tabs	(test_comt.text_nb, test_comt.user_nb);
 		test_count	('#text ul.sub_list:eq(0) a', 3);
 		test_text	('#text ul.sub_list:eq(0) a:eq(0)[href="/text/"]', 'Text list');
 		test_text	('#text ul.sub_list:eq(0) a:eq(1)[href="/create/upload/"]', 'Upload a text');
@@ -96,21 +66,21 @@ suite ('comt logged admin', function () {
 		test_val	('#text :input:eq(4)[type=submit]', 'Save');
 		test_val	('#text :input:eq(5)#cancel_button[type=button]', 'Cancel');
 		test_count	('select#id_format option', 3);
-		test_text	('select#id_format option:eq(0)[value="markdown"][selected]', 'markdown', hidden);
-		test_text	('select#id_format option:eq(1)[value="rst"]', 'rst', hidden);
-		test_text	('select#id_format option:eq(2)[value="html"]', 'html', hidden);
+		test_text	('select#id_format option:eq(0)[value="markdown"][selected]', 'markdown', C.HIDDEN);
+		test_text	('select#id_format option:eq(1)[value="rst"]', 'rst', C.HIDDEN);
+		test_text	('select#id_format option:eq(2)[value="html"]', 'html', C.HIDDEN);
 		test_count	('.markdown #markItUpId_content li', 20); // How many buttons in the WYSIWYG editor toolbar ?
-		test_unlogged_footer ();
-		test_click	('#text input[type="submit"]', wait_page_load);
+		test_comt_unlogged_footer ();
+		test_click	('#text input[type="submit"]', C.WAIT_PAGE_LOAD);
 		test_count	('div.help_text span.error-text', 2);
 		test_field	('text div.error', 'id_title',		'text', 0, 'Title', true);
 		test_field	('text div.error', 'id_content',	'textarea', 1, 'Content', true);
 	});
 
 	suite ('upload text page conformity', function () {
-		test_page_loading	('/create/upload/', 'Upload a text - '+c['#id_workspace_name']);
-		test_logged_header	(w.USER_ADMIN);
-		test_default_tabs	(t.text_nb, t.user_nb);
+		test_page_loading	('/create/upload/', 'Upload a text - '+C['#id_workspace_name']);
+		test_comt_logged_header	(C.W.USER_ADMIN);
+		test_comt_default_tabs	(test_comt.text_nb, test_comt.user_nb);
 		test_count	('#text ul.sub_list:eq(0) a', 3);
 		test_text	('#text ul.sub_list:eq(0) a:eq(0)[href="/text/"]', 'Text list');
 		test_text	('#text ul.sub_list:eq(0) a:eq(1)[href="/create/content/"]', 'Create a text');
@@ -123,20 +93,20 @@ suite ('comt logged admin', function () {
 		test_val	('#text :input:eq(4)[type=submit]', 'Save');
 		test_val	('#text :input:eq(5)#cancel_button[type=button]', 'Cancel');
 		test_count	('select#id_format option', 3);
-		test_text	('select#id_format option:eq(0)[value="markdown"][selected]', 'markdown', hidden);
-		test_text	('select#id_format option:eq(1)[value="rst"]', 'rst', hidden);
-		test_text	('select#id_format option:eq(2)[value="html"]', 'html', hidden);
-		test_unlogged_footer ();
-		test_click	('#text input[type="submit"]', wait_page_load);
+		test_text	('select#id_format option:eq(0)[value="markdown"][selected]', 'markdown', C.HIDDEN);
+		test_text	('select#id_format option:eq(1)[value="rst"]', 'rst', C.HIDDEN);
+		test_text	('select#id_format option:eq(2)[value="html"]', 'html', C.HIDDEN);
+		test_comt_unlogged_footer ();
+		test_click	('#text input[type="submit"]', C.WAIT_PAGE_LOAD);
 		test_count	('div.help_text span.error-text', 1);
 		test_field	('text div.error', 'id_file',		'file', 0, 'Upload file');
 		test_match	('#text div.help_text:eq(3) span.error-text:eq(0)', /You should specify a file to upload/m);
 	});
 
 	suite ('import a co-mented text page conformity', function () {
-		test_page_loading	('/create/import/', 'Import a co-mented text - '+c['#id_workspace_name']);
-		test_logged_header	(w.USER_ADMIN);
-		test_default_tabs	(t.text_nb, t.user_nb);
+		test_page_loading	('/create/import/', 'Import a co-mented text - '+C['#id_workspace_name']);
+		test_comt_logged_header	(C.W.USER_ADMIN);
+		test_comt_default_tabs	(test_comt.text_nb, test_comt.user_nb);
 		test_count	('#text ul.sub_list:eq(0) a', 3);
 		test_text	('#text ul.sub_list:eq(0) a:eq(0)[href="/text/"]', 'Text list');
 		test_text	('#text ul.sub_list:eq(0) a:eq(1)[href="/create/content/"]', 'Create a text');
@@ -145,16 +115,16 @@ suite ('comt logged admin', function () {
 		test_field	('text', 'id_file',	'file', 0, 'Upload XML file', true);
 		test_val	('#text :input:eq(1)[type=submit]', 'Save');
 		test_val	('#text :input:eq(2)#cancel_button[type=button]', 'Cancel');
-		test_unlogged_footer ();
-		test_click	('#text input[type="submit"]', wait_page_load);
+		test_comt_unlogged_footer ();
+		test_click	('#text input[type="submit"]', C.WAIT_PAGE_LOAD);
 		test_count	('div.help_text span.error-text', 1);
 		test_field	('text div.error', 'id_file',		'file', 0, 'Upload XML file', true);
 		test_match	('#text div.help_text:eq(0) span.error-text:eq(0)', /You should specify a file to upload/m);
 	});
 
 	suite ('edit profile page conformity', function () {
-		test_page_loading	('/profile/', 'Your profile \\('+w.USER_ADMIN+'\\)\n - '+c['#id_workspace_name']);
-		test_logged_header	(w.USER_ADMIN, no_tagline);
+		test_page_loading	('/profile/', 'Your profile \\('+C.W.USER_ADMIN+'\\)\n - '+C['#id_workspace_name']);
+		test_comt_logged_header	(C.W.USER_ADMIN, C.NO_TAGLINE);
 		test_count	('#content ul.sub_list:eq(0) a', 1);
 		test_text	('#content ul.sub_list:eq(0) a:eq(0)[href="/profile-pw/"]', 'Password');
 		test_count	('form#profile[action="."]:eq(0) :input', 5);
@@ -163,12 +133,12 @@ suite ('comt logged admin', function () {
 		test_field	('profile', 'id_last_name',	'text', 2, 'Last name');
 		test_field	('profile', 'id_tags',		'text', 3, 'Tags');
 		test_val	('#profile :input:eq(4)[type=submit]', 'Save');
-		test_unlogged_footer ();
+		test_comt_unlogged_footer ();
 	});
 
 	suite ('edit password page conformity', function () {
-		test_page_loading	('/profile-pw/', 'Your profile [(]'+w.USER_ADMIN+'[)]\n - '+c['#id_workspace_name']);
-		test_logged_header	(w.USER_ADMIN, no_tagline);
+		test_page_loading	('/profile-pw/', 'Your profile [(]'+C.W.USER_ADMIN+'[)]\n - '+C['#id_workspace_name']);
+		test_comt_logged_header	(C.W.USER_ADMIN, C.NO_TAGLINE);
 		test_count	('#content ul.sub_list:eq(0) a', 1);
 		test_text	('#content ul.sub_list:eq(0) a:eq(0)[href="/profile/"]', 'Profile');
 		test_count	('form#profile[action="."]:eq(0) :input', 4);
@@ -176,31 +146,31 @@ suite ('comt logged admin', function () {
 		test_field	('profile', 'id_new_password1', 'password', 1, 'New password', true);
 		test_field	('profile', 'id_new_password2',	'password', 2, 'New password confirmation', true);
 		test_val	('#profile :input:eq(3)[type=submit]', 'Save');
-		test_unlogged_footer ();
+		test_comt_unlogged_footer ();
 	});
 
 	suite ('people list page conformity', function () {
-		test_page_loading	('/user/', 'People\' list\n - '+c['#id_workspace_name']);
-		test_logged_header	(w.USER_ADMIN);
-		test_default_tabs	(t.text_nb, t.user_nb);
+		test_page_loading	('/user/', 'People\' list\n - '+C['#id_workspace_name']);
+		test_comt_logged_header	(C.W.USER_ADMIN);
+		test_comt_default_tabs	(test_comt.text_nb, test_comt.user_nb);
 		test_count	('#user ul.sub_list:eq(0) a', 2);
 		test_text	('#user ul.sub_list:eq(0) a:eq(0)[href="/user/add/"]', 'Add a new user');
 		test_text	('#user ul.sub_list:eq(0) a:eq(1)[href="/user/mass-add/"]', 'Add users in bulk');
 		// TOTEST : filter by tag -> commentator user should be tagged commentator (to change in fixture)
 		test_count	('form#filter_form[action="."] :input', 1);
 		test_text	('#filter_form a[href="?display=1"]', 'Display suspended users');
-		test_text	('select#tag_selected option:eq(0)[selected][value="0"]', '- All -', hidden);
+		test_text	('select#tag_selected option:eq(0)[selected][value="0"]', '- All -', C.HIDDEN);
 		// TOTEST : pagination
 		// TOTEST : Bulk Actions -> Apply does enable
 		// TOTEST display suspended users
-		test_text	('select#bulk_actions option:eq(0)[selected][value="-1"]', '- Bulk Actions -', hidden);
-		test_text	('select#bulk_actions option:eq(1)[value="disable"]', 'Suspend access', hidden);
-		test_text	('select#bulk_actions option:eq(2)[value="enable"]', 'Enable access', hidden);
-		test_text	('select#bulk_actions option:eq(3)[value="role_1"]', 'Change role to Manager', hidden);
-		test_text	('select#bulk_actions option:eq(4)[value="role_2"]', 'Change role to Editor', hidden);
-		test_text	('select#bulk_actions option:eq(5)[value="role_3"]', 'Change role to Moderator', hidden);
-		test_text	('select#bulk_actions option:eq(6)[value="role_4"]', 'Change role to Commentator', hidden);
-		test_text	('select#bulk_actions option:eq(7)[value="role_5"]', 'Change role to Observer', hidden);
+		test_text	('select#bulk_actions option:eq(0)[selected][value="-1"]', '- Bulk Actions -', C.HIDDEN);
+		test_text	('select#bulk_actions option:eq(1)[value="disable"]', 'Suspend access', C.HIDDEN);
+		test_text	('select#bulk_actions option:eq(2)[value="enable"]', 'Enable access', C.HIDDEN);
+		test_text	('select#bulk_actions option:eq(3)[value="role_1"]', 'Change role to Manager', C.HIDDEN);
+		test_text	('select#bulk_actions option:eq(4)[value="role_2"]', 'Change role to Editor', C.HIDDEN);
+		test_text	('select#bulk_actions option:eq(5)[value="role_3"]', 'Change role to Moderator', C.HIDDEN);
+		test_text	('select#bulk_actions option:eq(6)[value="role_4"]', 'Change role to Commentator', C.HIDDEN);
+		test_text	('select#bulk_actions option:eq(7)[value="role_5"]', 'Change role to Observer', C.HIDDEN);
 		test_val	('form#user_form input#apply[type=button][disabled]', 'Apply');
 		test_count	('table.large_table:eq(1) th', 6);
 		test_val	('table.large_table:eq(1) th:eq(0) input#all_check[type="checkbox"]', 'on');
@@ -210,22 +180,22 @@ suite ('comt logged admin', function () {
 		test_text	('table.large_table:eq(1) th:eq(4) a[href="?order=role__name"]', 'Role');
 		test_text	('table.large_table:eq(1) th:eq(5)', 'Last week activity');
 		test_text	('table.large_table:eq(1) tr:last a[href="/user/-/edit/"]', 'Anonymous users');
-		test_text	('table.large_table:eq(1) a.main_object_title[href="/profile/"]', w.USER_ADMIN);
+		test_text	('table.large_table:eq(1) a.main_object_title[href="/profile/"]', C.W.USER_ADMIN);
 		test_text	('table.large_table:eq(1) div.hidden-user-actions a[href="/profile/"]', 'Your profile');
 		// TOTEST roles of users
-		test_unlogged_footer ();
+		test_comt_unlogged_footer ();
 	});
 
 	suite ('check user number', function () {
-		test_page_loading	('/user/?display=1', 'People\' list\n - '+c['#id_workspace_name']);
-		test_count	('#user_form :input', 6 + (t.user_nb % 10) * 2);
-		test_match	('#paginator', new RegExp ('\\s\\d+-\\d+ of '+t.user_nb+'\\s','m'));
+		test_page_loading	('/user/?display=1', 'People\' list\n - '+C['#id_workspace_name']);
+		test_count	('#user_form :input', 6 + (test_comt.user_nb % 10) * 2);
+		test_match	('#paginator', new RegExp ('\\s\\d+-\\d+ of '+test_comt.user_nb+'\\s','m'));
 	});
 
 	suite ('add a user page conformity', function () {
-		test_page_loading	('/user/add/', 'Add a new user\n - '+c['#id_workspace_name']);
-		test_logged_header	(w.USER_ADMIN);
-		test_default_tabs	(t.text_nb, t.user_nb);
+		test_page_loading	('/user/add/', 'Add a new user\n - '+C['#id_workspace_name']);
+		test_comt_logged_header	(C.W.USER_ADMIN);
+		test_comt_default_tabs	(test_comt.text_nb, test_comt.user_nb);
 		test_count	('#user ul.sub_list:eq(0) a', 2);
 		test_text	('#user ul.sub_list:eq(0) a:eq(0)[href="/user/"]', 'Users\' list');
 		test_text	('#user ul.sub_list:eq(0) a:eq(1)[href="/user/mass-add/"]', 'Add users in bulk');
@@ -237,16 +207,16 @@ suite ('comt logged admin', function () {
 		test_field	('user', 'id_role',			'select', 4, 'Workspace level role');
 		test_field	('user', 'id_note',			'textarea', 5, 'Note');
 		test_count	('select#id_role option', 6);
-		test_text	('select#id_role option:eq(0)[value][selected]', '---------', hidden);
-		test_text	('select#id_role option:eq(1)[value="1"]', 'Manager', hidden);
-		test_text	('select#id_role option:eq(2)[value="2"]', 'Editor', hidden);
-		test_text	('select#id_role option:eq(3)[value="3"]', 'Moderator', hidden);
-		test_text	('select#id_role option:eq(4)[value="4"]', 'Commentator', hidden);
-		test_text	('select#id_role option:eq(5)[value="5"]', 'Observer', hidden);
+		test_text	('select#id_role option:eq(0)[value][selected]', '---------', C.HIDDEN);
+		test_text	('select#id_role option:eq(1)[value="1"]', 'Manager', C.HIDDEN);
+		test_text	('select#id_role option:eq(2)[value="2"]', 'Editor', C.HIDDEN);
+		test_text	('select#id_role option:eq(3)[value="3"]', 'Moderator', C.HIDDEN);
+		test_text	('select#id_role option:eq(4)[value="4"]', 'Commentator', C.HIDDEN);
+		test_text	('select#id_role option:eq(5)[value="5"]', 'Observer', C.HIDDEN);
 		test_val	('#user :input:eq(6)[type=submit]', 'Add user');
 		test_val	('#user :input:eq(7)#cancel_button[type=button]', 'Cancel');
-		test_unlogged_footer ();
-		test_click	('#user input[type="submit"]', wait_page_load);
+		test_comt_unlogged_footer ();
+		test_click	('#user input[type="submit"]', C.WAIT_PAGE_LOAD);
 		test_count	('div.help_text span.error-text', 1);
 		test_field	('user div.error', 'id_email', 'text', 0, 'E-mail address', true);
 		test_match	('#user div.help_text:eq(0) span.error-text:eq(0)', /This field is required/m);
@@ -254,9 +224,9 @@ suite ('comt logged admin', function () {
 	});
 
 	suite ('add-users-in-bulk page conformity', function () {
-		test_page_loading	('/user/mass-add/', 'Add users in bulk\n - '+c['#id_workspace_name']);
-		test_logged_header	(w.USER_ADMIN);
-		test_default_tabs	(t.text_nb, t.user_nb);
+		test_page_loading	('/user/mass-add/', 'Add users in bulk\n - '+C['#id_workspace_name']);
+		test_comt_logged_header	(C.W.USER_ADMIN);
+		test_comt_default_tabs	(test_comt.text_nb, test_comt.user_nb);
 		test_count	('#user ul.sub_list:eq(0) a', 2);
 		test_text	('#user ul.sub_list:eq(0) a:eq(0)[href="/user/"]', 'Users\' list');
 		test_text	('#user ul.sub_list:eq(0) a:eq(1)[href="/user/add/"]', 'Add a new user');
@@ -266,26 +236,26 @@ suite ('comt logged admin', function () {
 		test_field	('user', 'id_role',			'select',	2, 'Workspace level role');
 		test_field	('user', 'id_note',			'textarea', 3, 'Note');
 		test_count	('select#id_role option', 6);
-		test_text	('select#id_role option:eq(0)[value][selected]', '---------', hidden);
-		test_text	('select#id_role option:eq(1)[value="1"]', 'Manager', hidden);
-		test_text	('select#id_role option:eq(2)[value="2"]', 'Editor', hidden);
-		test_text	('select#id_role option:eq(3)[value="3"]', 'Moderator', hidden);
-		test_text	('select#id_role option:eq(4)[value="4"]', 'Commentator', hidden);
-		test_text	('select#id_role option:eq(5)[value="5"]', 'Observer', hidden);
+		test_text	('select#id_role option:eq(0)[value][selected]', '---------', C.HIDDEN);
+		test_text	('select#id_role option:eq(1)[value="1"]', 'Manager', C.HIDDEN);
+		test_text	('select#id_role option:eq(2)[value="2"]', 'Editor', C.HIDDEN);
+		test_text	('select#id_role option:eq(3)[value="3"]', 'Moderator', C.HIDDEN);
+		test_text	('select#id_role option:eq(4)[value="4"]', 'Commentator', C.HIDDEN);
+		test_text	('select#id_role option:eq(5)[value="5"]', 'Observer', C.HIDDEN);
 		test_val	('#user :input:eq(4)[type=submit]', 'Add users');
 		test_val	('#user :input:eq(5)#cancel_button[type=button]', 'Cancel');
 		// X TOTEST add users (pending) -> can't be deleted
-		test_unlogged_footer ();
-		test_click	('#user input[type="submit"]', wait_page_load);
+		test_comt_unlogged_footer ();
+		test_click	('#user input[type="submit"]', C.WAIT_PAGE_LOAD);
 		test_count	('div.help_text span.error-text', 1);
 		test_field	('user div.error', 'id_email', 'textarea', 0, 'Emails', true);
 		test_match	('#user div.help_text:eq(0) span.error-text:eq(0)', /This field is required/m);
 	});
 
 	suite ('settings page conformity', function () {
-		test_page_loading	('/settings/', 'Settings - '+c['#id_workspace_name']);
-		test_logged_header	(w.USER_ADMIN);
-		test_default_tabs	(t.text_nb, t.user_nb);
+		test_page_loading	('/settings/', 'Settings - '+C['#id_workspace_name']);
+		test_comt_logged_header	(C.W.USER_ADMIN);
+		test_comt_default_tabs	(test_comt.text_nb, test_comt.user_nb);
 		test_count	('#settings ul.sub_list:eq(0) a', 1);
 		test_text	('#settings ul.sub_list:eq(0) a:eq(0)[href="/settings/design/"]', 'Appearance');
 		test_count	('#settings form[action="."]:eq(0) :input', 12);
@@ -294,8 +264,8 @@ suite ('comt logged admin', function () {
 		test_field	('settings', 'id_workspace_registration', 'checkbox', 2, 'Workspace registration');
 		test_field	('settings', 'id_workspace_registration_moderation', 'checkbox', 3, 'Workspace registration moderation');
 		test_field	('settings', 'id_workspace_role_model', 'select', 4, 'Role model');
-		test_text	('select#id_workspace_role_model option:eq(0)[selected][value="generic"]', 'Generic', hidden);
-		test_text	('select#id_workspace_role_model option:eq(1)[value="teacher"]', 'Class (education)', hidden);
+		test_text	('select#id_workspace_role_model option:eq(0)[selected][value="generic"]', 'Generic', C.HIDDEN);
+		test_text	('select#id_workspace_role_model option:eq(1)[value="teacher"]', 'Class (education)', C.HIDDEN);
 		test_field	('settings', 'id_workspace_category_1', 'text', 5, 'Label for the first category of comments');
 		test_field	('settings', 'id_workspace_category_2', 'text', 6, 'Label for the second category of comments');
 		test_field	('settings', 'id_workspace_category_3', 'text', 7, 'Label for the third category of comments');
@@ -304,13 +274,13 @@ suite ('comt logged admin', function () {
 		test_val	('#settings :input:eq(10)[type=submit]', 'Save');
 		test_val	('#settings :input:eq(11)#cancel_button[type=button]', 'Cancel');
 		// TOTEST Workspace registration feature (with newly accessible page)
-		test_unlogged_footer ();
+		test_comt_unlogged_footer ();
 	});
 
 	suite ('settings design page conformity', function () {
-		test_page_loading	('/settings/design/', 'Settings - '+c['#id_workspace_name']);
-		test_logged_header	(w.USER_ADMIN);
-		test_default_tabs	(t.text_nb, t.user_nb);
+		test_page_loading	('/settings/design/', 'Settings - '+C['#id_workspace_name']);
+		test_comt_logged_header	(C.W.USER_ADMIN);
+		test_comt_default_tabs	(test_comt.text_nb, test_comt.user_nb);
 		test_count	('#settings ul.sub_list:eq(0) a', 1);
 		test_text	('#settings ul.sub_list:eq(0) a:eq(0)[href="/settings/"]', 'General');
 		test_count	('#settings form[action="."]:eq(0) :input', 7);
@@ -321,15 +291,15 @@ suite ('comt logged admin', function () {
 		test_val	('#settings :input:eq(4)[type=submit]', 'Save');
 		test_val	('#settings :input:eq(5)#cancel_button[type=button]', 'Cancel');
 		test_val	('#settings :input:eq(6)#delete_logo_button[type=submit]', 'Delete logo');
-		test_unlogged_footer ();
+		test_comt_unlogged_footer ();
 	});
 
 	suite ('followup page conformity', function () {
-		test_page_loading	('/followup/', 'Followup\n - '+c['#id_workspace_name']);
-		test_logged_header	(w.USER_ADMIN);
-		test_default_tabs	(t.text_nb, t.user_nb);
+		test_page_loading	('/followup/', 'Followup\n - '+C['#id_workspace_name']);
+		test_comt_logged_header	(C.W.USER_ADMIN);
+		test_comt_default_tabs	(test_comt.text_nb, test_comt.user_nb);
 		test_text	('#followup a:eq(0)[href="/help/#public_private_feed"]', '?');
-		test_match	('#followup a:eq(1)[href$="/feed/"]', new RegExp (w.WORKSPACE_URL+'feed/', 'm'));
+		test_match	('#followup a:eq(1)[href$="/feed/"]', new RegExp (C.W.WORKSPACE_URL+'feed/', 'm'));
 		test_text	('#followup a:eq(2)[href="/help/#public_private_feed"]', '?');
 		test_count	('form#followup_form[action="."] :input', 3);
 		test_val	('form#followup_form input[type=submit]', '(Activate private feed|Reset private feed url)');
@@ -339,55 +309,8 @@ suite ('comt logged admin', function () {
 		// X TOTEST qu'une fois cliqué, le bouton a le nvo label, et qu'une adresse est disponible
 		// X TOTEST que si on reclique l'adresse est changée
 
-		test_unlogged_footer ();
+		test_comt_unlogged_footer ();
 	});
 
 });
 
-function test_default_tabs (text_nb, user_nb) {
-	test_count	('#main-tabs a', 5);
-	test_text	('#main-tabs li:nth-of-type(1) a[href="/"]',			'Dashboard');
-	test_match	('#main-tabs li:nth-of-type(2) a[href="/text/"]',		/^Texts \(\d+\) $/);
-	test_match	('#main-tabs li:nth-of-type(3) a[href="/user/"]',		/^People  \(\d+\)$/);
-	test_text	('#main-tabs li:nth-of-type(4) a[href="/settings/"]',	'Settings');
-	test_text	('#main-tabs li:nth-of-type(5) a[href="/followup/"]',	'Followup');
-	test_match	('#main-tabs a[href="/text/"]', new RegExp ('^Texts\\s*\\('+text_nb+'\\)\\s*$'));
-	test_match	('#main-tabs a[href="/user/"]', new RegExp ('^People\\s*\\('+user_nb+'\\)\\s*$'));
-}
-
-function test_logged_header (username, is_tagline) {
-	is_tagline = typeof is_tagline == 'undefined' ? true : is_tagline;
-
-	test_text	('#header_controls b', username)
-	test_count	('#header_controls a', 6);
-	test_text	('#header_controls a:nth-of-type(1)[href="/"]',					'Home');
-	test_text	('#header_controls a:nth-of-type(2)[href="/create/content/"]',	'Create a text');
-	test_text	('#header_controls a:nth-of-type(3)[href="/create/upload/"]',	'Upload a text');
-	test_text	('#header_controls a:nth-of-type(4)[href="/create/import/"]',	'Import a co-mented text');
-	test_text	('#header_controls a:nth-of-type(5)[href="/profile/"]',			'Profile');
-	test_text	('#header_controls a:nth-of-type(6)[href="/logout/"]',			'Logout');
-	test_text	('#content h1.main_title a[href="/"]',							c['#id_workspace_name']);
-
-	if (is_tagline) {
-		test_match	('#content h1.main_title  + div', new RegExp (c['#id_workspace_tagline'], 'm'));
-	}
-}
-
-function test_fill_settings (s) {
-	test_fill_field ('#id_workspace_name', s);
-	test_fill_field ('#id_workspace_tagline', s);
-	test_fill_field ('#id_workspace_registration', s);
-	test_fill_field ('#id_workspace_registration_moderation', s);
-	test_fill_field ('#id_workspace_role_model', s);
-	test_fill_field ('#id_workspace_category_1', s);
-	test_fill_field ('#id_workspace_category_2', s);
-	test_fill_field ('#id_workspace_category_3', s);
-	test_fill_field ('#id_workspace_category_4', s);
-	test_fill_field ('#id_workspace_category_5', s);
-}
-
-function test_fill_design (s) {
-	test_fill_field ('#id_custom_css', s);
-	test_fill_field ('#id_custom_font', s);
-	test_fill_field ('#id_custom_titles_font', s);
-}

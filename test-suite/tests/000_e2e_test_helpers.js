@@ -1,6 +1,11 @@
 // Test helpers for karma-e2e-dsl environment
 //	
 // https://github.com/winsonwq/karma-e2e-dsl
+//
+// " Vim settings
+// set tabstop=4          " number of spaces in a tab
+// set softtabstop=4      " as above
+// set shiftwidth=4       " as above
 
 
 function test_page_loading (url, title) {

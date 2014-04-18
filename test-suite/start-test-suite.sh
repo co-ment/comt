@@ -77,7 +77,12 @@ fi
 echo "---------------------"
 echo "$KARMA start $@"
 "$KARMA" start $@
-# echo "Kill test server pid $TESTSERVER_PID"
-# echo "---------------------"
-# kill $TESTSERVER_PID
 
+read -p "Keep testserver (PID $TESTSERVER_PID) running ? (y/N)" -n 1 -r -t 5
+echo    # (optional) move to a new line
+
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+	exit 0
+fi
+
+kill $TESTSERVER_PID
