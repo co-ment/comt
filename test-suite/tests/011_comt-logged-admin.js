@@ -156,13 +156,9 @@ suite ('comt logged admin', function () {
 		test_count	('#user ul.sub_list:eq(0) a', 2);
 		test_text	('#user ul.sub_list:eq(0) a:eq(0)[href="/user/add/"]', 'Add a new user');
 		test_text	('#user ul.sub_list:eq(0) a:eq(1)[href="/user/mass-add/"]', 'Add users in bulk');
-		// TOTEST : filter by tag -> commentator user should be tagged commentator (to change in fixture)
-		test_count	('form#filter_form[action="."] :input', 1);
 		test_text	('#filter_form a[href="?display=1"]', 'Display suspended users');
+		test_count	('form#filter_form[action="."] :input', 1);
 		test_text	('select#tag_selected option:eq(0)[selected][value="0"]', '- All -', C.HIDDEN);
-		// TOTEST : pagination
-		// TOTEST : Bulk Actions -> Apply does enable
-		// TOTEST display suspended users
 		test_text	('select#bulk_actions option:eq(0)[selected][value="-1"]', '- Bulk Actions -', C.HIDDEN);
 		test_text	('select#bulk_actions option:eq(1)[value="disable"]', 'Suspend access', C.HIDDEN);
 		test_text	('select#bulk_actions option:eq(2)[value="enable"]', 'Enable access', C.HIDDEN);
@@ -172,6 +168,7 @@ suite ('comt logged admin', function () {
 		test_text	('select#bulk_actions option:eq(6)[value="role_4"]', 'Change role to Commentator', C.HIDDEN);
 		test_text	('select#bulk_actions option:eq(7)[value="role_5"]', 'Change role to Observer', C.HIDDEN);
 		test_val	('form#user_form input#apply[type=button][disabled]', 'Apply');
+		test_match  ('#paginator', /\s1-4 of 4\s/m);
 		test_count	('table.large_table:eq(1) th', 6);
 		test_val	('table.large_table:eq(1) th:eq(0) input#all_check[type="checkbox"]', 'on');
 		test_text	('table.large_table:eq(1) th:eq(1) a[href="?order=user__username"]', 'User');
@@ -182,7 +179,28 @@ suite ('comt logged admin', function () {
 		test_text	('table.large_table:eq(1) tr:last a[href="/user/-/edit/"]', 'Anonymous users');
 		test_text	('table.large_table:eq(1) a.main_object_title[href="/profile/"]', C.W.USER_ADMIN);
 		test_text	('table.large_table:eq(1) div.hidden-user-actions a[href="/profile/"]', 'Your profile');
-		// TOTEST roles of users
+		test_val	('form#user_form input#save[type="submit"][disabled]', 'Save');
+		test_exist	('#user_form tr:eq(1) td:eq(4) select[disabled]');
+		test_count	('#user_form tr:eq(1) td:eq(4) select[disabled] option', 6);
+		test_text	('#user_form tr:eq(1) td:eq(4) select option:eq(0)[value=""][selected]', '---------', C.H);
+		test_text	('#user_form tr:eq(1) td:eq(4) select[disabled] option:eq(1)[value="1"]', 'Manager', C.H);
+		test_text	('#user_form tr:eq(1) td:eq(4) select[disabled] option:eq(2)[value="2"]', 'Editor', C.H);
+		test_text	('#user_form tr:eq(1) td:eq(4) select[disabled] option:eq(3)[value="3"]', 'Moderator', C.H);
+		test_text	('#user_form tr:eq(1) td:eq(4) select[disabled] option:eq(4)[value="4"]', 'Commentator', C.H);
+		test_text	('#user_form tr:eq(1) td:eq(4) select[disabled] option:eq(5)[value="5"]', 'Observer', C.H);
+		test_val	('#user_form tr:eq(2) td:eq(4) select', '5'); // this is a bug should be 4
+		test_val	('#user_form tr:eq(3) td:eq(4) select', '5'); // this is a bug should be 2
+		test_val	('#user_form tr:eq(4) td:eq(4) select', '5');
+		test_exist	('#user_form tr:eq(6) td:eq(4) select');
+		test_count	('#user_form tr:eq(6) td:eq(4) select option', 3);
+		test_text	('#user_form tr:eq(6) td:eq(4) select option:eq(0)[value=""][selected]', '---------', C.H);
+		test_text	('#user_form tr:eq(6) td:eq(4) select option:eq(1)[value="4"]', 'Commentator', C.H);
+		test_text	('#user_form tr:eq(6) td:eq(4) select option:eq(2)[value="5"]', 'Observer', C.H);
+		test_exist	('#user_form tr:eq(1) td:eq(0) input[type=checkbox][disabled]');
+		test_text	('#user_form div.hidden-user-actions:eq(1) a:eq(0)[href^="/user/"][href$="/edit/"]', 'Edit');
+		test_text	('#user_form div.hidden-user-actions:eq(1) a:eq(1)[href^="/use"][href$="ontact/"]', 'Contact');
+		test_text	('#user_form div.hidden-user-actions:eq(1) a:eq(2)[id^="user-suspend-"]', 'Suspend access');
+		test_text	('#user_form div.hidden-user-actions:eq(1) a:eq(3)[id^="user-resen"]', '(Re-)send invitation');
 		test_comt_unlogged_footer ();
 	});
 
@@ -190,6 +208,27 @@ suite ('comt logged admin', function () {
 		test_page_loading	('/user/?display=1', 'People\' list\n - '+C['#id_workspace_name']);
 		test_count	('#user_form :input', 6 + (test_comt.user_nb % 10) * 2);
 		test_match	('#paginator', new RegExp ('\\s\\d+-\\d+ of '+test_comt.user_nb+'\\s','m'));
+	});
+
+	suite ('Reset fixture user roles', function () {
+		test        ('set user-com Commentator', dsl(function () {
+			input ('#user_form tr:eq(2) td:eq(4) select').option ('4');
+			input ('#user_form tr:eq(3) td:eq(4) select').option ('2');
+			input ('#user_form tr:eq(4) td:eq(4) select').option ('5');
+			input ('#save').prop ('disabled', false);
+		}));
+		test_click	('#save', C.WAIT_PAGE_LOAD);
+		test_page_loading ('/user/', 'People\' list\n - '+C['#id_workspace_name']);
+		test_val	('#user_form tr:eq(2) td:eq(4) select option:selected', '4');
+		test_val	('#user_form tr:eq(3) td:eq(4) select option:selected', '2');
+		test_val	('#user_form tr:eq(4) td:eq(4) select option:selected', '5');
+
+
+		// TOTEST roles of users
+		// TOTEST : filter by tag -> commentator user should be tagged commentator (to change in fixture)
+		// TOTEST : pagination
+		// TOTEST : Bulk Actions -> Apply does enable
+		// TOTEST display suspended users
 	});
 
 	suite ('add a user page conformity', function () {
@@ -220,7 +259,6 @@ suite ('comt logged admin', function () {
 		test_count	('div.help_text span.error-text', 1);
 		test_field	('user div.error', 'id_email', 'text', 0, 'E-mail address', true);
 		test_match	('#user div.help_text:eq(0) span.error-text:eq(0)', /This field is required/m);
-		// X TOTEST add user (pending)
 	});
 
 	suite ('add-users-in-bulk page conformity', function () {

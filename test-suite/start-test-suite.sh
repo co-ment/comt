@@ -78,7 +78,7 @@ echo "---------------------"
 echo "$KARMA start $@"
 "$KARMA" start $@
 
-read -p "Keep testserver (PID $TESTSERVER_PID) running ? (y/N)" -n 1 -r -t 5
+read -p "Keep testserver (PID $TESTSERVER_PID) running ? (y/N) " -n 1 -r -t 5
 echo    # (optional) move to a new line
 
 if [[ $REPLY =~ ^[Yy]$ ]]; then

@@ -11,6 +11,7 @@
 var test_comt = { 'text_nb': 0,	'user_nb': 4 };
 
 const C = { 'HIDDEN': false,
+	'H': false,
 	'NO_TAGLINE': false,
 	'WAIT_PAGE_LOAD': true,
 	'W': __karma__.config.W,
