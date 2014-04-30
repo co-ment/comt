@@ -8,7 +8,10 @@
  * Constants and variables
  */
 
-var test_comt = { 'text_nb': 0,	'user_nb': 4 };
+var test_comt = { text_nb: 0, user_nb: 4, long_text: '' };
+
+for (var i = 20; i--;)
+    test_comt.long_text += 'Contenu du troisième texte.<br/>Sur <b>plusieurs</b> lignes<br/>';
 
 const C = { 'HIDDEN': false,
 	'H': false,
@@ -27,7 +30,37 @@ const C = { 'HIDDEN': false,
 	'#id_workspace_category_5': 'ws_cat_5',
 	'#id_custom_css': "h2 {  font-family: Test_Sopinspace !important; }",
 	'#id_custom_font': 'Test_Sopinspace_custom_font',
-	'#id_custom_titles_font': 'Test_Sopinspace_custom_titles_font'
+	'#id_custom_titles_font': 'Test_Sopinspace_custom_titles_font',
+	'TEXTS': [
+	    {
+	        '#id_title':    'Text One Sopinspace-Test éléguant',
+	        '#id_format':   'markdown',
+	        '#id_content':  'Contenu du premier texte.\nSur plusieurs lignes\nPour tester un cas réaliste',
+	        '#id_tags':     'test_text, Text Premier'
+	    },
+	    {
+	        '#id_title':    'Text Two Sopinspace-Test éléguant',
+	        '#id_format':   'rst',
+	        '#id_content':  'Contenu du deuxième texte.\nSur plusieurs lignes aussi\nPour tester un cas réaliste',
+	        '#id_tags':     'test_text, Text Second'
+	    },
+	    {
+	        '#id_title':    'Text Three Sopinspace-Test éléguant',
+    	    '#id_format':   'html',
+	        '#id_content':  test_comt.long_text,
+	        '#id_tags':     'test_text, Text Troisième'
+	    }
+	],
+	'USERS': [
+	    {}, // to start counting at one
+		// SID roles should be : '', 4, 2, 5 ; but we're facing a bug here 
+	    { name: 'admin',        email: 'admin@mail.com',            date:'March 8, 2014 at 3:12 p.m.', role:'' },
+	    { name: 'user-com',     email: 'user-com@example.com',      date:'March 9, 2014 at 2:40 p.m.', role:'5'},
+    	{ name: 'user-edit',    email: 'user-edit@example.com',     date:'March 9, 2014 at 2:40 p.m.', role:'5'},
+	    { name: 'user-observ',  email: 'user-observ@example.com',   date:'March 9, 2014 at 2:40 p.m.', role:'5'},
+	    { '#id_tags': 'user-created-1',   '#id_email': 'uc1@example.com',   '#id_role':'2'},
+	    { '#id_tags': 'user-created-2',   '#id_email': 'uc2@example.com',   '#id_role':'4'}
+	]
 };
 
 
@@ -65,6 +98,19 @@ function test_comt_create_text (t) {
 	test_fill_field ('#id_tags', t);
 	test_click	 ('#save_button', C.WAIT_PAGE_LOAD);
 	test_comt.text_nb++;
+}
+
+function test_comt_create_user (u) {
+    test_page_loading   ('/user/add/', 'Add a new user\n - '+C['#id_workspace_name']);
+	test_fill_field ('#id_email', u);
+	test_fill_field ('#id_tags', u);
+
+    test ('test creation', dsl(function () {
+        dropdownlist ('#id_role').option (u['#id_role']);
+    }));
+
+    test_click   ('#user input[type="submit"]', C.WAIT_PAGE_LOAD);
+    test_comt.user_nb++;
 }
 
 

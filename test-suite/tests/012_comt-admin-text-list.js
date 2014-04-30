@@ -4,31 +4,6 @@
 // set softtabstop=4      " as above
 // set shiftwidth=4       " as above
 
-var long_text = '';
-
-for (var i = 20; i--;)
-    long_text += 'Contenu du troisième texte.<br/>Sur <b>plusieurs</b> lignes<br/>';
-
-const ctexts = [ 
-    { 
-        '#id_title':    'Text One Sopinspace-Test éléguant', 
-        '#id_format':   'markdown', 
-        '#id_content':  'Contenu du premier texte.\nSur plusieurs lignes\nPour tester un cas réaliste', 
-        '#id_tags':     'test_text, Text Premier' 
-    }, 
-    { 
-        '#id_title':    'Text Two Sopinspace-Test éléguant', 
-        '#id_format':   'rst', 
-        '#id_content':  'Contenu du deuxième texte.\nSur plusieurs lignes aussi\nPour tester un cas réaliste', 
-        '#id_tags':     'test_text, Text Second' 
-    }, 
-    { 
-        '#id_title':    'Text Three Sopinspace-Test éléguant', 
-        '#id_format':   'html', 
-        '#id_content':  long_text, 
-        '#id_tags':     'test_text, Text Troisième' 
-    } 
-];
 
 suite ('comt admin text list', function () {
 
@@ -49,7 +24,7 @@ suite ('comt admin text list', function () {
     suite ('create texts', function () {
         for (var j=4; j--;)
             for (var i=3; i--;)
-                 test_comt_create_text (ctexts[i]);
+                 test_comt_create_text (C.TEXTS[i]);
     });
 
     suite ('texts list page conformity', function () {
@@ -81,7 +56,7 @@ suite ('comt admin text list', function () {
         test_match  ('#paginator', /\s1-4 of 4\s/m);
 
         for (var i=4; i--;) {
-            test_text   ('a.main_object_title:eq('+i+')', ctexts[2]['#id_title']);
+            test_text   ('a.main_object_title:eq('+i+')', C.TEXTS[2]['#id_title']);
             test_match  ('.tag_list:eq('+i+')', /tags: test_text Text Troisième /);
             test_text   ('.tag_list:eq('+i+') a:eq(0)[href="?tag_selected=test_text"]', 'test_text');
             test_text   ('.tag_list:eq('+i+') a:eq(1)[href="?tag_selected=Text+Troisi%C3%A8me"]','Text Troisième');
