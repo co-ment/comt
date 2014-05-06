@@ -1,7 +1,8 @@
 from django.conf import settings
+from cm.cm_settings import TRACKING_ID
 from cm.models import ApplicationConfiguration
-from cm.cm_settings import TRACKING_HTML
 from cm.converters.pandoc_converters import PANDOC_VERSION
+
 def static(request):
     """
     add static data to be used in templates
@@ -9,11 +10,10 @@ def static(request):
     return {
             'SITE_URL' : settings.SITE_URL,
             'CLIENT_DEBUG' : settings.CLIENT_DEBUG,
-            'DISABLE_TRACKING' : settings.DISABLE_TRACKING,
+            'TRACKING_ID' : TRACKING_ID,
             'YUI_VERSION' : settings.YUI_VERSION,
             'CONF': ApplicationConfiguration,
             'CM_MEDIA_PREFIX' : settings.CM_MEDIA_PREFIX,
-            'TRACKING_HTML' : TRACKING_HTML,
             'PANDOC_VERSION' : PANDOC_VERSION,
             }
 

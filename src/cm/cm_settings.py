@@ -13,6 +13,9 @@ SITE_NAME = get_setting('SITE_NAME', 'comt ')
 
 DEFAULT_TIME_ZONE = get_setting('DEFAULT_TIME_ZONE','Europe/Paris') 
 
+# Piwik tracking ID
+TRACKING_ID = get_setting ('TRACKING_ID', 17)
+
 # button for new text version creation checked by default 
 NEW_TEXT_VERSION_ON_EDIT = get_setting('NEW_TEXT_VERSION_ON_EDIT', True)
 
@@ -24,8 +27,6 @@ AUTO_CONTRIB_REGISTER = get_setting('AUTO_CONTRIB_REGISTER', False)
 
 # show email in user list
 SHOW_EMAILS_IN_ADMIN = get_setting('SHOW_EMAILS_IN_ADMIN', True)
-
-TRACKING_HTML = get_setting('TRACKING_HTML', '')
 
 # Store IP (or not) in activity 
 STORE_ACTIVITY_IP = get_setting('STORE_ACTIVITY_IP', True)

@@ -79,6 +79,6 @@ DECORATED_CREATORS = False
 # Set to False to use LibreOffice for convertion from and to legacy formats.
 USE_ABI = True
 
-# Set to True if you don't want to appear in Sopinspace Piwik statistics
-DISABLE_TRACKING = DEBUG
+# Set to False to avoid appearing in Sopinspace Piwik statistics
+TRACKING_ID = False
 
