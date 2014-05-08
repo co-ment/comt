@@ -57,9 +57,9 @@ suite ('comt admin text list', function () {
 
         for (var i=4; i--;) {
             test_text   ('a.main_object_title:eq('+i+')', C.TEXTS[2]['#id_title']);
-            test_match  ('.tag_list:eq('+i+')', /tags: test_text Text Troisième /);
-            test_text   ('.tag_list:eq('+i+') a:eq(0)[href="?tag_selected=test_text"]', 'test_text');
-            test_text   ('.tag_list:eq('+i+') a:eq(1)[href="?tag_selected=Text+Troisi%C3%A8me"]','Text Troisième');
+            test_match  ('.tag_list:eq('+i+')', /tags:(?:\sText Troisième|\stest_text){2}\s/);
+            test_text   ('.tag_list:eq('+i+') a[href="?tag_selected=test_text"]', 'test_text');
+            test_text   ('.tag_list:eq('+i+') a[href="?tag_selected=Text+Troisi%C3%A8me"]','Text Troisième');
             test_text   ('#text .hidden-text-actions:eq('+i+') a:eq(0)[href^="/text/"][href$="/view/"]', 'View');
             test_text   ('#text .hidden-text-actions:eq('+i+') a:eq(1)[href^="/text/"][href$="/edit/"]', 'Edit');
             test_text   ('#text .hidden-text-actions:eq('+i+') a:eq(2)[href="#"][id*="text-delete-"]', 'Delete');

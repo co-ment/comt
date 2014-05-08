@@ -89,6 +89,7 @@ suite ('comt logged admin user list', function () {
 	suite_check_user_nb (2);
 
 	suite ('Add users in bulk', function () {
+		this.timeout(100000);
 		test_page_loading ('/user/mass-add/', 'Add users in bulk\n - '+C['#id_workspace_name']);
 	    test ('fill emails', dsl(function (){
 	        elt ('#id_email').val ('uc2@t.co,uc3@t.co,uc4@t.co,uc5@t.co,uc6@t.co,uc7@t.co');
