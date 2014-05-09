@@ -135,13 +135,14 @@ function test_comt_logged_header (username, is_tagline) {
 	is_tagline = typeof is_tagline == 'undefined' ? true : is_tagline;
 
 	test_text	('#header_controls b', username)
-	test_count	('#header_controls a', 6);
+	test_count	('#header_controls a', 7);
 	test_text	('#header_controls a:nth-of-type(1)[href="/"]',					'Home');
 	test_text	('#header_controls a:nth-of-type(2)[href="/create/content/"]',	'Create a text');
 	test_text	('#header_controls a:nth-of-type(3)[href="/create/upload/"]',	'Upload a text');
 	test_text	('#header_controls a:nth-of-type(4)[href="/create/import/"]',	'Import a co-mented text');
 	test_text	('#header_controls a:nth-of-type(5)[href="/profile/"]',			'Profile');
-	test_text	('#header_controls a:nth-of-type(6)[href="/logout/"]',			'Logout');
+	test_text	('#header_controls a:nth-of-type(6)#hide-piwik-cookies-optout',	'Privacy policy ');
+	test_text	('#header_controls a:nth-of-type(7)[href="/logout/"]',			'Logout');
 	test_text	('#content h1.main_title a[href="/"]',							C['#id_workspace_name']);
 
 	if (is_tagline) {
