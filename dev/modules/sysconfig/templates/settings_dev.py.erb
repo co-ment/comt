@@ -1,0 +1,6 @@
+
+from settings import *
+
+DEBUG=True
+SITE_URL = "http://<%= @ipaddress_eth1 %>:<%= @testserver_port %>"
+CACHE_BACKEND = 'locmem:///?timeout=0&max_entries=400'

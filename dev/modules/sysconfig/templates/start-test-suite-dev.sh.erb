@@ -1,0 +1,32 @@
+#!/bin/bash
+
+echo "---------------------"
+echo "Starting test server"
+
+DEV_FOLDER="<%= @vagrant_base_path %>"
+
+pushd "$DEV_FOLDER" > /dev/null
+vagrant ssh -c "/srv/comt/test-suite/start-testserver.sh"
+popd > /dev/null
+
+
+TESTSERVER_STARTED=True
+WORKSPACE_INFO="workspace.info.dev.js"
+
+echo "---------------------"
+echo "Starting karma tests"
+. ./start-test-suite.sh ./karma.conf.dev.js $@
+
+echo "---------------------"
+echo "stopping test server + output test server logs"
+
+read -p "Keep testserver (PID $TESTSERVER_PID) running ? (y/N)" -n 1 -r -t 5
+echo    # (optional) move to a new line
+
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    exit 0
+fi
+
+pushd "$DEV_FOLDER" > /dev/null
+vagrant ssh -c "/srv/comt/test-suite/clean-testserver.sh"
+popd /dev/null

@@ -1,0 +1,7 @@
+---
+:hierarchy:
+  - custom
+:backends:
+  - yaml
+:yaml:
+  :datadir: '/vagrant/'

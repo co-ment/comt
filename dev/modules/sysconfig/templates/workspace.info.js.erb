@@ -1,0 +1,26 @@
+
+function define (name, value) {
+    Object.defineProperty (exports, name, {
+        value:      value,
+        enumerable: true
+    });
+}
+
+define ("DEBUG", false);
+
+define ("USER_ADMIN", '<%= @superuser_name %>');
+define ("PASS_ADMIN", '<%= @superuser_pw %>');
+
+define ("BROWSERS", ['PhantomJS']);
+
+// TODO: decide wether we should populate workspaces with standard users or
+// create them on the fly ?
+
+define ("USER_EDIT", '<%= @user_edit_name %>');
+define ("PASS_EDIT", '<%= @user_edit_pw %>');
+
+define ("USER_COM", '<%= @user_com_name %>');
+define ("PASS_COM", '<%= @user_com_pw %>');
+
+define ("USER_OBSERV", '<%= @user_observ_name %>');
+define ("PASS_OBSERV", '<%= @user_observ_pw %>');
