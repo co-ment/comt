@@ -130,6 +130,7 @@ suite ('comt logged admin user list', function () {
     });
 
 	// TOTEST : filter by tag -> commentator user should be tagged commentator (to change in fixture)
+	  // bug roles are erased at 1st settings edition
 	// TOTEST : Bulk Actions -> Apply does enable
 	// suspend users
 	// TOTEST display suspended users

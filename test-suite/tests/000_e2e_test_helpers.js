@@ -22,18 +22,6 @@ function test_page_loading (url, title) {
 	}));
 }
 
-/** Test if it's possible to change lang to the specified :
- *	c : lang code
- *	l : help label
- */
-function test_i18n (c, l) {
-	test ('to '+c, dsl(function () {
-		element ('#footer a[href="/i18n/setlang/'+c+'/"]').click ();
-		browser.navigateTo ('/');
-		expect (elt ('#footer a[href="/help/"]').text ()).toMatch (new RegExp (l, 'm'));
-	}));
-}
-
 /** Test if the selected DOM element .text() value match the given regexp
  *	s : CSS selector
  *	r : regexp to match

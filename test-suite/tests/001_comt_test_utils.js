@@ -1,8 +1,8 @@
 
 // " Vim settings
-// set tabstop=4          " number of spaces in a tab
-// set softtabstop=4      " as above
-// set shiftwidth=4       " as above
+// set tabstop=4		  " number of spaces in a tab
+// set softtabstop=4	  " as above
+// set shiftwidth=4		  " as above
 
 /**
  * Constants and variables
@@ -11,11 +11,12 @@
 var test_comt = { text_nb: 0, user_nb: 4, long_text: '' };
 
 for (var i = 20; i--;)
-    test_comt.long_text += 'Contenu du troisième texte.<br/>Sur <b>plusieurs</b> lignes<br/>';
+	test_comt.long_text += 'Contenu du troisième texte.<br/>Sur <b>plusieurs</b> lignes<br/>';
 
 const C = { 'HIDDEN': false,
 	'H': false,
 	'NO_TAGLINE': false,
+	'IS_TEXT': true,
 	'WAIT_PAGE_LOAD': true,
 	'W': __karma__.config.W,
 	'#id_workspace_name':	'Test workspace name',
@@ -32,34 +33,34 @@ const C = { 'HIDDEN': false,
 	'#id_custom_font': 'Test_Sopinspace_custom_font',
 	'#id_custom_titles_font': 'Test_Sopinspace_custom_titles_font',
 	'TEXTS': [
-	    {
-	        '#id_title':    'Text One Sopinspace-Test éléguant',
-	        '#id_format':   'markdown',
-	        '#id_content':  'Contenu du premier texte.\nSur plusieurs lignes\nPour tester un cas réaliste',
-	        '#id_tags':     'test_text, Text Premier'
-	    },
-	    {
-	        '#id_title':    'Text Two Sopinspace-Test éléguant',
-	        '#id_format':   'rst',
-	        '#id_content':  'Contenu du deuxième texte.\nSur plusieurs lignes aussi\nPour tester un cas réaliste',
-	        '#id_tags':     'test_text, Text Second'
-	    },
-	    {
-	        '#id_title':    'Text Three Sopinspace-Test éléguant',
-    	    '#id_format':   'html',
-	        '#id_content':  test_comt.long_text,
-	        '#id_tags':     'test_text, Text Troisième'
-	    }
+		{
+			'#id_title':	'Text One Sopinspace-Test éléguant',
+			'#id_format':	'markdown',
+			'#id_content':	'Contenu du premier texte.\nSur plusieurs lignes\nPour tester un cas réaliste',
+			'#id_tags':		'test_text, Text Premier'
+		},
+		{
+			'#id_title':	'Text Two Sopinspace-Test éléguant',
+			'#id_format':	'rst',
+			'#id_content':	'Contenu du deuxième texte.\nSur plusieurs lignes aussi\nPour tester un cas réaliste',
+			'#id_tags':		'test_text, Text Second'
+		},
+		{
+			'#id_title':	'Text Three Sopinspace-Test éléguant',
+			'#id_format':	'html',
+			'#id_content':	test_comt.long_text,
+			'#id_tags':		'test_text, Text Troisième'
+		}
 	],
 	'USERS': [
-	    {}, // to start counting at one
+		{}, // to start counting at one
 		// SID roles should be : '', 4, 2, 5 ; but we're facing a bug here 
-	    { name: 'admin',        email: 'admin@mail.com',            date:'March 8, 2014 at 3:12 p.m.', role:'' },
-	    { name: 'user-com',     email: 'user-com@example.com',      date:'March 9, 2014 at 2:40 p.m.', role:'5'},
-    	{ name: 'user-edit',    email: 'user-edit@example.com',     date:'March 9, 2014 at 2:40 p.m.', role:'5'},
-	    { name: 'user-observ',  email: 'user-observ@example.com',   date:'March 9, 2014 at 2:40 p.m.', role:'5'},
-	    { '#id_tags': 'user-created-1',   '#id_email': 'uc1@example.com',   '#id_role':'2'},
-	    { '#id_tags': 'user-created-2',   '#id_email': 'uc2@example.com',   '#id_role':'4'}
+		{ name: 'admin',		email: 'admin@mail.com',			date:'March 8, 2014 at 3:12 p.m.', role:'' },
+		{ name: 'user-com',		email: 'user-com@example.com',		date:'March 9, 2014 at 2:40 p.m.', role:'5'},
+		{ name: 'user-edit',	email: 'user-edit@example.com',		date:'March 9, 2014 at 2:40 p.m.', role:'5'},
+		{ name: 'user-observ',	email: 'user-observ@example.com',	date:'March 9, 2014 at 2:40 p.m.', role:'5'},
+		{ '#id_tags': 'user-created-1',   '#id_email': 'uc1@example.com',	'#id_role':'2'},
+		{ '#id_tags': 'user-created-2',   '#id_email': 'uc2@example.com',	'#id_role':'4'}
 	]
 };
 
@@ -101,16 +102,16 @@ function test_comt_create_text (t) {
 }
 
 function test_comt_create_user (u) {
-    test_page_loading   ('/user/add/', 'Add a new user\n - '+C['#id_workspace_name']);
+	test_page_loading	('/user/add/', 'Add a new user\n - '+C['#id_workspace_name']);
 	test_fill_field ('#id_email', u);
 	test_fill_field ('#id_tags', u);
 
-    test ('test creation', dsl(function () {
-        dropdownlist ('#id_role').option (u['#id_role']);
-    }));
+	test ('test creation', dsl(function () {
+		dropdownlist ('#id_role').option (u['#id_role']);
+	}));
 
-    test_click   ('#user input[type="submit"]', C.WAIT_PAGE_LOAD);
-    test_comt.user_nb++;
+	test_click	 ('#user input[type="submit"]', C.WAIT_PAGE_LOAD);
+	test_comt.user_nb++;
 }
 
 
@@ -131,23 +132,51 @@ function test_comt_default_tabs (txt_nb, usr_nb) {
 	test_match	('#main-tabs a[href="/user/"]', new RegExp ('^People\\s*\\('+usr_nb+'\\)\\s*$'));
 }
 
-function test_comt_logged_header (username, is_tagline) {
+function test_comt_logged_header (username, is_tagline, is_text) {
+	var l = 7; 
+
 	is_tagline = typeof is_tagline == 'undefined' ? true : is_tagline;
+	is_text = typeof is_text == 'undefined' ? false : is_text;
+
+	if (is_text) {
+		l++;
+		test_text ('#header_controls a:nth-of-type(1)[href="/"][title="Home"]', '« back to workspace');
+	}
 
 	test_text	('#header_controls b', username)
-	test_count	('#header_controls a', 7);
-	test_text	('#header_controls a:nth-of-type(1)[href="/"]',					'Home');
-	test_text	('#header_controls a:nth-of-type(2)[href="/create/content/"]',	'Create a text');
-	test_text	('#header_controls a:nth-of-type(3)[href="/create/upload/"]',	'Upload a text');
-	test_text	('#header_controls a:nth-of-type(4)[href="/create/import/"]',	'Import a co-mented text');
-	test_text	('#header_controls a:nth-of-type(5)[href="/profile/"]',			'Profile');
-	test_text	('#header_controls a:nth-of-type(6)#hide-piwik-cookies-optout',	'Privacy policy ');
-	test_text	('#header_controls a:nth-of-type(7)[href="/logout/"]',			'Logout');
-	test_text	('#content h1.main_title a[href="/"]',							C['#id_workspace_name']);
+	test_count	('#header_controls a', l);
+	test_text	('#header_controls a:nth-of-type('+ l-- +')[href="/logout/"]',			'Logout');
+	test_text	('#header_controls a:nth-of-type('+ l-- +')#hide-piwik-cookies-optout',	'Privacy policy ');
+	test_text	('#header_controls a:nth-of-type('+ l-- +')[href="/profile/"]',			'Profile');
+	test_text	('#header_controls a:nth-of-type('+ l-- +')[href="/create/import/"]',	'Import a co-mented text');
+	test_text	('#header_controls a:nth-of-type('+ l-- +')[href="/create/upload/"]',	'Upload a text');
+	test_text	('#header_controls a:nth-of-type('+ l-- +')[href="/create/content/"]',	'Create a text');
+	test_text	('#header_controls a:nth-of-type('+ l-- +')[href="/"]',					'Home');
+	test_text	('#content h1.main_title a[href="/"]', C['#id_workspace_name']);
 
 	if (is_tagline) {
 		test_match	('#content h1.main_title  + div', new RegExp (C['#id_workspace_tagline'], 'm'));
 	}
+}
+
+function test_comt_unlogged_header () {
+	test_count	('#header_controls a', 2);
+	test_text	('#header_controls a[href="/"]',		'Home');
+	test_text	('#header_controls a[href="/login/"]',	'Login');
+}
+
+function test_comt_unlogged_footer () {
+	test_count	('#footer a', 10);
+	test_text	('#footer a:nth-of-type(1)[href="/contact/"]',				'Contact');
+	test_match	('#footer #comentlink[href="http://www.co-ment.com"]',		/Powered by/m);
+	test_text	('#footer a:nth-of-type(3)[href="/help/"]',					'Help');
+	test_text	('#footer a:nth-of-type(4)[href="/i18n/setlang/fr/"]',		'Français');
+	test_text	('#footer a:nth-of-type(5)[href="/i18n/setlang/es/"]',		'Español');
+	test_text	('#footer a:nth-of-type(6)[href="/i18n/setlang/it/"]',		'Italiano');
+	test_text	('#footer a:nth-of-type(7)[href="/i18n/setlang/de/"]',		'Deutsch');
+	test_text	('#footer a:nth-of-type(8)[href="/i18n/setlang/pt_BR/"]',	'Português Brasileiro');
+	test_text	('#footer a:nth-of-type(9)[href="/i18n/setlang/nb/"]',		'Norsk');
+	test_text	('#footer a:nth-of-type(10)[href="/i18n/setlang/bg/"]',		'Български');
 }
 
 function test_comt_fill_settings (s) {
@@ -170,14 +199,14 @@ function test_comt_fill_design (s) {
 }
 
 /** Test if it's possible to change lang to the specified :
- *  c : lang code
- *  l : help label
+ *	c : lang code
+ *	l : help label
  */
 function test_comt_i18n (c, l) {
-    test ('to '+c, dsl(function () {
-        element ('#footer a[href="/i18n/setlang/'+c+'/"]').click ();
-        browser.navigateTo ('/');
-        expect (elt ('#footer a[href="/help/"]').text ()).toMatch (new RegExp (l, 'm'));
-    }));
+	test ('to '+c, dsl(function () {
+		element ('#footer a[href="/i18n/setlang/'+c+'/"]').click ();
+		browser.navigateTo ('/');
+		expect (elt ('#footer a[href="/help/"]').text ()).toMatch (new RegExp (l, 'm'));
+	}));
 }
 
