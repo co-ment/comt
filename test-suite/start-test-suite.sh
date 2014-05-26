@@ -1,4 +1,5 @@
 #!/bin/bash
+export LANG=en_US.UTF-8
 
 echo "Starting test server"
 
@@ -32,8 +33,8 @@ if [[ -z "$SAFARI_BIN" && $OSTYPE =~ ^darwin ]]; then
 	export SAFARI_BIN="$SAFARI_BIN_BASE/Contents/MacOS/safari"
 fi
 
-if [ -x ./node_modules/.bin/karma ]; then
-   KARMA=./node_modules/.bin/karma
+if [ -x /usr/lib/node_modules/karma/bin/ ]; then
+   KARMA=/usr/lib/node_modules/karma/bin/karma
 else
    KARMA=`which karma`
 fi
@@ -44,7 +45,7 @@ TESTSERVER_START_WAIT=15
 TESTSERVER_LOOP_WAIT=5
 TESTSERVER_WAIT_LOOP_NB=7
 
-SERVER_IP=`grep WORKSPACE_URL workspace.info.js | sed "s|^.*http://\([-._[:alnum:]]*\):.*$|\1|"`
+SERVER_IP=`grep WORKSPACE_URL workspace.info.js | sed "s|^.*'http://\([-._[:alnum:]]*\):.*$|\1|"`
 SERVER_PORT=`grep WORKSPACE_URL workspace.info.js | sed "s|^.*http://[-._[:alnum:]]*:\([0-9]*\)/.*$|\1|"`
 
 if [[ -x `which nc` ]]; then

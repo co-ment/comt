@@ -42,6 +42,8 @@ module.exports = function(config) {
 		logLevel: config.LOG_INFO,
 		// If browser does not capture in given timeout [ms], kill it
 		captureTimeout: 20000,
+    // timeout disconnect
+    browserNoActivityTimeout: 300000,
 		// enable / disable watching file and executing tests whenever any file changes
 		autoWatch: false,
 		// Continuous Integration mode : if true, it capture browsers, run tests and exit

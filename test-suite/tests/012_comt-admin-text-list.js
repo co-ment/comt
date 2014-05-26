@@ -22,6 +22,7 @@ suite ('comt admin text list', function () {
     });
 
     suite ('create texts', function () {
+      // test_pause();
         for (var j=4; j--;)
             for (var i=3; i--;)
                  test_comt_create_text (C.TEXTS[i]);

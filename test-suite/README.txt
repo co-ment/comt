@@ -15,21 +15,26 @@ file.
 
 Installation :
 --------------
-apt-get install npm
-sudo ln /usr/bin/nodejs /usr/bin/node	# /usr/share/doc/nodejs/README.Debian
+sudo apt-get install npm (*) (**)
+
 sudo npm install -g karma karma-mocha	# install things in /usr/local/lib/node_modules/
 sudo npm install -g git://github.com/Siltaar/karma-e2e-dsl # to get the improved karma-e2e-dsl
 
+sudo npm install -g karma-chrome-launcher karma-firefox-launcher karma-phantomjs-launcher
 
-Starting comt :
----------------
-cd comt/
-./bin/django testserver localhost:8000 --noinput initial_data roles_generic test_content
+(*) Note for Ubuntu 12.04 LTS (aka 'precise'): version of npm in ubuntu repositories isn't supported any more, you've got to uninstall nodejs and npm (if necessary) and (re-) install from another repository:
+sudo apt-get purge nodejs npm
+sudo apt-get update
+sudo apt-get install -y python-software-properties python g++ make
+sudo add-apt-repository ppa:chris-lea/node.js
+sudo apt-get update
+sudo apt-get install nodejs
 
+(**) Note for Debian: sudo ln /usr/bin/nodejs /usr/bin/node	# /usr/share/doc/nodejs/README.Debian
 
 Starting the test-suite :
 -------------------------
-cd comt/src/cm/scripts
+cd comt/test-suite
 cp workspace.info.js.example workspace.info.js
 vi workspace.info.js	# Customize tested workspace settings
 ./start-test-suite.sh

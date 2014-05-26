@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext as _
+from django.core.cache import cache
 import random
 
 random.seed()
@@ -39,13 +40,16 @@ class PermanentModel(KeyModel):
     def delete(self):
         self.deleted = True
         self.save()
+        cache.clear()
 
     def undelete(self):
         self.deleted = False
         self.save()
+        cache.clear()
         
     def real_delete(self):
         super(KeyModel, self).delete() 
+        cache.clear()
 
 
 class AuthorModel(models.Model):
