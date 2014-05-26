@@ -86,7 +86,7 @@ function test_comt_logout () {
 };
 
 function test_comt_create_text (t) {
-	test_page_loading	('/create/content/', 'Create a text - '+C['#id_workspace_name']);
+	test_page_loading	('/create/content/', 'Create a text');
 	test ('test creation', dsl(function () {
 		dropdownlist ('#id_format').option (t['#id_format']);
 	}));
@@ -132,6 +132,17 @@ function test_comt_default_tabs (txt_nb, usr_nb) {
 	test_match	('#main-tabs a[href="/user/"]', new RegExp ('^People\\s*\\('+usr_nb+'\\)\\s*$'));
 }
 
+function test_comt_text_tabs (v_nb) {
+	test_count	('#text-tabs a', 7);
+	test_text	('#text-tabs li:nth-of-type(1) a[href^="/text/"][href$="/view/"]',		'Text');
+	test_text	('#text-tabs li:nth-of-type(2) a[href^="/text/"][href$="/edit/"]',		'Edit');
+	test_text	('#text-tabs li:nth-of-type(3) a[href^="/text/"][href$="/share/"]',		'People');
+	test_text	('#text-tabs li:nth-of-type(4) a[href^="/text/"][href$="/history/"]',	'Versions ('+v_nb+')');
+	test_text	('#text-tabs li:nth-of-type(5) a[href^="/text/"][href$="/settings/"]',	'Settings');
+	test_text	('#text-tabs li:nth-of-type(6) a[href^="/text/"][href$="/followup/"]',	'Followup');
+	test_text	('#text-tabs li:nth-of-type(7) a[href^="/text/"][href$="/embed/"]',		'Embed');
+}
+
 function test_comt_logged_header (username, is_tagline, is_text) {
 	var l = 7; 
 
@@ -139,8 +150,9 @@ function test_comt_logged_header (username, is_tagline, is_text) {
 	is_text = typeof is_text == 'undefined' ? false : is_text;
 
 	if (is_text) {
-		l++;
-		test_text ('#header_controls a:nth-of-type(1)[href="/"][title="Home"]', '« back to workspace');
+		test_text ('#header_left a:nth-of-type(1)[href="/"][title="Home"]', '« back to workspace');
+	} else {
+		test_text ('#content h1.main_title a[href="/"]', C['#id_workspace_name']);
 	}
 
 	test_text	('#header_controls b', username)
@@ -152,7 +164,6 @@ function test_comt_logged_header (username, is_tagline, is_text) {
 	test_text	('#header_controls a:nth-of-type('+ l-- +')[href="/create/upload/"]',	'Upload a text');
 	test_text	('#header_controls a:nth-of-type('+ l-- +')[href="/create/content/"]',	'Create a text');
 	test_text	('#header_controls a:nth-of-type('+ l-- +')[href="/"]',					'Home');
-	test_text	('#content h1.main_title a[href="/"]', C['#id_workspace_name']);
 
 	if (is_tagline) {
 		test_match	('#content h1.main_title  + div', new RegExp (C['#id_workspace_tagline'], 'm'));

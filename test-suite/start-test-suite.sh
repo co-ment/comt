@@ -42,7 +42,7 @@ fi
 CONNECTION_TIMEOUT=10
 TESTSERVER_START_WAIT=15
 TESTSERVER_LOOP_WAIT=5
-TESTSERVER_WAIT_LOOP_NB=5
+TESTSERVER_WAIT_LOOP_NB=7
 
 SERVER_IP=`grep WORKSPACE_URL workspace.info.js | sed "s|^.*http://\([-._[:alnum:]]*\):.*$|\1|"`
 SERVER_PORT=`grep WORKSPACE_URL workspace.info.js | sed "s|^.*http://[-._[:alnum:]]*:\([0-9]*\)/.*$|\1|"`
@@ -70,6 +70,7 @@ else
 	done
 	if [ $i -eq $TESTSERVER_WAIT_LOOP_NB ]; then
 		 echo "timeouted waiting for test server $SERVER_IP:$SERVER_PORT to start"
+		 kill $TESTSERVER_PID
 		 exit 1
 	fi
 fi
