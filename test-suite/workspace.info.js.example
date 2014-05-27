@@ -1,14 +1,8 @@
 
 define ("BROWSERS", ['Chrome']);
-define ("WORKSPACE_URL", '<workspace-url>'); // In http://IP_ADDRESS:PORT_NUM/ format
-define ("USER_ADMIN", '<admin-login>');
-define ("PASS_ADMIN", '<admin-password>');
-define ("USER_EDIT", '');
-define ("PASS_EDIT", '');
-define ("USER_COM", '');
-define ("PASS_COM", '');
-define ("USER_OBSERV", '');
-define ("PASS_OBSERV", '');
+define ("WORKSPACE_URL", 'http://localhost:8000/');
+define ("USER_ADMIN", 'admin');
+define ("PASS_ADMIN", 'dev@co-ment');
 
 function define (name, value) {
     Object.defineProperty (exports, name, {
