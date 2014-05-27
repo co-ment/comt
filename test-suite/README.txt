@@ -20,7 +20,6 @@ sudo apt-get install npm (*) (**)
 sudo npm install -g karma karma-mocha	# install things in /usr/local/lib/node_modules/
 sudo npm install -g git://github.com/Siltaar/karma-e2e-dsl # to get the improved karma-e2e-dsl
 
-sudo npm install -g karma-chrome-launcher karma-firefox-launcher karma-phantomjs-launcher
 
 (*) Note for Ubuntu 12.04 LTS (aka 'precise'): version of npm in ubuntu repositories isn't supported any more, you've got to uninstall nodejs and npm (if necessary) and (re-) install from another repository:
 sudo apt-get purge nodejs npm
@@ -29,6 +28,10 @@ sudo apt-get install -y python-software-properties python g++ make
 sudo add-apt-repository ppa:chris-lea/node.js
 sudo apt-get update
 sudo apt-get install nodejs
+
+Also, for Ubuntu 12.04 LTS, browsers launchers are not included with karma, you need to install them separately:
+
+sudo npm install -g karma-chrome-launcher karma-firefox-launcher
 
 (**) Note for Debian: sudo ln /usr/bin/nodejs /usr/bin/node	# /usr/share/doc/nodejs/README.Debian
 
