@@ -252,7 +252,6 @@ table.wide_form td {
 }
 
 table.small_form {
-	width: 70%;
 	margin-left: auto;
 	margin-right: auto;	
 }
@@ -262,7 +261,7 @@ table.small_form td {
 }
 
 .small_form input[type="text"], .small_form input[type="password"], .small_form textarea {
-	width:150px;
+	width:calc(100% - 6px);
 }
 
 input[type="checkbox"] {
@@ -779,7 +778,7 @@ a.tip:hover {
 }
 
 #login_container {
-	padding:34px 150px 50px;
+	padding:4% 16%;
 }
 
 .underline_border {

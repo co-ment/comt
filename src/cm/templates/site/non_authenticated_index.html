@@ -24,7 +24,7 @@
 {% if public_texts %}
 <table class="home-table">
 <tr>
-<td width="70%" style="vertical-align:text-top;">
+<td width="60%" style="vertical-align:text-top;">
 <h2>{% blocktrans count public_texts|length as counter %}One public text{% plural %}{{ counter }} public texts{% endblocktrans %}</h2>
 <ul>
 {% for text in public_texts %}
@@ -35,7 +35,7 @@
 {% endfor %}
 </ul>
 </td>
-<td width="29%">
+<td width="39%" style="vertical-align:text-top;">
 {% include "site/login_form.html" %}
 </td>
 </tr>
