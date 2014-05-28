@@ -88,12 +88,20 @@ def dashboard(request):
 
 
         public_texts = get_texts_with_perm(request, 'can_view_text').order_by('-modified')
+        paginate_by = get_int(request.GET, 'paginate', ACTIVITY_PAGINATION)
 
         template_dict = {
                          'form' : form,
-                         'public_texts' : public_texts,
+                         'public_texts_nb' : public_texts.count (),
                          }
-        return render_to_response('site/non_authenticated_index.html', template_dict, context_instance=RequestContext(request))
+#        return render_to_response('site/non_authenticated_index.html', template_dict, context_instance=RequestContext(request))
+        return object_list(
+            request,
+            public_texts,
+            template_name='site/non_authenticated_index.html',
+            paginate_by=paginate_by,
+            extra_context=template_dict
+        )
 
 
 class HeaderContactForm(forms.Form):
