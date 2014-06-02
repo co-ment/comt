@@ -250,6 +250,11 @@ class AbiFileConverter(object):
           infile = open(infile_name,'w')
           if type(input) == unicode:
             input = input.encode('utf8')
+
+          # fix abiword bug with pre code tags
+          input = re.sub(r'<pre>\s+<code>', r'<pre><code>', input)
+          input = re.sub(r'</code>\s+</pre>', r'</code></pre>', input)
+
           infile.write(input)
           infile.close()
 
