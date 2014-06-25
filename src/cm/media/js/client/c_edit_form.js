@@ -130,10 +130,8 @@ cancelEditForm = function() {
     }
 
 // REMOVE EDIT FORM NODES FROM ICOMMENT OVERLAY
-    var node = gEditICommentHost['overlay'].get('contentBox').get(".icomment-edit-body") ;
-    node.get('parentNode').removeChild(node) ;
-    node = gEditICommentHost['overlay'].get('contentBox').get(".icomment-edit-header") ;
-    node.get('parentNode').removeChild(node) ;
+    gEditICommentHost['overlay'].get('contentBox').one (".icomment-edit-body").remove () ;
+    gEditICommentHost['overlay'].get('contentBox').one (".icomment-edit-header").remove () ;
 
 // SHOW ICOMMENT OVERLAY
     gEditICommentHost.showContent() ;

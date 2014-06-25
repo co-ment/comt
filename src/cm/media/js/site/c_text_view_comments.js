@@ -196,7 +196,7 @@ preventLinksInText = function() {
     var a = e.target;
     var href = null;
     while (a != null && href == null) {
-      a = a.get('parentNode');
+      a = a.parentNode;
       href = a.get("href");
     }
     

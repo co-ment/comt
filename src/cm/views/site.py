@@ -94,7 +94,6 @@ def dashboard(request):
                          'form' : form,
                          'public_texts_nb' : public_texts.count (),
                          }
-#        return render_to_response('site/non_authenticated_index.html', template_dict, context_instance=RequestContext(request))
         return object_list(
             request,
             public_texts,

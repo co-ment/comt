@@ -474,7 +474,7 @@ unpaintCommentScope = function(comment) {
     }
   }
   for (var i = 0, ilen = toBeRemovedElts.length ; i < ilen ; i++)  {
-    toBeRemovedElts[i].parentNode.removeChild(toBeRemovedElts[i]) ;
+    toBeRemovedElts[i].remove ();
   }
 };
 
@@ -500,7 +500,7 @@ unpaintAllComments = function() {
     }
   }
   for (var i = 0, ilen = toBeRemovedElts.length ; i < ilen ; i++)  {
-    toBeRemovedElts[i].parentNode.removeChild(toBeRemovedElts[i]) ;
+    toBeRemovedElts[i].remove ();
   }
 
 };

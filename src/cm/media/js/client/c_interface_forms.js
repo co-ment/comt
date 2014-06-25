@@ -103,6 +103,6 @@ addFormErrMsg = function(formId, eltName, errorString) {
 removeFormErrMsg = function(formId) {
   var nodes = CY.all('#'+formId+' .c-error');
   if (nodes != null)
-    nodes.each(function (node) {node.get('parentNode').removeChild(node) ;}) ;
+    nodes.each(function (node) {node.remove() ;}) ;
 }
 
