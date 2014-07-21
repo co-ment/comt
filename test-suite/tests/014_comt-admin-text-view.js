@@ -14,8 +14,8 @@ suite ('comt admin text view', function () {
 		test_click	('#text a.main_object_title:eq(1)');
 		test_comt_logged_header (C.W.USER_ADMIN, C.NO_TAGLINE, C.IS_TEXT);
 		test_text('#content h1.main_title_text a.title[href^="/text/"][href$="/view/"]', C.TEXTS[2]['#id_title']);
-		test_match('#content span.metadata', 'last modified \\d* minutes? ago\n/\n1 version');
-		test_match('#content span.metadata abbr', 'last modified \\d* minutes? ago');
+		test_match('#content span.metadata', '\\s*0 comments,\\s*1 version,\\s*.*last modified \\d* minutes? ago\\s*');
+		test_match('#content span.metadata span', 'last modified \\d* minutes? ago');
 		test_match('#share', 'Share');
 		test_text('#share-options li:eq(0) a[href^="http://www.facebook.com/sharer.php"]', ' Facebook', C.HIDDEN);
 		test_text('#share-options li:eq(1) a[href^="http://digg.com/remote-submit/"]', ' Digg', C.HIDDEN);
