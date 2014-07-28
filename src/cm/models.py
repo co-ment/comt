@@ -383,7 +383,7 @@ class ConfigurationManager(models.Manager):
         if created or conf.value != value:
             conf.value = value
             conf.save()
-            if key == 'workspace_role_model':
+            if key == 'workspace_role_model' and not(created and value=='generic'):
                 change_role_model(value)
 
     def __getitem__(self, key):

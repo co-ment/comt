@@ -15,7 +15,6 @@ suite ('comt logged admin', function () {
 	suite ('setting settings to test-values', function () {
 		test_page_loading ('/settings/', 'Settings');
 		test_comt_fill_settings (C);
-		test_val	('#id_workspace_name', C['#id_workspace_name']);
 		test_click	('#settings input[type="submit"]', C.WAIT_PAGE_LOAD);
 		test_page_loading	('/settings/', 'Settings');
 		test_text	('#content h1.main_title a[href="/"]', C['#id_workspace_name']);
@@ -245,8 +244,8 @@ suite ('comt logged admin', function () {
 		test_text	('select#id_role option:eq(1)[value="1"]', 'Manager', C.HIDDEN);
 		test_text	('select#id_role option:eq(2)[value="2"]', 'Editor', C.HIDDEN);
 		test_text	('select#id_role option:eq(3)[value="3"]', 'Moderator', C.HIDDEN);
-		test_text	('select#id_role option:eq(4)[value="4"]', 'Commentator', C.HIDDEN);
-		test_text	('select#id_role option:eq(5)[value="5"][selected]', 'Observer', C.HIDDEN);
+		test_text	('select#id_role option:eq(4)[value="4"][selected]', 'Commentator', C.HIDDEN);
+		test_text	('select#id_role option:eq(5)[value="5"]', 'Observer', C.HIDDEN);
 		test_val	('#user :input:eq(6)[type=submit]', 'Save');
 		test_val	('#user :input:eq(7)#cancel_button[type=button]', 'Cancel');
 		test_comt_unlogged_footer ();

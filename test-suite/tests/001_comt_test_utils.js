@@ -54,10 +54,9 @@ const C = { 'HIDDEN': false,
 	],
 	'USERS': [
 		{}, // to start counting at one
-		// SID roles should be : '', 4, 2, 5 ; but we're facing a bug here 
 		{ name: 'admin',		email: 'admin@mail.com',			date:'March 8, 2014 at 3:12 p.m.', role:'' },
-		{ name: 'user-com',		email: 'user-com@example.com',		date:'March 9, 2014 at 2:40 p.m.', role:'5'},
-		{ name: 'user-edit',	email: 'user-edit@example.com',		date:'March 9, 2014 at 2:40 p.m.', role:'5'},
+		{ name: 'user-com',		email: 'user-com@example.com',		date:'March 9, 2014 at 2:40 p.m.', role:'4'},
+		{ name: 'user-edit',	email: 'user-edit@example.com',		date:'March 9, 2014 at 2:40 p.m.', role:'2'},
 		{ name: 'user-observ',	email: 'user-observ@example.com',	date:'March 9, 2014 at 2:40 p.m.', role:'5'},
 		{ '#id_tags': 'user-created-1',   '#id_email': 'uc1@example.com',	'#id_role':'2'},
 		{ '#id_tags': 'user-created-2',   '#id_email': 'uc2@example.com',	'#id_role':'4'}
