@@ -3,6 +3,10 @@ suite ('comt logged admin user list', function () {
 
 	this.timeout(20000);
 
+  suite ('logs as an admin', function () {
+		test_comt_login (C.W.USER_ADMIN, C.W.PASS_ADMIN);
+	});
+
 	suite ('people list page conformity', function () {
 		test_page_loading	('/user/', 'People\' list\n - '+C['#id_workspace_name']);
 		test_comt_logged_header (C.W.USER_ADMIN);
@@ -75,7 +79,7 @@ suite ('comt logged admin user list', function () {
 			input ('#user_form tr:eq(4) td:eq(4) select').option ('5');
 			input ('#save').prop ('disabled', false);
 		}));
-		test_click	('#save', C.WAIT_PAGE_LOAD);
+    test_submit ('#user_form');
 		test_page_loading ('/user/', 'People\' list\n - '+C['#id_workspace_name']);
 		test_val	('#user_form tr:eq(2) td:eq(4) select option:selected', '4');
 		test_val	('#user_form tr:eq(3) td:eq(4) select option:selected', '2');
@@ -139,6 +143,10 @@ suite ('comt logged admin user list', function () {
 	// TOTEST suspended user can't login anymore
 	// TOTEST roles of users
 	// TOTEST si les users anonymes ont droits, ils ont droits…
+
+  suite ('logout', function () {
+	  test_comt_logout();
+  });
 });
 
 function suite_check_user_nb (n) {

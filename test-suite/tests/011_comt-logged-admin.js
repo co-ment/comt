@@ -318,5 +318,9 @@ suite ('comt logged admin', function () {
 		test_comt_unlogged_footer ();
 	});
 
+  suite ('logout', function () {
+		test_comt_logout();
+	});
+
 });
 

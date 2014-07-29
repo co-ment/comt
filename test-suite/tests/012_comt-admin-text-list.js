@@ -9,6 +9,10 @@ suite ('comt admin text list', function () {
 
     this.timeout(200000);
 
+    suite ('logs as an admin', function () {
+		  test_comt_login (C.W.USER_ADMIN, C.W.PASS_ADMIN);
+	  });
+
     suite ('empty texts list page conformity', function () {
         test_page_loading   ('/text/', 'Texts\n - '+C['#id_workspace_name']);
         test_comt_logged_header  (C.W.USER_ADMIN);
@@ -116,6 +120,10 @@ suite ('comt admin text list', function () {
         test_count  ('form#texts_form :input', test_comt.text_nb + 3);
         test_match  ('#paginator', new RegExp ('\\s1-'+test_comt.text_nb+' of '+test_comt.text_nb+'\\s','m'));
     });
+
+    suite ('logout', function () {
+		  test_comt_logout();
+  	});
 
 });
 

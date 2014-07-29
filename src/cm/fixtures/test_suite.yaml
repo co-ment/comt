@@ -156,3 +156,15 @@
     role: null
     user: null
     text: null
+
+- model: cm.configuration
+  pk: 1
+  fields:
+    key: workspace_name
+    raw_value: VlRlc3Qgd29ya3NwYWNlIG5hbWUKcDAKLg==
+
+- model: cm.configuration
+  pk: 2
+  fields:
+    key: workspace_tagline
+    raw_value: VlRlc3Qgd29ya3NwYWNlIHRhZ2xpbmUKcDAKLg==

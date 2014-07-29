@@ -81,7 +81,7 @@ function test_comt_login (user, pass) {
 }
 
 function test_comt_logout () {
-	test_page_loading ('/logout/', 'Home - '+C['#id_workspace_name']);
+	test_page_loading ('/logout/', '');
 };
 
 function test_comt_create_text (t) {

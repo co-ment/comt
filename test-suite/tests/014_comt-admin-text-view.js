@@ -1,14 +1,13 @@
 
 suite ('comt admin text view', function () {
-// suite.only ('comt admin text view', function () {
 
 	this.timeout(2000000);
 
-	suite ('comt admin text view conformity', function () {
-/*		test_comt_login (C.W.USER_ADMIN, C.W.PASS_ADMIN);
-		test_comt_create_text (C.TEXTS[1]);
-		test_comt_create_text (C.TEXTS[2]);*/
+  suite ('logs as an admin', function () {
+	  test_comt_login (C.W.USER_ADMIN, C.W.PASS_ADMIN);
+	});
 
+	suite ('comt admin text view conformity', function () {
 		test_page_loading ('/text/', 'Texts\n - ');
 		
 		test_click	('#text a.main_object_title:eq(1)');
@@ -21,12 +20,6 @@ suite ('comt admin text view', function () {
 		test_text('#share-options li:eq(1) a[href^="http://digg.com/remote-submit/"]', ' Digg', C.HIDDEN);
 		test_text('#share-options li:eq(2) a[href^="http://www.linkedin.com/shareArticle"]', ' Linkedin', C.HIDDEN);
 		test_comt_text_tabs (1);
-
-/*		test ('Get into the inner frame', dsl(function () {
-			expect (browser.navigateTo (element ('#text_view_frame').attr ('src')));
-		}));
-
-		test_text('#outer-north table:eq(0) tr:eq(0) td:eq(0) span#c_filter_results', '-/ 0 discussions');*/
 	});
 
 	suite ('comt admin text view edit conformity', function () {
@@ -105,4 +98,8 @@ suite ('comt admin text view', function () {
 		// TOTEST is text selected in input ?
 		test_comt_unlogged_footer ();
 	});
+
+  suite ('logout', function () {
+	  test_comt_logout();
+  });
 });
