@@ -1,5 +1,5 @@
 from cm.tests.test_notifications import *
-#from cm.tests.test_converters import *
+from cm.tests.test_converters import *
 from cm.tests.test_spannifier import *
 from cm.tests.test_comment_positioning import *
 from cm.tests.test_structure import *
