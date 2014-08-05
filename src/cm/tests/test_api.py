@@ -203,9 +203,6 @@ class APITest(TestCase):
         """
         Text version operation
         """
-        from django.test.client import Client
-        c = Client()
-        
         # revert to text version
         self.assertEquals(Text.objects.get(pk=1).get_versions_number() , 2)
 
