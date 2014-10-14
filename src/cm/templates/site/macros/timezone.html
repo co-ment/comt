@@ -1,15 +1,17 @@
 <script type="text/javascript">
 <!--
+// tz from Django : {{ tz }}
 {% if tz_installed %}
     {% if tz %}
         var tz = '{{ tz }}';
     {% else %}
         $(function() {
             var d = new Date();
-            var tz = -d.getTimezoneOffset()/60;
-            /*tz = 'America/Chicago';*/
+            tz = -d.getTimezoneOffset()/60;
             $.post("{% url timezone_set %}", { tz: tz }, function(data){
-                window.location = window.location;
+                if ($.browser != 'msie') {
+                    window.location = window.location;
+                }
             });
         })
     {% endif %}

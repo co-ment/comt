@@ -23,9 +23,12 @@ def tz(request):
     """
     Add tz info
     """
+#    print "proutch %s" %request.session.get('tz', None)
+#	-> proutch None
+#	pas content...
     return {
         # TODO: set tz to user timezone if logged in
-        'tz': request.session.get('tz',None),
+        'tz': request.session.get('tz', None),
         'tz_installed' : True,
     }
     
