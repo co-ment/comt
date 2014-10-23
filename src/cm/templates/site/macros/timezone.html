@@ -9,9 +9,8 @@
             var d = new Date();
             tz = -d.getTimezoneOffset()/60;
             $.post("{% url timezone_set %}", { tz: tz }, function(data){
-                if ($.browser != 'msie') {
-                    window.location = window.location;
-                }
+                // seems useless to reload since tz is a global variable now
+                //    window.location = window.location;
             });
         })
     {% endif %}
