@@ -405,6 +405,7 @@ def comments_thread(request, text_version, text) :
     viewable_commentsnoreply = get_viewable_comments(request, commentsnoreply, text, order_by = ('start_wrapper','start_offset','end_wrapper','end_offset'))
     viewable_comments = []
     for cc in viewable_commentsnoreply :
+	cache.clear()
         viewable_comments += list_viewable_comments(request, [cc], text)
     return viewable_comments
 
