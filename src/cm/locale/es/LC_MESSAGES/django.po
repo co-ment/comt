@@ -289,7 +289,7 @@ msgstr "Italiano"
 
 #: static_i18n.py:6 static_i18n.py:11
 msgid "Observer"
-msgstr "Supervisor"
+msgstr "Observador"
 
 #: static_i18n.py:7
 msgid "Manager"
