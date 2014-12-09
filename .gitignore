@@ -1,0 +1,24 @@
+syntax: glob
+*.pyc
+*~
+syntax: glob
+parts
+store
+eggs
+bin
+develop-eggs
+downloads
+.settings
+
+src/comt.egg-info
+.installed.cfg
+recreate
+.pydevproject
+settings_local.py
+urls_local.py
+
+include/
+lib/
+local/
+mercurial-recipe/
+
