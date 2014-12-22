@@ -1,8 +1,11 @@
 COMT: Web-based text annotation
-Copyright (C) 2006-2010 Sopinspace, Society for Public Information Spaces, www.sopinspace.com
-Key developers: Renaud Bernard, Raphaël Badin, Gérald Sédrati-Dinet, Simon Descarpentries
+Copyright (C) 2006-2015 Abilian SAS <http://www.abilian.com/>
+Key developers: see CONTRIBUTORS file
 Software license: GNU AGPLv3 or any later version
 Translation files license: CC-By
+
+
+--
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License
