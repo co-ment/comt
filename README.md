@@ -59,35 +59,40 @@ CC-BY (<http://creativecommons.org/licenses/by/3.0/>) for translation files
 ## Installation (development install)
 
 1. Install python2.5+ and all required libraries
-	(ubuntu users: `sudo apt-get install python python-magic python-setuptools python-uno libyaml-0-1 python-yaml python-dev git-core python-utidylib python-pexpect python-cssutils`)
+
+   (ubuntu users, run: `sudo apt-get install python python-magic python-setuptools python-uno libyaml-0-1 python-yaml python-dev git-core python-utidylib python-pexpect python-cssutils`)
 
 2. Install pandoc
-	(ubuntu users: `sudo apt-get install pandoc`)
+
+   (ubuntu users: `sudo apt-get install pandoc`)
 
 3. Install abiword
+
   (ubuntu users: `sudo apt-get install abiword`)
-   Alternatively, install openoffice (headless mode) (used for document conversion)
-	(ubuntu users: `sudo apt-get install sun-java6-jre openoffice.org openoffice.org-headless xvfb`)
+
+  Alternatively, install openoffice (headless mode) (used for document conversion)
+
+  (ubuntu users: `sudo apt-get install sun-java6-jre openoffice.org openoffice.org-headless xvfb`)
 
 4. Install/configure database (skip this step if you plan to use a sqlite database)
 
-	4 a) Postgresql
+  4 a) Postgresql
 
-		- Install and configure database server [skip this step if use an external database server] 
-		(ubuntu users : `sudo apt-get install postgresql`)		
-		- Install database client
-		(ubuntu users : `sudo apt-get install postgresql-client`)		
-		- Install python database connector: psycopg2
-		(ubuntu users : `sudo apt-get install python-psycopg2`)		
+        - Install and configure database server [skip this step if use an external database server] 
+          (ubuntu users : `sudo apt-get install postgresql`)                
+                - Install database client
+                (ubuntu users : `sudo apt-get install postgresql-client`)                
+                - Install python database connector: psycopg2
+                (ubuntu users : `sudo apt-get install python-psycopg2`)                
 
-	4 b) Mysql
+        4 b) Mysql
 
-		-  Install and configure mysql server [skip this step if use an external database server]
-		(ubuntu users : `sudo apt-get install mysql-server`)		
-		- Install database client
-		(ubuntu users : `sudo apt-get install mysql-client`)
-		- Install python database connector: mysqldb
-		(ubuntu users : `sudo apt-get install python-mysqldb`)						
+                -  Install and configure mysql server [skip this step if use an external database server]
+                (ubuntu users : `sudo apt-get install mysql-server`)                
+                - Install database client
+                (ubuntu users : `sudo apt-get install mysql-client`)
+                - Install python database connector: mysqldb
+                (ubuntu users : `sudo apt-get install python-mysqldb`)                                                
 
 5. Create a database (we recommend UTF8 encoding) and a read/write access to it. (skip this step if you plan to use a sqlite database)
 
@@ -128,7 +133,8 @@ This README does not cover in details a production environment because this kind
 
 A few tips thought:
 
-- The recommended way to install it is using apache and wsgi, check out django installation guide at >http://www.djangoproject.com/documentation/modpython/>
+- The recommended way to install it is using apache and wsgi, check out django installation guide at <http://www.djangoproject.com/documentation/modpython/>
+
 - If you use apache as a frontend, you will need to create `{{ APACHE_HOME: usually /var/www }}/.python-eggs` and chown it to the `apache` user.
 
 
@@ -164,18 +170,18 @@ To use openoffice, on a development setup, you should make sure no openoffice pr
 
 ### Javascript libs used (and license) / shipped with the distribution
 
-- Yahoo UI	<http://developer.yahoo.com/yui/>	(BSD License)
-- JQuery	<http://jquery.com/>	(MIT license)
-- markItUp  <http://markitup.jaysalvat.com/home/> (MIT/GPL license)
+- Yahoo UI <http://developer.yahoo.com/yui/> (BSD License)
+- JQuery <http://jquery.com/> (MIT license)
+- markItUp <http://markitup.jaysalvat.com/home/> (MIT/GPL license)
 
 ### Python libraries used (and license) / NOT shipped with the distribution
 
-- django			<http://www.djangoproject.com/>					BSD License
-- python magic		<http://hupp.org/adam/hg/python-magic>			permissive BSD style license
-- Beautiful soup	<http://www.crummy.com/software/BeautifulSoup/>	PSF license
-- python-chardet	<http://chardet.feedparser.org/>					LGPL 
-- python-feedparser	<http://feedparser.org/> 							"Permissive" custom license
-- python-imaging	<http://www.pythonware.com/products/pil/> 		http://www.pythonware.com/products/pil/license.htm
+- django <http://www.djangoproject.com/> BSD License
+- python magic <http://hupp.org/adam/hg/python-magic> permissive BSD style license
+- Beautiful soup <http://www.crummy.com/software/BeautifulSoup/> PSF license
+- python-chardet <http://chardet.feedparser.org/> LGPL 
+- python-feedparser <http://feedparser.org/> "Permissive" custom license
+- python-imaging <http://www.pythonware.com/products/pil/> http://www.pythonware.com/products/pil/license.htm
 - python-pytz
 - html5lib
 - python-simplejson
