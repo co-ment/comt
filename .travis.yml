@@ -1,0 +1,17 @@
+language: python
+python:
+  - "2.7"
+
+# Install OS dependencies
+before_install:
+  - sudo rm -rf /dev/shm && sudo ln -s /run/shm /dev/shm
+  - sudo apt-get update
+  - sudo ./deploy/provision.sh
+
+# Install Python dependencies
+install:
+  - python bootstrap.y
+  - hg clone https://bitbucket.org/pagenoare/mercurial-recipe
+  - pip install -e mercurial-recipe
+  - ./bin/buildout -v
+
