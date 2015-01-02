@@ -78,21 +78,25 @@ CC-BY (<http://creativecommons.org/licenses/by/3.0/>) for translation files
 
   4 a) Postgresql
 
-        - Install and configure database server [skip this step if use an external database server] 
-          (ubuntu users : `sudo apt-get install postgresql`)                
-                - Install database client
-                (ubuntu users : `sudo apt-get install postgresql-client`)                
-                - Install python database connector: psycopg2
-                (ubuntu users : `sudo apt-get install python-psycopg2`)                
+    - Install and configure database server [skip this step if use an external database server] 
+      (ubuntu users : `sudo apt-get install postgresql`)                
 
-        4 b) Mysql
+    - Install database client
+      (ubuntu users : `sudo apt-get install postgresql-client`)                
 
-                -  Install and configure mysql server [skip this step if use an external database server]
-                (ubuntu users : `sudo apt-get install mysql-server`)                
-                - Install database client
-                (ubuntu users : `sudo apt-get install mysql-client`)
-                - Install python database connector: mysqldb
-                (ubuntu users : `sudo apt-get install python-mysqldb`)                                                
+    - Install python database connector: psycopg2
+      (ubuntu users : `sudo apt-get install python-psycopg2`)                
+
+  4 b) Mysql
+
+    - Install and configure mysql server [skip this step if use an external database server]
+       (ubuntu users : `sudo apt-get install mysql-server`)                
+
+    - Install database client
+      (ubuntu users : `sudo apt-get install mysql-client`)
+
+    - Install python database connector: mysqldb
+      (ubuntu users : `sudo apt-get install python-mysqldb`)                                                
 
 5. Create a database (we recommend UTF8 encoding) and a read/write access to it. (skip this step if you plan to use a sqlite database)
 
