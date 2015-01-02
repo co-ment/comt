@@ -6,9 +6,7 @@ python:
 before_install:
   - sudo rm -rf /dev/shm && sudo ln -s /run/shm /dev/shm
   - sudo apt-get update
-  - ls
-  - ls deploy
-  - sudo deploy/provision.sh
+  - sudo sh deploy/provision.sh
 
 # Install Python dependencies
 install:
