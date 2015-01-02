@@ -6,10 +6,13 @@ python:
 before_install:
   - sudo rm -rf /dev/shm && sudo ln -s /run/shm /dev/shm
   - sudo apt-get update
+  - cat /etc/lsb-release
   - sudo sh deploy/provision.sh
 
 # Install Python dependencies
 install:
+  - pwd
+  - ls
   - python bootstrap.y
   - hg clone https://bitbucket.org/pagenoare/mercurial-recipe
   - pip install -e mercurial-recipe
