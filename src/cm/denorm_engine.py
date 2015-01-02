@@ -1,8 +1,11 @@
-# This is the denormalisation engine
-# his goal is to leverage on django's signal to update
-# denormalized fields
-# this should be used with beanstalk or starling
-# python client (there is 2) http://github.com/earl/beanstalkc/tree/master
+
+"""
+This is the denormalisation engine.
+
+Its goal is to leverage on django's signal to update denormalized fields.
+This should be used with the beanstalk or starling
+python client (there is 2) http://github.com/earl/beanstalkc/tree/master
+"""
 
 import logging
 from django.db.models import signals

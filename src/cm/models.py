@@ -1,4 +1,8 @@
 import re
+import pickle
+import base64
+from datetime import datetime
+
 from cm.converters.pandoc_converters import \
     CHOICES_INPUT_FORMATS as CHOICES_INPUT_FORMATS_PANDOC, \
     DEFAULT_INPUT_FORMAT as DEFAULT_INPUT_FORMAT_PANDOC, pandoc_convert
@@ -8,6 +12,7 @@ from cm.utils.dj import absolute_reverse
 from cm.utils.date import datetime_to_user_str
 from cm.utils.html import on_content_receive
 from cm.utils.comment_positioning import compute_new_comment_positions
+
 from django import forms
 from django.db.models import Q
 from django.template.loader import render_to_string
@@ -22,10 +27,9 @@ from django.template.defaultfilters import timesince
 from django.db import models
 from django.utils.translation import ugettext as _, ugettext_lazy, ugettext_noop
 from tagging.fields import TagField
-import pickle
 from django.db import connection
-from datetime import datetime
 from django.core.cache import cache
+
 
 class TextManager(Manager):
     def create_text(self, title, format, content, note, name, email, tags, user=None, state='approved', **kwargs):
@@ -39,6 +43,7 @@ class TextManager(Manager):
         text_version = TextVersion.objects.create(title=title, format=format, content=content, text=text, note=note, name=name, email=email, tags=tags, user=user)
         return text_version
     
+
 class Text(PermanentModel, AuthorModel):
     modified = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -148,6 +153,7 @@ class Text(PermanentModel, AuthorModel):
     def __unicode__(self):
         return self.title    
 
+
 DEFAULT_INPUT_FORMAT = getattr(settings, 'DEFAULT_INPUT_FORMAT', DEFAULT_INPUT_FORMAT_PANDOC)
 CHOICES_INPUT_FORMATS = getattr(settings, 'CHOICES_INPUT_FORMATS', CHOICES_INPUT_FORMATS_PANDOC)
 
@@ -181,6 +187,7 @@ class TextVersionManager(KeyManager):
                  
         return duplicate_text_version
         
+
 class TextVersion(AuthorModel, KeyModel):
     modified = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -257,6 +264,7 @@ class TextVersion(AuthorModel, KeyModel):
     def get_version_number(self):
         return TextVersion.objects.filter(text__exact=self.text).order_by('created').filter(created__lte=self.created).count()
 
+
 class CommentManager(Manager):
     
     def duplicate(self, comment, text_version, reply_to=None, keep_dates=False):
@@ -268,6 +276,7 @@ class CommentManager(Manager):
         comment.save(keep_dates=keep_dates)
         return comment
     
+
 from cm.models_base import KEY_MAX_SIZE, generate_key
 
 class Comment(PermanentModel, AuthorModel):
@@ -350,6 +359,7 @@ class Comment(PermanentModel, AuthorModel):
         self.start_wrapper = self.end_wrapper = self.start_offset = self.end_offset = -1
         self.save()
         
+
 # http://docs.djangoproject.com/en/dev/topics/files/#topics-files
 
 # default conf values
@@ -400,7 +410,6 @@ class ConfigurationManager(models.Manager):
         else:
             return None 
     
-import base64
 
 class Configuration(models.Model):
     key = models.TextField(blank=False) # , unique=True cannot be added: creates error on mysql (?)
@@ -421,6 +430,7 @@ class Configuration(models.Model):
     
 ApplicationConfiguration = Configuration.objects     
 
+
 class AttachmentManager(KeyManager):
     def create_attachment(self, text_version, filename, data):
         attach = self.create(text_version=text_version)
@@ -428,12 +438,14 @@ class AttachmentManager(KeyManager):
         attach.data.save(filename, ff)
         return attach
     
+
 class Attachment(KeyModel):
     data = models.FileField(upload_to="attachments/%Y/%m/%d/", max_length=1000)
     text_version = models.ForeignKey(TextVersion, null=True, blank=True, default=None)
 
     objects = AttachmentManager()
     
+
 class NotificationManager(KeyManager):
     def create_notification(self, text, type, active, email_or_user):
         notification = self.create(text=text, type=type, active=active)
@@ -459,6 +471,7 @@ class NotificationManager(KeyManager):
             notification.active = active
             notification.save()                
     
+
 class Notification(KeyModel, AuthorModel):
     text = models.ForeignKey(Text, null=True, blank=True)
     type = models.CharField(max_length=30, null=True, blank=True)
@@ -479,6 +492,7 @@ class Notification(KeyModel, AuthorModel):
     def __unicode__(self):
         return u"%s: %s %s %s %s" % (self.__class__.__name__, self.user, self.text, self.type, self.active )
     
+
 # right management
 class UserRoleManager(models.Manager):
     def create_userroles_text(self, text):
@@ -490,6 +504,7 @@ class UserRoleManager(models.Manager):
         # anon global user
         global_userrole, _ = self.get_or_create(user=None, text=None)
             
+
 class UserRole(models.Model):
     role = models.ForeignKey("Role", null=True, blank=True)
     
@@ -518,6 +533,7 @@ class UserRole(models.Model):
     def __repr__(self):
         return self.__unicode__()
 
+
 from cm.models_base import generate_key
 from cm.utils.misc import update
 
@@ -541,6 +557,7 @@ class Role(models.Model):
     def name_i18n(self):
         return _(self.name)
     
+
 from django.utils.safestring import mark_safe
  
 class RegistrationManager(KeyManager):
@@ -679,6 +696,7 @@ class UserProfile(KeyModel):
     
         send_mail(subject, message, ApplicationConfiguration['email_from'], [self.user.email])
         
+
 from django.db.models import signals
 
 def delete_profile(sender, **kwargs):
@@ -688,8 +706,10 @@ def delete_profile(sender, **kwargs):
     
 signals.post_delete.connect(delete_profile, sender=UserProfile)
 
+
 class ActivityManager(models.Manager):
     pass
+
 
 class Activity(models.Model):
     created = models.DateTimeField(auto_now_add=True)
