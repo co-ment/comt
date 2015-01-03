@@ -1,20 +1,25 @@
 syntax: glob
+
 *.pyc
 *~
-syntax: glob
+
 parts
 store
 eggs
 bin
 develop-eggs
 downloads
-.settings
 
-src/comt.egg-info
+.Python
 .installed.cfg
-recreate
 .pydevproject
+.settings
+.travis-solo
+.vagrant
+
+recreate
 settings_local.py
+src/comt.egg-info
 urls_local.py
 
 include/
