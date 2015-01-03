@@ -11,6 +11,7 @@ before_install:
 
 # Install Python dependencies
 install:
+  - pip install -U setuptools
   - python bootstrap.py
   - hg clone https://bitbucket.org/pagenoare/mercurial-recipe
   - pip install -e mercurial-recipe
