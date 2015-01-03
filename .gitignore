@@ -16,6 +16,7 @@ downloads
 .settings
 .travis-solo
 .vagrant
+.idea/workspace.xml
 
 recreate
 settings_local.py
