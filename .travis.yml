@@ -17,3 +17,7 @@ install:
   - pip install -e mercurial-recipe
   - ./bin/buildout -v
 
+# TODO
+script:
+  - true 
+
