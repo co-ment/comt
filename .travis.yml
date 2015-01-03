@@ -13,7 +13,7 @@ before_install:
 install:
   - pwd
   - ls
-  - python bootstrap.y
+  - python bootstrap.py
   - hg clone https://bitbucket.org/pagenoare/mercurial-recipe
   - pip install -e mercurial-recipe
   - ./bin/buildout -v
