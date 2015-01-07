@@ -65,6 +65,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   # View the documentation for the provider you're using for more
   # information on available options.
+  $puppet_update_script = %{
+  apt-get update
+  apt-get -y install --only-upgrade puppet
+  }
+
+  config.vm.provision :shell, :inline => $puppet_update_script
+
+
 
   # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.
