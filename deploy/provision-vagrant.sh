@@ -28,6 +28,7 @@ apt-get install -y `cat /vagrant/deploy/packages.list`
 
 # Libreoffice
 #apt-get install -y python-uno
+
 #apt-get install -y libreoffice-common libreoffice-core \
 #  libreoffice-style-galaxy python-uno
 
