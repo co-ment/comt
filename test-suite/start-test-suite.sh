@@ -1,15 +1,36 @@
 #!/bin/bash
 
-export LANG=en_US.UTF-8
-
-echo "Starting test server"
 
 TESTSERVER_LOGS="/tmp/django_test_server_logs.`date +%F_%T`"
 
-cd ..
-nohup ./bin/django testserver --noinput localhost:8000 initial_data roles_generic test_suite > $TESTSERVER_LOGS 2>&1 &
-TESTSERVER_PID=$!
-cd "test-suite"
+if [ -z "$WORKSPACE_INFO" ]; then
+    WORKSPACE_INFO="workspace.info.js"
+fi
+
+WORKSPACE_URL_LINE=`grep -v '^[[:space:]]*//' "$WORKSPACE_INFO" | grep WORKSPACE_URL | head -n 1`
+echo "Workspace_url_line : $WORKSPACE_URL_LINE"
+
+SERVER_IP=`echo "$WORKSPACE_URL_LINE" | sed "s|^.*http://\([-._[:alnum:]]*\).*$|\1|"`
+if [ "$SERVER_IP" = "$WORKSPACE_URL_LINE" ]; then
+    echo "No ip found in WORKSPACE_URL, using localhost"
+    SERVER_IP="127.0.0.1"
+fi
+
+SERVER_PORT=`echo "$WORKSPACE_URL_LINE" | sed "s|^.*http://[-._[:alnum:]]*:\([0-9]*\).*$|\1|"`
+if [ "$SERVER_PORT" = "$WORKSPACE_URL_LINE" ]; then
+    echo "No port found in WORKSPACE_URL, using 80"
+    SERVER_PORT="80"
+fi
+
+echo "Test server : $SERVER_IP:$SERVER_PORT"
+
+if [ -z "$TESTSERVER_STARTED" ]; then
+    echo "Starting test server"
+    cd ..
+    nohup ./bin/django testserver --noinput localhost:$SERVER_PORT initial_data roles_generic test_suite > $TESTSERVER_LOGS 2>&1 &
+    TESTSERVER_PID=$!
+    cd "test-suite"
+fi
 
 # Exports browsers _BIN variables for karma
 export CHROME_BIN=`which chromium`
@@ -34,8 +55,10 @@ if [[ -z "$SAFARI_BIN" && $OSTYPE =~ ^darwin ]]; then
 	export SAFARI_BIN="$SAFARI_BIN_BASE/Contents/MacOS/safari"
 fi
 
-if [ -x /usr/lib/node_modules/karma/bin/ ]; then
-   KARMA=/usr/lib/node_modules/karma/bin/karma
+if [ -x ./node_modules/.bin/karma ]; then
+   KARMA=./node_modules/.bin/karma
+elif [ -x ./node_modules/karma/bin/karma ]; then
+   KARMA=./node_modules/karma/bin/karma
 else
    KARMA=`which karma`
 fi
@@ -44,10 +67,7 @@ fi
 CONNECTION_TIMEOUT=10
 TESTSERVER_START_WAIT=15
 TESTSERVER_LOOP_WAIT=5
-TESTSERVER_WAIT_LOOP_NB=7
-
-SERVER_IP=`grep WORKSPACE_URL workspace.info.js | sed "s|^.*'http://\([-._[:alnum:]]*\):.*$|\1|"`
-SERVER_PORT=`grep WORKSPACE_URL workspace.info.js | sed "s|^.*http://[-._[:alnum:]]*:\([0-9]*\)/.*$|\1|"`
+TESTSERVER_WAIT_LOOP_NB=5
 
 if [[ -x `which nc` ]]; then
 	SERVER_TEST_CMD="nc -w $CONNECTION_TIMEOUT -z $SERVER_IP $SERVER_PORT"
@@ -63,16 +83,17 @@ if [[ -z "$SERVER_TEST_CMD" ]]; then
 	echo "No http tool available so blindly waiting $TESTSERVER_START_WAIT seconds to let test server start"
 	sleep $TESTSERVER_START_WAIT
 else
+	SERVER_STARTED=false
 	for i in $(seq 1 $TESTSERVER_WAIT_LOOP_NB); do
 		echo "and waiting $TESTSERVER_LOOP_WAIT seconds"
 		sleep $TESTSERVER_LOOP_WAIT
 		if $SERVER_TEST_CMD; then
+			SERVER_STARTED=true
 			break
 		fi
 	done
-	if [ $i -eq $TESTSERVER_WAIT_LOOP_NB ]; then
+	if ! $SERVER_STARTED && [ $i -eq $TESTSERVER_WAIT_LOOP_NB ]; then
 		 echo "timeouted waiting for test server $SERVER_IP:$SERVER_PORT to start"
-		 kill $TESTSERVER_PID
 		 exit 1
 	fi
 fi
@@ -81,11 +102,14 @@ echo "---------------------"
 echo "$KARMA start $@"
 "$KARMA" start $@
 
-read -p "Keep testserver (PID $TESTSERVER_PID) running ? (y/N) " -n 1 -r -t 5
-echo    # (optional) move to a new line
 
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-	exit 0
+if [ -z "$TESTSERVER_STARTED" ]; then
+    read -p "Keep testserver (PID $TESTSERVER_PID) running? (y/N) " -n 1 -r -t 5
+    echo    # (optional) move to a new line
+    
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+    	exit 0
+    fi
+
+    kill $TESTSERVER_PID
 fi
-
-kill $TESTSERVER_PID

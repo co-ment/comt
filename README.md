@@ -78,25 +78,25 @@ CC-BY (<http://creativecommons.org/licenses/by/3.0/>) for translation files
 
   4 a) Postgresql
 
-    - Install and configure database server [skip this step if use an external database server] 
-      (ubuntu users : `sudo apt-get install postgresql`)                
+    - Install and configure database server [skip this step if use an external database server]
+      (ubuntu users : `sudo apt-get install postgresql`)
 
     - Install database client
-      (ubuntu users : `sudo apt-get install postgresql-client`)                
+      (ubuntu users : `sudo apt-get install postgresql-client`)
 
     - Install python database connector: psycopg2
-      (ubuntu users : `sudo apt-get install python-psycopg2`)                
+      (ubuntu users : `sudo apt-get install python-psycopg2`)
 
   4 b) Mysql
 
     - Install and configure mysql server [skip this step if use an external database server]
-       (ubuntu users : `sudo apt-get install mysql-server`)                
+       (ubuntu users : `sudo apt-get install mysql-server`)
 
     - Install database client
       (ubuntu users : `sudo apt-get install mysql-client`)
 
     - Install python database connector: mysqldb
-      (ubuntu users : `sudo apt-get install python-mysqldb`)                                                
+      (ubuntu users : `sudo apt-get install python-mysqldb`)
 
 5. Create a database (we recommend UTF8 encoding) and a read/write access to it. (skip this step if you plan to use a sqlite database)
 
@@ -107,7 +107,7 @@ CC-BY (<http://creativecommons.org/licenses/by/3.0/>) for translation files
 6. Setup the project and get dependencies
 
   - `python bootstrap.py`
-  - `./bin/buildout` 
+  - `./bin/buildout`
 
 7. Configure Comt to your settings
 
@@ -130,6 +130,60 @@ CC-BY (<http://creativecommons.org/licenses/by/3.0/>) for translation files
 11. Access your Comt instance by pointing your browser to http://127.0.0.1:8000/
 
 
+## Installation (Vagrant development box)
+
+The second option is to use the vagrant virtual machine defined in the `dev` folder.
+For this you need first to install Vagrant for your platform (c.f. http://www.vagrantup.com/), open a terminal in the `dev` folder and launch the command
+
+`$ vagrant up`
+
+This will create a virtual box, using the private address 172.16.1.2. An instance of comt can be reached at the following url http://172.16.1.2.
+
+The provisioning tool used is Puppet and the manifest (cf `dev/manifests/site.pp`) uses some external modules (c.f. `dev/modules/` except `dev/modules/sysconfig`). These modules are referenced as git submodule. Therefore you mus ensure that all the submodules have been cloned also. There is two ways to make this:
+
+- pass the `--recursive` option to `git clone` when cloning the Co-ment repository :
+`$ git clone --recursive https://github.com/co-ment/comt.git`
+- or on an existing cloned repository :
+`$ git submodule init && git submodule install`
+
+
+The installation have the following parameters:
+- The root of the project is mapped on `/srv/comt` on the dev box.
+- The web server is nginx (http://nginx.org/).
+- The web pages are served as a wsgi application with gunicorn (http://gunicorn.org/).
+- The gunicorn processes are monitored by supervisor (http://supervisord.org/).
+- Openoffice is installed but is not launched as an headless instance (althought it could be easily setup with supervisor).
+- The dev box uses a virtual network with the ip 172.16.1.2 (this can be changed in the Vagrant config).
+- The box is provisioned using puppet (http://puppetlabs.com/).
+- Most of the configuration is done in the sysconfig module found in `dev/modules/sysconfig`.
+- All the other subdirectories of `dev/modules` are puppet modules used during the box provisioning. All the folders are sub-repositories and are checked-out using git.
+
+Moreover, the following parameters are set :
+
+| var name       | default     |
+|----------------|-------------|
+| db_name        | coment      |
+| db_user        | coment_user |
+| db_pw          | coment      |
+| db_host        | 127.0.0.1   |
+| db_port        | 5432        |
+| superuser_name | admin       |
+| superuser_pw   | dev@co-ment |
+
+These values can be overriden by creating a `custom.yaml` file in the `dev` folder. The file `custom.yaml.tmpl` gives a template for the format of this file.
+if the db_host is empty or 'localhost', or '127.0.0.1', the database is considered local to the box and a postgresql server is installed in the virtual server.
+Otherwise, the server is considered remote and only the postgresql client libraries are installed on the dev box.
+Also in this case, the database (db_name) and user (db_user) are not created automatically.
+You must ensure that they are already created on the postgresql server with the adequate authorizations, and that the user can connect on the 'remote' server from the dev box.
+
+The creation of the virtual machine will create some files in your source tree (`buildout-dev.cfg, test-suite/start-test-suite-dev.js,...`). These files are necessary to the correct operation of the dev virtual machine and should not be touched. They are generated by Puppet during the provisioning of the Vagrant box. If they need to be adapted you will find them in the `sysconfig` puppet module.
+Please note that they should not be added to the versioning tool (git) and are currently already ignored.
+
+After you are done with the virtual machine (or if you need to start afresh) they can be cleaned by launching the `clean-testserver.sh` script. Please note that except the files directly managed by Vagrant,the script clean **all** trace of the virtual machine in the source tree, including the buildout `bin` and `egg` folders.
+
+Please refer to the available online documentation for more details on the various tools used here.
+
+
 
 ## Installation (production environment)
 
@@ -150,7 +204,7 @@ Upgrading you database should only need one command:
 
 - `./bin/buildout`
 - `./bin/django migrate --settings=settings`
-   
+
 ### Upgrade from alpha releases
 
 If your database was created using comt alpha prior to the revision 29, here are the commands you should run:
@@ -183,7 +237,7 @@ To use openoffice, on a development setup, you should make sure no openoffice pr
 - django <http://www.djangoproject.com/> BSD License
 - python magic <http://hupp.org/adam/hg/python-magic> permissive BSD style license
 - Beautiful soup <http://www.crummy.com/software/BeautifulSoup/> PSF license
-- python-chardet <http://chardet.feedparser.org/> LGPL 
+- python-chardet <http://chardet.feedparser.org/> LGPL
 - python-feedparser <http://feedparser.org/> "Permissive" custom license
 - python-imaging <http://www.pythonware.com/products/pil/> http://www.pythonware.com/products/pil/license.htm
 - python-pytz
@@ -195,7 +249,7 @@ To use openoffice, on a development setup, you should make sure no openoffice pr
 - python-pexpect
 - python-cssutils
 
-### Icons 
+### Icons
 
 Icons derived from FatCow Icon Set (<http://www.fatcow.com/free-icons/index.bml>) (Creative Commons Attribution 3.0 License)
 
@@ -224,7 +278,7 @@ R3: For this feature (commentator name = drupal login name) to be available, a c
 Q4: I get 'import error' when starting the server (step #9)
 
 R4: Make sure you installed all required python dependencies
-                      
+
 
 ## Community
 
@@ -234,7 +288,7 @@ The Comt web site <http://www.co-ment.org/> is the place to ask questions, repor
 ## How to contribute
 
 We use GitHub as our collaboration tool.
- 
+
 ### Reporting issues
 
 Please use the GitHub issue tracker for the project: <>
@@ -269,4 +323,4 @@ Run:
 
     cd src/cm
     ../../bin/django makemessages -l LG -e .html,.txt
-    ../../bin/django makemessages -d djangojs -l LG 
+    ../../bin/django makemessages -d djangojs -l LG

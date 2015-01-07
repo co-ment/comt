@@ -25,11 +25,11 @@ class sysconfig::packages {
       'libreoffice-script-provider-python',
       'python-uno'
   ]
-  
+
   package { $coment_pkgs: ensure => "installed" }
 
   #upgrade setuptools
-  exec { '/usr/bin/easy_install --upgrade setuptools': require => Package[$coment_pkgs]}
+  exec { '/usr/bin/pip install --upgrade setuptools': require => Package[$coment_pkgs]}
 
   augeas { "sshd_config":
     context => "/files/etc/ssh/sshd_config",

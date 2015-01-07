@@ -46,5 +46,6 @@ module.exports = function(config) {
 		autoWatch: false,
 		// Continuous Integration mode : if true, it capture browsers, run tests and exit
 		singleRun: true,
+		browserNoActivityTimeout: 100000,
 	});
 };

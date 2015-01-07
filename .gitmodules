@@ -1,0 +1,18 @@
+[submodule "dev/modules/nginx"]
+	path = dev/modules/nginx
+	url = https://github.com/jfryman/puppet-nginx.git
+[submodule "dev/modules/stdlib"]
+	path = dev/modules/stdlib
+	url = https://github.com/puppetlabs/puppetlabs-stdlib.git
+[submodule "dev/modules/apt"]
+	path = dev/modules/apt
+	url = https://github.com/puppetlabs/puppetlabs-apt.git
+[submodule "dev/modules/postgresql"]
+	path = dev/modules/postgresql
+	url = https://github.com/puppetlabs/puppetlabs-postgresql.git
+[submodule "dev/modules/supervisord"]
+	path = dev/modules/supervisord
+	url = https://github.com/adedommelin/puppet-supervisord.git
+[submodule "dev/modules/concat"]
+	path = dev/modules/concat
+	url = https://github.com/puppetlabs/puppetlabs-concat.git

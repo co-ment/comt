@@ -1,0 +1,21 @@
+{
+  "name": "test-suite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "karma.conf.js",
+  "repository": "https://github.com/co-ment/comt.git",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {},
+  "author": "",
+  "license": "",
+  "devDependencies": {
+    "karma": "^0.12.31",
+    "karma-chrome-launcher": "^0.1.7",
+    "karma-e2e-dsl": "git://github.com/Siltaar/karma-e2e-dsl",
+    "karma-firefox-launcher": "^0.1.4",
+    "karma-mocha": "^0.1.10",
+    "karma-phantomjs-launcher": "^0.1.4"
+  }
+}
