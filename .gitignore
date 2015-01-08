@@ -29,12 +29,11 @@ local/
 mercurial-recipe/
 
 buildout-dev.cfg
-dev/modules/
 dev/custom.yaml
 src/cm/settings_dev.py
+test-suite/node_modules
 test-suite/clean-testserver.sh
 test-suite/karma.conf.dev.js
-test-suite/node_modules/
 test-suite/start-test-suite-dev.sh
 test-suite/start-testserver.sh
 test-suite/workspace.info.dev.js
