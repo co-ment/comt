@@ -12,12 +12,10 @@ before_install:
 # Install Python dependencies
 install:
   - pip install -U setuptools
-  - python bootstrap.py
-  - hg clone https://bitbucket.org/pagenoare/mercurial-recipe
-  - pip install -e mercurial-recipe
-  - ./bin/buildout -v
+  - python bootstrap-buildout.py
+  - bin/buildout -v
 
-# TODO
+# Setup and run tests
 script:
-  - true 
+  - bin/django test --settings=settings
 
