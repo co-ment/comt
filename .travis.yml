@@ -2,20 +2,26 @@ language: python
 python:
   - "2.7"
 
+addons:
+  - postgresql: "9.3"
+
 # Install OS dependencies
 before_install:
   - sudo rm -rf /dev/shm && sudo ln -s /run/shm /dev/shm
-  - sudo apt-get update
+  - sudo apt-get update -qq
   - cat /etc/lsb-release
-  - sudo sh deploy/provision.sh
+  - apt-get install -y python-dev g++ libtidy-dev pandoc python-magic \
+    python-psycopg2 libpq-dev
 
 # Install Python dependencies
 install:
-  - pip install -U setuptools
   - python bootstrap-buildout.py
   - bin/buildout -v
+  - cp deploy/settings_travis.py settings_local.py
 
-# Setup and run tests
+before_script:
+  - psql -c 'create database comt;' -U postgres
+
+# Run tests
 script:
   - bin/django test --settings=settings
-

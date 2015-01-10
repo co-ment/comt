@@ -5,7 +5,12 @@
 #   mkdir /var/www/.qt ; chown www-data:www-data /var/www/.qt
 #   mkdir /var/www/.kde ; chown www-data:www-data /var/www/.kde
 
-UNO_IMPORT = True
+# FIXME: use a setting or do this uno stuff lazily
+try:
+    import uno
+    UNO_IMPORT = True
+except:
+    UNO_IMPORT = False
 
 if UNO_IMPORT:
     import uno
