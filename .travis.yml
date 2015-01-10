@@ -10,7 +10,7 @@ before_install:
   - sudo rm -rf /dev/shm && sudo ln -s /run/shm /dev/shm
   - sudo apt-get update -qq
   - cat /etc/lsb-release
-  - apt-get install -y python-dev g++ libtidy-dev pandoc python-magic \
+  - sudo apt-get install -y python-dev g++ libtidy-dev pandoc python-magic \
     python-psycopg2 libpq-dev
 
 # Install Python dependencies
