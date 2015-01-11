@@ -51,11 +51,9 @@ LAUNCH = 'xvfb-run soffice -headless "-accept=socket,port=2002;urp;"'
 #  soffice "-accept=socket,port=2002;urp;";
 
 
-ms = magic.open(magic.MAGIC_NONE)
-ms.load()
 
 def is_text(buffer):
-    type = ms.buffer(buffer)
+    type = magic.from_buffer(buffer)
     return ' text, ' in type
 
 def fix_text_encoding(buffer, to_encoding = 'utf-8'):
