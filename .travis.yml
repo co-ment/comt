@@ -22,5 +22,4 @@ before_script:
 
 # Run tests
 script:
-  - bin/python -c 'import magic'
   - bin/django test --settings=settings
