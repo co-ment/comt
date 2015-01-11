@@ -10,6 +10,7 @@ before_install:
   - sudo rm -rf /dev/shm && sudo ln -s /run/shm /dev/shm
   - sudo apt-get update -qq
   - sudo apt-get install -y git-core python-dev g++ libtidy-dev pandoc python-magic libpq-dev
+  - python -c 'import magic'
 
 # Install Python dependencies
 install:
@@ -22,4 +23,5 @@ before_script:
 
 # Run tests
 script:
+  - bin/python -c 'import magic'
   - bin/django test --settings=settings
