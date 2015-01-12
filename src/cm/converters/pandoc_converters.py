@@ -1,22 +1,23 @@
-# python 2.5 compat
-from __future__ import with_statement
-import tidylib
-from cm.utils.cache import memoize, dj_memoize
 ######
-## This module requires pandoc v > 1.0 (pandoc & markdown executables) 
+## This module requires pandoc v > 1.0 (pandoc & markdown executables)
 ######
 
-from subprocess import Popen, PIPE, call
+from subprocess import call
 import os
 from tempfile import mkstemp
-import StringIO
-from cm.utils.string_utils import to_unicode
-from BeautifulSoup import BeautifulSoup
 import re
 from distutils.version import LooseVersion
+import commands
+
+import tidylib
+from BeautifulSoup import BeautifulSoup
+
+from cm.utils.cache import dj_memoize
+from cm.utils.string_utils import to_unicode
+from cm.utils.system import bin_search
+
 
 PANDOC_BIN = "pandoc"
-import commands
 PANDOC_VERSION = commands.getstatusoutput(PANDOC_BIN + " -v|head -n 1|awk '{print $2;}'")[1]
 if LooseVersion(PANDOC_VERSION) < '1.8':
   PANDOC_OPTIONS = " --sanitize-html --email-obfuscation=none "
@@ -31,7 +32,6 @@ else:
   MARKDOWN2PDF_BIN = None
 
 # make sure binaries are available
-from cm.utils.system import bin_search
 bin_search(PANDOC_BIN)
 if MARKDOWN2PDF_BIN:
   bin_search(MARKDOWN2PDF_BIN)

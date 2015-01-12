@@ -14,6 +14,8 @@ pytz
 pyyaml
 simplejson
 south
+cssutils
+pexpect
 
 # Development
 pytest

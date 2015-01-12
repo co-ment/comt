@@ -2,28 +2,30 @@ import pickle
 import base64
 from datetime import datetime
 
+from django.conf import settings
+from django.core.cache import cache
+from django.core.files.base import ContentFile
+from django.core.urlresolvers import reverse
+from django.template.defaultfilters import timesince
+from django.template.loader import render_to_string
+from django.db import models, connection
+from django.db.models import Q
+from django.utils.translation import ugettext as _, ugettext_lazy as _l
+from django.contrib.auth.models import Permission, User
+from tagging.fields import TagField
+
+from cm.models_base import PermanentModel, KeyManager, Manager, KeyModel, \
+    AuthorModel, generate_key
+from cm.role_models import change_role_model
 from cm.converters.pandoc_converters import \
     CHOICES_INPUT_FORMATS as CHOICES_INPUT_FORMATS_PANDOC, \
     DEFAULT_INPUT_FORMAT as DEFAULT_INPUT_FORMAT_PANDOC, pandoc_convert
-from cm.models_base import PermanentModel, KeyManager, Manager, KeyModel, AuthorModel
-from cm.models_utils import *
 from cm.utils.dj import absolute_reverse
 from cm.utils.date import datetime_to_user_str
 from cm.utils.html import on_content_receive
 from cm.utils.comment_positioning import compute_new_comment_positions
+from cm.utils.misc import update
 
-from django.db.models import Q
-from django.template.loader import render_to_string
-from django.conf import settings
-from django.core.files.base import ContentFile
-from django.core.urlresolvers import reverse
-from django.template.defaultfilters import timesince
-from django.db import models
-from django.utils.translation import ugettext as _, ugettext_lazy as _l
-from tagging.fields import TagField
-from django.db import connection
-from django.core.cache import cache
-from django.contrib.auth.models import Permission
 
 
 class TextManager(Manager):
@@ -219,8 +221,6 @@ class TextVersion(AuthorModel, KeyModel):
 
     mod_posteriori = models.BooleanField(_l('Moderation a posteriori?'), default=True)
 
-    from django.utils.safestring import mark_safe
-
     category_1 = models.CharField(
         _l("Label for the first category of comments"),
         max_length=20, null=True, blank=True)
@@ -302,7 +302,8 @@ class CommentManager(Manager):
         return comment
     
 
-from cm.models_base import KEY_MAX_SIZE, generate_key
+from cm.models_base import KEY_MAX_SIZE
+
 
 class Comment(PermanentModel, AuthorModel):
     modified = models.DateTimeField()
@@ -398,8 +399,6 @@ DEFAULT_CONF = {
     'site_url': settings.SITE_URL,
     'email_from': settings.DEFAULT_FROM_EMAIL,
 }
-
-from cm.role_models import change_role_model
 
 class ConfigurationManager(models.Manager):
     def set_workspace_name(self, workspace_name):
@@ -563,9 +562,6 @@ class UserRole(models.Model):
     def __repr__(self):
         return self.__unicode__()
 
-
-from cm.models_base import generate_key
-from cm.utils.misc import update
 
 class Role(models.Model):
     """
@@ -866,7 +862,7 @@ import cm.main
 import cm.activity
 import cm.notifications
 
-# we fill username with email so we need a bigger value 
+# we fill username with email so we need a bigger value
 User._meta.get_field('username').max_length = 75
 
 import monkey_patches

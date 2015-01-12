@@ -8,7 +8,9 @@ python client (there is 2) http://github.com/earl/beanstalkc/tree/master
 """
 
 from django.db.models import signals
+
 from cm.models import TextVersion, Text
+
 
 
 # Text denormalisation

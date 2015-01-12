@@ -1,29 +1,25 @@
-from cm.cm_settings import VALID_EMAIL_FOR_PUBLISH, SITE_NAME
-from cm.converters import convert_from_mimetype
-from cm.converters.pandoc_converters import pandoc_convert
-from cm.models import Text, TextVersion, Comment, Attachment
-from cm.utils.files import remove_extension
-from cm.utils.mail import EmailMessage
-from cm.views import get_text_by_keys_or_404
+import os
+import re
+from base64 import b64decode
+
 from django import forms
-from cm.message import display_message
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.forms import ModelForm
 from django.forms.util import ErrorList
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.template.loader import render_to_string
 from django.utils.translation import ugettext as _, ugettext_lazy
 from django.db import connection, transaction
-from mimetypes import guess_type
+from BeautifulSoup import BeautifulStoneSoup
+
+from cm.converters import convert_from_mimetype
+from cm.models import Text, TextVersion, Comment, Attachment
+from cm.utils.files import remove_extension
+from cm.message import display_message
 from cm.activity import register_activity
 from cm.security import has_global_perm
-import os
-from BeautifulSoup import BeautifulStoneSoup
-import re
-from base64 import b64decode
 
 
 class CreateTextUploadForm(ModelForm):
@@ -32,7 +28,8 @@ class CreateTextUploadForm(ModelForm):
                            help_text=ugettext_lazy("Upload a file from your computer instead of using the direct input above"),)
 
     title = forms.CharField(required=False,
-                                  label=ugettext_lazy("Title"))
+                            label=ugettext_lazy("Title"))
+
     class Meta:
         model = TextVersion
         fields = ('title', 'format', 'tags') #, 'note'

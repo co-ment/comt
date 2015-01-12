@@ -1,10 +1,8 @@
 from django.core import mail
 from django.test import TestCase
 from django.test.client import Client
-from django.core import management
 
-from cm.models import *
-from cm.models_utils import *
+from cm.models import Notification
 
 
 class NotificationTest(TestCase):

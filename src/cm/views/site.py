@@ -1,27 +1,25 @@
-from django.db.models import Q
-from django.contrib.auth.decorators import login_required
-from cm.security import get_viewable_comments, get_viewable_activities
+from django import forms
+from django.conf import settings
+from django.contrib.auth.forms import AuthenticationForm
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from django.template.loader import render_to_string
+from django.utils.translation import ugettext as _, ugettext_lazy
+from django.views.generic.list_detail import object_list
+from django.core.cache import cache
+
+from cm.security import get_viewable_activities
 from cm.message import display_message
-from cm.models import Comment, Activity, UserProfile, Notification
-from cm.models_utils import Email
+from cm.models import UserProfile
 from cm.security import has_global_perm
 from cm.security import get_texts_with_perm, has_perm
 from cm.utils import get_among, get_int
 from cm.utils.mail import send_mail
 from cm.views.user import cm_login
-from django import forms
-from django.conf import settings
-from django.contrib.auth.forms import AuthenticationForm
-from django.core.urlresolvers import reverse
-from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.shortcuts import render_to_response
-from django.template import RequestContext
-from django.template.loader import render_to_string
-from django.utils.translation import get_language, ugettext as _, ugettext_lazy
-from django.views.generic.list_detail import object_list
-from django.contrib.auth.models import User
-from cm.models import Text, TextVersion, Attachment, Comment, Configuration, Activity
-from django.core.cache import cache
+from cm.models import Attachment, Comment, Configuration
+
 
 ACTIVITY_PAGINATION = 10
 RECENT_TEXT_NB = 5

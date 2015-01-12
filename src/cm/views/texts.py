@@ -1,15 +1,24 @@
-import difflib
 from difflib import unified_diff
 import logging
 import mimetypes
-from django.contrib.contenttypes.models import ContentType
-import simplejson
-import sys
 import re
 import imghdr
-import base64
+
 import cssutils
-from os.path import basename
+import simplejson
+from django.forms.util import ErrorList
+from django import forms
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.contenttypes.models import ContentType
+from django.forms import ModelForm
+from django.forms.models import BaseModelFormSet
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from django.utils.translation import ugettext as _, ugettext_lazy
+from django.views.generic.list_detail import object_list
+from django.db.models.sql.datastructures import EmptyResultSet
+from tagging.models import Tag
 
 from cm.utils.embed import embed_html
 from cm.activity import register_activity
@@ -19,36 +28,17 @@ from cm.cm_settings import NEW_TEXT_VERSION_ON_EDIT
 from cm.exception import UnauthorizedException
 from cm.message import *
 from cm.models import *
-from django.forms.util import ErrorList
-from cm.models_base import generate_key
 from cm.security import get_texts_with_perm, has_perm, get_viewable_comments, \
     has_perm_on_text
-from cm.utils import get_among, get_among, get_int
+from cm.utils import get_among, get_int
 from cm.utils.html import on_content_receive
 from cm.utils.comment_positioning import compute_new_comment_positions, \
     insert_comment_markers
 from cm.utils.spannifier import spannify
-from cm.views import get_keys_from_dict, get_textversion_by_keys_or_404, get_text_by_keys_or_404, redirect
+from cm.views import get_keys_from_dict, get_textversion_by_keys_or_404, \
+    get_text_by_keys_or_404, redirect
 from cm.views.export import content_export2, xml_export
-from cm.views.user import AnonUserRoleForm, cm_login
-from django import forms
-from django.conf import settings
-from django.contrib.auth import login as django_login
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
-from django.db.models import Q
-from django.forms import ModelForm
-from django.forms.models import BaseModelFormSet, modelformset_factory
-from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.shortcuts import render_to_response
-from django.template import RequestContext
-from django.template.loader import render_to_string
-from django.utils.translation import ugettext as _, ugettext_lazy
-from django.views.generic.list_detail import object_list
-from tagging.models import Tag
-from django.db.models.sql.datastructures import EmptyResultSet
-from django.core.cache import cache
+from cm.views.user import cm_login
 
 
 def get_text_and_admin(key, adminkey, assert_admin = False):
@@ -466,7 +456,6 @@ def text_view_frame(request, key, version_key=None, adminkey=None):
         text_version = get_textversion_by_keys_or_404(version_key, adminkey, key)
     else :
         text_version = text.get_latest_version()
-    from cm.models import ApplicationConfiguration
     template_dict = {'text' : text, 'text_version' : text_version}
     return render_to_response('site/text_view_frame.html',
                               template_dict,

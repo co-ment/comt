@@ -1,10 +1,8 @@
 from django.test import TestCase
-from django.test.client import Client
-from django.core import management
-from datetime import datetime
+
 from cm.activity import *
-from cm.models import *
 from cm.security import *
+
 
 class ActivityTest(TestCase):
     fixtures = ['roles_generic','test_content']

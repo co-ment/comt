@@ -1,4 +1,6 @@
-import difflib, string
+import difflib
+import string
+
 from django.utils.translation import ugettext as _
 
 
@@ -40,7 +42,7 @@ COLORS = [
     '#770000',
 ]
 
-from colorsys import hls_to_rgb, hsv_to_rgb
+from colorsys import hsv_to_rgb
 
 def generatePastelColors(n):
     s = .4

@@ -1,5 +1,5 @@
 import logging
-from django.db.models import signals
+
 
 def logger_config():
     # create logger

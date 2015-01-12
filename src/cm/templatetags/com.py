@@ -1,5 +1,18 @@
+from datetime import datetime
+from time import struct_time
+
 from django import template
-from django.template import Node, NodeList, Template, Context, Variable
+from django.template import Node, Variable
+from django.core.urlresolvers import reverse, NoReverseMatch
+from django.utils.translation import ugettext as _
+from django.utils.dateformat import format
+from pytz import UnknownTimeZoneError
+
+from cm.models import Text, UserProfile
+from cm.utils.timezone import tz_convert
+from cm.utils.log import error_mail_admins
+
+
 
 register = template.Library()
 
@@ -14,7 +27,6 @@ def do_current_time(parser, token):
     return CurrentTimeNode(format_string[1:-1])
 
 
-import datetime
 class CurrentTimeNode(template.Node):
     def __init__(self, format_string):
         self.format_string = format_string
@@ -36,9 +48,8 @@ def do_choice_string(parser, token):
         raise 
     #if not (format_string[0] == format_string[-1] and format_string[0] in ('"', "'")):
     #    raise template.TemplateSyntaxError, "%r tag's argument should be in quotes" % tag_name
-        
 
-import datetime
+
 class ChoiceStringNode(template.Node):
     def __init__(self, *args):
         new_args = [u'or'] + args[0]
@@ -69,8 +80,6 @@ class ChoiceStringNode(template.Node):
 
 register.tag('choice_string', do_choice_string)
 
-
-from django.core.urlresolvers import reverse, NoReverseMatch
 
 class URLNode(Node):
     def __init__(self, view_name, admin_key, args, kwargs, asvar):
@@ -126,15 +135,6 @@ def int_display(value):
     else:
         return str(value)
 int_display.is_safe = True
-
-
-from django.utils.translation import ugettext as _
-from django.utils.dateformat import format
-from datetime import datetime
-from time import struct_time
-from cm.utils.timezone import tz_convert
-from pytz import UnknownTimeZoneError
-from cm.utils.log import error_mail_admins
 
 
 @register.filter
@@ -220,9 +220,6 @@ class UpDownNode(template.Node):
         return '<a class="%s" href="?%s">%s</a>' %(node_class, new_get.urlencode(),output)
 
 
-from cm.security import get_viewable_comments
-from cm.models import Text
-
 @register.filter(name='nb_comments')
 def nb_comments(text, request):
     if type(text) == Text:
@@ -258,7 +255,6 @@ def do_nb_texts(parser, token):
     return NbTexts(var_name)
 
 
-from cm.models import UserProfile
 class NbUsers(template.Node):
     def __init__(self, var_name):
         self.var_name = var_name 
@@ -277,7 +273,6 @@ def do_nb_users(parser, token):
     return NbUsers(var_name)
 
 
-from cm.models import Comment
 class NbComments(template.Node):
     def __init__(self, text, var_name):
         self.text = text

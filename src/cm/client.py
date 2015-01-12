@@ -1,32 +1,33 @@
-from itertools import groupby
-from time import mktime, sleep
-import re
-import time
-import operator
+from time import sleep
 
+from django.http import HttpResponse
+from django.core.urlresolvers import reverse
 from django.core.validators import email_re
-from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.cache import cache
+from django.db.models import Q
 from django.forms import ValidationError
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.models import User
 from django.utils import simplejson
 from django.utils.translation import ugettext as _
+from tagging.fields import TagField
 from tagging.models import Tag
-from tagging.utils import parse_tag_input, LOGARITHMIC, calculate_cloud
-from tagging.models import TaggedItem
-from cm.models import *
-from cm.utils.timezone import request_tz_convert
+from tagging.utils import parse_tag_input, LOGARITHMIC
+
+from cm.models import Comment, Text, TextVersion, Notification
 from cm.converters.pandoc_converters import pandoc_convert
-from cm.security import get_viewable_comments, list_viewable_comments, has_perm, has_perm_on_text, has_perm_on_comment, has_own_perm
+from cm.security import get_viewable_comments, list_viewable_comments, \
+    has_perm, has_perm_on_text, has_perm_on_comment, has_own_perm
 from cm.activity import register_activity
+from cm.utils.timezone import request_tz_convert
 from cm.utils.date import datetime_to_user_str, datetime_to_epoch
 from cm.cm_settings import AUTO_CONTRIB_REGISTER, DECORATED_CREATORS
-from settings import CLIENT_DATE_FMT
-from django.core.cache import cache
-from django.contrib.contenttypes.models import ContentType
 
 
 selection_place_error_msg = _(u'A selection is required. Select in the text the part your comment applies to.')
 comment_states = ('approved', 'unapproved', 'pending')
+
 
 def is_valid_email(email):
     return email_re.match(email)
@@ -40,8 +41,7 @@ class RequestComplexEncoder(simplejson.JSONEncoder):
     def __init__(self, request, **kw):
         self.request = request
         simplejson.JSONEncoder.__init__(self, **kw)
-        
-        
+
     def default(self, obj):
         if isinstance(obj, Comment) :
             comment = obj
@@ -64,27 +64,28 @@ class RequestComplexEncoder(simplejson.JSONEncoder):
                    'modified' : datetime_to_epoch(comment.modified),  
 #                   'modified' : time.mktime(comment.modified.timetuple()),  
 #                   'created' : datetime_to_js_date_str(comment.created),
-                   'reply_to_id' : comment.reply_to_id,
-                   'replies' : replies,
-                   'name' : comment.get_name(), 
-                   'email' : comment.get_email(), 
-                   'logged_author' : (comment.user != None), 
-                   'title':comment.title,
-                   'content':comment.content, 
-                   'content_html':comment.content_html, 
-                   'tags': ', '.join(parse_tag_input(comment.tags)), 
-                   'category': comment.category,
-                   'format': comment.format, 
-                   'start_wrapper' : comment.start_wrapper, 
-                   'end_wrapper' : comment.end_wrapper,
-                   'start_offset' : comment.start_offset, 
-                   'end_offset' : comment.end_offset,
-                   'state' : comment.state,
-                   'permalink' : reverse('text-view-show-comment', args=[text.key, comment.id_key]),
-                   # permission
-                   'can_edit' : can_edit,
-                   'can_delete' : can_delete,
-                   'can_moderate' : can_moderate,
+                    'reply_to_id': comment.reply_to_id,
+                    'replies': replies,
+                    'name': comment.get_name(),
+                    'email': comment.get_email(),
+                    'logged_author': (comment.user != None),
+                    'title': comment.title,
+                    'content': comment.content,
+                    'content_html': comment.content_html,
+                    'tags': ', '.join(parse_tag_input(comment.tags)),
+                    'category': comment.category,
+                    'format': comment.format,
+                    'start_wrapper': comment.start_wrapper,
+                    'end_wrapper': comment.end_wrapper,
+                    'start_offset': comment.start_offset,
+                    'end_offset': comment.end_offset,
+                    'state': comment.state,
+                    'permalink': reverse('text-view-show-comment',
+                                         args=[text.key, comment.id_key]),
+                    # permission
+                    'can_edit': can_edit,
+                    'can_delete': can_delete,
+                    'can_moderate': can_moderate,
                    }
         if isinstance(obj, Tag) :
             tag = obj
@@ -126,14 +127,14 @@ def read_comment_args(request):
     end_wrapper = request.POST.get('end_wrapper', None)
     start_offset = request.POST.get('start_offset', None)
     end_offset = request.POST.get('end_offset', None)
-    
-    if start_wrapper :
+
+    if start_wrapper:
         start_wrapper = int(start_wrapper.strip())
-    if end_wrapper :
+    if end_wrapper:
         end_wrapper = int(end_wrapper.strip())
-    if start_offset :
+    if start_offset:
         start_offset = int(start_offset.strip())
-    if end_offset :
+    if end_offset:
         end_offset = int(end_offset.strip())
 
     return name, email, title, content, tags, category, reply_to_id, format, \
@@ -200,13 +201,13 @@ def edit_comment(request, key, comment_key):
     if errors != {} :
         ret['errors'] = errors
     else :
-    # INSERT
-    # TODO check version is latest (if boolean
-        #comment = Comment.objects.get(id=edit_comment_id)
+        # INSERT
+        # TODO check version is latest (if boolean
+        # comment = Comment.objects.get(id=edit_comment_id)
         comment = Comment.objects.get(key=comment_key)
-        if change_state : # moderation action
-            comment.state = state 
-        else :
+        if change_state:  # moderation action
+            comment.state = state
+        else:
             comment.name = name
             comment.email = email
             comment.title = title
@@ -215,12 +216,12 @@ def edit_comment(request, key, comment_key):
             comment.tags = tags
             comment.category = category
 
-            if change_scope :
+            if change_scope:
                 comment.start_wrapper = start_wrapper
                 comment.start_offset = start_offset
                 comment.end_wrapper = end_wrapper
                 comment.end_offset = end_offset
-            
+
         comment.save()
         
         ret['comment'] = comment
@@ -339,41 +340,54 @@ def get_filter_datas(request, text_version, text):
 
     # authors
 #    names = list(Comment.objects.filter(text_version__text__key=key).filter(user__isnull=True).values('name').annotate(nb_comments=Count('id'))) #.order_by('name'))
-    names = list(allowed_comments.filter(user__isnull=True).values('name').annotate(nb_comments=Count('id'))) #.order_by('name'))
+    names = list(allowed_comments.filter(user__isnull=True)
+                 .values('name')
+                 .annotate(nb_comments=Count('id'))) #.order_by('name'))
     if DECORATED_CREATORS:
-      names = list(allowed_comments.filter(user__isnull=False).values('name').annotate(nb_comments=Count('id'))) #.order_by('name'))
-      author = text_version.name
+        names = list(allowed_comments.filter(user__isnull=False)
+                     .values('name')
+                     .annotate(nb_comments=Count('id')))  # .order_by('name'))
+        author = text_version.name
     else:
-      names += list(User.objects.filter(Q(comment__text_version=text_version),Q(comment__deleted=False), Q(comment__id__in=allowed_ids)).extra(select={'name': "username"}).values('name').annotate(nb_comments=Count('id'))) #.order_by('username'))
-      has_author = User.objects.filter(id=text_version.user_id).values('username')
-      if has_author:
-        author = has_author[0]['username']
-      else:
-        author = ''
-    if request.GET.get('name', None):
-      me = request.GET.get('name', None)
-    else:
-      me = request.user.username
-    for name in names:
-      if name['name']:
-        if name['name'] == me:
-          name['display'] = _(u'me') + ' (' + name['name'] + ')'
-        elif name['name'] == author:
-          name['display'] = _(u'author') + ' (' + name['name'] + ')'
+        names += list(User.objects
+                      .filter(Q(comment__text_version=text_version),
+                              Q(comment__deleted=False),
+                              Q(comment__id__in=allowed_ids))
+                      .extra(select={'name': "username"})
+                      .values('name')
+                      .annotate(nb_comments=Count('id')))  # .order_by('username'))
+        has_author = User.objects.filter(id=text_version.user_id).values(
+            'username')
+        if has_author:
+            author = has_author[0]['username']
         else:
-          name['display'] = name['name']
-      else:
-        name['display'] = ''
+            author = ''
+
+    if request.GET.get('name', None):
+        me = request.GET.get('name', None)
+    else:
+        me = request.user.username
+
+    for name in names:
+        if name['name']:
+            if name['name'] == me:
+                name['display'] = _(u'me') + ' (' + name['name'] + ')'
+            elif name['name'] == author:
+                name['display'] = _(u'author') + ' (' + name['name'] + ')'
+            else:
+                name['display'] = name['name']
+        else:
+            name['display'] = ''
 
     def sort_with_author_or_me_first(x, y):
-      if x and (x.startswith(_(u'me')) or x.startswith(_(u'author'))):
-        return -1
-      if y and (y.startswith(_(u'me')) or y.startswith(_(u'author'))):
-        return 1
-      else:
-        return cmp(x, y)
+        if x and (x.startswith(_(u'me')) or x.startswith(_(u'author'))):
+            return -1
+        if y and (y.startswith(_(u'me')) or y.startswith(_(u'author'))):
+            return 1
+        else:
+            return cmp(x, y)
 
-    names.sort(cmp = sort_with_author_or_me_first, key = lambda obj:obj["display"])
+    names.sort(cmp=sort_with_author_or_me_first, key=lambda obj: obj["display"])
 
     # dates
     # TODO maybe optimize by comparing dates in python and saving these 'by day db requests'
@@ -382,12 +396,19 @@ def get_filter_datas(request, text_version, text):
     today = datetime.today()
     for nb_day in nb_days :
         day_date = today - timedelta(nb_day)
-        dates.append({'nb_day' : nb_day, 'nb_day_date':datetime_to_epoch(day_date), 'nb_comments':allowed_comments.filter(modified__gt = day_date).count()})
+        dates.append({'nb_day': nb_day,
+                      'nb_day_date': datetime_to_epoch(day_date),
+                      'nb_comments': allowed_comments.filter(modified__gt=day_date).count()})
     
     # tags
     comment_ids = [c.id for c in allowed_comments]
     # FIXME: ContentType has not been imported. Is this method used?
-    tags = list(Tag.objects.filter(items__content_type = ContentType.objects.get_for_model(Comment),items__object_id__in=comment_ids).values("name").annotate(nb_comments=Count('id')).distinct().order_by('name'))
+    tags = list(Tag.objects \
+                .filter(items__content_type=ContentType.objects.get_for_model(Comment),
+                        items__object_id__in=comment_ids)
+                .values("name").annotate(nb_comments=Count('id'))
+                .distinct()
+                .order_by('name'))
 
     # categories
     categories = []
@@ -450,9 +471,10 @@ def get_tagcloud(key) :
 # TODO: get rid of text here, keep text_version
 def comments_thread(request, text_version, text) :
     commentsnoreply = text_version.comment_set.filter(reply_to__isnull=True)#id=3)
-    viewable_commentsnoreply = get_viewable_comments(request, commentsnoreply, text, order_by = ('start_wrapper','start_offset','end_wrapper','end_offset'))
+    viewable_commentsnoreply = get_viewable_comments(request, commentsnoreply,
+                                                     text, order_by=('start_wrapper', 'start_offset', 'end_wrapper', 'end_offset'))
     viewable_comments = []
-    for cc in viewable_commentsnoreply :
+    for cc in viewable_commentsnoreply:
         cache.clear()
         viewable_comments += list_viewable_comments(request, [cc], text)
     return viewable_comments

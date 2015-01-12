@@ -1,6 +1,10 @@
-from django import template
-from django.template import Node, NodeList, Template, Context, Variable
 from datetime import timedelta
+
+from django import template
+
+from cm.activity import get_activity
+
+
 
 register = template.Library()
 
@@ -48,8 +52,6 @@ def do_activity(parser, token):
             raise template.TemplateSyntaxError, "fourth tag's argument should be one and int"
     return ActivityNode(text, user, type, nb_type, action[1:-1], kind[1:-1])
 
-
-from cm.activity import get_activity
 
 class ActivityNode(template.Node):
     def __init__(self, text, user, delta, nb_type, action, kind):

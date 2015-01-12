@@ -1,13 +1,15 @@
 """
 Simple extension of django's EmailMessage to store emails in db
 """
-from cm.cm_settings import CM_EMAIL_SUBJECT_PREFIX
-from cm.models import Email
-from cm.utils.i18n import translate_to
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage as BaseEmailMessage
-from django.template.loader import render_to_string
+
+from cm.models_utils import Email
+from cm.cm_settings import CM_EMAIL_SUBJECT_PREFIX
+from cm.utils.i18n import translate_to
+
+
 LIST_SEP = ' '
 
 

@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.test import TestCase
-from cm.utils.spannifier import *
-from BeautifulSoup import BeautifulSoup
+
+from cm.utils.spannifier import spannify
+
 
 # python manage.py test 
 #       

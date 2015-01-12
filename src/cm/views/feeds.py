@@ -1,18 +1,17 @@
+import time
+from urlparse import urlparse
+
 from django.conf import settings
-from django.core.urlresolvers import reverse
-from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render_to_response
+from django.http import HttpResponse, Http404
 from django.template.loader import render_to_string
 from django.utils import feedgenerator
 from django.utils.translation import ugettext as _
 from django.template import RequestContext
-from django.contrib.auth.models import AnonymousUser  
+from django.contrib.auth.models import AnonymousUser
+
 from cm.security import get_viewable_activities
 from cm.models import ApplicationConfiguration, Activity, Configuration
-import time
-from cm.exception import UnauthorizedException
-import re
-from urlparse import urlparse
+
 
 
 # taken from django's feedgenerator.py and changed to support multiple posts in minute

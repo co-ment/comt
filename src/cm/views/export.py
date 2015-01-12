@@ -1,35 +1,32 @@
-from django import forms
-from django.core.urlresolvers import reverse
-from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.shortcuts import render_to_response
-from django.template.loader import render_to_string
-from django.template import RequestContext
-from django.utils.translation import ugettext as _, ugettext_lazy
-from django.contrib.auth.models import User
-from django.conf import settings
-from cm.converters.pandoc_converters import pandoc_convert, do_tidy
-from cm.models import Text, TextVersion, Attachment, Comment
-from cm.security import get_viewable_comments
-import mimetypes
-import simplejson
 import imghdr
 import base64
 import re
+
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+from django.template import RequestContext
+from django.contrib.auth.models import User
+from django.conf import settings
+
+from cm.converters.pandoc_converters import pandoc_convert
+from cm.models import Attachment
+from cm.security import get_viewable_comments
 from cm.cm_settings import USE_ABI
 
+
 EXPORT2_INFOS = {
-# key -> { mimetype, extension}
-'s5' :   {},
-'pdf' :  {'mimetype': 'application/pdf', 'extension':'pdf'},
-'markdown' :  {'mimetype': 'text/plain', 'extension':'mkd'},
-'odt' :  {'mimetype': 'application/vnd.oasis.opendocument.text', 'extension':'odt'},
-'doc' :  {'mimetype': 'application/msword', 'extension':'doc'},
-'docx' :  {'mimetype': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'extension':'docx'},
-'latex' :{'mimetype': 'text/x-tex', 'extension':'tex'},
-'html' :{'mimetype': 'text/html', 'extension':'html'},
-'epub' :{'mimetype': 'application/epub+zip', 'extension':'epub'},
-'raw' : {'mimetype': 'text/plain', 'extension':'txt'},
-'xml' : {'mimetype': 'text/xml', 'extension':'xml'},
+    # key -> { mimetype, extension}
+    's5' :   {},
+    'pdf' :  {'mimetype': 'application/pdf', 'extension':'pdf'},
+    'markdown' :  {'mimetype': 'text/plain', 'extension':'mkd'},
+    'odt' :  {'mimetype': 'application/vnd.oasis.opendocument.text', 'extension':'odt'},
+    'doc' :  {'mimetype': 'application/msword', 'extension':'doc'},
+    'docx' :  {'mimetype': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'extension':'docx'},
+    'latex' :{'mimetype': 'text/x-tex', 'extension':'tex'},
+    'html' :{'mimetype': 'text/html', 'extension':'html'},
+    'epub' :{'mimetype': 'application/epub+zip', 'extension':'epub'},
+    'raw' : {'mimetype': 'text/plain', 'extension':'txt'},
+    'xml' : {'mimetype': 'text/xml', 'extension':'xml'},
 }
 
 HTML_HEADER = u"""

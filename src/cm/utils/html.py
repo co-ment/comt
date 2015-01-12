@@ -2,8 +2,9 @@
 Package to manipulage html chunks
 """
 
-from string_utils import strip_cr
 from BeautifulSoup import BeautifulSoup, Comment
+
+from .string_utils import strip_cr
 
 
 def surrond_text_node(html_chunk, start_html, end_html):

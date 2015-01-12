@@ -1,18 +1,22 @@
-from piston.handler import AnonymousBaseHandler, BaseHandler
-from piston.utils import rc
-
-from cm.models import Text,TextVersion, Role, UserRole, Comment, Attachment
-from cm.views import get_keys_from_dict, get_textversion_by_keys_or_404, get_text_by_keys_or_404, get_textversion_by_keys_or_404, redirect
-from cm.security import get_texts_with_perm, has_perm, get_viewable_comments, \
-    has_perm_on_text_api
-from cm.security import get_viewable_comments
-from cm.utils.embed import embed_html
-from cm.views.create import CreateTextContentForm, create_text, CreateTextImportForm, _text_create_import
-from cm.views.texts import client_exchange, text_view_frame, text_view_comments, text_export
-from cm.views.feeds import text_feed
-from piston.utils import validate
+from django.template import RequestContext
+from django.shortcuts import render_to_response
 from django.conf import settings
 from django.db.models import F
+from piston.handler import AnonymousBaseHandler, BaseHandler
+from piston.utils import rc
+from piston.handler import handler_tracker
+from piston.doc import generate_doc
+
+from cm.models import Text, Role, UserRole, Comment, Attachment
+from cm.security import get_texts_with_perm, has_perm_on_text_api
+from cm.security import get_viewable_comments
+from cm.utils.embed import embed_html
+from cm.views import get_text_by_keys_or_404, get_textversion_by_keys_or_404
+from cm.views.create import CreateTextContentForm, create_text, \
+    CreateTextImportForm, _text_create_import
+from cm.views.texts import client_exchange, text_view_frame, \
+    text_view_comments, text_export
+from cm.views.feeds import text_feed
 
 
 URL_PREFIX = settings.SITE_URL + '/api'
@@ -20,7 +24,9 @@ URL_PREFIX = settings.SITE_URL + '/api'
 class AnonymousTextHandler(AnonymousBaseHandler):
     type = "Text methods"
     title = "Read text info"
-    fields = ('key', 'title', 'format', 'content', 'created', 'modified', 'nb_comments', 'nb_versions', 'embed_html', ('last_text_version', ('created','modified', 'format', 'title', 'content')))   
+    fields = ('key', 'title', 'format', 'content', 'created', 'modified',
+              'nb_comments', 'nb_versions', 'embed_html',
+              ('last_text_version', ('created','modified', 'format', 'title', 'content')))
     allowed_methods = ('GET', )   
     model = Text
     desc = """ Read text identified by `key`."""
@@ -30,14 +36,16 @@ class AnonymousTextHandler(AnonymousBaseHandler):
     def endpoint():
         return URL_PREFIX + '/text/{key}/'
 
-
     @has_perm_on_text_api('can_view_text')
     def read(self, request, key):
         
         text = get_text_by_keys_or_404(key)
-        setattr(text,'nb_comments',len(get_viewable_comments(request, text.last_text_version.comment_set.all(), text)))
-        setattr(text,'nb_versions',text.get_versions_number())
-        setattr(text,'embed_html',embed_html(text.key))
+        # XXX: strange to use setattr here
+        setattr(text, 'nb_comments', len(get_viewable_comments(request,
+                                                               text.last_text_version.comment_set.all(),
+                                                               text)))
+        setattr(text, 'nb_versions', text.get_versions_number())
+        setattr(text, 'embed_html', embed_html(text.key))
 
         return text
 
@@ -135,8 +143,11 @@ class TextListHandler(BaseHandler):
             text = create_text(request.user, form.cleaned_data)
             anon_role = request.POST.get('anon_role', None)
             if anon_role:
-                userrole = UserRole.objects.create(user=None, role=Role.objects.get(id=anon_role), text=text)         
-            return {'key' : text.key , 'version_key' : text.last_text_version.key, 'created': text.created}
+                userrole = UserRole.objects.create(user=None,
+                                                   role=Role.objects.get(id=anon_role),
+                                                   text=text)
+            return {'key': text.key, 'version_key': text.last_text_version.key,
+                    'created': text.created}
         else:
             resp = rc.BAD_REQUEST
         return resp
@@ -161,7 +172,7 @@ class ConvertHandler(BaseHandler):
     
   def create(self, request):
     mime = request.POST.get('mime', None)
-    the_file = request.FILES['file'];
+    the_file = request.FILES['file']
     html, attachs = _convert_from_mimetype(the_file.read(), mime, 'html')
     for attach_file in attachs:
       attach_data = file(attach_file, 'rb').read()
@@ -530,13 +541,6 @@ class CommentsHandler(BaseHandler):
         return query
 
 
-from piston.doc import documentation_view
-
-from piston.handler import handler_tracker
-from django.template import RequestContext
-from piston.doc import generate_doc
-from django.shortcuts import render_to_response
-
 def documentation(request):
     """
     Generic documentation view. Generates documentation
@@ -560,5 +564,4 @@ def documentation(request):
     return render_to_response('api_doc.html', 
         { 'docs': docs }, RequestContext(request))
 
-from piston.doc import generate_doc
 DocHandler = generate_doc(TextPreEditHandler)

@@ -1,11 +1,10 @@
-from django.test import TestCase
-from django.test.client import Client
-from django.core import management
 from django.core.cache import cache
 
-from cm.models import *
-from cm.security import *
-from cm.tests.test_comment_positioning import create_comment
+from django.test import TestCase
+
+from cm.models import UserProfile, Text
+from cm.security import has_own_perm, get_texts_with_perm, has_perm
+from .test_comment_positioning import create_comment
 
 
 class FalseRequest(object):

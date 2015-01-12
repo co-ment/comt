@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 from difflib import SequenceMatcher
-#from cm.utils.spannifier import Spannifier
-import sys, operator
+import sys
+import operator
+import re
+import logging
+
 from cm.utils.spannifier import spannify
 from cm.converters.pandoc_converters import pandoc_convert
-import logging
 from cm.utils.spannifier import get_the_soup
-import re
 
-import html5lib
-from html5lib import treebuilders
+#from cm.utils.spannifier import Spannifier
 
 
 def compute_new_comment_positions(old_content, old_format, new_content,
@@ -115,6 +115,7 @@ def add_marker(text, color, start_ids, end_ids, with_markers, with_colors):
         ret = "<span style='background-color:%s;'>%s</span>"%(BCKCOLORS[color], ret)
         
     return ret
+
 
 # comments are comments and replies :
 def insert_comment_markers(htmlcontent, comments, with_markers, with_colors):

@@ -1,9 +1,10 @@
 from django.conf.urls.defaults import *
-
 from piston.resource import Resource
 from piston.authentication import HttpBasicAuthentication
 
-from cm.api.handlers import * 
+from .handlers import *
+
+
 auth = HttpBasicAuthentication(realm='Comt API')
 
 text_handler = Resource(handler=TextHandler, authentication=auth)

@@ -1,16 +1,7 @@
-import logging
 from hashlib import sha1
 
-from django.conf import settings
 from django.contrib.auth import REDIRECT_FIELD_NAME
-from django.contrib.auth.models import Permission
-from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import get_object_or_404
-from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
-from django.utils.http import urlquote
-from django.db.models import Q
-from django.core.cache import cache
 from piston.utils import rc
 
 from cm.models import *

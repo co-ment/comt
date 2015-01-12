@@ -1,11 +1,12 @@
 import re
 import os
+
 import chardet
 
 from cm.utils.string_utils import to_unicode
-
 from .pandoc_converters import pandoc_convert
 from .oo_converters import extract_css_body
+
 
 
 # TODO: move that in text_base: save images

@@ -1,16 +1,16 @@
-from cm.models import Activity, Text
-from django.contrib.auth.models import User
-from django.db.models import signals
 from datetime import datetime, timedelta
-from time import mktime
+
 import django.dispatch
-import logging
+
+from cm.models import Activity
 from cm.cm_settings import STORE_ACTIVITY_IP
 
 
-def register_activity(request, type, text=None, comment=None, user=None, text_version=None):
-    signal_activity.send(sender=text, request=request, type=type, comment=comment, user=user, text_version=text_version)
-    
+def register_activity(request, type, text=None, comment=None, user=None,
+                      text_version=None):
+    signal_activity.send(sender=text, request=request, type=type,
+                         comment=comment, user=user, text_version=text_version)
+
 # activity signal
 
 signal_activity = django.dispatch.Signal(providing_args=["request", "type", "comment"])
@@ -37,7 +37,8 @@ def _save_activity(sender, **kwargs):
     else:
         ip = None
     
-    Activity.objects.create(text=text, user=user, text_version=text_version, comment=comment, type=type, ip=ip, originator_user=originator_user)
+    Activity.objects.create(text=text, user=user, text_version=text_version,
+                            comment=comment, type=type, ip=ip, originator_user=originator_user)
     
 
 def connect_all():
@@ -53,11 +54,12 @@ def seconds(t_delta):
 
 VISIT_DURATION = timedelta(seconds=30 * 60) # 30 minutes
 
-from cm.utils.cache import memoize, dj_memoize
+from cm.utils.cache import dj_memoize
 
 
 @dj_memoize
-def get_activity(text='all', user='all', reference_date=None, nb_slots=31, slot_timedelta=timedelta(days=1), action="all", kind=''):
+def get_activity(text='all', user='all', reference_date=None, nb_slots=31,
+                 slot_timedelta=timedelta(days=1), action="all", kind=''):
     """
     text : text: specific text
            'all': all texts
@@ -110,5 +112,3 @@ def get_activity(text='all', user='all', reference_date=None, nb_slots=31, slot_
     # TODO: could be more efficient...
     res = [slots.count(index) for index in range(nb_slots)]
     return res
-        
-        

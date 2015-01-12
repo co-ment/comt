@@ -1,20 +1,12 @@
 from django.test import TestCase
-from django.test.client import Client
-from django.core import management
-from datetime import datetime
-from cm.activity import *
-from cm.models import *
-from cm.security import *
-
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest
 from django.utils import simplejson
 
+from cm.security import *
 from cm.api.handlers import *
 
+
 #from piston.test import TestCase
-from piston.models import Consumer
-from piston.handler import BaseHandler
-from piston.utils import rc
 from piston.resource import Resource
 
 

@@ -1,7 +1,8 @@
 from datetime import timedelta
-from pytz import timezone, utc, UnknownTimeZoneError
 
+from pytz import timezone, utc, UnknownTimeZoneError
 from django.conf import settings
+
 
 local_tz = timezone(settings.TIME_ZONE)
 

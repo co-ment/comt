@@ -1,14 +1,16 @@
-from cm.exception import UnauthorizedException
+from urllib import urlencode
+
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from urllib import urlencode
+
+from cm.exception import UnauthorizedException
 
 
 class CmMiddleware(object):
     def process_exception(self, request, exception):
         if settings.DEBUG:
-            import sys, traceback
+            import traceback
             traceback.print_exc()
         if type(exception) == UnauthorizedException:
             if request.user.is_anonymous():

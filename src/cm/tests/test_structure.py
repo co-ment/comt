@@ -1,8 +1,6 @@
 from django.test import TestCase
-from django.test.client import Client
-from django.core import management
 
-from cm.models import *
+from cm.models import Text, TextVersion, Comment
 
 
 class StructureTest(TestCase):

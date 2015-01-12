@@ -1,7 +1,9 @@
 from django.conf import settings
+
 from cm.cm_settings import TRACKING_ID
 from cm.models import ApplicationConfiguration
 from cm.converters.pandoc_converters import PANDOC_VERSION
+from cm.utils.i18n import translate_to
 
 
 def static(request):
@@ -33,7 +35,6 @@ def tz(request):
     }
 
 
-from cm.utils.i18n import translate_to
 LOCAL_LANGUAGES = []
 for code, value in settings.LANGUAGES:
     trans_value = translate_to(value, code)

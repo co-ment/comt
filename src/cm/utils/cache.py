@@ -1,6 +1,8 @@
-from django.core.cache import cache
 from hashlib import sha1
+
+from django.core.cache import cache
 from django.conf import settings
+
 
 
 # adapted [to django] from http://code.activestate.com/recipes/325205/

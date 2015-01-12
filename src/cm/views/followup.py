@@ -1,23 +1,16 @@
-from cm.exception import UnauthorizedException
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from django.utils.translation import ugettext as _
+
 from cm.message import display_message
-from cm.models import ApplicationConfiguration, Notification, Configuration, UserRole
+from cm.models import Notification, Configuration
 from cm.models_base import generate_key
 from cm.views import get_text_by_keys_or_404
 from cm.utils.embed import embed_html
 from cm.security import get_request_user
-from django import forms
-from django.conf import settings
-from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse
-from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render_to_response
-from django.template import RequestContext
-from django.template.loader import render_to_string
-from django.utils import feedgenerator
-from django.utils.translation import ugettext as _
 
-import re
-import time
 
 
 #@login_required

@@ -1,11 +1,7 @@
-from django.views.generic import list_detail
-from django.views.generic import create_update
-from django.contrib.auth.models import User
 from django.conf.urls.defaults import *
-from django.conf import settings
+
 from cm.views import *
 from cm.views.create import *
-from cm.views.export import *
 from cm.views.texts import *
 from cm.views.user import *
 from cm.views.timezone import *
@@ -14,7 +10,7 @@ from cm.views.feeds import *
 from cm.views.followup import *
 from cm.views import i18n
 
- 
+
 urlpatterns = patterns('',
 )
 

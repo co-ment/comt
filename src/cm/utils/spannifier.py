@@ -1,9 +1,8 @@
-import uuid
-import xml.dom.minidom
 import re
+
 from BeautifulSoup import BeautifulSoup, Comment
 
-from cm.utils.cache import memoize, dj_memoize
+from cm.utils.cache import dj_memoize
 
 
 def get_text_nodes(soup):

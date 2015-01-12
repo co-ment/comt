@@ -1,5 +1,6 @@
-import chardet
 import re
+
+import chardet
 
 
 def to_unicode(input):

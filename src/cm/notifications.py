@@ -1,14 +1,10 @@
-from cm.models import Activity, Text, Notification, Comment, ApplicationConfiguration
-from datetime import datetime, timedelta
-from django.contrib.auth.models import User
 from django.db.models import Q, signals
 from django.utils.translation import ugettext as _
 from django.template.loader import render_to_string
-from time import mktime
 from django.conf import settings
+
+from cm.models import Activity, Notification, Comment, ApplicationConfiguration
 from cm.utils.mail import send_mail
-import django.dispatch
-import logging
 
 
 class FakeRequest(object):

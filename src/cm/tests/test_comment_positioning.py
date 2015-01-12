@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.test import TestCase
-from BeautifulSoup import BeautifulSoup
-from cm.models import *
 from django.core.cache import cache
+
+from cm.models import Text, Comment
+
 
 # python manage.py test 
 #       

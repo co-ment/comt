@@ -1,6 +1,4 @@
 from django.test import TestCase
-from django.test.client import Client
-from django.core import management
 
 from cm.converters.pandoc_converters import pandoc_convert, OUTPUT_FORMATS
 
