@@ -19,6 +19,7 @@ from django.utils.translation import ugettext as _
 import re
 import time
 
+
 #@login_required
 def followup(request):
     user = get_request_user(request)
@@ -38,10 +39,13 @@ def followup(request):
             notif_val = request.POST.get(notif_id,None)
             if notif_val != None :
                 Notification.objects.set_notification(text=None, type=notif_type, active=(notif_val == 'true'), email_or_user=user)
-    
-    return render_to_response('site/followup.html', {'workspace_notify_check':workspace_notify_check,
-                                                          'own_notify_check' :own_notify_check, 
-                                                          }, context_instance=RequestContext(request))
+
+    return render_to_response('site/followup.html',
+                              {
+                                  'workspace_notify_check': workspace_notify_check,
+                                  'own_notify_check': own_notify_check,
+                              },
+                              context_instance=RequestContext(request))
     
 
 # force a POST (database modifications)
@@ -57,11 +61,12 @@ def desactivate_notification(request, adminkey):
             notification.desactivate()
             display_message(request, _(u"Notification deactivated."))                
             return HttpResponseRedirect(reverse('index'))
-    return render_to_response('site/notifications_desactivate.html', 
-                              {'notification' : notification,
-                               'title' : _(u'Deactivate notification?'),                               
-                               },
-                               context_instance=RequestContext(request))
+    return render_to_response('site/notifications_desactivate.html',
+                              {
+                                  'notification': notification,
+                                  'title': _(u'Deactivate notification?'),
+                              },
+                              context_instance=RequestContext(request))
 
 
 def text_followup(request, key):
@@ -90,20 +95,22 @@ def text_followup(request, key):
                 Notification.objects.set_notification(text=text, type='text', active=(notif_val == 'true'), email_or_user=request.user)
 
     template_dict = {
-                     'text' : text,
-                     'workspace_notify_check' : workspace_notify_check,
-                     'text_notify_check' : text_notify_check,
-                     'anonymous_can_view_text' : anonymous_can_view_text,
-                     }
-    return render_to_response('site/text_followup.html', template_dict , context_instance=RequestContext(request))
+        'text': text,
+        'workspace_notify_check': workspace_notify_check,
+        'text_notify_check': text_notify_check,
+        'anonymous_can_view_text': anonymous_can_view_text,
+    }
+    return render_to_response('site/text_followup.html', template_dict,
+                              context_instance=RequestContext(request))
 
 def text_embed(request, key):
     text = get_text_by_keys_or_404(key)
-    embed_code = embed_html(text.key) ;   
+    embed_code = embed_html(text.key)
     template_dict = {
-                     'text' : text,
-                     'embed_code': embed_code
-                     }
-    return render_to_response('site/text_embed.html', template_dict , context_instance=RequestContext(request))
+        'text': text,
+        'embed_code': embed_code
+    }
+    return render_to_response('site/text_embed.html', template_dict,
+                              context_instance=RequestContext(request))
     
     

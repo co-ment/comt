@@ -25,6 +25,7 @@ from BeautifulSoup import BeautifulStoneSoup
 import re
 from base64 import b64decode
 
+
 class CreateTextUploadForm(ModelForm):
     file = forms.FileField(required=True,
                            label=ugettext_lazy("Upload file"),
@@ -43,6 +44,7 @@ class CreateTextUploadForm(ModelForm):
             self._errors["file"] = ErrorList([msg])
               
         return cleaned_data
+
 
 class CreateTextImportForm(ModelForm):
     file = forms.FileField(required=True,
@@ -89,13 +91,16 @@ class CreateTextContentForm(ModelForm):
         model = TextVersion
         fields = ('title', 'format', 'content','tags') #, 'note'
 
+
 @has_global_perm('can_create_text')
 def text_create_content(request):
     text, rep = _text_create_content(request, CreateTextContentForm)
     return rep
     
+
 def redirect_post_create(text) :
     return HttpResponseRedirect(reverse('text-view', args=[text.key]))
+
 
 def _text_create_content(request, createForm):
     document = ""
@@ -112,6 +117,7 @@ def _text_create_content(request, createForm):
         form = createForm()
         
     return None, render_to_response('site/text_create_content.html', {'document':document, 'form' : form}, context_instance=RequestContext(request))
+
 
 def _text_create_upload(request, createForm):
     
@@ -148,6 +154,7 @@ def _text_create_upload(request, createForm):
         form = createForm()
         
     return None, render_to_response('site/text_create_upload.html', {'form' : form}, context_instance=RequestContext(request))
+
 
 def _text_create_import(request, createForm):
   if request.method == 'POST':
@@ -257,9 +264,11 @@ def text_create_upload(request):
     text, rep = _text_create_upload(request, CreateTextUploadForm)
     return rep
 
+
 def text_create_import(request):
     text, rep = _text_create_import(request, CreateTextImportForm)
     return rep
+
 
 def create_text(user, data):
     text = Text.objects.create_text(title=data['title'],
@@ -269,8 +278,7 @@ def create_text(user, data):
                                     name=data.get('name', None),
                                     email=data.get('email', None),
                                     tags=data.get('tags', None),
-                                    user=user
-                                    )
+                                    user=user)
     text.update_denorm_fields()
     text_version = text.get_latest_version()
     text_content = text_version.content

@@ -14,6 +14,7 @@ from piston.utils import validate
 from django.conf import settings
 from django.db.models import F
 
+
 URL_PREFIX = settings.SITE_URL + '/api'
  
 class AnonymousTextHandler(AnonymousBaseHandler):
@@ -40,11 +41,13 @@ class AnonymousTextHandler(AnonymousBaseHandler):
 
         return text
 
+
 class TextHandler(BaseHandler):
     type = "Text methods"    
     anonymous = AnonymousTextHandler
     allowed_methods = ('GET',)  
     no_display = True 
+
 
 class AnonymousTextVersionHandler(AnonymousBaseHandler):
     type = "Text methods"
@@ -67,6 +70,7 @@ class AnonymousTextVersionHandler(AnonymousBaseHandler):
 
         return text_version
 
+
 class TextVersionHandler(BaseHandler):
     type = "Text methods"    
     anonymous = AnonymousTextVersionHandler
@@ -81,6 +85,7 @@ class TextVersionHandler(BaseHandler):
         setattr(text_version,'nb_comments',len(get_viewable_comments(request, text_version.comment_set.all(), text_version.text)))
 
         return text_version
+
 
 class AnonymousTextListHandler(AnonymousBaseHandler):
     title = "List texts"    
@@ -98,6 +103,7 @@ class AnonymousTextListHandler(AnonymousBaseHandler):
         order_by = '-id'
         texts = get_texts_with_perm(request, 'can_view_text').order_by(order_by)        
         return texts
+
 
 class TextListHandler(BaseHandler):
     title = "Create text"    
@@ -135,6 +141,7 @@ class TextListHandler(BaseHandler):
             resp = rc.BAD_REQUEST
         return resp
     
+
 from cm.converters import _convert_from_mimetype
 import os
 from django.core.urlresolvers import reverse
@@ -162,7 +169,8 @@ class ConvertHandler(BaseHandler):
       attachment = Attachment.objects.create_attachment(filename=filename, data=attach_data, text_version=None)
       attach_url = reverse('notext-attach', args=[attachment.key])
       html = html.replace(filename, settings.SITE_URL + attach_url)
-    return {'html' : html}
+    return {'html': html}
+
 
 from cm.exception import UnauthorizedException
 from cm.views.texts import text_delete
@@ -189,6 +197,7 @@ class TextDeleteHandler(BaseHandler):
             return rc.BAD_REQUEST
         return rc.DELETED
 
+
 from cm.views.texts import text_pre_edit
  
 class TextPreEditHandler(BaseHandler):
@@ -207,6 +216,7 @@ class TextPreEditHandler(BaseHandler):
     
     def create(self, request, key):
         return text_pre_edit(request, key=key)
+
 
 from cm.views.texts import text_edit
 
@@ -228,8 +238,7 @@ class TextEditHandler(BaseHandler):
     @staticmethod
     def endpoint():
         return URL_PREFIX + '/text/{key}/edit/'
-    
-    
+
     def create(self, request, key):
         prev_text = get_text_by_keys_or_404(key)
         prev_text_version = prev_text.last_text_version
@@ -257,7 +266,8 @@ class AnonymousTextFeedHandler(AnonymousBaseHandler):
     def read(self, request, key):
         return text_feed(request, key=key)
 
-class TextFeedHandler(BaseHandler):    
+
+class TextFeedHandler(BaseHandler):
     type = "Text methods"
     anonymous = AnonymousTextFeedHandler
     allowed_methods = ('GET',)  
@@ -266,6 +276,7 @@ class TextFeedHandler(BaseHandler):
     def read(self, request, key):
         return text_feed(request, key=key)
     
+
 class TextVersionRevertHandler(BaseHandler):
     allowed_methods = ('POST', )    
     type = "Text methods"
@@ -285,6 +296,7 @@ class TextVersionRevertHandler(BaseHandler):
         text_version = get_textversion_by_keys_or_404(version_key, key=key)
         new_text_version = text_version.text.revert_to_version(version_key)
         return {'version_key' : new_text_version.key , 'created': new_text_version.created}
+
 
 class TextVersionDeleteHandler(BaseHandler):
     allowed_methods = ('POST', )    
@@ -306,6 +318,7 @@ class TextVersionDeleteHandler(BaseHandler):
         text_version.delete()
         return rc.ALL_OK    
 
+
 ## client methods
 
 class AnonymousClientHandler(AnonymousBaseHandler):
@@ -324,7 +337,8 @@ post arguments
     def create(self, request):
         return client_exchange(request)
 
-class ClientHandler(BaseHandler):    
+
+class ClientHandler(BaseHandler):
     type = "Client methods"
     anonymous = AnonymousClientHandler
     allowed_methods = ('POST',)  
@@ -332,6 +346,7 @@ class ClientHandler(BaseHandler):
 
     def create(self, request):
         return client_exchange(request)
+
 
 ## embed methods
 from django.views.i18n import javascript_catalog
@@ -367,7 +382,8 @@ class AnonymousCommentFrameHandler(AnonymousBaseHandler):
     def read(self, request, key):
         return text_view_frame(request, key=key)
 
-class CommentFrameHandler(BaseHandler):    
+
+class CommentFrameHandler(BaseHandler):
     type = "Embed methods"
     anonymous = AnonymousCommentFrameHandler
     allowed_methods = ('GET',)  
@@ -376,6 +392,7 @@ class CommentFrameHandler(BaseHandler):
     @has_perm_on_text_api('can_view_text')
     def read(self, request, key):
         return text_view_frame(request, key=key)
+
 
 class AnonymousCommentHandler(AnonymousBaseHandler):
     allowed_methods = ('GET',)    
@@ -393,7 +410,8 @@ class AnonymousCommentHandler(AnonymousBaseHandler):
     def read(self, request, key, version_key):
         return text_view_comments(request, key=key, version_key=version_key)
 
-class CommentHandler(BaseHandler):    
+
+class CommentHandler(BaseHandler):
     type = "Embed methods"
     anonymous = AnonymousCommentHandler
     allowed_methods = ('GET',)  
@@ -420,7 +438,8 @@ class AnonymousTextExportHandler(AnonymousBaseHandler):
     def create(self, request, key, format, download, whichcomments, withcolor):
         return text_export(request, key, format, download, whichcomments, withcolor, adminkey=None)
 
-class TextExportHandler(BaseHandler):    
+
+class TextExportHandler(BaseHandler):
     type = "Embed methods"
     anonymous = AnonymousTextExportHandler
     allowed_methods = ('POST',)  
@@ -429,6 +448,7 @@ class TextExportHandler(BaseHandler):
     @has_perm_on_text_api('can_view_text')
     def create(self, request, key, format, download, whichcomments, withcolor):
         return text_export(request, key, format, download, whichcomments, withcolor, adminkey=None)
+
 
 class ImportHandler(BaseHandler):
     allowed_methods = ('POST', )    
@@ -448,6 +468,7 @@ class ImportHandler(BaseHandler):
       text, res = _text_create_import(request, CreateTextImportForm)
       text_version = text.last_text_version
       return {'key' : text.key , 'version_key' : text.last_text_version.key, 'html': text_version.content}
+
 
 class AnonymousCommentsHandler(AnonymousBaseHandler):
     allowed_methods = ('GET',)    
@@ -481,7 +502,8 @@ class AnonymousCommentsHandler(AnonymousBaseHandler):
             query = query[:int(limit)]
         return query
 
-class CommentsHandler(BaseHandler):    
+
+class CommentsHandler(BaseHandler):
     type = "Comment methods"
     anonymous = AnonymousCommentsHandler
     allowed_methods = ('GET',)  
@@ -506,6 +528,7 @@ class CommentsHandler(BaseHandler):
         if limit:
             query = query[:int(limit)]
         return query
+
 
 from piston.doc import documentation_view
 

@@ -41,8 +41,6 @@ class SpannifyTest(TestCase):
 ##                print res
 #                self.assertEqual(res2,expectedResult)
 
-
-
     def test_long_spannify(self):
         content =  unicode(file('src/cm/tests/data/long_text_to_spannify.html').read(), 'utf8')
         

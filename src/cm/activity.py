@@ -7,12 +7,14 @@ import django.dispatch
 import logging
 from cm.cm_settings import STORE_ACTIVITY_IP
 
+
 def register_activity(request, type, text=None, comment=None, user=None, text_version=None):
     signal_activity.send(sender=text, request=request, type=type, comment=comment, user=user, text_version=text_version)
     
 # activity signal
 
 signal_activity = django.dispatch.Signal(providing_args=["request", "type", "comment"])
+
 
 def _save_activity(sender, **kwargs):
     request = kwargs['request']
@@ -37,10 +39,12 @@ def _save_activity(sender, **kwargs):
     
     Activity.objects.create(text=text, user=user, text_version=text_version, comment=comment, type=type, ip=ip, originator_user=originator_user)
     
+
 def connect_all():
     signal_activity.connect(_save_activity)
 
 connect_all()
+
 
 # activity processing
 
@@ -50,6 +54,7 @@ def seconds(t_delta):
 VISIT_DURATION = timedelta(seconds=30 * 60) # 30 minutes
 
 from cm.utils.cache import memoize, dj_memoize
+
 
 @dj_memoize
 def get_activity(text='all', user='all', reference_date=None, nb_slots=31, slot_timedelta=timedelta(days=1), action="all", kind=''):

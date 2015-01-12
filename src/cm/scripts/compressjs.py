@@ -7,9 +7,14 @@ import re
 os.system("rm -rf temp")
 os.system("mkdir temp")
 
+# (prefix, destDir, destFile, containerFile)
+SRC = [("c_", "../media/js/client/", "c_client-min.js",
+        "../../cm/templates/site/text_view_comments.html"),
+       ("f_", "../media/js/client/", "f_client-min.js",
+        "../../cm/templates/site/text_view_frame.html")]
+
 timestamp = int(time())
-for (prefix, destDir, destFile, containerFile) in [("c_", "../media/js/client/", "c_client-min.js","../../cm/templates/site/text_view_comments.html"),
-                                                   ("f_", "../media/js/client/", "f_client-min.js", "../../cm/templates/site/text_view_frame.html")] :
+for (prefix, destDir, destFile, containerFile) in SRC:
     os.system("rm %s%s"%(destDir, destFile))
     os.system("touch %s%s"%(destDir, destFile))
     

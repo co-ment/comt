@@ -1,4 +1,3 @@
-import re
 import pickle
 import base64
 from datetime import datetime
@@ -13,45 +12,55 @@ from cm.utils.date import datetime_to_user_str
 from cm.utils.html import on_content_receive
 from cm.utils.comment_positioning import compute_new_comment_positions
 
-from django import forms
 from django.db.models import Q
 from django.template.loader import render_to_string
 from django.conf import settings
-from django.template import RequestContext
-from django.contrib.auth.models import Permission
-from django.contrib.contenttypes import generic
-from django.contrib.contenttypes.models import ContentType
 from django.core.files.base import ContentFile
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import timesince
 from django.db import models
-from django.utils.translation import ugettext as _, ugettext_lazy, ugettext_noop
+from django.utils.translation import ugettext as _, ugettext_lazy as _l
 from tagging.fields import TagField
 from django.db import connection
 from django.core.cache import cache
+from django.contrib.auth.models import Permission
 
 
 class TextManager(Manager):
-    def create_text(self, title, format, content, note, name, email, tags, user=None, state='approved', **kwargs):
+    def create_text(self, title, format, content, note, name, email, tags,
+                    user=None, state='approved', **kwargs):
         content = on_content_receive(content, format)
         text = self.create(name=name, email=email, user=user, state=state)
-        text_version = TextVersion.objects.create(title=title, format=format, content=content, text=text, note=note, name=name, email=email, tags=tags, user=user)
+        text_version = TextVersion.objects.create(title=title, format=format,
+                                                  content=content, text=text,
+                                                  note=note, name=name,
+                                                  email=email, tags=tags,
+                                                  user=user)
         cache.clear()
         return text
-    
-    def create_new_version(self, text, title, format, content, note, name, email, tags, user=None, **kwargs):
-        text_version = TextVersion.objects.create(title=title, format=format, content=content, text=text, note=note, name=name, email=email, tags=tags, user=user)
+
+    def create_new_version(self, text, title, format, content, note, name,
+                           email, tags, user=None, **kwargs):
+        text_version = TextVersion.objects.create(title=title, format=format,
+                                                  content=content, text=text,
+                                                  note=note, name=name,
+                                                  email=email, tags=tags,
+                                                  user=user)
         return text_version
     
 
 class Text(PermanentModel, AuthorModel):
     modified = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-
-    private_feed_key = models.CharField(max_length=20, db_index=True, unique=True, blank=True, null=True, default=None)
+    private_feed_key = models.CharField(max_length=20, db_index=True,
+                                        unique=True, blank=True, null=True,
+                                        default=None)
 
     # denormalized fields
-    last_text_version = models.ForeignKey("TextVersion", related_name='related_text', null=True, blank=True, on_delete=models.SET_NULL)
+    last_text_version = models.ForeignKey("TextVersion",
+                                          related_name='related_text',
+                                          null=True, blank=True,
+                                          on_delete=models.SET_NULL)
     title = models.TextField()
 
     objects = TextManager()
@@ -141,13 +150,16 @@ class Text(PermanentModel, AuthorModel):
             raise Exception('Invalid revert attempt')
         new_text_version = TextVersion.objects.duplicate(text_version, True)
         return new_text_version
-        
-    def edit(self, new_title, new_format, new_content, new_tags=None, new_note=None, keep_comments=True, cancel_modified_scopes=True, new_version=True):
+
+    def edit(self, new_title, new_format, new_content, new_tags=None,
+             new_note=None, keep_comments=True, cancel_modified_scopes=True,
+             new_version=True):
         text_version = self.get_latest_version()
             
         if new_version:        
             text_version = TextVersion.objects.duplicate(text_version, keep_comments)
-        text_version.edit(new_title, new_format, new_content, new_tags, new_note, keep_comments, cancel_modified_scopes)        
+        text_version.edit(new_title, new_format, new_content, new_tags,
+                          new_note, keep_comments, cancel_modified_scopes)
         return text_version 
         
     def __unicode__(self):
@@ -180,8 +192,11 @@ class TextVersionManager(KeyManager):
                         old_comment_set.remove(c)
                         reply_to = None
                         if c.reply_to:                            
-                            reply_to = old_comment_map[c.reply_to.id]  
-                        c2 = Comment.objects.duplicate(c, duplicate_text_version, reply_to, keep_dates=True)
+                            reply_to = old_comment_map[c.reply_to.id]
+                        c2 = Comment.objects.duplicate(c,
+                                                       duplicate_text_version,
+                                                       reply_to,
+                                                       keep_dates=True)
                         old_comment_map[old_id] = c2
                         break
                  
@@ -192,22 +207,35 @@ class TextVersion(AuthorModel, KeyModel):
     modified = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
-    title = models.TextField(ugettext_lazy("Title"))
-    format = models.CharField(ugettext_lazy("Format"), max_length=20, blank=False, default=DEFAULT_INPUT_FORMAT, choices=CHOICES_INPUT_FORMATS)
-    content = models.TextField(ugettext_lazy("Content"))
-    tags = TagField(ugettext_lazy("Tags"), max_length=1000)
+    title = models.TextField(_l("Title"))
+    format = models.CharField(_l("Format"), max_length=20,
+                              blank=False, default=DEFAULT_INPUT_FORMAT,
+                              choices=CHOICES_INPUT_FORMATS)
+    content = models.TextField(_l("Content"))
+    tags = TagField(_l("Tags"), max_length=1000)
 
-    note = models.CharField(ugettext_lazy("Note"), max_length=100, null=True, blank=True)
+    note = models.CharField(_l("Note"), max_length=100, null=True,
+                            blank=True)
 
-    mod_posteriori = models.BooleanField(ugettext_lazy('Moderation a posteriori?'), default=True)
+    mod_posteriori = models.BooleanField(_l('Moderation a posteriori?'), default=True)
 
     from django.utils.safestring import mark_safe
 
-    category_1 = models.CharField(ugettext_lazy("Label for the first category of comments"), max_length=20, null=True, blank=True)
-    category_2 = models.CharField(ugettext_lazy("Label for the second category of comments"), max_length=20, null=True, blank=True)
-    category_3 = models.CharField(ugettext_lazy("Label for the third category of comments"), max_length=20, null=True, blank=True)
-    category_4 = models.CharField(ugettext_lazy("Label for the fourth category of comments"), max_length=20, null=True, blank=True)
-    category_5 = models.CharField(ugettext_lazy("Label for the fifth category of comments"), max_length=20, null=True, blank=True)
+    category_1 = models.CharField(
+        _l("Label for the first category of comments"),
+        max_length=20, null=True, blank=True)
+    category_2 = models.CharField(
+        _l("Label for the second category of comments"),
+        max_length=20, null=True, blank=True)
+    category_3 = models.CharField(
+        _l("Label for the third category of comments"),
+        max_length=20, null=True, blank=True)
+    category_4 = models.CharField(
+        _l("Label for the fourth category of comments"),
+        max_length=20, null=True, blank=True)
+    category_5 = models.CharField(
+        _l("Label for the fifth category of comments"),
+        max_length=20, null=True, blank=True)
 
     text = models.ForeignKey("Text")
 
@@ -225,14 +253,15 @@ class TextVersion(AuthorModel, KeyModel):
         return self.comment_set.filter(~Q(reply_to == None), Q(deleted=False))
     
     def __unicode__(self):
-        return '<%d> %s' % (self.id, self.title)    
+        return '<%d> %s' % (self.id, self.title)
 
-    def edit(self, new_title, new_format, new_content, new_tags=None, new_note=None, keep_comments=True, cancel_modified_scopes=True):
+    def edit(self, new_title, new_format, new_content, new_tags=None,
+             new_note=None, keep_comments=True, cancel_modified_scopes=True):
         new_content = on_content_receive(new_content, new_format) 
-        if not keep_comments :
+        if not keep_comments:
             self.comment_set.all().delete()
         elif self.content != new_content or new_format != self.format:
-            comments = self.get_comments() ;
+            comments = self.get_comments()
             tomodify_comments, toremove_comments = compute_new_comment_positions(self.content, self.format, new_content, new_format, comments)
             [comment.save(keep_dates=True) for comment in tomodify_comments]
             if cancel_modified_scopes :
@@ -252,10 +281,6 @@ class TextVersion(AuthorModel, KeyModel):
     def get_next_version(self):        
         other_versions = TextVersion.objects.filter(text__exact=self.text).order_by('created').filter(created__gt=self.created)
         return other_versions[0] if other_versions else None 
-        if other_versions:
-            return 
-        else:
-            return None
 
     def get_previous_version(self):
         other_versions = TextVersion.objects.filter(text__exact=self.text).order_by('-created').filter(created__lt=self.created)
@@ -284,7 +309,8 @@ class Comment(PermanentModel, AuthorModel):
     created = models.DateTimeField()
 
     # key to identify same comments across versions
-    id_key = models.CharField(max_length=KEY_MAX_SIZE, db_index=True, default=generate_key)
+    id_key = models.CharField(max_length=KEY_MAX_SIZE, db_index=True,
+                              default=generate_key)
 
     text_version = models.ForeignKey("TextVersion")
 
@@ -294,8 +320,10 @@ class Comment(PermanentModel, AuthorModel):
     title = models.TextField()
     content = models.TextField()
     content_html = models.TextField()
-    
-    format = models.CharField(_("Format:"), max_length=20, blank=False, default=DEFAULT_INPUT_FORMAT, choices=CHOICES_INPUT_FORMATS)
+
+    format = models.CharField(_("Format:"), max_length=20, blank=False,
+                              default=DEFAULT_INPUT_FORMAT,
+                              choices=CHOICES_INPUT_FORMATS)
 
     tags = TagField()
 
@@ -317,7 +345,9 @@ class Comment(PermanentModel, AuthorModel):
         super(PermanentModel, self).save(**kwargs) 
             
     def __unicode__(self):
-        return '<%d> %s [st_wrp:%s, st_ofs:%s, e_wrp:%s, e_ofs:%s]' % (self.id, self.title,  self.start_wrapper ,  self.start_offset,  self.end_wrapper,  self.end_offset, )    
+        return '<%d> %s [st_wrp:%s, st_ofs:%s, e_wrp:%s, e_ofs:%s]' % (
+            self.id, self.title, self.start_wrapper, self.start_offset,
+            self.end_wrapper, self.end_offset, )
         
     def is_reply(self):
         return self.reply_to != None
@@ -364,10 +394,10 @@ class Comment(PermanentModel, AuthorModel):
 
 # default conf values
 DEFAULT_CONF = {
-                'workspace_name' : 'Workspace',
-                'site_url' : settings.SITE_URL,
-                'email_from' : settings.DEFAULT_FROM_EMAIL,
-                }
+    'workspace_name': 'Workspace',
+    'site_url': settings.SITE_URL,
+    'email_from': settings.DEFAULT_FROM_EMAIL,
+}
 
 from cm.role_models import change_role_model
 
@@ -541,8 +571,8 @@ class Role(models.Model):
     """
     'Static' application roles 
     """
-    name = models.CharField(ugettext_lazy('name'), max_length=50, unique=True)
-    description = models.TextField(ugettext_lazy('description'))
+    name = models.CharField(_l('name'), max_length=50, unique=True)
+    description = models.TextField(_l('description'))
     permissions = models.ManyToManyField(Permission, related_name="roles")
 
     global_scope = models.BooleanField('global scope', default=False) # applies to global scope only
@@ -596,8 +626,7 @@ class RegistrationManager(KeyManager):
             return user
         else:
             return None
-    
-        
+
     def create_inactive_user(self, email, send_invitation, **kwargs):
         if 'postgresql' in settings.DATABASES['default']['ENGINE']:
             #prevent concurrent access 
@@ -633,13 +662,13 @@ class UserProfile(KeyModel):
     
     user = models.ForeignKey(User, unique=True)
 
-    allow_contact = models.BooleanField(ugettext_lazy(u'Allow contact'), default=True, help_text=ugettext_lazy(u"Allow email messages from other users"))    
-    preferred_language = models.CharField(ugettext_lazy(u'Preferred language'), max_length=2, default="en")
+    allow_contact = models.BooleanField(_l(u'Allow contact'), default=True, help_text=_l(u"Allow email messages from other users"))
+    preferred_language = models.CharField(_l(u'Preferred language'), max_length=2, default="en")
     is_temp = models.BooleanField(default=False)
     is_email_error = models.BooleanField(default=False)
-    is_suspended = models.BooleanField(ugettext_lazy(u'Suspended access'), default=False) # used to disable access or to wait for approval when registering
+    is_suspended = models.BooleanField(_l(u'Suspended access'), default=False) # used to disable access or to wait for approval when registering
 
-    tags = TagField(ugettext_lazy("Tags"), max_length=1000)
+    tags = TagField(_l("Tags"), max_length=1000)
 
     objects = RegistrationManager()
 
@@ -688,11 +717,11 @@ class UserProfile(KeyModel):
     
         activate_url = reverse('user-activate', args=[self.adminkey])
         message = render_to_string(template,
-                                   { 
-                                     'activate_url' : activate_url,
-                                     'note' : note,
-                                     'CONF': ApplicationConfiguration
-                                      })
+                                   {
+                                       'activate_url': activate_url,
+                                       'note': note,
+                                       'CONF': ApplicationConfiguration
+                                   })
     
         send_mail(subject, message, ApplicationConfiguration['email_from'], [self.user.email])
         
@@ -730,38 +759,38 @@ class Activity(models.Model):
                    'view_texts' : ['text_created', 'text_imported', 'text_removed', 'text_edited', 'text_edited_new_version'],
                    }
     ACTIVITIES_TYPES = reduce(list.__add__, VIEWABLE_ACTIVITIES.values())
-    
+
     IMGS = {
-            'text_created' : u'page_add_small.png',
-            'text_imported' : u'sop_import_small.png',
-            'text_removed' : u'page_delete_small.png',
-            'text_edited'  : u'page_save_small.png',
-            'text_edited_new_version' : u'page_save_small.png',
-            'user_created' : u'user_add_small.png',
-            'user_enabled' : u'user_add_small.png',
-            'user_refused': u'user_delete_small.png',
-            'user_suspended': u'user_delete_small.png',
-            'user_approved': u'user_add_small.png',
-            'user_activated' : u'user_go.png',
-            'comment_created' : u'note_add_small.png',
-            'comment_removed' : u'note_delete_small.png',
-        }
+        'text_created': u'page_add_small.png',
+        'text_imported': u'sop_import_small.png',
+        'text_removed': u'page_delete_small.png',
+        'text_edited': u'page_save_small.png',
+        'text_edited_new_version': u'page_save_small.png',
+        'user_created': u'user_add_small.png',
+        'user_enabled': u'user_add_small.png',
+        'user_refused': u'user_delete_small.png',
+        'user_suspended': u'user_delete_small.png',
+        'user_approved': u'user_add_small.png',
+        'user_activated': u'user_go.png',
+        'comment_created': u'note_add_small.png',
+        'comment_removed': u'note_delete_small.png',
+    }
     
     #type/msg
     MSGS = {
-         'text_edited' : ugettext_lazy(u'Text %(link_to_text)s edited by %(creator)s'),
-         'text_edited_new_version' : ugettext_lazy(u'Text %(link_to_text)s edited (new version created) by %(creator)s'),
-         'text_created' :  ugettext_lazy(u'Text %(link_to_text)s added by %(creator)s'),
-         'text_imported' :  ugettext_lazy(u'Text %(link_to_text)s imported by %(creator)s'),
-         'text_removed' : ugettext_lazy(u'Text %(link_to_text)s removed'),
-         'comment_created' : ugettext_lazy(u'Comment %(link_to_comment)s added on text %(link_to_text)s by %(creator)s'),
-         'comment_removed' : ugettext_lazy(u'Comment %(link_to_comment)s removed from text %(link_to_text)s'),
-         'user_created' : ugettext_lazy(u'User %(username)s added'),
-         'user_enabled' : ugettext_lazy(u'User %(username)s access to workspace enabled'),
-         'user_refused' : ugettext_lazy(u'User %(username)s access to workspace refused'),
-         'user_suspended' : ugettext_lazy(u'User %(username)s access to workspace suspended'),
-         'user_activated' : ugettext_lazy(u'User %(username)s access to workspace activated'),
-         'user_approved' : ugettext_lazy(u'User %(username)s has activated his account'),
+         'text_edited' : _l(u'Text %(link_to_text)s edited by %(creator)s'),
+         'text_edited_new_version' : _l(u'Text %(link_to_text)s edited (new version created) by %(creator)s'),
+         'text_created' :  _l(u'Text %(link_to_text)s added by %(creator)s'),
+         'text_imported' :  _l(u'Text %(link_to_text)s imported by %(creator)s'),
+         'text_removed' : _l(u'Text %(link_to_text)s removed'),
+         'comment_created' : _l(u'Comment %(link_to_comment)s added on text %(link_to_text)s by %(creator)s'),
+         'comment_removed' : _l(u'Comment %(link_to_comment)s removed from text %(link_to_text)s'),
+         'user_created' : _l(u'User %(username)s added'),
+         'user_enabled' : _l(u'User %(username)s access to workspace enabled'),
+         'user_refused' : _l(u'User %(username)s access to workspace refused'),
+         'user_suspended' : _l(u'User %(username)s access to workspace suspended'),
+         'user_activated' : _l(u'User %(username)s access to workspace activated'),
+         'user_approved' : _l(u'User %(username)s has activated his account'),
          }
     
     def is_same_user(self, other_activity):
@@ -810,7 +839,7 @@ class Activity(models.Model):
                                      'link_to_text' : self.linkable_text_title(html=html, link=link) if self.text else None,
                                      'link_to_comment' : self.linkable_comment_title(html=html, link=link) if self.comment else None,
                                      'username' : self.user.username if self.user else None,
-                                     'creator' : self.originator_user.username if self.originator_user else ugettext_lazy(u'anonymous'),
+                                     'creator' : self.originator_user.username if self.originator_user else _l(u'anonymous'),
                                     })
         return ''
     
@@ -829,6 +858,7 @@ class Activity(models.Model):
             ret.append(u' ')
         ret.append(datetime_to_user_str(self.created))
         return u''.join(ret)
+
 
 import cm.denorm_engine
 import cm.admin

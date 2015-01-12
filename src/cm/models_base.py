@@ -1,8 +1,9 @@
+import random
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext as _
 from django.core.cache import cache
-import random
 
 random.seed()
 
@@ -17,23 +18,29 @@ KEY_SIZE = 11
 # database column length
 KEY_MAX_SIZE = 20
 
+
 def generate_key(size=KEY_SIZE):
     key = ''.join([random.choice(KEY_CHARS) for i in range(size)])
     return key
 
-class KeyModel(models.Model):        
-    key      = models.CharField(max_length=KEY_MAX_SIZE, db_index=True, unique=True, blank=False)
-    adminkey = models.CharField(max_length=KEY_MAX_SIZE, db_index=True, unique=True, blank=False)
+
+class KeyModel(models.Model):
+    key = models.CharField(max_length=KEY_MAX_SIZE, db_index=True, unique=True,
+                           blank=False)
+    adminkey = models.CharField(max_length=KEY_MAX_SIZE, db_index=True,
+                                unique=True, blank=False)
 
     class Meta:
         abstract = True
             
+
 class PermanentModel(KeyModel):
     """
     Permanent model: delete only sets a flag in database 
     """
     deleted = models.BooleanField(default=False, db_index=True)
     state = models.CharField(max_length=16, blank=False)
+
     class Meta:
         abstract = True
 
@@ -83,6 +90,7 @@ class AuthorModel(models.Model):
             self.email = email_or_user
         self.save()
 
+
 class KeyManager(models.Manager):
     """
     Manager for key-models
@@ -116,6 +124,7 @@ class KeyManager(models.Manager):
     def real_all(self):
         return super(KeyManager, self).get_query_set()
         
+
 class Manager(KeyManager):
     """
     Manager for permanent- and key- models

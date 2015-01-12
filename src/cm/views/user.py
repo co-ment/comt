@@ -1,31 +1,28 @@
-from django.forms.models import inlineformset_factory
-from cm.models import *
-from cm.message import *
-from django.contrib.auth import authenticate
-from django.contrib.auth import login as django_login  
-from django.forms import ModelForm
-from django.contrib.auth.models import User
-from django.forms.formsets import formset_factory
+import re
+
+from django import forms
+from django.forms.util import ErrorList
+from django.contrib.auth import login as django_login
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext as _, ugettext_lazy, ungettext
-from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.forms.util import ErrorList
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
+from django.views.generic.list_detail import object_list
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.decorators import login_required
+from tagging.models import Tag
+
+from cm.models import *
 from cm.activity import register_activity
 from cm.views import get_text_by_keys_or_404
 from cm.message import display_message
 from cm.utils import get_among, get_int
-from cm.models import ApplicationConfiguration
-from django.views.generic.list_detail import object_list
-from django.contrib.auth.decorators import login_required
 from cm.views import get_keys_from_dict
 from cm.security import has_global_perm, has_global_perm_or_perm_on_text
 from cm.exception import UnauthorizedException
 from cm.cm_settings import SHOW_EMAILS_IN_ADMIN
-from tagging.models import Tag
-import sys
-import re
+
 
 USER_PAGINATION = 10
 
@@ -34,16 +31,14 @@ def user_list(request):
     display_suspended_users = get_int(request.GET, 'display', 0)
     tag_selected = request.GET.get('tag_selected', 0)
     paginate_by = get_int(request.GET, 'paginate', USER_PAGINATION)
-    order_by = get_among(request.GET, 'order', ('user__username',
-                                              'user__email',
-                                              '-user__username',
-                                              '-user__email',
-                                              'role__name',
-                                              '-role__name',
-                                              'user__date_joined',
-                                              '-user__date_joined',
-                                              ),
-                          'user__username')
+    order_by = get_among(request.GET,
+                         'order',
+                         ('user__username', 'user__email',
+                          '-user__username', '-user__email',
+                          'role__name', '-role__name',
+                          'user__date_joined', '-user__date_joined',
+                         ),
+                         'user__username')
     
     UserRole.objects.create_userroles_text(None)
     
@@ -102,16 +97,16 @@ def user_list(request):
         anon_role = UserRole.objects.get(user=None, text=None).role
     except UserRole.DoesNotExist:
         anon_role = None
-        
+
     context = {
-               'anon_role' : anon_role,
-               'all_roles' : Role.objects.all(),
-               'anon_roles' : Role.objects.filter(anon=True),
-               'display_suspended_users' : display_suspended_users,
-               'tag_list' : Tag.objects.usage_for_model(UserProfile),
-               'tag_selected': tag_selected,
-               'SHOW_EMAILS_IN_ADMIN': SHOW_EMAILS_IN_ADMIN,
-               }
+        'anon_role': anon_role,
+        'all_roles': Role.objects.all(),
+        'anon_roles': Role.objects.filter(anon=True),
+        'display_suspended_users': display_suspended_users,
+        'tag_list': Tag.objects.usage_for_model(UserProfile),
+        'tag_selected': tag_selected,
+        'SHOW_EMAILS_IN_ADMIN': SHOW_EMAILS_IN_ADMIN,
+    }
     
     query = UserRole.objects.select_related().filter(text=None).filter(~Q(user=None)).order_by(order_by)
     if not display_suspended_users:
@@ -133,10 +128,10 @@ def user_list(request):
     return object_list(request, query,
                        template_name='site/user_list.html',
                        paginate_by=paginate_by,
-                       extra_context=context,
-                       )
+                       extra_context=context)
 
-class UserForm(ModelForm):
+
+class UserForm(forms.ModelForm):
     email = forms.EmailField(label=ugettext_lazy(u'E-mail address'), required=True)
     
     class Meta:
@@ -159,13 +154,17 @@ class UserForm(ModelForm):
                 return email
             raise forms.ValidationError(_(u'This user is already a member.'))
         
+
 class MassUserForm(forms.Form):
-    email = forms.CharField(label=ugettext_lazy(u'Emails'),
-                           help_text=ugettext_lazy(u'Add multiples emails one per line (or separated by "," or ";")'),
-                           widget=forms.Textarea,
-                           required=True)
+    email = forms.CharField(
+        label=ugettext_lazy(u'Emails'),
+        help_text=ugettext_lazy(
+            u'Add multiples emails one per line (or separated by "," or ";")'),
+        widget=forms.Textarea,
+        required=True)
     
-class UserRoleForm(ModelForm):
+
+class UserRoleForm(forms.ModelForm):
     class Meta:
         model = UserRole
         fields = ('role',)
@@ -173,7 +172,8 @@ class UserRoleForm(ModelForm):
     def __init__(self, data=None, files=None, auto_id='id_%s', prefix=None,
                  initial=None, error_class=ErrorList, label_suffix=':',
                  empty_permitted=False, instance=None):
-        ModelForm.__init__(self, data, files, auto_id, prefix, initial, error_class, label_suffix, empty_permitted, instance)
+        forms.ModelForm.__init__(self, data, files, auto_id, prefix, initial,
+                           error_class, label_suffix, empty_permitted, instance)
 
         # override manually
         role_field = self.fields['role']
@@ -182,7 +182,8 @@ class UserRoleForm(ModelForm):
         role_field.help_text = _(u'This role will apply to every text in the workspace. To share only a (few) texts with this user, you can leave this blank and delegate roles on texts once the user is created.')
         self.fields['role'] = role_field
         
-class UserRoleTextForm(ModelForm):
+
+class UserRoleTextForm(forms.ModelForm):
     class Meta:
         model = UserRole
         fields = ('role',)
@@ -190,7 +191,8 @@ class UserRoleTextForm(ModelForm):
     def __init__(self, data=None, files=None, auto_id='id_%s', prefix=None,
                  initial=None, error_class=ErrorList, label_suffix=':',
                  empty_permitted=False, instance=None):
-        ModelForm.__init__(self, data, files, auto_id, prefix, initial, error_class, label_suffix, empty_permitted, instance)
+        forms.ModelForm.__init__(self, data, files, auto_id, prefix, initial,
+                           error_class, label_suffix, empty_permitted, instance)
 
         # override manually
         role_field = self.fields['role']
@@ -199,31 +201,37 @@ class UserRoleTextForm(ModelForm):
         role_field.help_text = _(u'This role will apply only to this text.')
         self.fields['role'] = role_field
         
-class UserProfileForm(ModelForm):
+
+class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('is_suspended', 'tags')
 
-class MyUserProfileForm(ModelForm):
+
+class MyUserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('tags',)
 
-class UserProfileAddForm(ModelForm):
+
+class UserProfileAddForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('tags',)
         
-class UserProfileRegisterForm(ModelForm):
+
+class UserProfileRegisterForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ()
 
+
 class UserAddForm(forms.Form):
-    note = forms.CharField(label=ugettext_lazy(u'Note'),
-                           help_text=ugettext_lazy(u'Optional text to add to invitation email'),
-                           widget=forms.Textarea,
-                           required=False)
+    note = forms.CharField(
+        label=ugettext_lazy(u'Note'),
+        help_text=ugettext_lazy(u'Optional text to add to invitation email'),
+        widget=forms.Textarea,
+        required=False)
 
 
 SEPARATORS_RE = re.compile('[;,\n]+')
@@ -231,6 +239,7 @@ SEPARATORS_RE = re.compile('[;,\n]+')
 @has_global_perm_or_perm_on_text('can_manage_workspace', 'can_manage_text')
 def user_mass_add(request, key=None):
     return user_add(request, key=key, mass=True)
+
 
 @has_global_perm_or_perm_on_text('can_manage_workspace', 'can_manage_text')
 def user_add(request, key=None, mass=False):
@@ -274,13 +283,21 @@ def user_add(request, key=None, mass=False):
     else:
         template = 'site/user_mass_add.html' if mass else 'site/user_add.html'
 
-    return render_to_response(template, {'forms' : [userform, userprofileform , userroleform, noteform, localroleform],
-                                                               'save_name' : ungettext(u'Add user', u'Add users', 2 if mass else 1),
-                                                               'mass' : mass,
-                                                               'text' : text,
-                                                                }, context_instance=RequestContext(request))
+    return render_to_response(template,
+                              {
+                                  'forms': [userform, userprofileform,
+                                            userroleform, noteform,
+                                            localroleform],
+                                  'save_name': ungettext(u'Add user',
+                                                         u'Add users',
+                                                         2 if mass else 1),
+                                  'mass': mass,
+                                  'text': text,
+                              },
+                              context_instance=RequestContext(request))
 
-class UserValidateForm(ModelForm):
+
+class UserValidateForm(forms.ModelForm):
     email = forms.EmailField(label=ugettext_lazy(u'Email'), required=True)
     
     class Meta:
@@ -299,6 +316,7 @@ class UserValidateForm(ModelForm):
                 return username
             raise forms.ValidationError(_(u'This username is already in use. Please supply a different username.'))
         
+
 from django.contrib.auth.forms import SetPasswordForm
 
 def user_activate(request, key):
@@ -327,11 +345,13 @@ def user_activate(request, key):
                 pwform = SetPasswordForm(user)
             
             cache.clear()
-            return render_to_response('site/activate.html', {
-                                                                  'forms' : [userform, pwform],
-                                                                  'title': _(u'Activate your account'),
-                                                                  'save_name' : _(u'activate account'),
-                                                                  }, context_instance=RequestContext(request))
+            return render_to_response('site/activate.html',
+                                      {
+                                          'forms': [userform, pwform],
+                                          'title': _(u'Activate your account'),
+                                          'save_name': _(u'activate account'),
+                                      },
+                                      context_instance=RequestContext(request))
         else:
             user.backend = 'django.contrib.auth.backends.ModelBackend'
             django_login(request, user)
@@ -341,6 +361,7 @@ def user_activate(request, key):
                         
     except UserProfile.DoesNotExist:
         raise UnauthorizedException('No profile')
+
 
 #@has_global_perm('can_manage_workspace')
 #def user_delete(request, key):
@@ -372,6 +393,7 @@ def user_suspend(request, key):
         return HttpResponse('') # no redirect because this is called by js
     raise UnauthorizedException('')
     
+
 @has_global_perm('can_manage_workspace')
 def user_enable(request, key):
     if request.method == 'POST':
@@ -388,6 +410,7 @@ def user_enable(request, key):
         return HttpResponse('') # no redirect because this is called by js
     raise UnauthorizedException('')
     
+
 def user_send_invitation(request, key):
     if request.method == 'POST':
         profile = get_object_or_404(UserProfile, key=key)
@@ -396,6 +419,7 @@ def user_send_invitation(request, key):
         display_message(request, _(u"A new invitation has been sent to user %(prof)s.") % {'prof':profile.simple_print()})
         return HttpResponse('') # no redirect because this is called by js
     raise UnauthorizedException('')
+
 
 from django.contrib.auth.forms import PasswordChangeForm
 
@@ -415,10 +439,14 @@ def profile(request):
     else:
         userform = UserForm(instance=user)
         userprofileform = MyUserProfileForm(instance=profile)
-    
-    return render_to_response('site/profile.html', {'forms' : [userform, userprofileform],
-                                                               'title' : 'Profile',
-                                                                }, context_instance=RequestContext(request))
+
+    return render_to_response('site/profile.html',
+                              {
+                                  'forms': [userform, userprofileform],
+                                  'title': 'Profile',
+                              },
+                              context_instance=RequestContext(request))
+
 
 @login_required()
 def profile_pw(request):
@@ -432,15 +460,20 @@ def profile_pw(request):
             return HttpResponseRedirect(reverse('profile'))
     else:
         pwform = PasswordChangeForm(profile.user)
-    return render_to_response('site/profile_pw.html', {'forms' : [pwform],
-                                                               'title' : 'Password',
-                                                                }, context_instance=RequestContext(request))
+    return render_to_response('site/profile_pw.html',
+                              {
+                                  'forms': [pwform],
+                                  'title': 'Password',
+                              },
+                              context_instance=RequestContext(request))
+
 
 class AnonUserRoleForm(UserRoleForm):
     def __init__(self, data=None, files=None, auto_id='id_%s', prefix=None,
                  initial=None, error_class=ErrorList, label_suffix=':',
                  empty_permitted=False, instance=None):
-        ModelForm.__init__(self, data, files, auto_id, prefix, initial, error_class, label_suffix, empty_permitted, instance)
+        forms.ModelForm.__init__(self, data, files, auto_id, prefix, initial,
+                           error_class, label_suffix, empty_permitted, instance)
 
         # override manually
         role_field = self.fields['role']
@@ -448,6 +481,7 @@ class AnonUserRoleForm(UserRoleForm):
         role_field.choices = [(u'', u'---------')] + [(r.id, str(r)) for r in Role.objects.filter(anon=True)] # limit anon choices
         
         self.fields['role'] = role_field
+
 
 @has_global_perm('can_manage_workspace')    
 def user_anon_edit(request):
@@ -460,10 +494,14 @@ def user_anon_edit(request):
             return HttpResponseRedirect(reverse('user'))
     else:
         userroleform = AnonUserRoleForm(instance=userrole)
-    
-    return render_to_response('site/user_edit.html', {'form' : userroleform,
-                                                               'title' : 'Edit anonymous user',
-                                                                }, context_instance=RequestContext(request))
+
+    return render_to_response('site/user_edit.html',
+                              {
+                                  'form': userroleform,
+                                  'title': 'Edit anonymous user',
+                              },
+                              context_instance=RequestContext(request))
+
 
 @has_global_perm('can_manage_workspace')    
 def user_edit(request, key):
@@ -484,11 +522,16 @@ def user_edit(request, key):
         userform = UserForm(instance=user)
         userprofileform = UserProfileForm(instance=profile)
         userroleform = UserRoleForm(instance=userrole)
-    
-    return render_to_response('site/user_edit.html', {'forms' : [userform , userprofileform, userroleform],
-                                                               'title' : 'Edit user',
-                                                               'user_edit' : user,
-                                                                }, context_instance=RequestContext(request))
+
+    return render_to_response('site/user_edit.html',
+                              {
+                                  'forms': [userform, userprofileform,
+                                            userroleform],
+                                  'title': 'Edit user',
+                                  'user_edit': user,
+                              },
+                              context_instance=RequestContext(request))
+
 
 # user contact form (for logged-in users only
 
@@ -502,6 +545,7 @@ class UserContactForm(forms.Form):
                            widget=forms.Textarea,
                            required=True)
 
+
 @login_required
 def user_contact(request, key):
     recipient_profile = get_object_or_404(UserProfile, key=key)
@@ -511,22 +555,26 @@ def user_contact(request, key):
         if contact_form.is_valid():
             data = contact_form.cleaned_data
             message = render_to_string('email/user_contact_email.txt',
-                                       { 
-                                         'body' : data['body'],
-                                         'CONF': ApplicationConfiguration
-                                          })
-        
-            send_mail(data['subject'], message, request.user.email, [recipient_profile.user.email])
+                                       {
+                                           'body': data['body'],
+                                           'CONF': ApplicationConfiguration
+                                       })
+
+            send_mail(data['subject'], message, request.user.email,
+                      [recipient_profile.user.email])
             
             display_message(request, _(u'Email sent.'))
             return HttpResponseRedirect(reverse('index'))
     else:
         contact_form = UserContactForm()
-    
-    return render_to_response('site/user_contact.html', {'form' : contact_form,
-                                                         'save_name' : 'send',
-                                                         'recipient_profile' : recipient_profile,
-                                                                }, context_instance=RequestContext(request))
+
+    return render_to_response('site/user_contact.html',
+                              {
+                                  'form': contact_form,
+                                  'save_name': 'send',
+                                  'recipient_profile': recipient_profile,
+                              },
+                              context_instance=RequestContext(request))
 
 
 from django.contrib.auth.forms import AuthenticationForm
@@ -556,6 +604,7 @@ def cm_login(request, user):
     else:
         return HttpResponseRedirect(reverse('index'))
 
+
 def login(request): 
     request.session.set_test_cookie()
     
@@ -570,12 +619,14 @@ def login(request):
     
     return render_to_response('site/login.html', {'form':form}, context_instance=RequestContext(request))
 
+
 from django.contrib.auth import logout as django_logout
 
 def logout(request):
     django_logout(request)
     display_message(request, _(u"You've been logged out."))
     return HttpResponseRedirect(reverse('index'))
+
 
 def register(request):
     if request.method == 'POST':
@@ -585,7 +636,9 @@ def register(request):
         if userform.is_valid() and userprofileaddform.is_valid():
             data = userform.cleaned_data
             data.update(userprofileaddform.cleaned_data)
-            user = UserProfile.objects.create_inactive_user(userform.cleaned_data['email'], False, **userprofileaddform.cleaned_data)
+            user = UserProfile.objects.create_inactive_user(
+                userform.cleaned_data['email'], False,
+                **userprofileaddform.cleaned_data)
             profile = user.get_profile()
             if ApplicationConfiguration.get_key('workspace_registration_moderation', False): # need moderation
                 profile.is_suspended = True
@@ -598,5 +651,9 @@ def register(request):
     else:    
         userform = UserForm()
         userprofileaddform = UserProfileRegisterForm()
-    
-    return render_to_response('site/register.html', {'forms':[userform, userprofileaddform]}, context_instance=RequestContext(request))
+
+    return render_to_response('site/register.html',
+                              {
+                                  'forms': [userform, userprofileaddform]
+                              },
+                              context_instance=RequestContext(request))

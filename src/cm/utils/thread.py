@@ -1,6 +1,10 @@
+import sys
+import os
+
+
 def synchronized(lock):
     """ Synchronization decorator. """
-    
+
     def wrap(f):
         def newFunction(*args, **kw):
             lock.acquire()
@@ -8,18 +12,18 @@ def synchronized(lock):
                 return f(*args, **kw)
             finally:
                 lock.release()
+
         return newFunction
+
     return wrap
 
-import sys, os
 
 def daemonize(stdin='/dev/null', stdout='/dev/null', stderr='/dev/null'):
-
     # Perform first fork.
     try:
         pid = os.fork()
         if pid > 0:
-            sys.exit(0) # Exit first parent.
+            sys.exit(0)  # Exit first parent.
     except OSError, e:
         sys.stderr.write("fork #1 failed: (%d) %s\n" % (e.errno, e.strerror))
         sys.exit(1)
@@ -33,7 +37,7 @@ def daemonize(stdin='/dev/null', stdout='/dev/null', stderr='/dev/null'):
     try:
         pid = os.fork()
         if pid > 0:
-            sys.exit(0) # Exit second parent.
+            sys.exit(0)  # Exit second parent.
     except OSError, e:
         sys.stderr.write("fork #2 failed: (%d) %s\n" % (e.errno, e.strerror))
         sys.exit(1)

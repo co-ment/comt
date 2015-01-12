@@ -15,6 +15,7 @@ class FakeRequest(object):
     def __init__(self, user):
         self.user = user
 
+
 def notify(sender, **kwargs):
     from cm.security import get_viewable_comments, has_perm
     allready_notified = set() # avoid sending multiple notifications to same user
@@ -28,6 +29,7 @@ def notify(sender, **kwargs):
                 if user_has_perm(notification.user, 'can_manage_workspace'):
                     send_notification(activity, notification)
                     allready_notified.add(notification.user)
+
     elif activity.type in Activity.VIEWABLE_ACTIVITIES.get('view_comments'):
         notifications = Notification.objects.filter(Q(text=activity.text) | Q(text=None), active=True)
         for notification in notifications:            
@@ -40,6 +42,7 @@ def notify(sender, **kwargs):
                 if not notification.user in allready_notified:
                     send_notification(activity, notification)
                     allready_notified.add(notification.user)            
+
     elif activity.type in Activity.VIEWABLE_ACTIVITIES.get('view_texts'):
         notifications = Notification.objects.filter(Q(text=activity.text) | Q(text=None), active=True).exclude(type='own')
         for notification in notifications:
@@ -55,17 +58,18 @@ def notify(sender, **kwargs):
 
 signals.post_save.connect(notify, sender=Activity)
 
+
 def send_notification(activity, notification):
     email = notification.user.email if notification.user else notification.email
     if email:
       subject = _('Notification:') + " " + activity.printable_data(html=False, link=False)
       message = render_to_string('email/activity_notification.txt',
-                                   { 
-                                     'activity' : activity,
-                                     'notification' : notification,
-                                     'SITE_URL' : settings.SITE_URL,
-                                     'CONF' : ApplicationConfiguration,
-                                      })
+                                 {
+                                     'activity': activity,
+                                     'notification': notification,
+                                     'SITE_URL': settings.SITE_URL,
+                                     'CONF': ApplicationConfiguration,
+                                 })
     
       send_mail(subject, message, ApplicationConfiguration['email_from'], [email], fail_silently=True)
     

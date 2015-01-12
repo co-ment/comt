@@ -7,9 +7,11 @@ from cm.models import *
 from cm.security import *
 from cm.tests.test_comment_positioning import create_comment
 
+
 class FalseRequest(object):
     def __init__(self, user):
         self.user = user
+
 
 class SecurityTest(TestCase):
     fixtures = ['initial_data', 'roles_generic','test_content']

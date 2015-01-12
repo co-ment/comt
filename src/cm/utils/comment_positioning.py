@@ -11,7 +11,9 @@ import re
 import html5lib
 from html5lib import treebuilders
 
-def compute_new_comment_positions(old_content, old_format, new_content, new_format, commentList):
+
+def compute_new_comment_positions(old_content, old_format, new_content,
+                                  new_format, commentList):
     
     # cf. TextVersion.get_content
     previousVersionContent = pandoc_convert(old_content, old_format, 'html')
@@ -43,6 +45,7 @@ def compute_new_comment_positions(old_content, old_format, new_content, new_form
 #        comment.computed_end_wrapper = None
 
         comment.valid = True
+
     for tag, i1, i2, j1, j2 in opcodes:
         #print tag, i1, i2, j1, j2
         
@@ -83,10 +86,13 @@ def compute_new_comment_positions(old_content, old_format, new_content, new_form
     return [c for c in commentList if c.valid], \
            [c for c in commentList if not c.valid]
 
+
 def add_marker(text, color, start_ids, end_ids, with_markers, with_colors):
-# TODO
-# THESE 3 LINES ARE REALLY JUST FOR TESTING THIS IS COPIED FROM C-TEXT.CSS AND SHOULD BE DONE DIFFERENTLY
-    BCKCOLORS = ['#ffffff', '#ffffa8', '#fff6a1', '#ffeb99', '#ffde91', '#ffd08a', '#ffc182', '#ffaf7a', '#ff9d73', '#ff896b', '#ff7363', '#ff5c5c']
+    # TODO
+    # THESE 3 LINES ARE REALLY JUST FOR TESTING THIS IS COPIED FROM C-TEXT.CSS AND SHOULD BE DONE DIFFERENTLY
+    BCKCOLORS = ['#ffffff', '#ffffa8', '#fff6a1', '#ffeb99', '#ffde91',
+                 '#ffd08a', '#ffc182', '#ffaf7a', '#ff9d73', '#ff896b',
+                 '#ff7363', '#ff5c5c']
     for i in range(14) :
         BCKCOLORS.append('#ff5c5c')
 
@@ -94,7 +100,11 @@ def add_marker(text, color, start_ids, end_ids, with_markers, with_colors):
     
     if with_markers:
         end_ids.reverse()
-        ret = "%s%s%s"%(''.join(["[%s&gt;"%start_id for start_id in start_ids]), ret, ''.join(["&lt;%s]"%end_id for end_id in end_ids]))
+        ret = "%s%s%s" % (
+            ''.join(["[%s&gt;" % start_id for start_id in start_ids]),
+            ret,
+            ''.join(["&lt;%s]" % end_id for end_id in end_ids])
+        )
      
     if with_colors and color != 0 :
       # For some reasons, abiwords can read background style attribute but not background-color
@@ -107,9 +117,9 @@ def add_marker(text, color, start_ids, end_ids, with_markers, with_colors):
     return ret
 
 # comments are comments and replies :
-def insert_comment_markers(htmlcontent, comments, with_markers, with_colors) :
+def insert_comment_markers(htmlcontent, comments, with_markers, with_colors):
 
-    html = get_the_soup(htmlcontent) ;
+    html = get_the_soup(htmlcontent)
     
     if comments :
         max_wrapper = max([comment.end_wrapper for comment in comments])
@@ -120,17 +130,19 @@ def insert_comment_markers(htmlcontent, comments, with_markers, with_colors) :
     cpt = 1 # starting numbered comment
     for comment in comments :
         if comment.is_reply() :
-            continue ;
+            continue
         
         # start 
-        wrapper_data = datas.get(comment.start_wrapper, {'start_color':0, 'offsets':{}})
+        wrapper_data = datas.get(comment.start_wrapper,
+                                 {'start_color': 0, 'offsets': {}})
         offset = wrapper_data.get('offsets').get(comment.start_offset, [[],[]])
         offset[0].append(cpt)
         wrapper_data['offsets'][comment.start_offset] = offset
         datas[comment.start_wrapper] = wrapper_data
             
         # end 
-        wrapper_data = datas.get(comment.end_wrapper, {'start_color':0, 'offsets':{}})
+        wrapper_data = datas.get(comment.end_wrapper,
+                                 {'start_color': 0, 'offsets': {}})
         offset = wrapper_data.get('offsets').get(comment.end_offset, [[],[]])
         offset[1].append(cpt)
         wrapper_data['offsets'][comment.end_offset] = offset
@@ -144,7 +156,7 @@ def insert_comment_markers(htmlcontent, comments, with_markers, with_colors) :
         cpt = cpt + 1
     
     # order ee values
-    for (wrapper_id, wrapper_data) in datas.items() :
+    for (wrapper_id, wrapper_data) in datas.items():
         start_color = wrapper_data['start_color']
         offsets = sorted(wrapper_data['offsets'].items(), key=operator.itemgetter(0))
 
@@ -154,8 +166,8 @@ def insert_comment_markers(htmlcontent, comments, with_markers, with_colors) :
         content = d.contents[0]
         
         spans = ""
-        
-        if offsets :
+
+        if offsets:
             color = start_color
             
             start = 0
@@ -183,8 +195,8 @@ def insert_comment_markers(htmlcontent, comments, with_markers, with_colors) :
 
     output = unicode(html)
     # Soup has introduced HTML entities, which should be expanded
-    output =re.sub(r"&quot;", '"', output)
-    output =re.sub(r"&amp;", '&', output)
-    output =re.sub(r"&gt;", '>', output)
-    output =re.sub(r"&lt;", '<', output)
+    output =re.sub("&quot;", '"', output)
+    output =re.sub("&amp;", '&', output)
+    output =re.sub("&gt;", '>', output)
+    output =re.sub("&lt;", '<', output)
     return unicode(output)

@@ -1,3 +1,6 @@
+import logging
+from hashlib import sha1
+
 from django.conf import settings
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.models import Permission
@@ -7,15 +10,14 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.utils.http import urlquote
 from django.db.models import Q
-from piston.utils import rc
-import logging
 from django.core.cache import cache
-from hashlib import sha1
+from piston.utils import rc
 
 from cm.models import *
 from cm import cm_settings
 from cm.exception import UnauthorizedException
 from cm.cm_settings import DECORATED_CREATORS
+
 
 def get_request_user(request):
     if request and request.user and not request.user.is_anonymous():
@@ -24,14 +26,17 @@ def get_request_user(request):
         user = None
     return user
     
+
 ## Permission functions
 class FakeRequest(object):
     def __init__(self, user):
         self.user = user
 
+
 def user_has_perm(user, perm_name, text=None):
     return has_perm(FakeRequest(user),perm_name, text)
     
+
 def has_perm(request, perm_name, text=None):
     # bypass sec if NO_SECURITY
     if cm_settings.NO_SECURITY:
@@ -77,6 +82,7 @@ def has_perm(request, perm_name, text=None):
             return ret
             #return UserRole.objects.filter(user=user).filter(text=None).filter(Q(role__permissions__codename__exact=perm_name)).count() != 0
         
+
 def has_own_perm(request, perm_name, text, comment):
     
     user = get_request_user(request)
@@ -138,6 +144,7 @@ def has_own_perm(request, perm_name, text, comment):
     cache.set(key, ret)
     return ret
         
+
 def is_authenticated(request):
     # We customize this to be able to monkey patch it if needed
     return request.user.is_authenticated()
@@ -186,6 +193,7 @@ def get_texts_with_perm(request, perm_name):
     cache.set(key, ret)
     return ret
     
+
 def get_viewable_comments(request, comments, text, order_by=('created',)):
     """
     Get comments visibles by user
@@ -261,6 +269,7 @@ def get_viewable_comments(request, comments, text, order_by=('created',)):
             cache.set(key, [])
             return []
     
+
 def get_viewable_activities(request=None, act_types={}, text=None):
     """
     Get activities user in request is allowed to see
@@ -309,13 +318,16 @@ def has_global_perm(perm_name, must_be_logged_in=False, redirect_field_name=REDI
         return _check_global_perm
     return _dec    
 
-def has_perm_on_text_api(perm_name, must_be_logged_in=False, redirect_field_name=REDIRECT_FIELD_NAME):    
+
+def has_perm_on_text_api(perm_name, must_be_logged_in=False, redirect_field_name=REDIRECT_FIELD_NAME):
     return _has_perm_on_text(perm_name, must_be_logged_in, redirect_field_name, api=True)
     
+
 def has_perm_on_text(perm_name, must_be_logged_in=False, redirect_field_name=REDIRECT_FIELD_NAME, api=False):
     return _has_perm_on_text(perm_name, must_be_logged_in, redirect_field_name, api)
 
-def _has_perm_on_text(perm_name, must_be_logged_in=False, redirect_field_name=REDIRECT_FIELD_NAME, api=False):    
+
+def _has_perm_on_text(perm_name, must_be_logged_in=False, redirect_field_name=REDIRECT_FIELD_NAME, api=False):
     """
     decorator protection checking for perm for logged in user
     force logged in (i.e. redirect to connection screen if not if must_be_logged_in 
@@ -361,7 +373,8 @@ def _has_perm_on_text(perm_name, must_be_logged_in=False, redirect_field_name=RE
         return _check_local_perm
     return _dec
         
-def has_perm_on_comment(perm_name):    
+
+def has_perm_on_comment(perm_name):
     """
     decorator protection checking for perm for logged in user on to comment
     perm_name: 'virtual' permission name 
@@ -391,6 +404,7 @@ def has_perm_on_comment(perm_name):
 
         return _check_local_perm
     return _dec        
+
 
 def has_global_perm_or_perm_on_text(global_perm_name, perm_name, must_be_logged_in=False, redirect_field_name=REDIRECT_FIELD_NAME, api=False):
   def _dec(view_func):

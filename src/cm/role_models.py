@@ -1,8 +1,9 @@
+import random
+
 from django.core import management
 from django.db.models import Q
 from django.db.models import Max
 from django.utils.translation import ugettext as _, ugettext_lazy
-import random
 
 role_models_choices = [('generic', ugettext_lazy(u'Generic')), ('teacher', ugettext_lazy(u'Class (education)'))]
 

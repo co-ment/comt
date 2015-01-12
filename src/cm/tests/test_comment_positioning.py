@@ -9,25 +9,24 @@ from django.core.cache import cache
 # python manage.py test cm.CommentPositioningTest
 
 
-def create_comment(start_wrapper=0, end_wrapper=0, start_offset=0, end_offset=0, reply_to=None, user=None, state='pending'):
+def create_comment(start_wrapper=0, end_wrapper=0, start_offset=0, end_offset=0,
+                   reply_to=None, user=None, state='pending'):
     version = Text.objects.all()[0].get_latest_version()
     co = Comment.objects.create(text_version=version,
-                           title="tt",
-                           content="tt",
-                           start_wrapper=start_wrapper,
-                           end_wrapper=end_wrapper,                                
-                           start_offset=start_offset,
-                           end_offset=end_offset,
-                           reply_to=reply_to,
-                           state=state,
-                           user=user)
+                                title="tt",
+                                content="tt",
+                                start_wrapper=start_wrapper,
+                                end_wrapper=end_wrapper,
+                                start_offset=start_offset,
+                                end_offset=end_offset,
+                                reply_to=reply_to,
+                                state=state,
+                                user=user)
     cache.clear()
     return co
     
 
 class CommentPositioningTest(TestCase):
-        
-        
     def assert_comment(self, old_comment_id, start_wrapper, end_wrapper, start_offset, end_offset):
         comment = Comment.objects.get(id=old_comment_id)
         #print comment.start_wrapper, comment.end_wrapper, comment.start_offset, comment.end_offset  

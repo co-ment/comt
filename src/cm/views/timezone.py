@@ -11,6 +11,7 @@ import mimetypes
 import simplejson
 from cm.utils.timezone import tz_convert
 
+
 def timezone_set(request):
     if request.method == 'POST':
         #if request.user.is_authenticated():

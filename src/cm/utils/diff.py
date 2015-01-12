@@ -1,7 +1,10 @@
 import difflib, string
 from django.utils.translation import ugettext as _
 
-def isatag(x): return x.startswith("<") and x.endswith(">")
+
+def isatag(x):
+    return x.startswith("<") and x.endswith(">")
+
 
 def text_diff(a, b):
     res = []
@@ -9,7 +12,11 @@ def text_diff(a, b):
     s = difflib.SequenceMatcher(isatag, a, b)
     for e in s.get_opcodes():
         if e[0] == "replace":
-            res.append('<del class="diff modified">'+''.join(a[e[1]:e[2]]) + '</del><ins class="diff modified">'+''.join(b[e[3]:e[4]])+"</ins>")
+            res.append('<del class="diff modified">'
+                       + ''.join(a[e[1]:e[2]])
+                       + '</del><ins class="diff modified">'
+                       + ''.join(b[e[3]:e[4]])
+                       + "</ins>")
         elif e[0] == "delete":
             res.append('<del class="diff">'+ ''.join(a[e[1]:e[2]]) + "</del>")
         elif e[0] == "insert":
@@ -20,16 +27,17 @@ def text_diff(a, b):
             raise "error parsing %s" %(e[0])
     return ''.join(res)
 
+
 COLORS = [
-'#FF0000',
-'#EE0000',
-'#DD0000',
-'#CC0000',
-'#BB0000',
-'#AA0000',
-'#990000',
-'#880000',
-'#770000',
+    '#FF0000',
+    '#EE0000',
+    '#DD0000',
+    '#CC0000',
+    '#BB0000',
+    '#AA0000',
+    '#990000',
+    '#880000',
+    '#770000',
 ]
 
 from colorsys import hls_to_rgb, hsv_to_rgb
@@ -37,7 +45,11 @@ from colorsys import hls_to_rgb, hsv_to_rgb
 def generatePastelColors(n):
     s = .4
     v = .99
-    return ['#'+''.join((hex(int(r*255))[2:],hex(int(g*255))[2:],hex(int(b*255))[2:])) for r,g,b in [hsv_to_rgb(h/200.,s,v) for h in range(1,100,100/n)]]
+    return ['#' + ''.join((hex(int(r * 255))[2:],
+                           hex(int(g * 255))[2:],
+                           hex(int(b * 255))[2:]))
+            for r, g, b in [hsv_to_rgb(h / 200., s, v)
+                            for h in range(1, 100, 100 / n)]]
     
 
 DEFAULT_COLOR = '#D9D9D9'
@@ -51,7 +63,7 @@ def get_colors(authors, last_white = False):
     res = []
     if None in authors or '' in authors:
         res = [(_(u'unknown'),DEFAULT_COLOR) ]
-    res.extend([(author,new_colors.pop()) for author in authors if author])
+    res.extend([(author, new_colors.pop()) for author in authors if author])
     #if authors[-1]:
     #    res[authors[-1]] = '#FFFFFF'
     return res
@@ -67,6 +79,7 @@ def text_history(versions, authors):
         res = text_diff_add(v_2, res, color)
     return res,colors.items()
 
+
 from cm.utils.html import surrond_text_node
  
 def text_diff_add(a,b, color):
@@ -76,14 +89,18 @@ def text_diff_add(a,b, color):
     for e in s.get_opcodes():
         if e[0] == "replace":
             html_chunk = ''.join(b[e[3]:e[4]])
-            new_html_chunk = surrond_text_node(html_chunk,'<span style="background: %s;">' %color,'</span>')
+            new_html_chunk = surrond_text_node(html_chunk,
+                                               '<span style="background: %s;">' % color,
+                                               '</span>')
             res.append(new_html_chunk)
             #res.append('<font style="background: %s;" class="diff modified">' %color+''.join(b[e[3]:e[4]])+"</font>")
         elif e[0] == "delete":
             pass
         elif e[0] == "insert":
             html_chunk = ''.join(b[e[3]:e[4]])
-            new_html_chunk = surrond_text_node(html_chunk,'<span style="background: %s;">' %color,'</span>') 
+            new_html_chunk = surrond_text_node(html_chunk,
+                                               '<span style="background: %s;">' % color,
+                                               '</span>')
             res.append(new_html_chunk)
             #res.append('<font style="background: %s;" class="diff">' %color+''.join(b[e[3]:e[4]]) + "</font>")
         elif e[0] == "equal":
@@ -92,29 +109,39 @@ def text_diff_add(a,b, color):
             raise "error parsing %s" %(e[0])
     return ''.join(res)
 
+
 def createlist(x, b=0):
     mode = 'char'
     cur = ''
     out = []
     for c in x:
         if mode == 'tag':
-            if c == '>': 
-                if b: cur += ']'
-                else: cur += c
-                out.append(cur); cur = ''; mode = 'char'
-            else: cur += c
-        elif mode == 'char':
-            if c == '<': 
+            if c == '>':
+                if b:
+                    cur += ']'
+                else:
+                    cur += c
                 out.append(cur)
-                if b: cur = '['
-                else: cur = c
-                mode = 'tag'            
-            elif c in string.whitespace: out.append(cur+c); cur = ''
-            else: cur += c
+                cur = ''
+                mode = 'char'
+            else:
+                cur += c
+        elif mode == 'char':
+            if c == '<':
+                out.append(cur)
+                if b:
+                    cur = '['
+                else:
+                    cur = c
+                mode = 'tag'
+            elif c in string.whitespace:
+                out.append(cur + c)
+                cur = ''
+            else:
+                cur += c
     out.append(cur)
     return filter(lambda x: x is not '', out)
 
-# 
 
 from cm.ext.diff_match_patch import diff_match_patch
 

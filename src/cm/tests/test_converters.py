@@ -4,6 +4,7 @@ from django.core import management
 
 from cm.converters.pandoc_converters import pandoc_convert, OUTPUT_FORMATS
 
+
 class ConverterTest(TestCase):
     
     def test_rst(self):

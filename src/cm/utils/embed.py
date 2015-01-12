@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.conf import settings
 
+
 def embed_html(text_key, attrs='', version_key=None, query_string="") :
     if version_key :
         url =  reverse('text-view-comments-frame-version', args=[text_key, version_key])

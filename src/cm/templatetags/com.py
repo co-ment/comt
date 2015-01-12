@@ -37,6 +37,7 @@ def do_choice_string(parser, token):
     #if not (format_string[0] == format_string[-1] and format_string[0] in ('"', "'")):
     #    raise template.TemplateSyntaxError, "%r tag's argument should be in quotes" % tag_name
         
+
 import datetime
 class ChoiceStringNode(template.Node):
     def __init__(self, *args):
@@ -67,6 +68,7 @@ class ChoiceStringNode(template.Node):
         #return datetime.datetime.now().strftime(str(self.format_string))
 
 register.tag('choice_string', do_choice_string)
+
 
 from django.core.urlresolvers import reverse, NoReverseMatch
 
@@ -105,9 +107,11 @@ class URLNode(Node):
                     
         return url
 
+
 @register.filter
 def in_list(value,arg):
     return value in arg
+
 
 @register.filter
 def in_dict(value,arg):
@@ -123,6 +127,7 @@ def int_display(value):
         return str(value)
 int_display.is_safe = True
 
+
 from django.utils.translation import ugettext as _
 from django.utils.dateformat import format
 from datetime import datetime
@@ -130,6 +135,8 @@ from time import struct_time
 from cm.utils.timezone import tz_convert
 from pytz import UnknownTimeZoneError
 from cm.utils.log import error_mail_admins
+
+
 @register.filter
 def local_date(value, tz=None):
     """Formats a date according to the given local date format."""
@@ -150,6 +157,7 @@ local_date.is_safe = False
 # TODO: this should be removed as soon
 # as http://code.djangoproject.com/ticket/10427 lands into core
 from django import forms
+
 
 @register.filter(name='field_value')
 def field_value(field):
@@ -224,11 +232,13 @@ def nb_comments(text, request):
         return len(get_viewable_comments(request, text.comment_set.all(), text.text))
 ## number tags
 
+
 from cm.security import get_texts_with_perm, get_viewable_comments
 class FakeRequest(object):
     def __init__(self, user):
         self.user = user
         
+
 class NbTexts(template.Node):
     def __init__(self, var_name):
         self.var_name = var_name 
@@ -238,6 +248,7 @@ class NbTexts(template.Node):
         context[self.var_name] = get_texts_with_perm(request, 'can_view_text').count()
         return ''
 
+
 @register.tag(name="nb_texts")
 def do_nb_texts(parser, token):
     try:
@@ -245,6 +256,7 @@ def do_nb_texts(parser, token):
     except ValueError:
         raise
     return NbTexts(var_name)
+
 
 from cm.models import UserProfile
 class NbUsers(template.Node):
@@ -255,6 +267,7 @@ class NbUsers(template.Node):
         context[self.var_name] = UserProfile.objects.all().count()
         return ''
 
+
 @register.tag(name="nb_users")
 def do_nb_users(parser, token):
     try:
@@ -262,6 +275,7 @@ def do_nb_users(parser, token):
     except ValueError:
         raise    
     return NbUsers(var_name)
+
 
 from cm.models import Comment
 class NbComments(template.Node):
@@ -275,10 +289,12 @@ class NbComments(template.Node):
         context[self.var_name] = len(get_viewable_comments(request, text.last_text_version.comment_set.all(), text))
         return ''        
 
+
 @register.tag(name="nb_comments")
 def do_nb_comments(parser, token):
     tag_name, text, _as, var_name = token.split_contents()
     return NbComments(text, var_name)
+
 
 class NewParams(template.Node):
     def __init__(self, params):
@@ -297,6 +313,7 @@ class NewParams(template.Node):
             new_get[k]=v
         return new_get.urlencode()
 
+
 @register.tag(name="newparams")
 def do_newparams(parser, token):
     all_params = token.split_contents()
@@ -305,10 +322,12 @@ def do_newparams(parser, token):
     all_params = all_params[1:]    
     return NewParams([a for a in all_params])
 
+
 @register.filter(name='invneg')
 def do_invneg(value, arg):
     """."""
     return int(arg) - int(value)
+
 
 @register.filter(name='url_args')
 def url_args(url):
@@ -316,6 +335,7 @@ def url_args(url):
         return '&'
     else:
         return '?'
+
 
 @register.filter
 def leading_zeros(value, desired_digits):

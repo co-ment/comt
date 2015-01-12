@@ -1,8 +1,10 @@
-try:
-    from django.core.validators import email_re
-except ImportError:
-    # support for django pre 1.2 alpha 1
-    from django.forms.fields import email_re
+from itertools import groupby
+from time import mktime, sleep
+import re
+import time
+import operator
+
+from django.core.validators import email_re
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.forms import ValidationError
@@ -13,31 +15,26 @@ from tagging.utils import parse_tag_input, LOGARITHMIC, calculate_cloud
 from tagging.models import TaggedItem
 from cm.models import *
 from cm.utils.timezone import request_tz_convert
-from itertools import groupby
-from time import mktime, sleep
 from cm.converters.pandoc_converters import pandoc_convert
 from cm.security import get_viewable_comments, list_viewable_comments, has_perm, has_perm_on_text, has_perm_on_comment, has_own_perm
 from cm.activity import register_activity
 from cm.utils.date import datetime_to_user_str, datetime_to_epoch
 from cm.cm_settings import AUTO_CONTRIB_REGISTER, DECORATED_CREATORS
 from settings import CLIENT_DATE_FMT
-import re
-import time
-import operator
 from django.core.cache import cache
+from django.contrib.contenttypes.models import ContentType
 
 
 selection_place_error_msg = _(u'A selection is required. Select in the text the part your comment applies to.')
 comment_states = ('approved', 'unapproved', 'pending')
 
 def is_valid_email(email):
-    if email_re.match(email) : 
-        return True 
-    return False
+    return email_re.match(email)
 
-#
+
 def jsonize(obj, request):
     return simplejson.dumps(obj, cls=RequestComplexEncoder, request=request)
+
 
 class RequestComplexEncoder(simplejson.JSONEncoder):
     def __init__(self, request, **kw):
@@ -92,13 +89,17 @@ class RequestComplexEncoder(simplejson.JSONEncoder):
         if isinstance(obj, Tag) :
             tag = obj
             # RBE each time issuing a db request to find comments related to this tag !!! TODO  
-            return { 'ids' : [t.id for t in tag.items.all()], 'name' : tag.name, 'font_size' : tag.font_size}            
+            return {'ids': [t.id for t in tag.items.all()],
+                    'name': tag.name,
+                    'font_size': tag.font_size}
 
         return simplejson.JSONEncoder.default(self, obj)
 
-def experiment() :
-    sleep(5) ;
-    return {"key":"value"}
+
+def experiment():
+    sleep(5)
+    return {"key": "value"}
+
 
 def read_comment_args(request):
     name = request.POST.get('name', None)
@@ -115,7 +116,7 @@ def read_comment_args(request):
     
     tags = request.POST['tags']
 
-    category = request.POST.get('category', 0);
+    category = request.POST.get('category', 0)
 
     reply_to_id = request.POST.get('reply_to_id', None)
     
@@ -134,8 +135,10 @@ def read_comment_args(request):
         start_offset = int(start_offset.strip())
     if end_offset :
         end_offset = int(end_offset.strip())
-    
-    return name, email, title, content, tags, category, reply_to_id, format, start_wrapper, end_wrapper, start_offset, end_offset
+
+    return name, email, title, content, tags, category, reply_to_id, format, \
+           start_wrapper, end_wrapper, start_offset, end_offset
+
 
 def validate_comment_args(name, email, title, content, tags):
     errors = {}
@@ -158,6 +161,7 @@ def validate_comment_args(name, email, title, content, tags):
         
     return errors
 
+
 @has_perm_on_comment("can_delete_comment")
 def remove_comment(request, key, comment_key):
     ret={}
@@ -170,7 +174,8 @@ def remove_comment(request, key, comment_key):
         cache.clear()
     except ObjectDoesNotExist: 
         pass
-    return ret ;
+    return ret
+
 
 @has_perm_on_comment("can_edit_comment")
 def edit_comment(request, key, comment_key):
@@ -181,7 +186,8 @@ def edit_comment(request, key, comment_key):
     if not change_state : # moderation action
         change_scope = request.POST.get('change_scope', None)
     
-        name, email, title, content, tags, category, reply_to_id, format, start_wrapper, end_wrapper, start_offset, end_offset = read_comment_args(request)
+        name, email, title, content, tags, category, reply_to_id, format, \
+        start_wrapper, end_wrapper, start_offset, end_offset = read_comment_args(request)
     
         errors = validate_comment_args(name, email, title, content, tags)
          
@@ -221,7 +227,8 @@ def edit_comment(request, key, comment_key):
         ret['msg'] = _(u'comment saved')
     return ret
     
-# DIRTY : this function has no error check but anyway errors are not listened to client side 
+
+# DIRTY : this function has no error check but anyway errors are not listened to client side
 @has_perm_on_text("can_create_comment")
 def own_notify(request, key):
     email_or_user = None if request.user.is_anonymous() else request.user
@@ -232,10 +239,12 @@ def own_notify(request, key):
 
     active = (request.POST.get('active', False) == 'true')
     text = Text.objects.get(key=key)
-    Notification.objects.set_notification(text=None, type='own', active=active, email_or_user=email_or_user)
+    Notification.objects.set_notification(text=None, type='own', active=active,
+                                          email_or_user=email_or_user)
     ret = HttpResponse()
     ret.status_code = 200 
     return ret 
+
 
 @has_perm_on_text("can_create_comment")
 def add_comment(request, key, version_key):
@@ -244,7 +253,6 @@ def add_comment(request, key, version_key):
 #    and comment.user == self.request.user
     user = None if request.user.is_anonymous() else request.user 
     name, email, title, content, tags, category, reply_to_id, format, start_wrapper, end_wrapper, start_offset, end_offset = read_comment_args(request)
-    errors = {} 
     errors = validate_comment_args(name, email, title, content, tags)
 
     if start_wrapper == "" :
@@ -265,14 +273,33 @@ def add_comment(request, key, version_key):
             
         text = Text.objects.get(key=key)
         text_version = TextVersion.objects.get(key=version_key)
-        
+
         comment_state = 'approved' if text_version.mod_posteriori else 'pending'
-        comment = Comment.objects.create(state=comment_state, text_version=text_version, user=user, name=name, email=email, title=title, content=content, content_html=content_html, tags = tags, category = category, start_wrapper = start_wrapper, end_wrapper = end_wrapper, start_offset = start_offset, end_offset = end_offset, reply_to=reply_to)
+        comment = Comment.objects.create(state=comment_state,
+                                         text_version=text_version,
+                                         user=user,
+                                         name=name,
+                                         email=email,
+                                         title=title,
+                                         content=content,
+                                         content_html=content_html, tags=tags,
+                                         category=category,
+                                         start_wrapper=start_wrapper,
+                                         end_wrapper=end_wrapper,
+                                         start_offset=start_offset,
+                                         end_offset=end_offset,
+                                         reply_to=reply_to)
         
         ask_for_notification = True
-        if user : 
-            workspace_notify_count = Notification.objects.filter(text=None,type='workspace',user=user, active=True).count()
-            text_notify_count = Notification.objects.filter(text=text,type='text',user=user, active=True).count()
+        if user :
+            workspace_notify_count = Notification.objects.filter(text=None,
+                                                                 type='workspace',
+                                                                 user=user,
+                                                                 active=True).count()
+            text_notify_count = Notification.objects.filter(text=text,
+                                                            type='text',
+                                                            user=user,
+                                                            active=True).count()
             if workspace_notify_count > 0 or text_notify_count > 0 : 
                 ask_for_notification = False
 
@@ -281,26 +308,33 @@ def add_comment(request, key, version_key):
         ret['ask_for_notification'] = ask_for_notification
         ret['email'] = '' if user else email
 
-        if text_version.mod_posteriori or has_perm(request, 'can_view_unapproved_comment', text=text) or has_perm(request, 'can_view_comment_own', text=text) : 
+        if text_version.mod_posteriori \
+                or has_perm(request, 'can_view_unapproved_comment', text=text) \
+                or has_perm(request, 'can_view_comment_own', text=text) :
             ret['comment'] = comment
             ret['msg'] = _(u"comment saved")
         else :
             ret['msg'] = _(u"comment saved, it is being held for moderation")
         
         if AUTO_CONTRIB_REGISTER:
-            Notification.objects.set_notification(text=text, type='own', active=True, email_or_user=user or email)            
+            Notification.objects.set_notification(text=text, type='own',
+                                                  active=True,
+                                                  email_or_user=user or email)
         register_activity(request, "comment_created", text, comment)
         cache.clear()
     return ret
 
-#we need to call comments_thread from here this function will be very expensive 
+
+#we need to call comments_thread from here this function will be very expensive
 # TODO: stupid get rid of text argument
 def get_filter_datas(request, text_version, text):
     from django.db.models import Count
     from datetime import datetime, timedelta
 
-    allowed_ids = [c.id for c in comments_thread(request, text_version, text)] 
-    allowed_comments = Comment.objects.filter(Q(text_version=text_version),Q(deleted=False),Q(id__in=allowed_ids)) 
+    allowed_ids = [c.id for c in comments_thread(request, text_version, text)]
+    allowed_comments = Comment.objects.filter(Q(text_version=text_version),
+                                              Q(deleted=False),
+                                              Q(id__in=allowed_ids))
     #print allowed_ids 
 
     # authors
@@ -352,19 +386,27 @@ def get_filter_datas(request, text_version, text):
     
     # tags
     comment_ids = [c.id for c in allowed_comments]
+    # FIXME: ContentType has not been imported. Is this method used?
     tags = list(Tag.objects.filter(items__content_type = ContentType.objects.get_for_model(Comment),items__object_id__in=comment_ids).values("name").annotate(nb_comments=Count('id')).distinct().order_by('name'))
 
     # categories
     categories = []
     for category in [0, 1, 2, 3, 4, 5] :
-        categories.append({'cat' : category, 'nb_comments':allowed_comments.filter(category = category).count()})
+        categories.append({
+            'cat': category,
+            'nb_comments': allowed_comments.filter(category=category).count(),
+        })
     
     # states
     states = []
     for state in comment_states :
-        states.append({'state' : state, 'nb_comments':allowed_comments.filter(state = state).count()})
-    
-    return {'names':names, 'dates':dates, 'tags':tags, 'categories':categories, 'states':states}
+        states.append({
+            'state': state,
+            'nb_comments': allowed_comments.filter(state=state).count(),
+        })
+
+    return {'names': names, 'dates': dates, 'tags': tags,
+            'categories': categories, 'states': states}
 
 #def get_ordered_ids(text_version_id):
 #    comments_and_replies = Comment.objects.filter(text_version__id=text_version_id)
@@ -379,33 +421,39 @@ def get_filter_datas(request, text_version, text):
 #    ordered_comment_ids = {'scope' : [c.id for c in comments.order_by('start_wrapper','start_offset','end_offset')],
 #                           'thread_modified' : map(operator.itemgetter(0), sorted(dic.items(), key=operator.itemgetter(1)))}
 #    return ordered_comment_ids
-   
+
+
 def validate_tags(tags):
-    if tags :
-        try :
-            if len(tags) > 250 : 
+    if tags:
+        try:
+            if len(tags) > 250:
                 return _(u"Tags input must be no longer than 250 characters.")
             TagField().formfield().clean(tags)
-        except ValidationError, e :
-            return ",".join(e.messages) 
+        except ValidationError, e:
+            return ",".join(e.messages)
     return ''
+
 
 MAX_NB_TAGS_IN_COMMENT_CLOUD = 30
 def get_tagcloud(key) :
-    tagCloud = Tag.objects.cloud_for_model(Comment, steps=8, distribution=LOGARITHMIC, filters=dict(text_version__text__key=key))
+    tagCloud = Tag.objects.cloud_for_model(Comment, steps=8,
+                                           distribution=LOGARITHMIC,
+                                           filters=dict(
+                                               text_version__text__key=key))
     return tagCloud
     
-# returns a flat list of viewable comments and their replies ordered as they should be : 
+
+# returns a flat list of viewable comments and their replies ordered as they should be :
 # order is : 
 # 'start_wrapper','start_offset','end_wrapper','end_offset' for 'real' comments
 # 'created' for replies
 # TODO: get rid of text here, keep text_version
-def comments_thread(request, text_version, text) : 
+def comments_thread(request, text_version, text) :
     commentsnoreply = text_version.comment_set.filter(reply_to__isnull=True)#id=3)
     viewable_commentsnoreply = get_viewable_comments(request, commentsnoreply, text, order_by = ('start_wrapper','start_offset','end_wrapper','end_offset'))
     viewable_comments = []
     for cc in viewable_commentsnoreply :
-	cache.clear()
+        cache.clear()
         viewable_comments += list_viewable_comments(request, [cc], text)
     return viewable_comments
 

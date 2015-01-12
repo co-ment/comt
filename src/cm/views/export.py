@@ -45,6 +45,7 @@ div.pagebreakhere {
 </html>
 """
  
+
 def content_export2(request, content, title, content_format, format, use_pandoc, download_response):
     # TODO : formats must be imported from converters
 #    import pdb;pdb.set_trace()
@@ -109,10 +110,12 @@ def _response_download(content, title, mimetype, extension):
     response.write(content)
     return response        
 
+
 def _response_write(content):
     response = HttpResponse()
     response.write(content)
     return response
+
 
 def xml_export(request, text_version, whichcomments):
   # Text version infos

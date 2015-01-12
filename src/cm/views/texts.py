@@ -1,3 +1,16 @@
+import difflib
+from difflib import unified_diff
+import logging
+import mimetypes
+from django.contrib.contenttypes.models import ContentType
+import simplejson
+import sys
+import re
+import imghdr
+import base64
+import cssutils
+from os.path import basename
+
 from cm.utils.embed import embed_html
 from cm.activity import register_activity
 from cm.client import jsonize, get_filter_datas, edit_comment, remove_comment, \
@@ -18,7 +31,6 @@ from cm.utils.spannifier import spannify
 from cm.views import get_keys_from_dict, get_textversion_by_keys_or_404, get_text_by_keys_or_404, redirect
 from cm.views.export import content_export2, xml_export
 from cm.views.user import AnonUserRoleForm, cm_login
-from difflib import unified_diff
 from django import forms
 from django.conf import settings
 from django.contrib.auth import login as django_login
@@ -35,18 +47,9 @@ from django.template.loader import render_to_string
 from django.utils.translation import ugettext as _, ugettext_lazy
 from django.views.generic.list_detail import object_list
 from tagging.models import Tag
-import difflib
-import logging
-import mimetypes
-import simplejson
-import sys
-import re
-import imghdr
-import base64
-import cssutils
-from os.path import basename
 from django.db.models.sql.datastructures import EmptyResultSet
 from django.core.cache import cache
+
 
 def get_text_and_admin(key, adminkey, assert_admin = False):
     """
@@ -64,7 +67,6 @@ def get_text_and_admin(key, adminkey, assert_admin = False):
     return text, admin
 
 
-
 ACTIVITY_PAGINATION = 10
 RECENT_TEXT_NB = 5
 RECENT_COMMENT_NB = RECENT_TEXT_NB
@@ -75,10 +77,10 @@ def dashboard(request):
     request.session.set_test_cookie()
     if request.user.is_authenticated():
         act_view = {
-                    'view_texts' : get_int(request.GET, 'view_texts',1),
-                    'view_comments' : get_int(request.GET, 'view_comments',1),
-                    'view_users' : get_int(request.GET, 'view_users',1),
-                    }
+            'view_texts': get_int(request.GET, 'view_texts', 1),
+            'view_comments': get_int(request.GET, 'view_comments', 1),
+            'view_users': get_int(request.GET, 'view_users', 1),
+        }
             
         paginate_by = get_int(request.GET, 'paginate', ACTIVITY_PAGINATION)
                 
@@ -121,10 +123,9 @@ def dashboard(request):
 
         activities = activities.order_by('-created')
         return object_list(request, activities,
-                           template_name = 'site/dashboard.html',
-                           paginate_by = paginate_by,
-                           extra_context = template_dict,
-                           )
+                           template_name='site/dashboard.html',
+                           paginate_by=paginate_by,
+                           extra_context=template_dict)
         
     else:
         if request.method == 'POST':
@@ -138,23 +139,28 @@ def dashboard(request):
         else:
             form = AuthenticationForm()        
 
-
         public_texts = get_texts_with_perm(request, 'can_view_text').order_by('-modified')
 
         template_dict = {
-                         'form' : form,
-                         'texts' : public_texts,
-                         }
-        return render_to_response('site/non_authenticated_index.html', template_dict, context_instance=RequestContext(request))
+            'form': form,
+            'texts': public_texts,
+        }
+        return render_to_response('site/non_authenticated_index.html',
+                                  template_dict,
+                                  context_instance=RequestContext(request))
         
+
 TEXT_PAGINATION = 10
 # security check inside view
 # TODO: set global access perm
 def text_list(request):
     paginate_by = get_int(request.GET,'paginate',TEXT_PAGINATION)
     tag_selected = request.GET.get('tag_selected', 0)
-        
-    order_by = get_among(request.GET,'order',('title','author','modified','-title','-author','-modified'),'-modified')
+
+    order_by = get_among(request.GET, 'order',
+                         ('title', 'author', 'modified', '-title', '-author',
+                          '-modified'),
+                         '-modified')
 
     if request.method == 'POST':
         action = request.POST.get('action',None)
@@ -175,10 +181,10 @@ def text_list(request):
         tag_list = Tag.objects.usage_for_queryset(TextVersion.objects.filter(id__in = [t.last_text_version_id for t in get_texts_with_perm(request, 'can_view_text')]))
     except EmptyResultSet:
         tag_list = []
-    context = {    
-               'tag_list' : tag_list,
-               'tag_selected': tag_selected,
-               }
+    context = {
+        'tag_list': tag_list,
+        'tag_selected': tag_selected,
+    }
 
     if tag_selected:     
         tag_ids = Tag.objects.filter(name=tag_selected)
@@ -190,21 +196,27 @@ def text_list(request):
                                        'tagging_taggeditem.tag_id = %i' %tag_ids[0].id],
                                 tables=['tagging_taggeditem'],
                                 )
-    
+
     return object_list(request, texts,
-                       template_name = 'site/text_list.html',
-                       paginate_by = paginate_by,
-                       extra_context=context,
-                       )
+                       template_name='site/text_list.html',
+                       paginate_by=paginate_by,
+                       extra_context=context)
     
+
 @has_perm_on_text('can_view_text')
 def text_view(request, key, adminkey=None):
     text = get_text_by_keys_or_404(key)
     register_activity(request, "text_view", text=text)    
     text_version = text.get_latest_version()
-    embed_code = embed_html(key, 'id="text_view_frame" name="text_view_frame"', None, request.META.get('QUERY_STRING'))
-    template_dict = { 'embed_code':embed_code, 'text' : text, 'text_version' : text_version, 'title' : text_version.title}
-    return render_to_response('site/text_view.html', template_dict, context_instance=RequestContext(request))
+    embed_code = embed_html(key, 'id="text_view_frame" name="text_view_frame"',
+                            None, request.META.get('QUERY_STRING'))
+    template_dict = {'embed_code': embed_code,
+                     'text': text,
+                     'text_version': text_version,
+                     'title': text_version.title}
+    return render_to_response('site/text_view.html', template_dict,
+                              context_instance=RequestContext(request))
+
 
 @has_perm_on_text('can_delete_text')
 def text_delete(request, key):
@@ -217,13 +229,15 @@ def text_delete(request, key):
     cache.clear()
     return HttpResponse('') # no redirect because this is called by js
 
+
 @has_perm_on_text('can_delete_text')
 def text_version_delete(request, key, text_version_key):
     text_version = TextVersion.objects.get(key=text_version_key)
     text=text_version.text
     if request.method != 'POST':
         raise UnauthorizedException('Unauthorized')
-    display_message(request, _(u'Text version %(text_version_title)s deleted') %{'text_version_title':text_version.title})
+    display_message(request,
+                    _(u'Text version %(text_version_title)s deleted') %{'text_version_title':text_version.title})
     register_activity(request, "text_version_removed", text=text)
     text_version.delete()
     return HttpResponse('') # no redirect because this is called by js
@@ -258,13 +272,13 @@ def text_view_comments(request, key, version_key=None, adminkey=None):
             categories[i] = ApplicationConfiguration.get_key('workspace_category_' + str(i))
 
     template_dict = {
-        'text' : text,
-        'text_version' : text_version,
-        'title' : text_version.title, # TODO use it ...
-        'get_params' : get_params,
-        'content' : wrapped_text_version,
-        'client_date_fmt' : settings.CLIENT_DATE_FMT,
-        'read_only' : read_only,
+        'text': text,
+        'text_version': text_version,
+        'title': text_version.title,  # TODO use it ...
+        'get_params': get_params,
+        'content': wrapped_text_version,
+        'client_date_fmt': settings.CLIENT_DATE_FMT,
+        'read_only': read_only,
     }
     template_dict['json_comments'] = jsonize(comments, request)
     template_dict['json_filter_datas'] = jsonize(filter_datas, request)
@@ -284,6 +298,8 @@ def text_view_comments(request, key, version_key=None, adminkey=None):
     return render_to_response('site/text_view_comments.html',
                               template_dict,
                               context_instance=RequestContext(request))
+
+
 def client_exchange(request):
     ret = None
     if request.method == 'POST' :
@@ -353,6 +369,7 @@ def from_html_links_to_inline_imgs(content, inline=True, full_path=True):
         img_fmt = imghdr.what(attach.data.path)
         content = content.replace(link, match[1]+'.'+img_fmt)
   return content
+
 
 def text_export(request, key, format, download, whichcomments, withcolor, adminkey=None):
     text, admin = get_text_and_admin(key, adminkey)
@@ -471,6 +488,7 @@ def text_history_version(request, key, version_key):
                               template_dict,
                               context_instance=RequestContext(request))
 
+
 @has_perm_on_text('can_view_text')
 def text_history_compare(request, key, v1_version_key, v2_version_key, mode=''):
     text = get_text_by_keys_or_404(key)
@@ -493,17 +511,18 @@ def text_history_compare(request, key, v1_version_key, v2_version_key, mode=''):
     text_versions = text.get_versions()
     first_version = text_versions[len(text_versions) - 1]
     template_dict = {
-                     'text' : text,
-                     'v1': v1,
-                     'v2': v2,
-                     'content' : content.strip(),
-                     'empty' : '<table class="diff"><tbody></tbody></table>'==content,
-                     'first_version':first_version,
-                     }
+        'text': text,
+        'v1': v1,
+        'v2': v2,
+        'content': content.strip(),
+        'empty': '<table class="diff"><tbody></tbody></table>' == content,
+        'first_version': first_version,
+    }
     return render_to_response('site/text_history_compare.html',
                               template_dict,
                               context_instance=RequestContext(request))
     
+
 @has_perm_on_text('can_view_text')
 def text_history(request, key):
     text = get_text_by_keys_or_404(key)
@@ -511,20 +530,25 @@ def text_history(request, key):
     if request.method == 'POST':
         v1_key = request.POST.get('newkey',None)
         v2_key = request.POST.get('oldkey',None)
-        if v1_key and v2_key:  
-            return redirect(request, 'text-history-compare', args=[text.key, v2_key, v1_key ])
+        if v1_key and v2_key:
+            return redirect(request, 'text-history-compare',
+                            args=[text.key, v2_key, v1_key])
         
     text_versions = text.get_versions()
-    paginate_by = get_int(request.GET,'paginate',TEXT_PAGINATION)
+    paginate_by = get_int(request.GET, 'paginate', TEXT_PAGINATION)
 
     last_last_version = text_versions[1] if len(text_versions)>1 else None 
     first_version = text_versions[len(text_versions) - 1]
-    context = {'text':text, 'last_version':text.last_text_version, 'last_last_version':last_last_version, 'first_version':first_version}
+    context = {
+        'text': text,
+        'last_version': text.last_text_version,
+        'last_last_version': last_last_version,
+        'first_version': first_version
+    }
     return object_list(request, text_versions,
-                       template_name = 'site/text_history.html',
-                       paginate_by = paginate_by,
-                       extra_context=context,
-                       )
+                       template_name='site/text_history.html',
+                       paginate_by=paginate_by,
+                       extra_context=context)
     
 
 # taken from trac
@@ -545,8 +569,10 @@ def _get_change_extent(str1, str2):
         end -= 1
     return (start, end + 1)
 
+
 def diff_decorate(minus, plus):
     return minus, plus
+
 
 def get_uniffied_inner_diff_table(title1, title2, author1, author2, text1, text2):
     """
@@ -599,6 +625,7 @@ def get_uniffied_inner_diff_table(title1, title2, author1, author2, text1, text2
     res.append('</tbody></table>')
     return ''.join(res)
 
+
 #def text_history_version(request, key):
 #    text = get_text_by_keys_or_404(key=key)
 #    return _text_history_version(request, text)
@@ -616,17 +643,20 @@ class TextVersionForm(ModelForm):
         model = TextVersion
         fields = ('title', 'content', 'format')
 
+
 class EditTextForm(ModelForm):
     title = forms.CharField(label=ugettext_lazy("Title"), widget=forms.TextInput)
     #format = forms.CharField(label=_("Format"))
     #content = forms.TextField(label=_("Content"))
 
-    note = forms.CharField(label=ugettext_lazy("Note (optional)"),
-                           widget=forms.TextInput,
-                           required=False,
-                           max_length=100,
-                           help_text=ugettext_lazy("Add a note to explain the modifications made to the text")
-                           )
+    note = forms.CharField(
+        label=ugettext_lazy("Note (optional)"),
+        widget=forms.TextInput,
+        required=False,
+        max_length=100,
+        help_text=ugettext_lazy(
+            "Add a note to explain the modifications made to the text")
+    )
 
     #tags = forms.CharField(label=_("Tags (optional)"),
     #                       widget=forms.TextInput,
@@ -635,28 +665,33 @@ class EditTextForm(ModelForm):
     #                       )
 
 
-    new_version = forms.BooleanField(label=ugettext_lazy("New version (optional)"),
-                           required=False,
-                           initial=True,
-                           help_text=ugettext_lazy("Create a new version of this text (recommended)")
-                           )
+    new_version = forms.BooleanField(
+        label=ugettext_lazy("New version (optional)"),
+        required=False,
+        initial=True,
+        help_text=ugettext_lazy(
+            "Create a new version of this text (recommended)")
+    )
 
-    keep_comments = forms.BooleanField(label=ugettext_lazy("Keep comments (optional)"),
-                           required=False,
-                           initial=True,
-                           help_text=ugettext_lazy("Keep comments (if not affected by the edit)")
-                           )
+    keep_comments = forms.BooleanField(
+        label=ugettext_lazy("Keep comments (optional)"),
+        required=False,
+        initial=True,
+        help_text=ugettext_lazy("Keep comments (if not affected by the edit)")
+    )
 
-    cancel_modified_scopes = forms.BooleanField(label=ugettext_lazy("Detach comments (optional)"),
-                           required=False,
-                           initial=True,
-                           help_text=ugettext_lazy("If some comments were attached to a chunck of text that is modified, check this option to keep these comments with no scope. Leave this option unchecked if you want that such comments be deleted. This option is ignored if the previous 'Keep comment' option is unchecked.")
-                           )
+    cancel_modified_scopes = forms.BooleanField(
+        label=ugettext_lazy("Detach comments (optional)"),
+        required=False,
+        initial=True,
+        help_text=ugettext_lazy(
+            "If some comments were attached to a chunck of text that is modified, check this option to keep these comments with no scope. Leave this option unchecked if you want that such comments be deleted. This option is ignored if the previous 'Keep comment' option is unchecked.")
+    )
     
     class Meta:
         model = TextVersion
         fields = ('title', 'format', 'content', 'new_version', 'tags', 'note')
-        
+
     def save_into_text(self, text, request):
         new_content = request.POST.get('content')
         new_title = request.POST.get('title')
@@ -666,7 +701,8 @@ class EditTextForm(ModelForm):
         keep_comments = bool(request.POST.get('keep_comments',None))
         cancel_modified_scopes = bool(request.POST.get('cancel_modified_scopes',None))
         version = text.get_latest_version()
-        version.edit(new_title, new_format, new_content, new_tags, new_note, keep_comments, cancel_modified_scopes)
+        version.edit(new_title, new_format, new_content, new_tags, new_note,
+                     keep_comments, cancel_modified_scopes)
 
         return version
 
@@ -676,12 +712,16 @@ class EditTextForm(ModelForm):
         new_format = request.POST.get('format', text.last_text_version.format)        
         new_note = request.POST.get('note',None)
         new_tags = request.POST.get('tags',None)
-        
-        new_text_version = text.edit(new_title, new_format, new_content, new_tags, new_note, keep_comments=True, cancel_modified_scopes=True, new_version=True)
+
+        new_text_version = text.edit(new_title, new_format, new_content,
+                                     new_tags, new_note, keep_comments=True,
+                                     cancel_modified_scopes=True,
+                                     new_version=True)
 
         keep_comments = bool(request.POST.get('keep_comments',None))
         cancel_modified_scopes = bool(request.POST.get('cancel_modified_scopes',None))
-        new_text_version.edit(new_title, new_format, new_content, new_tags, new_note, keep_comments, cancel_modified_scopes)
+        new_text_version.edit(new_title, new_format, new_content, new_tags,
+                              new_note, keep_comments, cancel_modified_scopes)
         new_text_version.user = request.user if request.user.is_authenticated() else None
         new_text_version.note = request.POST.get('note','')
         new_text_version.email = request.POST.get('email','')
@@ -693,7 +733,8 @@ class EditTextForm(ModelForm):
     def __init__(self, data=None, files=None, auto_id='id_%s', prefix=None,
                  initial=None, error_class=ErrorList, label_suffix=':',
                  empty_permitted=False, instance=None):
-        ModelForm.__init__(self, data, files, auto_id, prefix, initial, error_class, label_suffix, empty_permitted, instance)
+        ModelForm.__init__(self, data, files, auto_id, prefix, initial,
+                           error_class, label_suffix, empty_permitted, instance)
 
         # override manually to disabled
         format_field = self.fields['format']
@@ -701,6 +742,7 @@ class EditTextForm(ModelForm):
         format_field.required = False
 
         self.fields['format'] = format_field
+
 
 @has_perm_on_text('can_edit_text')
 def text_pre_edit(request, key, adminkey=None):
@@ -715,6 +757,7 @@ def text_pre_edit(request, key, adminkey=None):
     _tomodify_comments, toremove_comments = compute_new_comment_positions(text_version.content, text_version.format, new_content, new_format, comments)
     return HttpResponse(simplejson.dumps({'nb_removed' : len(toremove_comments) }))
 
+
 class EditTextFormAnon(EditTextForm):
     name = forms.CharField(label=ugettext_lazy("Name (optional)"), widget=forms.TextInput, required=False)
     email = forms.EmailField(label=ugettext_lazy("Email (optional)"), required=False)
@@ -723,6 +766,7 @@ class EditTextFormAnon(EditTextForm):
     class Meta:
         model = TextVersion
         fields = ('title', 'format', 'content', 'tags', 'note', 'name', 'email')
+
 
 @has_perm_on_text('can_edit_text')
 def text_edit(request, key, adminkey=None):
@@ -737,22 +781,23 @@ def text_edit(request, key, adminkey=None):
         if form.is_valid():
             if request.POST.get('new_version'):
                 new_version = form.save_new_version(text, request)
-                register_activity(request, "text_edited_new_version", text=text, text_version=new_version)
+                register_activity(request, "text_edited_new_version", text=text,
+                                  text_version=new_version)
             else:
                 form.save_into_text(text, request)
                 register_activity(request, "text_edited", text=text)    
             return redirect(request, 'text-view', args=[text.key]) 
     else:
         default_data = {
-                        'content': text_version.content,
-                        'title': text_version.title,
-                        'format': text_version.format,
-                        'tags': text_version.tags,
-                        'new_version': NEW_TEXT_VERSION_ON_EDIT,
-                        'note' : '',
-                        'keep_comments' : True,
-                        'cancel_modified_scopes' : True,
-                       }        
+            'content': text_version.content,
+            'title': text_version.title,
+            'format': text_version.format,
+            'tags': text_version.tags,
+            'new_version': NEW_TEXT_VERSION_ON_EDIT,
+            'note': '',
+            'keep_comments': True,
+            'cancel_modified_scopes': True,
+        }
         if request.user.is_authenticated():
             form = EditTextForm(default_data)
         else:
@@ -760,7 +805,9 @@ def text_edit(request, key, adminkey=None):
 
     template_dict = {'text' : text, 'form' : form}
 
-    return render_to_response('site/text_edit.html', template_dict , context_instance=RequestContext(request))
+    return render_to_response('site/text_edit.html', template_dict,
+                              context_instance=RequestContext(request))
+
 
 @has_perm_on_text('can_edit_text')
 def text_revert(request, key, text_version_key):
@@ -774,6 +821,7 @@ def text_revert(request, key, text_version_key):
 
     return HttpResponse('') # no redirect because this is called by js
     
+
 @has_perm_on_text('can_view_text')
 def text_attach(request, key, attach_key):
     attach = Attachment.objects.get(key=attach_key, text_version__text__key=key)
@@ -782,6 +830,7 @@ def text_attach(request, key, attach_key):
     response = HttpResponse(content, mimetype)
     return response
 
+
 def notext_attach(request, attach_key):
     attach = Attachment.objects.get(key=attach_key)
     content = file(attach.data.path).read()
@@ -789,10 +838,12 @@ def notext_attach(request, attach_key):
     response = HttpResponse(content, mimetype)
     return response
     
+
 def fix_anon_in_formset(formset):
     # fix role choice in formset for anon (not all role are allowed)
     role_field = [f.fields['role'] for f in formset.forms if f.instance.user == None][0]
     role_field.choices = [(u'', u'---------')] + [(r.id, str(r)) for r in Role.objects.filter(anon = True)] # limit anon choices
+
 
 class BaseUserRoleFormSet(BaseModelFormSet):
     def clean(self):
@@ -847,6 +898,7 @@ def text_wysiwyg_preview(request, format):
 
 USER_PAGINATION = 10
 
+
 @has_perm_on_text('can_manage_text')
 def text_share(request, key):
     display_suspended_users = get_int(request.GET, 'display', 0)
@@ -854,14 +906,12 @@ def text_share(request, key):
     paginate_by = get_int(request.GET, 'paginate', USER_PAGINATION)    
     
     text = get_text_by_keys_or_404(key)
-    order_by = get_among(request.GET,'order',('user__username',
-                                              'user__email',
-                                              '-user__username',
-                                              '-user__email',
-                                              'role__name',
-                                              '-role__name',
-                                              ),
-                          'user__username')
+    order_by = get_among(request.GET,
+                         'order',
+                         ('user__username', 'user__email',
+                          '-user__username', '-user__email',
+                          'role__name', '-role__name'),
+                         'user__username')
     
     UserRole.objects.create_userroles_text(text)
     
@@ -887,17 +937,17 @@ def text_share(request, key):
     
     anon_role = UserRole.objects.get(user = None, text = text).role
     global_anon_role = UserRole.objects.get(user = None, text = None).role
-        
+
     context = {
-               'anon_role' : anon_role,
-               'global_anon_role' : global_anon_role,
-               'all_roles' : Role.objects.all(),
-               'anon_roles' : Role.objects.filter(anon = True),
-               'text' : text,
-               'display_suspended_users' : display_suspended_users,
-               'tag_list' : Tag.objects.usage_for_model(UserProfile),
-               'tag_selected': tag_selected,               
-               }
+        'anon_role': anon_role,
+        'global_anon_role': global_anon_role,
+        'all_roles': Role.objects.all(),
+        'anon_roles': Role.objects.filter(anon=True),
+        'text': text,
+        'display_suspended_users': display_suspended_users,
+        'tag_list': Tag.objects.usage_for_model(UserProfile),
+        'tag_selected': tag_selected,
+    }
 
     query = UserRole.objects.filter(text=text).filter(~Q(user=None)).order_by(order_by)
     if not display_suspended_users:
@@ -913,45 +963,80 @@ def text_share(request, key):
             query = query.extra(where=['tagging_taggeditem.object_id = cm_userprofile.id', 
                                        'tagging_taggeditem.content_type_id = %i' %content_type_id,
                                        'tagging_taggeditem.tag_id = %i' %tag_ids[0].id],
-                                tables=['tagging_taggeditem'],
-                                )
+                                tables=['tagging_taggeditem'])
 
     return object_list(request, query,
-                       template_name = 'site/text_share.html',
-                       paginate_by = paginate_by,
-                       extra_context = context,
-                       )
-    
+                       template_name='site/text_share.html',
+                       paginate_by=paginate_by,
+                       extra_context=context)
+
     
 class SettingsTextForm(ModelForm):
     from django.utils.safestring import mark_safe
-    category_1 = forms.CharField(label=_("Label for the first category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #1523f4">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace.") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), required=False)
-    category_2 = forms.CharField(label=ugettext_lazy("Label for the second category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #f4154f">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace.") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), required=False)
-    category_3 = forms.CharField(label=ugettext_lazy("Label for the third category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #09ff09">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace.") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), required=False)
-    category_4 = forms.CharField(label=ugettext_lazy("Label for the fourth category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #bc39cf">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace.") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), required=False)
-    category_5 = forms.CharField(label=ugettext_lazy("Label for the fifth category of comments"), help_text=mark_safe(_("Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #ffbd08">&nbsp;</span><br />' + _("Leave blank to use the value configured for the workspace.") + '<br />' + _("To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'), required=False)
+
+    category_1 = forms.CharField(
+        label=_("Label for the first category of comments"),
+        help_text=mark_safe(_(
+            "Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #1523f4">&nbsp;</span><br />' + _(
+            "Leave blank to use the value configured for the workspace.") + '<br />' + _(
+            "To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'),
+        required=False)
+
+    category_2 = forms.CharField(
+        label=ugettext_lazy("Label for the second category of comments"),
+        help_text=mark_safe(_(
+            "Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #f4154f">&nbsp;</span><br />' + _(
+            "Leave blank to use the value configured for the workspace.") + '<br />' + _(
+            "To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'),
+        required=False)
+
+    category_3 = forms.CharField(
+        label=ugettext_lazy("Label for the third category of comments"),
+        help_text=mark_safe(_(
+            "Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #09ff09">&nbsp;</span><br />' + _(
+            "Leave blank to use the value configured for the workspace.") + '<br />' + _(
+            "To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'),
+        required=False)
+
+    category_4 = forms.CharField(
+        label=ugettext_lazy("Label for the fourth category of comments"),
+        help_text=mark_safe(_(
+            "Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #bc39cf">&nbsp;</span><br />' + _(
+            "Leave blank to use the value configured for the workspace.") + '<br />' + _(
+            "To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'),
+        required=False)
+
+    category_5 = forms.CharField(
+        label=ugettext_lazy("Label for the fifth category of comments"),
+        help_text=mark_safe(_(
+            "Paragraphs including at least one comment of this category will have a vertical bar with this color: ") + '<span style="width: 2px; height: 5px; background-color: #ffbd08">&nbsp;</span><br />' + _(
+            "Leave blank to use the value configured for the workspace.") + '<br />' + _(
+            "To disable this category for this text whatever the configuration for the workspace, enter: ") + '<em>none</em>'),
+        required=False)
     # example name = forms.CharField(label=_("Name (optional)"), widget=forms.TextInput, required=False)
     
     class Meta:
         model = TextVersion
         fields = ('mod_posteriori', 'category_1', 'category_2', 'category_3', 'category_4', 'category_5')
 
+
 @has_perm_on_text('can_manage_text')
 def text_settings(request, key):
     text = get_text_by_keys_or_404(key)
-        
+
     text_version = text.get_latest_version()
     if request.method == 'POST':
-        form = SettingsTextForm(request.POST, instance = text_version)
-        
+        form = SettingsTextForm(request.POST, instance=text_version)
+
         if form.is_valid():
             form.save()
-            display_message(request, _(u'Text settings updated'))                            
+            display_message(request, _(u'Text settings updated'))
             return redirect(request, 'text-settings', args=[text.key])
     else:
-        form = SettingsTextForm(instance = text_version)
+        form = SettingsTextForm(instance=text_version)
 
-    template_dict = {'text' : text, 'form' : form}
+    template_dict = {'text': text, 'form': form}
 
-    return render_to_response('site/text_settings.html', template_dict , context_instance=RequestContext(request))
+    return render_to_response('site/text_settings.html', template_dict,
+                              context_instance=RequestContext(request))
 

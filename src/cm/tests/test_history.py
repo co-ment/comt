@@ -4,6 +4,7 @@ from django.core import management
 
 from cm.models import *
 
+
 class HistoryTest(TestCase):
     fixtures = ['test_comments',]
     

@@ -17,9 +17,11 @@ from piston.handler import BaseHandler
 from piston.utils import rc
 from piston.resource import Resource
 
+
 class FalseRequest(object):
     def __init__(self, user):
         self.user = user
+
 
 class APITest(TestCase):
     fixtures = ['initial_data','roles_generic', 'test_content', ]

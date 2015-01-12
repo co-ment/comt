@@ -13,6 +13,8 @@ import time
 from cm.exception import UnauthorizedException
 import re
 from urlparse import urlparse
+
+
 # taken from django's feedgenerator.py and changed to support multiple posts in minute
 def get_tag_uri(url, date):
     "Creates a TagURI. See http://diveintomark.org/archives/2004/05/28/howto-atom-id"
@@ -28,6 +30,7 @@ def public_feed(request):
     activitites = get_viewable_activities(request, {'view_comments' : 1, 'view_texts' : 1})
     return _feed(request, activitites, feed_title, feed_description)
 
+
 def private_feed(request, key):
     private_feed_key = Configuration.objects.get_key('private_feed_key', None)
     if private_feed_key != key:
@@ -37,6 +40,7 @@ def private_feed(request, key):
     feed_description = _(u"Workspace %(workspace_name)s private feed") % {'workspace_name' : ApplicationConfiguration['workspace_name']}
     activities = Activity.objects.filter(type__in=Activity.ACTIVITIES_TYPES).order_by('-created')
     return _feed(request, activities, feed_title, feed_description)
+
 
 def _feed(request, activities, feed_title, feed_description):
     feed = feedgenerator.Atom1Feed(
@@ -66,6 +70,7 @@ def _feed(request, activities, feed_title, feed_description):
     feed.write(response, 'utf-8')
     return response
     
+
 def text_feed(request, key):
     from cm.views import get_text_by_keys_or_404    
     text = get_text_by_keys_or_404(key)
@@ -74,6 +79,7 @@ def text_feed(request, key):
     request.user = AnonymousUser()
     activitites = get_viewable_activities(request, {'view_comments' : 1, 'view_texts' : 1}, text=text)
     return _feed(request, activitites, feed_title, feed_description)
+
 
 def text_feed_private(request, key, private_feed_key):
     from cm.views import get_text_by_keys_or_404    

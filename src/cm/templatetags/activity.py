@@ -4,18 +4,19 @@ from datetime import timedelta
 
 register = template.Library()
 
-ALL_TYPES = {u'seconds': timedelta(seconds=1),
-             u'minute': timedelta(seconds=60),
-             u'1/4hour': timedelta(seconds=3600/4),
-             u'1/2hour': timedelta(seconds=3600/2),
-             u'hour': timedelta(seconds=3600),
-             u'1/4day': timedelta(seconds=21600),
-             u'1/2day': timedelta(seconds=43200),
-             u'day': timedelta(days=1),
-             u'week': timedelta(days=7),
-             u'month': timedelta(days=31),
-             u'year': timedelta(days=365),
-             }
+ALL_TYPES = {
+    u'seconds': timedelta(seconds=1),
+    u'minute': timedelta(seconds=60),
+    u'1/4hour': timedelta(seconds=3600 / 4),
+    u'1/2hour': timedelta(seconds=3600 / 2),
+    u'hour': timedelta(seconds=3600),
+    u'1/4day': timedelta(seconds=21600),
+    u'1/2day': timedelta(seconds=43200),
+    u'day': timedelta(days=1),
+    u'week': timedelta(days=7),
+    u'month': timedelta(days=31),
+    u'year': timedelta(days=365),
+}
 
 TYPE_FULL_SHORT = {
              u'hour': (60, u'minutes'),
@@ -29,6 +30,7 @@ TYPE_FULL_SHORT = {
              } 
 
 KINDS = (u"''",u"'raw'")
+
 
 def do_activity(parser, token):
     try:
@@ -45,6 +47,7 @@ def do_activity(parser, token):
         except ValueError:
             raise template.TemplateSyntaxError, "fourth tag's argument should be one and int"
     return ActivityNode(text, user, type, nb_type, action[1:-1], kind[1:-1])
+
 
 from cm.activity import get_activity
 

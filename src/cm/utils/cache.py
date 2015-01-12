@@ -2,6 +2,7 @@ from django.core.cache import cache
 from hashlib import sha1
 from django.conf import settings
 
+
 # adapted [to django] from http://code.activestate.com/recipes/325205/
 def dj_memoize(f):
     def g(*args, **kwargs):

@@ -1,9 +1,11 @@
+import sys
+
 from south.management.commands.migrate import  Command, list_migrations
 from south.db import DEFAULT_DB_ALIAS
 from south import migration
 from south.migration import Migrations
 from south.exceptions import NoMigrations
-import sys
+
 
 ### RBA+GIB: prevent uno custom __import__ from messing with south import machinery (to discover south enabled dj apps)
 def new_handle(self, app=None, target=None, skip=False, merge=False, backwards=False, fake=False, db_dry_run=False, show_list=False, database=DEFAULT_DB_ALIAS, delete_ghosts=False, ignore_ghosts=False, **options):
@@ -45,21 +47,20 @@ def new_handle(self, app=None, target=None, skip=False, merge=False, backwards=F
         list_migrations(apps, database, **options)
         
     if not show_list:
-            
         for app in apps:
             result = migration.migrate_app(
                 app,
-                target_name = target,
-                fake = fake,
-                db_dry_run = db_dry_run,
-                verbosity = int(options.get('verbosity', 0)),
-                interactive = options.get('interactive', True),
-                load_initial_data = not options.get('no_initial_data', False),
-                merge = merge,
-                skip = skip,
-                database = database,
-                delete_ghosts = delete_ghosts,
-                ignore_ghosts = ignore_ghosts,
+                target_name=target,
+                fake=fake,
+                db_dry_run=db_dry_run,
+                verbosity=int(options.get('verbosity', 0)),
+                interactive=options.get('interactive', True),
+                load_initial_data=not options.get('no_initial_data', False),
+                merge=merge,
+                skip=skip,
+                database=database,
+                delete_ghosts=delete_ghosts,
+                ignore_ghosts=ignore_ghosts,
             )
             if result is False:
                 sys.exit(1) # Migration failed, so the command fails.

@@ -1,9 +1,11 @@
-from pandoc_converters import pandoc_convert
-import chardet 
-from cm.utils.string_utils import to_unicode 
 import re
 import os
-from oo_converters import extract_css_body
+import chardet
+
+from cm.utils.string_utils import to_unicode
+
+from .pandoc_converters import pandoc_convert
+from .oo_converters import extract_css_body
 
 
 # TODO: move that in text_base: save images
@@ -79,9 +81,9 @@ def _convert_from_mimetype(input, mime_type, format):
     else:
         converted_input = to_unicode(input)
 
-
     return converted_input, attachs
     
+
 def fix_img_path(html, xhtml, imgs):
     """
     imgs : name --> path
@@ -110,6 +112,7 @@ def fix_img_path(html, xhtml, imgs):
     result.append(xhtml[last_index:len(xhtml)])
     return u''.join(result)
 
+
 def convert_oo_to_html(input):
     from oo_converters import convert    
     html_input, images = convert(input, 'html')
@@ -126,10 +129,12 @@ def convert_oo_to_html(input):
         raise Exception('UnicodeDecodeError: could not decode')
     return res_content_html, images
 
+
 def fix_html_img_path(html):
     return html.replace('IMG SRC="../outdir/','IMG SRC="')
     
-def convert_oo_to_html_and_xhtml(input): 
+
+def convert_oo_to_html_and_xhtml(input):
     from oo_converters import convert   
     html_input, images = convert(input, 'html')
     xhtml_input, _not_used_ = convert(input, 'xhtml')
@@ -139,7 +144,7 @@ def convert_oo_to_html_and_xhtml(input):
         try:
             res_content_html = unicode(html_input, encoding)
             res_content_xhtml = unicode(xhtml_input, encoding)
-            break;
+            break
         except UnicodeDecodeError:
             pass
 
@@ -150,8 +155,10 @@ def convert_oo_to_html_and_xhtml(input):
         raise Exception('UnicodeDecodeError: could not decode')
     return res_content_html, cleanup(res_content_xhtml), images
         
+
 def cleanup(string):
     return string.replace(u'\xc2\xa0',u'')
+
 
 def markdown_from_code(code):
     CODE_INDICATOR = "    " # 4 spaces

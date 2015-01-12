@@ -2,7 +2,6 @@ from django.test import TestCase
 from django.test.client import Client
 from django.core import management
 
-
 from cm.models import *
 from cm.security import *
 from cm.tests.test_comment_positioning import create_comment

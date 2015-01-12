@@ -33,6 +33,7 @@ TYPES_OUT = {'abw': 'abw',       'aw': 'aw',         'awt': 'awt',
              'txt': 'txt',       'wml': 'wml',       'xml': 'xml',
              'xml2ps': 'xml2ps', 'zabw': 'zabw'}
 
+
 class AbiFileConverter(object):
     """This let's you convert between all filetypes supperted by the 
     AbiWord program. Import type isn't checked, as AbiWord doesn't check 
@@ -106,7 +107,6 @@ class AbiFileConverter(object):
           self._perform_conversion(in_file, out_file, type)
         except:
           raise
-
 
         # return a byte string if no out_file is specified
         if return_bytes:

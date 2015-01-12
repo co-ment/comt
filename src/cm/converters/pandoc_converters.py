@@ -47,6 +47,7 @@ DEFAULT_INPUT_FORMAT = 'markdown'
 
 _PANDOC_ENCODING = 'utf8'
 
+
 @dj_memoize
 def pandoc_convert(content, from_format, to_format, full=False, raw=False):
     """
@@ -69,6 +70,7 @@ def pandoc_convert(content, from_format, to_format, full=False, raw=False):
         return pandoc_markdown2pdf(content)
     return pandoc_pandoc(content, from_format, to_format, full, from_format==to_format=='html') # use raw pandoc convertion if html->html
 
+
 def content_or_file_name(content, file_name):
     if not content and not file_name:
         raise Exception('You should provide either a content or a file_name')
@@ -81,6 +83,7 @@ def content_or_file_name(content, file_name):
         fp.close()
 
     return content
+
 
 @dj_memoize
 def do_tidy(content=None, file_name=None):
@@ -111,6 +114,7 @@ def do_tidy(content=None, file_name=None):
 def get_filetemp(mode="r", suffix=''):
     (fd, fname) = mkstemp(suffix)
     return (os.fdopen(fd, mode), fname)
+
 
 @dj_memoize
 def pandoc_markdown2pdf(content=None, file_name=None):
@@ -173,6 +177,7 @@ def pandoc_markdown2pdf(content=None, file_name=None):
     
 # TODO: manage images in pandoc (?)
 # TODO: use tidy to cleanup html
+
 
 @dj_memoize
 def pandoc_pandoc(content, from_format, to_format, full=False, raw=False):
@@ -274,6 +279,7 @@ def pandoc_pandoc(content, from_format, to_format, full=False, raw=False):
     
     return stdoutdata
     
+
 if __name__ == "__main__":
     import doctest
     doctest.testmod()

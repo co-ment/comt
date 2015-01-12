@@ -19,18 +19,21 @@ def to_unicode(string):
     else:
         return string 
 
+
 def to_utf8(string):
     if type(string) != 'str':
         return string.encode('utf8')
     else:
         return string
  
+
 #@memoize
 def rst_to_html(rst):
     from docutils import core, io
     html, pub = _get_html_and_pub(rst)
     parts = pub.writer.parts
     return parts['stylesheet']+parts['body']
+
 
 #@memoize
 def rst_to_fullhtml(rst):

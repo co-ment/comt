@@ -5,6 +5,7 @@ from django.conf import settings
 import os
 import gettext as gettext_module
 
+
 # taken from django/views/i18n.py
 # to allow GET change (flickr does it)
 def set_language(request, lang_code):

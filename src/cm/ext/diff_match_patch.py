@@ -31,6 +31,7 @@ import time
 import urllib
 import re
 
+
 class diff_match_patch:
   """Class containing the diff, match and patch methods.
 
