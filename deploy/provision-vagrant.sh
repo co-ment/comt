@@ -15,7 +15,7 @@ apt-get install -y git-core python-dev g++ libtidy-dev pandoc libpq-dev
 apt-get clean
 
 #
-# Install via buildout
+# Prepare & run buildout
 #
 echo "Installing using buildout"
 cd /vagrant

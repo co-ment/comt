@@ -5,6 +5,5 @@ Currently we're working on simple Vagrant deployment using shell scripts.
 Eventually more sophisticated methods may be supported (e.g. Ansible, etc.)
 
 
-Note that there is another Vagrant config (more sophisticated, but currently
-not working) in the ../dev directory.
+Note that there is another Vagrant config (using Puppet) in the ../dev directory.
 
