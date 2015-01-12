@@ -1,12 +1,12 @@
 from datetime import timedelta
 
-from django import template
+from django.template import Library, Node, Variable, TemplateSyntaxError
 
 from cm.activity import get_activity
 
 
 
-register = template.Library()
+register = Library()
 
 ALL_TYPES = {
     u'seconds': timedelta(seconds=1),
@@ -40,27 +40,27 @@ def do_activity(parser, token):
     try:
         tag_name, text, user, type, nb_type, action, kind = token.split_contents()
     except ValueError:
-        raise template.TemplateSyntaxError, "%r tag requires 6 arguments" % token.contents.split()[0]
+        raise TemplateSyntaxError, "%r tag requires 6 arguments" % token.contents.split()[0]
     if type[0]=="'" and type[-1]=="'" and type[1:-1] not in ALL_TYPES.keys():
-        raise template.TemplateSyntaxError, "third tag's argument should be one of %s or a variable" % ','.join(ALL_TYPES.keys())
+        raise TemplateSyntaxError, "third tag's argument should be one of %s or a variable" % ','.join(ALL_TYPES.keys())
     if kind not in KINDS:
-        raise template.TemplateSyntaxError, "sixth tag's argument should be one of %s" % ','.join(KINDS)
+        raise TemplateSyntaxError, "sixth tag's argument should be one of %s" % ','.join(KINDS)
     if nb_type != u'auto':
         try:        
             nb_type = int(nb_type)
         except ValueError:
-            raise template.TemplateSyntaxError, "fourth tag's argument should be one and int"
+            raise TemplateSyntaxError, "fourth tag's argument should be one and int"
     return ActivityNode(text, user, type, nb_type, action[1:-1], kind[1:-1])
 
 
-class ActivityNode(template.Node):
+class ActivityNode(Node):
     def __init__(self, text, user, delta, nb_type, action, kind):
         if text not in ['all']:
-            self.text = template.Variable(text)
+            self.text = Variable(text)
         else:
             self.text = text
         if user not in ['None','all']:
-            self.user = template.Variable(user)
+            self.user = Variable(user)
         else:
             self.user = user
             
@@ -68,7 +68,7 @@ class ActivityNode(template.Node):
             self.delta = delta[1:-1]
             self.delta_var = False
         else:
-            self.delta = template.Variable(delta)
+            self.delta = Variable(delta)
             self.delta_var = True
             
         self.nb_type = nb_type

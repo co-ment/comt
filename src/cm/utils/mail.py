@@ -14,9 +14,8 @@ LIST_SEP = ' '
 
 
 class EmailMessage(BaseEmailMessage):
-    
     def __init__(self, subject='', body='', from_email=None, to=None, bcc=None,
-            connection=None, attachments=None, headers=None):
+                 connection=None, attachments=None, headers=None):
         if CM_EMAIL_SUBJECT_PREFIX:
             subject = CM_EMAIL_SUBJECT_PREFIX + subject
         BaseEmailMessage.__init__(self, subject, body, from_email, to, bcc,

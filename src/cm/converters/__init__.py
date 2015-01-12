@@ -4,6 +4,7 @@ import os
 import chardet
 
 from cm.utils.string_utils import to_unicode
+from cm.cm_settings import USE_ABI
 from .pandoc_converters import pandoc_convert
 from .oo_converters import extract_css_body
 
@@ -22,14 +23,14 @@ def _convert_from_mimetype(input, mime_type, format):
     attachs_dir = None
     ##############################
     # OO/MS-Word
-    if mime_type in ['application/vnd.oasis.opendocument.text',
-                     'application/msword',
-                     'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-                     'application/rtf',
-                     'text/rtf',
-                     ]:
+    if mime_type in [
+        'application/vnd.oasis.opendocument.text',
+        'application/msword',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'application/rtf',
+        'text/rtf',
+    ]:
         
-        from cm.cm_settings import USE_ABI
         if USE_ABI:
           from abi_converters import AbiFileConverter
           converter = AbiFileConverter()
@@ -45,6 +46,7 @@ def _convert_from_mimetype(input, mime_type, format):
                   #converted_input = xhtml_input
   
             converted_input = pandoc_convert(html_input, 'html', format)
+
         else:
           html_input, xhtml_input, attachs = convert_oo_to_html_and_xhtml(input)
           if format == 'html':

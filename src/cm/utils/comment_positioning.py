@@ -176,7 +176,6 @@ def insert_comment_markers(htmlcontent, comments, with_markers, with_colors):
             end_ids = []
             
             for offset, ids in offsets :
-                
                 end_ids = ids[1]
                 end = offset
                 

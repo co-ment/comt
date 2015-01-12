@@ -1,19 +1,9 @@
-from cm.message import display_message
-from cm.models import Text, TextVersion, Attachment, Comment, Configuration
-from cm.security import has_global_perm
-from cm.utils.spannifier import spannify
-from django import forms
 from django.core.urlresolvers import reverse
-from django.forms import ModelForm
-from django.forms.util import ErrorList
-from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.utils.translation import ugettext as _, ugettext_lazy
-from django.views.generic.list_detail import object_list
-import mimetypes
-import simplejson
-import sys
+
+from cm.models import Text, TextVersion
 
 
 def get_textversion_by_keys_or_404(textversion_key, adminkey=None, key=None):

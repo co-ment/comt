@@ -1,11 +1,11 @@
 import sys
+import traceback
 
 from django.conf import settings
 from django.core.mail import mail_admins
 
 
 def _get_traceback(exc_info):
-    import traceback
     return '\n'.join(traceback.format_exception(*(exc_info or sys.exc_info())))
 
 

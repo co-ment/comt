@@ -20,16 +20,16 @@ from cm.utils.system import bin_search
 PANDOC_BIN = "pandoc"
 PANDOC_VERSION = commands.getstatusoutput(PANDOC_BIN + " -v|head -n 1|awk '{print $2;}'")[1]
 if LooseVersion(PANDOC_VERSION) < '1.8':
-  PANDOC_OPTIONS = " --sanitize-html --email-obfuscation=none "
+    PANDOC_OPTIONS = " --sanitize-html --email-obfuscation=none "
 else:
-  PANDOC_OPTIONS = " --email-obfuscation=none "
+    PANDOC_OPTIONS = " --email-obfuscation=none "
 
 PANDOC_OPTIONS_RAW = " -R --email-obfuscation=none "
 
 if LooseVersion(PANDOC_VERSION) < '1.9':
-  MARKDOWN2PDF_BIN = "markdown2pdf"
+    MARKDOWN2PDF_BIN = "markdown2pdf"
 else:
-  MARKDOWN2PDF_BIN = None
+    MARKDOWN2PDF_BIN = None
 
 # make sure binaries are available
 bin_search(PANDOC_BIN)
@@ -38,7 +38,9 @@ if MARKDOWN2PDF_BIN:
 
 # pandoc capabilities
 INPUT_FORMATS = ['native', 'markdown', 'rst', 'html', 'latex']
-OUTPUT_FORMATS = ['native', 'html', 's5', 'docbook', 'opendocument', 'odt', 'latex', 'context', 'texinfo', 'man', 'markdown', 'rst', 'mediawiki', 'rtf', 'pdf', 'epub']
+OUTPUT_FORMATS = ['native', 'html', 's5', 'docbook', 'opendocument', 'odt',
+                  'latex', 'context', 'texinfo', 'man', 'markdown', 'rst',
+                  'mediawiki', 'rtf', 'pdf', 'epub']
 
 # input formats
 CHOICES_INPUT_FORMATS = [(f, f) for f in ['markdown', 'rst', 'html']]
@@ -68,7 +70,8 @@ def pandoc_convert(content, from_format, to_format, full=False, raw=False):
         if from_format != 'markdown':
             content = pandoc_convert(content, from_format, 'markdown', True)
         return pandoc_markdown2pdf(content)
-    return pandoc_pandoc(content, from_format, to_format, full, from_format==to_format=='html') # use raw pandoc convertion if html->html
+    return pandoc_pandoc(content, from_format, to_format, full,
+                         from_format==to_format=='html') # use raw pandoc convertion if html->html
 
 
 def content_or_file_name(content, file_name):
@@ -101,8 +104,7 @@ def do_tidy(content=None, file_name=None):
                         logical_emphasis=1,
                         wrap=0,
                         input_encoding='utf8',
-                        output_encoding='utf8',
-                        )
+                        output_encoding='utf8')
     src = to_unicode(content).encode('utf8')
     tidied_content, errors = tidylib.tidy_document(src, options=tidy_options)
     tidied_content = str(tidied_content)
@@ -139,20 +141,21 @@ def pandoc_markdown2pdf(content=None, file_name=None):
 
     # xetex seems to randomly cause "Invalid or incomplete multibyte or wide character" errors, try without it
     if retcode:
-      # build absolute address for latex header file
-      _tmp_ = __file__.split(os.path.sep)[:-1]
-      _tmp_.append('latex_header.txt')
-      _tmp_.insert(0, os.path.sep)
+        # build absolute address for latex header file
+        _tmp_ = __file__.split(os.path.sep)[:-1]
+        _tmp_.append('latex_header.txt')
+        _tmp_.insert(0, os.path.sep)
 
-      LATEX_HEADER_PATH = os.path.join(*_tmp_)
+        LATEX_HEADER_PATH = os.path.join(*_tmp_)
 
-      if not os.path.isfile(LATEX_HEADER_PATH):
-        raise Exception('LATEX_HEADER_PATH is not a file!')
+        if not os.path.isfile(LATEX_HEADER_PATH):
+            raise Exception('LATEX_HEADER_PATH is not a file!')
 
-      # custom latex header
-      cust_head_tex = " --custom-header=%s " %LATEX_HEADER_PATH
+        # custom latex header
+        cust_head_tex = " --custom-header=%s " % LATEX_HEADER_PATH
 
-      retcode = call(MARKDOWN2PDF_BIN + cust_head_tex + ' ' + input_temp_name, shell=True, stderr=fp_error)
+        retcode = call(MARKDOWN2PDF_BIN + cust_head_tex + ' ' + input_temp_name,
+                       shell=True, stderr=fp_error)
 
     fp_error.close()
     
@@ -197,9 +200,11 @@ def pandoc_pandoc(content, from_format, to_format, full=False, raw=False):
     """
     # verify formats
     if from_format not in INPUT_FORMATS:
-        raise Exception("Input format [%s] is not a supported format [%s]" % (from_format, ' '.join(INPUT_FORMATS)))
+        raise Exception("Input format [%s] is not a supported format [%s]"
+                        % (from_format, ' '.join(INPUT_FORMATS)))
     if to_format not in OUTPUT_FORMATS:
-        raise Exception("Output format [%s] is not a supported format [%s]" % (to_format, ' '.join(OUTPUT_FORMATS)))
+        raise Exception("Output format [%s] is not a supported format [%s]"
+                        % (to_format, ' '.join(OUTPUT_FORMATS)))
     if type(content) != unicode:
         raise Exception('Content is not in unicode format!')
 
@@ -207,9 +212,9 @@ def pandoc_pandoc(content, from_format, to_format, full=False, raw=False):
     input_file, input_temp_name = get_filetemp('w', 'input')
     # For some reason when pandoc > 1.9 converts to PDF, '-t' shouldn't be used but output file name extension has to be '.pdf'
     if to_format != 'pdf':
-      output_temp_fp, output_temp_name = get_filetemp('r', 'output')
+        output_temp_fp, output_temp_name = get_filetemp('r', 'output')
     else:
-      output_temp_fp, output_temp_name = get_filetemp('r', 'output.pdf')
+        output_temp_fp, output_temp_name = get_filetemp('r', 'output.pdf')
     output_temp_fp.close()
     
     error_temp_fp, error_temp_name = get_filetemp('w', 'err')
@@ -224,20 +229,20 @@ def pandoc_pandoc(content, from_format, to_format, full=False, raw=False):
         p_options = PANDOC_OPTIONS_RAW
                 
     # do not use pandoc to convert from html to html
-    if from_format==to_format=='html':
-      # get body content
-      stdoutdata = (content.encode('utf8'))
-      soup = BeautifulSoup(stdoutdata, fromEncoding='UTF-8')
-      body = soup.body
-      if body:
-        stdoutdata = body.renderContents()
-      # strip leading spaces
-      stdoutdata = re.sub(r"^\s+", '', stdoutdata)
-      # add new line before closing bracket
-      stdoutdata = re.sub(r"(\/?)>", r"\n\1>", stdoutdata)
-      # do not split closing tag with following opening tag
-      stdoutdata = re.sub(r">\n<", r"><", stdoutdata)
-      return stdoutdata
+    if from_format == to_format == 'html':
+        # get body content
+        stdoutdata = (content.encode('utf8'))
+        soup = BeautifulSoup(stdoutdata, fromEncoding='UTF-8')
+        body = soup.body
+        if body:
+            stdoutdata = body.renderContents()
+        # strip leading spaces
+        stdoutdata = re.sub(r"^\s+", '', stdoutdata)
+        # add new line before closing bracket
+        stdoutdata = re.sub(r"(\/?)>", r"\n\1>", stdoutdata)
+        # do not split closing tag with following opening tag
+        stdoutdata = re.sub(r">\n<", r"><", stdoutdata)
+        return stdoutdata
 
     cmd_args = ' %s -o %s ' %(p_options,output_temp_name) 
     if full:

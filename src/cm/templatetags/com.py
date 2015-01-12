@@ -1,9 +1,10 @@
 from datetime import datetime
 from time import struct_time
 
-from django import template
-from django.template import Node, Variable
+from django.template import Node, Variable, TemplateSyntaxError, \
+    VariableDoesNotExist, Library
 from django.core.urlresolvers import reverse, NoReverseMatch
+from django.utils.encoding import smart_str
 from django.utils.translation import ugettext as _
 from django.utils.dateformat import format
 from pytz import UnknownTimeZoneError
@@ -14,20 +15,20 @@ from cm.utils.log import error_mail_admins
 
 
 
-register = template.Library()
+register = Library()
 
 def do_current_time(parser, token):
     try:
         # split_contents() knows not to split quoted strings.
         tag_name, format_string = token.split_contents()
     except ValueError:
-        raise template.TemplateSyntaxError, "%r tag requires a single argument" % token.contents.split()[0]
+        raise TemplateSyntaxError, "%r tag requires a single argument" % token.contents.split()[0]
     if not (format_string[0] == format_string[-1] and format_string[0] in ('"', "'")):
-        raise template.TemplateSyntaxError, "%r tag's argument should be in quotes" % tag_name
+        raise TemplateSyntaxError, "%r tag's argument should be in quotes" % tag_name
     return CurrentTimeNode(format_string[1:-1])
 
 
-class CurrentTimeNode(template.Node):
+class CurrentTimeNode(Node):
     def __init__(self, format_string):
         self.format_string = format_string
     def render(self, context):
@@ -50,14 +51,14 @@ def do_choice_string(parser, token):
     #    raise template.TemplateSyntaxError, "%r tag's argument should be in quotes" % tag_name
 
 
-class ChoiceStringNode(template.Node):
+class ChoiceStringNode(Node):
     def __init__(self, *args):
         new_args = [u'or'] + args[0]
         self.data = []
         for index in range((len(new_args)-1) / 4):
             or_tag =  new_args[index*4]
-            test1 =  template.Variable(new_args[index*4+1])
-            test2 =  template.Variable(new_args[index*4+2])
+            test1 =  Variable(new_args[index*4+1])
+            test2 =  Variable(new_args[index*4+2])
             string =  new_args[index*4+3]
             self.data.append((test1, test2, string))
         self.default = new_args[-1]
@@ -92,7 +93,7 @@ class URLNode(Node):
     def render(self, context):
         try:
             admin_key = Variable(self.admin_key).resolve(context)
-        except template.VariableDoesNotExist:
+        except VariableDoesNotExist:
             admin_key = None
             
         args = [arg.resolve(context) for arg in self.args]
@@ -118,13 +119,13 @@ class URLNode(Node):
 
 
 @register.filter
-def in_list(value,arg):
+def in_list(value, arg):
     return value in arg
 
 
 @register.filter
-def in_dict(value,arg):
-    return arg.get(value,None)
+def in_dict(value, arg):
+    return arg.get(value, None)
 
 
 import sys
@@ -141,12 +142,14 @@ int_display.is_safe = True
 def local_date(value, tz=None):
     """Formats a date according to the given local date format."""
     if not value:
-        return u''    
-    if isinstance(value,struct_time): 
-        publication_date = datetime(value.tm_year,value.tm_mon,value.tm_mday,value.tm_hour,value.tm_min,value.tm_sec)
+        return u''
+    if isinstance(value, struct_time):
+        publication_date = datetime(value.tm_year, value.tm_mon,
+                                    value.tm_mday, value.tm_hour,
+                                    value.tm_min, value.tm_sec)
 
     try:
-        value = tz_convert(value,tz)
+        value = tz_convert(value, tz)
     except UnknownTimeZoneError:
         error_mail_admins()
     
@@ -179,7 +182,7 @@ def do_up_down(parser, token):
         nodelist = parser.parse(('endup_down',))
         parser.delete_first_token()        
     except ValueError:
-        raise template.TemplateSyntaxError, "%r tag requires 3 arguments" % token.contents.split()[0]
+        raise TemplateSyntaxError, "%r tag requires 3 arguments" % token.contents.split()[0]
     return UpDownNode(sort_name, nodelist)
 
 VAR = 'order'
@@ -189,7 +192,7 @@ DOWN_CLASS = 'sort_down'
 DISABLE_CLASS = 'sort_disable'
 
 
-class UpDownNode(template.Node):
+class UpDownNode(Node):
     def __init__(self, sort_name, nodelist):
         self.sort_name = sort_name 
         self.nodelist = nodelist 
@@ -236,7 +239,7 @@ class FakeRequest(object):
         self.user = user
         
 
-class NbTexts(template.Node):
+class NbTexts(Node):
     def __init__(self, var_name):
         self.var_name = var_name 
         
@@ -255,7 +258,7 @@ def do_nb_texts(parser, token):
     return NbTexts(var_name)
 
 
-class NbUsers(template.Node):
+class NbUsers(Node):
     def __init__(self, var_name):
         self.var_name = var_name 
         
@@ -273,7 +276,7 @@ def do_nb_users(parser, token):
     return NbUsers(var_name)
 
 
-class NbComments(template.Node):
+class NbComments(Node):
     def __init__(self, text, var_name):
         self.text = text
         self.var_name = var_name         
@@ -291,7 +294,7 @@ def do_nb_comments(parser, token):
     return NbComments(text, var_name)
 
 
-class NewParams(template.Node):
+class NewParams(Node):
     def __init__(self, params):
         self.params = params
         
@@ -313,7 +316,7 @@ class NewParams(template.Node):
 def do_newparams(parser, token):
     all_params = token.split_contents()
     if len(all_params) % 1 != 0:
-        raise template.TemplateSyntaxError, "%r tag requires even number of arguments" % token.contents.split()[0]
+        raise TemplateSyntaxError, "%r tag requires even number of arguments" % token.contents.split()[0]
     all_params = all_params[1:]    
     return NewParams([a for a in all_params])
 
@@ -334,18 +337,18 @@ def url_args(url):
 
 @register.filter
 def leading_zeros(value, desired_digits):
-  """
-  Given an integer, returns a string representation, padded with [desired_digits] zeros.
-  """
-  int_val = int(value)
-  if (int_val > 0):
-    sign = '+'
-  else:
-    sign = '-'
-  num_zeros = int(desired_digits) - len(str(abs(int_val)))
-  padded_value = []
-  while num_zeros >= 1:
-    padded_value.append("0") 
-    num_zeros = num_zeros - 1
-  padded_value.append(str(abs(int_val)))
-  return sign + "".join(padded_value)
+    """
+    Given an integer, returns a string representation, padded with [desired_digits] zeros.
+    """
+    int_val = int(value)
+    if (int_val > 0):
+        sign = '+'
+    else:
+        sign = '-'
+    num_zeros = int(desired_digits) - len(str(abs(int_val)))
+    padded_value = []
+    while num_zeros >= 1:
+        padded_value.append("0")
+        num_zeros = num_zeros - 1
+    padded_value.append(str(abs(int_val)))
+    return sign + "".join(padded_value)

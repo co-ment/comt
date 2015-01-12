@@ -1,14 +1,15 @@
+from cPickle import dumps
 from hashlib import sha1
 
 from django.core.cache import cache
 from django.conf import settings
 
 
-
 # adapted [to django] from http://code.activestate.com/recipes/325205/
 def dj_memoize(f):
     def g(*args, **kwargs):
-        key = sha1( str((settings.SITE_URL, f.__name__, f, tuple(args), frozenset(kwargs.items())) )).hexdigest()
+        key = sha1(str((settings.SITE_URL, f.__name__, f, tuple(args),
+                        frozenset(kwargs.items())))).hexdigest()
         val = cache.get(key)
         if not val:
             val = f(*args, **kwargs)
@@ -24,7 +25,6 @@ def dj_memoize(f):
 # changed : 
 #  - default limit is 100
 #  - store sha1 of key (shorter) 
-import cPickle, hashlib
 
 def memoize(function, limit=100):
     if isinstance(function, int):
@@ -36,7 +36,7 @@ def memoize(function, limit=100):
     dict = {}
     list = []
     def memoize_wrapper(*args, **kwargs):
-        key = hashlib.sha1(cPickle.dumps((args, kwargs))).digest()
+        key = sha1(dumps((args, kwargs))).digest()
         try:
             list.append(list.pop(list.index(key)))
         except ValueError:

@@ -16,8 +16,10 @@ from cm.security import get_request_user
 #@login_required
 def followup(request):
     user = get_request_user(request)
-    workspace_notify_check = Notification.objects.filter(text=None,type='workspace',user=user, active=True).count()
-    own_notify_check = Notification.objects.filter(text=None,type='own',user=user, active=True).count()
+    workspace_notify_check = Notification.objects \
+        .filter(text=None, type='workspace', user=user, active=True).count()
+    own_notify_check = Notification.objects \
+        .filter(text=None, type='own', user=user, active=True).count()
     
     if request.method == 'POST':
         if 'activate' in request.POST:
@@ -31,7 +33,10 @@ def followup(request):
             notif_type = 'own' if notif_id == 'own_notify_check' else 'workspace' 
             notif_val = request.POST.get(notif_id,None)
             if notif_val != None :
-                Notification.objects.set_notification(text=None, type=notif_type, active=(notif_val == 'true'), email_or_user=user)
+                Notification.objects.set_notification(text=None,
+                                                      type=notif_type,
+                                                      active=(notif_val == 'true'),
+                                                      email_or_user=user)
 
     return render_to_response('site/followup.html',
                               {
@@ -68,8 +73,10 @@ def text_followup(request, key):
 
     from cm.security import user_has_perm # import here!
     anonymous_can_view_text = user_has_perm(None, 'can_view_text', text=text)
-    text_notify_check = Notification.objects.filter(text=text,type='text',user=user, active=True).count()
-    workspace_notify_check = Notification.objects.filter(text=None,type='workspace',user=user, active=True).count()
+    text_notify_check = Notification.objects \
+        .filter(text=text, type='text', user=user, active=True).count()
+    workspace_notify_check = Notification.objects \
+        .filter(text=None, type='workspace', user=user, active=True).count()
     
     if request.method == 'POST':
         if 'activate' in request.POST:
@@ -85,7 +92,9 @@ def text_followup(request, key):
             notif_id = request.POST.get('notif_id')
             notif_val = request.POST.get(notif_id,None)
             if notif_val != None :
-                Notification.objects.set_notification(text=text, type='text', active=(notif_val == 'true'), email_or_user=request.user)
+                Notification.objects.set_notification(text=text, type='text',
+                                                      active=(notif_val == 'true'),
+                                                      email_or_user=request.user)
 
     template_dict = {
         'text': text,
@@ -105,5 +114,3 @@ def text_embed(request, key):
     }
     return render_to_response('site/text_embed.html', template_dict,
                               context_instance=RequestContext(request))
-    
-    

@@ -3,7 +3,6 @@ import time
 from django.utils.translation import ugettext as _
 
 
-
 #http://docs.python.org/lib/module-time.html
 def datetime_to_user_str(dt):
     return dt.strftime(str(_("%Y-%m-%d %H:%M"))) 

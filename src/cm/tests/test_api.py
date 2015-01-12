@@ -1,13 +1,14 @@
+from django.contrib.auth.models import User
 from django.test import TestCase
 from django.http import HttpRequest
 from django.utils import simplejson
-
-from cm.security import *
-from cm.api.handlers import *
-
-
-#from piston.test import TestCase
 from piston.resource import Resource
+
+from cm.api.handlers import AnonymousTextHandler, TextListHandler, \
+    AnonymousTextListHandler, TextDeleteHandler, TextPreEditHandler, \
+    TextEditHandler, TextVersionRevertHandler, TextVersionDeleteHandler
+from cm.models import Text
+from cm.security import get_texts_with_perm
 
 
 class FalseRequest(object):
@@ -66,22 +67,28 @@ class APITest(TestCase):
         user = User.objects.get(pk=1)
         setattr(request, 'user' , user)
         request.method = 'POST'
-        setattr(request, 'POST' , {'content':'test content', 'format':"markdown", 'title': 'my title'})
+        setattr(request, 'POST', {'content': 'test content',
+                                  'format': "markdown",
+                                  'title': 'my title'})
         response = resource(request,)
 
         self.assertEquals(200, response.status_code)
         self.assertTrue('key' in simplejson.loads(response.content).keys())
 
         request = FalseRequest(None) 
-        self.assertEqual(get_texts_with_perm(request, 'can_view_text').count(), nb_anon_texts) # NO more anon text
+        self.assertEqual(get_texts_with_perm(request, 'can_view_text').count(),
+                         nb_anon_texts) # NO more anon text
         
         # create one text with anon observer
         request = HttpRequest()
         user = User.objects.get(pk=1)
         setattr(request, 'user' , user)
         request.method = 'POST'
-        setattr(request, 'POST' , {'content':'test content', 'format':"markdown", 'title': 'my title', 'anon_role' : 4})
-        response = resource(request,)
+        setattr(request, 'POST', {'content': 'test content',
+                                  'format': "markdown",
+                                  'title': 'my title',
+                                  'anon_role': 4})
+        response = resource(request)
 
         self.assertEquals(200, response.status_code)
         self.assertTrue('key' in simplejson.loads(response.content).keys())
@@ -89,7 +96,8 @@ class APITest(TestCase):
         self.assertEquals(nb_texts + 2, Text.objects.count()) # 2 more texts should have been created
 
         request = FalseRequest(None) 
-        self.assertEqual(get_texts_with_perm(request, 'can_view_text').count(), nb_anon_texts + 1) # one more anon accessible text available
+        self.assertEqual(get_texts_with_perm(request, 'can_view_text').count(),
+                         nb_anon_texts + 1) # one more anon accessible text available
         
     def test_list_text_get(self):
         """
@@ -111,7 +119,7 @@ class APITest(TestCase):
         resource = Resource(AnonymousTextListHandler)
         request = HttpRequest()
         user = User.objects.get(pk=1)
-        setattr(request, 'user' , user)
+        setattr(request, 'user', user)
         request.method = 'GET'
   
         response = resource(request, emitter_format='json')
@@ -127,10 +135,10 @@ class APITest(TestCase):
         resource = Resource(TextDeleteHandler)
         request = HttpRequest()
         user = User.objects.get(pk=1)
-        setattr(request, 'user' , user)
+        setattr(request, 'user', user)
         request.method = 'POST'
-        setattr(request, 'POST' , {})
-        setattr(request, 'flash' , {})
+        setattr(request, 'POST', {})
+        setattr(request, 'flash', {})
   
         response = resource(request, key='text_key_3', emitter_format='json')
         self.assertEquals(204, response.status_code)
@@ -147,10 +155,10 @@ class APITest(TestCase):
         resource = Resource(TextDeleteHandler)
         request = HttpRequest()
         user = User.objects.get(pk=3)
-        setattr(request, 'user' , user)
+        setattr(request, 'user', user)
         request.method = 'POST'
-        setattr(request, 'POST' , {})
-        setattr(request, 'flash' , {})
+        setattr(request, 'POST', {})
+        setattr(request, 'flash', {})
   
         response = resource(request, key='text_key_3', emitter_format='json')
         self.assertEquals(401, response.status_code)
@@ -158,18 +166,18 @@ class APITest(TestCase):
         # no text deleted
         self.assertEquals(nb_texts, Text.objects.count())
 
-
     def test_pre_edit(self):
         """
         Pre edit text: should return number of comments to remove
         """
         resource = Resource(TextPreEditHandler)
         request = HttpRequest()
-        user = User.objects.get(pk=1) 
-        setattr(request, 'user' , user)
+        user = User.objects.get(pk=1)
+        setattr(request, 'user', user)
         request.method = 'POST'
-        setattr(request, 'POST' , {'new_format' : 'markdown', 'new_content' : u'ggg'})
-        setattr(request, 'flash' , {})
+        setattr(request, 'POST',
+                {'new_format': 'markdown', 'new_content': u'ggg'})
+        setattr(request, 'flash', {})
     
         response = resource(request, key='text_key_2', emitter_format='json')
         self.assertEquals(response.content, '{"nb_removed": 3}')
@@ -186,12 +194,15 @@ class APITest(TestCase):
         user = User.objects.get(pk=1) 
         setattr(request, 'user' , user)
         request.method = 'POST'
-        setattr(request, 'POST' , {'format' : 'markdown', 'content' : u'ggg', 'keep_comments' : True, 'new_version' : True, 'title' : 'new title'})
+        setattr(request, 'POST', {'format': 'markdown', 'content': u'ggg',
+                                  'keep_comments': True, 'new_version': True,
+                                  'title': 'new title'})
         #setattr(request, 'flash' , {})
     
         response = resource(request, key='text_key_2', emitter_format='json')
 
-        self.assertEquals(Text.objects.get(pk=2).last_text_version.content , u'ggg')
+        self.assertEquals(Text.objects.get(pk=2).last_text_version.content,
+                          u'ggg')
 
     def test_text_version(self):
         """
@@ -203,9 +214,11 @@ class APITest(TestCase):
         resource = Resource(TextVersionRevertHandler)
         request = HttpRequest()
         request.method = 'POST'
-        setattr(request, 'POST' , {})
-        
-        response = resource(request, key='text_key_1', version_key='textversion_key_0', emitter_format='json')
+        setattr(request, 'POST', {})
+
+        response = resource(request, key='text_key_1',
+                            version_key='textversion_key_0',
+                            emitter_format='json')
 
         self.assertEquals(Text.objects.get(pk=1).get_versions_number() , 3)
         
@@ -215,7 +228,8 @@ class APITest(TestCase):
         request = HttpRequest()
         request.method = 'POST'
         setattr(request, 'POST' , {})
-        response = resource(request, key='text_key_1', version_key='textversion_key_0', emitter_format='json')
-        
-        
+        response = resource(request, key='text_key_1',
+                            version_key='textversion_key_0',
+                            emitter_format='json')
+
         self.assertEquals(Text.objects.get(pk=1).get_versions_number() , 2)

@@ -91,7 +91,9 @@ def content_export2(request, content, title, content_format, format, use_pandoc,
     export_infos = EXPORT2_INFOS[format]
      
     if download_response:
-        return _response_download(export_content, title, export_infos['mimetype'], export_infos['extension']) ;
+        return _response_download(export_content, title,
+                                  export_infos['mimetype'],
+                                  export_infos['extension'])
     else:
         return _response_write(export_content)    
     
@@ -116,7 +118,12 @@ def _response_write(content):
 
 def xml_export(request, text_version, whichcomments):
   # Text version infos
-  template_dict = { 'title': text_version.title, 'created': text_version.created, 'modified': text_version.modified, 'format': text_version.format, 'content': text_version.content, 'tags': text_version.tags, }
+  template_dict = {'title': text_version.title,
+                   'created': text_version.created,
+                   'modified': text_version.modified,
+                   'format': text_version.format,
+                   'content': text_version.content,
+                   'tags': text_version.tags, }
   
   # Comments
   comments = [] # whichcomments=="none"
@@ -128,7 +135,8 @@ def xml_export(request, text_version, whichcomments):
         ll = request.POST.get('filteredIds',[]).split(",")
         filteredIds = [ int(l) for l in ll if l]
       _comments = text_version.comment_set.filter(id__in=filteredIds)
-    comments = get_viewable_comments(request, _comments, text_version, order_by=('start_wrapper','start_offset','end_wrapper','end_offset'))
+    comments = get_viewable_comments(request, _comments, text_version,
+                                     order_by=('start_wrapper','start_offset','end_wrapper','end_offset'))
     # Add user name/email if missing comment name/email
     for comment in comments:
       users = User.objects.filter(id=comment.user_id)
@@ -168,8 +176,11 @@ def xml_export(request, text_version, whichcomments):
   template_dict['attachments'] = attachments
 
   # Renders template
-  export_content = render_to_string('site/export.xml', template_dict, context_instance=RequestContext(request))
+  export_content = render_to_string('site/export.xml', template_dict,
+                                    context_instance=RequestContext(request))
 
   # Returns HTTP response
   export_infos = EXPORT2_INFOS['xml']
-  return _response_download(export_content, text_version.title, export_infos['mimetype'], export_infos['extension']) ;
+  return _response_download(export_content, text_version.title,
+                            export_infos['mimetype'],
+                            export_infos['extension'])

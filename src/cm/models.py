@@ -9,13 +9,14 @@ from django.core.urlresolvers import reverse
 from django.template.defaultfilters import timesince
 from django.template.loader import render_to_string
 from django.db import models, connection
-from django.db.models import Q
+from django.db.models import Q, signals
 from django.utils.translation import ugettext as _, ugettext_lazy as _l
+from django.utils.safestring import mark_safe
 from django.contrib.auth.models import Permission, User
 from tagging.fields import TagField
 
 from cm.models_base import PermanentModel, KeyManager, Manager, KeyModel, \
-    AuthorModel, generate_key
+    AuthorModel, generate_key, KEY_MAX_SIZE
 from cm.role_models import change_role_model
 from cm.converters.pandoc_converters import \
     CHOICES_INPUT_FORMATS as CHOICES_INPUT_FORMATS_PANDOC, \
@@ -91,7 +92,8 @@ class Text(PermanentModel, AuthorModel):
             self.last_text_version = real_last_text_version
             modif = True
             
-        if real_last_text_version and real_last_text_version.title and real_last_text_version.title != self.title:
+        if real_last_text_version and real_last_text_version.title \
+                and real_last_text_version.title != self.title:
             self.title = real_last_text_version.title
             modif = True
         
@@ -125,7 +127,8 @@ class Text(PermanentModel, AuthorModel):
         """
         Get version number 'version_number' (1-based)
         """
-        version = TextVersion.objects.filter(text__exact=self).order_by('created')[version_number - 1:version_number][0]
+        version = TextVersion.objects.filter(text__exact=self)\
+                      .order_by('created')[version_number - 1:version_number][0]
         return version
         
     def get_inversed_versions(self):
@@ -301,9 +304,6 @@ class CommentManager(Manager):
         comment.save(keep_dates=keep_dates)
         return comment
     
-
-from cm.models_base import KEY_MAX_SIZE
-
 
 class Comment(PermanentModel, AuthorModel):
     modified = models.DateTimeField()
@@ -482,7 +482,7 @@ class NotificationManager(KeyManager):
         return notification
 
     def get_notifications(self, text, type, email_or_user):
-        if isinstance(email_or_user,unicode):
+        if isinstance(email_or_user, unicode):
             prev_notifications = Notification.objects.filter(text=text, type=type, email=email_or_user)
         else:
             prev_notifications = Notification.objects.filter(text=text, type=type, user=email_or_user)
@@ -555,9 +555,11 @@ class UserRole(models.Model):
             rolename = ''
             
         if self.user:
-            return u"%s: %s %s %s" % (self.__class__.__name__, self.user.username, self.text, rolename)
+            return u"%s: %s %s %s" % (self.__class__.__name__,
+                                      self.user.username, self.text, rolename)
         else:
-            return u"%s: *ALL* %s %s" % (self.__class__.__name__, self.text, rolename)
+            return u"%s: *ALL* %s %s" % (self.__class__.__name__,
+                                         self.text, rolename)
     
     def __repr__(self):
         return self.__unicode__()
@@ -584,8 +586,6 @@ class Role(models.Model):
         return _(self.name)
     
 
-from django.utils.safestring import mark_safe
- 
 class RegistrationManager(KeyManager):
     def activate_user(self, activation_key):
         """
@@ -610,8 +610,11 @@ class RegistrationManager(KeyManager):
         return (activated, user)
 
     def _create_manager(self, email, username, password, first_name, last_name):
-        if username and email and password and len(User.objects.filter(username=username)) == 0:
-            user = User.objects.create(username=username, email=email, first_name=first_name, last_name=last_name, is_active=True)
+        if username and email and password \
+                and len(User.objects.filter(username=username)) == 0:
+            user = User.objects.create(username=username, email=email,
+                                       first_name=first_name,
+                                       last_name=last_name, is_active=True)
             user.set_password(password)
             user.save()
             
@@ -710,7 +713,6 @@ class UserProfile(KeyModel):
         
     def _send_act_invit_email(self, template, note=None):
         subject = _(u'Invitation')
-    
         activate_url = reverse('user-activate', args=[self.adminkey])
         message = render_to_string(template,
                                    {
@@ -719,10 +721,9 @@ class UserProfile(KeyModel):
                                        'CONF': ApplicationConfiguration
                                    })
     
-        send_mail(subject, message, ApplicationConfiguration['email_from'], [self.user.email])
+        send_mail(subject, message, ApplicationConfiguration['email_from'],
+                  [self.user.email])
         
-
-from django.db.models import signals
 
 def delete_profile(sender, **kwargs):
     user_profile = kwargs['instance']
@@ -787,7 +788,7 @@ class Activity(models.Model):
          'user_suspended' : _l(u'User %(username)s access to workspace suspended'),
          'user_activated' : _l(u'User %(username)s access to workspace activated'),
          'user_approved' : _l(u'User %(username)s has activated his account'),
-         }
+    }
     
     def is_same_user(self, other_activity):
         if (self.originator_user != None or other_activity.originator_user != None) and self.originator_user != other_activity.originator_user:
@@ -797,7 +798,10 @@ class Activity(models.Model):
 
     def linkable_text_title(self, html=True, link=True):
         # html: whether or not output sould be html
-        format_args = {'link':absolute_reverse('text-view', args=[self.text.key]), 'title':self.text.title}
+        format_args = {
+            'link': absolute_reverse('text-view', args=[self.text.key]),
+            'title': self.text.title,
+        }
         if html and not self.text.deleted :
             return mark_safe(u'<a href="%(link)s">%(title)s</a>' % format_args)
         else:
@@ -808,14 +812,20 @@ class Activity(models.Model):
 
     def linkable_comment_title(self, html=True, link=True):
         if self.comment:
-            format_args = {'link':absolute_reverse('text-view-show-comment', args=[self.text.key, self.comment.id_key]), 'title':self.comment.title}
+            format_args = {
+                'link': absolute_reverse('text-view-show-comment',
+                                         args=[self.text.key,
+                                               self.comment.id_key]),
+                'title': self.comment.title,
+            }
             if html and not self.comment.deleted and not self.text.deleted:
-                return mark_safe(u'<a href="%(link)s">%(title)s</a>' % format_args)
+                return mark_safe(u'<a href="%(link)s">%(title)s</a>'
+                                 % format_args)
             else :
                 if link and not self.comment.deleted and not self.text.deleted:
                     return u'%(title)s (%(link)s)' % format_args
                 else:
-                    return self.comment.title ;
+                    return self.comment.title
         else:
             return u''
 
@@ -842,15 +852,18 @@ class Activity(models.Model):
     def printable_metadata(self, html=True):
         ret = []
         if self.type == 'user_activated':
-            ret.append(_(u'by "%(username)s"') % {'username' : self.originator_user.username})
+            ret.append(_(u'by "%(username)s"')
+                       % {'username': self.originator_user.username})
             ret.append(' ')
-        ret.append(_(u"%(time_since)s ago") % {'time_since':timesince(self.created)})
+        ret.append(_(u"%(time_since)s ago")
+                   % {'time_since': timesince(self.created)})
         return ''.join(ret)
 
     def printable_metadata_absolute(self, html=True):
         ret = []
         if self.type == 'user_activated':
-            ret.append(_(u'by "%(username)s"') % {'username' : self.originator_user.username})
+            ret.append(_(u'by "%(username)s"')
+                       % {'username': self.originator_user.username})
             ret.append(u' ')
         ret.append(datetime_to_user_str(self.created))
         return u''.join(ret)
