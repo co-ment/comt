@@ -1,28 +1,44 @@
 # Comt, free software Web-based text annotation platform
 
-## Installation
-
-If you're busy, run:
-
-    git clone git@git.abilian.com:co-ment/comt.git
-    git clone git@git.abilian.com:co-ment/lite-co-ment-com.git lite.co-ment.com
-    cd comt
-    virtualenv --system-site-packages .
-    source bin/activate
-    pip install -U pip setuptools
-    pip install zc.buildout
-    python bootstrap.py
-    hg clone https://bitbucket.org/pagenoare/mercurial-recipe
-    pushd mercurial-recipe
-    pip install -e .
-    popd
-    bin/buildout -v
-    deactivate
-
-
 ## About
 
 Comt is a free software Web-based text annotation platform.
+
+More info (and a hosted platform) at: <http://www.co-ment.com/>.
+
+## Installation
+
+If you're busy, 
+
+1. Install the following packages (on a Debian or Ubuntu Linux distibution):
+
+    sudo apt-get install -y git-core python-dev g++ libtidy-dev pandoc libpq-dev
+    
+  Note 1: you can probably find similar packages on other Linux distributions,
+  then proceed.
+  
+  Note 2: at this point we don't have a straightforward recipe to install comt
+  Mac OS or Windows.
+
+2. Not run:
+
+    git clone git@git.abilian.com:co-ment/comt.git
+    cd comt
+    python bootstrap-buildout.py
+    bin/buildout -v
+
+3. Then create your database (see below) and create/edit the
+   `settings_local.py` file accordingly.
+
+4. Then run:
+
+    bin/django syncdb --settings=settings
+    bin/django migrate --settings=settings
+    bin/django loaddata roles_generic --settings=settings
+    bin/django runserver --settings=settings
+
+5. Now you can point your browser to <http://localhost:8000/>
+
 
 ## License
 
@@ -56,7 +72,10 @@ CC-BY (<http://creativecommons.org/licenses/by/3.0/>) for translation files
 
 (all other python dependencies will be downloaded by buildout)
 
+
 ## Installation (development install)
+
+*These are old installation notes, they still need to be updated*.
 
 1. Install python2.5+ and all required libraries
 
@@ -133,28 +152,37 @@ CC-BY (<http://creativecommons.org/licenses/by/3.0/>) for translation files
 ## Installation (Vagrant development box)
 
 The second option is to use the vagrant virtual machine defined in the `dev` folder.
-For this you need first to install Vagrant for your platform (c.f. http://www.vagrantup.com/), open a terminal in the `dev` folder and launch the command
 
-`$ vagrant up`
+For this you need first to install Vagrant for your platform
+(cf. <http://www.vagrantup.com/>), open a terminal in the `dev` folder and
+launch the command
 
-This will create a virtual box, using the private address 172.16.1.2. An instance of comt can be reached at the following url http://172.16.1.2.
+    vagrant up
 
-The provisioning tool used is Puppet and the manifest (cf `dev/manifests/site.pp`) uses some external modules (c.f. `dev/modules/` except `dev/modules/sysconfig`). These modules are referenced as git submodule. Therefore you mus ensure that all the submodules have been cloned also. There is two ways to make this:
+This will create a virtual box, using the private address 172.16.1.2.
+An instance of comt can be reached at the following url <http://172.16.1.2/>.
+
+The provisioning tool used is Puppet and the manifest
+(cf `dev/manifests/site.pp`) uses some external modules (c.f. `dev/modules/`
+except `dev/modules/sysconfig`). These modules are referenced as git submodules.
+Therefore you mus ensure that all the submodules have been cloned also.
+There are two ways to make this:
 
 - pass the `--recursive` option to `git clone` when cloning the Co-ment repository :
 `$ git clone --recursive https://github.com/co-ment/comt.git`
-- or on an existing cloned repository :
-`$ git submodule init && git submodule install`
+
+- or on an existing cloned repository : `$ git submodule init && git submodule install`
 
 
-The installation have the following parameters:
+The installation has the following parameters:
+
 - The root of the project is mapped on `/srv/comt` on the dev box.
-- The web server is nginx (http://nginx.org/).
-- The web pages are served as a wsgi application with gunicorn (http://gunicorn.org/).
-- The gunicorn processes are monitored by supervisor (http://supervisord.org/).
+- The web server is nginx (<http://nginx.org/>).
+- The web pages are served as a wsgi application with gunicorn (<http://gunicorn.org/>).
+- The gunicorn processes are monitored by supervisor (<http://supervisord.org/>).
 - Openoffice is installed but is not launched as an headless instance (althought it could be easily setup with supervisor).
 - The dev box uses a virtual network with the ip 172.16.1.2 (this can be changed in the Vagrant config).
-- The box is provisioned using puppet (http://puppetlabs.com/).
+- The box is provisioned using puppet (http://puppetlabs.com/>).
 - Most of the configuration is done in the sysconfig module found in `dev/modules/sysconfig`.
 - All the other subdirectories of `dev/modules` are puppet modules used during the box provisioning. All the folders are sub-repositories and are checked-out using git.
 
@@ -170,19 +198,25 @@ Moreover, the following parameters are set :
 | superuser_name | admin       |
 | superuser_pw   | dev@co-ment |
 
-These values can be overriden by creating a `custom.yaml` file in the `dev` folder. The file `custom.yaml.tmpl` gives a template for the format of this file.
-if the db_host is empty or 'localhost', or '127.0.0.1', the database is considered local to the box and a postgresql server is installed in the virtual server.
+These values can be overriden by creating a `custom.yaml` file in the `dev`
+folder. The file `custom.yaml.tmpl` gives a template for the format of this file.
+
+If the db_host is empty or 'localhost', or '127.0.0.1', the database is
+considered local to the box and a postgresql server is installed in the virtual server.
+
 Otherwise, the server is considered remote and only the postgresql client libraries are installed on the dev box.
+
 Also in this case, the database (db_name) and user (db_user) are not created automatically.
+
 You must ensure that they are already created on the postgresql server with the adequate authorizations, and that the user can connect on the 'remote' server from the dev box.
 
 The creation of the virtual machine will create some files in your source tree (`buildout-dev.cfg, test-suite/start-test-suite-dev.js,...`). These files are necessary to the correct operation of the dev virtual machine and should not be touched. They are generated by Puppet during the provisioning of the Vagrant box. If they need to be adapted you will find them in the `sysconfig` puppet module.
+
 Please note that they should not be added to the versioning tool (git) and are currently already ignored.
 
 After you are done with the virtual machine (or if you need to start afresh) they can be cleaned by launching the `clean-testserver.sh` script. Please note that except the files directly managed by Vagrant,the script clean **all** trace of the virtual machine in the source tree, including the buildout `bin` and `egg` folders.
 
 Please refer to the available online documentation for more details on the various tools used here.
-
 
 
 ## Installation (production environment)
@@ -202,26 +236,31 @@ A few tips thought:
 
 Upgrading you database should only need one command:
 
-- `./bin/buildout`
-- `./bin/django migrate --settings=settings`
+- `bin/buildout`
+- `bin/django migrate --settings=settings`
 
 ### Upgrade from alpha releases
 
 If your database was created using comt alpha prior to the revision 29, here are the commands you should run:
 
-- `./bin/buildout`
-- `./bin/django syncdb`
-- `./bin/django migrate cm 0001_initial --fake`
-- `./bin/django migrate`
+- `bin/buildout`
+- `bin/django syncdb`
+- `bin/django migrate cm 0001_initial --fake`
+- `bin/django migrate`
 
 
 ## Abiword or Openoffice ?
 
-Comt uses either abiword or openoffice to convert documents from ODT, MS Word, etc. to html.
+Comt uses either abiword or openoffice to convert documents from ODT, MS Word,
+etc. to html.
 
-Abiword is a lighter and more performant solution. You have to add the configuration parameter `USE_ABI = True` in your `settings_local.py` to use Abiword. Otherwise openoffice is used.
+Abiword is a lighter and more performant solution. You have to add the
+configuration parameter `USE_ABI = True` in your `settings_local.py` to use
+Abiword. Otherwise openoffice is used.
 
-To use openoffice, on a development setup, you should make sure no openoffice process is left and launch `soffice -headless "-accept=socket,port=2002;urp;"` to start openoffice in background mode.
+To use openoffice, on a development setup, you should make sure no openoffice
+process is left and launch `soffice -headless "-accept=socket,port=2002;urp;"`
+to start openoffice in background mode.
 
 
 ## Libraries and assets COMT depends upon
