@@ -1,5 +1,6 @@
 # python 2.5 compat
 from __future__ import with_statement
+import tidylib
 from cm.utils.cache import memoize, dj_memoize
 ######
 ## This module requires pandoc v > 1.0 (pandoc & markdown executables) 
@@ -9,7 +10,6 @@ from subprocess import Popen, PIPE, call
 import os
 from tempfile import mkstemp
 import StringIO
-import tidy
 from cm.utils.string_utils import to_unicode
 from BeautifulSoup import BeautifulSoup
 import re
@@ -100,11 +100,12 @@ def do_tidy(content=None, file_name=None):
                         input_encoding='utf8',
                         output_encoding='utf8',
                         )
-    tidyied_content = tidy.parseString(to_unicode(content).encode('utf8'), **tidy_options)
-    tidyied_content = str(tidyied_content)
-    if content and not tidyied_content.strip():
+    src = to_unicode(content).encode('utf8')
+    tidied_content, errors = tidylib.tidy_document(src, options=tidy_options)
+    tidied_content = str(tidied_content)
+    if content and not tidied_content.strip():
         raise Exception('Content could not be tidyfied') 
-    return str(tidyied_content).decode('utf8')
+    return str(tidied_content).decode('utf8')
 
 
 def get_filetemp(mode="r", suffix=''):
