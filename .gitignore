@@ -21,6 +21,7 @@ downloads
 .tox
 .cache
 .coverage
+.eggs
 
 recreate
 settings_local.py

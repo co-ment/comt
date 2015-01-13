@@ -12,5 +12,6 @@ clean:
 	find . -name "*.pyc" | xargs rm -f
 	rm -rf .installed.cfg *.egg-info \
              bin/ develop-eggs/ eggs/ include/ lib/ local/ parts/ \
-             pip-selfcheck.json .cache .coverage src/comt.egg-info *.egg
+             pip-selfcheck.json 
+	rm -rf .eggs .cache .coverage *.egg
 
