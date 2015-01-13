@@ -1,7 +1,8 @@
+import json
+
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.http import HttpRequest
-from django.utils import simplejson
 from piston.resource import Resource
 
 from cm.api.handlers import AnonymousTextHandler, TextListHandler, \
@@ -32,7 +33,7 @@ class APITest(TestCase):
         # get public text
         response = resource(request, key='text_key_4', emitter_format='json')
         self.assertEquals(200, response.status_code) # 401: forbidden
-        response_data = simplejson.loads(response.content)
+        response_data = json.loads(response.content)
         self.assertEquals(response_data.get('created'), '2009-02-13 04:01:12')
         
         # error: private text
@@ -73,7 +74,7 @@ class APITest(TestCase):
         response = resource(request,)
 
         self.assertEquals(200, response.status_code)
-        self.assertTrue('key' in simplejson.loads(response.content).keys())
+        self.assertTrue('key' in json.loads(response.content).keys())
 
         request = FalseRequest(None) 
         self.assertEqual(get_texts_with_perm(request, 'can_view_text').count(),
@@ -91,7 +92,7 @@ class APITest(TestCase):
         response = resource(request)
 
         self.assertEquals(200, response.status_code)
-        self.assertTrue('key' in simplejson.loads(response.content).keys())
+        self.assertTrue('key' in json.loads(response.content).keys())
         
         self.assertEquals(nb_texts + 2, Text.objects.count()) # 2 more texts should have been created
 
@@ -110,7 +111,7 @@ class APITest(TestCase):
   
         response = resource(request, emitter_format='json')
         self.assertEquals(200, response.status_code)
-        self.assertEquals(2, len(simplejson.loads(response.content)))
+        self.assertEquals(2, len(json.loads(response.content)))
 
     def test_list_text_logged_in(self):
         """
@@ -124,7 +125,7 @@ class APITest(TestCase):
   
         response = resource(request, emitter_format='json')
         self.assertEquals(200, response.status_code)
-        self.assertEquals(5, len(simplejson.loads(response.content)))
+        self.assertEquals(5, len(json.loads(response.content)))
 
     def test_delete_text_logged_in_works(self):
         """

@@ -1,4 +1,5 @@
 from time import sleep
+import json
 
 from django.http import HttpResponse
 from django.core.urlresolvers import reverse
@@ -9,7 +10,6 @@ from django.db.models import Q
 from django.forms import ValidationError
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import User
-from django.utils import simplejson
 from django.utils.translation import ugettext as _
 from tagging.fields import TagField
 from tagging.models import Tag
@@ -34,13 +34,13 @@ def is_valid_email(email):
 
 
 def jsonize(obj, request):
-    return simplejson.dumps(obj, cls=RequestComplexEncoder, request=request)
+    return json.dumps(obj, cls=RequestComplexEncoder, request=request)
 
 
-class RequestComplexEncoder(simplejson.JSONEncoder):
+class RequestComplexEncoder(json.JSONEncoder):
     def __init__(self, request, **kw):
         self.request = request
-        simplejson.JSONEncoder.__init__(self, **kw)
+        json.JSONEncoder.__init__(self, **kw)
 
     def default(self, obj):
         if isinstance(obj, Comment) :
@@ -102,7 +102,7 @@ class RequestComplexEncoder(simplejson.JSONEncoder):
                     'name': tag.name,
                     'font_size': tag.font_size}
 
-        return simplejson.JSONEncoder.default(self, obj)
+        return json.JSONEncoder.default(self, obj)
 
 
 def experiment():

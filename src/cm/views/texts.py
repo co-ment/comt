@@ -3,9 +3,9 @@ import logging
 import mimetypes
 import re
 import imghdr
+import json
 
 import cssutils
-import simplejson
 from django.forms.util import ErrorList
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
@@ -265,7 +265,7 @@ def text_view_comments(request, key, version_key=None, adminkey=None):
     comments = get_viewable_comments(request, text_version.comment_set.filter(reply_to__isnull=True),text)
     filter_datas = get_filter_datas(request, text_version, text)
     
-    get_params = simplejson.dumps(request.GET)
+    get_params = json.dumps(request.GET)
     wrapped_text_version, _ , _ = spannify(text_version.get_content())
 
     from cm.models import ApplicationConfiguration
@@ -349,9 +349,9 @@ def client_exchange(request):
                     #ret['tagCloud'] = get_tagcloud(key)
     if ret :
         if type(ret) != HttpResponseRedirect and type(ret) != HttpResponse:
-            ret = HttpResponse(simplejson.dumps(ret,
-                                                cls=RequestComplexEncoder,
-                                                request=request))
+            ret = HttpResponse(json.dumps(ret,
+                                          cls=RequestComplexEncoder,
+                                          request=request))
     else :
         ret = HttpResponse()
         ret.status_code = 403 
@@ -791,7 +791,7 @@ def text_pre_edit(request, key, adminkey=None):
 
     # TODO: RBE : si commentaire mal forme : (position non existante : boom par key error)
     _tomodify_comments, toremove_comments = compute_new_comment_positions(text_version.content, text_version.format, new_content, new_format, comments)
-    return HttpResponse(simplejson.dumps({'nb_removed' : len(toremove_comments) }))
+    return HttpResponse(json.dumps({'nb_removed' : len(toremove_comments) }))
 
 
 class EditTextFormAnon(EditTextForm):
