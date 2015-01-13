@@ -1,13 +1,15 @@
+#
 # Production
-django==1.3
+#
+django==1.3.7
 django-tagging==0.3.1
+psycopg2==1.4.1
 BeautifulSoup
 Pillow
 chardet
 django-flash
 feedparser
 html5lib
-psycopg2
 python-memcached
 pytidylib
 pytz
@@ -17,6 +19,8 @@ south
 cssutils
 pexpect
 
+#
 # Development
+#
 pytest
 pytest-django

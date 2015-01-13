@@ -1,7 +1,11 @@
+import os
+
+from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.conf import settings
 from django.db.models import F
+from django.views.i18n import javascript_catalog
 from piston.handler import AnonymousBaseHandler, BaseHandler
 from piston.utils import rc
 from piston.handler import handler_tracker
@@ -10,13 +14,16 @@ from piston.doc import generate_doc
 from cm.models import Text, Role, UserRole, Comment, Attachment
 from cm.security import get_texts_with_perm, has_perm_on_text_api
 from cm.security import get_viewable_comments
-from cm.utils.embed import embed_html
+from cm.urls import js_info_dict
 from cm.views import get_text_by_keys_or_404, get_textversion_by_keys_or_404
 from cm.views.create import CreateTextContentForm, create_text, \
     CreateTextImportForm, _text_create_import
 from cm.views.texts import client_exchange, text_view_frame, \
-    text_view_comments, text_export
+    text_view_comments, text_export, text_delete, text_edit
 from cm.views.feeds import text_feed
+from cm.converters import _convert_from_mimetype
+from cm.exception import UnauthorizedException
+from cm.utils.embed import embed_html
 
 
 URL_PREFIX = settings.SITE_URL + '/api'
@@ -38,12 +45,12 @@ class AnonymousTextHandler(AnonymousBaseHandler):
 
     @has_perm_on_text_api('can_view_text')
     def read(self, request, key):
-        
         text = get_text_by_keys_or_404(key)
         # XXX: strange to use setattr here
-        setattr(text, 'nb_comments', len(get_viewable_comments(request,
-                                                               text.last_text_version.comment_set.all(),
-                                                               text)))
+        setattr(text, 'nb_comments',
+                len(get_viewable_comments(request,
+                                          text.last_text_version.comment_set.all(),
+                                          text)))
         setattr(text, 'nb_versions', text.get_versions_number())
         setattr(text, 'embed_html', embed_html(text.key))
 
@@ -74,7 +81,10 @@ class AnonymousTextVersionHandler(AnonymousBaseHandler):
     @has_perm_on_text_api('can_view_text')
     def read(self, request, key, version_key):
         text_version = get_textversion_by_keys_or_404(version_key, key=key)
-        setattr(text_version,'nb_comments',len(get_viewable_comments(request, text_version.comment_set.all(), text_version.text)))
+        setattr(text_version, 'nb_comments',
+                len(get_viewable_comments(request,
+                                          text_version.comment_set.all(),
+                                          text_version.text)))
 
         return text_version
 
@@ -90,7 +100,10 @@ class TextVersionHandler(BaseHandler):
     @has_perm_on_text_api('can_view_text')
     def read(self, request, key, version_key):
         text_version = get_textversion_by_keys_or_404(version_key, key=key)
-        setattr(text_version,'nb_comments',len(get_viewable_comments(request, text_version.comment_set.all(), text_version.text)))
+        setattr(text_version, 'nb_comments',
+                len(get_viewable_comments(request,
+                                          text_version.comment_set.all(),
+                                          text_version.text)))
 
         return text_version
 
@@ -153,11 +166,7 @@ class TextListHandler(BaseHandler):
         return resp
     
 
-from cm.converters import _convert_from_mimetype
-import os
-from django.core.urlresolvers import reverse
-
-class ConvertHandler(BaseHandler):    
+class ConvertHandler(BaseHandler):
   type = "Text methods"
   allowed_methods = ('POST', )    
   title = "Convert a legacy file"    
@@ -182,9 +191,6 @@ class ConvertHandler(BaseHandler):
       html = html.replace(filename, settings.SITE_URL + attach_url)
     return {'html': html}
 
-
-from cm.exception import UnauthorizedException
-from cm.views.texts import text_delete
 
 class TextDeleteHandler(BaseHandler):
     type = "Text methods"
@@ -228,8 +234,6 @@ class TextPreEditHandler(BaseHandler):
     def create(self, request, key):
         return text_pre_edit(request, key=key)
 
-
-from cm.views.texts import text_edit
 
 class TextEditHandler(BaseHandler):
     allowed_methods = ('POST', )    
@@ -359,10 +363,6 @@ class ClientHandler(BaseHandler):
         return client_exchange(request)
 
 
-## embed methods
-from django.views.i18n import javascript_catalog
-from cm.urls import js_info_dict
-
 class JSI18NHandler(AnonymousBaseHandler):
     allowed_methods = ('GET',)    
     type = "Embed methods"
@@ -473,8 +473,7 @@ class ImportHandler(BaseHandler):
     @staticmethod
     def endpoint():
         return URL_PREFIX + '/import/'
-    
-    
+
     def create(self, request):
       text, res = _text_create_import(request, CreateTextImportForm)
       text_version = text.last_text_version

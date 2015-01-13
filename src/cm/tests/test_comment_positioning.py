@@ -45,9 +45,10 @@ class CommentPositioningTest(TestCase):
         for old, new  in comment_pos_list:
             x, y, z, k = old 
             comment = create_comment(x, y, z, k)
-            res[comment.id] = new  
-        
-        version.edit("text", "html", new_content, keep_comments = True, cancel_modified_scopes=False)
+            res[comment.id] = new
+
+        version.edit("text", "html", new_content, keep_comments=True,
+                     cancel_modified_scopes=False)
 
         for id, new in res.items():
             if not new:
@@ -69,7 +70,8 @@ class CommentPositioningTest(TestCase):
 
         self.assertEqual(len(version.get_comments()), 2)
 
-        version.edit("text", "html", new_content, keep_comments = False, cancel_modified_scopes=False)
+        version.edit("text", "html", new_content, keep_comments=False,
+                     cancel_modified_scopes=False)
 
         self.assertEqual(len(version.get_comments()), 0)
             

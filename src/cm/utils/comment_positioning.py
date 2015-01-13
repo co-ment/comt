@@ -89,7 +89,8 @@ def compute_new_comment_positions(old_content, old_format, new_content,
 
 def add_marker(text, color, start_ids, end_ids, with_markers, with_colors):
     # TODO
-    # THESE 3 LINES ARE REALLY JUST FOR TESTING THIS IS COPIED FROM C-TEXT.CSS AND SHOULD BE DONE DIFFERENTLY
+    # THESE 3 LINES ARE REALLY JUST FOR TESTING THIS IS COPIED FROM C-TEXT.CSS
+    # AND SHOULD BE DONE DIFFERENTLY
     BCKCOLORS = ['#ffffff', '#ffffa8', '#fff6a1', '#ffeb99', '#ffde91',
                  '#ffd08a', '#ffc182', '#ffaf7a', '#ff9d73', '#ff896b',
                  '#ff7363', '#ff5c5c']
@@ -107,7 +108,8 @@ def add_marker(text, color, start_ids, end_ids, with_markers, with_colors):
         )
      
     if with_colors and color != 0 :
-      # For some reasons, abiwords can read background style attribute but not background-color
+      # For some reasons, abiwords can read background style attribute
+      # but not background-color
       from cm.cm_settings import USE_ABI
       if USE_ABI:
         ret = "<span style='background:%s;'>%s</span>"%(BCKCOLORS[color], ret)
@@ -159,7 +161,8 @@ def insert_comment_markers(htmlcontent, comments, with_markers, with_colors):
     # order ee values
     for (wrapper_id, wrapper_data) in datas.items():
         start_color = wrapper_data['start_color']
-        offsets = sorted(wrapper_data['offsets'].items(), key=operator.itemgetter(0))
+        offsets = sorted(wrapper_data['offsets'].items(),
+                         key=operator.itemgetter(0))
 
         d = html.find(id = "sv-%d"%wrapper_id)
         if not d: # comment detached
@@ -178,8 +181,9 @@ def insert_comment_markers(htmlcontent, comments, with_markers, with_colors):
             for offset, ids in offsets :
                 end_ids = ids[1]
                 end = offset
-                
-                spans += add_marker(content[start:end], color, start_ids, end_ids, with_markers, with_colors)
+
+                spans += add_marker(content[start:end], color, start_ids,
+                                    end_ids, with_markers, with_colors)
 
                 start_ids = ids[0]
                 start = end
@@ -187,9 +191,11 @@ def insert_comment_markers(htmlcontent, comments, with_markers, with_colors):
                 color += (len(ids[0]) - len(ids[1]))
                 
             end_ids = []
-            spans += add_marker(content[end:], color,start_ids, end_ids, with_markers, with_colors)
+            spans += add_marker(content[end:], color, start_ids, end_ids,
+                                with_markers, with_colors)
         else : # the whole content is to be colored with start_color
-            spans += add_marker(content, start_color, [], [], with_markers, with_colors)
+            spans += add_marker(content, start_color, [], [], with_markers,
+                                with_colors)
 
         content.replaceWith(spans)
 

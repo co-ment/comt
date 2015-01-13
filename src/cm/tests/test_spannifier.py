@@ -14,15 +14,15 @@ class SpannifyTest(TestCase):
     
     def test_spannify(self):
         string_tests_spannify = [
-                                 [u"""<body>kéké</body>""", 
-                                  u"""<body><span id="sv_0" class="c-s"><span id="sv-0" class="c-count-0 c-c">kéké</span></span></body>""",
-                                  u'kéké',
-                                  ],
-                                  
-                                 [u"""<body>aaa <span>bbb</span> ccc ddd <b>eee</b></body>""",
-                                  u"""<body><span id="sv_0" class="c-s"><span id="sv-0" class="c-count-0 c-c">aaa </span></span><span><span id="sv_1" class="c-s"><span id="sv-1" class="c-count-0 c-c">bbb</span></span></span><span id="sv_2" class="c-s"><span id="sv-2" class="c-count-0 c-c"> ccc ddd </span></span><b><span id="sv_3" class="c-s"><span id="sv-3" class="c-count-0 c-c">eee</span></span></b></body>""",
-                                  u"""aaa bbb ccc ddd eee""",]                                  
-                                ]
+            [u"""<body>kéké</body>""",
+             u"""<body><span id="sv_0" class="c-s"><span id="sv-0" class="c-count-0 c-c">kéké</span></span></body>""",
+             u'kéké',
+            ],
+
+            [u"""<body>aaa <span>bbb</span> ccc ddd <b>eee</b></body>""",
+             u"""<body><span id="sv_0" class="c-s"><span id="sv-0" class="c-count-0 c-c">aaa </span></span><span><span id="sv_1" class="c-s"><span id="sv-1" class="c-count-0 c-c">bbb</span></span></span><span id="sv_2" class="c-s"><span id="sv-2" class="c-count-0 c-c"> ccc ddd </span></span><b><span id="sv_3" class="c-s"><span id="sv-3" class="c-count-0 c-c">eee</span></span></b></body>""",
+             u"""aaa bbb ccc ddd eee""", ]
+        ]
 
 #        
         for input, expected_spanned, expected_raw in string_tests_spannify :

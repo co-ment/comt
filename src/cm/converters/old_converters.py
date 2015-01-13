@@ -1,3 +1,7 @@
+# XXX: is this still in used? Some of the imports (markdown, docutils)
+# dont work with the current requirements.
+
+
 ########## converters
 from django.core.cache import cache
 
@@ -92,28 +96,28 @@ def html_to_markdown(html):
 ########## formats
 
 FORMATS = {
-           'HTML' : {'name': 'HTML', 
-                     'to_format' : {'Markdown' : html_to_markdown, }
-                     },
-           'FULLHTML' : {'name': 'FULLHTML', 
-                     'to_format' : {'PDF' : html_to_pdf, }
-                     },
-           'RST' : {'name': 'reStructuredText', 
-                     'to_format' : {'HTML' : rst_to_html,
-                                    'FULLHTML' : rst_to_fullhtml,
-                                    }
-                     },
-                     
-           'Markdown' : {'name': 'Markdown', 
-                     'to_format' : {'HTML' : markdown_to_html,
-                                    'FULLHTML' : markdown_to_fullhtml,
-                                    }
-                     },
-           'Textile' : {'name': 'Textile', 
-                     },
-           'PDF' : {'name': 'PDF', 
-                     },
-            }            
+    'HTML': {'name': 'HTML',
+             'to_format': {'Markdown': html_to_markdown, }
+    },
+    'FULLHTML': {'name': 'FULLHTML',
+                 'to_format': {'PDF': html_to_pdf, }
+    },
+    'RST': {'name': 'reStructuredText',
+            'to_format': {'HTML': rst_to_html,
+                          'FULLHTML': rst_to_fullhtml,
+            }
+    },
+
+    'Markdown': {'name': 'Markdown',
+                 'to_format': {'HTML': markdown_to_html,
+                               'FULLHTML': markdown_to_fullhtml,
+                 }
+    },
+    'Textile': {'name': 'Textile',
+    },
+    'PDF': {'name': 'PDF',
+    },
+}
 
 CHOICES_FORMATS = [ (k,v.get('name')) for k,v in FORMATS.items()]
 
@@ -121,15 +125,19 @@ INPUT_FORMATS = ['RST','Markdown']
 
 DEFAULT_INPUT_FORMAT = 'Markdown'
 
-CHOICES_INPUT_FORMATS = [ (k,v.get('name')) for k,v in FORMATS.items() if k in INPUT_FORMATS]
+CHOICES_INPUT_FORMATS = [(k, v.get('name')) for k, v in FORMATS.items()
+                         if k in INPUT_FORMATS]
+
 
 def get_supported_conversions(from_format):
     return FORMATS[from_format]['to_format'].keys()
+
 
 def is_supported_conversion(from_format, to_format):
     infos = FORMATS.get(from_format)
     return infos.get('to_format') and infos.get('to_format').get(to_format)
  
+
 def convert(content, from_format, to_format):
     if is_supported_conversion(from_format, to_format):
         infos = FORMATS.get(from_format)
