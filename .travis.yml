@@ -22,7 +22,7 @@ before_script:
 
 # Run tests
 script:
-  - bin/django test --settings=settings
+  - bin/django test cm --settings=settings
 
 notifications:
   email:
