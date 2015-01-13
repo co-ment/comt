@@ -7,6 +7,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext as _, ugettext_lazy
+from django.utils.safestring import mark_safe
 from django.views.generic.list_detail import object_list
 from django.core.cache import cache
 
@@ -19,6 +20,7 @@ from cm.utils import get_among, get_int
 from cm.utils.mail import send_mail
 from cm.views.user import cm_login
 from cm.models import Attachment, Comment, Configuration
+from cm.role_models import role_models_choices
 
 
 ACTIVITY_PAGINATION = 10
@@ -45,30 +47,39 @@ def dashboard(request):
         all_texts_ids = [t.id for t in moderator_texts] + [t.id for t in viewer_texts]
 
         span = get_among(request.GET, 'span', ('day', 'month', 'week',), 'week')
-        template_dict = {
-                         'span' : span,
-                         'last_texts' : get_texts_with_perm(request, 'can_view_text').order_by('-modified')[:RECENT_TEXT_NB],
-                         'last_comments' : Comment.objects.filter(text_version__text__in=all_texts_ids).order_by('-created')[:RECENT_COMMENT_NB], # TODO: useful?
-                         #'last_users' : User.objects.all().order_by('-date_joined')[:5],
-                         }
-        template_dict.update(act_view)
+        ctx = {
+            'span': span,
+            'last_texts': get_texts_with_perm(request, 'can_view_text')
+                              .order_by('-modified')[:RECENT_TEXT_NB],
+            'last_comments': Comment.objects
+                                 .filter(text_version__text__in=all_texts_ids)
+                                 .order_by('-created')[:RECENT_COMMENT_NB],  # TODO: useful?
+            # 'last_users' : User.objects.all().order_by('-date_joined')[:5],
+        }
+        ctx.update(act_view)
 
         #selected_activities = []
         #[selected_activities.extend(Activity.VIEWABLE_ACTIVITIES[k]) for k in act_view.keys() if act_view[k]]
         activities = get_viewable_activities(request, act_view)
 
         if not has_perm(request, 'can_manage_workspace'):
-            template_dict['to_mod_profiles'] = []
+            ctx['to_mod_profiles'] = []
         else:
-            template_dict['to_mod_profiles'] = UserProfile.objects.filter(user__is_active=False).filter(is_suspended=True).order_by('-user__date_joined')[:MODERATE_NB]
+            ctx['to_mod_profiles'] = UserProfile.objects \
+                                         .filter(user__is_active=False) \
+                                         .filter(is_suspended=True) \
+                                         .order_by('-user__date_joined')[:MODERATE_NB]
 
-        template_dict['to_mod_comments'] = Comment.objects.filter(state='pending').filter(text_version__text__in=moderator_texts).order_by('-modified')[:MODERATE_NB - len(template_dict['to_mod_profiles'])]
+        ctx['to_mod_comments'] = Comment.objects \
+                                     .filter(state='pending') \
+                                     .filter(text_version__text__in=moderator_texts) \
+                                     .order_by('-modified')[:MODERATE_NB - len(ctx['to_mod_profiles'])]
 
         activities = activities.order_by('-created')
         return object_list(request, activities,
                            template_name='site/dashboard.html',
                            paginate_by=paginate_by,
-                           extra_context=template_dict)
+                           extra_context=ctx)
 
     else:
         if request.method == 'POST':
@@ -86,7 +97,7 @@ def dashboard(request):
         public_texts = get_texts_with_perm(request, 'can_view_text').order_by('-modified')
         paginate_by = get_int(request.GET, 'paginate', ACTIVITY_PAGINATION)
 
-        template_dict = {
+        ctx = {
             'form': form,
             'public_texts_nb': public_texts.count(),
         }
@@ -95,7 +106,7 @@ def dashboard(request):
             public_texts,
             template_name='site/non_authenticated_index.html',
             paginate_by=paginate_by,
-            extra_context=template_dict)
+            extra_context=ctx)
 
 
 class HeaderContactForm(forms.Form):
@@ -129,13 +140,12 @@ def contact(request):
         if form.is_valid():
             name = form.cleaned_data.get('name', None) or request.user.username
             email = form.cleaned_data.get('email', None) or request.user.email
+            ctx = {'body': form.cleaned_data['body'], 'name': name,
+                   'email': email,
+                   'referer': request.META.get('HTTP_REFERER', None), }
             message = render_to_string('email/site_contact_email.txt',
-                                       {
-                                         'body' : form.cleaned_data['body'],
-                                         'name' : name,
-                                         'email' : email,
-                                         'referer' : request.META.get('HTTP_REFERER', None),
-                                          }, context_instance=RequestContext(request))
+                                       ctx,
+                                       context_instance=RequestContext(request))
             subject = form.cleaned_data['title']
             # Email subject *must not* contain newlines
             subject = ''.join(subject.splitlines())
@@ -155,9 +165,6 @@ def contact(request):
 def global_feed(request):
     pass
 
-
-from cm.role_models import role_models_choices
-from django.utils.safestring import mark_safe
 
 class BaseSettingsForm(forms.Form):
     def __init__(self, data=None, initial=None):
@@ -270,13 +277,10 @@ def settingss(request):
     else:
         form = SettingsForm()
 
+    ctx = {'form': form,
+           'help_links': {'workspace_role_model': 'role_model'}}
     return render_to_response('site/settings.html',
-                              {
-                                  'form': form,
-                                  'help_links': {
-                                      'workspace_role_model': 'role_model'}
-                              },
-                              context_instance=RequestContext(request))
+                              ctx, context_instance=RequestContext(request))
 
 
 class SettingsDesignForm(BaseSettingsForm):
@@ -352,7 +356,9 @@ div.frame .title {
 }'''
       form = SettingsDesignForm(initial={'custom_css': default_css})
 
-    return render_to_response('site/settings_design.html', {'form' : form}, context_instance=RequestContext(request))
+    return render_to_response('site/settings_design.html',
+                              {'form': form},
+                              context_instance=RequestContext(request))
 
 
 def password_reset_done(request):
@@ -367,5 +373,6 @@ def password_reset_complete(request):
 
 
 def help(request):
-    return render_to_response('site/help.html', context_instance=RequestContext(request))
+    return render_to_response('site/help.html',
+                              context_instance=RequestContext(request))
 

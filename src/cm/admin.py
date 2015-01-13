@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from cm.models import Text, Role, UserProfile, UserRole, TextVersion, Activity, \
     Notification
 from cm.models_utils import Email

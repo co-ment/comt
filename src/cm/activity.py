@@ -36,9 +36,10 @@ def _save_activity(sender, **kwargs):
         ip = request.META.get('REMOTE_ADDR', '0.0.0.0')
     else:
         ip = None
-    
+
     Activity.objects.create(text=text, user=user, text_version=text_version,
-                            comment=comment, type=type, ip=ip, originator_user=originator_user)
+                            comment=comment, type=type, ip=ip,
+                            originator_user=originator_user)
     
 
 def connect_all():
@@ -78,7 +79,8 @@ def get_activity(text='all', user='all', reference_date=None, nb_slots=31,
         activities = activities.filter(text=text)
     if user != 'all':
         activities = activities.filter(originator_user=user)
-    activities = activities.order_by('created').only('created', 'originator_user', 'text')
+    activities = activities.order_by('created') \
+        .only('created', 'originator_user', 'text')
     #print 'got %d activities' % len(activities), [a.created for a in activities]
     
     if kind == 'raw':

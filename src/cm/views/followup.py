@@ -12,7 +12,6 @@ from cm.utils.embed import embed_html
 from cm.security import get_request_user
 
 
-
 #@login_required
 def followup(request):
     user = get_request_user(request)
@@ -59,11 +58,11 @@ def desactivate_notification(request, adminkey):
             notification.desactivate()
             display_message(request, _(u"Notification deactivated."))                
             return HttpResponseRedirect(reverse('index'))
+
+    ctx = {'notification': notification,
+                     'title': _(u'Deactivate notification?'), }
     return render_to_response('site/notifications_desactivate.html',
-                              {
-                                  'notification': notification,
-                                  'title': _(u'Deactivate notification?'),
-                              },
+                              ctx,
                               context_instance=RequestContext(request))
 
 
@@ -71,7 +70,8 @@ def text_followup(request, key):
     text = get_text_by_keys_or_404(key)
     user = request.user if request.user.is_authenticated() else None
 
-    from cm.security import user_has_perm # import here!
+    from cm.security import user_has_perm  # import here!
+
     anonymous_can_view_text = user_has_perm(None, 'can_view_text', text=text)
     text_notify_check = Notification.objects \
         .filter(text=text, type='text', user=user, active=True).count()
@@ -96,21 +96,21 @@ def text_followup(request, key):
                                                       active=(notif_val == 'true'),
                                                       email_or_user=request.user)
 
-    template_dict = {
+    ctx = {
         'text': text,
         'workspace_notify_check': workspace_notify_check,
         'text_notify_check': text_notify_check,
         'anonymous_can_view_text': anonymous_can_view_text,
     }
-    return render_to_response('site/text_followup.html', template_dict,
+    return render_to_response('site/text_followup.html', ctx,
                               context_instance=RequestContext(request))
 
 def text_embed(request, key):
     text = get_text_by_keys_or_404(key)
     embed_code = embed_html(text.key)
-    template_dict = {
+    ctx = {
         'text': text,
-        'embed_code': embed_code
+        'embed_code': embed_code,
     }
-    return render_to_response('site/text_embed.html', template_dict,
+    return render_to_response('site/text_embed.html', ctx,
                               context_instance=RequestContext(request))

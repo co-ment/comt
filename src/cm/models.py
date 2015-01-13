@@ -869,6 +869,7 @@ class Activity(models.Model):
         return u''.join(ret)
 
 
+# These imports are used for side effects. Do not remove.
 import cm.denorm_engine
 import cm.admin
 import cm.main

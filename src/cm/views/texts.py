@@ -75,24 +75,31 @@ def dashboard(request):
         paginate_by = get_int(request.GET, 'paginate', ACTIVITY_PAGINATION)
                 
         # texts with can_view_unapproved_comment perms
-        moderator_texts = get_texts_with_perm(request, 'can_view_unapproved_comment')
+        moderator_texts = get_texts_with_perm(request,
+                                              'can_view_unapproved_comment')
         viewer_texts = get_texts_with_perm(request, 'can_view_approved_comment')
-        all_texts_ids = [t.id for t in moderator_texts] + [t.id for t in viewer_texts]
+        all_texts_ids = [t.id for t in moderator_texts] \
+                        + [t.id for t in viewer_texts]
                     
-        span = get_among(request.GET, 'span', ('day','month','week',),'week')        
-        template_dict = { 
-                         'span' : span,
-                         'last_texts' : get_texts_with_perm(request, 'can_view_text').order_by('-modified')[:RECENT_TEXT_NB],
-                         'last_comments' : Comment.objects.filter(text_version__text__in=all_texts_ids).order_by('-created')[:RECENT_COMMENT_NB],# TODO: useful?
-                         #'last_users' : User.objects.all().order_by('-date_joined')[:5],
-                         }
+        span = get_among(request.GET, 'span', ('day','month','week',),'week')
+        template_dict = {
+            'span': span,
+            'last_texts': get_texts_with_perm(request, 'can_view_text')
+                              .order_by('-modified')[:RECENT_TEXT_NB],
+            'last_comments': Comment.objects
+                                 .filter(text_version__text__in=all_texts_ids)
+                                 .order_by('-created')[:RECENT_COMMENT_NB],  # TODO: useful?
+            # 'last_users' : User.objects.all().order_by('-date_joined')[:5],
+        }
         template_dict.update(act_view)
-        
+
         all_activities = {
-                               'view_comments' : ['comment_created','comment_removed'],
-                               'view_users' : ['user_created', 'user_activated', 'user_suspended','user_enabled',],
-                               'view_texts' : ['text_created','text_removed', 'text_edited', 'text_edited_new_version'],
-                               }
+            'view_comments': ['comment_created', 'comment_removed'],
+            'view_users': ['user_created', 'user_activated', 'user_suspended',
+                           'user_enabled', ],
+            'view_texts': ['text_created', 'text_removed', 'text_edited',
+                           'text_edited_new_version'],
+        }
         
         selected_activities = []
         [selected_activities.extend(all_activities[k]) for k in act_view.keys() if act_view[k]]
@@ -108,8 +115,14 @@ def dashboard(request):
             activities = activities.filter(Q(comment__in=comments) | Q(comment=None) )
             template_dict['to_mod_profiles'] = []
         else:
-            template_dict['to_mod_profiles'] = UserProfile.objects.filter(user__is_active=False).filter(is_suspended=True).order_by('-user__date_joined')[:MODERATE_NB]
-        template_dict['to_mod_comments'] = Comment.objects.filter(state='pending').filter(text_version__text__in=moderator_texts).order_by('-modified')[:MODERATE_NB-len(template_dict['to_mod_profiles'])]
+            template_dict['to_mod_profiles'] = UserProfile.objects \
+                                                   .filter(user__is_active=False) \
+                                                   .filter(is_suspended=True) \
+                                                   .order_by('-user__date_joined')[:MODERATE_NB]
+        template_dict['to_mod_comments'] = Comment.objects \
+                                               .filter(state='pending') \
+                                               .filter(text_version__text__in=moderator_texts) \
+                                               .order_by('-modified')[:MODERATE_NB-len(template_dict['to_mod_profiles'])]
 
         activities = activities.order_by('-created')
         return object_list(request, activities,
@@ -162,15 +175,19 @@ def text_list(request):
                     text.delete()
                 else:
                     raise UnauthorizedException('No perm can_delete_text on comment') 
-            display_message(request, _(u'%(nb_texts)i text(s) deleted') %{'nb_texts':len(text_keys)})
+            display_message(request,
+                            _(u'%(nb_texts)i text(s) deleted')
+                            %{'nb_texts':len(text_keys)})
             return HttpResponseRedirect(reverse('text'))
 
     texts = get_texts_with_perm(request, 'can_view_text').order_by(order_by)
 
     try:
-        tag_list = Tag.objects.usage_for_queryset(TextVersion.objects.filter(id__in = [t.last_text_version_id for t in get_texts_with_perm(request, 'can_view_text')]))
+        tag_list = Tag.objects \
+            .usage_for_queryset(TextVersion.objects.filter(id__in = [t.last_text_version_id for t in get_texts_with_perm(request, 'can_view_text')]))
     except EmptyResultSet:
         tag_list = []
+
     context = {
         'tag_list': tag_list,
         'tag_selected': tag_selected,
@@ -184,8 +201,7 @@ def text_list(request):
             texts = texts.extra(where=['tagging_taggeditem.object_id = cm_text.last_text_version_id', 
                                        'tagging_taggeditem.content_type_id = %i' %content_type_id,
                                        'tagging_taggeditem.tag_id = %i' %tag_ids[0].id],
-                                tables=['tagging_taggeditem'],
-                                )
+                                tables=['tagging_taggeditem'])
 
     return object_list(request, texts,
                        template_name='site/text_list.html',
@@ -200,11 +216,12 @@ def text_view(request, key, adminkey=None):
     text_version = text.get_latest_version()
     embed_code = embed_html(key, 'id="text_view_frame" name="text_view_frame"',
                             None, request.META.get('QUERY_STRING'))
-    template_dict = {'embed_code': embed_code,
-                     'text': text,
-                     'text_version': text_version,
-                     'title': text_version.title}
-    return render_to_response('site/text_view.html', template_dict,
+
+    ctx = {'embed_code': embed_code,
+           'text': text,
+           'text_version': text_version,
+           'title': text_version.title}
+    return render_to_response('site/text_view.html', ctx,
                               context_instance=RequestContext(request))
 
 
@@ -254,14 +271,17 @@ def text_view_comments(request, key, version_key=None, adminkey=None):
     from cm.models import ApplicationConfiguration
     categories = {}
     for i in range(1, 6):
-      if text_version.__dict__['category_' + str(i)] == None or text_version.__dict__['category_' + str(i)].lower() != 'none':
-        if text_version.__dict__['category_' + str(i)] != None and text_version.__dict__['category_' + str(i)] != '':
+      if text_version.__dict__['category_' + str(i)] == None \
+              or text_version.__dict__['category_' + str(i)].lower() != 'none':
+        if text_version.__dict__['category_' + str(i)] != None \
+                and text_version.__dict__['category_' + str(i)] != '':
           categories[i] = text_version.__dict__['category_' + str(i)]
         else:
-          if ApplicationConfiguration.get_key('workspace_category_' + str(i)) != None and ApplicationConfiguration.get_key('workspace_category_' + str(i)) != '':
+          if ApplicationConfiguration.get_key('workspace_category_' + str(i)) != None \
+                  and ApplicationConfiguration.get_key('workspace_category_' + str(i)) != '':
             categories[i] = ApplicationConfiguration.get_key('workspace_category_' + str(i))
 
-    template_dict = {
+    template_ctx = {
         'text': text,
         'text_version': text_version,
         'title': text_version.title,  # TODO use it ...
@@ -270,23 +290,23 @@ def text_view_comments(request, key, version_key=None, adminkey=None):
         'client_date_fmt': settings.CLIENT_DATE_FMT,
         'read_only': read_only,
     }
-    template_dict['json_comments'] = jsonize(comments, request)
-    template_dict['json_filter_datas'] = jsonize(filter_datas, request)
+    template_ctx['json_comments'] = jsonize(comments, request)
+    template_ctx['json_filter_datas'] = jsonize(filter_datas, request)
     if categories:
       categories[0] = 'none'
-    template_dict['categories'] = jsonize(categories, request)
+    template_ctx['categories'] = jsonize(categories, request)
     custom_css_str = ApplicationConfiguration.get_key('custom_css')
     if custom_css_str:
       custom_css = cssutils.parseString(custom_css_str)
       for css_rule in custom_css:
         if css_rule.type == css_rule.STYLE_RULE and css_rule.wellformed:
           css_rule.selectorText = "#textcontainer %s" %css_rule.selectorText
-      template_dict['custom_css'] = custom_css.cssText
+      template_ctx['custom_css'] = custom_css.cssText
 
-    template_dict['custom_font'] = ApplicationConfiguration.get_key('custom_font')
-    template_dict['custom_titles_font'] = ApplicationConfiguration.get_key('custom_titles_font')
+    template_ctx['custom_font'] = ApplicationConfiguration.get_key('custom_font')
+    template_ctx['custom_titles_font'] = ApplicationConfiguration.get_key('custom_titles_font')
     return render_to_response('site/text_view_comments.html',
-                              template_dict,
+                              template_ctx,
                               context_instance=RequestContext(request))
 
 
@@ -296,6 +316,7 @@ def client_exchange(request):
         function_name = request.POST['fun']# function called from client
         user = request.user
         if function_name == 'experiment' :
+            # FIXME: what's this function?
             ret = experiment()
         elif function_name == 'warn' :
             # TODO: (RBE to RBA) send mail withinfos
@@ -308,23 +329,29 @@ def client_exchange(request):
             text = Text.objects.get(key=key)
             #TODO: stupid why restrict to latest ? 
             text_version = text.get_latest_version()
-            
-            if (text != None) :
-                if function_name == 'ownNotify' : 
+
+            if (text != None):
+                if function_name == 'ownNotify':
                     ret = own_notify(request=request, key=key)
-                if function_name in ('editComment', 'addComment', 'removeComment',) :
-                    if function_name == 'editComment' :
-                        ret = edit_comment(request=request, key=key, comment_key=request.POST['comment_key'])
-                    elif function_name == 'addComment' :
-                        ret = add_comment(request=request, key=key, version_key=version_key)
-                    elif function_name == 'removeComment' :
-                        ret = remove_comment(request=request, key=key, comment_key=request.POST['comment_key'])
-                        
-                    ret['filterData'] = get_filter_datas(request, text_version, text)
+                if function_name in ('editComment', 'addComment', 'removeComment'):
+                    if function_name == 'editComment':
+                        ret = edit_comment(request=request, key=key,
+                                           comment_key=request.POST['comment_key'])
+                    elif function_name == 'addComment':
+                        ret = add_comment(request=request, key=key,
+                                          version_key=version_key)
+                    elif function_name == 'removeComment':
+                        ret = remove_comment(request=request, key=key,
+                                             comment_key=request.POST['comment_key'])
+
+                    ret['filterData'] = get_filter_datas(request, text_version,
+                                                         text)
                     #ret['tagCloud'] = get_tagcloud(key)
     if ret :
         if type(ret) != HttpResponseRedirect and type(ret) != HttpResponse:
-            ret = HttpResponse(simplejson.dumps(ret, cls=RequestComplexEncoder, request=request))        
+            ret = HttpResponse(simplejson.dumps(ret,
+                                                cls=RequestComplexEncoder,
+                                                request=request))
     else :
         ret = HttpResponse()
         ret.status_code = 403 
@@ -351,13 +378,14 @@ def from_html_links_to_inline_imgs(content, inline=True, full_path=True):
       img = open(attach.data.path, 'rb')
       data = base64.b64encode(img.read())
       img.close()
-      content = content.replace(link, 'data:image/'+img_fmt+';base64,'+data)
+      content = content.replace(link,
+                                'data:image/' + img_fmt + ';base64,' + data)
     else:
       if full_path:
         content = content.replace(link, attach.data.path)
       else:
         img_fmt = imghdr.what(attach.data.path)
-        content = content.replace(link, match[1]+'.'+img_fmt)
+        content = content.replace(link, match[1] + '.' + img_fmt)
   return content
 
 
@@ -405,26 +433,34 @@ def text_export(request, key, format, download, whichcomments, withcolor, admink
       # for everything else, inline b64 encoded
       else:
         original_content = from_html_links_to_inline_imgs(original_content)
-            
-    if len(comments) == 0 : #want to bypass html conversion in this case
-      # Prepends title
-      if original_format == 'html':
-        original_content = "<h1>%s</h1>%s" %(text_version.title, original_content)
-      elif original_format == 'markdown':
-        original_content = "%s\n======\n%s" %(text_version.title, original_content)
-      elif original_format == 'rst':
-        underline = '=' * len(text_version.title)
-        original_content = "%s\n%s\n%s" %(text_version.title, underline, original_content)
 
-      return content_export2(request, original_content, text_version.title, original_format, format, use_pandoc, download_response)
+    if len(comments) == 0:  # want to bypass html conversion in this case
+        # Prepends title
+        if original_format == 'html':
+            original_content = "<h1>%s</h1>%s" \
+                               % (text_version.title, original_content)
+        elif original_format == 'markdown':
+            original_content = "%s\n======\n%s" \
+                               % (text_version.title, original_content)
+        elif original_format == 'rst':
+            underline = '=' * len(text_version.title)
+            original_content = "%s\n%s\n%s" \
+                               % (text_version.title, underline,
+                                  original_content)
+
+        return content_export2(request, original_content, text_version.title,
+                               original_format, format, use_pandoc,
+                               download_response)
     else : # case comments to be added  
         html = pandoc_convert(original_content, original_format, 'html')
         wrapped_text_version, _ , _ = spannify(html)
         with_markers = True
-        marked_content = insert_comment_markers(wrapped_text_version, comments, with_markers, with_color)
+        marked_content = insert_comment_markers(wrapped_text_version, comments,
+                                                with_markers, with_color)
         # Prepends title
         marked_content = "<h1>%s</h1>%s" %(text_version.title, marked_content)
-        viewable_comments = [x for x in comments_thread(request, text_version, text) if x in comments]
+        viewable_comments = [x for x in comments_thread(request, text_version, text)
+                             if x in comments]
         extended_comments = {}
         nb_children = {}
         for cc in viewable_comments :
@@ -440,13 +476,17 @@ def text_export(request, key, format, download, whichcomments, withcolor, admink
         
             if cc.is_reply() :
                 cc.num = "%s.%s"%(extended_comments[cc.reply_to_id].num, cc.num)
-        
-        html_comments=render_to_string('site/macros/text_comments.html',{'comments':viewable_comments }, context_instance=RequestContext(request))
+
+        html_comments = render_to_string('site/macros/text_comments.html',
+                                         {'comments': viewable_comments},
+                                         context_instance=RequestContext(request))
         
         content = "%s%s"%(marked_content, html_comments)
-        content_format = "html" 
-        
-        return content_export2(request, content, text_version.title, content_format, format, use_pandoc, download_response)
+        content_format = "html"
+
+        return content_export2(request, content, text_version.title,
+                               content_format, format, use_pandoc,
+                               download_response)
 
 @has_perm_on_text('can_view_text')
 def text_view_frame(request, key, version_key=None, adminkey=None):
@@ -468,13 +508,17 @@ def text_history_version(request, key, version_key):
     text_version = get_textversion_by_keys_or_404(version_key, key=key)
     text_versions = text.get_versions()
     first_version = text_versions[len(text_versions) - 1]
-    template_dict = {'text' : text,
-                     'text_version' : text_version,
-                     'embed_code' : embed_html(key, 'id="text_view_frame" name="text_view_frame"', version_key),
-                     'first_version':first_version,
-                      }
+
+    template_ctx = {
+        'text': text,
+        'text_version': text_version,
+        'embed_code': embed_html(key,
+                                 'id="text_view_frame" name="text_view_frame"',
+                                 version_key),
+        'first_version': first_version,
+    }
     return render_to_response('site/text_history_version.html',
-                              template_dict,
+                              template_ctx,
                               context_instance=RequestContext(request))
 
 
@@ -495,11 +539,13 @@ def text_history_compare(request, key, v1_version_key, v2_version_key, mode=''):
         #from cm.utils.diff import text_diff
         from cm.utils.diff import diff_match_patch2        
         dif = diff_match_patch2()
-        content = dif.diff_prettyHtml_one_way(dif.diff_main(v1.get_content(), v2.get_content()), mode='ins_del')
+        content = dif.diff_prettyHtml_one_way(
+            dif.diff_main(v1.get_content(), v2.get_content()), mode='ins_del')
 
     text_versions = text.get_versions()
     first_version = text_versions[len(text_versions) - 1]
-    template_dict = {
+
+    template_ctx = {
         'text': text,
         'v1': v1,
         'v2': v2,
@@ -508,7 +554,7 @@ def text_history_compare(request, key, v1_version_key, v2_version_key, mode=''):
         'first_version': first_version,
     }
     return render_to_response('site/text_history_compare.html',
-                              template_dict,
+                              template_ctx,
                               context_instance=RequestContext(request))
     
 
@@ -528,6 +574,7 @@ def text_history(request, key):
 
     last_last_version = text_versions[1] if len(text_versions)>1 else None 
     first_version = text_versions[len(text_versions) - 1]
+
     context = {
         'text': text,
         'last_version': text.last_text_version,
@@ -793,7 +840,6 @@ def text_edit(request, key, adminkey=None):
             form = EditTextFormAnon(default_data)
 
     template_dict = {'text' : text, 'form' : form}
-
     return render_to_response('site/text_edit.html', template_dict,
                               context_instance=RequestContext(request))
 
@@ -806,7 +852,9 @@ def text_revert(request, key, text_version_key):
     text = get_text_by_keys_or_404(key)
 
     text_version = text.revert_to_version(text_version_key)
-    display_message(request, _(u'A new version (copied from version %(version_title)s) has been created') % {'version_title':text_version.title})
+    display_message(request,
+                    _(u'A new version (copied from version %(version_title)s) has been created')
+                    % {'version_title':text_version.title})
 
     return HttpResponse('') # no redirect because this is called by js
     
@@ -831,7 +879,8 @@ def notext_attach(request, attach_key):
 def fix_anon_in_formset(formset):
     # fix role choice in formset for anon (not all role are allowed)
     role_field = [f.fields['role'] for f in formset.forms if f.instance.user == None][0]
-    role_field.choices = [(u'', u'---------')] + [(r.id, str(r)) for r in Role.objects.filter(anon = True)] # limit anon choices
+    role_field.choices = [(u'', u'---------')] \
+                         + [(r.id, str(r)) for r in Role.objects.filter(anon = True)] # limit anon choices
 
 
 class BaseUserRoleFormSet(BaseModelFormSet):
@@ -879,10 +928,13 @@ class BaseUserRoleFormSet(BaseModelFormSet):
 # TODO: permission protection ? format value check ?
 def text_wysiwyg_preview(request, format):
     html_content = ""
-    if request.POST : # if satisfied in the no html case, in html case : no POST (cf. markitup) previewTemplatePath and previewParserPath
-        html_content = pandoc_convert(request.POST['data'], format, "html", full=False)
-        
-    return render_to_response('site/wysiwyg_preview.html', {'content':html_content} , context_instance=RequestContext(request))
+    if request.POST: # if satisfied in the no html case, in html case : no POST (cf. markitup) previewTemplatePath and previewParserPath
+        html_content = pandoc_convert(request.POST['data'], format, "html",
+                                      full=False)
+
+    return render_to_response('site/wysiwyg_preview.html',
+                              {'content': html_content},
+                              context_instance=RequestContext(request))
         #return HttpResponse(pandoc_convert(content, format, "html", full=False))
 
 USER_PAGINATION = 10
@@ -1025,7 +1077,6 @@ def text_settings(request, key):
         form = SettingsTextForm(instance=text_version)
 
     template_dict = {'text': text, 'form': form}
-
     return render_to_response('site/text_settings.html', template_dict,
                               context_instance=RequestContext(request))
 

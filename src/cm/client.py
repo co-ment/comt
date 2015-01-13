@@ -47,49 +47,57 @@ class RequestComplexEncoder(simplejson.JSONEncoder):
             comment = obj
             #replies = list(comment.comment_set.order_by('created'))
             text=comment.text_version.text
-            replies = get_viewable_comments(self.request, comment.comment_set.all(), text)
+            replies = get_viewable_comments(self.request,
+                                            comment.comment_set.all(), text)
             
             # can_view == true because of get_viewable_comments filter
             can_moderate = has_perm(self.request, 'can_edit_comment', text)   
-            can_edit = has_perm(self.request, 'can_edit_comment', text) or has_own_perm(self.request, 'can_edit_comment_own', text, comment)  
-            can_delete = has_perm(self.request, 'can_delete_comment', text) or has_own_perm(self.request, 'can_delete_comment_own', text, comment)
-            
-            return {'id' : comment.id, 
-                    'key' : comment.key,
-                    'id_key' : comment.id_key,
-                   'created_user_str' : datetime_to_user_str(request_tz_convert(comment.created, self.request)),
-                   'modified_user_str' : datetime_to_user_str(request_tz_convert(comment.modified, self.request)),
-#                   'created_str' : datetime_to_str(comment.created), # TODO change to a simple number as modified if possible
-                   'created' : datetime_to_epoch(comment.created), # TODO change to a simple number as modified if possible
-                   'modified' : datetime_to_epoch(comment.modified),  
-#                   'modified' : time.mktime(comment.modified.timetuple()),  
-#                   'created' : datetime_to_js_date_str(comment.created),
-                    'reply_to_id': comment.reply_to_id,
-                    'replies': replies,
-                    'name': comment.get_name(),
-                    'email': comment.get_email(),
-                    'logged_author': (comment.user != None),
-                    'title': comment.title,
-                    'content': comment.content,
-                    'content_html': comment.content_html,
-                    'tags': ', '.join(parse_tag_input(comment.tags)),
-                    'category': comment.category,
-                    'format': comment.format,
-                    'start_wrapper': comment.start_wrapper,
-                    'end_wrapper': comment.end_wrapper,
-                    'start_offset': comment.start_offset,
-                    'end_offset': comment.end_offset,
-                    'state': comment.state,
-                    'permalink': reverse('text-view-show-comment',
-                                         args=[text.key, comment.id_key]),
-                    # permission
-                    'can_edit': can_edit,
-                    'can_delete': can_delete,
-                    'can_moderate': can_moderate,
-                   }
+            can_edit = has_perm(self.request, 'can_edit_comment', text) \
+                       or has_own_perm(self.request, 'can_edit_comment_own', text, comment)
+            can_delete = has_perm(self.request, 'can_delete_comment', text) \
+                         or has_own_perm(self.request, 'can_delete_comment_own', text, comment)
+
+            return {
+                'id': comment.id,
+                'key': comment.key,
+                'id_key': comment.id_key,
+                'created_user_str': datetime_to_user_str(
+                    request_tz_convert(comment.created, self.request)),
+                'modified_user_str': datetime_to_user_str(
+                    request_tz_convert(comment.modified, self.request)),
+                # 'created_str' : datetime_to_str(comment.created), # TODO change to a simple number as modified if possible
+                'created': datetime_to_epoch(comment.created),
+                # TODO change to a simple number as modified if possible
+                'modified': datetime_to_epoch(comment.modified),
+                #                   'modified' : time.mktime(comment.modified.timetuple()),
+                #                   'created' : datetime_to_js_date_str(comment.created),
+                'reply_to_id': comment.reply_to_id,
+                'replies': replies,
+                'name': comment.get_name(),
+                'email': comment.get_email(),
+                'logged_author': (comment.user != None),
+                'title': comment.title,
+                'content': comment.content,
+                'content_html': comment.content_html,
+                'tags': ', '.join(parse_tag_input(comment.tags)),
+                'category': comment.category,
+                'format': comment.format,
+                'start_wrapper': comment.start_wrapper,
+                'end_wrapper': comment.end_wrapper,
+                'start_offset': comment.start_offset,
+                'end_offset': comment.end_offset,
+                'state': comment.state,
+                'permalink': reverse('text-view-show-comment',
+                                     args=[text.key, comment.id_key]),
+                # permission
+                'can_edit': can_edit,
+                'can_delete': can_delete,
+                'can_moderate': can_moderate,
+            }
         if isinstance(obj, Tag) :
             tag = obj
-            # RBE each time issuing a db request to find comments related to this tag !!! TODO  
+            # RBE each time issuing a db request to find comments related
+            # to this tag !!! TODO
             return {'ids': [t.id for t in tag.items.all()],
                     'name': tag.name,
                     'font_size': tag.font_size}
@@ -472,7 +480,8 @@ def get_tagcloud(key) :
 def comments_thread(request, text_version, text) :
     commentsnoreply = text_version.comment_set.filter(reply_to__isnull=True)#id=3)
     viewable_commentsnoreply = get_viewable_comments(request, commentsnoreply,
-                                                     text, order_by=('start_wrapper', 'start_offset', 'end_wrapper', 'end_offset'))
+                                                     text,
+                                                     order_by=('start_wrapper', 'start_offset', 'end_wrapper', 'end_offset'))
     viewable_comments = []
     for cc in viewable_commentsnoreply:
         cache.clear()
