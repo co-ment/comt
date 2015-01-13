@@ -2,6 +2,7 @@ syntax: glob
 
 *.pyc
 *~
+*.swp
 
 parts
 store
@@ -17,6 +18,9 @@ downloads
 .travis-solo
 .vagrant
 .idea/workspace.xml
+.tox
+.cache
+.coverage
 
 recreate
 settings_local.py

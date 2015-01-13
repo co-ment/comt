@@ -13,8 +13,7 @@ before_install:
 
 # Install Python dependencies
 install:
-  - python bootstrap-buildout.py
-  - bin/buildout -v
+  - pip install -r requirements.txt
   - cp deploy/settings_travis.py settings_local.py
 
 before_script:
@@ -22,7 +21,7 @@ before_script:
 
 # Run tests
 script:
-  - bin/django test cm --settings=settings
+  - python manage.py test cm
 
 notifications:
   email:

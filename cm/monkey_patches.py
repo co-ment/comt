@@ -1,14 +1,29 @@
+"""
+Patch that prevent uno custom __import__ from messing with south import
+machinery (to discover south enabled dj apps).
+
+If south is not importable, we don't patch anything.
+"""
 import sys
 
-from south.management.commands.migrate import  Command, list_migrations
-from south.db import DEFAULT_DB_ALIAS
-from south import migration
-from south.migration import Migrations
-from south.exceptions import NoMigrations
+try:
+    from south.management.commands.migrate import Command, list_migrations
+    from south.db import DEFAULT_DB_ALIAS
+    from south import migration
+    from south.migration import Migrations
+    from south.exceptions import NoMigrations
+    import_ok = True
+except ImportError:
+    import_ok = False
+    DEFAULT_DB_ALIAS = None
 
 
-### RBA+GIB: prevent uno custom __import__ from messing with south import machinery (to discover south enabled dj apps)
-def new_handle(self, app=None, target=None, skip=False, merge=False, backwards=False, fake=False, db_dry_run=False, show_list=False, database=DEFAULT_DB_ALIAS, delete_ghosts=False, ignore_ghosts=False, **options):
+### RBA+GIB: prevent uno custom __import__ from messing with south import
+### machinery (to discover south enabled dj apps)
+def new_handle(self, app=None, target=None, skip=False, merge=False,
+               backwards=False, fake=False, db_dry_run=False, show_list=False,
+               database=DEFAULT_DB_ALIAS, delete_ghosts=False,
+               ignore_ghosts=False, **options):
 
     # NOTE: THIS IS DUPLICATED FROM django.core.management.commands.syncdb
     # This code imports any module named 'management' in INSTALLED_APPS.
@@ -21,7 +36,9 @@ def new_handle(self, app=None, target=None, skip=False, merge=False, backwards=F
             __import__(app_name + '.management', {}, {}, [''])
         except ImportError, exc:
             msg = exc.args[0]
-            if (not msg.startswith('No module named') and not msg.endswith(' is unknown') ) or 'management' not in msg:
+            if (not msg.startswith('No module named')
+                and not msg.endswith(' is unknown')) \
+                    or 'management' not in msg:
                 raise
 
     # END DJANGO DUPE CODE
@@ -60,9 +77,10 @@ def new_handle(self, app=None, target=None, skip=False, merge=False, backwards=F
                 skip=skip,
                 database=database,
                 delete_ghosts=delete_ghosts,
-                ignore_ghosts=ignore_ghosts,
-            )
+                ignore_ghosts=ignore_ghosts)
             if result is False:
                 sys.exit(1) # Migration failed, so the command fails.
 
-Command.handle = new_handle
+
+if import_ok:
+    Command.handle = new_handle
