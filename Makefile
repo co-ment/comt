@@ -1,6 +1,8 @@
 test:
-	@echo "This won't work currently. Please FIXME."
-	PYTHONPATH=src py.test src/cm/tests
+	@echo "--> Running tests using the django test runner"
+	bin/django test cm --settings=settings
+	#@echo "--> This won't work currently. Please FIXME."
+	#PYTHONPATH=src py.test src/cm/tests
 
 clean:
 	@echo "--> Cleaning up"
