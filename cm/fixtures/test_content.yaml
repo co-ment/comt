@@ -17,6 +17,7 @@
     key: "up_key_1" 
     adminkey: "up_adminkey_1" 
     created: "2009-02-13 04:01:12"    
+    modified: "2009-02-13 04:01:12"
 
 # user2
 
@@ -34,6 +35,7 @@
     key: "up_key_2" 
     adminkey: "up_adminkey_2" 
     created: "2009-02-13 04:01:12"    
+    modified: "2009-02-13 04:01:12"
 
 # user3
 
@@ -51,6 +53,7 @@
     key: "up_key_3" 
     adminkey: "up_adminkey_3" 
     created: "2009-02-13 04:01:12"    
+    modified: "2009-02-13 04:01:12"
 
 # user4
 
@@ -68,6 +71,7 @@
     key: "up_key_4" 
     adminkey: "up_adminkey_4" 
     created: "2009-02-13 04:01:12"    
+    modified: "2009-02-13 04:01:12"
 
 # user5
 
@@ -85,7 +89,8 @@
     user: 5
     key: "up_key_5" 
     adminkey: "up_adminkey_5" 
-    created: "2009-02-13 04:01:12"    
+    created: "2009-02-13 04:01:12"
+    modified: "2009-02-13 04:01:12"
 
 # user6: pending user
 
@@ -105,6 +110,7 @@
     adminkey: "up_adminkey_6"
     is_suspended: True 
     created: "2009-02-13 04:01:12"    
+    modified: "2009-02-13 04:01:12"
 
 ############### texts ############### 
 

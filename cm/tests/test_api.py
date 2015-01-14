@@ -26,7 +26,6 @@ class APITest(TestCase):
         """
         Anonymous api call
         """
-        
         resource = Resource(AnonymousTextHandler)
         request = HttpRequest()
         setattr(request, 'user' , None)
@@ -36,7 +35,10 @@ class APITest(TestCase):
         response = resource(request, key='text_key_4', emitter_format='json')
         self.assertEquals(200, response.status_code) # 401: forbidden
         response_data = json.loads(response.content)
-        self.assertEquals(response_data.get('created'), '2009-02-13 04:01:12')
+
+        # We pass with both Django 1.3 and 1.4.
+        self.assertTrue(response_data.get('created')
+                        in ['2009-02-13 04:01:12', '2009-02-13T04:01:12'])
         
         # error: private text
         response = resource(request, key='text_key_3', emitter_format='json')
@@ -47,7 +49,6 @@ class APITest(TestCase):
         """
         Logged in as manager api call
         """
-
         resource = Resource(AnonymousTextHandler)
         request = HttpRequest()
         user = User.objects.get(pk=1)
