@@ -5,14 +5,16 @@ from django.test import TestCase
 from django.http import HttpRequest
 from piston.resource import Resource
 
+from cm.models import Text
+from cm.security import get_texts_with_perm
 from cm.api.handlers import AnonymousTextHandler, TextListHandler, \
     AnonymousTextListHandler, TextDeleteHandler, TextPreEditHandler, \
     TextEditHandler, TextVersionRevertHandler, TextVersionDeleteHandler
-from cm.models import Text
-from cm.security import get_texts_with_perm
+
+__all__ = ['APITest']
 
 
-class FalseRequest(object):
+class FakeRequest(object):
     def __init__(self, user):
         self.user = user
 
@@ -57,7 +59,7 @@ class APITest(TestCase):
 
 
     def test_text_create(self):
-        request = FalseRequest(None) 
+        request = FakeRequest(None)
         nb_anon_texts = get_texts_with_perm(request, 'can_view_text').count()
         nb_texts = Text.objects.count()
         
@@ -76,7 +78,7 @@ class APITest(TestCase):
         self.assertEquals(200, response.status_code)
         self.assertTrue('key' in json.loads(response.content).keys())
 
-        request = FalseRequest(None) 
+        request = FakeRequest(None)
         self.assertEqual(get_texts_with_perm(request, 'can_view_text').count(),
                          nb_anon_texts) # NO more anon text
         
@@ -96,7 +98,7 @@ class APITest(TestCase):
         
         self.assertEquals(nb_texts + 2, Text.objects.count()) # 2 more texts should have been created
 
-        request = FalseRequest(None) 
+        request = FakeRequest(None)
         self.assertEqual(get_texts_with_perm(request, 'can_view_text').count(),
                          nb_anon_texts + 1) # one more anon accessible text available
         

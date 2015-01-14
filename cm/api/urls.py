@@ -1,8 +1,15 @@
+from __future__ import absolute_import
+
 from django.conf.urls.defaults import patterns, url
 from piston.resource import Resource
 from piston.authentication import HttpBasicAuthentication
 
-from .handlers import *
+from .handlers import TextHandler, TextVersionHandler, TextListHandler, \
+    TextDeleteHandler, TextPreEditHandler, TextEditHandler, \
+    TextVersionRevertHandler, documentation, TextFeedHandler, \
+    TextVersionDeleteHandler, TextExportHandler, ImportHandler, CommentsHandler, \
+    ConvertHandler, ClientHandler, JSI18NHandler, CommentHandler, \
+    CommentFrameHandler
 
 
 auth = HttpBasicAuthentication(realm='Comt API')

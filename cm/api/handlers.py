@@ -14,12 +14,11 @@ from piston.doc import generate_doc
 from cm.models import Text, Role, UserRole, Comment, Attachment
 from cm.security import get_texts_with_perm, has_perm_on_text_api
 from cm.security import get_viewable_comments
-from cm.urls import js_info_dict
 from cm.views import get_text_by_keys_or_404, get_textversion_by_keys_or_404
 from cm.views.create import CreateTextContentForm, create_text, \
     CreateTextImportForm, _text_create_import
 from cm.views.texts import client_exchange, text_view_frame, \
-    text_view_comments, text_export, text_delete, text_edit
+    text_view_comments, text_export, text_delete, text_edit, text_pre_edit
 from cm.views.feeds import text_feed
 from cm.converters import _convert_from_mimetype
 from cm.exception import UnauthorizedException
@@ -76,7 +75,6 @@ class AnonymousTextVersionHandler(AnonymousBaseHandler):
     @staticmethod
     def endpoint():
         return URL_PREFIX + '/text/{key}/{version_key}/'
-
 
     @has_perm_on_text_api('can_view_text')
     def read(self, request, key, version_key):
@@ -164,32 +162,35 @@ class TextListHandler(BaseHandler):
         else:
             resp = rc.BAD_REQUEST
         return resp
-    
+
 
 class ConvertHandler(BaseHandler):
-  type = "Text methods"
-  allowed_methods = ('POST', )    
-  title = "Convert a legacy file"    
-  desc = "Returns the HTLM file."
-  args = """<br />
+    type = "Text methods"
+    allowed_methods = ('POST', )
+    title = "Convert a legacy file"
+    desc = "Returns the HTLM file."
+    args = """<br />
 `file`: the file in legacy format<br />        
-    """ 
+    """
 
-  @staticmethod
-  def endpoint():
-    return URL_PREFIX + '/convert/'
-    
-  def create(self, request):
-    mime = request.POST.get('mime', None)
-    the_file = request.FILES['file']
-    html, attachs = _convert_from_mimetype(the_file.read(), mime, 'html')
-    for attach_file in attachs:
-      attach_data = file(attach_file, 'rb').read()
-      filename = os.path.basename(attach_file)
-      attachment = Attachment.objects.create_attachment(filename=filename, data=attach_data, text_version=None)
-      attach_url = reverse('notext-attach', args=[attachment.key])
-      html = html.replace(filename, settings.SITE_URL + attach_url)
-    return {'html': html}
+    @staticmethod
+    def endpoint():
+        return URL_PREFIX + '/convert/'
+
+    def create(self, request):
+        mime = request.POST.get('mime', None)
+        the_file = request.FILES['file']
+        html, attachs = _convert_from_mimetype(the_file.read(), mime, 'html')
+        for attach_file in attachs:
+            attach_data = file(attach_file, 'rb').read()
+            filename = os.path.basename(attach_file)
+            attachment = Attachment.objects.create_attachment(filename=filename,
+                                                              data=attach_data,
+                                                              text_version=None)
+            attach_url = reverse('notext-attach', args=[attachment.key])
+            html = html.replace(filename, settings.SITE_URL + attach_url)
+
+        return {'html': html}
 
 
 class TextDeleteHandler(BaseHandler):
@@ -215,8 +216,6 @@ class TextDeleteHandler(BaseHandler):
         return rc.DELETED
 
 
-from cm.views.texts import text_pre_edit
- 
 class TextPreEditHandler(BaseHandler):
     type = "Text methods"
     allowed_methods = ('POST', )    
@@ -264,7 +263,12 @@ class TextEditHandler(BaseHandler):
         text_version = text.last_text_version
         comments = text_version.get_comments()
         scope_removed = [c for c in comments if c.is_scope_removed()]
-        return {'version_key' : text_version.key , 'created': text_version.created, 'nb_deleted' : len(prev_comments) - len(comments), 'nb_scope_removed' : len(scope_removed) - len(prev_scope_removed)}
+        return {
+            'version_key': text_version.key,
+            'created': text_version.created,
+            'nb_deleted': len(prev_comments) - len(comments),
+            'nb_scope_removed': len(scope_removed) - len(prev_scope_removed),
+        }
 
 
 class AnonymousTextFeedHandler(AnonymousBaseHandler):
@@ -305,12 +309,12 @@ class TextVersionRevertHandler(BaseHandler):
     @staticmethod
     def endpoint():
         return URL_PREFIX + '/text/{key}/{version_key}/revert/'
-    
-    
+
     def create(self, request, key, version_key):
         text_version = get_textversion_by_keys_or_404(version_key, key=key)
         new_text_version = text_version.text.revert_to_version(version_key)
-        return {'version_key' : new_text_version.key , 'created': new_text_version.created}
+        return {'version_key': new_text_version.key,
+                'created': new_text_version.created}
 
 
 class TextVersionDeleteHandler(BaseHandler):
@@ -326,8 +330,7 @@ class TextVersionDeleteHandler(BaseHandler):
     @staticmethod
     def endpoint():
         return URL_PREFIX + '/text/{key}/{version_key}/delete/'
-    
-    
+
     def create(self, request, key, version_key):
         text_version = get_textversion_by_keys_or_404(version_key, key=key)
         text_version.delete()
@@ -373,8 +376,11 @@ class JSI18NHandler(AnonymousBaseHandler):
     @staticmethod
     def endpoint():
         return URL_PREFIX + '/jsi18n/'
-    
+
     def read(self, request):
+        # Lazy import, on purpose
+        from cm.urls import js_info_dict
+
         return javascript_catalog(request, **js_info_dict)
 
 
@@ -447,7 +453,8 @@ class AnonymousTextExportHandler(AnonymousBaseHandler):
     
     @has_perm_on_text_api('can_view_text')    
     def create(self, request, key, format, download, whichcomments, withcolor):
-        return text_export(request, key, format, download, whichcomments, withcolor, adminkey=None)
+        return text_export(request, key, format, download, whichcomments,
+                           withcolor, adminkey=None)
 
 
 class TextExportHandler(BaseHandler):
@@ -458,7 +465,8 @@ class TextExportHandler(BaseHandler):
 
     @has_perm_on_text_api('can_view_text')
     def create(self, request, key, format, download, whichcomments, withcolor):
-        return text_export(request, key, format, download, whichcomments, withcolor, adminkey=None)
+        return text_export(request, key, format, download, whichcomments,
+                           withcolor, adminkey=None)
 
 
 class ImportHandler(BaseHandler):
@@ -477,13 +485,15 @@ class ImportHandler(BaseHandler):
     def create(self, request):
       text, res = _text_create_import(request, CreateTextImportForm)
       text_version = text.last_text_version
-      return {'key' : text.key , 'version_key' : text.last_text_version.key, 'html': text_version.content}
+      return {'key': text.key, 'version_key': text.last_text_version.key,
+              'html': text_version.content}
 
 
 class AnonymousCommentsHandler(AnonymousBaseHandler):
     allowed_methods = ('GET',)    
     type = "Comment methods"
-    fields = ('id_key', 'title', 'format', 'content', 'created', 'name', ('text_version' , ('key', ('text', ('key',))) ))   
+    fields = ('id_key', 'title', 'format', 'content', 'created', 'name',
+              ('text_version', ('key', ('text', ('key',))) ))
     model = Comment    
     title = "Get comments"
     desc = "Get comments from the workspace, most recent first."
@@ -516,8 +526,9 @@ class AnonymousCommentsHandler(AnonymousBaseHandler):
 class CommentsHandler(BaseHandler):
     type = "Comment methods"
     anonymous = AnonymousCommentsHandler
-    allowed_methods = ('GET',)  
-    fields = ('id_key', 'title', 'format', 'content', 'created', 'name', ('text_version' , ('key', ('text', ('key',))) ))   
+    allowed_methods = ('GET',)
+    fields = ('id_key', 'title', 'format', 'content', 'created', 'name',
+              ('text_version', ('key', ('text', ('key',))) ))
     model = Comment
     no_display = True 
 
@@ -533,7 +544,8 @@ class CommentsHandler(BaseHandler):
             query = query.filter(name=name)
         if comment_key:
             query = query.filter(id_key=comment_key)
-        query = query.filter(text_version__text__last_text_version__exact=F('text_version__id'))
+        query = query.filter(
+            text_version__text__last_text_version__exact=F('text_version__id'))
         query = query.order_by('-created')
         if limit:
             query = query[:int(limit)]

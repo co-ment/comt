@@ -7,4 +7,4 @@ from cm.tests.test_history import *
 from cm.tests.test_security import *
 from cm.tests.test_activity import *
 from cm.tests.test_registration import *
-from cm.tests.test_api import *
+from cm.tests.test_api import APITest
