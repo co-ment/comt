@@ -16,10 +16,18 @@ if test_db == 'postgres':
             }
         }
     }
+elif test_db == 'mysql':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'comt',
+            'USER': 'root',
+        }
+    }
 else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': ':memory:'
+            'NAME': ':memory:',
         }
     }
