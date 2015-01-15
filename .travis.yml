@@ -34,9 +34,13 @@ before_script:
 script:
   - python manage.py test cm
 
+after_success:
+  - coveralls
+
 notifications:
   email:
     recipients:
       - dev@abilian.com
     on_success: change
     on_failure: change
+
