@@ -7,6 +7,10 @@ test-with-coverage:
 	coverage run ./manage.py test cm
 	coverage report --include='src/cm/*' --omit='src/cm/tests/*'
 
+run:
+	@echo "--> Starting server"
+	./manage.py runserver
+
 clean:
 	@echo "--> Cleaning up"
 	find . -name "*.pyc" | xargs rm -f

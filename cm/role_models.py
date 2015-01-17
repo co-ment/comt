@@ -5,7 +5,8 @@ from django.db.models import Q
 from django.db.models import Max
 from django.utils.translation import ugettext as _, ugettext_lazy
 
-role_models_choices = [('generic', ugettext_lazy(u'Generic')), ('teacher', ugettext_lazy(u'Class (education)'))]
+role_models_choices = [('generic', ugettext_lazy(u'Generic')),
+                       ('teacher', ugettext_lazy(u'Class (education)'))]
 
 
 def change_role_model(role_model):
@@ -36,7 +37,9 @@ def change_role_model(role_model):
     management.call_command('loaddata', 'roles_' + role_model, verbosity=0)
 
     new_manager = Role.objects.get(id=1)
-    id_max = Role.objects.filter(~Q(id=TEMP_MANAGER_ID) & ~Q(id=TEMP_USER_ID)).aggregate(Max('id'))['id__max']
+    id_max = Role.objects \
+        .filter(~Q(id=TEMP_MANAGER_ID) & ~Q(id=TEMP_USER_ID)) \
+        .aggregate(Max('id'))['id__max']
     new_user = Role.objects.get(id=id_max)
     
     for user_userrole in UserRole.objects.filter(role=temp_user):

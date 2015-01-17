@@ -1,4 +1,5 @@
 # default cm settings
+# TODO: Not needed, merge with settings.py
 
 from django.conf import settings
 

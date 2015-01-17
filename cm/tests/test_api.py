@@ -96,12 +96,14 @@ class APITest(TestCase):
 
         self.assertEquals(200, response.status_code)
         self.assertTrue('key' in json.loads(response.content).keys())
-        
-        self.assertEquals(nb_texts + 2, Text.objects.count()) # 2 more texts should have been created
+
+        # 2 more texts should have been created
+        self.assertEquals(nb_texts + 2, Text.objects.count())
 
         request = FakeRequest(None)
+        # one more anon accessible text available
         self.assertEqual(get_texts_with_perm(request, 'can_view_text').count(),
-                         nb_anon_texts + 1) # one more anon accessible text available
+                         nb_anon_texts + 1)
         
     def test_list_text_get(self):
         """
@@ -213,7 +215,7 @@ class APITest(TestCase):
         Text version operation
         """
         # revert to text version
-        self.assertEquals(Text.objects.get(pk=1).get_versions_number() , 2)
+        self.assertEquals(Text.objects.get(pk=1).get_versions_number(), 2)
 
         resource = Resource(TextVersionRevertHandler)
         request = HttpRequest()
@@ -224,7 +226,7 @@ class APITest(TestCase):
                             version_key='textversion_key_0',
                             emitter_format='json')
 
-        self.assertEquals(Text.objects.get(pk=1).get_versions_number() , 3)
+        self.assertEquals(Text.objects.get(pk=1).get_versions_number(), 3)
         
         # delete text version
 
@@ -236,4 +238,4 @@ class APITest(TestCase):
                             version_key='textversion_key_0',
                             emitter_format='json')
 
-        self.assertEquals(Text.objects.get(pk=1).get_versions_number() , 2)
+        self.assertEquals(Text.objects.get(pk=1).get_versions_number(), 2)

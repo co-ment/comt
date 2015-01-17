@@ -16,8 +16,7 @@ If you're busy,
 1. Install the following packages (on a Debian or Ubuntu Linux
    distibution):
 
-   sudo apt-get install -y git-core python-dev g++ libtidy-dev pandoc
-   libpq-dev
+   sudo apt-get install -y git-core python-dev g++ libtidy-dev pandoc libpq-dev
 
 Note 1: you can probably find similar packages on other Linux
 distributions, then proceed.
@@ -56,8 +55,8 @@ Dependencies
 Environment
 ~~~~~~~~~~~
 
--  Postgresql 8.3 or Mysql 5+ or sqlite
--  Python 2.5+
+-  Postgresql 8.3+ or Mysql 5+ or sqlite
+-  Python 2.7+
 -  Abiword or Openoffice 3.0+ (headless)
 -  Pandoc
 
@@ -411,32 +410,26 @@ Translation
 Update all po files
 ~~~~~~~~~~~~~~~~~~~
 
-Run:
+Run::
 
-::
-
-    cd src/cm
-    ../../bin/django makemessages -a
-    ../../bin/django makemessages -d djangojs -a
+    cd cm
+    ../bin/django makemessages -a
+    ../bin/django makemessages -d djangojs -a
 
 Compile po files
 ~~~~~~~~~~~~~~~~
 
-Run:
+Run::
 
-::
-
-    cd src/cm
-    ../../bin/django compilemessages
+    cd cm
+    ../bin/django compilemessages
 
 Create new file for lang 'LG'
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Run:
+Run::
 
-::
-
-    cd src/cm
-    ../../bin/django makemessages -l LG -e .html,.txt
-    ../../bin/django makemessages -d djangojs -l LG
+    cd cm
+    ../bin/django makemessages -l LG -e .html,.txt
+    ../bin/django makemessages -d djangojs -l LG
 

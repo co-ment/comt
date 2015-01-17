@@ -12,7 +12,6 @@ from django.db.models import signals
 from cm.models import TextVersion, Text
 
 
-
 # Text denormalisation
 def update_text_from_last_version(sender, **kwargs):
     """

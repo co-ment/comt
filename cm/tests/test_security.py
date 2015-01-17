@@ -1,5 +1,4 @@
 from django.core.cache import cache
-
 from django.test import TestCase
 
 from cm.models import UserProfile, Text

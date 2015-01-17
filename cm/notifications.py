@@ -18,7 +18,8 @@ def notify(sender, **kwargs):
     
     activity = kwargs['instance']
     if activity.type in Activity.VIEWABLE_ACTIVITIES.get('view_users'): # user activity: only viewed by managers
-        notifications = Notification.objects.filter(text=None, active=True).exclude(type='own')
+        notifications = Notification.objects \
+            .filter(text=None, active=True).exclude(type='own')
         for notification in notifications:
             if notification.user:
                 from cm.security import user_has_perm # import here!
@@ -27,28 +28,36 @@ def notify(sender, **kwargs):
                     allready_notified.add(notification.user)
 
     elif activity.type in Activity.VIEWABLE_ACTIVITIES.get('view_comments'):
-        notifications = Notification.objects.filter(Q(text=activity.text) | Q(text=None), active=True)
-        for notification in notifications:            
-            viewable = get_viewable_comments(FakeRequest(notification.user),
-                                             Comment.objects.filter(id__in = [activity.comment.id]),
-                                             text=activity.text)
+        notifications = Notification.objects \
+            .filter(Q(text=activity.text) | Q(text=None), active=True)
+        for notification in notifications:
+            viewable = get_viewable_comments(
+                FakeRequest(notification.user),
+                Comment.objects.filter(id__in=[activity.comment.id]),
+                text=activity.text)
             if viewable and \
-                ((notification.type == 'own' and activity.comment.user != notification.user and activity.comment.top_comment().user == notification.user) or
-                 (notification.type != 'own')):
+                ((notification.type == 'own'
+                  and activity.comment.user != notification.user
+                  and activity.comment.top_comment().user == notification.user)
+                 or (notification.type != 'own')):
                 if not notification.user in allready_notified:
                     send_notification(activity, notification)
                     allready_notified.add(notification.user)            
 
     elif activity.type in Activity.VIEWABLE_ACTIVITIES.get('view_texts'):
-        notifications = Notification.objects.filter(Q(text=activity.text) | Q(text=None), active=True).exclude(type='own')
+        notifications = Notification.objects \
+            .filter(Q(text=activity.text) | Q(text=None), active=True) \
+            .exclude(type='own')
         for notification in notifications:
             if notification.user:
                 from cm.security import user_has_perm # import here!
-                if user_has_perm(notification.user, 'can_view_text', text=activity.text) and not notification.user in allready_notified:
+                if user_has_perm(notification.user, 'can_view_text', text=activity.text) \
+                        and not notification.user in allready_notified:
                     send_notification(activity, notification)
                     allready_notified.add(notification.user)
             else:
-                if has_perm(None, 'can_view_text', text=activity.text) and not notification.email in allready_notified:
+                if has_perm(None, 'can_view_text', text=activity.text) \
+                        and not notification.email in allready_notified:
                     send_notification(activity, notification)
                     allready_notified.add(notification.email)                
 
@@ -67,6 +76,5 @@ def send_notification(activity, notification):
                                      'CONF': ApplicationConfiguration,
                                  })
     
-      send_mail(subject, message, ApplicationConfiguration['email_from'], [email], fail_silently=True)
-    
-      #logging.debug(u"Notification sent [%s] => %s" %(activity,notification.user) if notification.user else u"sending (email) %s => %s" %(activity,notification.email))
+      send_mail(subject, message, ApplicationConfiguration['email_from'],
+                [email], fail_silently=True)

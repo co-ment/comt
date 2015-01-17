@@ -16,9 +16,8 @@ matrix:
 addons:
   postgresql: "9.3"
 
-# Install OS dependencies
+# Install OS-level dependencies
 before_install:
-  - sudo rm -rf /dev/shm && sudo ln -s /run/shm /dev/shm
   - sudo apt-get update -qq
   - sudo apt-get install -y git-core python-dev g++ libtidy-dev pandoc 
   - sudo apt-get install -y libmysqlclient-dev libpq-dev
@@ -27,7 +26,6 @@ before_install:
 install:
   - pip install -r requirements.txt
   - pip install -q Django==$DJANGO
-  - cp deploy/settings_travis.py settings_local.py
 
 before_script:
   - psql -c 'create database comt;' -U postgres
@@ -35,7 +33,7 @@ before_script:
 
 # Run tests
 script:
-  - python manage.py test cm
+  - py.test cm
 
 after_success:
   - coveralls

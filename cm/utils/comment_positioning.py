@@ -5,11 +5,8 @@ import operator
 import re
 import logging
 
-from cm.utils.spannifier import spannify
 from cm.converters.pandoc_converters import pandoc_convert
-from cm.utils.spannifier import get_the_soup
-
-#from cm.utils.spannifier import Spannifier
+from cm.utils.spannifier import spannify, get_the_soup
 
 
 def compute_new_comment_positions(old_content, old_format, new_content,
@@ -73,12 +70,14 @@ def compute_new_comment_positions(old_content, old_format, new_content,
                 end = span_starts_new.get(id+1, sys.maxint)
 
                 # adjust start                
-                if cc.computed_start_offset >= start and cc.computed_start_offset < end:
+                if cc.computed_start_offset >= start \
+                        and cc.computed_start_offset < end:
                     cc.start_wrapper = id
                     cc.start_offset = cc.computed_start_offset - start
                 
                 # adjust end                        
-                if cc.computed_end_offset >= start and cc.computed_end_offset < end:
+                if cc.computed_end_offset >= start \
+                        and cc.computed_end_offset < end:
                     cc.end_wrapper = id
                     cc.end_offset = cc.computed_end_offset - start
             

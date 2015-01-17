@@ -14,4 +14,3 @@ class ConverterTest(TestCase):
                 # Skip this because it involves a whole LaTeX install
                 continue
             res = pandoc_convert(rst,'rst',to_format)
- 
