@@ -1,0 +1,8 @@
+[run]
+include = cm/*
+omit =
+    cm/tests/*
+    cm/migrations/*
+
+[report]
+show_missing = True

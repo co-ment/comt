@@ -25,4 +25,4 @@ pyyaml
 #
 pytest
 pytest-django
-coverage
+pytest-cov

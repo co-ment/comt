@@ -1,11 +1,12 @@
+PKG=cm
+
 test:
-	@echo "--> Running tests using the django test runner"
-	./manage.py test cm
+	@echo "--> Running tests using the py.test runner"
+	py.test $(PKG)
 
 test-with-coverage:
 	@echo "--> Running tests with coverage"
-	coverage run ./manage.py test cm
-	coverage report --include='src/cm/*' --omit='src/cm/tests/*'
+	py.test --cov $(PKG) --cov-config etc/coverage.rc $(PKG)
 
 run:
 	@echo "--> Starting server"

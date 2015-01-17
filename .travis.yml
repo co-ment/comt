@@ -33,7 +33,7 @@ before_script:
 
 # Run tests
 script:
-  - py.test cm
+  - py.test --cov cm --cov-config etc/coverage.rc cm
 
 after_success:
   - coveralls
