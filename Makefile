@@ -21,4 +21,4 @@ clean:
 	rm -rf .eggs .cache .coverage *.egg log
 
 tidy: clean
-	rm -rf .tox node_modules
+	rm -rf .tox node_modules comt.db
