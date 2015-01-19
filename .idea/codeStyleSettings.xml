@@ -54,7 +54,7 @@
           <option name="ELSE_ON_NEW_LINE" value="true" />
           <option name="ALIGN_MULTILINE_ARRAY_INITIALIZER_EXPRESSION" value="true" />
           <option name="KEEP_SIMPLE_BLOCKS_IN_ONE_LINE" value="true" />
-          <option name="ARRAY_INITIALIZER_WRAP" value="2" />
+          <option name="ARRAY_INITIALIZER_WRAP" value="1" />
           <indentOptions>
             <option name="INDENT_SIZE" value="2" />
             <option name="TAB_SIZE" value="2" />

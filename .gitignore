@@ -11,6 +11,7 @@ bin
 develop-eggs
 downloads
 node_modules
+log
 
 .Python
 .installed.cfg

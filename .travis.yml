@@ -35,7 +35,7 @@ before_script:
 # Run tests
 script:
   - py.test --cov cm --cov-config etc/coverage.rc cm
-  - ./tests/e2e/run.sh
+  - ./tests/e2e/run-tests.sh
 
 after_success:
   - coveralls

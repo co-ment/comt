@@ -5,7 +5,7 @@
 #
 
 # Exit on error
-set -e
+set -ex
 
 #
 # Install system packages

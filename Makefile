@@ -18,5 +18,7 @@ clean:
 	rm -rf .installed.cfg *.egg-info \
              bin/ develop-eggs/ eggs/ include/ lib/ local/ parts/ \
              pip-selfcheck.json 
-	rm -rf .eggs .cache .coverage *.egg
+	rm -rf .eggs .cache .coverage *.egg log
 
+tidy: clean
+	rm -rf .tox node_modules
