@@ -30,30 +30,33 @@ def _convert_from_mimetype(input, mime_type, format):
         'application/rtf',
         'text/rtf',
     ]:
-        
+
         if USE_ABI:
-          from abi_converters import AbiFileConverter
-          converter = AbiFileConverter()
-          try:
-            html_input, attachs = converter.convert_to_html(input)
-            html_input = re.sub(r' awml:style="[^"]*"', '', html_input)
-            converted_input = pandoc_convert(html_input, 'html', format)
-          except:
-            # If Abiword fails for any reason, try libreoffice
-            html_input, xhtml_input, attachs = convert_oo_to_html_and_xhtml(input)
-            if format == 'html':
-                  _not_used_css, converted_input = extract_css_body(xhtml_input)
-                  #converted_input = xhtml_input
-  
-            converted_input = pandoc_convert(html_input, 'html', format)
+            from abi_converters import AbiFileConverter
+            converter = AbiFileConverter()
+            try:
+                html_input, attachs = converter.convert_to_html(input)
+                html_input = re.sub(r' awml:style="[^"]*"', '', html_input)
+                converted_input = pandoc_convert(html_input, 'html', format)
+            except:
+                # If Abiword fails for any reason, try libreoffice
+                html_input, xhtml_input, attachs = convert_oo_to_html_and_xhtml(
+                    input)
+                if format == 'html':
+                    _not_used_css, converted_input = extract_css_body(
+                        xhtml_input)
+                    # converted_input = xhtml_input
+
+                converted_input = pandoc_convert(html_input, 'html', format)
 
         else:
-          html_input, xhtml_input, attachs = convert_oo_to_html_and_xhtml(input)
-          if format == 'html':
+            html_input, xhtml_input, attachs = convert_oo_to_html_and_xhtml(
+                input)
+            if format == 'html':
                 _not_used_css, converted_input = extract_css_body(xhtml_input)
-                #converted_input = xhtml_input
-        
-          converted_input = pandoc_convert(html_input, 'html', format)
+                # converted_input = xhtml_input
+
+            converted_input = pandoc_convert(html_input, 'html', format)
         
     ##############################
     # latex
@@ -125,7 +128,7 @@ def convert_oo_to_html(input):
     for encoding in try_encodings:
         try:
             res_content_html = unicode(html_input, encoding)
-            break;
+            break
         except UnicodeDecodeError:
             pass
     if not res_content_html:

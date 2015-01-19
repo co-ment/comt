@@ -154,7 +154,7 @@ function test_comt_logged_header (username, is_tagline, is_text) {
 		test_text ('#content h1.main_title a[href="/"]', C['#id_workspace_name']);
 	}
 
-	test_text	('#header_controls b', username)
+	test_text	('#header_controls b', username);
 	test_count	('#header_controls a', l);
 	test_text	('#header_controls a:nth-of-type('+ l-- +')[href="/logout/"]',			'Logout');
 	test_text	('#header_controls a:nth-of-type('+ l-- +')#hide-piwik-cookies-optout',	'Privacy policy ');

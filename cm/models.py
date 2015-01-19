@@ -26,7 +26,7 @@ from cm.utils.date import datetime_to_user_str
 from cm.utils.html import on_content_receive
 from cm.utils.comment_positioning import compute_new_comment_positions
 from cm.utils.misc import update
-
+from cm.utils.mail import send_mail
 
 
 class TextManager(Manager):
@@ -265,13 +265,17 @@ class TextVersion(AuthorModel, KeyModel):
             self.comment_set.all().delete()
         elif self.content != new_content or new_format != self.format:
             comments = self.get_comments()
-            tomodify_comments, toremove_comments = compute_new_comment_positions(self.content, self.format, new_content, new_format, comments)
-            [comment.save(keep_dates=True) for comment in tomodify_comments]
+            tomodify_comments, toremove_comments = compute_new_comment_positions(
+                self.content, self.format, new_content, new_format, comments)
+            for comment in tomodify_comments:
+                comment.save(keep_dates=True)
             if cancel_modified_scopes :
-                [comment.remove_scope() for comment in toremove_comments]
+                for comment in toremove_comments:
+                    comment.remove_scope()
             else :
-                [comment.delete() for comment in toremove_comments]
-                
+                for comment in toremove_comments:
+                    comment.delete()
+
         self.title = new_title
         if new_tags:
             self.tags = new_tags
@@ -282,15 +286,24 @@ class TextVersion(AuthorModel, KeyModel):
         self.save()
 
     def get_next_version(self):        
-        other_versions = TextVersion.objects.filter(text__exact=self.text).order_by('created').filter(created__gt=self.created)
+        other_versions = TextVersion.objects \
+            .filter(text__exact=self.text) \
+            .order_by('created') \
+            .filter(created__gt=self.created)
         return other_versions[0] if other_versions else None 
 
     def get_previous_version(self):
-        other_versions = TextVersion.objects.filter(text__exact=self.text).order_by('-created').filter(created__lt=self.created)
+        other_versions = TextVersion.objects \
+            .filter(text__exact=self.text) \
+            .order_by('-created') \
+            .filter(created__lt=self.created)
         return other_versions[0] if other_versions else None
 
     def get_version_number(self):
-        return TextVersion.objects.filter(text__exact=self.text).order_by('created').filter(created__lte=self.created).count()
+        return TextVersion.objects \
+            .filter(text__exact=self.text) \
+            .order_by('created') \
+            .filter(created__lte=self.created).count()
 
 
 class CommentManager(Manager):
@@ -348,7 +361,7 @@ class Comment(PermanentModel, AuthorModel):
     def __unicode__(self):
         return '<%d> %s [st_wrp:%s, st_ofs:%s, e_wrp:%s, e_ofs:%s]' % (
             self.id, self.title, self.start_wrapper, self.start_offset,
-            self.end_wrapper, self.end_offset, )
+            self.end_wrapper, self.end_offset)
         
     def is_reply(self):
         return self.reply_to != None
@@ -358,7 +371,7 @@ class Comment(PermanentModel, AuthorModel):
         own_user: comment belonging to this user are also visible 
         """
         if self.state == 'approved' or (own_user and self.user == own_user):
-            if self.reply_to==None:
+            if self.reply_to == None:
                 return True
             else:                
                 return self.reply_to.is_thread_full_visible(own_user)
@@ -367,25 +380,25 @@ class Comment(PermanentModel, AuthorModel):
     def is_scope_removed(self):
         #when scope is "removed" we will have 
         #self.start_wrapper == self.end_wrapper == self.start_offset == self.end_offset == -1
-        return (self.start_wrapper == -1)  
-               
+        return (self.start_wrapper == -1)
+
     def top_comment(self):
-        if self.reply_to == None :
+        if self.reply_to == None:
             return self
-        else : 
+        else:
             return self.reply_to.top_comment()
-    
+
     def depth(self):
-        if self.reply_to == None :
+        if self.reply_to == None:
             return 0
-        else : 
+        else:
             return 1 + self.reply_to.depth()
-    
+
     def delete(self):
         PermanentModel.delete(self)
         # delete replies
         [c.delete() for c in self.comment_set.all()]
-        
+
     def remove_scope(self):
         self.start_wrapper = self.end_wrapper = self.start_offset = self.end_offset = -1
         self.save()
@@ -422,7 +435,8 @@ class ConfigurationManager(models.Manager):
         if created or conf.value != value:
             conf.value = value
             conf.save()
-            if key == 'workspace_role_model' and not(created and value=='generic'):
+            if key == 'workspace_role_model' \
+                    and not (created and value == 'generic'):
                 change_role_model(value)
 
     def __getitem__(self, key):
@@ -470,8 +484,8 @@ class AttachmentManager(KeyManager):
 
 class Attachment(KeyModel):
     data = models.FileField(upload_to="attachments/%Y/%m/%d/", max_length=1000)
-    text_version = models.ForeignKey(TextVersion, null=True, blank=True, default=None)
-
+    text_version = models.ForeignKey(TextVersion, null=True, blank=True,
+                                     default=None)
     objects = AttachmentManager()
     
 
@@ -483,9 +497,11 @@ class NotificationManager(KeyManager):
 
     def get_notifications(self, text, type, email_or_user):
         if isinstance(email_or_user, unicode):
-            prev_notifications = Notification.objects.filter(text=text, type=type, email=email_or_user)
+            prev_notifications = Notification.objects.filter(
+                text=text, type=type, email=email_or_user)
         else:
-            prev_notifications = Notification.objects.filter(text=text, type=type, user=email_or_user)
+            prev_notifications = Notification.objects.filter(
+                text=text, type=type, user=email_or_user)
             
         if prev_notifications:
             return prev_notifications[0]
@@ -519,7 +535,8 @@ class Notification(KeyModel, AuthorModel):
             self.delete()
     
     def __unicode__(self):
-        return u"%s: %s %s %s %s" % (self.__class__.__name__, self.user, self.text, self.type, self.active )
+        return u"%s: %s %s %s %s" % (self.__class__.__name__, self.user,
+                                     self.text, self.type, self.active )
     
 
 # right management
@@ -653,16 +670,16 @@ class RegistrationManager(KeyManager):
             return user_with_email
         
 
-from cm.utils.mail import send_mail
-
 class UserProfile(KeyModel):
     modified = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     
     user = models.ForeignKey(User, unique=True)
 
-    allow_contact = models.BooleanField(_l(u'Allow contact'), default=True, help_text=_l(u"Allow email messages from other users"))
-    preferred_language = models.CharField(_l(u'Preferred language'), max_length=2, default="en")
+    allow_contact = models.BooleanField(_l(u'Allow contact'), default=True,
+                                        help_text=_l(u"Allow email messages from other users"))
+    preferred_language = models.CharField(_l(u'Preferred language'),
+                                          max_length=2, default="en")
     is_temp = models.BooleanField(default=False)
     is_email_error = models.BooleanField(default=False)
     is_suspended = models.BooleanField(_l(u'Suspended access'), default=False) # used to disable access or to wait for approval when registering
@@ -689,15 +706,18 @@ class UserProfile(KeyModel):
     def admin_print(self):
         if self.is_suspended:
             if self.user.is_active:
-                return mark_safe('%s (%s)' % (self.user.username, _(u'suspended'),))
+                return mark_safe('%s (%s)' % (self.user.username,
+                                              _(u'suspended')))
             else:
-                return mark_safe('%s (%s)' % (self.user.username, _(u'waiting approval'),))
+                return mark_safe('%s (%s)' % (self.user.username,
+                                              _(u'waiting approval')))
         else:
             if self.user.is_active:
                 return mark_safe('%s' % self.user.username) 
             else:
                 email_username = self.user.email.split('@')[0]
-                return mark_safe('%s (%s)' % (self.user.username, _(u'pending'),))
+                return mark_safe('%s (%s)' % (self.user.username,
+                                              _(u'pending')))
 
     def simple_print(self):
         if self.user.is_active:
@@ -706,10 +726,12 @@ class UserProfile(KeyModel):
             return self.user.email
 
     def send_activation_email(self, note=None):
-        self._send_act_invit_email(note=note, template='email/activation_email.txt')
+        self._send_act_invit_email(note=note,
+                                   template='email/activation_email.txt')
 
     def send_invitation_email(self, note=None):
-        self._send_act_invit_email(note=note, template='email/invitation_email.txt')
+        self._send_act_invit_email(note=note,
+                                   template='email/invitation_email.txt')
         
     def _send_act_invit_email(self, template, note=None):
         subject = _(u'Invitation')
@@ -720,7 +742,6 @@ class UserProfile(KeyModel):
                                        'note': note,
                                        'CONF': ApplicationConfiguration
                                    })
-    
         send_mail(subject, message, ApplicationConfiguration['email_from'],
                   [self.user.email])
         
@@ -739,7 +760,9 @@ class ActivityManager(models.Manager):
 
 class Activity(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    originator_user = models.ForeignKey(User, related_name='originator_activity', null=True, blank=True, default=None)
+    originator_user = models.ForeignKey(User,
+                                        related_name='originator_activity',
+                                        null=True, blank=True, default=None)
     text = models.ForeignKey(Text, null=True, blank=True, default=None)
     text_version = models.ForeignKey(TextVersion, null=True, blank=True, default=None)
     comment = models.ForeignKey(Comment, null=True, blank=True, default=None)
@@ -751,10 +774,12 @@ class Activity(models.Model):
     
     # viewable activities (i.e. now 'text-view')
     VIEWABLE_ACTIVITIES = {
-                   'view_comments' : ['comment_created', 'comment_removed'],
-                   'view_users' : ['user_created', 'user_activated', 'user_refused', 'user_enabled', 'user_approved', 'user_suspended'],
-                   'view_texts' : ['text_created', 'text_imported', 'text_removed', 'text_edited', 'text_edited_new_version'],
-                   }
+        'view_comments': ['comment_created', 'comment_removed'],
+        'view_users': ['user_created', 'user_activated', 'user_refused',
+                       'user_enabled', 'user_approved', 'user_suspended'],
+        'view_texts': ['text_created', 'text_imported', 'text_removed',
+                       'text_edited', 'text_edited_new_version'],
+    }
     ACTIVITIES_TYPES = reduce(list.__add__, VIEWABLE_ACTIVITIES.values())
 
     IMGS = {
@@ -791,7 +816,9 @@ class Activity(models.Model):
     }
     
     def is_same_user(self, other_activity):
-        if (self.originator_user != None or other_activity.originator_user != None) and self.originator_user != other_activity.originator_user:
+        if (self.originator_user != None
+            or other_activity.originator_user != None) \
+                and self.originator_user != other_activity.originator_user:
             return False
         else:
             return self.ip != None and self.ip == other_activity.ip
@@ -830,7 +857,8 @@ class Activity(models.Model):
             return u''
 
     def __unicode__(self):
-        return u"%s %s %s %s %s" % (self.type, self.originator_user, self.text, self.comment, self.user)
+        return u"%s %s %s %s %s" % (self.type, self.originator_user,
+                                    self.text, self.comment, self.user)
     
     def img_name(self):
         return self.IMGS.get(self.type)
@@ -841,12 +869,13 @@ class Activity(models.Model):
     def printable_data(self, html=True, link=True):
         msg = self.MSGS.get(self.type, None)
         if msg:
-            return mark_safe(msg % {
-                                     'link_to_text' : self.linkable_text_title(html=html, link=link) if self.text else None,
-                                     'link_to_comment' : self.linkable_comment_title(html=html, link=link) if self.comment else None,
-                                     'username' : self.user.username if self.user else None,
-                                     'creator' : self.originator_user.username if self.originator_user else _l(u'anonymous'),
-                                    })
+            ctx = {
+                'link_to_text': self.linkable_text_title(html=html, link=link) if self.text else None,
+                'link_to_comment': self.linkable_comment_title(html=html, link=link) if self.comment else None,
+                'username': self.user.username if self.user else None,
+                'creator': self.originator_user.username if self.originator_user else _l(u'anonymous'),
+            }
+            return mark_safe(msg % ctx)
         return ''
     
     def printable_metadata(self, html=True):

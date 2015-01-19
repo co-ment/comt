@@ -10,7 +10,7 @@ from django.forms.util import ErrorList
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.utils.translation import ugettext as _, ugettext_lazy
+from django.utils.translation import ugettext as _, ugettext_lazy as _l
 from django.db import connection, transaction
 from BeautifulSoup import BeautifulStoneSoup
 
@@ -24,11 +24,10 @@ from cm.security import has_global_perm
 
 class CreateTextUploadForm(ModelForm):
     file = forms.FileField(required=True,
-                           label=ugettext_lazy("Upload file"),
-                           help_text=ugettext_lazy("Upload a file from your computer instead of using the direct input above"),)
+                           label=_l("Upload file"),
+                           help_text=_l("Upload a file from your computer instead of using the direct input above"),)
 
-    title = forms.CharField(required=False,
-                            label=ugettext_lazy("Title"))
+    title = forms.CharField(required=False, label=_l("Title"))
 
     class Meta:
         model = TextVersion
@@ -44,9 +43,8 @@ class CreateTextUploadForm(ModelForm):
 
 
 class CreateTextImportForm(ModelForm):
-    file = forms.FileField(required=True,
-                           label=ugettext_lazy("Upload XML file"),
-                           help_text=ugettext_lazy("Upload a previously exported XML file from your computer"),)
+    file = forms.FileField(required=True, label=_l("Upload XML file"),
+                           help_text=_l("Upload a previously exported XML file from your computer"),)
 
     class Meta:
         model = TextVersion
@@ -84,9 +82,8 @@ class CreateTextImportForm(ModelForm):
 
 
 class CreateTextContentForm(ModelForm):
-    title = forms.CharField(required=True,
-                            label=ugettext_lazy("Title"),
-                            help_text=ugettext_lazy("The title of your text"),
+    title = forms.CharField(required=True, label=_l("Title"),
+                            help_text=_l("The title of your text"),
                             widget=forms.TextInput)
     
     class Meta:
@@ -134,10 +131,10 @@ def _text_create_upload(request, createForm):
             if form.cleaned_data['file']:
                 try:
                     uploaded_file = form.cleaned_data['file']
-                    content, attachs = convert_from_mimetype(uploaded_file.temporary_file_path(),
-                                                    uploaded_file.content_type,
-                                                    format=form.cleaned_data['format'],
-                                                    )
+                    content, attachs = convert_from_mimetype(
+                        uploaded_file.temporary_file_path(),
+                        uploaded_file.content_type,
+                        format=form.cleaned_data['format'])
                     form.cleaned_data['content'] = content
                     form.cleaned_data['attachs'] = attachs
                     

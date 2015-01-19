@@ -2,12 +2,6 @@ DEBUG = True
 CLIENT_DEBUG = DEBUG
 TEMPLATE_DEBUG = DEBUG
 
-ADMINS = (
-    # ('Your Name', 'your_email@domain.com'),
-)
-
-MANAGERS = ADMINS
-
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -17,7 +11,6 @@ TIME_ZONE = 'Europe/Paris'  #UTC
 
 # base timezone used for client
 DEFAULT_TIME_ZONE = TIME_ZONE
-
 
 # it's not the format js client users will see the dates in !
 # it's the format that's used to communicate dates to js client (python date -> JSON str -> parsed to js date)
@@ -51,11 +44,6 @@ MEDIA_URL = '/site_media/'
 ADMIN_MEDIA_PREFIX = '/media/'
 
 LOGIN_URL = '/login/'
-
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash if there is a path component (optional in other cases).
-# Examples: "http://media.lawrence.com", "http://example.com/media/"
-#MEDIA_URL = SITE_URL + '/themedia/'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -188,17 +176,11 @@ EMAIL_HOST = "localhost"  # YOUR_SETTINGS
 
 TEMPLATE_STRING_IF_INVALID = "NNNNNNNNNOOOOOOOOOOOOOOO" if DEBUG else ''
 
-# web server writable directory to store Comt uploaded content (text images etc.)
-MEDIA_ROOT = '/the/path/'  # YOUR_SETTINGS
-
 # Insert some random text here,
 # it will be used to add some randomness to every crypto operation Comt does
 SECRET_KEY = 'TODO FIXME'  # YOUR_SETTINGS
 
-MEDIA_URL = '/site_media/'
-
 CM_MEDIA_PREFIX = '/cmmedia/'
-ADMIN_MEDIA_PREFIX = '/media/'
 ADMINS = (
     ('Comt admin', CONTACT_DEST),
 )
@@ -231,58 +213,15 @@ DEFAULT_FROM_EMAIL = "me@example.com"  # YOUR_SETTINGS
 # destination email for the contact page
 CONTACT_DEST = DEFAULT_FROM_EMAIL
 
-# smtp host
-EMAIL_HOST = "localhost"  # YOUR_SETTINGS
-
-TEMPLATE_STRING_IF_INVALID = "NNNNNNNNNOOOOOOOOOOOOOOO" if DEBUG else ''
-
-# web server writable directory to store Comt uploaded content (text images etc.)
-MEDIA_ROOT = '/srv/comt/web'  # YOUR_SETTINGS
-
-# Insert some random text here,
-# it will be used to add some randomness to every crypto operation Comt does
-SECRET_KEY = '7atc+iy6v82vol_y-j05a@ru5!d6@^edtt%d94ro7+(wcqg+nd'  # YOUR_SETTINGS
-
-MEDIA_URL = '/site_media/'
-
-INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.admin',
-    'cm',
-    # 'django_extensions',
-    'tagging',
-    #'south',
-)
-
-CM_MEDIA_PREFIX = '/cmmedia/'
-
-ADMIN_MEDIA_PREFIX = '/media/'
-
 ADMINS = (
     ('Comt admin', CONTACT_DEST),
 )
-
-MANAGERS = ADMINS
-SEND_BROKEN_LINK_EMAILS = False
-
-SERVER_EMAIL = DEFAULT_FROM_EMAIL
-
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# If running in a Windows environment this must be set to the same as your
-# system time zone.
-DEFAULT_TIME_ZONE = "Europe/Paris"
 
 # Set to True if you don't want to appear in Sopinspace Piwik statistics
 DISABLE_TRACKING = True
 
 # disable email reporting by piston
 PISTON_EMAIL_ERRORS = False
-
 
 #
 # Override with local settings
