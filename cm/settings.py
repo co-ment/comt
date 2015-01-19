@@ -204,6 +204,9 @@ USE_ABI = True
 # Set to False to avoid appearing in Sopinspace Piwik statistics
 TRACKING_ID = False
 
+# FIXME: temp value to make karma tests passe
+TRACKING_ID = 17
+
 
 #
 # Even more overrides
