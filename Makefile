@@ -18,6 +18,11 @@ run:
 	@echo "--> Starting server"
 	./manage.py runserver
 
+develop:
+	pip install -e .
+	npm install karma karma-phantomjs-launcher karma-mocha
+	npm install git://github.com/Siltaar/karma-e2e-dsl
+
 clean:
 	@echo "--> Cleaning up"
 	find . -name "*.pyc" | xargs rm -f

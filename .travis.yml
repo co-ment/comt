@@ -21,12 +21,13 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -y git-core python-dev g++ libtidy-dev pandoc 
   - sudo apt-get install -y libmysqlclient-dev libpq-dev
-  - npm install karma karma-phantomjs-launcher karma-e2e-dsl karma-mocha
 
 # Install Python dependencies
 install:
   - pip install -r requirements.txt
   - pip install -q Django==$DJANGO
+  - npm install karma karma-phantomjs-launcher karma-mocha
+  - npm install git://github.com/Siltaar/karma-e2e-dsl
 
 before_script:
   - psql -c 'create database comt;' -U postgres
