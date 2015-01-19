@@ -102,7 +102,8 @@ urlpatterns += patterns('',
     # notifications
     ## workspace followup
     url(r'^followup/$', followup, name="followup"),
-    url(r'^followup/(?P<adminkey>\w*)/deactivate/$', desactivate_notification, name="desactivate-notification"),
+    url(r'^followup/(?P<adminkey>\w*)/deactivate/$',
+        desactivate_notification, name="desactivate-notification"),
     ## text notifications
     url(r'^text/(?P<key>\w*)/followup/$', text_followup, name="text-followup"),
     ## embed
@@ -114,9 +115,11 @@ urlpatterns += patterns('',
     url(r'^feed/$', public_feed, name="public-feed"),
     ## text feeds
     url(r'^text/(?P<key>\w*)/feed/$', text_feed, name="text-feed"),
-    url(r'^text/(?P<key>\w*)/feed/(?P<private_feed_key>\w*)/$', text_feed_private, name="text-private-feed"),
+    url(r'^text/(?P<key>\w*)/feed/(?P<private_feed_key>\w*)/$',
+        text_feed_private, name="text-private-feed"),
 
-    url(r'^wysiwyg-preview/(?P<format>\w*)/$', text_wysiwyg_preview, name="text-wysiwyg-preview"),
+    url(r'^wysiwyg-preview/(?P<format>\w*)/$',
+        text_wysiwyg_preview, name="text-wysiwyg-preview"),
 )
 
 # this is to make django.contrib.auth.views work with our templates
@@ -124,22 +127,28 @@ from django.contrib.sites.models import Site
 Site._meta.installed = False
 
 urlpatterns += patterns('django.contrib.auth.views',
-    (r'^password_reset/$', 'password_reset', {'template_name': 'site/forgot_pw.html', 'email_template_name':'email/forgot_pw.txt', 'post_reset_redirect':'/password_reset/done/'}, 'forgot-pw'),
+    (r'^password_reset/$', 'password_reset',
+     {'template_name': 'site/forgot_pw.html', 'email_template_name':'email/forgot_pw.txt', 'post_reset_redirect':'/password_reset/done/'}, 'forgot-pw'),
     (r'^password_reset/done/$', password_reset_done),
-    (r'^reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', 'password_reset_confirm', {'template_name': 'site/forgot_pw.html', 'post_reset_redirect':'/reset/done/'}),
+    (r'^reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', 'password_reset_confirm',
+     {'template_name': 'site/forgot_pw.html', 'post_reset_redirect':'/reset/done/'}),
     (r'^reset/done/$', password_reset_complete),
 )
 
 # static pages
 urlpatterns += patterns('django.views.generic.simple',
-    url(r'^help/format/$', 'direct_to_template', {'template': 'static/help_format.html'}, name='help-format'),
+    url(r'^help/format/$', 'direct_to_template',
+        {'template': 'static/help_format.html'}, name='help-format'),
 )
 
 
 if settings.DEBUG: # client experiments
     urlpatterns += patterns('django.views.generic.simple',
-        url(r'anim_io_sync/$','direct_to_template', {'template': 'static/experiment/anim_io_sync.html'}, name='experiment-anim_io_sync'),
-        url(r'test0/$','direct_to_template', {'template': 'static/experiment/test0.html'}, name='test0'),
+        url(r'anim_io_sync/$','direct_to_template',
+            {'template': 'static/experiment/anim_io_sync.html'},
+            name='experiment-anim_io_sync'),
+        url(r'test0/$','direct_to_template',
+            {'template': 'static/experiment/test0.html'}, name='test0'),
     )
 
 urlpatterns += patterns('',
@@ -148,14 +157,19 @@ urlpatterns += patterns('',
 
 if settings.DEBUG:
      urlpatterns += patterns('',
-       (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
-       (r'^cmmedia/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'cm/media/'}),
-       (r'^robots.txt$', 'django.views.static.serve', {'document_root': 'src/cm/media/', 'path':'robots.txt'}),
-       (r'^favicon.ico$', 'django.views.static.serve', {'document_root': 'src/cm/media/', 'path':'favicon.ico'}),
+       (r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
+        {'document_root': settings.MEDIA_ROOT}),
+       (r'^cmmedia/(?P<path>.*)$', 'django.views.static.serve',
+        {'document_root': 'cm/media/'}),
+       (r'^robots.txt$', 'django.views.static.serve',
+        {'document_root': 'cm/media/', 'path':'robots.txt'}),
+       (r'^favicon.ico$', 'django.views.static.serve',
+        {'document_root': 'cm/media/', 'path':'favicon.ico'}),
      )
 else:
      urlpatterns += patterns('',
-       (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+       (r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
+        {'document_root': settings.MEDIA_ROOT}),
      )
 
 js_info_dict = {
