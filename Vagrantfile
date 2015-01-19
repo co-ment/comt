@@ -11,5 +11,5 @@ Vagrant.configure("2") do |config|
 
   config.vm.network "forwarded_port", guest: 8000, host: 8000
 
-  config.vm.provision :shell, :path => "deploy/provision-vagrant.sh"
+  config.vm.provision :shell, :path => "etc/provision-vagrant.sh"
 end
