@@ -2,6 +2,8 @@
 
 set -ex
 
+HERE=`pwd`
+
 nohup ./manage.py testserver --noinput \
   initial_data roles_generic test_suite &
 TESTSERVER_PID=$!
@@ -10,8 +12,8 @@ sleep 5
 
 echo "Starting Karma runner"
 cd test-suite
-node_modules/karma/bin/karma start --single-run
+$HERE/node_modules/karma/bin/karma start --single-run
 
 echo "Cleaning up"
 kill $TESTSERVER_PID
-rm -f nohup.out
+rm -f $HERE/nohup.out
