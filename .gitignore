@@ -10,6 +10,7 @@ eggs
 bin
 develop-eggs
 downloads
+node_modules
 
 .Python
 .installed.cfg
