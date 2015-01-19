@@ -4,6 +4,7 @@ from django.utils.translation import check_for_language
 
 # taken from django/views/i18n.py
 # to allow GET change (flickr does it)
+# FIXME: changing language should be done with POST, not GET
 def set_language(request, lang_code):
     """
     Redirect to a given url while setting the chosen language in the

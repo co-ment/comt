@@ -67,14 +67,15 @@ signals.post_save.connect(notify, sender=Activity)
 def send_notification(activity, notification):
     email = notification.user.email if notification.user else notification.email
     if email:
-      subject = _('Notification:') + " " + activity.printable_data(html=False, link=False)
-      message = render_to_string('email/activity_notification.txt',
-                                 {
-                                     'activity': activity,
-                                     'notification': notification,
-                                     'SITE_URL': settings.SITE_URL,
-                                     'CONF': ApplicationConfiguration,
-                                 })
-    
-      send_mail(subject, message, ApplicationConfiguration['email_from'],
-                [email], fail_silently=True)
+        subject = _('Notification:') + " " + activity.printable_data(html=False,
+                                                                     link=False)
+        ctx = {
+            'activity': activity,
+            'notification': notification,
+            'SITE_URL': settings.SITE_URL,
+            'CONF': ApplicationConfiguration,
+        }
+        message = render_to_string('email/activity_notification.txt', ctx)
+
+        send_mail(subject, message, ApplicationConfiguration['email_from'],
+                  [email], fail_silently=True)

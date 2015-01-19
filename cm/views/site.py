@@ -154,7 +154,8 @@ def contact(request):
             if form.cleaned_data['copy']:
                 my_subject = _(u"Copy of message:") + u" " + subject
                 send_mail(my_subject, message, email, [email])
-            display_message(request, _(u"Email sent. We will get back to you as quickly as possible."))
+            display_message(request,
+                            _(u"Email sent. We will get back to you as quickly as possible."))
             redirect_url = reverse('index')
             return HttpResponseRedirect(redirect_url)
     else:
@@ -171,8 +172,6 @@ class BaseSettingsForm(forms.Form):
         forms.Form.__init__(self, data=data, initial=initial)
         for field in self.fields:
             if field in self.conf_fields:
-                self.fields[field].initial = Configuration.objects.get_key(field)
-
                 self.fields[field].initial = Configuration.objects.get_key(field)
 
     def save(self):
@@ -332,6 +331,7 @@ def settings_design(request):
                 return HttpResponseRedirect(reverse('settings-design'))
     else:
       from cm.models import ApplicationConfiguration
+
       custom_css = ApplicationConfiguration.get_key('custom_css')
       if custom_css:
         default_css = custom_css
