@@ -27,6 +27,8 @@ recreate
 settings_local.py
 src/comt.egg-info
 urls_local.py
+comt.db
+nohup.out
 
 include/
 lib/
@@ -42,4 +44,3 @@ test-suite/karma.conf.dev.js
 test-suite/start-test-suite-dev.sh
 test-suite/start-testserver.sh
 test-suite/workspace.info.dev.js
-test-suite/workspace.info.js
