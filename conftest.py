@@ -8,7 +8,6 @@ def pytest_configure(config):
     if not settings.configured:
         os.environ['DJANGO_SETTINGS_MODULE'] = 'cm.settings'
 
-    settings.TESTING = True
     settings.TEMPLATE_DEBUG = True
 
     test_db = os.environ.get('DB', 'sqlite')

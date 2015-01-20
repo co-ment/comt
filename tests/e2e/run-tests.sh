@@ -3,9 +3,12 @@
 set -ex
 
 # TODO: currently this script MUST be run from the project root.
-export TESTING=True
+
 ROOT=`pwd`
 TESTS=$ROOT/tests/e2e/
+
+# Don't send mail.
+export NO_MAIL=True
 
 mkdir -p $ROOT/log
 

@@ -21,7 +21,6 @@ class NotificationTest(TestCase):
             'notif_id': u'workspace_notify_check',
             'workspace_notify_check': u'true',
         })
-
         self.assertEquals(len(Notification.objects.all()), 1)
 
         # subscribe to own notifications
@@ -29,9 +28,7 @@ class NotificationTest(TestCase):
             'notif_id': u'own_notify_check',
             'own_notify_check': u'true',
         })
-
         self.assertEquals(len(Notification.objects.all()), 2)
-
         self.assertEquals(len(mail.outbox), 0)
 
         c.post('/client/', {

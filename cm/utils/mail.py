@@ -3,7 +3,9 @@ Simple extension of django's EmailMessage to store emails in db
 """
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core import mail
 from django.core.mail import EmailMessage as BaseEmailMessage
+from django.core.mail.backends import locmem
 
 from cm.models_utils import Email
 from cm.cm_settings import CM_EMAIL_SUBJECT_PREFIX
@@ -45,9 +47,12 @@ def send_mail(subject, message, from_email, recipient_list,
 
     msg = EmailMessage(subject=subject, body=message, from_email=from_email,
                        to=recipient_list)
-    # Hack: maybe there is a cleaner way (look a Django best practices)
-    if not settings.TESTING:
-        msg.send(fail_silently)
+
+    # XXX: not sure if it's the right place / right Django idiom.
+    if settings.NO_MAIL:
+        return
+
+    msg.send(fail_silently)
 
 
 def send_mail_in_language(subject, subject_vars, message_template, message_vars,
