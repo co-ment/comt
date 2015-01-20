@@ -41,11 +41,13 @@ def send_mail(subject, message, from_email, recipient_list,
     Easy wrapper for django replacing of send_mail in django.core.mail
     """
     # Email subject *must not* contain newlines
-    subject = ''.join(subject.splitlines())
+    subject = ' '.join(subject.splitlines())
 
     msg = EmailMessage(subject=subject, body=message, from_email=from_email,
                        to=recipient_list)
-    msg.send(fail_silently)
+    # Hack: maybe there is a cleaner way (look a Django best practices)
+    if not settings.TESTING:
+        msg.send(fail_silently)
 
 
 def send_mail_in_language(subject, subject_vars, message_template, message_vars,

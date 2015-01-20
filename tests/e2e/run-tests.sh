@@ -2,8 +2,8 @@
 
 set -ex
 
-# TODO: this script MUST be run from the project root.
-
+# TODO: currently this script MUST be run from the project root.
+export TESTING=True
 ROOT=`pwd`
 TESTS=$ROOT/tests/e2e/
 
@@ -20,6 +20,7 @@ echo "Starting Karma runner"
 cd $TESTS
 $ROOT/node_modules/karma/bin/karma start --single-run
 
+# TODO: this part is actually not reached if some test has failed before.
 echo "Cleaning up"
 kill $TESTSERVER_PID
 rm -f $ROOT/log/server.log

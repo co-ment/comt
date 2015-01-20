@@ -1,11 +1,15 @@
-from django.conf import settings
 import os
 import os.path
+
+from django.conf import settings
 
 
 def pytest_configure(config):
     if not settings.configured:
         os.environ['DJANGO_SETTINGS_MODULE'] = 'cm.settings'
+
+    settings.TESTING = True
+    settings.TEMPLATE_DEBUG = True
 
     test_db = os.environ.get('DB', 'sqlite')
     if test_db == 'mysql':
@@ -29,4 +33,3 @@ def pytest_configure(config):
             'NAME': ':memory:',
         })
 
-    settings.TEMPLATE_DEBUG = True
