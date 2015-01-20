@@ -12,7 +12,7 @@ test-with-coverage:
 
 test-e2e:
 	@echo "--> Running end-to-end tests using karma"
-	tests/e2e/run-tests.sh
+	tests/e2e/run-tests.py
 
 run:
 	@echo "--> Starting server"
