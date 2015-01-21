@@ -118,3 +118,4 @@ More information
 
 * `The co-ment.com site <http://www.co-mt.com/>`_.
 * `The GitHub project <https://github.com/co-ment/comt>`_.
+* `Development mailing list <https://groups.google.com/forum/#!forum/comt-dev>`_.
