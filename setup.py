@@ -6,6 +6,7 @@ setup(
     url='http://www.co-ment.org',
     license='AGPL3',
     description="Web-based Text Annotation Application.",
+    long_description=open('ABOUT.rst').read(),
     author='Abilian SAS',
     author_email='dev@abilian.com',
 
