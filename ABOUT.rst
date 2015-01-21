@@ -8,11 +8,25 @@ It's the software that powers the `co-ment web service
 <http://www.co-ment.com>`_.
 
 
+Important note about this version
+=================================
+
+This is version 2.6, the last one of the 2.x branch.
+
+We don't intend to do further development on it, except fo bug fixes.
+
+If you're interested in the project, either as a user or a potential
+contributor, we recommend you try the upcoming 3.0 releases.
+
+
+Features
+========
+
 Annotate, discuss, (re)write…
 -----------------------------
 
 … are the three main functions of comt. They open many possible
-uses: school, corporate, legal, advocacy… View our use cases.
+uses: school, corporate, legal, advocacy…
 
 
 
@@ -91,8 +105,16 @@ What if your text receives a lot of comments? You can display or
 browse them according to the part of the text commented, their date
 of arrival, their author or their tags.
 
+
+Technology
+==========
+
+comt is based on Django on the back-end, with PostgreSQL, MySQL
+and Sqlite3 as supported dababases, and YUI on the front-end.
+
+
 More information
-----------------
+================
 
 * `The co-ment.com site <http://www.co-mt.com/>`_.
 * `The GitHub project <https://github.com/co-ment/comt>`_.
