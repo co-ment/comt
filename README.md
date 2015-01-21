@@ -6,6 +6,17 @@ Comt is a free software Web-based text annotation platform.
 
 More info (and a hosted platform) at: <http://www.co-ment.com/>.
 
+
+## Note about this version
+
+This is version 2.6, the last one of the 2.x branch.
+
+We don't intend to do further development on it, except fo bug fixes.
+
+If you're interested in the project, either as a user or a potential 
+contributor, we recommend you try the upcoming 3.0 releases. 
+
+
 ## Installation
 
 If you're busy, 

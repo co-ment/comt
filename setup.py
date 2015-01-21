@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="comt",
-    version="2.0a1",
+    version="2.6.0",
     url='http://www.co-ment.org',
     license='AGPL3',
     description="Web-based Text Annotation Application.",
