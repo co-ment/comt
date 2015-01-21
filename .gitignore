@@ -9,6 +9,7 @@ eggs
 bin
 develop-eggs
 downloads
+dist
 
 .Python
 .installed.cfg

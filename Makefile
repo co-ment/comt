@@ -7,5 +7,5 @@ clean:
 	find . -name "*.pyc" | xargs rm -f
 	rm -rf .installed.cfg *.egg-info \
              bin/ develop-eggs/ eggs/ include/ lib/ local/ parts/ \
-             pip-selfcheck.json 
+             pip-selfcheck.json dist temp
 
