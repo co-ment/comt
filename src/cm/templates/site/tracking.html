@@ -1,33 +1,22 @@
 {% if TRACKING_ID %}
-
 <!-- Piwik -->
 <script type="text/javascript">
-<!--
   var _paq = _paq || [];
-  _paq.push(["trackPageView"]);
-  _paq.push(["enableLinkTracking"]);
-
-  _paq.push([function() {
-    function getOriginalVisitorCookieTimeout(obj) {
-      var now = new Date(),
-        nowTs = Math.round(now.getTime() / 1000),
-        visitorInfo = obj.getVisitorInfo();
-      var createTs = parseInt(visitorInfo[2]);
-      var cookieTimeout = 33696000; // 13 mois en secondes
-      var originalTimeout = createTs + cookieTimeout - nowTs;
-      return originalTimeout;
-    }
-    this.setVisitorCookieTimeout(getOriginalVisitorCookieTimeout(this));
-  }]);
-
+  _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+  _paq.push(["setCookieDomain", "*.co-ment.com"]);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
   (function() {
-    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://stats.co-ment.com/";
-    _paq.push(["setTrackerUrl", u+"piwik.php"]);
-    _paq.push(["setSiteId", "{{ TRACKING_ID }}"]);
-    var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
-    g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+    var u="//stats.abilian.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 5]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
   })();
+</script>
+<noscript><p><img src="//stats.abilian.com/piwik.php?idsite={{ TRACKING_ID }}" style="border:0;" alt="" /></p></noscript>
 <!-- End Piwik Code -->
+
 $(document).ready(function() {
   $('#hide-piwik-cookies-optout').click(function() {
     $('#piwik-cookies-optout iframe').slideToggle("fast");
@@ -35,5 +24,5 @@ $(document).ready(function() {
 });
 -->
 </script>
-<div id="piwik-cookies-optout"><iframe frameborder="no" width="900px" height="90px" src="https://stats.co-ment.com/index.php?module=CustomOptOut&action=optOut&idSite={{ TRACKING_ID }}&language={{ LANGUAGE_CODE }}"></iframe></div>
+<div id="piwik-cookies-optout"><iframe style="border: 0; height: 90px; width: 900px;" src="https://stats.abilian.com/index.php?module=CoreAdminHome&action=optOut&&idSite={{ TRACKING_ID }}&language={{ LANGUAGE_CODE }}"></iframe></div>
 {% endif %}
