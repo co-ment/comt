@@ -26,3 +26,4 @@ pyyaml
 pytest
 pytest-django
 pytest-cov
+tox

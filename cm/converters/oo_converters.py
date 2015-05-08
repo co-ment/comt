@@ -226,8 +226,8 @@ def extract_css_body(xhtml):
     style = dom.getElementsByTagName("style")[0].toxml()
     body = dom.getElementsByTagName("body")[0].toxml()
     # cleanup initial/final tags
-    style_clean = style[style.find('>')+1:style.rfind('</')]
-    body_clean = body[body.find('>')+1:body.rfind('</')]
+    style_clean = style[style.find('>') + 1:style.rfind('</')]
+    body_clean = body[body.find('>') + 1:body.rfind('</')]
     return style_clean,body_clean
 
 convert_lock = threading.RLock()
@@ -292,14 +292,16 @@ def convert_html(input, format_name, images = None):
         os.chmod(outdir_name, 0777) # read / write
 
         inProps = PropertyValue( "Hidden" , 0 , True, 0 ),
-        doc = desktop.loadComponentFromURL( "private:factory/swriter", "_blank", 0, inProps )
+        doc = desktop.loadComponentFromURL("private:factory/swriter", "_blank",
+                                           0, inProps)
         text   = doc.Text
         cursor = text.createTextCursor()
 
         fileUrl = systemPathToFileUrl(infile_name)
         cursor.insertDocumentFromURL(fileUrl, ())
 
-        properties= (PropertyValue("Hidden", 0, True, 0), PropertyValue("FilterName", 0, out_filter, 0))
+        properties = (PropertyValue("Hidden", 0, True, 0),
+                      PropertyValue("FilterName", 0, out_filter, 0))
         doc.storeToURL('file://%s' %outfile_name,tuple(properties))
 
         out_f = open(outfile_name,'r')
@@ -368,9 +370,11 @@ def convert(input, format_name, unicode = False):
         properties = PropertyValue("Hidden", 0, True, 0),
 
         #import pdb;pdb.set_trace()
-        doc=desktop.loadComponentFromURL("file://%s" % infile_name, "_blank", 0, properties)
+        doc = desktop.loadComponentFromURL("file://%s" % infile_name, "_blank",
+                                           0, properties)
 
-        properties= (PropertyValue("Hidden", 0, True, 0), PropertyValue("FilterName", 0, out_filter, 0))
+        properties = (PropertyValue("Hidden", 0, True, 0),
+                      PropertyValue("FilterName", 0, out_filter, 0))
         doc.storeToURL('file://%s' %outfile_name,tuple(properties))
 
         out_f = open(outfile_name,'r')

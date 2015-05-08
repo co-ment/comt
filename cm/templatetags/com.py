@@ -1,5 +1,6 @@
 from datetime import datetime
 from time import struct_time
+import sys
 
 from django.template import Node, Variable, TemplateSyntaxError, \
     VariableDoesNotExist, Library
@@ -12,7 +13,7 @@ from pytz import UnknownTimeZoneError
 from cm.models import Text, UserProfile
 from cm.utils.timezone import tz_convert
 from cm.utils.log import error_mail_admins
-
+from cm.security import get_texts_with_perm, get_viewable_comments
 
 
 register = Library()
@@ -128,7 +129,6 @@ def in_dict(value, arg):
     return arg.get(value, None)
 
 
-import sys
 @register.filter
 def int_display(value):
     if value == sys.maxint:
@@ -226,14 +226,17 @@ class UpDownNode(Node):
 @register.filter(name='nb_comments')
 def nb_comments(text, request):
     if type(text) == Text:
-        return len(get_viewable_comments(request, text.last_text_version.comment_set.all(), text))
+        comments = get_viewable_comments(request,
+                                         text.last_text_version.comment_set.all(),
+                                         text)
     else:
         # text is text version
-        return len(get_viewable_comments(request, text.comment_set.all(), text.text))
+        comments = get_viewable_comments(request, text.comment_set.all(),
+                                         text.text)
+    return len(comments)
 ## number tags
 
 
-from cm.security import get_texts_with_perm, get_viewable_comments
 class FakeRequest(object):
     def __init__(self, user):
         self.user = user
@@ -284,7 +287,10 @@ class NbComments(Node):
     def render(self, context):
         text = Variable(self.text).resolve(context)
         request = Variable('request').resolve(context)
-        context[self.var_name] = len(get_viewable_comments(request, text.last_text_version.comment_set.all(), text))
+        comments = get_viewable_comments(request,
+                                         text.last_text_version.comment_set.all(),
+                                         text)
+        context[self.var_name] = len(comments)
         return ''        
 
 
@@ -297,18 +303,18 @@ def do_nb_comments(parser, token):
 class NewParams(Node):
     def __init__(self, params):
         self.params = params
-        
+
     def render(self, context):
         request = Variable('request').resolve(context)
         new_get = request.GET.copy()
-        for i in range(len(self.params)/2):
-            k = self.params[i][1:-1]            
-            v = self.params[i+1]
+        for i in range(len(self.params) / 2):
+            k = self.params[i][1:-1]
+            v = self.params[i + 1]
             if not v.startswith("'") or not v.endswith("'"):
                 v = Variable(v).resolve(context)
             else:
                 v = v[1:-1]
-            new_get[k]=v
+            new_get[k] = v
         return new_get.urlencode()
 
 

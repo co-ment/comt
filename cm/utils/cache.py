@@ -18,7 +18,6 @@ def dj_memoize(f):
     return g
 
 
-
 # adapted from http://code.activestate.com/recipes/496879/
 # decorator with LRU policy
 

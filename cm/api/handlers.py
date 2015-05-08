@@ -157,7 +157,8 @@ class TextListHandler(BaseHandler):
                 userrole = UserRole.objects.create(user=None,
                                                    role=Role.objects.get(id=anon_role),
                                                    text=text)
-            return {'key': text.key, 'version_key': text.last_text_version.key,
+            return {'key': text.key,
+                    'version_key': text.last_text_version.key,
                     'created': text.created}
         else:
             resp = rc.BAD_REQUEST
@@ -485,7 +486,8 @@ class ImportHandler(BaseHandler):
     def create(self, request):
       text, res = _text_create_import(request, CreateTextImportForm)
       text_version = text.last_text_version
-      return {'key': text.key, 'version_key': text.last_text_version.key,
+      return {'key': text.key,
+              'version_key': text.last_text_version.key,
               'html': text_version.content}
 
 
@@ -557,22 +559,23 @@ def documentation(request):
     Generic documentation view. Generates documentation
     from the handlers you've defined.
     """
-    docs = [ ]
+    docs = []
 
     for handler in handler_tracker:
         doc = generate_doc(handler)
-        setattr(doc,'type', handler.type)
+        setattr(doc, 'type', handler.type)
         docs.append(doc)
 
-    def _compare(doc1, doc2): 
-       #handlers and their anonymous counterparts are put next to each other.
-       name1 = doc1.name.replace("Anonymous", "")
-       name2 = doc2.name.replace("Anonymous", "")
-       return cmp(name1, name2)    
- 
-    #docs.sort(_compare)
-       
-    return render_to_response('api_doc.html', 
-        { 'docs': docs }, RequestContext(request))
+    def _compare(doc1, doc2):
+        # handlers and their anonymous counterparts are put next to each other.
+        name1 = doc1.name.replace("Anonymous", "")
+        name2 = doc2.name.replace("Anonymous", "")
+        return cmp(name1, name2)
+
+        #docs.sort(_compare)
+
+    return render_to_response('api_doc.html', {'docs': docs},
+                              RequestContext(request))
+
 
 DocHandler = generate_doc(TextPreEditHandler)
