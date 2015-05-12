@@ -1,0 +1,16 @@
+{
+  "name": "comt",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "lint": "eslint cm/media/js/client cm/media/js/site --ext .js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^0.21.0",
+    "karma": "^0.12.31",
+    "karma-mocha": "^0.1.10",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "mocha": "^2.2.4"
+  }
+}

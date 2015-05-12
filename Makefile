@@ -18,6 +18,9 @@ run:
 	@echo "--> Starting server"
 	./manage.py runserver
 
+lint:
+	npm run lint --silent
+
 develop:
 	pip install -e .
 	npm install karma karma-phantomjs-launcher karma-mocha
