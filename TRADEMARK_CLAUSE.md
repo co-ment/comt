@@ -1,8 +1,6 @@
-Trademark clause
-================
+# Trademark clause
 
-Additionnal trademark clause
-----------------------------
+## Additionnal trademark clause
 
 ### Trademark
 
@@ -12,8 +10,7 @@ co-ment(R) is a registered trademark of Philippe Aigrain.
 
 As authorized by the [GNU AGPLv3](http://www.fsf.org/licensing/licenses/agpl.html "Affero GPLv3 license text") license, users of the COMT software can only make use of the co-ment trademark in compliance with the regulation of use (see below).
 
-Regulation of use for the co-ment(R) trademark
-----------------------------------------------
+## Regulation of use for the co-ment(R) trademark
 
 ### Sopinspace
 
