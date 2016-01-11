@@ -18,7 +18,7 @@ apt-get clean
 #
 # Prepare & run buildout
 #
-echo "Installing using buildout"
+echo "Creating virtualenv"
 cd /vagrant
 su - vagrant -c "cd /vagrant ; virtualenv env"
 su - vagrant -c "cd /vagrant ; env/bin/pip install -e ."
