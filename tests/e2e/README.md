@@ -5,7 +5,7 @@ COMT test-suite instructions
 Prerequisites
 -------------
 
-You should have a running comt installation, made from a "comt" hg snapshot.
+You should have a running comt installation, made from a "comt" git snapshot.
 
 You gave your database user the right to create databases.
 
