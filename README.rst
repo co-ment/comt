@@ -4,15 +4,16 @@ About
 comt is an open source web application for annotating, discussing and
 writing texts online.
 
-It's the software that powers the [co-ment web
-service](http://www.co-ment.com).
+It's the software that powers the `co-ment web
+service <http://www.co-ment.com>`__.
 
 Screenshots
 ===========
 
-<img src="http://www.co-ment.com/wp-content/uploads/2010/02/01_dashboard.png" style="max-width: 600px;">
+.. image:: https://raw.githubusercontent.com/co-ment/comt/maint-2.x/docs/images/dashboard.png
 
-<img src="http://www.co-ment.com/wp-content/uploads/2010/03/mpl_revision.png" style="max-width: 600px;">
+.. image:: https://raw.githubusercontent.com/co-ment/comt/maint-2.x/docs/images/mpl_revision.png
+
 
 Important note about this version
 =================================
@@ -112,20 +113,21 @@ Sqlite3 as supported dababases, and YUI on the front-end.
 License
 =======
 
-GNU AFFERO GENERAL PUBLIC LICENSE (<http://www.gnu.org/licenses/agpl.html>)
-for software files
+GNU AFFERO GENERAL PUBLIC LICENSE
+(http://www.gnu.org/licenses/agpl.html) for software files
 
-CC-BY (<http://creativecommons.org/licenses/by/3.0/>) for translation files
+CC-BY (http://creativecommons.org/licenses/by/3.0/) for translation
+files
 
 Installation
 ============
 
-See the `INSTALL.md` file.
+See the ``INSTALL.md`` file.
 
 More information
 ================
 
--   [The co-ment.com site](http://www.co-ment.com/).
--   [The GitHub project](https://github.com/co-ment/comt).
--   [Development mailing list](https://groups.google.com/forum/#!forum/comt-dev).
-
+-  `The co-ment.com site <http://www.co-ment.com/>`__.
+-  `The GitHub project <https://github.com/co-ment/comt>`__.
+-  `Development mailing
+   list <https://groups.google.com/forum/#!forum/comt-dev>`__.
