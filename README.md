@@ -6,6 +6,11 @@ Comt is a free software Web-based text annotation platform.
 
 More info (and a hosted platform) at: <http://www.co-ment.com/>.
 
+## Screenshots
+
+<img src="http://www.co-ment.com/wp-content/uploads/2010/02/01_dashboard.png" style="max-width: 600px;">
+
+<img src="http://www.co-ment.com/wp-content/uploads/2010/03/mpl_revision.png" style="max-width: 600px;">
 
 ## Note about this version
 
