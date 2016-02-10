@@ -1,4 +1,7 @@
 from setuptools import setup, find_packages
+import os
+
+description = os.popen("pandoc README.md -t rst").read()
 
 setup(
     name="comt",
@@ -6,7 +9,7 @@ setup(
     url='http://www.co-ment.org',
     license='AGPL3',
     description="Web-based Text Annotation Application.",
-    long_description=open('ABOUT.rst').read(),
+    long_description=description,
     author='Abilian SAS',
     author_email='dev@abilian.com',
 
