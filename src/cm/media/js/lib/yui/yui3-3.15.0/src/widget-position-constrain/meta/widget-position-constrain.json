@@ -1,7 +1,0 @@
-{
-    "widget-position-constrain": {
-        "requires": [
-            "widget-position"
-        ]
-    }
-}

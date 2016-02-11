@@ -1,7 +1,0 @@
-{
-    "axis-stacked-base": {
-        "requires":[
-            "axis-numeric-base"
-        ]
-    }
-}

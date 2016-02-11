@@ -1,8 +1,0 @@
-{
-    "series-combospline-stacked": {
-        "requires":[
-            "series-combo-stacked",
-            "series-curve-util"
-        ]
-    }
-}

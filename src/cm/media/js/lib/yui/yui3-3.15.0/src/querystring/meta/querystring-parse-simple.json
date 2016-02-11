@@ -1,7 +1,0 @@
-{
-    "querystring-parse-simple": {
-        "requires": [
-            "yui-base"
-        ]
-    }
-}

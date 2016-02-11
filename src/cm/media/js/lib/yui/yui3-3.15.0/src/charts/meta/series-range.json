@@ -1,7 +1,0 @@
-{
-    "series-range": {
-        "requires":[
-            "series-cartesian"
-        ]
-    }
-}

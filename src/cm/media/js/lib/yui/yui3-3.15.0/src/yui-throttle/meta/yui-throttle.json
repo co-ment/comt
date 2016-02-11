@@ -1,5 +1,0 @@
-{
-    "yui-throttle": {
-        "requires": [ "yui-base" ]
-    }
-}

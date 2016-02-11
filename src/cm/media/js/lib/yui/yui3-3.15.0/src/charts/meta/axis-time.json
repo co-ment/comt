@@ -1,8 +1,0 @@
-{
-    "axis-time": {
-        "requires":[
-            "axis",
-            "axis-time-base"
-        ]
-    }
-}

@@ -1,8 +1,0 @@
-{
-    "series-histogram-base": {
-        "requires":[
-            "series-cartesian",
-            "series-plot-util"
-        ]
-    }
-}

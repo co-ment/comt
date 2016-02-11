@@ -1,7 +1,0 @@
-{
-    "cookie": {
-        "requires": [
-            "yui-base"
-        ]
-    }
-}

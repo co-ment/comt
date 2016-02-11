@@ -1,8 +1,0 @@
-{
-    "series-spline": {
-        "requires":[
-            "series-line",
-            "series-curve-util"
-        ]
-    }
-}

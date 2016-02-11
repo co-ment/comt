@@ -1,7 +1,0 @@
-{
-    "series-ohlc": {
-        "requires":[
-            "series-range"
-        ]
-    }
-}

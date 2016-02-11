@@ -1,7 +1,0 @@
-{
-    "axis-time-base": {
-        "requires":[
-            "axis-base"
-        ]
-    }
-}

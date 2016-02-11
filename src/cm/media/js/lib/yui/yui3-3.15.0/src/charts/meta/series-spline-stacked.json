@@ -1,8 +1,0 @@
-{
-    "series-spline-stacked": {
-        "requires":[
-            "series-stacked",
-            "series-spline"
-        ]
-    }
-}

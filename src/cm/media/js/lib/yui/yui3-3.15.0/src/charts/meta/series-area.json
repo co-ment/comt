@@ -1,8 +1,0 @@
-{
-    "series-area": {
-        "requires":[
-            "series-cartesian",
-            "series-fill-util"
-        ]
-    }
-}

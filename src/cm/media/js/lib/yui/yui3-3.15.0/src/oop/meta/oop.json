@@ -1,7 +1,0 @@
-{
-    "oop": {
-        "requires": [
-            "yui-base"
-        ]
-    }
-}

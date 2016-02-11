@@ -1,7 +1,0 @@
-{
-	"promise": {
-		"requires": [
-			"timers"
-		]
-	}
-}

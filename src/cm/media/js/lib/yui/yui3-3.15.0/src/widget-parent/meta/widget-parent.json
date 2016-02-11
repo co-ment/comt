@@ -1,9 +1,0 @@
-{
-    "widget-parent": {
-        "requires": [
-            "arraylist",
-            "base-build",
-            "widget"
-        ]
-    }
-}

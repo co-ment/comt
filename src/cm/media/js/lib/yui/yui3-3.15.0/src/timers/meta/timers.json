@@ -1,7 +1,0 @@
-{
-    "timers": {
-        "requires": [
-            "yui-base"
-        ]
-    }
-}

@@ -1,9 +1,0 @@
-{
-    "test": {
-        "requires": [
-            "event-simulate",
-            "event-custom",
-            "json-stringify"
-        ]
-    }
-}

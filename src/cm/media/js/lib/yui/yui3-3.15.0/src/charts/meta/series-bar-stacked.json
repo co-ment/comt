@@ -1,8 +1,0 @@
-{
-    "series-bar-stacked": {
-        "requires":[
-            "series-stacked",
-            "series-bar"
-        ]
-    }
-}

@@ -1,7 +1,0 @@
-{
-    "queue-promote": {
-        "requires": [
-            "yui-base"
-        ]
-    }
-}
