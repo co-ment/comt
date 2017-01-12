@@ -17,12 +17,5 @@
 <noscript><p><img src="//stats.abilian.com/piwik.php?idsite={{ TRACKING_ID }}" style="border:0;" alt="" /></p></noscript>
 <!-- End Piwik Code -->
 
-$(document).ready(function() {
-  $('#hide-piwik-cookies-optout').click(function() {
-    $('#piwik-cookies-optout iframe').slideToggle("fast");
-  });
-});
--->
-</script>
 <div id="piwik-cookies-optout"><iframe style="border: 0; height: 90px; width: 900px;" src="https://stats.abilian.com/index.php?module=CoreAdminHome&action=optOut&&idSite={{ TRACKING_ID }}&language={{ LANGUAGE_CODE }}"></iframe></div>
 {% endif %}

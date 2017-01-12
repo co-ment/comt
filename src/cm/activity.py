@@ -9,7 +9,7 @@ from cm.cm_settings import STORE_ACTIVITY_IP
 
 def register_activity(request, type, text=None, comment=None, user=None, text_version=None):
     signal_activity.send(sender=text, request=request, type=type, comment=comment, user=user, text_version=text_version)
-    
+
 # activity signal
 
 signal_activity = django.dispatch.Signal(providing_args=["request", "type", "comment"])
@@ -19,24 +19,24 @@ def _save_activity(sender, **kwargs):
     type = kwargs['type']
     comment = kwargs['comment']
     user = kwargs['user']
-    
+
     text = sender
     text_version = kwargs.get('text_version', None)
     if not text_version and text:
         text_version = text.last_text_version
-        
+
     if request.user.is_anonymous():
         originator_user = None
     else:
         originator_user = request.user
-    
+
     if STORE_ACTIVITY_IP:
-        ip = request.META.get('REMOTE_ADDR', '0.0.0.0')
+        ip = request.META.get('HTTP_X_REAL_IP') or request.META.get('REMOTE_ADDR', '0.0.0.0') or '0.0.0.0'
     else:
         ip = None
-    
+
     Activity.objects.create(text=text, user=user, text_version=text_version, comment=comment, type=type, ip=ip, originator_user=originator_user)
-    
+
 def connect_all():
     signal_activity.connect(_save_activity)
 
@@ -60,7 +60,7 @@ def get_activity(text='all', user='all', reference_date=None, nb_slots=31, slot_
            None: anonymous users
            'all': all users
     """
-    # calc activities used    
+    # calc activities used
     if not reference_date:
         reference_date = datetime.now()
     from_date = reference_date - slot_timedelta * nb_slots
@@ -73,7 +73,7 @@ def get_activity(text='all', user='all', reference_date=None, nb_slots=31, slot_
         activities = activities.filter(originator_user=user)
     activities = activities.order_by('created').only('created', 'originator_user', 'text')
     #print 'got %d activities' % len(activities), [a.created for a in activities]
-    
+
     if kind == 'raw':
         visits = activities
     else:
@@ -84,7 +84,7 @@ def get_activity(text='all', user='all', reference_date=None, nb_slots=31, slot_
                 activity = activities[i]
                 found = False
                 for j in range(i - 1, -1, -1):
-                    prev_act = activities[j]                
+                    prev_act = activities[j]
                     if activity.created > prev_act.created + VISIT_DURATION: # out of session bounds: add act
                         visits.append(activity)
                         found = True
@@ -95,15 +95,13 @@ def get_activity(text='all', user='all', reference_date=None, nb_slots=31, slot_
                         else: # in session: do not count act
                             found = True
                             break
-                if not found:                    
+                if not found:
                     visits.append(activity)
         #print 'got %d visits' % len(visits), [(v.created, v.user) for v in visits]
-    
+
     # hist by slot_timedelta
     slots = [seconds(from_date - v.created) // seconds(slot_timedelta) for v in visits]
-    
+
     # TODO: could be more efficient...
     res = [slots.count(index) for index in range(nb_slots)]
     return res
-        
-        
